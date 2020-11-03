@@ -61,13 +61,13 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
 	commodity_type varchar(50) NULL,	-- HS6: e.g. 2468 which could be metal
-	shipping_marks varchar(250) NULL,
+	shipping_marks text NULL,
 	description_of_goods varchar(2000) NULL,
 	hs_code varchar(50) NULL,
-	weight varchar(50) NULL,
-	volume varchar(50) NULL,
-	weight_unit varchar(50) NULL,
-	volume_unit varchar(50) NULL,
+	weight integer NULL,
+	volume integer NULL,
+	weight_unit varchar(2) NULL,
+	volume_unit varchar(16) NULL,
 	number_of_packages integer NULL,
 	carrier_booking_number varchar(20) NULL,
 	shipping_instruction_number varchar(20) NULL
@@ -89,7 +89,7 @@ CREATE TABLE dcsa_ebl_v1_0.charges (
 	shipment_id uuid NOT NULL,
 	charge_type varchar(20) NULL,
 	amount integer NULL,
-	currency varchar(3) NULL,
+	currency_code varchar(3) NULL,
 	payment_term varchar(3) NULL,
 	calculation_basis varchar(50) NULL,
 	freight_payable_at uuid NULL,
@@ -98,9 +98,9 @@ CREATE TABLE dcsa_ebl_v1_0.charges (
 
 CREATE TABLE dcsa_ebl_v1_0.contact_details (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	phone_number varchar(50) NULL,
-	email varchar(50) NULL,
-	fax varchar(50) NULL,
+	phone_number varchar(20) NULL,
+	email varchar(250) NULL,
+	fax varchar(20) NULL,
 	location_id uuid NULL
 );
 
@@ -125,7 +125,7 @@ ALTER TABLE dcsa_ebl_v1_0.ebl_endorsement_chain ADD CONSTRAINT "pk_ebl_endorseme
 CREATE TABLE dcsa_ebl_v1_0.equipment (
 	equipment_reference varchar(15) PRIMARY KEY,	-- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
 	iso_equipment_code char(4) NULL,	-- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
-	tare_weight varchar(50) NULL,
+	tare_weight integer NULL,
 	weight_unit varchar(50) NULL
 );
 
@@ -157,8 +157,8 @@ CREATE TABLE dcsa_ebl_v1_0.package_code (
 
 CREATE TABLE dcsa_ebl_v1_0.party (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	party_name varchar(50) NULL,
-	tax_reference varchar(50) NULL,
+	party_name varchar(100) NULL,
+	tax_reference varchar(20) NULL,
 	contact_details_id uuid NULL,
 	public_key varchar(500) NULL
 );
@@ -188,7 +188,7 @@ CREATE TABLE dcsa_ebl_v1_0.references (
 CREATE TABLE dcsa_ebl_v1_0.seal (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_equipment_id uuid NOT NULL,
-	seal_number varchar(50) NOT NULL,
+	seal_number varchar(15) NOT NULL,
 	seal_source_id uuid NULL,
 	seal_type_id uuid NULL
 );
@@ -216,12 +216,12 @@ CREATE TABLE dcsa_ebl_v1_0.shipment (
 	collection_datetime timestamp without time zone NULL,	-- The date and the time that the shipment items need to be collected from the origin.
 	delivery_datetime timestamp without time zone NULL,	-- The date (and when possible time) that the shipment items need to be delivered to the destination.
 	carrier_code varchar(10) NULL,	-- The Carrier Code represents a concatenation of the Code List Provider Code and the Code List Provider. A hyphen is used between the two codes. The unique carrier identifier is sourced from either the NMFTA SCAC codes list or the SMDG Master Liner codes list.
-	export_reference_number varchar(50) NULL,
+	export_reference_number integer NULL,
 	shipment_on_board_date timestamp with time zone NULL,
 	pre_carrier_mode_of_transport varchar(3) NULL,
 	shipment_equipment_quantity integer NULL,
-	svc_contract varchar(50) NULL,
-	declared_value varchar(50) NULL,
+	svc_contract varchar(30) NULL,
+	declared_value integer NULL,
 	declared_value_currency varchar(3) NULL
 );
 
@@ -229,8 +229,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NULL,
 	equipment_reference varchar(15) NULL,
-	total_container_weight varchar(50) NULL,
-	verified_gross_mass varchar(50) NULL,
+	total_container_weight integer NULL,
+	verified_gross_mass integer NULL,
 	weight_unit varchar(50) NULL
 );
 
@@ -299,9 +299,9 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	place_of_issue uuid NULL,
 	onboard_date timestamp with time zone NULL,
 	received_for_shipment_date timestamp with time zone NULL,
-	document_reference_number varchar(50) NULL,
+	document_reference_number varchar(20) NULL,
 	number_of_originals integer NULL,
-	terms_and_conditions varchar(50) NULL,
+	terms_and_conditions text NULL,
 	issuer uuid NULL,	-- name of the carrier who issues the BL
 	document_status varchar(50) NULL,	-- SI Received, Drafted, Pending Approval, Approved, Issued, Surrendered
 	shipping_instruction_number varchar(20) NULL
@@ -313,7 +313,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses (
 );
 
 CREATE TABLE dcsa_ebl_v1_0.transport_document_type (
-	transport_document_code varchar(3) PRIMARY KEY,	-- The type of the transport document (i.e. BOL (bill of lading) or SWB (Sea Waybill).  @adding eBL
+	transport_document_type_code varchar(3) PRIMARY KEY,	-- The type of the transport document (i.e. BOL (bill of lading) or SWB (Sea Waybill).  @adding eBL
 	transport_document_type_name varchar(50) NULL,	-- The full names of the document types (Bill of Lading or Sea Waybill).
 	transport_document_type_description text NULL	-- A description of the different docuemtn types.
 );
