@@ -66,7 +66,7 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	hs_code varchar(50) NULL,
 	weight integer NULL,
 	volume integer NULL,
-	weight_unit varchar(2) NULL,
+	weight_unit varchar(3) NULL,
 	volume_unit varchar(16) NULL,
 	number_of_packages integer NULL,
 	carrier_booking_number varchar(20) NULL,
