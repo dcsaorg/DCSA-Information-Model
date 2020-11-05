@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.voyage CASCADE;
 /* Create Tables */
 
 CREATE TABLE dcsa_ebl_v1_0.booking (
-	carrier_booking_number varchar(35) PRIMARY KEY,
+	carrier_booking_reference varchar(35) PRIMARY KEY,
 	shipment_id uuid NULL,
 	service_type_at_origin varchar(3) NULL,
 	service_type_at_destination varchar(3) NULL,
@@ -69,7 +69,7 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	weight_unit varchar(2) NULL,
 	volume_unit varchar(16) NULL,
 	number_of_packages integer NULL,
-	carrier_booking_number varchar(20) NULL,
+	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_number varchar(20) NULL
 );
 
