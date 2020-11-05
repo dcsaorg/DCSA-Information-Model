@@ -76,7 +76,7 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 CREATE TABLE dcsa_ebl_v1_0.cargo_item_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	cargo_item_id uuid NOT NULL,
-	shipment_equipment_id uuid NOT NULL
+	equipment_id uuid NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.carrier_clauses (
