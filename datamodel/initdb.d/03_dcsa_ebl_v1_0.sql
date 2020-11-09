@@ -216,13 +216,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipment (
 	collection_datetime timestamp without time zone NULL,	-- The date and the time that the shipment items need to be collected from the origin.
 	delivery_datetime timestamp without time zone NULL,	-- The date (and when possible time) that the shipment items need to be delivered to the destination.
 	carrier_code varchar(10) NULL,	-- The Carrier Code represents a concatenation of the Code List Provider Code and the Code List Provider. A hyphen is used between the two codes. The unique carrier identifier is sourced from either the NMFTA SCAC codes list or the SMDG Master Liner codes list.
-	export_reference_number integer NULL,
-	shipment_on_board_date timestamp with time zone NULL,
-	pre_carrier_mode_of_transport varchar(3) NULL,
-	shipment_equipment_quantity integer NULL,
-	svc_contract varchar(30) NULL,
-	declared_value integer NULL,
-	declared_value_currency varchar(3) NULL
+	confirmed_equipment_type NULL,
+	confirmed_equipment_units NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
@@ -264,8 +259,10 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
-	shipping_instruction_number varchar(20) PRIMARY KEY,
-	shipment_id uuid NOT NULL
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	shipment_id uuid NOT NULL,
+	is_electronic boolean NOT NULL,
+	callback_url text NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.transport (
