@@ -73,9 +73,9 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	description_of_goods text NULL,
 	hs_code varchar(10) NULL,
 	weight real NULL,
+	weight_unit varchar(3) NULL,
 	volume real NULL,
-	weight_unit varchar(20) NULL,
-	volume_unit varchar(20) NULL,
+	volume_unit varchar(3) NULL,
 	number_of_packages integer NULL,
 	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_id uuid NULL
@@ -149,7 +149,7 @@ CREATE TABLE dcsa_ebl_v1_0.equipment (
 	equipment_reference varchar(15) PRIMARY KEY,	-- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
 	iso_equipment char(4) NULL,	-- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
 	tare_weight real NULL,
-	weight_unit varchar(20) NULL
+	weight_unit varchar(3) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.iso_equipment_code (
@@ -276,11 +276,11 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	equipment_reference varchar(15) NULL,
 	total_container_weight real NULL,
 	verified_gross_mass real NULL,
-	weight_unit varchar(20) NULL,
+	weight_unit varchar(3) NULL,
 	reefer_temperature_setting real NULL,
-	reefer_temperature_setting_unit varchar(20) NULL,
+	reefer_temperature_setting_unit varchar(3) NULL,
 	reefer_humidity real NULL,
-	reefer_humidity_unit varchar(20) NULL
+	reefer_humidity_unit varchar(3) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_location (
