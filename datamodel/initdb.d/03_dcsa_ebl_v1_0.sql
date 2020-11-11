@@ -276,7 +276,11 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	equipment_reference varchar(15) NULL,
 	total_container_weight real NULL,
 	verified_gross_mass real NULL,
-	weight_unit varchar(20) NULL
+	weight_unit varchar(20) NULL,
+	reefer_temperature_setting real NULL,
+	reefer_temperature_setting_unit varchar(20) NULL,
+	reefer_humidity real NULL,
+	reefer_humidity_unit varchar(20) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_location (
