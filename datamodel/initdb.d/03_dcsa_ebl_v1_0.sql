@@ -9,17 +9,23 @@
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item_equipment CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier_clauses CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.charges CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.contact_details CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.country CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.displayed_address CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.ebl_endorsement_chain CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.equipment CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.iso_equipment_code CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.facility CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.facility_type CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.hs_code CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.location CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.mode_of_transport CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.package_code CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.party CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.party_function CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.party_location CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.reference_type CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.references CASCADE;
@@ -41,6 +47,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_call_voyage CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document_carrier_clauses CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document_type CASCADE;
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document_party CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.un_location CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.vessel CASCADE;
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.voyage CASCADE;
@@ -50,33 +57,41 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.voyage CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.booking (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
 	shipment_id uuid NULL,
-	service_type_at_origin varchar(3) NULL,
-	service_type_at_destination varchar(3) NULL,
-	shipment_term_at_origin varchar(3) NULL,
-	shipment_term_at_destination varchar(3) NULL,
-	booking_datetime timestamp without time zone NULL	-- The date and time of the booking request.
+	service_type_at_origin varchar(5) NULL,
+	service_type_at_destination varchar(5) NULL,
+	shipment_term_at_origin varchar(5) NULL,
+	shipment_term_at_destination varchar(5) NULL,
+	booking_datetime timestamp with time zone NULL,	-- The date and time of the booking request.
+	service_contract varchar(30)
 );
 
 CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
-	commodity_type varchar(50) NULL,	-- HS6: e.g. 2468 which could be metal
+	commodity_type varchar(20) NULL,	-- HS6: e.g. 2468 which could be metal
 	shipping_marks text NULL,
-	description_of_goods varchar(2000) NULL,
-	hs_code varchar(50) NULL,
-	weight integer NULL,
-	volume integer NULL,
-	weight_unit varchar(3) NULL,
-	volume_unit varchar(16) NULL,
+	description_of_goods text NULL,
+	hs_code varchar(10) NULL,
+	weight real NULL,
+	volume real NULL,
+	weight_unit varchar(20) NULL,
+	volume_unit varchar(20) NULL,
 	number_of_packages integer NULL,
 	carrier_booking_reference varchar(35) NULL,
-	shipping_instruction_number varchar(20) NULL
+	shipping_instruction_id uuid NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.cargo_item_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	cargo_item_id uuid NOT NULL,
 	equipment_id uuid NOT NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.carrier (
+    carrier_code varchar(10) PRIMARY KEY,
+    code_list_provider_code varchar(4),
+    carrier_name varchar(100),
+    code_list_provider varchar(8)
 );
 
 CREATE TABLE dcsa_ebl_v1_0.carrier_clauses (
@@ -87,13 +102,16 @@ CREATE TABLE dcsa_ebl_v1_0.carrier_clauses (
 CREATE TABLE dcsa_ebl_v1_0.charges (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
+	transport_document_id uuid NULL,
 	charge_type varchar(20) NULL,
-	amount integer NULL,
-	currency_code varchar(3) NULL,
+	amount real NULL,
+	currency varchar(3) NULL,
 	payment_term varchar(3) NULL,
 	calculation_basis varchar(50) NULL,
 	freight_payable_at uuid NULL,
-	display_charges boolean NULL
+	display_charges boolean NULL,
+	unit_price real NULL,
+	quantity real NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.contact_details (
@@ -102,6 +120,11 @@ CREATE TABLE dcsa_ebl_v1_0.contact_details (
 	email varchar(250) NULL,
 	fax varchar(20) NULL,
 	location_id uuid NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.country (
+	country_code varchar(2) PRIMARY KEY,
+	country_name varchar(75) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.displayed_address (
@@ -114,7 +137,7 @@ CREATE TABLE dcsa_ebl_v1_0.ebl_endorsement_chain (
 	transport_document_id uuid NOT NULL,
 	title_holder uuid NOT NULL,  -- reference to Party
 	signature varchar(500) NOT NULL,	-- Digital signature of the previous title holder
-	endorsement_date timestamp without time zone NOT NULL,
+	endorsement_date date NOT NULL,
 	endorsee uuid NOT NULL  -- reference to Party
 );
 
@@ -124,21 +147,46 @@ ALTER TABLE dcsa_ebl_v1_0.ebl_endorsement_chain ADD CONSTRAINT "pk_ebl_endorseme
 
 CREATE TABLE dcsa_ebl_v1_0.equipment (
 	equipment_reference varchar(15) PRIMARY KEY,	-- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
-	iso_equipment_code char(4) NULL,	-- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
-	tare_weight integer NULL,
-	weight_unit varchar(50) NULL
+	iso_equipment char(4) NULL,	-- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
+	tare_weight real NULL,
+	weight_unit varchar(20) NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.iso_equipment_code (
+    iso_equipment_code text PRIMARY KEY,
+    iso_equipment_name text NULL,
+    iso_equipment_size_code text NULL,
+    iso_equipment_type_code_a text NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.facility (
+    facility_code varchar(11) PRIMARY KEY,
+    facility_name varchar(100) NULL,
+    code_list_provider_code varchar(6) NULL,
+    code_list_provider varchar(8) NULL,
+    un_location_code varchar(5) NULL,
+    latitude varchar(10) NULL,
+    longitude varchar(11) NULL,
+    address varchar(250) NULL,
+    facility_type varchar(4) NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.facility_type (
+    facility_type_code varchar(4) PRIMARY KEY,
+    facility_type_name varchar(100) NULL,
+    facility_type_description varchar(250) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.hs_code (
-	hs_code varchar(50) PRIMARY KEY,
+	hs_code varchar(10) PRIMARY KEY,
 	code_description varchar(250) NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.location (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	address varchar(250) NULL,
-	latitude varchar(50) NULL,
-	longitude varchar(50) NULL,
+	latitude varchar(10) NULL,
+	longitude varchar(11) NULL,
 	un_location_code char(5) NULL
 );
 
@@ -150,17 +198,21 @@ CREATE TABLE dcsa_ebl_v1_0.mode_of_transport (
 );
 
 CREATE TABLE dcsa_ebl_v1_0.package_code (
-	un_package_code varchar(10) PRIMARY KEY,	-- e.g. UN00001899
-	value varchar(50) NOT NULL,
-	cargo_item_id uuid NOT NULL
+	package_code varchar(10) PRIMARY KEY,	-- e.g. UN00001899
+	description varchar(50) NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.party (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	party_name varchar(100) NULL,
 	tax_reference varchar(20) NULL,
-	contact_details_id uuid NULL,
 	public_key varchar(500) NULL
+);
+
+CREATE TABLE dcsa_ebl_v1_0.party_function (
+    party_function_code varhcar(3) PRIMARY KEY,
+    party_function_name varchar(100),
+    party_function_description varchar(250)
 );
 
 CREATE TABLE dcsa_ebl_v1_0.party_location (
@@ -174,8 +226,8 @@ ALTER TABLE dcsa_ebl_v1_0.party_location ADD CONSTRAINT "pk_party_location"
 
 CREATE TABLE dcsa_ebl_v1_0.reference_type (
 	reference_type_code varchar(3) PRIMARY KEY,
-	reference_name varchar(50) NOT NULL,
-	reference_description varchar(50) NOT NULL
+	reference_name varchar(20) NOT NULL,
+	reference_description varchar(200) NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.references (
@@ -189,49 +241,42 @@ CREATE TABLE dcsa_ebl_v1_0.seal (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_equipment_id uuid NOT NULL,
 	seal_number varchar(15) NOT NULL,
-	seal_source_id uuid NULL,
-	seal_type_id uuid NULL
+	seal_source varchar(5) NULL,
+	seal_type varchar(4) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.seal_source (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	seal_source_code varchar(5) NOT NULL,
+	seal_source_code varchar(5) PRIMARY KEY,
 	description varchar(50) NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.seal_type (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	seal_type_code varchar(4) NOT NULL,
+	seal_type_code varchar(4) NOT PRIMARY KEY,
 	description varchar(50) NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.service_type (
-	service_type varchar(3) PRIMARY KEY,
-	description varchar(50) NULL
+	service_type varchar(5) PRIMARY KEY,
+	description varchar(200) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_id uuid NULL,	-- Bill of lading number is an identifier that links to a shipment. Bill of lading is the legal document issued to the customer which confirms the carrier's receipt of the cargo from the customer acknowledging goods being shipped and specifying the terms of delivery.
-	collection_datetime timestamp without time zone NULL,	-- The date and the time that the shipment items need to be collected from the origin.
-	delivery_datetime timestamp without time zone NULL,	-- The date (and when possible time) that the shipment items need to be delivered to the destination.
+-- 	transport_document_id uuid NULL,	-- Bill of lading number is an identifier that links to a shipment. Bill of lading is the legal document issued to the customer which confirms the carrier's receipt of the cargo from the customer acknowledging goods being shipped and specifying the terms of delivery.
+	collection_datetime timestamp with time zone NULL,	-- The date and the time that the shipment items need to be collected from the origin.
+	delivery_datetime timestamp with time zone NULL,	-- The date (and when possible time) that the shipment items need to be delivered to the destination.
 	carrier_code varchar(10) NULL,	-- The Carrier Code represents a concatenation of the Code List Provider Code and the Code List Provider. A hyphen is used between the two codes. The unique carrier identifier is sourced from either the NMFTA SCAC codes list or the SMDG Master Liner codes list.
-	export_reference_number integer NULL,
-	shipment_on_board_date timestamp with time zone NULL,
-	pre_carrier_mode_of_transport varchar(3) NULL,
-	shipment_equipment_quantity integer NULL,
-	svc_contract varchar(30) NULL,
-	declared_value integer NULL,
-	declared_value_currency varchar(3) NULL
+	confirmed_equipment_type varchar(4) NULL,
+	confirmed_equipment_units integer NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NULL,
 	equipment_reference varchar(15) NULL,
-	total_container_weight integer NULL,
-	verified_gross_mass integer NULL,
-	weight_unit varchar(50) NULL
+	total_container_weight real NULL,
+	verified_gross_mass real NULL,
+	weight_unit varchar(20) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_location (
@@ -248,13 +293,13 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_location_type (
 CREATE TABLE dcsa_ebl_v1_0.shipment_party (
 	party_id uuid NOT NULL,
 	shipment_id uuid NOT NULL,
-	party_type varchar(50) NOT NULL,
+	party_role varchar(20) NOT NULL,
 	notification_flag boolean NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_term (
-	shipment_term varchar(3) PRIMARY KEY,
-	description varchar(50) NULL
+	shipment_term varchar(5) PRIMARY KEY,
+	description varchar(200) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
@@ -264,25 +309,26 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 );
 
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
-	shipping_instruction_number varchar(20) PRIMARY KEY,
-	shipment_id uuid NOT NULL
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	shipment_id uuid NOT NULL,
+	callback_url text NOT NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.transport (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_reference varchar(50) NULL,	-- The reference for the transport, e.g. when the mode of transport is a vessel, the Transport Reference will be the vessel IMO number.
 	transport_name varchar(100) NULL,	-- The name of the particular transport instance, e.g. for a vessel this is the vessel name
-	mode_of_transport varchar(5) NOT NULL,	-- The code specifying the means of transport, e.g. the named vessel executing the transporting.
-	departure_transport_call_id uuid NOT NULL,
-	arrival_transport_call_id uuid NOT NULL,
-	mode_of_transport_code varchar(3) NULL
+	mode_of_transport varchar(3) NOT NULL,	-- The code specifying the means of transport, e.g. the named vessel executing the transporting.
+	load_transport_call_id uuid NOT NULL,
+	discharge_transport_call_id uuid NOT NULL,
+	vessel uuid NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.transport_call (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_call_sequence_number varchar(50) NULL,	-- Transport operator's key that uniquely identifies each individual call. Essential to distinguish between 2 separate calls at the same location.
 	facility_code varchar(11) NULL,
-	facility_type_code char(4) NULL,
+	facility_type char(4) NULL,
 	other_facility varchar(50) NULL,
 	customer_address varchar(250) NULL,
 	location_id uuid NULL
@@ -295,16 +341,18 @@ CREATE TABLE dcsa_ebl_v1_0.transport_call_voyage (
 
 CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_code varchar(3) NULL,
+	transport_document_type varchar(3) NULL,
 	place_of_issue uuid NULL,
-	onboard_date timestamp with time zone NULL,
-	received_for_shipment_date timestamp with time zone NULL,
+	onboard_date date NULL,
+	received_for_shipment_date date NULL,
 	document_reference_number varchar(20) NULL,
 	number_of_originals integer NULL,
 	terms_and_conditions text NULL,
 	issuer uuid NULL,	-- name of the carrier who issues the BL
-	document_status varchar(50) NULL,	-- SI Received, Drafted, Pending Approval, Approved, Issued, Surrendered
-	shipping_instruction_number varchar(20) NULL
+	document_status varchar(50) NULL,	-- SI, Received, Drafted, Pending Approval, Approved, Issued, Surrendered
+	shipping_instruction UUID NULL,
+	declared_value real NULL,
+	declared_value_currency varchar(3) NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses (
@@ -312,10 +360,25 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses (
 	transport_document_id uuid NOT NULL
 );
 
+ALTER TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses ADD CONSTRAINT "pk_transport_document_carrier_clauses"
+    PRIMARY KEY (carrier_clauses_id,transport_document_id)
+;
+
+CREATE TABLE dcsa_ebl_v1_0.transport_document_party (
+	party_id uuid NOT NULL,
+	transport_document_id uuid NOT NULL,
+	displayed_address varchar(250) null,
+	party_contact_details varchar(250) null
+);
+
+ALTER TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses ADD CONSTRAINT "pk_transport_document_carrier_clauses"
+    PRIMARY KEY (carrier_clauses_id,transport_document_id)
+;
+
 CREATE TABLE dcsa_ebl_v1_0.transport_document_type (
 	transport_document_type_code varchar(3) PRIMARY KEY,	-- The type of the transport document (i.e. BOL (bill of lading) or SWB (Sea Waybill).  @adding eBL
-	transport_document_type_name varchar(50) NULL,	-- The full names of the document types (Bill of Lading or Sea Waybill).
-	transport_document_type_description text NULL	-- A description of the different docuemtn types.
+	transport_document_type_name varchar(20) NULL,	-- The full names of the document types (Bill of Lading or Sea Waybill).
+	transport_document_type_description varchar(200) NULL	-- A description of the different document types.
 );
 
 CREATE TABLE dcsa_ebl_v1_0.un_location (
@@ -330,8 +393,7 @@ CREATE TABLE dcsa_ebl_v1_0.vessel (
 	vessel_name varchar(35) NULL,	-- The name of the Vessel given by the Vessel Operator e.g. Emma Maersk
 	vessel_flag char(2) NULL,	-- The flag of the vessel e.g. DK
 	vessel_call_sign_number varchar(10) NULL,	-- A unique alphanumeric identity that belongs to the vessel.  Each Call Sign begins with the Call Sign alphanumeric prefix that indicates nationality, e.g. prefixes allocated to the United Kingdom are 2, G, M, VP-VQ, VS, ZB-ZJ, ZN-ZO and ZQ. The prefix is usually followed by 2 or 3 alphanumeric characters.  For example, Cunard Lines Queen Mary 2 has the Call Sign W6RO.
-	vessel_operator_carrier_code varchar(10) NULL,	-- The carrier who is in charge of the vessel operations
-	transport_id uuid NULL	-- The identifier of the Transport.
+	vessel_operator_carrier_code varchar(10) NULL	-- The carrier who is in charge of the vessel operations
 );
 
 CREATE TABLE dcsa_ebl_v1_0.voyage (
