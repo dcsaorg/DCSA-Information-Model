@@ -82,10 +82,12 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 );
 
 CREATE TABLE dcsa_ebl_v1_0.cargo_item_equipment (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	cargo_item_id uuid NOT NULL,
 	equipment_id uuid NOT NULL
 );
+ALTER TABLE dcsa_ebl_v1_0.cargo_item_equipment ADD CONSTRAINT "pk_cargo_item_equipment"
+    PRIMARY KEY (cargo_item_id,equipment_id)
+;
 
 CREATE TABLE dcsa_ebl_v1_0.carrier (
     carrier_code varchar(10) PRIMARY KEY,
@@ -234,7 +236,8 @@ CREATE TABLE dcsa_ebl_v1_0.references (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	reference_type varchar(3) NOT NULL,	-- e.g. CR, PO, SI, FF
 	reference_value varchar(50) NOT NULL,
-	shipment_id uuid NOT NULL
+	shipment_id uuid NULL,
+	transport_document_id uuid NULL
 );
 
 CREATE TABLE dcsa_ebl_v1_0.seal (
@@ -277,6 +280,10 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	total_container_weight real NULL,
 	verified_gross_mass real NULL,
 	weight_unit varchar(3) NULL,
+	reefer_settings_id uuid NULL,
+);
+CREATE TABLE dcsa_ebl_v1_0.live_reefer_setting (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	reefer_temperature_setting real NULL,
 	reefer_temperature_setting_unit varchar(3) NULL,
 	reefer_humidity real NULL,
