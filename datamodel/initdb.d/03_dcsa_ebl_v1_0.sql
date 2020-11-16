@@ -212,9 +212,9 @@ CREATE TABLE dcsa_ebl_v1_0.equipment (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.iso_equipment_code CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.iso_equipment_code (
     iso_equipment_code varchar(4) PRIMARY KEY,
-    iso_equipment_name text NULL,
-    iso_equipment_size_code text NULL,
-    iso_equipment_type_code_a text NULL
+    iso_equipment_name varchar(35) NULL,
+    iso_equipment_size_code varchar(2) NULL,
+    iso_equipment_type_code_a varchar(2) NULL
 );
 
 
@@ -264,7 +264,8 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	volume_unit varchar(20) NULL,
 	number_of_packages integer NULL,
 	carrier_booking_reference varchar(35) NULL,
-	shipping_instruction_id uuid NULL
+	shipping_instruction_id uuid NULL,
+	package_code varchar(3) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.hs_code CASCADE;
@@ -296,7 +297,7 @@ CREATE TABLE dcsa_ebl_v1_0.seal_type (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.package_code CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.package_code (
-	package_code varchar(10) PRIMARY KEY,
+	package_code varchar(3) PRIMARY KEY,
 	description varchar(50) NOT NULL
 );
 
