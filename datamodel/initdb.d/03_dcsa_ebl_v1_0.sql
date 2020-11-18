@@ -72,6 +72,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	place_of_issue uuid NULL,
+	date_of_issue date NULL,
 	onboard_date date NULL,
 	received_for_shipment_date date NULL,
 	document_reference_number varchar(20) NULL,
@@ -82,8 +83,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	shipping_instruction UUID NULL,
 	declared_value_currency varchar(3) NULL,
 	declared_value real NULL,
-	is_electric boolean NULL,
-	part_load integer NULL
+	is_electric boolean NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
@@ -228,15 +228,18 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	equipment_reference varchar(15) NULL,
 	total_container_weight real NULL,
 	verified_gross_mass real NULL,
-	weight_unit varchar(20) NULL
+	weight_unit varchar(20) NULL,
+	part_load integer NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.live_reefer_setting CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.live_reefer_setting (
 	shipment_equipment_id uuid PRIMARY KEY,
-	temperature real NULL,
+	temperature_min real NULL,
+	temperature_max real NULL,
 	temperature_unit varchar(3) NULL,
-	humidity real NULL,
+	humidity_min real NULL,
+	humidity_max real NULL,
 	ventilation real NULL
 );
 
