@@ -240,7 +240,8 @@ CREATE TABLE dcsa_ebl_v1_0.live_reefer_setting (
 	temperature_unit varchar(3) NULL,
 	humidity_min real NULL,
 	humidity_max real NULL,
-	ventilation real NULL
+	ventilation_min real NULL,
+	ventilation_max real NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item_equipment CASCADE;
