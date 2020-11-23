@@ -8,22 +8,22 @@
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	carrier_booking_reference varchar(35) NULL,
 	collection_datetime timestamp with time zone NULL,
 	delivery_datetime timestamp with time zone NULL,
-	carrier_code varchar(10) NULL
+	carrier_code varchar(10) NULL,
+	commercial_voyage_id uuid NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.booking (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
-	shipment_id uuid NULL,
 	service_type_at_origin varchar(5) NULL,
 	service_type_at_destination varchar(5) NULL,
 	shipment_term_at_origin varchar(5) NULL,
 	shipment_term_at_destination varchar(5) NULL,
 	booking_datetime timestamp with time zone NULL,	-- The date and time of the booking request.
-	service_contract varchar(30) NULL,
-	commercial_voyage_id uuid NULL
+	service_contract varchar(30) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment_entity CASCADE;
@@ -80,10 +80,18 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	terms_and_conditions text NULL,
 	issuer uuid NULL,	-- name of the carrier who issues the BL
 	document_status varchar(50) NULL,	-- SI, Received, Drafted, Pending Approval, Approved, Issued, Surrendered
-	shipping_instruction UUID NULL,
+	shipping_instruction_id UUID NULL,
 	declared_value_currency varchar(3) NULL,
-	declared_value real NULL,
-	is_electric boolean NULL
+	declared_value real NULL
+);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_version CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.document_version (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	transport_document_id uuid NULL,
+	document_status varchar(3) NULL,
+	binary_copy blob NULL,
+	document_hash text NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
@@ -91,6 +99,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	number_of_rider_pages integer NULL,
 	transport_document_type varchar(3) NULL,
+	is_electric boolean NULL,
 	callback_url text NOT NULL
 );
 
@@ -157,7 +166,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_party (
 	party_id uuid NOT NULL,
 	shipment_id uuid NOT NULL,
 	party_function varchar(3) NOT NULL,
-	notification_flag boolean NULL
+	should_be_notified boolean NULL
 );
 ALTER TABLE dcsa_ebl_v1_0.shipment_party ADD CONSTRAINT "pk_shipment_party"
     PRIMARY KEY (party_id, shipment_id, party_function)
@@ -186,6 +195,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.charges CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.charges (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_id uuid NOT NULL,
+	shipment_id uuid NULL,
 	charge_type varchar(20) NULL,
 	currency_amount real NULL,
 	currency varchar(3) NULL,
@@ -270,6 +280,13 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_id uuid NULL,
 	package_code varchar(3) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_line_item CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.cargo_line_item (
+	cargo_line_item_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	cargo_item_id uuid NOT NULL,
+	shipping_marks text NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.hs_code CASCADE;
