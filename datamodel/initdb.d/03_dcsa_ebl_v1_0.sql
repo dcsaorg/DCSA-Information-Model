@@ -22,7 +22,7 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
 	service_type_at_destination varchar(5) NULL,
 	shipment_term_at_origin varchar(5) NULL,
 	shipment_term_at_destination varchar(5) NULL,
-	booking_datetime timestamp with time zone NULL,	-- The date and time of the booking request.
+	booking_datetime timestamp with time zone NULL,
 	service_contract varchar(30) NULL
 );
 
@@ -30,9 +30,9 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment_entity CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.requested_equipment_entity (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
 	shipment_id uuid NULL,
-	requested_equipment_types varchar(4) NOT NULL,
+	requested_equipment_type varchar(4) NOT NULL,
 	requested_equipment_units integer NOT NULL,
-	confirmed_equipment_types varchar(4) NULL,
+	confirmed_equipment_type varchar(4) NULL,
 	confirmed_equipment_units integer NULL
 );
 
@@ -149,27 +149,18 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	public_key varchar(500) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction_party CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.shipping_instruction_party (
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.document_party (
     shipping_instruction_id uuid NOT NULL,
     party_id uuid NOT NULL,
+    shipment_id uuid NOT NULL,
     party_function varchar(3) NOT NULL,
     displayed_address varchar(250) NULL,
-    party_contact_details varchar(250) NULL
-);
-ALTER TABLE dcsa_ebl_v1_0.shipping_instruction_party ADD CONSTRAINT "pk_shipping_instruction_party"
-    PRIMARY KEY (shipping_instruction_id, party_id, party_function)
-;
-
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_party CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.shipment_party (
-	party_id uuid NOT NULL,
-	shipment_id uuid NOT NULL,
-	party_function varchar(3) NOT NULL,
+    party_contact_details varchar(250) NULL,
 	should_be_notified boolean NULL
 );
-ALTER TABLE dcsa_ebl_v1_0.shipment_party ADD CONSTRAINT "pk_shipment_party"
-    PRIMARY KEY (party_id, shipment_id, party_function)
+ALTER TABLE dcsa_ebl_v1_0.document_party ADD CONSTRAINT "pk_document_party"
+    PRIMARY KEY (shipping_instruction_id, shipment_id, party_id, party_function)
 ;
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier CASCADE;
@@ -254,16 +245,6 @@ CREATE TABLE dcsa_ebl_v1_0.live_reefer_setting (
 	ventilation_max real NULL
 );
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item_equipment CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.cargo_item_equipment (
-	stuffing_id uuid NOT NULL,
-	cargo_item_id uuid NOT NULL,
-	equipment_reference varchar(15) NOT NULL
-);
-ALTER TABLE dcsa_ebl_v1_0.cargo_item_equipment ADD CONSTRAINT "pk_cargo_item_equipment"
-    PRIMARY KEY (stuffing_id, cargo_item_id, equipment_reference)
-;
-
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -279,12 +260,13 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	number_of_packages integer NULL,
 	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_id uuid NULL,
-	package_code varchar(3) NULL
+	package_code varchar(3) NULL,
+	equipment_reference varchar(15) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_line_item CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.cargo_line_item (
-	cargo_line_item_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	cargo_line_item_id text PRIMARY KEY,
 	cargo_item_id uuid NOT NULL,
 	shipping_marks text NULL
 );
@@ -458,7 +440,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport_call (
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.voyage CASCADE;
-CREATlE TABLE dcsa_ebl_v1_0.voyage (
+CREATE TABLE dcsa_ebl_v1_0.voyage (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	carrier_voyage_number varchar(50) NULL,
 	service_id uuid NULL
