@@ -11,7 +11,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment (
 	carrier_booking_reference varchar(35) NULL,
 	collection_datetime timestamp with time zone NULL,
 	delivery_datetime timestamp with time zone NULL,
-	carrier_code varchar(10) NULL,
+	carrier_id uuid NULL,
 	commercial_voyage_id uuid NULL
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_term (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.references CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.references (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	reference_type varchar(3) NOT NULL,	-- e.g. CR, PO, SI, FF
+	reference_type varchar(3) NOT NULL,
 	reference_value varchar(100) NOT NULL,
 	shipment_id uuid NULL,
 	shipping_instruction_id uuid NULL
@@ -82,24 +82,26 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	document_status varchar(50) NULL,	-- SI, Received, Drafted, Pending Approval, Approved, Issued, Surrendered
 	shipping_instruction_id UUID NULL,
 	declared_value_currency varchar(3) NULL,
-	declared_value real NULL
+	declared_value real NULL,
+	number_of_rider_pages integer NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_version CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.document_version (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_id uuid NULL,
-	document_status varchar(3) NULL,
-	binary_copy blob NULL,
-	document_hash text NULL
+	transport_document_id uuid NOT NULL,
+	document_status varchar(3) NOT NULL,
+	binary_copy bytea NOT NULL,
+	document_hash text NOT NULL,
+	last_modified_datetime timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	number_of_rider_pages integer NULL,
 	transport_document_type varchar(3) NULL,
 	is_electric boolean NULL,
+	part_load boolean NULL,
 	callback_url text NOT NULL
 );
 
@@ -146,7 +148,14 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	party_name varchar(100) NULL,
 	tax_reference varchar(20) NULL,
-	public_key varchar(500) NULL
+	public_key varchar(500) NULL,
+	street_name varchar(50) NULL,
+	street_number integer NULL,
+	floor varchar(8) NULL,
+	postal_code varchar(10) NULL,
+	city_name varchar(65) NULL,
+	region varchar(65) NULL,
+	country varchar(25) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
@@ -189,7 +198,7 @@ CREATE TABLE dcsa_ebl_v1_0.charges (
 	shipment_id uuid NULL,
 	charge_type varchar(20) NULL,
 	currency_amount real NULL,
-	currency varchar(3) NULL,
+	currency_code varchar(3) NULL,
 	payment_term varchar(3) NULL,
 	calculation_basis varchar(50) NULL,
 	freight_payable_at uuid NULL,
@@ -225,16 +234,15 @@ CREATE TABLE dcsa_ebl_v1_0.iso_equipment_code (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_equipment CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	shipment_id uuid NULL,
-	equipment_reference varchar(15) NULL,
+	shipment_id uuid NOT NULL,
+	equipment_reference varchar(15) NOT NULL,
 	total_container_weight real NULL,
 	verified_gross_mass real NULL,
-	weight_unit varchar(20) NULL,
-	part_load integer NULL
+	weight_unit varchar(20) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.live_reefer_setting CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.live_reefer_setting (
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.live_reefer_settings CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.live_reefer_settings (
 	shipment_equipment_id uuid PRIMARY KEY,
 	temperature_min real NULL,
 	temperature_max real NULL,
@@ -250,7 +258,6 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
 	commodity_type varchar(20) NULL,
-	shipping_marks text NULL,
 	description_of_goods text NULL,
 	hs_code varchar(10) NULL,
 	weight real NULL,
@@ -261,7 +268,7 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_id uuid NULL,
 	package_code varchar(3) NULL,
-	equipment_reference varchar(15) NULL
+	shipment_equipment_id uuid NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_line_item CASCADE;
@@ -282,8 +289,8 @@ CREATE TABLE dcsa_ebl_v1_0.seal (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_equipment_id uuid NOT NULL,
 	seal_number varchar(15) NOT NULL,
-	seal_source varchar(5) NULL,
-	seal_type varchar(5) NULL
+	seal_source varchar(5) NOT NULL,
+	seal_type varchar(5) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.seal_source CASCADE;
@@ -311,6 +318,7 @@ CREATE TABLE dcsa_ebl_v1_0.package_code (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.location CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.location (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    location_name varchar(100) NULL,
 	address varchar(250) NULL,
 	latitude varchar(10) NULL,
 	longitude varchar(11) NULL,
@@ -384,7 +392,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_reference varchar(50) NULL,
 	transport_name varchar(100) NULL,
-	mode_of_transport varchar(3) NOT NULL,
+	mode_of_transport varchar(3) NULL,
 	load_transport_call_id uuid NOT NULL,
 	discharge_transport_call_id uuid NOT NULL,
 	vessel varchar(7) NULL
