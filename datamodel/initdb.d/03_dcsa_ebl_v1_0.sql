@@ -79,7 +79,6 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	number_of_originals integer NULL,
 	terms_and_conditions text NULL,
 	issuer uuid NULL,	-- name of the carrier who issues the BL
-	document_status varchar(50) NULL,	-- SI, Received, Drafted, Pending Approval, Approved, Issued, Surrendered
 	shipping_instruction_id UUID NULL,
 	declared_value_currency varchar(3) NULL,
 	declared_value real NULL,
@@ -90,7 +89,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_version CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.document_version (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_id uuid NOT NULL,
-	document_status varchar(3) NOT NULL,
+	document_status varchar(4) NOT NULL,
 	binary_copy bytea NOT NULL,
 	document_hash text NOT NULL,
 	last_modified_datetime timestamp with time zone NOT NULL
@@ -100,8 +99,8 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_type varchar(3) NULL,
+	is_part_load boolean NULL,
 	is_electric boolean NULL,
-	part_load boolean NULL,
 	callback_url text NOT NULL
 );
 
@@ -154,8 +153,8 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	floor varchar(8) NULL,
 	postal_code varchar(10) NULL,
 	city_name varchar(65) NULL,
-	region varchar(65) NULL,
-	country varchar(25) NULL
+	state_region varchar(65) NULL,
+	country varchar(75) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
@@ -241,8 +240,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	weight_unit varchar(20) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.live_reefer_settings CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.live_reefer_settings (
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.active_reefer_settings CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.active_reefer_settings (
 	shipment_equipment_id uuid PRIMARY KEY,
 	temperature_min real NULL,
 	temperature_max real NULL,
@@ -404,7 +403,7 @@ CREATE TABLE dcsa_ebl_v1_0.vessel (
 	vessel_name varchar(35) NULL,
 	vessel_flag char(2) NULL,
 	vessel_call_sign_number varchar(10) NULL,
-	vessel_operator_carrier_code varchar(10) NULL
+	vessel_operator_carrier_id uuid NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_transport CASCADE;
