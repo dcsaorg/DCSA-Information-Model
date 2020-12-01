@@ -26,8 +26,8 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
 	service_contract varchar(30) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment_entity CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.requested_equipment_entity (
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
 	shipment_id uuid NULL,
 	requested_equipment_type varchar(4) NOT NULL,
