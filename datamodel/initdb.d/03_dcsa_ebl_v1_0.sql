@@ -11,8 +11,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment (
 	carrier_booking_reference varchar(35) NULL,
 	collection_datetime timestamp with time zone NULL,
 	delivery_datetime timestamp with time zone NULL,
-	carrier_id uuid NULL,
-	commercial_voyage_id uuid NULL
+	carrier_id uuid NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
@@ -28,7 +27,7 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
-	carrier_booking_reference varchar(35) PRIMARY KEY,
+	carrier_booking_reference varchar(35) NOT NULL,
 	shipment_id uuid NULL,
 	requested_equipment_type varchar(4) NOT NULL,
 	requested_equipment_units integer NOT NULL,
@@ -99,6 +98,8 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_type varchar(3) NULL,
+	number_of_copies integer NULL,
+	number_of_originals integer NULL,
 	is_part_load boolean NULL,
 	is_electric boolean NULL,
 	callback_url text NOT NULL
@@ -121,9 +122,6 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses (
 	carrier_clause_id uuid NOT NULL,
 	transport_document_id uuid NOT NULL
 );
-ALTER TABLE dcsa_ebl_v1_0.transport_document_carrier_clauses ADD CONSTRAINT "pk_transport_document_carrier_clauses"
-    PRIMARY KEY (carrier_clause_id,transport_document_id)
-;
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.carrier_clauses (
@@ -148,9 +146,9 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	party_name varchar(100) NULL,
 	tax_reference varchar(20) NULL,
 	public_key varchar(500) NULL,
-	street_name varchar(50) NULL,
-	street_number integer NULL,
-	floor varchar(8) NULL,
+	street_name varchar(100) NULL,
+	street_number varchar(50) NULL,
+	floor varchar(50) NULL,
 	postal_code varchar(10) NULL,
 	city_name varchar(65) NULL,
 	state_region varchar(65) NULL,
@@ -167,9 +165,6 @@ CREATE TABLE dcsa_ebl_v1_0.document_party (
     party_contact_details varchar(250) NULL,
 	should_be_notified boolean NULL
 );
-ALTER TABLE dcsa_ebl_v1_0.document_party ADD CONSTRAINT "pk_document_party"
-    PRIMARY KEY (shipping_instruction_id, shipment_id, party_id, party_function)
-;
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.carrier (
@@ -193,7 +188,7 @@ CREATE TABLE dcsa_ebl_v1_0.party_function (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.charges CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.charges (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_id uuid NOT NULL,
+	transport_document_id uuid NULL,
 	shipment_id uuid NULL,
 	charge_type varchar(20) NULL,
 	currency_amount real NULL,
@@ -257,24 +252,23 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
 	commodity_type varchar(20) NULL,
-	description_of_goods text NULL,
-	hs_code varchar(10) NULL,
+	description_of_goods text NOT NULL,
+	hs_code varchar(10) NOT NULL,
 	weight real NULL,
-	weight_unit varchar(20) NULL,
 	volume real NULL,
+	weight_unit varchar(20) NULL,
 	volume_unit varchar(20) NULL,
 	number_of_packages integer NULL,
-	carrier_booking_reference varchar(35) NULL,
 	shipping_instruction_id uuid NULL,
 	package_code varchar(3) NULL,
-	shipment_equipment_id uuid NULL
+	shipment_equipment_id uuid NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_line_item CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.cargo_line_item (
-	cargo_line_item_id text PRIMARY KEY,
+	cargo_line_item_id text NOT NULL,
 	cargo_item_id uuid NOT NULL,
-	shipping_marks text NULL
+	shipping_marks text NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.hs_code CASCADE;
@@ -328,11 +322,9 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_location CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_location (
 	shipment_id uuid NOT NULL,
 	location_id uuid NOT NULL,
-	location_type varchar(3) NOT NULL
+	location_type varchar(3) NOT NULL,
+	displayed_name varchar(250)
 );
-ALTER TABLE dcsa_ebl_v1_0.shipment_location ADD CONSTRAINT "pk_shipment_location"
-    PRIMARY KEY (shipment_id, location_id, location_type)
-;
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_location_type CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_location_type (
@@ -410,11 +402,9 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_transport CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 	shipment_id uuid NOT NULL,
 	transport_id uuid NOT NULL,
-	sequence_number integer NOT NULL
+	sequence_number integer NOT NULL,
+	commercial_voyage_id uuid
 );
-ALTER TABLE dcsa_ebl_v1_0.shipment_transport ADD CONSTRAINT "pk_shipment_transport"
-    PRIMARY KEY (shipment_id, transport_id, sequence_number)
-;
 
 
 /* Events related Entities */
@@ -438,7 +428,7 @@ ALTER TABLE dcsa_ebl_v1_0.shipment_transport ADD CONSTRAINT "pk_shipment_transpo
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_call CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.transport_call (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_call_sequence_number varchar(50) NULL,
+	transport_call_sequence_number integer,
 	facility_code varchar(11) NULL,
 	facility_type_code char(4) NULL,
 	other_facility varchar(50) NULL,
@@ -458,13 +448,10 @@ CREATE TABLE dcsa_ebl_v1_0.transport_call_voyage (
 	voyage_id uuid NOT NULL,
 	transport_call_id uuid NOT NULL
 );
-ALTER TABLE dcsa_ebl_v1_0.transport_call_voyage ADD CONSTRAINT "pk_transport_call_voyage"
-    PRIMARY KEY (voyage_id, transport_call_id)
-;
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.commercial_voyage CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.commercial_voyage (
-	commercial_voyage_id uuid NOT NULL,
+	commercial_voyage_id uuid PRIMARY KEY,
 	commercial_voyage_name text NOT NULL
 );
 
@@ -473,9 +460,6 @@ CREATE TABLE dcsa_ebl_v1_0.commercial_voyage_transport_call (
 	transport_call_id uuid NOT NULL,
 	commercial_voyage_id uuid NOT NULL
 );
-ALTER TABLE dcsa_ebl_v1_0.commercial_voyage_transport_call ADD CONSTRAINT "pk_commercial_voyage_transport_call"
-    PRIMARY KEY (transport_call_id, commercial_voyage_id)
-;
 
 
 /* Create Foreign Key Constraints (Not implemented yet) */
