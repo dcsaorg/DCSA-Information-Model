@@ -8,21 +8,24 @@
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	carrier_booking_reference varchar(35) NULL,
-	collection_datetime timestamp with time zone NULL,
-	delivery_datetime timestamp with time zone NULL,
-	carrier_id uuid NULL
+	carrier_booking_reference varchar(35) NOT NULL,
+	collection_datetime timestamp with time zone NOT NULL,
+	delivery_datetime timestamp with time zone NOT NULL,
+	carrier_id uuid NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.booking (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
-	service_type_at_origin varchar(5) NULL,
-	service_type_at_destination varchar(5) NULL,
-	shipment_term_at_origin varchar(5) NULL,
-	shipment_term_at_destination varchar(5) NULL,
-	booking_datetime timestamp with time zone NULL,
-	service_contract varchar(30) NULL
+	service_type_at_origin varchar(5) NOT NULL,
+	service_type_at_destination varchar(5) NOT NULL,
+	shipment_term_at_origin varchar(5) NOT NULL,
+	shipment_term_at_destination varchar(5) NOT NULL,
+	booking_datetime timestamp with time zone NOT NULL,
+	service_contract varchar(30) NOT NULL,
+	commodity_type varchar(20) NOT NULL,
+	cargo_gross_weight real NOT NULL,
+	cargo_gross_weight_unit varchar(3) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment CASCADE;
@@ -38,13 +41,13 @@ CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_type CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.service_type (
 	service_type varchar(5) PRIMARY KEY,
-	description varchar(200) NULL
+	description varchar(200) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_term CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_term (
 	shipment_term varchar(5) PRIMARY KEY,
-	description varchar(200) NULL
+	description varchar(200) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.references CASCADE;
@@ -144,7 +147,8 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.party CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.party (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	party_name varchar(100) NULL,
-	tax_reference varchar(20) NULL,
+	tax_reference_1 varchar(20) NULL,
+	tax_reference_2 varchar(20) NULL,
 	public_key varchar(500) NULL,
 	street_name varchar(100) NULL,
 	street_number varchar(50) NULL,
@@ -163,7 +167,7 @@ CREATE TABLE dcsa_ebl_v1_0.document_party (
     party_function varchar(3) NOT NULL,
     displayed_address varchar(250) NULL,
     party_contact_details varchar(250) NULL,
-	should_be_notified boolean NULL
+    should_be_notified boolean NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier CASCADE;
@@ -210,7 +214,7 @@ CREATE TABLE dcsa_ebl_v1_0.equipment (
 	equipment_reference varchar(15) PRIMARY KEY,	-- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
 	iso_equipment_code char(4) NULL,	-- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
 	tare_weight real NULL,
-	weight_unit varchar(20) NULL
+	weight_unit varchar(3) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.iso_equipment_code CASCADE;
@@ -230,9 +234,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
 	equipment_reference varchar(15) NOT NULL,
-	total_container_weight real NULL,
-	verified_gross_mass real NULL,
-	weight_unit varchar(20) NULL
+	verified_gross_mass varchar(250) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.active_reefer_settings CASCADE;
@@ -251,13 +253,12 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.cargo_item CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
-	commodity_type varchar(20) NULL,
 	description_of_goods text NOT NULL,
 	hs_code varchar(10) NOT NULL,
 	weight real NULL,
 	volume real NULL,
-	weight_unit varchar(20) NULL,
-	volume_unit varchar(20) NULL,
+	weight_unit varchar(3) NULL,
+	volume_unit varchar(3) NULL,
 	number_of_packages integer NULL,
 	shipping_instruction_id uuid NULL,
 	package_code varchar(3) NULL,
