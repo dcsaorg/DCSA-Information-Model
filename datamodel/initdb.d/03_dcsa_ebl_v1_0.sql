@@ -156,7 +156,8 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	postal_code varchar(10) NULL,
 	city_name varchar(65) NULL,
 	state_region varchar(65) NULL,
-	country varchar(75) NULL
+	country varchar(75) NULL,
+	nmfta_code varchar(4) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
