@@ -1,0 +1,11 @@
+name: Database backend
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Initialize and run the database
+      run: docker-compose -f docker-compose.yml up -d -V
