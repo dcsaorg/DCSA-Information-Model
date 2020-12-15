@@ -235,7 +235,9 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL,
 	equipment_reference varchar(15) NOT NULL,
-	verified_gross_mass varchar(250) NULL
+	verified_gross_mass varchar(250) NULL,
+	cargo_gross_weight real NULL,
+	cargo_gross_weight_unit varchar(3) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.active_reefer_settings CASCADE;
