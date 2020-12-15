@@ -2,7 +2,7 @@ Facility Type Code,Facility Type Name,Facility Type Description
 BOCR,Border crossing,"Border crossing is the point at a border between two countries where people, transports or goods can cross. This may or may not include a customs checkpoint."
 CLOC,Customer location,"Customer location is the premise of the customer, who can be either the shipper or the consignee."
 COFS,Container freight station,"Container freight station is a facility where LCL (Less Than Container Load) shipments are consolidated or dispersed, cargo is stuffed into containers prior to shipment, or cargo is stripped from containers prior to release to the consignee."
-COYA*,Container yard,"Deprecated, now called OFFD."
+COYA,Container yard,"Deprecated, now called OFFD."
 OFFD,Off dock storage,An interim storage facility where empty or full containers are stored in transit.
 DEPO,Depot,Depot is a designated area where empty equipment is stored between use.
 INTE,Inland terminal,"Inland terminal is a facility where containers are loaded, moved, or discharged. The inland terminal can be serviced by trucks, rail, and barges (at river terminals)."
