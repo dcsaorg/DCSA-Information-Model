@@ -104,7 +104,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
 	is_part_load boolean NULL,
-	is_electric boolean NULL,
+	is_electronic boolean NULL,
 	callback_url text NOT NULL
 );
 
