@@ -1,9 +1,0 @@
-Shipment Location Type Code,Location Type Description
-PRE,Place of Receipt
-PDE,Place of Delivery
-PCF,Pre-carriage From
-OIR,Onward In-land Routing
-POL,Port of Loading
-POD,Port of Discharge
-ORI,Origin of goods
-DRL,Depot release location
