@@ -1,4 +1,7 @@
+\set ON_ERROR_STOP true
 \connect dcsa_openapi
+
+BEGIN;
 
 /* Create Tables */
 
@@ -656,3 +659,5 @@ CREATE TABLE dcsa_ebl_v1_0.commercial_voyage_transport_call (
 -- ALTER TABLE dcsa_ebl_v1_0.vessel ADD CONSTRAINT "FK_Vessel_Transport"
 -- 	FOREIGN KEY (transport_id) REFERENCES dcsa_ebl_v1_0.transport (id) ON DELETE No Action ON UPDATE No Action
 -- ;
+
+COMMIT;

@@ -1,4 +1,7 @@
+\set ON_ERROR_STOP true
 \connect dcsa_openapi
+
+BEGIN;
 
 INSERT INTO dcsa_ebl_v1_0.shipment (
     id,
@@ -125,3 +128,5 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
     'PDE'
 );
+
+COMMIT;
