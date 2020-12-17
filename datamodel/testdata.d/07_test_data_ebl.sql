@@ -129,4 +129,32 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     'PDE'
 );
 
+INSERT INTO dcsa_ebl_v1_0.equipment (
+    equipment_reference,
+    iso_equipment_code,
+    tare_weight,
+    weight_unit
+) VALUES (
+    'BMOU2149612',
+    '22G1',
+    2000,
+    'KGM'
+);
+
+INSERT INTO dcsa_ebl_v1_0.shipment_equipment (
+    id,
+    shipment_id,
+    equipment_reference,
+    verified_gross_mass,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
+) VALUES (
+    uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    'BMOU2149612',
+    'Verified Gross Mass Dummy text::',
+    4000,
+    'KGM'
+);
+
 COMMIT;
