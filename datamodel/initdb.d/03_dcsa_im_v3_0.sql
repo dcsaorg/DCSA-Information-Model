@@ -165,9 +165,9 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.document_party (
-    shipping_instruction_id uuid NULL,
     party_id uuid NOT NULL,
     shipment_id uuid NULL,
+    shipping_instruction_id uuid NULL,
     party_function varchar(3) NOT NULL,
     displayed_address varchar(250) NULL,
     party_contact_details varchar(250) NULL,
