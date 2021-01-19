@@ -168,12 +168,11 @@ INSERT INTO dcsa_ebl_v1_0.shipment_equipment (
 );
 
 INSERT INTO dcsa_ebl_v1_0.hs_code (
-    hs_code,½
+    hs_code,
     code_description
 ) VALUES (
     '411510',
     'Leather; composition leather with a basis of leather or leather fibre, in slabs, sheets or strip, whether or not in rolls'
 );
-
 
 COMMIT;
