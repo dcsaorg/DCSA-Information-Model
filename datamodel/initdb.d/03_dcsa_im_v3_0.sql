@@ -205,7 +205,6 @@ CREATE TABLE dcsa_ebl_v1_0.charges (
 	payment_term varchar(3) NULL,
 	calculation_basis varchar(50) NULL,
 	freight_payable_at uuid NULL,
-	is_charge_displayed boolean NULL,
 	unit_price real NULL,
 	quantity real NULL
 );
