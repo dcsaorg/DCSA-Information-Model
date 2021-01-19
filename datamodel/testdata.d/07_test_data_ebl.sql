@@ -157,14 +157,12 @@ INSERT INTO dcsa_ebl_v1_0.shipment_equipment (
     id,
     shipment_id,
     equipment_reference,
-    verified_gross_mass,
     cargo_gross_weight,
     cargo_gross_weight_unit
 ) VALUES (
     uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
     'BMOU2149612',
-    'Verified Gross Mass Dummy text::',
     4000,
     'KGM'
 );
@@ -175,6 +173,61 @@ INSERT INTO dcsa_ebl_v1_0.hs_code (
 ) VALUES (
     '411510',
     'Leather; composition leather with a basis of leather or leather fibre, in slabs, sheets or strip, whether or not in rolls'
+);
+
+INSERT INTO dcsa_ebl_v1_0.party (
+    id,
+    party_name
+) VALUES (
+    uuid('1e118f26-1035-11eb-a19d-7f9eb9bc8ff9'),
+    'Cargo Unlimited'
+);
+
+INSERT INTO dcsa_ebl_v1_0.shipping_instruction (
+	id,
+	transport_document_type,
+	number_of_copies,
+	number_of_originals,
+	is_part_load,
+	is_electronic,
+	callback_url
+
+) VALUES (
+    uuid('111a5606-402e-11eb-b19a-0f3aa4962e00'),
+    'BOL',
+    2,
+    4,
+    false,
+    true,
+    'http://myserver.com'
+);
+
+INSERT INTO dcsa_ebl_v1_0.transport_document (
+	id,
+	place_of_issue,
+	date_of_issue,
+	onboard_date,
+	received_for_shipment_date,
+	document_reference_number,
+	terms_and_conditions,
+	issuer,
+	shipping_instruction_id,
+	declared_value_currency,
+	declared_value,
+	number_of_rider_pages
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0e'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    DATE '2020-01-14',
+    DATE '2020-01-20',
+    DATE '2020-01-18',
+    '123',
+    'You will surrender',
+    uuid('1e118f26-1035-11eb-a19d-7f9eb9bc8ff9'),
+    uuid('111a5606-402e-11eb-b19a-0f3aa4962e00'),
+    'DKK',
+    '10.000',
+    '5'
 );
 
 COMMIT;
