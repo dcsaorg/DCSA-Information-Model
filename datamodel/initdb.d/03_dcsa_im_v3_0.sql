@@ -20,10 +20,10 @@ CREATE TABLE dcsa_ebl_v1_0.shipment (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.booking (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
-	service_type_at_origin varchar(5) NOT NULL,
-	service_type_at_destination varchar(5) NOT NULL,
-	shipment_term_at_origin varchar(5) NOT NULL,
-	shipment_term_at_destination varchar(5) NOT NULL,
+	service_type_at_origin varchar(3) NOT NULL,
+	service_type_at_destination varchar(3) NOT NULL,
+	shipment_term_at_origin varchar(3) NOT NULL,
+	shipment_term_at_destination varchar(3) NOT NULL,
 	booking_datetime timestamp with time zone NOT NULL,
 	service_contract varchar(30) NOT NULL,
 	commodity_type varchar(20) NOT NULL,
