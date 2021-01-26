@@ -1,0 +1,4 @@
+Shipment Term,Description
+FCL,Full Container Load: the shipper/ consignee or its agent or subcontractor is responsible for stuffing or stripping the cargo into or out of the container and bears every responsibility and liability in such respect. 
+LCL,Less than Container Load: the carrier or its agent or subcontractor is responsible for stuffing or stripping the cargo into or out of the container and bears every responsibility and liability in such respect.
+BB,Break bulk: indicates that the carrier has received the cargo which is not containerised.

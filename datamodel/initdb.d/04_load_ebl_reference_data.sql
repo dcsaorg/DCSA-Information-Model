@@ -10,5 +10,8 @@ BEGIN;
 \copy dcsa_ebl_v1_0.seal_type from '../referencedata.d/sealtypecodes.csv' CSV HEADER
 \copy dcsa_ebl_v1_0.shipment_location_type from '../referencedata.d/shipmentlocationtypes.csv' CSV HEADER
 \copy dcsa_ebl_v1_0.party_function from '../referencedata.d/partyfunctioncodes.csv' CSV HEADER
+\copy dcsa_ebl_v1_0.reference_type from '../referencedata.d/referencetypes.csv' CSV HEADER
+\copy dcsa_ebl_v1_0.service_type from '../referencedata.d/servicetypes.csv' CSV HEADER
+\copy dcsa_ebl_v1_0.shipment_term from '../referencedata.d/shipmentterms.csv' CSV HEADER
 
 COMMIT;
