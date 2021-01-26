@@ -82,7 +82,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	received_for_shipment_date date NULL,
 	document_reference_number varchar(20) NULL,
 	terms_and_conditions text NULL,
-	issuer uuid NULL,	-- name of the carrier who issues the BL
+	issuer varchar(4) NULL,
 	shipping_instruction_id UUID NULL,
 	declared_value_currency varchar(3) NULL,
 	declared_value real NULL,
