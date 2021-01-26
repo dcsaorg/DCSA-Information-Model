@@ -43,14 +43,14 @@ CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_type CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.service_type (
-	service_type varchar(5) PRIMARY KEY,
-	description varchar(200) NOT NULL
+    service_type varchar(5) PRIMARY KEY,
+    description varchar(300) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_term CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_term (
-	shipment_term varchar(5) PRIMARY KEY,
-	description varchar(200) NOT NULL
+    shipment_term varchar(5) PRIMARY KEY,
+    description varchar(300) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.references CASCADE;
@@ -65,7 +65,7 @@ CREATE TABLE dcsa_ebl_v1_0.references (
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.reference_type CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.reference_type (
 	reference_type_code varchar(3) PRIMARY KEY,
-	reference_name varchar(20) NOT NULL,
+	reference_name varchar(100) NOT NULL,
 	reference_description varchar(200) NOT NULL
 );
 
