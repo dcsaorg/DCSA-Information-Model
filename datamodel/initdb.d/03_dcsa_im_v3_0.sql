@@ -247,8 +247,6 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	shipment_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
 	equipment_reference varchar(15) NOT NULL REFERENCES dcsa_ebl_v1_0.equipment (equipment_reference),
-	verified_gross_mass real NULL,
-	verified_gross_mass_unit varchar(3) NULL,
 	cargo_gross_weight real NULL,
 	cargo_gross_weight_unit varchar(3) NULL
 );
