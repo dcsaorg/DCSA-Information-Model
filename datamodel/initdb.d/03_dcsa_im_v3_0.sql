@@ -49,7 +49,7 @@ CREATE TABLE dcsa_ebl_v1_0.service_type (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_term CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipment_term (
-    shipment_term varchar(5) PRIMARY KEY,
+	shipment_term varchar(3) PRIMARY KEY,
     description varchar(300) NOT NULL
 );
 
