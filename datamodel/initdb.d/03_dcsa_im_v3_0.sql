@@ -43,7 +43,7 @@ CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_type CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.service_type (
-    service_type varchar(5) PRIMARY KEY,
+	service_type varchar(3) PRIMARY KEY,
     description varchar(300) NOT NULL
 );
 
