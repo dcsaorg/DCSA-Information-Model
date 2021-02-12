@@ -103,9 +103,13 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_type varchar(3) NULL,
+	is_shipped_onboard_type boolean NOT NULL,
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
+    precarriage_mode_of_transport_under_shippers_responsibilty varchar(3) NULL,
+    freight_payable_at uuid NOT NULL,
 	is_part_load boolean NULL,
+	number_of_partloads integer NULL,
 	is_electronic boolean NULL,
 	callback_url text NOT NULL
 );
@@ -248,7 +252,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	shipment_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
 	equipment_reference varchar(15) NOT NULL REFERENCES dcsa_ebl_v1_0.equipment (equipment_reference),
 	cargo_gross_weight real NULL,
-	cargo_gross_weight_unit varchar(3) NULL
+	cargo_gross_weight_unit varchar(3) NULL,
+    number_of_partloads integer NULL
 );
 
 -- Supporting FK constraints
@@ -284,6 +289,7 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	weight_unit varchar(3) NULL,
 	volume_unit varchar(3) NULL,
 	number_of_packages integer NULL,
+	partload_sequence_number integer NULL,
 	shipping_instruction_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
 	package_code varchar(3) NULL REFERENCES dcsa_ebl_v1_0.package_code (package_code),
 	shipment_equipment_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.shipment_equipment (id)
