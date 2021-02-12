@@ -106,8 +106,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	is_shipped_onboard_type boolean NOT NULL,
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
-    precarriage_mode_of_transport_under_shippers_responsibilty varchar(3) NULL,
-    freight_payable_at uuid NOT NULL,
+	precarriage_mode_of_transport_under_shippers_responsibilty varchar(3) NULL,
+	freight_payable_at uuid NOT NULL,
 	is_part_load boolean NULL,
 	is_electronic boolean NULL,
 	callback_url text NOT NULL
@@ -252,7 +252,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	equipment_reference varchar(15) NOT NULL REFERENCES dcsa_ebl_v1_0.equipment (equipment_reference),
 	cargo_gross_weight real NULL,
 	cargo_gross_weight_unit varchar(3) NULL,
-    number_of_partloads integer NULL
+	number_of_partloads integer NULL
 );
 
 -- Supporting FK constraints
