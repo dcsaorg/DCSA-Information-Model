@@ -109,7 +109,6 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
     precarriage_mode_of_transport_under_shippers_responsibilty varchar(3) NULL,
     freight_payable_at uuid NOT NULL,
 	is_part_load boolean NULL,
-	number_of_partloads integer NULL,
 	is_electronic boolean NULL,
 	callback_url text NOT NULL
 );
