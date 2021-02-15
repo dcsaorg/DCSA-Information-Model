@@ -412,7 +412,7 @@ CREATE TABLE dcsa_ebl_v1_0.mode_of_transport (
 	mode_of_transport_code varchar(3) PRIMARY KEY,
 	mode_of_transport_name varchar(100) NULL,
 	mode_of_transport_description varchar(250) NULL,
-	dcsa_transport_type varchar(50) NULL
+	dcsa_transport_type varchar(50) NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport CASCADE;
