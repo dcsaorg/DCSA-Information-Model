@@ -2,9 +2,4 @@ Mode of Transport Code,Mode of Transport Name,Mode of Transport Description,DCSA
 1,Maritime transport,Transport of goods and/or persons is by sea.,VESSEL
 2,Rail transport,Transport of goods and/or persons is by rail.,RAIL
 3,Road transport,Transport of goods and/or persons is by road.,TRUCK
-4,Air transport,Transport of goods and/or persons is by air.,
-5,Mail,Method to convey goods is by mail.,
-6,Multimodal transport,Method to convey goods and/or persons is by multimodal transport.,
-7,Fixed Transport installation,Transport of item is via a fixed transport installation.,
 8,Inland water Transport,Transport of goods and/or persons is by inland water.,BARGE
-9,Transport mode not applicable,The mode of transport in not applicable.,
