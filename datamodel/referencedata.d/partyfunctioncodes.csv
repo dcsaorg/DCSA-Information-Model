@@ -9,3 +9,4 @@ N2,Second Notify Party.,The second party which is to be notified.
 NI,Notify party,Party to be notified of arrival of goods.
 SFA,Shipper Forwarding Agent.,Forwarding agent that acts on behalf of the shipper (Defined by DCSA).
 CFA,Consignee Forwarding Agent,Forwarding agent that acts on behalf of the consignee (Defined by DCSA).
+CNO,Consignee To Order,??? (Defined by DCSA).
