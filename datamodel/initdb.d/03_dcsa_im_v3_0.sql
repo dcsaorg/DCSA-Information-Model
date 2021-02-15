@@ -250,8 +250,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_equipment (
 	shipment_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
 	equipment_reference varchar(15) NOT NULL REFERENCES dcsa_ebl_v1_0.equipment (equipment_reference),
 	cargo_gross_weight real NULL,
-	cargo_gross_weight_unit varchar(3) NULL,
-	number_of_partloads integer NULL
+ 	cargo_gross_weight_unit varchar(3) NULL
 );
 
 -- Supporting FK constraints
