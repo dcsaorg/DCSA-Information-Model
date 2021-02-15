@@ -286,7 +286,6 @@ CREATE TABLE dcsa_ebl_v1_0.cargo_item (
 	weight_unit varchar(3) NULL,
 	volume_unit varchar(3) NULL,
 	number_of_packages integer NULL,
-	partload_sequence_number integer NULL,
 	shipping_instruction_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
 	package_code varchar(3) NULL REFERENCES dcsa_ebl_v1_0.package_code (package_code),
 	shipment_equipment_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.shipment_equipment (id)
