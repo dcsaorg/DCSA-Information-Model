@@ -106,7 +106,6 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	is_shipped_onboard_type boolean NOT NULL,
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
-	freight_payable_at uuid NOT NULL,
 	is_part_load boolean NULL,
 	is_electronic boolean NULL,
 	callback_url text NOT NULL
