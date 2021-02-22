@@ -2,7 +2,8 @@
 \set ON_ERROR_STOP true
 \connect dcsa_openapi
 
--- Use a transaction so a bug will not leave tainted / incomplete data.
+-- Currently an implementation detail for the reference implementation but one
+-- we would like to remove eventually.
 BEGIN;
 
 -- Most of the R2DBC tooling we are currently using requires that every entity
