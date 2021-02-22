@@ -28,7 +28,19 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
 	service_contract varchar(30) NOT NULL,
 	commodity_type varchar(20) NOT NULL,
 	cargo_gross_weight real NOT NULL,
-	cargo_gross_weight_unit varchar(3) NOT NULL
+	cargo_gross_weight_unit varchar(3) NOT NULL,
+    partial_load_allowed boolean NULL,
+    export_declaration_required boolean NULL,
+    export_declaration_number varchar(35) NULL,
+    import_license_required boolean NULL,
+    import_license_number varchar(35) NULL,
+    pickup_date_at_place_of_receipt date NULL,
+    expected_date_of_arrival_at_final_destination varchar(35) NULL, // TODO: DateRange...
+    date_and_time_of_submission timestamp with time zone NULL,
+    ams_aci_filing_required boolean NULL,
+    contract_quotation_reference varhcar(35) NULL,
+    expected_departure_date date NULL,
+    booking_channel_reference varchar(20) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment CASCADE;
@@ -38,7 +50,19 @@ CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
 	requested_equipment_type varchar(4) NOT NULL,
 	requested_equipment_units integer NOT NULL,
 	confirmed_equipment_type varchar(4) NULL,
-	confirmed_equipment_units integer NULL
+	confirmed_equipment_units integer NULL,
+    shipper_owned_containers boolean NULL
+);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_terms CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.service_terms (
+    service_terms_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	latest_time_of_si_submission timestamp with time zone NOT NULL,
+    vgm_cut_off timestamp with time zone NOT NULL,
+    fcl_delivery_cut_off timestamp with time zone NOT NULL,
+    lcl_delivery_cut_off timestamp with time zone NOT NULL,
+    empty_container_pickup_date_and_time timestamp with time zone NULL,
+    earliest_full_container_delivery_date timestamp with time zone NULL,
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_type CASCADE;
