@@ -38,7 +38,7 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
     expected_date_of_arrival_at_final_destination varchar(35) NULL, -- TODO: DateRange...
     date_and_time_of_submission timestamp with time zone NULL,
     ams_aci_filing_required boolean NULL,
-    contract_quotation_reference varhcar(35) NULL,
+    contract_quotation_reference varchar(35) NULL,
     expected_departure_date date NULL,
     booking_channel_reference varchar(20) NULL
 );
