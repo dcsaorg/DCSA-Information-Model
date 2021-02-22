@@ -448,7 +448,105 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 
 /* Events related Entities */
 
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.event CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.event (
+    event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    event_type text NOT NULL,
+    event_classifier_code varchar(3) NOT NULL,
+    event_date_time timestamp with time zone NOT NULL,
+    event_type_code varchar(4) NOT NULL
+);
 
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.equipment_event CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.equipment_event (
+    equipment_reference varchar(15),
+    empty_indicator_code text NOT NULL,
+    transport_call_id uuid NOT NULL
+) INHERITS (dcsa_ebl_v1_0.event);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment_event CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.shipment_event (
+    shipment_id uuid NOT NULL,
+    shipment_information_type_code varchar(3) NOT NULL
+) INHERITS (dcsa_ebl_v1_0.event);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_event CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.transport_event (
+    delay_reason_code varchar(3),
+    vessel_schedule_change_remark varchar(250),
+    transport_call_id uuid NOT NULL
+) INHERITS (dcsa_ebl_v1_0.event);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.event_subscription CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.event_subscription (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    callback_url text NOT NULL,
+    event_type text, --This field must be able to contain multiple event types. Currently it does not.
+    booking_reference varchar(35),
+    transport_document_id varchar(20),
+    transport_document_type text,
+    equipment_reference varchar(15),
+    schedule_id uuid NULL,
+    transport_call_id uuid NULL
+    );
+
+
+-- Aggregated table containing all events
+DROP VIEW IF EXISTS dcsa_ebl_v1_0.aggregated_events CASCADE;
+CREATE VIEW dcsa_ebl_v1_0.aggregated_events AS
+ SELECT transport_event.event_id,
+    transport_event.event_type,
+    transport_event.event_classifier_code,
+    transport_event.event_type_code,
+    transport_event.event_date_time,
+    transport_event.transport_call_id,
+    transport_event.delay_reason_code,
+    transport_event.vessel_schedule_change_remark,
+    NULL::text AS shipment_information_type_code,
+    NULL::text AS equipment_reference,
+    NULL::text AS empty_indicator_code,
+    NULL::UUID AS shipment_id
+   FROM dcsa_ebl_v1_0.transport_event
+UNION
+ SELECT shipment_event.event_id,
+    shipment_event.event_type,
+    shipment_event.event_classifier_code,
+    shipment_event.event_type_code,
+    shipment_event.event_date_time,
+    NULL::UUID AS transport_call_id,
+    NULL::text AS delay_reason_code,
+    NULL:: text AS vessel_schedule_change_remark,
+    shipment_event.shipment_information_type_code,
+    NULL::text AS equipment_reference,
+    NULL::text AS empty_indicator_code,
+    shipment_event.shipment_id
+   FROM dcsa_ebl_v1_0.shipment_event
+UNION
+ SELECT equipment_event.event_id,
+    equipment_event.event_type,
+    equipment_event.event_classifier_code,
+    equipment_event.event_type_code,
+    equipment_event.event_date_time,
+    equipment_event.transport_call_id,
+    NULL::text AS delay_reason_code,
+    NULL:: text AS vessel_schedule_change_remark,
+    NULL::text AS shipment_information_type_code,
+    equipment_event.equipment_reference,
+    equipment_event.empty_indicator_code,
+    NULL::UUID AS shipment_id
+   FROM dcsa_ebl_v1_0.equipment_event;
+
+--Helper table in order to filter Events on schedule_id
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.schedule CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.schedule (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    vessel_operator_carrier_code varchar(10) NOT NULL,
+    vessel_operator_carrier_code_list_provider text NOT NULL,
+    vessel_partner_carrier_code varchar(10) NOT NULL,
+    vessel_partner_carrier_code_list_provider text,
+    start_date date,
+    date_range text
+);
 
 
 /* Vessel Sharing Agreement related Entities */
