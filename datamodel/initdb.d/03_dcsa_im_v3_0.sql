@@ -35,7 +35,7 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
     import_license_required boolean NULL,
     import_license_number varchar(35) NULL,
     pickup_date_at_place_of_receipt date NULL,
-    expected_date_of_arrival_at_final_destination varchar(35) NULL, // TODO: DateRange...
+    expected_date_of_arrival_at_final_destination varchar(35) NULL, -- TODO: DateRange...
     date_and_time_of_submission timestamp with time zone NULL,
     ams_aci_filing_required boolean NULL,
     contract_quotation_reference varhcar(35) NULL,
