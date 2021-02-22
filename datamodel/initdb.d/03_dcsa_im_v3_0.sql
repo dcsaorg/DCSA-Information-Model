@@ -62,7 +62,7 @@ CREATE TABLE dcsa_ebl_v1_0.service_terms (
     fcl_delivery_cut_off timestamp with time zone NOT NULL,
     lcl_delivery_cut_off timestamp with time zone NOT NULL,
     empty_container_pickup_date_and_time timestamp with time zone NULL,
-    earliest_full_container_delivery_date timestamp with time zone NULL,
+    earliest_full_container_delivery_date timestamp with time zone NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.service_type CASCADE;
