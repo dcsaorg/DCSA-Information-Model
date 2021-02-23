@@ -168,7 +168,7 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	tax_reference_1 varchar(20) NULL,
 	tax_reference_2 varchar(20) NULL,
 	public_key varchar(500) NULL,
-    address uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
+    address_id uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
 	nmfta_code varchar(4) NULL
 );
 
