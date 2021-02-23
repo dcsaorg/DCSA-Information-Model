@@ -372,7 +372,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.location CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.location (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     location_name varchar(100) NULL,
-    address uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
+    address_id uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
 	latitude varchar(10) NULL,
 	longitude varchar(11) NULL,
 	un_location_code char(5) NULL REFERENCES dcsa_ebl_v1_0.un_location (un_location_code)
