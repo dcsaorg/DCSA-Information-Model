@@ -1,5 +1,4 @@
 Party Function Code,Party Function Name,Party Function Description
-FW,Freight forwarder.,Party arranging forwarding of goods.
 OS,Original shipper.,The original supplier of the goods.
 CN,Consignee.,Party to which goods are consigned.
 COW,Freight payer on behalf of the consignor.,Freight payer is a third party acting on behalf of the consignor.
