@@ -465,7 +465,8 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 	shipment_id uuid NOT NULL,
 	transport_id uuid NOT NULL,
 	sequence_number integer NOT NULL,
-	commercial_voyage_id uuid
+	commercial_voyage_id uuid,
+	isUnderShippersResponsibility boolean NOT NULL
 );
 
 
