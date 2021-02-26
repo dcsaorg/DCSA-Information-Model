@@ -3,6 +3,30 @@
 
 BEGIN;
 
+INSERT INTO dcsa_ebl_v1_0.booking (
+	carrier_booking_reference,
+	service_type_at_origin,
+	service_type_at_destination,
+	shipment_term_at_origin,
+	shipment_term_at_destination,
+	booking_datetime,
+	service_contract,
+	commodity_type,
+	cargo_gross_weight,
+	cargo_gross_weight_unit
+) VALUES (
+    'BR1239719871',
+    'CY',
+    'CFS',
+    'FCL',
+    'LCL',
+    DATE '2020-03-07',
+    'You will surrender',
+    'Donno',
+    13233.4,
+    'KGM'
+);
+
 INSERT INTO dcsa_ebl_v1_0.shipment (
     id,
     collection_datetime,
