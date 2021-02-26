@@ -165,6 +165,23 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document_type (
 );
 
 
+/* Address Entity */
+
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.address CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.address (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	name varchar(100) NULL,
+	street varchar(100) NULL,
+	street_number varchar(50) NULL,
+	floor varchar(50) NULL,
+	postal_code varchar(10) NULL,
+	city varchar(65) NULL,
+	state_region varchar(65) NULL,
+	country varchar(75) NULL
+);
+
+
 /* Party related Entities */
 
 
@@ -175,13 +192,7 @@ CREATE TABLE dcsa_ebl_v1_0.party (
 	tax_reference_1 varchar(20) NULL,
 	tax_reference_2 varchar(20) NULL,
 	public_key varchar(500) NULL,
-	street_name varchar(100) NULL,
-	street_number varchar(50) NULL,
-	floor varchar(50) NULL,
-	postal_code varchar(10) NULL,
-	city_name varchar(65) NULL,
-	state_region varchar(65) NULL,
-	country varchar(75) NULL,
+    address_id uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
 	nmfta_code varchar(4) NULL
 );
 
@@ -385,7 +396,7 @@ DROP TABLE IF EXISTS dcsa_ebl_v1_0.location CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.location (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     location_name varchar(100) NULL,
-	address varchar(250) NULL,
+    address_id uuid NULL REFERENCES dcsa_ebl_v1_0.address (id),
 	latitude varchar(10) NULL,
 	longitude varchar(11) NULL,
 	un_location_code char(5) NULL REFERENCES dcsa_ebl_v1_0.un_location (un_location_code)
