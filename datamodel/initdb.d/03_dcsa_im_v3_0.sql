@@ -218,7 +218,7 @@ CREATE TABLE dcsa_ebl_v1_0.document_party (
     shipment_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_ebl_v1_0.party_function (party_function_code),
-    party_contact_details uuid NULL REFERENCES dcsa_ebl_v1_0.party_contact_details (id),
+    party_contact_details_id uuid NULL REFERENCES dcsa_ebl_v1_0.party_contact_details (id),
     should_be_notified boolean NOT NULL
 );
 
