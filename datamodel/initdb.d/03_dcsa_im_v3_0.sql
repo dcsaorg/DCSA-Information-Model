@@ -203,20 +203,46 @@ CREATE TABLE dcsa_ebl_v1_0.party_function (
     party_function_description varchar(250) NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.party_contact_details CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.party_contact_details (
+    id uuid PRIMARY KEY,
+    name varchar(250) NULL,
+    phone varchar(250) NULL,
+    email varchar(250) NULL,
+    fax varchar(250) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.document_party CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.document_party (
     party_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.party (id),
     shipment_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_ebl_v1_0.party_function (party_function_code),
-    displayed_address varchar(250) NULL,
-    party_contact_details varchar(250) NULL,
+    party_contact_details uuid NULL REFERENCES dcsa_ebl_v1_0.party_contact_details (id),
     should_be_notified boolean NOT NULL
 );
+
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_ebl_v1_0.document_party (party_id);
+CREATE INDEX ON dcsa_ebl_v1_0.document_party (party_function);
 CREATE INDEX ON dcsa_ebl_v1_0.document_party (shipment_id);
 CREATE INDEX ON dcsa_ebl_v1_0.document_party (shipping_instruction_id);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.displayed_address CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.displayed_address (
+    -- Same key as document_party
+    party_id uuid NOT NULL REFERENCES dcsa_ebl_v1_0.party (id),
+    shipment_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipment (id),
+    shipping_instruction_id uuid NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
+    party_function varchar(3) NOT NULL REFERENCES dcsa_ebl_v1_0.party_function (party_function_code),
+
+    address_line varchar(250) NOT NULL,
+    address_line_number int NOT NULL
+);
+CREATE INDEX ON dcsa_ebl_v1_0.displayed_address (party_id, party_function);
+CREATE INDEX ON dcsa_ebl_v1_0.displayed_address (shipment_id);
+CREATE INDEX ON dcsa_ebl_v1_0.displayed_address (shipping_instruction_id);
+
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.carrier CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.carrier (
