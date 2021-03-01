@@ -13,6 +13,9 @@ BEGIN;
 ALTER TABLE dcsa_ebl_v1_0.document_party
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
+ALTER TABLE dcsa_ebl_v1_0.displayed_address
+    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
+
 
 ALTER TABLE dcsa_ebl_v1_0.shipment_location
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
