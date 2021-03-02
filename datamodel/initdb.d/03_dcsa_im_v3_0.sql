@@ -205,7 +205,7 @@ CREATE TABLE dcsa_ebl_v1_0.party_function (
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.party_contact_details (
-    id uuid PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     name varchar(250) NULL,
     phone varchar(250) NULL,
     email varchar(250) NULL,
