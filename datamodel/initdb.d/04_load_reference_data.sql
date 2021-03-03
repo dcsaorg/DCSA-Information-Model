@@ -14,5 +14,6 @@ BEGIN;
 \copy dcsa_ebl_v1_0.service_type from '../referencedata.d/servicetypes.csv' CSV HEADER
 \copy dcsa_ebl_v1_0.shipment_term from '../referencedata.d/shipmentterms.csv' CSV HEADER
 \copy dcsa_ebl_v1_0.mode_of_transport from '../referencedata.d/modeoftransportcodes.csv' CSV HEADER
+\copy dcsa_ebl_v1_0.transport_document_type from '../referencedata.d/transportdocumenttypecodes.csv' CSV HEADER
 
 COMMIT;

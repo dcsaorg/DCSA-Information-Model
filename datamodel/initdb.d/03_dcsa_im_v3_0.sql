@@ -123,10 +123,17 @@ CREATE TABLE dcsa_ebl_v1_0.document_version (
 	last_modified_datetime timestamp with time zone NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document_type CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.transport_document_type (
+	transport_document_type_code varchar(3) PRIMARY KEY,
+	transport_document_type_name varchar(20) NULL,
+	transport_document_type_description varchar(500) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_type varchar(3) NULL,
+	transport_document_type varchar(3) NOT NULL REFERENCES dcsa_ebl_v1_0.transport_document_type (transport_document_type_code),
 	is_shipped_onboard_type boolean NOT NULL,
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
@@ -156,14 +163,6 @@ CREATE TABLE dcsa_ebl_v1_0.carrier_clauses (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	clause_content text NOT NULL
 );
-
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.transport_document_type CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.transport_document_type (
-	transport_document_type_code varchar(3) PRIMARY KEY,
-	transport_document_type_name varchar(20) NULL,
-	transport_document_type_description varchar(200) NULL
-);
-
 
 /* Address Entity */
 
