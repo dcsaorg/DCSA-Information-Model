@@ -139,7 +139,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipping_instruction (
 	number_of_originals integer NULL,
 	freight_payable_at uuid NOT NULL,
 	is_electronic boolean NULL,
-	callback_url text NOT NULL
+	callback_url text NULL
 );
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.ebl_endorsement_chain CASCADE;
