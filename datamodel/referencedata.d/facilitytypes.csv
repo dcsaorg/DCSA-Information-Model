@@ -8,3 +8,4 @@ DEPO,Depot,Depot is a designated area where empty equipment is stored between us
 INTE,Inland terminal,"Inland terminal is a facility where containers are loaded, moved, or discharged. The inland terminal can be serviced by trucks, rail, and barges (at river terminals)."
 POTE,Port terminal,"Port terminal is a facility located adjacent to a waterway where containers are loaded, moved, or discharged onto/from sea-going vessels and barges. "
 PBST,Pilot boarding station,The place where a pilot boards the vessel upon arrival at the port boundaries.
+BRTH,Birth,Missing description
