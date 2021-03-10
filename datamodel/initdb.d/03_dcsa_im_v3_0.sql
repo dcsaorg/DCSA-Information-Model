@@ -8,15 +8,6 @@ BEGIN;
 
 /* Shipment related Entities */
 
-DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment CASCADE;
-CREATE TABLE dcsa_ebl_v1_0.shipment (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	carrier_booking_reference varchar(35) NOT NULL,
-	collection_datetime timestamp with time zone NOT NULL,
-	delivery_datetime timestamp with time zone NOT NULL,
-	carrier_id uuid NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.booking CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.booking (
 	carrier_booking_reference varchar(35) PRIMARY KEY,
@@ -42,10 +33,20 @@ CREATE TABLE dcsa_ebl_v1_0.booking (
     expected_departure_date date NULL,
     booking_channel_reference varchar(20) NULL
 );
+CREATE INDEX ON dcsa_ebl_v1_0.booking (carrier_booking_reference);
+
+DROP TABLE IF EXISTS dcsa_ebl_v1_0.shipment CASCADE;
+CREATE TABLE dcsa_ebl_v1_0.shipment (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_ebl_v1_0.booking (carrier_booking_reference),
+	collection_datetime timestamp with time zone NOT NULL,
+	delivery_datetime timestamp with time zone NOT NULL,
+	carrier_id uuid NOT NULL
+);
 
 DROP TABLE IF EXISTS dcsa_ebl_v1_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_ebl_v1_0.requested_equipment (
-	carrier_booking_reference varchar(35) NOT NULL,
+	carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_ebl_v1_0.booking (carrier_booking_reference),
 	shipment_id uuid NULL,
 	requested_equipment_type varchar(4) NOT NULL,
 	requested_equipment_units integer NOT NULL,
@@ -502,7 +503,7 @@ CREATE TABLE dcsa_ebl_v1_0.shipment_transport (
 	transport_id uuid NOT NULL,
 	sequence_number integer NOT NULL,
 	commercial_voyage_id uuid,
-	isUnderShippersResponsibility boolean NOT NULL
+	is_under_shippers_responsibility boolean NOT NULL
 );
 
 
