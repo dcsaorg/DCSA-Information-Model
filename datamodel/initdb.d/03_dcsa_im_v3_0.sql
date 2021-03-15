@@ -584,7 +584,6 @@ CREATE TABLE dcsa_ebl_v1_0.transport_call (
 	facility_code varchar(11) NULL,
 	facility_type_code char(4) NULL,
 	other_facility varchar(50) NULL,
-	customer_address varchar(250) NULL,
 	location_id uuid NULL
 );
 
