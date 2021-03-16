@@ -5,8 +5,8 @@
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
 -- Aggregated table containing all events
-DROP VIEW IF EXISTS dcsa_ebl_v1_0.aggregated_events CASCADE;
-CREATE VIEW dcsa_ebl_v1_0.aggregated_events AS
+DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
+CREATE VIEW dcsa_im_v3_0.aggregated_events AS
  SELECT transport_event.event_id,
     transport_event.event_type,
     transport_event.event_classifier_code,
@@ -19,7 +19,7 @@ CREATE VIEW dcsa_ebl_v1_0.aggregated_events AS
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::UUID AS shipment_id
-   FROM dcsa_ebl_v1_0.transport_event
+   FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
     shipment_event.event_type,
@@ -33,7 +33,7 @@ UNION
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.shipment_id
-   FROM dcsa_ebl_v1_0.shipment_event
+   FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
     equipment_event.event_type,
@@ -47,6 +47,6 @@ UNION
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
     NULL::UUID AS shipment_id
-   FROM dcsa_ebl_v1_0.equipment_event;
+   FROM dcsa_im_v3_0.equipment_event;
 
 COMMIT;
