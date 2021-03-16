@@ -3,7 +3,7 @@
 
 BEGIN;
 
-INSERT INTO dcsa_ebl_v1_0.booking (
+INSERT INTO dcsa_im_v3_0.booking (
 	carrier_booking_reference,
 	service_type_at_origin,
 	service_type_at_destination,
@@ -27,7 +27,7 @@ INSERT INTO dcsa_ebl_v1_0.booking (
     'KGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment (
+INSERT INTO dcsa_im_v3_0.shipment (
     id,
     collection_datetime,
     delivery_datetime,
@@ -41,7 +41,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment (
     'BR1239719871'
 );
 
-INSERT INTO dcsa_ebl_v1_0.party (
+INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name
 ) VALUES (
@@ -49,7 +49,7 @@ INSERT INTO dcsa_ebl_v1_0.party (
     'Malwart'
 );
 
-INSERT INTO dcsa_ebl_v1_0.party (
+INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name
 ) VALUES (
@@ -57,7 +57,7 @@ INSERT INTO dcsa_ebl_v1_0.party (
     'Malwart Düsseldorf'
 );
 
-INSERT INTO dcsa_ebl_v1_0.document_party (
+INSERT INTO dcsa_im_v3_0.document_party (
     party_id,
     shipment_id,
     party_function,
@@ -69,7 +69,7 @@ INSERT INTO dcsa_ebl_v1_0.document_party (
     true
 );
 
-INSERT INTO dcsa_ebl_v1_0.document_party (
+INSERT INTO dcsa_im_v3_0.document_party (
     party_id,
     shipment_id,
     party_function,
@@ -81,7 +81,7 @@ INSERT INTO dcsa_ebl_v1_0.document_party (
     true
 );
 
-INSERT INTO dcsa_ebl_v1_0.location (
+INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
 ) VALUES (
@@ -89,7 +89,7 @@ INSERT INTO dcsa_ebl_v1_0.location (
     'The Factory'
 );
 
-INSERT INTO dcsa_ebl_v1_0.location (
+INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
 ) VALUES (
@@ -97,7 +97,7 @@ INSERT INTO dcsa_ebl_v1_0.location (
     'Port of Singapore'
 );
 
-INSERT INTO dcsa_ebl_v1_0.location (
+INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
 ) VALUES (
@@ -105,7 +105,7 @@ INSERT INTO dcsa_ebl_v1_0.location (
     'Port of Rotterdam'
 );
 
-INSERT INTO dcsa_ebl_v1_0.location (
+INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
 ) VALUES (
@@ -113,7 +113,7 @@ INSERT INTO dcsa_ebl_v1_0.location (
     'The Warehouse'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_location (
+INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     location_id,
     location_type
@@ -123,7 +123,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     'PRE'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_location (
+INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     location_id,
     location_type
@@ -133,7 +133,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     'POL'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_location (
+INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     location_id,
     location_type
@@ -143,7 +143,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     'POD'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_location (
+INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     location_id,
     location_type
@@ -153,7 +153,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_location (
     'PDE'
 );
 
-INSERT INTO dcsa_ebl_v1_0.iso_equipment_code (
+INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
     iso_equipment_name,
     iso_equipment_size_code,
@@ -165,7 +165,7 @@ INSERT INTO dcsa_ebl_v1_0.iso_equipment_code (
     'G1'
 );
 
-INSERT INTO dcsa_ebl_v1_0.equipment (
+INSERT INTO dcsa_im_v3_0.equipment (
     equipment_reference,
     iso_equipment_code,
     tare_weight,
@@ -177,7 +177,7 @@ INSERT INTO dcsa_ebl_v1_0.equipment (
     'KGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_equipment (
+INSERT INTO dcsa_im_v3_0.shipment_equipment (
     id,
     shipment_id,
     equipment_reference,
@@ -191,7 +191,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_equipment (
     'KGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.hs_code (
+INSERT INTO dcsa_im_v3_0.hs_code (
     hs_code,
     code_description
 ) VALUES (
