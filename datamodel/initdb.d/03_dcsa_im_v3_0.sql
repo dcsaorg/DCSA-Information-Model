@@ -108,7 +108,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
 	document_reference_number varchar(20) NULL,
 	terms_and_conditions text NULL,
 	issuer varchar(4) NULL,
-	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
+	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
 	declared_value_currency varchar(3) NULL,
 	declared_value real NULL,
 	number_of_rider_pages integer NULL
@@ -150,7 +150,7 @@ CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
 	signature varchar(500) NOT NULL,
 	endorsement_datetime timestamp with time zone NOT NULL,
 	endorsee uuid NOT NULL,
-    CONSTRAINT "pk_ebl_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
+    CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
@@ -627,15 +627,15 @@ CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
 -- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
 -- ;
 --
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_EBL Change Signing Parties_Party"
+-- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Change Signing Parties_Party"
 -- 	FOREIGN KEY (title_holder) REFERENCES dcsa_im_v3_0.party (id) ON DELETE No Action ON UPDATE No Action
 -- ;
 --
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_EBL Endorsement Chain_Party"
+-- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Endorsement Chain_Party"
 -- 	FOREIGN KEY (endorsee) REFERENCES dcsa_im_v3_0.party (id) ON DELETE No Action ON UPDATE No Action
 -- ;
 --
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_EBL Endorsement Chain_Transport Document"
+-- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Endorsement Chain_Transport Document"
 -- 	FOREIGN KEY (transport_document_id) REFERENCES dcsa_im_v3_0.transport_document (id) ON DELETE No Action ON UPDATE No Action
 -- ;
 --
