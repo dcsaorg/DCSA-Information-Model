@@ -108,7 +108,7 @@ CREATE TABLE dcsa_ebl_v1_0.transport_document (
 	document_reference_number varchar(20) NULL,
 	terms_and_conditions text NULL,
 	issuer varchar(4) NULL,
-	shipping_instruction_id UUID NULL,
+	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_ebl_v1_0.shipping_instruction (id),
 	declared_value_currency varchar(3) NULL,
 	declared_value real NULL,
 	number_of_rider_pages integer NULL
