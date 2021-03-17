@@ -3,7 +3,7 @@
 
 BEGIN;
 
-INSERT INTO dcsa_ebl_v1_0.booking (
+INSERT INTO dcsa_im_v3_0.booking (
 	carrier_booking_reference,
 	service_type_at_origin,
 	service_type_at_destination,
@@ -28,7 +28,7 @@ INSERT INTO dcsa_ebl_v1_0.booking (
 );
 
 
-INSERT INTO dcsa_ebl_v1_0.booking (
+INSERT INTO dcsa_im_v3_0.booking (
 	carrier_booking_reference,
 	service_type_at_origin,
 	service_type_at_destination,
@@ -52,7 +52,7 @@ INSERT INTO dcsa_ebl_v1_0.booking (
     'KGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment (
+INSERT INTO dcsa_im_v3_0.shipment (
     id,
     collection_datetime,
     delivery_datetime,
@@ -66,7 +66,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment (
     'BR1239719971'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment (
+INSERT INTO dcsa_im_v3_0.shipment (
     id,
     collection_datetime,
     delivery_datetime,
@@ -80,7 +80,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment (
     'BR1239719872'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_event (
+INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
     event_type,
@@ -98,7 +98,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_event (
     'VGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_event (
+INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
     event_type,
@@ -116,7 +116,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_event (
     'VGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.shipment_event (
+INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
     event_type,
@@ -134,7 +134,7 @@ INSERT INTO dcsa_ebl_v1_0.shipment_event (
     'VGM'
 );
 
-INSERT INTO dcsa_ebl_v1_0.equipment_event (
+INSERT INTO dcsa_im_v3_0.equipment_event (
     event_id,
     event_classifier_code,
     event_type,
@@ -154,7 +154,7 @@ INSERT INTO dcsa_ebl_v1_0.equipment_event (
     'EMPTY'
 );
 
-INSERT INTO dcsa_ebl_v1_0.transport_event (
+INSERT INTO dcsa_im_v3_0.transport_event (
     event_id,
     event_classifier_code,
     event_type,
@@ -174,7 +174,7 @@ INSERT INTO dcsa_ebl_v1_0.transport_event (
     'Do not know a valid delay reason code...'
 );
 
-INSERT INTO dcsa_ebl_v1_0.event_subscription (
+INSERT INTO dcsa_im_v3_0.event_subscription (
     callback_url,
     event_type,
     booking_reference,
@@ -190,7 +190,7 @@ INSERT INTO dcsa_ebl_v1_0.event_subscription (
     ''
 );
 
-INSERT INTO dcsa_ebl_v1_0.event_subscription (
+INSERT INTO dcsa_im_v3_0.event_subscription (
     callback_url,
     event_type,
     booking_reference,
@@ -206,7 +206,7 @@ INSERT INTO dcsa_ebl_v1_0.event_subscription (
     ''
 );
 
-INSERT INTO dcsa_ebl_v1_0.event_subscription (
+INSERT INTO dcsa_im_v3_0.event_subscription (
     callback_url,
     event_type,
     booking_reference,
@@ -222,7 +222,7 @@ INSERT INTO dcsa_ebl_v1_0.event_subscription (
     ''
 );
 
-INSERT INTO dcsa_ebl_v1_0.event_subscription (
+INSERT INTO dcsa_im_v3_0.event_subscription (
     callback_url,
     event_type,
     booking_reference,
