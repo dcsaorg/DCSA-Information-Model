@@ -98,22 +98,6 @@ CREATE TABLE dcsa_im_v3_0.reference_type (
 /* Transport Document related Entities */
 
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_document (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	place_of_issue uuid NULL,
-	date_of_issue date NULL,
-	onboard_date date NULL,
-	received_for_shipment_date date NULL,
-	document_reference_number varchar(20) NULL,
-	terms_and_conditions text NULL,
-	issuer varchar(4) NULL,
-	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-	declared_value_currency varchar(3) NULL,
-	declared_value real NULL,
-	number_of_rider_pages integer NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_version (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -141,6 +125,22 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 	freight_payable_at uuid NOT NULL,
 	is_electronic boolean NULL,
 	is_charges_displayed boolean NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_document (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	place_of_issue uuid NULL,
+	date_of_issue date NULL,
+	onboard_date date NULL,
+	received_for_shipment_date date NULL,
+	document_reference_number varchar(20) NULL,
+	terms_and_conditions text NULL,
+	issuer varchar(4) NULL,
+	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+	declared_value_currency varchar(3) NULL,
+	declared_value real NULL,
+	number_of_rider_pages integer NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
