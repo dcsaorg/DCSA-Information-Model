@@ -587,10 +587,10 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
 	location_id uuid NULL
 );
 
-ALTER TABLE transport
-ADD FOREIGN KEY (load_transport_call_id) REFERENCES transport_call(id);
-ALTER TABLE transport
-ADD FOREIGN KEY (discharge_transport_call_id) REFERENCES transport_call(id);
+ALTER TABLE dcsa_im_v3_0.transport
+ADD FOREIGN KEY (load_transport_call_id) REFERENCES dcsa_im_v3_0.transport_call(id);
+ALTER TABLE dcsa_im_v3_0.transport
+ADD FOREIGN KEY (discharge_transport_call_id) REFERENCES dcsa_im_v3_0.transport_call(id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
