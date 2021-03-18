@@ -153,6 +153,20 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
+INSERT INTO dcsa_im_v3_0.vessel (
+	vessel_imo_number,
+	vessel_name,
+	vessel_flag,
+	vessel_call_sign_number,
+	vessel_operator_carrier_id
+) VALUES (
+	'1801323',
+    'Emma Maersk',
+    'DK',
+    null,
+    null
+);
+
 INSERT INTO dcsa_im_v3_0.transport (
     id,
 	transport_reference,
