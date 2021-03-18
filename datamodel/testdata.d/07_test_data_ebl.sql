@@ -115,7 +115,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
-    'dono',
+    null,
     'COFS',
 	'test',
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
@@ -131,7 +131,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
-    'dono',
+    null,
     'COFS',
 	'test',
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
@@ -147,7 +147,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
-    'dono',
+    null,
     'INTE',
 	'test 123',
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
