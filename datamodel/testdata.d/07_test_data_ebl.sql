@@ -89,6 +89,78 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'BR1239719871'
 );
 
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    '2106W'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879e'),
+    '2107E'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879f'),
+    '2108W'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8790'),
+    '2218W'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8791'),
+    '2219E'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8792'),
+    '2418W'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8793'),
+    '2419E'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8794'),
+    '3418W'
+);
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8795'),
+    '3419E'
+);
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
 	transport_call_sequence_number,
@@ -103,6 +175,30 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'POTE',
 	null,
 	uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879e'),
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879f'),
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -120,7 +216,23 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 	'test',
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
 );
-    
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8790'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8791'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+);
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
 	transport_call_sequence_number,
@@ -137,6 +249,22 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
 );
 
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8792'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8793'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+);
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
 	transport_call_sequence_number,
@@ -151,6 +279,22 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'INTE',
 	'test 123',
 	uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8794'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+	voyage_id,
+	transport_call_id
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8795'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
 INSERT INTO dcsa_im_v3_0.vessel (
