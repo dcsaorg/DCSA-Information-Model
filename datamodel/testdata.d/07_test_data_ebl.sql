@@ -3,6 +3,54 @@
 
 BEGIN;
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'The Factory'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    'Port of Singapore'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    'Port of Rotterdam'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    'Genneb'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    'Nijmegen'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
+    'The Warehouse'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
 	carrier_booking_reference,
 	service_type_at_origin,
@@ -39,6 +87,180 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-03-31',
     uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
     'BR1239719871'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+	transport_call_sequence_number,
+	facility_code,
+	facility_type_code,
+	other_facility,
+	location_id
+) VALUES (
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    1,
+    null,
+    'POTE',
+	null,
+	uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+	transport_call_sequence_number,
+	facility_code,
+	facility_type_code,
+	other_facility,
+	location_id
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    1,
+    null,
+    'COFS',
+	'test',
+	uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+);
+    
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+	transport_call_sequence_number,
+	facility_code,
+	facility_type_code,
+	other_facility,
+	location_id
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    1,
+    null,
+    'COFS',
+	'test',
+	uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+	transport_call_sequence_number,
+	facility_code,
+	facility_type_code,
+	other_facility,
+	location_id
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    1,
+    null,
+    'INTE',
+	'test 123',
+	uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+);
+
+INSERT INTO dcsa_im_v3_0.vessel (
+	vessel_imo_number,
+	vessel_name,
+	vessel_flag,
+	vessel_call_sign_number,
+	vessel_operator_carrier_id
+) VALUES (
+	'1801323',
+    'Emma Maersk',
+    'DK',
+    null,
+    null
+);
+
+INSERT INTO dcsa_im_v3_0.transport (
+    id,
+	transport_reference,
+	transport_name,
+	mode_of_transport,
+	load_transport_call_id,
+	discharge_transport_call_id,
+	vessel
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
+    'transport reference',
+    'Transport name',
+    '1',
+	uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+	uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+	'1801323'
+);
+
+INSERT INTO dcsa_im_v3_0.transport (
+    id,
+	transport_reference,
+	transport_name,
+	mode_of_transport,
+	load_transport_call_id,
+	discharge_transport_call_id,
+	vessel
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
+    'transport reference xx',
+    'Transport name xx',
+    '2',
+	uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+	null
+);
+
+INSERT INTO dcsa_im_v3_0.transport (
+    id,
+	transport_reference,
+	transport_name,
+	mode_of_transport,
+	load_transport_call_id,
+	discharge_transport_call_id,
+	vessel
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
+    'transport reference yy',
+    'Transport name yy',
+    '2',
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+	null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+	shipment_id,
+	transport_id,
+	sequence_number,
+	commercial_voyage_id,
+	is_under_shippers_responsibility
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
+    1,
+    null,
+    false
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+	shipment_id,
+	transport_id,
+	sequence_number,
+	commercial_voyage_id,
+	is_under_shippers_responsibility
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
+    2,
+    null,
+    false
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+	shipment_id,
+	transport_id,
+	sequence_number,
+	commercial_voyage_id,
+	is_under_shippers_responsibility
+) VALUES (
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
+    3,
+    null,
+    true
 );
 
 INSERT INTO dcsa_im_v3_0.party (
@@ -81,37 +303,6 @@ INSERT INTO dcsa_im_v3_0.document_party (
     true
 );
 
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
-    'The Factory'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    'Port of Singapore'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    'Port of Rotterdam'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
-    'The Warehouse'
-);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
