@@ -3,6 +3,54 @@
 
 BEGIN;
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'The Factory'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    'Port of Singapore'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    'Port of Rotterdam'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    'Genneb'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    'Nijmegen'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name
+) VALUES (
+    uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
+    'The Warehouse'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
 	carrier_booking_reference,
 	service_type_at_origin,
@@ -128,7 +176,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 	null,
 	uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
 );
-
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 	voyage_id,
@@ -400,37 +447,6 @@ INSERT INTO dcsa_im_v3_0.document_party (
     true
 );
 
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
-    'The Factory'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    'Port of Singapore'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    'Port of Rotterdam'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
-    uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
-    'The Warehouse'
-);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
