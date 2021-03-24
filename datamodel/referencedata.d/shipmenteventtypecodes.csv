@@ -1,4 +1,4 @@
-Code,Attribute,Description
+shipment_event_type_code,shipment_event_type_name,shipment_event_type_description
 RECE,Received,Indicates that a document is received by the carrier or shipper
 DRFT,Drafted,Indicates that a document is in draft mode being updated by either the shipper or the carrier.
 PENA,Pending Approval,Indicates that a document has been submitted by the shipper or carrier and is now awaiting approval by the counterpart.
