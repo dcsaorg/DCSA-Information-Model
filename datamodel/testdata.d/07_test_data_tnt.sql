@@ -4,16 +4,16 @@
 BEGIN;
 
 INSERT INTO dcsa_im_v3_0.booking (
-	carrier_booking_reference,
-	service_type_at_origin,
-	service_type_at_destination,
-	shipment_term_at_origin,
-	shipment_term_at_destination,
-	booking_datetime,
-	service_contract,
-	commodity_type,
-	cargo_gross_weight,
-	cargo_gross_weight_unit
+    carrier_booking_reference,
+    service_type_at_origin,
+    service_type_at_destination,
+    shipment_term_at_origin,
+    shipment_term_at_destination,
+    booking_datetime,
+    service_contract,
+    commodity_type,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
 ) VALUES (
     'BR1239719971',
     'CY',
@@ -29,16 +29,16 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 
 INSERT INTO dcsa_im_v3_0.booking (
-	carrier_booking_reference,
-	service_type_at_origin,
-	service_type_at_destination,
-	shipment_term_at_origin,
-	shipment_term_at_destination,
-	booking_datetime,
-	service_contract,
-	commodity_type,
-	cargo_gross_weight,
-	cargo_gross_weight_unit
+    carrier_booking_reference,
+    service_type_at_origin,
+    service_type_at_destination,
+    shipment_term_at_origin,
+    shipment_term_at_destination,
+    booking_datetime,
+    service_contract,
+    commodity_type,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
 ) VALUES (
     'BR1239719872',
     'CY',
