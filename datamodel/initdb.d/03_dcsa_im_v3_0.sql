@@ -108,7 +108,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_version (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	transport_document_id uuid NOT NULL,
-	document_status varchar(4) NOT NULL,
+	document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
 	binary_copy bytea NOT NULL,
 	document_hash text NOT NULL,
 	last_modified_datetime timestamp with time zone NOT NULL
