@@ -1,0 +1,3 @@
+operations_event_type_code,operations_event_type_name,operations_event_type_description
+STRT,Started,Indicates a service has started
+CMPL,Completed,Indicates that service has completed

@@ -515,12 +515,19 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
 
 /* Events related Entities */
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_classifier CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_classifier (
+    event_classifier_code char(3) PRIMARY KEY, -- Code for the event classifier, either PLN, ACT or EST.
+    event_classifier_name varchar(100) NULL -- Name of the classifier.
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.event CASCADE;
 CREATE TABLE dcsa_im_v3_0.event (
-    event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY, -- Unique identifier for the event captured.
+    event_created_date_time timestamp with time zone NOT NULL DEFAULT now(), -- The date and time when the event record was created and stored.
     event_type text NOT NULL,
-    event_classifier_code varchar(3) NOT NULL,
-    event_date_time timestamp with time zone NOT NULL,
+    event_classifier_code varchar(3) NOT NULL, -- Code for the event classifier telling whether the information relates to an actual or future event.
+    event_date_time timestamp with time zone NOT NULL, -- Indicating the date and time of when the event occurred or will occur.
     event_type_code varchar(4) NOT NULL
 );
 
@@ -543,6 +550,45 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     vessel_schedule_change_remark varchar(250),
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
+CREATE TABLE dcsa_im_v3_0.operations_event (
+    operations_event_type_code varchar(4) NOT NULL, -- The code to identify the type of event that is related to the operation.
+    event_location uuid NOT NULL, -- The location where the event takes place.
+    port_call_service_type_code varchar(4) NOT NULL, -- The type of the service provided in the port call.
+    facility_type_code varchar(4) NULL -- Four character code to identify the specific type of facility.
+) INHERITS (dcsa_im_v3_0.event);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_service_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_service_type (
+    port_call_service_type_code varchar(4) PRIMARY KEY, -- The 4-letter code indicating the type of the port call service.
+    port_call_service_type_name varchar(50) NOT NULL, -- The name of the of the port call service type.
+    port_call_service_type_description varchar(300) NOT NULL -- The description of the of the port call service type.
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.operations_event_type (
+    operations_event_type_code varchar(4) PRIMARY KEY,
+    operations_event_type_name varchar(30) NOT NULL,
+    operations_event_type_description varchar(200) NOT NULL
+);
+
+ALTER TABLE dcsa_im_v3_0.operations_event
+ADD FOREIGN KEY (event_classifier_code)
+REFERENCES dcsa_im_v3_0.event_classifier (event_classifier_code);
+
+ALTER TABLE dcsa_im_v3_0.operations_event
+ADD FOREIGN KEY (port_call_service_type_code)
+REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code);
+
+ALTER TABLE dcsa_im_v3_0.operations_event
+ADD FOREIGN KEY (operations_event_type_code)
+REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code);
+
+ALTER TABLE dcsa_im_v3_0.operations_event
+ADD FOREIGN KEY (event_location)
+REFERENCES dcsa_im_v3_0.location(id);
+
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
