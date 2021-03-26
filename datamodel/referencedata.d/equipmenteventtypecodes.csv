@@ -1,0 +1,7 @@
+equipment_event_type_code,equipment_event_type_name
+LOAD,Loaded
+DISC,Discharged
+GTIN,Gated in
+GTOT,Gated out
+STUF,Stuffed
+STRP,Stripped

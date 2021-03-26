@@ -527,12 +527,12 @@ CREATE TABLE dcsa_im_v3_0.event (
     event_created_date_time timestamp with time zone NOT NULL DEFAULT now(), -- The date and time when the event record was created and stored.
     event_type text NOT NULL,
     event_classifier_code varchar(3) NOT NULL, -- Code for the event classifier telling whether the information relates to an actual or future event.
-    event_date_time timestamp with time zone NOT NULL, -- Indicating the date and time of when the event occurred or will occur.
-    event_type_code varchar(4) NOT NULL
+    event_date_time timestamp with time zone NOT NULL -- Indicating the date and time of when the event occurred or will occur.
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
+    equipment_event_type_code varchar(4) NOT NULL,
     equipment_reference varchar(15),
     empty_indicator_code text NOT NULL,
     transport_call_id uuid NOT NULL
@@ -541,11 +541,13 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
     shipment_id uuid NOT NULL,
+    shipment_event_type_code varchar(4) NOT NULL,
     shipment_information_type_code varchar(3) NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
+    transport_event_type_code varchar(4) NOT NULL,
     delay_reason_code varchar(3),
     vessel_schedule_change_remark varchar(250),
     transport_call_id uuid NOT NULL
@@ -564,6 +566,18 @@ CREATE TABLE dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_code varchar(4) PRIMARY KEY, -- The 4-letter code indicating the type of the port call service.
     port_call_service_type_name varchar(50) NOT NULL, -- The name of the of the port call service type.
     port_call_service_type_description varchar(300) NOT NULL -- The description of the of the port call service type.
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.equipment_event_type (
+    equipment_event_type_code varchar(4) PRIMARY KEY,
+    equipment_event_type_name varchar(30) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_event_type (
+    transport_event_type_code varchar(4) PRIMARY KEY,
+    transport_event_type_name varchar(30) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event_type CASCADE;
@@ -589,6 +603,17 @@ ALTER TABLE dcsa_im_v3_0.operations_event
 ADD FOREIGN KEY (event_location)
 REFERENCES dcsa_im_v3_0.location(id);
 
+ALTER TABLE dcsa_im_v3_0.shipment_event
+ADD FOREIGN KEY (shipment_event_type_code)
+REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code);
+
+ALTER TABLE dcsa_im_v3_0.equipment_event
+ADD FOREIGN KEY (equipment_event_type_code)
+REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code);
+
+ALTER TABLE dcsa_im_v3_0.transport_event
+ADD FOREIGN KEY (transport_event_type_code)
+REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
