@@ -540,9 +540,10 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
-    shipment_id uuid NOT NULL,
     shipment_event_type_code varchar(4) NOT NULL,
-    shipment_information_type_code varchar(3) NOT NULL
+    shipment_information_type_code varchar(3) NOT NULL,
+    document_id varchar(50) NOT NULL,
+    reason varchar(100)
 ) INHERITS (dcsa_im_v3_0.event);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
@@ -550,6 +551,8 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_event_type_code varchar(4) NOT NULL,
     delay_reason_code varchar(3),
     vessel_schedule_change_remark varchar(250),
+    location_id uuid,
+    facility_type varchar(4),
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
@@ -614,6 +617,14 @@ REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code);
 ALTER TABLE dcsa_im_v3_0.transport_event
 ADD FOREIGN KEY (transport_event_type_code)
 REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code);
+
+ALTER TABLE dcsa_im_v3_0.transport_event
+ADD FOREIGN KEY (facility_type)
+REFERENCES dcsa_im_v3_0.facility_type(facility_type_code);
+
+ALTER TABLE dcsa_im_v3_0.transport_event
+ADD FOREIGN KEY (location_id)
+REFERENCES dcsa_im_v3_0.location(id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
