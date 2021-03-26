@@ -5,7 +5,6 @@ BEGIN;
 
 /* Create Tables */
 
-
 /* Shipment related Entities */
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
@@ -66,12 +65,6 @@ CREATE TABLE dcsa_im_v3_0.service_terms (
     earliest_full_container_delivery_date timestamp with time zone NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.service_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.service_type (
-	service_type varchar(3) PRIMARY KEY,
-    description varchar(300) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_term CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_term (
 	shipment_term varchar(3) PRIMARY KEY,
@@ -87,22 +80,7 @@ CREATE TABLE dcsa_im_v3_0.references (
 	shipping_instruction_id uuid NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.reference_type (
-	reference_type_code varchar(3) PRIMARY KEY,
-	reference_name varchar(100) NOT NULL,
-	reference_description varchar(200) NOT NULL
-);
-
-
 /* Transport Document related Entities */
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.shipment_event_type (
-	shipment_event_type_code varchar(4) PRIMARY KEY,
-	shipment_event_type_name varchar(30) NOT NULL,
-	shipment_event_type_description varchar(200) NOT NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_version (
@@ -114,12 +92,6 @@ CREATE TABLE dcsa_im_v3_0.document_version (
 	last_modified_datetime timestamp with time zone NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_document_type (
-	transport_document_type_code varchar(3) PRIMARY KEY,
-	transport_document_type_name varchar(20) NULL,
-	transport_document_type_description varchar(500) NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
@@ -202,12 +174,6 @@ CREATE TABLE dcsa_im_v3_0.party (
 	nmfta_code varchar(4) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
-CREATE TABLE dcsa_im_v3_0.party_function (
-    party_function_code varchar(3) PRIMARY KEY,
-    party_function_name varchar(100) NOT NULL,
-    party_function_description varchar(250) NOT NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
@@ -279,14 +245,6 @@ CREATE TABLE dcsa_im_v3_0.charges (
 
 /* Equipment related Entities */
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
-    iso_equipment_code varchar(4) PRIMARY KEY,
-    iso_equipment_name varchar(35) NULL,
-    iso_equipment_size_code varchar(2) NULL,
-    iso_equipment_type_code_a varchar(2) NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment (
 	equipment_reference varchar(15) PRIMARY KEY,	-- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
@@ -334,12 +292,6 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 	ventilation_max real NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.hs_code (
-	hs_code varchar(10) PRIMARY KEY,
-	code_description varchar(250) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -373,18 +325,6 @@ CREATE TABLE dcsa_im_v3_0.cargo_line_item (
 	UNIQUE (cargo_item_id, cargo_line_item_id)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
-CREATE TABLE dcsa_im_v3_0.seal_source (
-	seal_source_code varchar(5) PRIMARY KEY,
-	description varchar(50) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.seal_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.seal_type (
-	seal_type_code varchar(5) PRIMARY KEY,
-	description varchar(50) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -400,18 +340,6 @@ CREATE INDEX ON dcsa_im_v3_0.seal (seal_type);
 
 
 /* Location related Entities */
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.shipment_location_type (
-	location_type_code varchar(3) PRIMARY KEY,
-	location_type_description varchar(50) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.country CASCADE;
-CREATE TABLE dcsa_im_v3_0.country (
-	country_code varchar(2) PRIMARY KEY,
-	country_name varchar(75) NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.un_location CASCADE;
 CREATE TABLE dcsa_im_v3_0.un_location (
@@ -463,24 +391,8 @@ CREATE TABLE dcsa_im_v3_0.facility (
     facility_type_code varchar(4) NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.facility_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.facility_type (
-    facility_type_code varchar(4) PRIMARY KEY,
-    facility_type_name varchar(100) NULL,
-    facility_type_description varchar(250) NULL
-);
-
-
 /* Transport related Entities */
 
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.mode_of_transport CASCADE;
-CREATE TABLE dcsa_im_v3_0.mode_of_transport (
-	mode_of_transport_code varchar(3) PRIMARY KEY,
-	mode_of_transport_name varchar(100) NULL,
-	mode_of_transport_description varchar(250) NULL,
-	dcsa_transport_type varchar(50) NULL UNIQUE
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
@@ -512,35 +424,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
 	UNIQUE (shipment_id, transport_id, sequence_number) -- sequence_number must be unique together with transport and shipment
 );
 
-
-/* Reference data tables */
-
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_service_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code varchar(4) PRIMARY KEY, -- The 4-letter code indicating the type of the port call service.
-    port_call_service_type_name varchar(50) NOT NULL, -- The name of the of the port call service type.
-    port_call_service_type_description varchar(300) NOT NULL -- The description of the of the port call service type.
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.equipment_event_type (
-    equipment_event_type_code varchar(4) PRIMARY KEY,
-    equipment_event_type_name varchar(30) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_event_type (
-    transport_event_type_code varchar(4) PRIMARY KEY,
-    transport_event_type_name varchar(30) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.operations_event_type (
-    operations_event_type_code varchar(4) PRIMARY KEY,
-    operations_event_type_name varchar(30) NOT NULL,
-    operations_event_type_description varchar(200) NOT NULL
-);
 
 /* Events related Entities */
 
@@ -675,101 +558,5 @@ CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
 	transport_call_id uuid NOT NULL,
 	commercial_voyage_id uuid NOT NULL
 );
-
-
-/* Create Foreign Key Constraints (Not implemented yet) */
-
-
--- ALTER TABLE dcsa_im_v3_0.booking ADD CONSTRAINT "FK_Booking_Shipment"
--- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.charges ADD CONSTRAINT "FK_Charges_Location"
--- 	FOREIGN KEY (freight_payable_at) REFERENCES dcsa_im_v3_0.location (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.charges ADD CONSTRAINT "FK_Charges_Shipment"
--- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Change Signing Parties_Party"
--- 	FOREIGN KEY (title_holder) REFERENCES dcsa_im_v3_0.party (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Endorsement Chain_Party"
--- 	FOREIGN KEY (endorsee) REFERENCES dcsa_im_v3_0.party (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.ebl_endorsement_chain ADD CONSTRAINT "FK_IM Endorsement Chain_Transport Document"
--- 	FOREIGN KEY (transport_document_id) REFERENCES dcsa_im_v3_0.transport_document (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.references ADD CONSTRAINT "FK_References_Reference Type"
--- 	FOREIGN KEY (reference_type) REFERENCES dcsa_im_v3_0.reference_type (reference_type_code) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.references ADD CONSTRAINT "FK_References_Shipment"
--- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.shipment ADD CONSTRAINT "FK_Shipment_Mode Of Transport"
--- 	FOREIGN KEY (pre_carrier_mode_of_transport) REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.shipment_transport ADD CONSTRAINT "FK_ShipmentTransportLeg_Shipment"
--- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.shipment_transport ADD CONSTRAINT "FK_ShipmentTransportLeg_Transport Leg"
--- 	FOREIGN KEY (transport_id) REFERENCES dcsa_im_v3_0.transport (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport ADD CONSTRAINT "FK_Transport Leg_Transport Call"
--- 	FOREIGN KEY (departure_transport_call_id) REFERENCES dcsa_im_v3_0.transport_call (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport ADD CONSTRAINT "FK_Transport Leg_Transport Call_02"
--- 	FOREIGN KEY (arrival_transport_call_id) REFERENCES dcsa_im_v3_0.transport_call (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport ADD CONSTRAINT "FK_Transport_Mode Of Transport"
--- 	FOREIGN KEY (mode_of_transport_code) REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_call ADD CONSTRAINT "FK_Transport Call_Location"
--- 	FOREIGN KEY (location_id) REFERENCES dcsa_im_v3_0.location (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_call_voyage ADD CONSTRAINT "FK_Transport Call Voyage_Transport Call"
--- 	FOREIGN KEY (transport_call_id) REFERENCES dcsa_im_v3_0.transport_call (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_call_voyage ADD CONSTRAINT "FK_Transport Call Voyage_Voyage"
--- 	FOREIGN KEY (voyage_id) REFERENCES dcsa_im_v3_0.voyage (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_document ADD CONSTRAINT "FK_Transport Document_Location"
--- 	FOREIGN KEY (place_of_issue) REFERENCES dcsa_im_v3_0.location (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_document ADD CONSTRAINT "FK_Transport Document_Shipping Instruction"
--- 	FOREIGN KEY (shipping_instruction_number) REFERENCES dcsa_im_v3_0.shipping_instruction (shipping_instruction_number) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_document ADD CONSTRAINT "FK_Transport Document_Transport Document Type"
--- 	FOREIGN KEY (transport_document_code) REFERENCES dcsa_im_v3_0.transport_document_type (transport_document_code) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_document_carrier_clauses ADD CONSTRAINT "FK_Transport Document Carrier Clauses_Carrier Clauses"
--- 	FOREIGN KEY (carrier_clauses_id) REFERENCES dcsa_im_v3_0.carrier_clauses (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.transport_document_carrier_clauses ADD CONSTRAINT "FK_Transport Document Carrier Clauses_Transport Document"
--- 	FOREIGN KEY (transport_document_id) REFERENCES dcsa_im_v3_0.transport_document (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.vessel ADD CONSTRAINT "FK_Vessel_Transport"
--- 	FOREIGN KEY (transport_id) REFERENCES dcsa_im_v3_0.transport (id) ON DELETE No Action ON UPDATE No Action
--- ;
 
 COMMIT;
