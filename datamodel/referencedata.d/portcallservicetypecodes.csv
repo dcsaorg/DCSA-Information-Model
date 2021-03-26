@@ -1,0 +1,7 @@
+port_call_service_type_code,port_call_service_type_name,port_call_service_type_description
+PILO,Pilotage,"The activity of conducting a vessel within restricted waters. Also, the fee for the services of a pilot."
+MOOR,Mooring,"The activity of attaching a vessel to a berth using mooring lines. The service is usually provided by linesmen."
+CRGO,Cargo operations,To be described
+TOWG,Towage,"The activity of one vessel (boat/tug) assisting another vessel with maneuvers within the port area."
+BUNK,Bunkering,To be described
+WSDP,Waste disposal,To be described
