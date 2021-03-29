@@ -472,8 +472,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code), -- The code to identify the type of event that is related to the operation.
     event_location uuid NOT NULL REFERENCES dcsa_im_v3_0.location(id), -- The location where the event takes place.
-    port_call_service_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code), -- The type of the service provided in the port call.
-    facility_type_code varchar(4) NULL -- Four character code to identify the specific type of facility.
+    port_call_service_type_code varchar(4) REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code), -- The type of the service provided in the port call.
+    facility_type_code varchar(4) NULL, -- Four character code to identify the specific type of facility.
+    delay_reason_code varchar(3) -- SMDG code indicating the reason for a delay
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event
@@ -505,16 +506,9 @@ CREATE TABLE dcsa_im_v3_0.schedule (
     date_range text
 );
 
-
 /* Vessel Sharing Agreement related Entities */
 
-
-
-
 /* Service related Entities */
-
-
-
 
 /* Transport Journey related Entities */
 

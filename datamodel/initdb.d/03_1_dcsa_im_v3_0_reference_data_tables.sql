@@ -49,8 +49,7 @@ CREATE TABLE dcsa_im_v3_0.mode_of_transport (
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event_type (
     operations_event_type_code varchar(4) PRIMARY KEY,
-    operations_event_type_name varchar(30) NOT NULL,
-    operations_event_type_description varchar(200) NOT NULL
+    operations_event_type_name varchar(30) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
