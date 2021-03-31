@@ -462,7 +462,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code),
     delay_reason_code varchar(3),
-    vessel_schedule_change_remark varchar(250),
+    change_remark varchar(250), -- Free text description of the reason for the change in schedule. 
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
