@@ -13,7 +13,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     transport_event.event_date_time,
     transport_event.transport_call_id,
     transport_event.delay_reason_code,
-    transport_event.vessel_schedule_change_remark,
+    transport_event.change_remark,
     NULL::text AS shipment_information_type_code,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code
@@ -25,7 +25,7 @@ UNION
     shipment_event.event_date_time,
     NULL::UUID AS transport_call_id,
     NULL::text AS delay_reason_code,
-    NULL:: text AS vessel_schedule_change_remark,
+    NULL:: text AS change_remark,
     shipment_event.shipment_information_type_code,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code
@@ -37,7 +37,7 @@ UNION
     equipment_event.event_date_time,
     equipment_event.transport_call_id,
     NULL::text AS delay_reason_code,
-    NULL:: text AS vessel_schedule_change_remark,
+    NULL:: text AS change_remark,
     NULL::text AS shipment_information_type_code,
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code

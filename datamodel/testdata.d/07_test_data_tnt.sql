@@ -162,7 +162,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     transport_event_type_code,
     transport_call_id,
     delay_reason_code,
-    vessel_schedule_change_remark
+    change_remark
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea3'),
     'ACT',
