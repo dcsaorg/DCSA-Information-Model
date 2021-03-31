@@ -430,7 +430,8 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_classifier CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_classifier (
     event_classifier_code char(3) PRIMARY KEY, -- Code for the event classifier, either PLN, ACT or EST.
-    event_classifier_name varchar(100) NULL -- Name of the classifier.
+    event_classifier_name varchar(30) NULL, -- Name of the classifier.
+    event_classifier_description varchar(250) NULL -- The description of the event classifier. 
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event CASCADE;
