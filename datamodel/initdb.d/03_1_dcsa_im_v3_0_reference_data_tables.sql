@@ -95,7 +95,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event_type (
     shipment_event_type_code varchar(4) PRIMARY KEY,
     shipment_event_type_name varchar(30) NOT NULL,
-    shipment_event_type_description varchar(200) NOT NULL
+    shipment_event_type_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location_type CASCADE;
