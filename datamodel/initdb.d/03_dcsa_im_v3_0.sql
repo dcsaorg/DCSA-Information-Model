@@ -463,8 +463,6 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code),
     delay_reason_code varchar(3),
     vessel_schedule_change_remark varchar(250),
-    location_id uuid REFERENCES dcsa_im_v3_0.location(id),
-    facility_type_code varchar(4) REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
