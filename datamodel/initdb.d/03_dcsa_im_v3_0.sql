@@ -447,7 +447,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code),
     equipment_reference varchar(15),
-    empty_indicator_code text NOT NULL,
+    empty_indicator_code varchar(5) NOT NULL,
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
