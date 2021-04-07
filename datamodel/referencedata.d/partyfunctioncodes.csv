@@ -9,6 +9,6 @@ NI,Notify party,Party to be notified of arrival of goods.
 SFA,Shipper Forwarding Agent.,Forwarding agent that acts on behalf of the shipper (Defined by DCSA).
 CFA,Consignee Forwarding Agent,Forwarding agent that acts on behalf of the consignee (Defined by DCSA).
 CNO,Consignee To Order,??? (Defined by DCSA).
-TR,Terminal operator, A party which handles the loading and unloading of marine vessels.
-CA,Carrier, Party undertaking or arranging transport of goods between named points.
-POR, Port, A Seaport (Defined by DCSA)
+TR,Terminal operator,A party which handles the loading and unloading of marine vessels.
+CA,Carrier,Party undertaking or arranging transport of goods between named points.
+POR, Port,A Seaport (Defined by DCSA)
