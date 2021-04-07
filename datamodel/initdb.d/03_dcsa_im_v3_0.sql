@@ -476,7 +476,8 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     event_location uuid NOT NULL REFERENCES dcsa_im_v3_0.location(id), -- The location where the event takes place.
     port_call_service_type_code varchar(4) REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code), -- The type of the service provided in the port call.
     facility_type_code varchar(4) NULL, -- Four character code to identify the specific type of facility.
-    delay_reason_code varchar(3) -- SMDG code indicating the reason for a delay
+    delay_reason_code varchar(3),-- SMDG code indicating the reason for a delay
+    change_remark varchar(250), -- Free text description of the reason for the change in schedule.
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event
