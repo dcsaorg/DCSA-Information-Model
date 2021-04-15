@@ -469,14 +469,16 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code), -- The code to identify the type of event that is related to the operation.
-    publisher varchar(50) NOT NULL, -- The publisher (source) of the event
+    publisher varchar(4) NOT NULL, -- The publisher (source) of the event. Code provided by the publisher code list provider
+    publisher_code_list_provider varchar(4) NOT NULL, -- The code list provider of the publisher codes
     publisher_role varchar(3) NOT NULL, -- The party function code of the publisher
     transport_call_id uuid NOT NULL,
     event_location uuid NOT NULL REFERENCES dcsa_im_v3_0.location(id), -- The location where the event takes place.
     port_call_service_type_code varchar(4) REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code), -- The type of the service provided in the port call.
     facility_type_code varchar(4) NULL, -- Four character code to identify the specific type of facility.
     delay_reason_code varchar(3),-- SMDG code indicating the reason for a delay
-    change_remark varchar(250) -- Free text description of the reason for the change in schedule.
+    change_remark varchar(250), -- Free text description of the reason for the change in schedule.
+    vessel_position uuid NULL REFERENCES dcsa_im_v3_0.location(id) -- The position of the vessel at the time when the message was sent
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event
