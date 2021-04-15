@@ -3,6 +3,20 @@
 
 BEGIN;
 
+INSERT INTO dcsa_im_v3_0.vessel (
+    vessel_imo_number,
+    vessel_name,
+    vessel_flag,
+    vessel_call_sign_number,
+    vessel_operator_carrier_id
+) VALUES (
+    '1801323',
+    'Emma Maersk',
+    'DK',
+    null,
+    null
+);
+
 INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
@@ -167,14 +181,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_code,
     facility_type_code,
     other_facility,
-    location_id
+    location_id,
+    vessel
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
     null,
     'POTE',
     null,
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    '1801323'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -271,14 +287,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_code,
     facility_type_code,
     other_facility,
-    location_id
+    location_id,
+    vessel
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
     null,
     'INTE',
     'test 123',
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    '1801323'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -297,36 +315,20 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
-INSERT INTO dcsa_im_v3_0.vessel (
-    vessel_imo_number,
-    vessel_name,
-    vessel_flag,
-    vessel_call_sign_number,
-    vessel_operator_carrier_id
-) VALUES (
-    '1801323',
-    'Emma Maersk',
-    'DK',
-    null,
-    null
-);
-
 INSERT INTO dcsa_im_v3_0.transport (
     id,
     transport_reference,
     transport_name,
     mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     'transport reference',
     'Transport name',
     '1',
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    '1801323'
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -335,16 +337,14 @@ INSERT INTO dcsa_im_v3_0.transport (
     transport_name,
     mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     'transport reference xx',
     'Transport name xx',
     '2',
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    null
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -353,16 +353,14 @@ INSERT INTO dcsa_im_v3_0.transport (
     transport_name,
     mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     'transport reference yy',
     'Transport name yy',
     '2',
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
-    null
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_transport (

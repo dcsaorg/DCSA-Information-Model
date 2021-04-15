@@ -406,12 +406,11 @@ CREATE TABLE dcsa_im_v3_0.vessel (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_reference varchar(50) NULL,
-	transport_name varchar(100) NULL,
-	mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
-	load_transport_call_id uuid NOT NULL,
-	discharge_transport_call_id uuid NOT NULL,
-	vessel varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
+    transport_reference varchar(50) NULL,
+    transport_name varchar(100) NULL,
+    mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
+    load_transport_call_id uuid NOT NULL,
+    discharge_transport_call_id uuid NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_transport CASCADE;
@@ -519,11 +518,12 @@ CREATE TABLE dcsa_im_v3_0.schedule (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_call_sequence_number integer,
-	facility_code varchar(11) NULL REFERENCES dcsa_im_v3_0.facility (facility_code),
-	facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-	other_facility varchar(50) NULL,
-	location_id uuid NULL
+    transport_call_sequence_number integer,
+    facility_code varchar(11) NULL REFERENCES dcsa_im_v3_0.facility (facility_code),
+    facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
+    other_facility varchar(50) NULL,
+    location_id uuid NULL,
+    vessel varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
 );
 
 ALTER TABLE dcsa_im_v3_0.transport
