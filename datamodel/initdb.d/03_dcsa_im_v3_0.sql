@@ -387,8 +387,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
     un_location_code varchar(5) NULL,
     latitude varchar(10) NULL,
     longitude varchar(11) NULL,
-    address varchar(250) NULL,
-    facility_type_code varchar(4) NULL
+    address varchar(250) NULL
 );
 
 /* Transport related Entities */
