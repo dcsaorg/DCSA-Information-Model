@@ -543,19 +543,6 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_call_id uuid NOT NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    callback_url text NOT NULL,
-    event_type text, --This field must be able to contain multiple event types. Currently it does not.
-    booking_reference varchar(35),
-    transport_document_id varchar(20),
-    transport_document_type text,
-    equipment_reference varchar(15),
-    schedule_id uuid NULL,
-    transport_call_id uuid NULL
-    );
-
 --Helper table in order to filter Events on schedule_id
 DROP TABLE IF EXISTS dcsa_im_v3_0.schedule CASCADE;
 CREATE TABLE dcsa_im_v3_0.schedule (

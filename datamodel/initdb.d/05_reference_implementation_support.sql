@@ -49,4 +49,33 @@ UNION
     NULL::UUID AS shipment_id
    FROM dcsa_im_v3_0.equipment_event;
 
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription (
+    subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    callback_url text NOT NULL,
+    booking_reference varchar(35),
+    transport_document_id varchar(20),
+    transport_document_type text,
+    equipment_reference varchar(15),
+    schedule_id uuid NULL,
+    transport_call_id uuid NULL,
+    -- these two combined is a cursor for the subscription to unique identify which
+    -- event was the last delivered
+    last_event_date_created_date_time timestamp with time zone,
+    last_event_id uuid NULL,
+    -- Retry state
+    retry_after timestamp with time zone NULL,
+    retry_count int DEFAULT 0 NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    event_type text,
+
+    PRIMARY KEY (subscription_id, event_type)
+);
+
 COMMIT;
