@@ -3,8 +3,6 @@
 
 BEGIN;
 
-/* Create Tables */
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.receipt_delivery_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.receipt_delivery_type (
     receipt_delivery_type varchar(3) PRIMARY KEY,
@@ -15,6 +13,46 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_movement_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_movement_type (
     cargo_movement_type varchar(3) PRIMARY KEY,
     description varchar(300) NOT NULL
+);
+
+/* Address Entity */
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.country CASCADE;
+CREATE TABLE dcsa_im_v3_0.country (
+	country_code varchar(2) PRIMARY KEY,
+	country_name varchar(75) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.un_location CASCADE;
+CREATE TABLE dcsa_im_v3_0.un_location (
+	un_location_code char(5) PRIMARY KEY,
+	un_location_name varchar(100) NULL,
+	location_code char(3) NULL,
+	country_code char(2) NULL REFERENCES dcsa_im_v3_0.country (country_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.address CASCADE;
+CREATE TABLE dcsa_im_v3_0.address (
+	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+	name varchar(100) NULL,
+	street varchar(100) NULL,
+	street_number varchar(50) NULL,
+	floor varchar(50) NULL,
+	postal_code varchar(10) NULL,
+	city varchar(65) NULL,
+	state_region varchar(65) NULL,
+	country varchar(75) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.location CASCADE;
+CREATE TABLE dcsa_im_v3_0.location (
+    id varchar(100) PRIMARY KEY,
+    location_name varchar(100) NULL,
+    address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
+	latitude varchar(10) NULL,
+	longitude varchar(11) NULL,
+	un_location_code char(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code)
 );
 
 /* Shipment related Entities */
@@ -126,7 +164,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 	is_shipped_onboard_type boolean NOT NULL,
 	number_of_copies integer NULL,
 	number_of_originals integer NULL,
-	freight_payable_at uuid NOT NULL,
+	invoice_payable_at varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.location(id),
 	is_electronic boolean NULL,
 	is_charges_displayed boolean NOT NULL
 );
@@ -167,22 +205,6 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	clause_content text NOT NULL
-);
-
-/* Address Entity */
-
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.address CASCADE;
-CREATE TABLE dcsa_im_v3_0.address (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	name varchar(100) NULL,
-	street varchar(100) NULL,
-	street_number varchar(50) NULL,
-	floor varchar(50) NULL,
-	postal_code varchar(10) NULL,
-	city varchar(65) NULL,
-	state_region varchar(65) NULL,
-	country varchar(75) NULL
 );
 
 
@@ -403,31 +425,9 @@ CREATE TABLE dcsa_im_v3_0.shipment_location_type (
     location_type_description varchar(50) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.country CASCADE;
-CREATE TABLE dcsa_im_v3_0.country (
-	country_code varchar(2) PRIMARY KEY,
-	country_name varchar(75) NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.un_location CASCADE;
-CREATE TABLE dcsa_im_v3_0.un_location (
-	un_location_code char(5) PRIMARY KEY,
-	un_location_name varchar(100) NULL,
-	location_code char(3) NULL,
-	country_code char(2) NULL REFERENCES dcsa_im_v3_0.country (country_code)
-);
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.un_location (country_code);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.location CASCADE;
-CREATE TABLE dcsa_im_v3_0.location (
-    id varchar(100) PRIMARY KEY,
-    location_name varchar(100) NULL,
-    address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
-	latitude varchar(10) NULL,
-	longitude varchar(11) NULL,
-	un_location_code char(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code)
-);
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.location (un_location_code);
 
@@ -613,10 +613,6 @@ CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
 
 -- ALTER TABLE dcsa_im_v3_0.booking ADD CONSTRAINT "FK_Booking_Shipment"
 -- 	FOREIGN KEY (shipment_id) REFERENCES dcsa_im_v3_0.shipment (id) ON DELETE No Action ON UPDATE No Action
--- ;
---
--- ALTER TABLE dcsa_im_v3_0.charges ADD CONSTRAINT "FK_Charges_Location"
--- 	FOREIGN KEY (freight_payable_at) REFERENCES dcsa_im_v3_0.location (id) ON DELETE No Action ON UPDATE No Action
 -- ;
 --
 -- ALTER TABLE dcsa_im_v3_0.charges ADD CONSTRAINT "FK_Charges_Shipment"
