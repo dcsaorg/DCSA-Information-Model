@@ -10,16 +10,16 @@ BEGIN;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
-	carrier_booking_reference varchar(35) PRIMARY KEY,
-	service_type_at_origin varchar(3) NOT NULL,
-	service_type_at_destination varchar(3) NOT NULL,
-	shipment_term_at_origin varchar(3) NOT NULL,
-	shipment_term_at_destination varchar(3) NOT NULL,
-	booking_datetime timestamp with time zone NOT NULL,
-	service_contract varchar(30) NOT NULL,
-	commodity_type varchar(20) NOT NULL,
-	cargo_gross_weight real NOT NULL,
-	cargo_gross_weight_unit varchar(3) NOT NULL,
+    carrier_booking_reference varchar(35) PRIMARY KEY,
+    receipt_delivery_type_at_origin varchar(3) NOT NULL,
+    receipt_delivery_type_at_destination varchar(3) NOT NULL,
+    cargo_movement_type_at_origin varchar(3) NOT NULL,
+    cargo_movement_type_at_destination varchar(3) NOT NULL,
+    booking_datetime timestamp with time zone NOT NULL,
+    service_contract varchar(30) NOT NULL,
+    commodity_type varchar(20) NOT NULL,
+    cargo_gross_weight real NOT NULL,
+    cargo_gross_weight_unit varchar(3) NOT NULL,
     partial_load_allowed boolean NULL,
     export_declaration_required boolean NULL,
     export_declaration_number varchar(35) NULL,
@@ -55,10 +55,10 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
     shipper_owned_containers boolean NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.service_terms CASCADE;
+DROP TABLE IF EXISTS dcsa_im_v3_0.service_terms CASCADE; -- rename to ...
 CREATE TABLE dcsa_im_v3_0.service_terms (
     service_terms_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	latest_time_of_si_submission timestamp with time zone NOT NULL,
+    latest_time_of_si_submission timestamp with time zone NOT NULL,
     vgm_cut_off timestamp with time zone NOT NULL,
     fcl_delivery_cut_off timestamp with time zone NOT NULL,
     lcl_delivery_cut_off timestamp with time zone NOT NULL,
@@ -66,21 +66,20 @@ CREATE TABLE dcsa_im_v3_0.service_terms (
     earliest_full_container_delivery_date timestamp with time zone NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.service_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.service_type (
-	service_type varchar(3) PRIMARY KEY,
+DROP TABLE IF EXISTS dcsa_im_v3_0.receipt_delivery_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.receipt_delivery_type (
+    receipt_delivery_type varchar(3) PRIMARY KEY,
     description varchar(300) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_term CASCADE;
-CREATE TABLE dcsa_im_v3_0.shipment_term (
-	shipment_term varchar(3) PRIMARY KEY,
+DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_movement_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.cargo_movement_type (
+    cargo_movement_type varchar(3) PRIMARY KEY,
     description varchar(300) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.references CASCADE;
 CREATE TABLE dcsa_im_v3_0.references (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
 	reference_type varchar(3) NOT NULL,
 	reference_value varchar(100) NOT NULL,
 	shipment_id uuid NULL,
@@ -106,12 +105,12 @@ CREATE TABLE dcsa_im_v3_0.shipment_event_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_version (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_id uuid NOT NULL,
-	document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
-	binary_copy bytea NOT NULL,
-	document_hash text NOT NULL,
-	last_modified_datetime timestamp with time zone NOT NULL
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    transport_document_id varchar(100) NOT NULL,
+    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
+    binary_copy bytea NOT NULL,
+    document_hash text NOT NULL,
+    last_modified_datetime timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_type CASCADE;
@@ -135,34 +134,34 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
-	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	place_of_issue uuid NULL,
-	date_of_issue date NULL,
-	onboard_date date NULL,
-	received_for_shipment_date date NULL,
-	document_reference_number varchar(20) NULL,
-	terms_and_conditions text NULL,
-	issuer varchar(4) NULL,
-	shipping_instruction_id UUID NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-	declared_value_currency varchar(3) NULL,
-	declared_value real NULL,
-	number_of_rider_pages integer NULL
+    id varchar(100) PRIMARY KEY,
+    place_of_issue uuid NULL,
+    date_of_issue date NULL,
+    onboard_date date NULL,
+    received_for_shipment_date date NULL,
+    document_reference_number varchar(20) NULL,
+    terms_and_conditions text NULL,
+    issuer varchar(4) NULL,
+    shipping_instruction_id UUID NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+    declared_value_currency varchar(3) NULL,
+    declared_value real NULL,
+    number_of_rider_pages integer NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
 CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
-	transport_document_id uuid NOT NULL,
-	title_holder uuid NOT NULL,
-	signature varchar(500) NOT NULL,
-	endorsement_datetime timestamp with time zone NOT NULL,
-	endorsee uuid NOT NULL,
+    transport_document_id varchar(100) NOT NULL,
+    title_holder uuid NOT NULL,
+    signature varchar(500) NOT NULL,
+    endorsement_datetime timestamp with time zone NOT NULL,
+    endorsee uuid NOT NULL,
     CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document_carrier_clauses (
-	carrier_clause_id uuid NOT NULL,
-	transport_document_id uuid NOT NULL
+    carrier_clause_id uuid NOT NULL,
+    transport_document_id varchar(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
@@ -212,10 +211,9 @@ CREATE TABLE dcsa_im_v3_0.party_function (
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    name varchar(250) NULL,
-    phone varchar(250) NULL,
-    email varchar(250) NULL,
-    fax varchar(250) NULL
+    name varchar(100) NULL,
+    phone varchar(100) NULL,
+    email varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
@@ -241,7 +239,6 @@ CREATE TABLE dcsa_im_v3_0.displayed_address (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
-
     address_line varchar(250) NOT NULL,
     address_line_number int NOT NULL
 );
@@ -265,7 +262,7 @@ CREATE TABLE dcsa_im_v3_0.carrier (
 DROP TABLE IF EXISTS dcsa_im_v3_0.charges CASCADE;
 CREATE TABLE dcsa_im_v3_0.charges (
 	id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-	transport_document_id uuid NULL,
+	transport_document_id varchar(100) NULL,
 	shipment_id uuid NULL,
 	charge_type varchar(20) NULL,
 	currency_amount real NULL,
@@ -403,8 +400,8 @@ CREATE INDEX ON dcsa_im_v3_0.seal (seal_type);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location_type (
-	location_type_code varchar(3) PRIMARY KEY,
-	location_type_description varchar(50) NOT NULL
+    location_type_code varchar(3) PRIMARY KEY,
+    location_type_description varchar(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.country CASCADE;
@@ -437,11 +434,12 @@ CREATE INDEX ON dcsa_im_v3_0.location (un_location_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location (
-	shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-	location_id uuid NOT NULL REFERENCES dcsa_im_v3_0.location (id),
-	location_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (location_type_code),
-	displayed_name varchar(250),
-	UNIQUE (location_id, location_type, shipment_id)
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    location_id uuid NOT NULL REFERENCES dcsa_im_v3_0.location (id),
+    location_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (location_type_code),
+    displayed_name varchar(250),
+    event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
+    UNIQUE (location_id, location_type, shipment_id)
 );
 
 -- Supporting FK constraints
