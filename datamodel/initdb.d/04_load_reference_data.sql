@@ -11,8 +11,8 @@ BEGIN;
 \copy dcsa_im_v3_0.shipment_location_type from '../referencedata.d/shipmentlocationtypes.csv' CSV HEADER
 \copy dcsa_im_v3_0.party_function from '../referencedata.d/partyfunctioncodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.reference_type from '../referencedata.d/referencetypes.csv' CSV HEADER
-\copy dcsa_im_v3_0.service_type from '../referencedata.d/servicetypes.csv' CSV HEADER
-\copy dcsa_im_v3_0.shipment_term from '../referencedata.d/shipmentterms.csv' CSV HEADER
+\copy dcsa_im_v3_0.receipt_delivery_type from '../referencedata.d/receiptdeliverytypes.csv' CSV HEADER
+\copy dcsa_im_v3_0.cargo_movement_type from '../referencedata.d/cargomovementtypes.csv' CSV HEADER
 \copy dcsa_im_v3_0.mode_of_transport from '../referencedata.d/modeoftransportcodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.transport_document_type from '../referencedata.d/transportdocumenttypecodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmenteventtypecodes.csv' CSV HEADER
