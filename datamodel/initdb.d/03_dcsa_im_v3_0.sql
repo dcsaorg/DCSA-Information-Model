@@ -68,10 +68,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
     facility_name varchar(100) NULL,
     code_list_provider_code varchar(6) NULL,
     code_list_provider varchar(8) NULL,
-    un_location_code varchar(5) NULL,
-    latitude varchar(10) NULL,
-    longitude varchar(11) NULL,
-    address varchar(250) NULL
+    location varchar(100) REFERENCES dcsa_im_v3_0.location (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
