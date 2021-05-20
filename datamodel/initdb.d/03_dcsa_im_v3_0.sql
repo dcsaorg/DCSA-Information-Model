@@ -519,6 +519,7 @@ CREATE TABLE dcsa_im_v3_0.event (
     event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     event_type text NOT NULL,
     event_classifier_code varchar(3) NOT NULL,
+    event_created_date_time timestamp with time zone DEFAULT now() NOT NULL,
     event_date_time timestamp with time zone NOT NULL,
     event_type_code varchar(4) NOT NULL
 );
