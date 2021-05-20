@@ -3,6 +3,12 @@
 
 BEGIN;
 
+INSERT INTO dcsa_im_v3_0.transport_call(
+    id
+) VALUES (
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_reference,
     receipt_delivery_type_at_origin,
@@ -149,7 +155,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     'EQUIPMENT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'ARRI',
-    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     'equipref3453',
     'EMPTY'
 );
