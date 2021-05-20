@@ -29,6 +29,7 @@ UNION
     shipment_event.event_date_time,
     shipment_event.event_created_date_time,
     NULL::UUID AS transport_call_id,
+    NULL::text AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL:: text AS vessel_schedule_change_remark,
     shipment_event.shipment_information_type_code,
