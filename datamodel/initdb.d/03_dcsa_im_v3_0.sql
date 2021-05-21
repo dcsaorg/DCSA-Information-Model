@@ -3,6 +3,13 @@
 
 BEGIN;
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.reference_type (
+    reference_type_code varchar(3) PRIMARY KEY,
+    reference_name varchar(100) NOT NULL,
+    reference_description varchar(200) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.receipt_delivery_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.receipt_delivery_type (
     receipt_delivery_type varchar(3) PRIMARY KEY,
@@ -149,17 +156,10 @@ CREATE TABLE dcsa_im_v3_0.service_terms (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.references CASCADE;
 CREATE TABLE dcsa_im_v3_0.references (
-    reference_type varchar(3) NOT NULL,
+    reference_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
     reference_value varchar(100) NOT NULL,
     shipment_id uuid NULL,
     shipping_instruction_id varchar(100) NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.reference_type (
-    reference_type_code varchar(3) PRIMARY KEY,
-    reference_name varchar(100) NOT NULL,
-    reference_description varchar(200) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
