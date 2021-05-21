@@ -93,7 +93,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     facility_code varchar(11) NULL REFERENCES dcsa_im_v3_0.facility (facility_code),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
     other_facility varchar(50) NULL,
-    location_id varchar(100) NULL
+    location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
@@ -135,7 +135,7 @@ CREATE TABLE dcsa_im_v3_0.shipment (
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment (
     carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_im_v3_0.booking (carrier_booking_reference),
-    shipment_id uuid NULL,
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     requested_equipment_type varchar(4) NOT NULL,
     requested_equipment_units integer NOT NULL,
     confirmed_equipment_type varchar(4) NULL,
@@ -152,14 +152,6 @@ CREATE TABLE dcsa_im_v3_0.service_terms (
     lcl_delivery_cut_off timestamp with time zone NOT NULL,
     empty_container_pickup_date_and_time timestamp with time zone NULL,
     earliest_full_container_delivery_date timestamp with time zone NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.references CASCADE;
-CREATE TABLE dcsa_im_v3_0.references (
-    reference_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
-    reference_value varchar(100) NOT NULL,
-    shipment_id uuid NULL,
-    shipping_instruction_id varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
@@ -197,6 +189,14 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_charges_displayed boolean NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.references CASCADE;
+CREATE TABLE dcsa_im_v3_0.references (
+    reference_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
+    reference_value varchar(100) NOT NULL,
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
     id varchar(100) PRIMARY KEY,
@@ -223,16 +223,16 @@ CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
     CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_document_carrier_clauses (
-    carrier_clause_id uuid NOT NULL,
-    transport_document_id varchar(100) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     clause_content text NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_document_carrier_clauses (
+    carrier_clause_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier_clauses (id),
+    transport_document_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
@@ -302,9 +302,6 @@ CREATE TABLE dcsa_im_v3_0.charges (
     unit_price real NULL,
     quantity real NULL
 );
-
-
-/* Equipment related Entities */
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
