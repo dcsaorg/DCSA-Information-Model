@@ -12,6 +12,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     transport_event.event_classifier_code,
     transport_event.event_type_code,
     transport_event.event_date_time,
+    transport_event.event_created_date_time,
     transport_event.transport_call_id,
     transport_event.delay_reason_code,
     transport_event.vessel_schedule_change_remark,
@@ -26,6 +27,7 @@ UNION
     shipment_event.event_classifier_code,
     shipment_event.event_type_code,
     shipment_event.event_date_time,
+    shipment_event.event_created_date_time,
     NULL::UUID AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL:: text AS vessel_schedule_change_remark,
@@ -40,6 +42,7 @@ UNION
     equipment_event.event_classifier_code,
     equipment_event.event_type_code,
     equipment_event.event_date_time,
+    equipment_event.event_created_date_time,
     equipment_event.transport_call_id,
     NULL::text AS delay_reason_code,
     NULL:: text AS vessel_schedule_change_remark,
@@ -61,10 +64,16 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
     equipment_reference varchar(15),
     schedule_id uuid NULL,
     transport_call_id uuid NULL,
+
+    signature_method varchar(20) NOT NULL,
+    secret bytea NOT NULL,
     -- these two combined is a cursor for the subscription to unique identify which
     -- event was the last delivered
     last_event_date_created_date_time timestamp with time zone,
     last_event_id uuid NULL,
+    last_bundle_size int NULL,
+    last_status_message text NULL,
+    accumulated_retry_delay bigint NULL,
     -- Retry state
     retry_after timestamp with time zone NULL,
     retry_count int DEFAULT 0 NOT NULL
