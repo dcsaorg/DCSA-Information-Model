@@ -283,7 +283,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.charges CASCADE;
 CREATE TABLE dcsa_im_v3_0.charges (
     id varchar(100) PRIMARY KEY,
     transport_document_reference varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document(transport_document_reference),
-    shipment_id uuid NULL,
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     charge_type varchar(20) NULL,
     currency_amount real NULL,
     currency_code varchar(3) NULL,
