@@ -161,15 +161,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_event_type (
     shipment_event_type_description varchar(200) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
-CREATE TABLE dcsa_im_v3_0.document_version (
-    transport_document_id varchar(100) NOT NULL,
-    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
-    binary_copy bytea NOT NULL,
-    document_hash text NOT NULL,
-    last_modified_datetime timestamp with time zone NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document_type (
     transport_document_type_code varchar(3) PRIMARY KEY,
@@ -199,12 +190,11 @@ CREATE TABLE dcsa_im_v3_0.references (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
-    id varchar(100) PRIMARY KEY,
+    transport_document_reference varchar(20) PRIMARY KEY,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     date_of_issue date NULL,
     onboard_date date NULL,
     received_for_shipment_date date NULL,
-    document_reference_number varchar(20) NULL,
     terms_and_conditions text NULL,
     issuer varchar(4) NULL,
     shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
@@ -215,12 +205,12 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
 CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
-    transport_document_id varchar(100) NOT NULL,
+    transport_document_reference varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document (transport_document_reference),
     title_holder varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     signature varchar(500) NOT NULL,
     endorsement_datetime timestamp with time zone NOT NULL,
     endorsee varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
+    CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_reference,title_holder)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
@@ -232,7 +222,7 @@ CREATE TABLE dcsa_im_v3_0.carrier_clauses (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document_carrier_clauses (
     carrier_clause_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier_clauses (id),
-    transport_document_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document (id)
+    transport_document_reference varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document (transport_document_reference)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
@@ -280,7 +270,6 @@ CREATE INDEX ON dcsa_im_v3_0.displayed_address (party_id, party_function);
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipping_instruction_id);
 
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -292,7 +281,7 @@ CREATE TABLE dcsa_im_v3_0.carrier (
 DROP TABLE IF EXISTS dcsa_im_v3_0.charges CASCADE;
 CREATE TABLE dcsa_im_v3_0.charges (
     id varchar(100) PRIMARY KEY,
-    transport_document_id varchar(100) NULL,
+    transport_document_reference varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document(transport_document_reference),
     shipment_id uuid NULL,
     charge_type varchar(20) NULL,
     currency_amount real NULL,
@@ -301,6 +290,15 @@ CREATE TABLE dcsa_im_v3_0.charges (
     calculation_basis varchar(50) NULL,
     unit_price real NULL,
     quantity real NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
+CREATE TABLE dcsa_im_v3_0.document_version (
+    transport_document_reference varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_document (transport_document_reference),
+    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
+    binary_copy bytea NOT NULL,
+    document_hash text NOT NULL,
+    last_modified_datetime timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
