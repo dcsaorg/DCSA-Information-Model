@@ -103,7 +103,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     receipt_delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
     cargo_movement_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
     cargo_movement_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
-    booking_datetime timestamp with time zone NOT NULL,
+    booking_request_datetime timestamp with time zone NOT NULL,
     service_contract varchar(30) NOT NULL,
     commodity_type varchar(20) NOT NULL,
     cargo_gross_weight real NOT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
     requested_equipment_units integer NOT NULL,
     confirmed_equipment_type varchar(4) NULL,
     confirmed_equipment_units integer NULL,
-    shipper_owned_containers boolean NULL
+    is_shipper_owned  boolean NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.service_terms CASCADE; -- rename to ...
@@ -511,7 +511,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_event (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3),
-    vessel_schedule_change_remark varchar(250),
+    change_remark varchar(250),
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 ) INHERITS (dcsa_im_v3_0.event);
 

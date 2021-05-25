@@ -57,7 +57,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     receipt_delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
-    booking_datetime,
+    booking_request_datetime,
     service_contract,
     commodity_type,
     cargo_gross_weight,

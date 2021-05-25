@@ -15,7 +15,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     receipt_delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
-    booking_datetime,
+    booking_request_datetime,
     service_contract,
     commodity_type,
     cargo_gross_weight,
@@ -40,7 +40,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     receipt_delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
-    booking_datetime,
+    booking_request_datetime,
     service_contract,
     commodity_type,
     cargo_gross_weight,
@@ -168,7 +168,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     event_type_code,
     transport_call_id,
     delay_reason_code,
-    vessel_schedule_change_remark
+    change_remark
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea3'),
     'ACT',
