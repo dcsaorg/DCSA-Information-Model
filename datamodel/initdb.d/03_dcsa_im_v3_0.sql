@@ -143,8 +143,8 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
     is_shipper_owned  boolean NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.service_terms CASCADE; -- rename to ...
-CREATE TABLE dcsa_im_v3_0.service_terms (
+DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_times CASCADE;
+CREATE TABLE dcsa_im_v3_0.shipment_cutoff_times (
     service_terms_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     latest_time_of_si_submission timestamp with time zone NOT NULL,
     vgm_cut_off timestamp with time zone NOT NULL,
@@ -196,6 +196,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     onboard_date date NULL,
     received_for_shipment_date date NULL,
     terms_and_conditions text NULL,
+    number_of_originals integer NULL, --number of originals if different from number requeste by shipper (on SI)
     issuer varchar(4) NULL,
     shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
