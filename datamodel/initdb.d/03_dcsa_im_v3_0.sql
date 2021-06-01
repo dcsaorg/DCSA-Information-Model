@@ -51,7 +51,7 @@ CREATE TABLE dcsa_im_v3_0.address (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.location CASCADE;
 CREATE TABLE dcsa_im_v3_0.location (
-    id varchar(100) PRIMARY KEY,
+    id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
     location_name varchar(100) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
     latitude varchar(10) NULL,
@@ -77,7 +77,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
 CREATE TABLE dcsa_im_v3_0.party (
-    id varchar(100) PRIMARY KEY,
+    id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
     party_name varchar(100) NULL,
     tax_reference_1 varchar(20) NULL,
     tax_reference_2 varchar(20) NULL,
@@ -170,7 +170,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
-    id varchar(100) PRIMARY KEY,
+    id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
     transport_document_type varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.transport_document_type (transport_document_type_code),
     is_shipped_onboard_type boolean NOT NULL,
     number_of_copies integer NULL,
@@ -243,7 +243,7 @@ CREATE TABLE dcsa_im_v3_0.party_contact_details (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
-    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party (id),
+    party_id varchar(100) NOT NULL DEFAULT uuid_generate_v4()::text REFERENCES dcsa_im_v3_0.party (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
