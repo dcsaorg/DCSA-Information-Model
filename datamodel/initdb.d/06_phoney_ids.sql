@@ -25,4 +25,10 @@ ALTER TABLE dcsa_im_v3_0.cargo_line_item
 ALTER TABLE dcsa_im_v3_0.shipment_transport
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
+ALTER TABLE dcsa_im_v3_0.seal
+    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
+
+ALTER TABLE dcsa_im_v3_0.references
+    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
+
 COMMIT;

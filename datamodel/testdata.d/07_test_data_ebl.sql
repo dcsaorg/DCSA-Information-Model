@@ -411,7 +411,7 @@ INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name
 ) VALUES (
-    uuid('4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'),
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
     'Malwart'
 );
 
@@ -419,7 +419,7 @@ INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name
 ) VALUES (
-    uuid('8dd9a4c4-4039-11eb-8770-0b2b19847fab'),
+    '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'Malwart Düsseldorf'
 );
 
@@ -429,7 +429,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     party_function,
     should_be_notified
 ) VALUES (
-    uuid('4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'),
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
     'OS',
     true
@@ -441,7 +441,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     party_function,
     should_be_notified
 ) VALUES (
-    uuid('8dd9a4c4-4039-11eb-8770-0b2b19847fab'),
+    '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
     'CN',
     true
