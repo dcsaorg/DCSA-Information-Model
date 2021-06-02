@@ -68,10 +68,10 @@ CREATE TABLE dcsa_im_v3_0.facility_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.facility CASCADE;
 CREATE TABLE dcsa_im_v3_0.facility (
-    facility_code varchar(11) PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     facility_name varchar(100) NULL,
-    code_list_provider_code varchar(6) NULL,
-    code_list_provider varchar(8) NULL,
+    facility_bic_code varchar(11) NULL, -- prefixed with UN Locode
+    facility_smdg_code varchar(4) NULL, -- without UN Locode
     location varchar(100) REFERENCES dcsa_im_v3_0.location (id)
 );
 
@@ -90,9 +90,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
     id varchar(100) PRIMARY KEY,
     transport_call_sequence_number integer,
-    facility_code varchar(11) NULL REFERENCES dcsa_im_v3_0.facility (facility_code),
+    facility uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-    other_facility varchar(50) NULL,
+    other_facility uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id)
 );
 

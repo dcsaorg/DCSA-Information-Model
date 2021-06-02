@@ -164,7 +164,7 @@ INSERT INTO dcsa_im_v3_0.voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_code,
+    facility,
     facility_type_code,
     other_facility,
     location_id
@@ -204,7 +204,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_code,
+    facility,
     facility_type_code,
     other_facility,
     location_id
@@ -213,7 +213,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     1,
     null,
     'COFS',
-    'test',
+    null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
 );
 
@@ -236,7 +236,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_code,
+    facility,
     facility_type_code,
     other_facility,
     location_id
@@ -245,7 +245,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     1,
     null,
     'COFS',
-    'test',
+    null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
 );
 
@@ -268,7 +268,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_code,
+    facility,
     facility_type_code,
     other_facility,
     location_id
@@ -277,7 +277,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     1,
     null,
     'INTE',
-    'test 123',
+    null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
