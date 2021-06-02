@@ -56,7 +56,7 @@ UNION
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
-    subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    subscription_id varchar(100) DEFAULT uuid_generate_v4() PRIMARY KEY,
     callback_url text NOT NULL,
     booking_reference varchar(35),
     transport_document_id varchar(20),
@@ -81,7 +81,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
-    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    subscription_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     event_type text,
 
     PRIMARY KEY (subscription_id, event_type)
