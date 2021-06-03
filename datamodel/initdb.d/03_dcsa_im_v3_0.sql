@@ -461,7 +461,7 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign_number varchar(10) NULL,
-    vessel_operator_carrier_id uuid NULL
+    vessel_operator_carrier_id uuid REFERENCES dcsa_im_v3_0.carrier (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
