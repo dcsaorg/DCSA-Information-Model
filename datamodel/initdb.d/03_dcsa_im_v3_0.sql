@@ -101,7 +101,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     transport_call_sequence_number integer,
     facility uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-    other_facility uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
+    other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id)
 );
 
