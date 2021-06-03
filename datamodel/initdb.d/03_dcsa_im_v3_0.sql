@@ -70,8 +70,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.facility CASCADE;
 CREATE TABLE dcsa_im_v3_0.facility (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     facility_name varchar(100) NULL,
-    facility_bic_code varchar(11) NULL, -- prefixed with UN Locode
-    facility_smdg_code varchar(4) NULL, -- without UN Locode
+    un_location_code varchar(7) NULL, -- The UN Locode prefixing the BIC / SMDG code
+    facility_bic_code varchar(4) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
+    facility_smdg_code varchar(3) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     location varchar(100) REFERENCES dcsa_im_v3_0.location (id)
 );
 
