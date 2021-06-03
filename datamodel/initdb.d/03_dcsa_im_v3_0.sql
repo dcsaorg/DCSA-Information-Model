@@ -76,6 +76,14 @@ CREATE TABLE dcsa_im_v3_0.facility (
     location varchar(100) REFERENCES dcsa_im_v3_0.location (id)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
+CREATE TABLE dcsa_im_v3_0.carrier (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    carrier_name varchar(100),
+    smdg_code varchar(3) NULL,
+    nmfta_code varchar(4) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
 CREATE TABLE dcsa_im_v3_0.party (
     id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
@@ -198,7 +206,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     received_for_shipment_date date NULL,
     terms_and_conditions text NULL,
     number_of_originals integer NULL, --number of originals if different from number requeste by shipper (on SI)
-    issuer varchar(4) NULL,
+    issuer uuid NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
     declared_value real NULL,
@@ -271,14 +279,6 @@ CREATE TABLE dcsa_im_v3_0.displayed_address (
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (party_id, party_function);
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipping_instruction_id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
-CREATE TABLE dcsa_im_v3_0.carrier (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_name varchar(100),
-    smdg_code varchar(3) NULL,
-    nmfta_code varchar(4) NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charges CASCADE;
 CREATE TABLE dcsa_im_v3_0.charges (
