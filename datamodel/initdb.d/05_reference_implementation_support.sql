@@ -87,4 +87,13 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
     PRIMARY KEY (subscription_id, event_type)
 );
 
+
+-- Indexes to help the reference implementation deduplicate these. Fields are ordered by how discriminatory they are
+-- presumed to be in the general case or how fast they would like to check.
+CREATE UNIQUE INDEX deduplicate_location
+    ON dcsa_im_v3_0.location (address_id, un_location_code, location_name, latitude, longitude);
+
+CREATE UNIQUE INDEX deduplicate_address
+    ON dcsa_im_v3_0.address (postal_code, name, country, state_region, city, street, street_number, floor);
+
 COMMIT;
