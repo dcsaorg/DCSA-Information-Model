@@ -9,3 +9,4 @@ ISSU,Issued,Indicates that a document has been issued by the carrier.
 SURR,Surrendered,Indicates that a document has been surrendered by the customer to the carrier.
 SUBM,Submitted,Indicates that a document has been submitted by the customer to the carrier
 VOID,Void,Cancellation of an original transport document.
+CONF,Confirmed,Indicates that the booking is confirmed
