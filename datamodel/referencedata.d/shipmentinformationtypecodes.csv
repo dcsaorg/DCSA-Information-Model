@@ -1,0 +1,9 @@
+shipment_information_type_code,shipment_information_type_name
+TRD,Transport document
+BOK,Booking
+SHI,Shipping Instructions
+SRM,Shipment Release Message
+OOG,Out-of-Gauge declaration
+DGD,Dangerous Goods Declaration
+VGM,Verified Gross Mass
+ARN,Arrival Notice
