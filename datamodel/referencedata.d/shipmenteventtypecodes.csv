@@ -12,3 +12,4 @@ VOID,Void,Cancellation of an original document.
 CONF,Confirmed,Indicates that the document is confirmed
 HOLD,Indicated the shipment is on hold in customs inspection
 RELS,Indicates the shipment is released from customs inspection
+CMLP, Indicates the surveyor completed the cargo survey and the report submited 
