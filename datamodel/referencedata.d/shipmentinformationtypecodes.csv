@@ -1,6 +1,6 @@
 shipment_information_type_code,shipment_information_type_name
 TRD,Transport document
-BOK,Booking
+BKG,Booking
 SHI,Shipping Instructions
 SRM,Shipment Release Message
 OOG,Out-of-Gauge declaration
