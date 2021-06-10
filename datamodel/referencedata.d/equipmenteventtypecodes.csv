@@ -8,3 +8,8 @@ STRP,Strupping,The action of unloading cargo from containers or equipment.
 PICK,Pick-up,The action of collecting the container at customer location.
 DROP,Drop-off, The action of deliverying the container at customer location.
 HOLD,On Hold, " "
+RELS,Released,
+REQS,Requested,
+INSP,Inspected,
+RMVD,Removed,
+RSEA,Resealed,
