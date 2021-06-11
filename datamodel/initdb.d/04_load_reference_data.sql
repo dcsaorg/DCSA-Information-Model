@@ -16,5 +16,12 @@ BEGIN;
 \copy dcsa_im_v3_0.mode_of_transport from '../referencedata.d/modeoftransportcodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.transport_document_type from '../referencedata.d/transportdocumenttypecodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmenteventtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/emptyindicatorcodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/transporteventtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmentinformationtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/equipmenteventtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/eventclassifiercode.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmenteventtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/facilitytypes.csv' CSV HEADER
 
 COMMIT;
