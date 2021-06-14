@@ -10,5 +10,5 @@ DROP,Drop-off, The action of deliverying the container at customer location.
 INSP,Inspected,
 RMVD,Removed,
 RSEA,Resealed,
-HOLD,On Hold
-RELS,Released
+HOLD,On Hold,
+RELS,Released,
