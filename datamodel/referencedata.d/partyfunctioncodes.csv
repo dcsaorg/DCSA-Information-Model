@@ -3,6 +3,7 @@ OS,Original shipper.,The original supplier of the goods.
 CN,Consignee.,Party to which goods are consigned.
 COW,Freight payer on behalf of the consignor.,Freight payer is a third party acting on behalf of the consignor.
 COX,Freight payer on behalf of the consignee.,Freight payer is a third party acting on behalf of the consignee.
+MS,"Document/message issuer/sender",Issuer of a document and/or sender of a message.
 N1,First Notify Party.,The first party which is to be notified.
 N2,Second Notify Party.,The second party which is to be notified.
 NI,Notify party,Party to be notified of arrival of goods.
