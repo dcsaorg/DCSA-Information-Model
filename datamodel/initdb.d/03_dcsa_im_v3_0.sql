@@ -72,7 +72,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
     facility_name varchar(100) NULL,
     un_location_code varchar(7) NULL, -- The UN Locode prefixing the BIC / SMDG code
     facility_bic_code varchar(4) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
-    facility_smdg_code varchar(3) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
+    facility_smdg_code varchar(6) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     location varchar(100) REFERENCES dcsa_im_v3_0.location (id)
 );
 
