@@ -6,8 +6,8 @@ The reference implementation uses PostgreSQL as the underlying database
 cd initdb.d && cat ./* ../testdata.d/* | sudo -u postgres psql -f -
 ```
 
-Alternatively, if you are using Windows run the following command in a Powershell window:
+Alternatively, if you are using Windows run the following command in a Powershell window from the `initdb.d` directory (remember to replace the two placeholders in the command):
 
 ```
-(cd initdb.d) -and (cat ./* ../testdata.d/*) | psql -U [db_user] -p [port_number] -f
+(Get-ChildItem ./*, ../testdata.d/* -File) | Get-Content | psql -U [postgres_admin_username] -p [port_number] 
 ```
