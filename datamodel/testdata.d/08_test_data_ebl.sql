@@ -165,16 +165,12 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code,
-    other_facility,
-    location_id
+    facility_type_code
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
-    null,
-    'POTE',
-    null,
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -205,16 +201,12 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code,
-    other_facility,
-    location_id
+    facility_type_code
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
-    null,
-    'COFS',
-    null,
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
+    'COFS'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -308,7 +300,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     'Emma Maersk',
     'DK',
     null,
-    null
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
