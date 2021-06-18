@@ -3,10 +3,16 @@
 
 BEGIN;
 
-INSERT INTO dcsa_im_v3_0.transport_call(
-    id
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code
 ) VALUES (
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed'
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (

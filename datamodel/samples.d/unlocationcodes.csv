@@ -1,0 +1,458 @@
+UN Location Code,UN Location Name,Location Code,ISO 3166-1
+DEHAM,Hamburg,HAM,DE
+BEANR,Antwerpen,ANR,BE
+NLRTM,Rotterdam,RTM,NL
+ESVLC,Valencia,VLC,ES
+ESALG,Algeciras,ALG,ES
+SGSIN,Singapore,SIN,SG
+HKHKG,Hong Kong,HKG,HK
+JPYOK,Yokohama,YOK,JP
+DEBRV,Bremerhaven,BRV,DE
+CNSGH,Shanghai,SGH,CN
+JPTYO,Tokyo,TYO,JP
+AEAUH,Abu Dhabi,AUH,AE
+AEJEA,Jebel Ali,JEA,AE
+AEKHL,Mina Khalifa/Abu Dhabi,KHL,AE
+AEKLF,Khor al Fakkan,KLF,AE
+AESHJ,Sharjah,SHJ,AE
+AOLAD,Luanda,LAD,AO
+ARBHI,Bahia Blanca,BHI,AR
+ARBUE,Buenos Aires,BUE,AR
+ARLPS,Las Palmas,LPS,AR
+ARMDQ,Mar del Plata,MDQ,AR
+ARPMY,Puerto Madryn,PMY,AR
+ARPUD,Puerto Deseado,PUD,AR
+ARROS,Rosario,ROS,AR
+ARSAE,San Antonio Este,SAE,AR
+ARUSH,Ushuaia,USH,AR
+ARZAE,Zarate,ZAE,AR
+ASPPG,Pago Pago,PPG,AS
+AUADL,Adelaide,ADL,AU
+AUBEL,Bell Bay,BEL,AU
+AUBNE,Brisbane,BNE,AU
+AUBWT,Burnie,BWT,AU
+AUDRW,Darwin,DRW,AU
+AUFRE,Fremantle,FRE,AU
+AUGEX,Geelong,GEX,AU
+AUGLT,Gladstone,GLT,AU
+AUHLT,Hamilton,HLT,AU
+AUMEL,Melbourne,MEL,AU
+AUPKL,Port Kembla,PKL,AU
+AUSYD,Sydney,SYD,AU
+AWORJ,Oranjestad,ORJ,AW
+BDCGP,Chattogram,CGP,BD
+BDMUN,Munshiganj,MUN,BD
+BEZEE,Zeebrugge,ZEE,BE
+BHBAH,Bahrain International Airport,BAH,BH
+BJCOO,Cotonou,COO,BJ
+BRFOR,Fortaleza,FOR,BR
+BRIBB,Imbituba,IBB,BR
+BRIOA,Itapoa,IOA,BR
+BRITJ,Itajai,ITJ,BR
+BRMAO,Manaus,MAO,BR
+BRNVT,Navegantes,NVT,BR
+BRPEC,Pecem Pt/Sao Goncalo do Amarante,PEC,BR
+BRPNG,Paranagua,PNG,BR
+BRRIG,Rio Grande,RIG,BR
+BRRIO,Rio de Janeiro,RIO,BR
+BRSFS,Sao Francisco do Sul,SFS,BR
+BRSLZ,Sao Luis,SLZ,BR
+BRSPB,Itaguai Pt = Sepetiba Pt,SPB,BR
+BRSSA,Salvador,SSA,BR
+BRSSZ,Santos,SSZ,BR
+BRSUA,Suape,SUA,BR
+BRVDC,Vila do Conde Pt/Barcarena,VDC,BR
+BRVIX,Vitoria Pt,VIX,BR
+CAHAL,Halifax,HAL,CA
+CAMTR,Montreal,MTR,CA
+CAPRR,Prince Rupert,PRR,CA
+CAVAN,Vancouver,VAN,CA
+CGPNR,Pointe Noire,PNR,CG
+CIABJ,Abidjan,ABJ,CI
+CLANF,Antofagasta,ANF,CL
+CLARI,Arica,ARI,CL
+CLCNL,Coronel,CNL,CL
+CLIQQ,Iquique,IQQ,CL
+CLLQN,Lirquen,LQN,CL
+CLPAG,Puerto Angamos,PAG,CL
+CLPUQ,Punta Arenas,PUQ,CL
+CLSAI,San Antonio,SAI,CL
+CLSVE,San Vicente,SVE,CL
+CLVAP,Valparaiso,VAP,CL
+CNCQI,Chongqing,CQI,CN
+CNCWN,Chiwan Pt,CWN,CN
+CNDAL,Dalian,DAL,CN
+CNDCB,DA CHAN BAY,DCB,CN
+CNFZH,Fuzhou,FZH,CN
+CNLYG,Lianyungang,LYG,CN
+CNNBO,Ningbo,NBO,CN
+CNNJI,Nanjing,NJI,CN
+CNNSA,Nansha Pt,NSA,CN
+CNQIN,Qingdao,QIN,CN
+CNRZH,Rizhao Pt,RZH,CN
+CNSHK,Shekou Pt,SHK,CN
+CNSTG,Shantou Pt,STG,CN
+CNTAC,Taicang Pt,TAC,CN
+CNTNJ,Tianjin,TNJ,CN
+CNWEI,Weihai,WEI,CN
+CNXAM,Xiamen,XAM,CN
+CNYAT,Yantai,YAT,CN
+CNYIK,Yingkou Pt,YIK,CN
+CNYTN,Yantian Pt,YTN,CN
+COBAQ,Barranquilla,BAQ,CO
+COBUN,Buenaventura,BUN,CO
+COCTG,Cartagena,CTG,CO
+COSMR,Santa Marta,SMR,CO
+COTRB,Turbo,TRB,CO
+CRCAL,Caldera,CAL,CR
+CRLIO,Puerto Limon,LIO,CR
+CRMOB,Moin,MOB,CR
+CUHAV,La Habana,HAV,CU
+CUMAR,Mariel,MAR,CU
+CWWIL,Willemstad,WIL,CW
+CYLMS,Limassol,LMS,CY
+DEWVN,Wilhelmshaven,WVN,DE
+DKAAL,Aalborg,AAL,DK
+DKAAR,Aarhus,AAR,DK
+DKCPH,Kobenhavn,CPH,DK
+DKFRC,Fredericia,FRC,DK
+DKKAL,Kalundborg,KAL,DK
+DOCAU,Caucedo,CAU,DO
+DOHAI,Rio Haina,HAI,DO
+DOSPM,San Pedro de Macoris,SPM,DO
+DZALG,Alger (Algiers),ALG,DZ
+DZORN,Oran,ORN,DZ
+ECGYE,Guayaquil,GYE,EC
+ECPBO,Puerto Bolivar,PBO,EC
+ECPSJ,Posorja,PSJ,EC
+EEMUG,Muuga,MUG,EE
+EGALY,El Iskandariya (Alexandria),ALY,EG
+EGDAM,Dumyat (Damietta),DAM,EG
+EGPSD,Port Said,PSD,EG
+EGSOK,Sokhna Port,SOK,EG
+ESACE,Lanzarote,ACE,ES
+ESAGP,Malaga,AGP,ES
+ESBCN,Barcelona,BCN,ES
+ESBIO,Bilbao,BIO,ES
+ESCAD,Cadiz,CAD,ES
+ESCAR,Cartagena,CAR,ES
+ESCEU,Ceuta,CEU,ES
+ESGIJ,Gijon,GIJ,ES
+ESHUV,Huelva,HUV,ES
+ESLCG,La Coruna (A Coruna),LCG,ES
+ESLPA,Las Palmas de Gran Canaria,LPA,ES
+ESMLN,Melilla,MLN,ES
+ESMPG,"Marin, Pontevedra",MPG,ES
+ESSAG,Sagunto,SAG,ES
+ESSCT,Santa Cruz de Tenerife,SCT,ES
+ESTAR,Tarragona,TAR,ES
+ESVGO,Vigo,VGO,ES
+FIHEL,Helsingfors (Helsinki),HEL,FI
+FIHMN,Fredrikshamn (Hamina),HMN,FI
+FIKOK,Karleby (Kokkola),KOK,FI
+FIKTK,Kotka,KTK,FI
+FIMTY,Mantyluoto,MTY,FI
+FIRAU,Rauma (Raumo),RAU,FI
+FITKU,Turku (Abo),TKU,FI
+FJSUV,Suva,SUV,FJ
+FRDKK,Dunkerque,DKK,FR
+FRFOS,Fos-sur-Mer,FOS,FR
+FRLEH,Le Havre,LEH,FR
+FRMTX,Montoir-de-Bretagne,MTX,FR
+GAOWE,Owendo,OWE,GA
+GBBEL,Belfast,BEL,GB
+GBFXT,Felixstowe,FXT,GB
+GBGRG,Grangemouth,GRG,GB
+GBGRK,Greenock,GRK,GB
+GBHUL,Hull,HUL,GB
+GBLGP,London Gateway Port,LGP,GB
+GBLIV,Liverpool,LIV,GB
+GBRCS,Rochester,RCS,GB
+GBSOU,Southampton,SOU,GB
+GBTEE,Teesport,TEE,GB
+GBTIL,Tilbury,TIL,GB
+GEPTI,Poti,PTI,GE
+GHTEM,Tema,TEM,GH
+GHTKD,Takoradi,TKD,GH
+GIGIB,Gibraltar,GIB,GI
+GRPIR,Piraeus,PIR,GR
+GRSKG,Thessaloniki,SKG,GR
+GTPBR,Puerto Barrios,PBR,GT
+GTPRQ,Puerto Quetzal,PRQ,GT
+GTSTC,Puerto Santo Tomas de Castilla,STC,GT
+HNPCR,Puerto Cortes,PCR,HN
+HNSLO,San Lorenzo,SLO,HN
+HRRJK,Rijeka,RJK,HR
+HTPAP,Port-au-Prince,PAP,HT
+IDBDJ,Banjarmasin,BDJ,ID
+IDBTM,Batam Island,BTM,ID
+IDJKT,"Jakarta, Java",JKT,ID
+IDPLM,"Palembang, Sumatra",PLM,ID
+IDSUB,Surabaya,SUB,ID
+IEDUB,Dublin,DUB,IE
+IEORK,Cork,ORK,IE
+ILASH,Ashdod,ASH,IL
+ILHFA,Haifa,HFA,IL
+INCCU,Kolkata (ex Calcutta),CCU,IN
+INCOK,Cochin,COK,IN
+INENR,Ennore,ENR,IN
+INIXE,Mangalore,IXE,IN
+INMAA,Chennai (ex Madras),MAA,IN
+INMUN,Mundra,MUN,IN
+INNSA,Jawaharlal Nehru (Nhava Sheva),NSA,IN
+INPPV,Port Pipavav,PPV,IN
+INTUT,Tuticorin,TUT,IN
+INVTZ,Visakhapatnam,VTZ,IN
+IQUQR,Umm Qasr Port,UQR,IQ
+ISREY,Reykjavik,REY,IS
+ITAOI,Ancona,AOI,IT
+ITCAG,Cagliari,CAG,IT
+ITCTA,Catania,CTA,IT
+ITCVV,Civitavecchia,CVV,IT
+ITGIT,Gioia Tauro,GIT,IT
+ITGOA,Genova,GOA,IT
+ITLIV,Livorno,LIV,IT
+ITNAP,Napoli,NAP,IT
+ITRAN,Ravenna,RAN,IT
+ITSAL,Salerno,SAL,IT
+ITSPE,La Spezia,SPE,IT
+ITTRS,Trieste,TRS,IT
+ITVCE,Venezia,VCE,IT
+ITVDL,Vado Ligure,VDL,IT
+JMKIN,Kingston,KIN,JM
+JOAQJ,Al Aqabah,AQJ,JO
+JPABU,Aburatsu,ABU,JP
+JPAXT,Akita,AXT,JP
+JPCHB,Chiba,CHB,JP
+JPFKY,"Fukuyama, Hiroshima",FKY,JP
+JPHHE,Hachinohe,HHE,JP
+JPHIC,Hitachinaka,HIC,JP
+JPHIJ,Hiroshima,HIJ,JP
+JPHIM,Himeji,HIM,JP
+JPHKT,Hakata/Fukuoka,HKT,JP
+JPHMD,Hamada,HMD,JP
+JPHSM,Hososhima,HSM,JP
+JPHTC,Hitachi,HTC,JP
+JPIMB,Imabari,IMB,JP
+JPIMI,Imari,IMI,JP
+JPISI,Ishikari,ISI,JP
+JPIWK,Iwakuni,IWK,JP
+JPKCZ,Kochi,KCZ,JP
+JPKIJ,Niigata,KIJ,JP
+JPKIS,Kamaishi,KIS,JP
+JPKMJ,Kumamoto,KMJ,JP
+JPKNZ,Kanazawa,KNZ,JP
+JPKOM,Komatsushima,KOM,JP
+JPKSM,"Kashima, Ibaraki",KSM,JP
+JPKWS,Kawasaki,KWS,JP
+JPMAI,Maizuru,MAI,JP
+JPMIZ,Mizushima,MIZ,JP
+JPMKW,Mikawa,MKW,JP
+JPMKX,"Mishima, Kawanoe",MKX,JP
+JPMOJ,Moji/Kitakyushu,MOJ,JP
+JPMUR,Muroran,MUR,JP
+JPMYJ,Matsuyama,MYJ,JP
+JPNAH,"Naha, Okinawa",NAH,JP
+JPNAN,Nakanoseki,NAN,JP
+JPNAO,Naoetsu,NAO,JP
+JPNGO,"Nagoya, Aichi",NGO,JP
+JPNGS,Nagasaki,NGS,JP
+JPOIT,Oita,OIT,JP
+JPOMZ,Omaezaki,OMZ,JP
+JPONA,Onahama,ONA,JP
+JPOSA,Osaka,OSA,JP
+JPOTK,Otake,OTK,JP
+JPSBK,Sakaisenboku,SBK,JP
+JPSBS,Shibushi,SBS,JP
+JPSGM,Sendaishiogama,SGM,JP
+JPSKT,Sakata,SKT,JP
+JPSMN,Sakaiminato,SMN,JP
+JPSMT,Shimotsu,SMT,JP
+JPSMZ,Shimizu,SMZ,JP
+JPTHS,Toyohashi,THS,JP
+JPTKY,Tokuyama,TKY,JP
+JPTMK,Tomakomai,TMK,JP
+JPTRG,Tsuruga,TRG,JP
+JPTTJ,Tottori,TTJ,JP
+JPUBJ,Ube,UBJ,JP
+JPUKB,Kobe,UKB,JP
+JPWKJ,Wakkanai,WKJ,JP
+JPYKK,Yokkaichi,YKK,JP
+KEMBA,Mombasa,MBA,KE
+KHKOS,Kampong Saom,KOS,KH
+KRINC,Incheon,INC,KR
+KRKAN,Gwangyang,KAN,KR
+KRKPO,Pohang,KPO,KR
+KRPTK,Pyeongtaek,PTK,KR
+KRPUS,Busan,PUS,KR
+KRUSN,Ulsan,USN,KR
+KWSAA,Shuaiba,SAA,KW
+KWSWK,Shuwaikh,SWK,KW
+LBBEY,Beirut,BEY,LB
+LKCMB,Colombo,CMB,LK
+LTKLJ,Klaipeda,KLJ,LT
+LVRIX,Riga,RIX,LV
+MACAS,Casablanca,CAS,MA
+MAPTM,Tanger Med,PTM,MA
+MATNG,Tangier,TNG,MA
+MMRGN,Yangon,RGN,MM
+MRNKC,Nouakchott,NKC,MR
+MTMAR,Marsaxlokk,MAR,MT
+MXATM,Altamira,ATM,MX
+MXESE,Ensenada,ESE,MX
+MXLZC,Lazaro Cardenas,LZC,MX
+MXMZT,Mazatlan,MZT,MX
+MXPGO,Progreso,PGO,MX
+MXTAP,Tapachula,TAP,MX
+MXTUX,Tuxpan,TUX,MX
+MXVER,Veracruz,VER,MX
+MXZLO,Manzanillo,ZLO,MX
+MYPEN,Penang (Georgetown),PEN,MY
+MYPGU,"Pasir Gudang, Johor",PGU,MY
+MYPKG,Port Klang (Pelabuhan Klang),PKG,MY
+MYTPP,Tanjung Pelepas,TPP,MY
+MZMPM,Maputo,MPM,MZ
+NAWVB,Walvis Bay,WVB,NA
+NGAPP,Apapa,APP,NG
+NGPHC,Port Harcourt,PHC,NG
+NGTIN,Tincan/Lagos,TIN,NG
+NICIO,Corinto,CIO,NI
+NLAMS,Amsterdam,AMS,NL
+NLVLI,Vlissingen,VLI,NL
+NOAES,Alesund,AES,NO
+NOBGO,Bergen,BGO,NO
+NOFRK,Fredrikstad,FRK,NO
+NOHAL,Halden,HAL,NO
+NOLAR,Larvik,LAR,NO
+NOMSS,Moss,MSS,NO
+NOOSL,Oslo,OSL,NO
+NOSKI,Skjerkoya,SKI,NO
+NOTAE,Tananger,TAE,NO
+NZAKL,Auckland,AKL,NZ
+NZLYT,Lyttelton,LYT,NZ
+NZNPE,Napier,NPE,NZ
+NZNPL,New Plymouth,NPL,NZ
+NZNSN,Nelson,NSN,NZ
+NZPOE,Port Chalmers,POE,NZ
+NZTIU,Timaru,TIU,NZ
+NZTRG,Tauranga,TRG,NZ
+NZWLG,Wellington,WLG,NZ
+OMSLL,Salalah,SLL,OM
+OMSOH,Sohar,SOH,OM
+PABLB,Balboa,BLB,PA
+PACTB,Cristobal,CTB,PA
+PAMIT,Manzanillo,MIT,PA
+PAONX,Colon,ONX,PA
+PAROD,Rodman,ROD,PA
+PECLL,Callao,CLL,PE
+PEPAI,Paita,PAI,PE
+PFPPT,Papeete,PPT,PF
+PHCEB,Cebu,CEB,PH
+PHMNL,Manila,MNL,PH
+PKBQM,Muhammad Bin Qasim/Karachi,BQM,PK
+PKKHI,Karachi,KHI,PK
+PLGDN,Gdansk,GDN,PL
+PLGDY,Gdynia,GDY,PL
+PLSZZ,Szczecin,SZZ,PL
+PRSJU,San Juan,SJU,PR
+PTCNL,Canical,CNL,PT
+PTFDF,Figueira da Foz,FDF,PT
+PTFNC,"Funchal, Madeira",FNC,PT
+PTLEI,Leixoes,LEI,PT
+PTLIS,Lisboa,LIS,PT
+PTPXO,Porto Santo Island,PXO,PT
+PTSET,Setubal,SET,PT
+PTSIE,Sines,SIE,PT
+PYASU,Asuncion,ASU,PY
+PYPIL,Pilar,PIL,PY
+PYSAN,San Antonio,SAN,PY
+PYVLL,Villeta,VLL,PY
+QADOH,Doha,DOH,QA
+QAHMD,BGN/PCGN1956 - HAMAD,HMD,QA
+RELPT,Le Port,LPT,RE
+ROCND,Constanta,CND,RO
+RULED,Saint Petersburg (ex Leningrad),LED,RU
+RUNVS,Novorossiysk,NVS,RU
+RUULU,Ust-Luga,ULU,RU
+RUVVO,Vladivostok,VVO,RU
+RUVYP,Vostochnyy Port,VYP,RU
+SADMM,Ad Dammam,DMM,SA
+SAJED,Jeddah,JED,SA
+SAJUB,Jubail,JUB,SA
+SAKAC,King Abdullah City,KAC,SA
+SDPZU,Port Sudan,PZU,SD
+SEAHU,Ahus,AHU,SE
+SEGOT,Goteborg,GOT,SE
+SEGVX,Gavle,GVX,SE
+SEHAD,Halmstad,HAD,SE
+SEHEL,Helsingborg,HEL,SE
+SEKPS,Kapellskar,KPS,SE
+SEMMA,Malmo,MMA,SE
+SENRK,Norrkoping,NRK,SE
+SENYN,Nynashamn,NYN,SE
+SESTO,Stockholm,STO,SE
+SEVST,Vasteras,VST,SE
+SIKOP,Koper,KOP,SI
+SNDKR,Dakar,DKR,SN
+SRPBM,Paramaribo,PBM,SR
+SVAQJ,Acajutla,AQJ,SV
+SVLUN,La Union,LUN,SV
+SYLTK,Latakia,LTK,SY
+SYTTS,Tartus,TTS,SY
+THBKK,Bangkok,BKK,TH
+THLCH,Laem Chabang,LCH,TH
+THSCS,Sahathai Coastal Seaport,SCS,TH
+TNTUN,Tunis,TUN,TN
+TRALI,Aliaga,ALI,TR
+TRGEB,Gebze,GEB,TR
+TRGEM,Gemlik,GEM,TR
+TRISK,Iskenderun,ISK,TR
+TRIST,Istanbul,IST,TR
+TRIZM,Ä°zmir,IZM,TR
+TRIZT,Izmit,IZT,TR
+TRKSP,Port of Karasu,KSP,TR
+TRMER,Mersin,MER,TR
+TRYAR,Yarimca,YAR,TR
+TTPOS,Port-of-Spain,POS,TT
+TTPTS,Point Lisas,PTS,TT
+TWKEL,Keelung (Chilung),KEL,TW
+TWKHH,Kaohsiung,KHH,TW
+TZDAR,Dar es Salaam,DAR,TZ
+UAODS,Odesa,ODS,UA
+UAYUZ,Pivdennyi,YUZ,UA
+USBAL,Baltimore,BAL,US
+USCHS,Charleston,CHS,US
+USHNL,Honolulu,HNL,US
+USHOU,Houston,HOU,US
+USILM,Wilmington,ILM,US
+USJAX,Jacksonville,JAX,US
+USLAX,Los Angeles,LAX,US
+USLGB,Long Beach,LGB,US
+USMIA,Miami,MIA,US
+USMOB,Mobile,MOB,US
+USMSY,New Orleans,MSY,US
+USNTD,Port Hueneme,NTD,US
+USNYC,New York,NYC,US
+USOAK,Oakland,OAK,US
+USORF,Norfolk,ORF,US
+USPDX,Portland,PDX,US
+USPEF,Port Everglades,PEF,US
+USPHL,Philadelphia,PHL,US
+USPTM,Portsmouth,PTM,US
+USSAV,Savannah,SAV,US
+USSEA,Seattle,SEA,US
+USTIW,Tacoma,TIW,US
+UYMVD,Montevideo,MVD,UY
+UYPTP,Punta Pereyra,PTP,UY
+VEGUT,Guanta,GUT,VE
+VELAG,La Guaira,LAG,VE
+VEPBL,Puerto Cabello,PBL,VE
+VNHPH,Haiphong,HPH,VN
+VNNIH,Ninh Hoa,NIH,VN
+VNSGN,Ho Chi Minh City,SGN,VN
+VNVUT,Vung Tau,VUT,VN
+WSAPW,Apia,APW,WS
+ZACPT,Cape Town,CPT,ZA
+ZADUR,Durban,DUR,ZA
+ZANGQ,Port of Ngqura,NGQ,ZA
+ZAPLZ,Port Elizabeth,PLZ,ZA
