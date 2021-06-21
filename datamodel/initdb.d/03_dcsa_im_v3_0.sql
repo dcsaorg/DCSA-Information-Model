@@ -485,11 +485,18 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
     UNIQUE (shipment_id, transport_id, sequence_number) -- sequence_number must be unique together with transport and shipment
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_classifier CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_classifier (
+    event_classifier_code varchar(3) PRIMARY KEY,
+    event_classifier_name varchar(100) NOT NULL,
+    event_classifier_description varchar(250) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.event CASCADE;
 CREATE TABLE dcsa_im_v3_0.event (
     event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     event_type text NOT NULL,
-    event_classifier_code varchar(3) NOT NULL,
+    event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     event_created_date_time timestamp with time zone DEFAULT now() NOT NULL,
     event_date_time timestamp with time zone NOT NULL,
     event_type_code varchar(4) NOT NULL
