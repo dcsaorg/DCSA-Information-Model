@@ -2,4 +2,3 @@ event_classifier_code,event_classifier_name,event_classifier_description
 ACT,Actual,
 PLN,Planned,
 EST,Estimated,
-REQ,Requested,
