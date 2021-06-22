@@ -164,7 +164,7 @@ INSERT INTO dcsa_im_v3_0.voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility,
+    facility_id,
     facility_type_code,
     other_facility,
     location_id
@@ -204,7 +204,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility,
+    facility_id,
     facility_type_code,
     other_facility,
     location_id
@@ -236,7 +236,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility,
+    facility_id,
     facility_type_code,
     other_facility,
     location_id
@@ -268,7 +268,7 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility,
+    facility_id,
     facility_type_code,
     other_facility,
     location_id
