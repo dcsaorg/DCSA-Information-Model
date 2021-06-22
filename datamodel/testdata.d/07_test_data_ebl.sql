@@ -318,7 +318,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     mode_of_transport,
     load_transport_call_id,
     discharge_transport_call_id,
-    vessel
+    vessel_imo_number
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     'transport reference',
@@ -336,7 +336,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     mode_of_transport,
     load_transport_call_id,
     discharge_transport_call_id,
-    vessel
+    vessel_imo_number
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     'transport reference xx',
@@ -354,7 +354,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     mode_of_transport,
     load_transport_call_id,
     discharge_transport_call_id,
-    vessel
+    vessel_imo_number
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     'transport reference yy',
