@@ -8,4 +8,7 @@ APPR,Approved,Indicates that a document has been approved by the counterpart.
 ISSU,Issued,Indicates that a document has been issued by the carrier.
 SURR,Surrendered,Indicates that a document has been surrendered by the customer to the carrier.
 SUBM,Submitted,Indicates that a document has been submitted by the customer to the carrier
-VOID,Void,Cancellation of an original transport document.
+VOID,Void,Cancellation of an original document.
+CONF,Confirmed,Indicates that the document is confirmed
+CMLP,Completed,Indicates the surveyor completed the cargo survey and the report submited
+REQS,Requested,Indicates the cargo survey is requested by shipper or consignee
