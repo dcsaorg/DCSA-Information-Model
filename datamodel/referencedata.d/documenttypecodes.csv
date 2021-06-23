@@ -3,9 +3,4 @@ TRD,Transport document
 BKG,Booking
 SHI,Shipping Instructions
 SRM,Shipment Release Message
-OOG,Out-of-Gauge declaration
-DGD,Dangerous Goods Declaration
-VGM,Verified Gross Mass
 ARN,Arrival Notice
-CUS,Customs Inspection
-CAS,Cargo Survey

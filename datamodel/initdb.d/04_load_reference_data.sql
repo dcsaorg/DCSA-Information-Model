@@ -18,7 +18,7 @@ BEGIN;
 \copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmenteventtypecodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.event_classifier from '../referencedata.d/eventclassifiercodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.equipment_event_type from '../referencedata.d/equipmenteventtypecodes.csv' CSV HEADER
-\copy dcsa_im_v3_0.shipment_information_type from '../referencedata.d/shipmentinformationtypecodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.shipment_information_type from '../referencedata.d/documenttypecodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.transport_event_type from '../referencedata.d/transporteventtypecodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' CSV HEADER
 
