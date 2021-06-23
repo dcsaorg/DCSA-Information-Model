@@ -502,7 +502,7 @@ CREATE TABLE dcsa_im_v3_0.equipment_event_type (
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_type (
     document_type_code varchar(3) PRIMARY KEY,
-    document_type_name varchar(100) NOT NULL,
+    document_type_name varchar(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
