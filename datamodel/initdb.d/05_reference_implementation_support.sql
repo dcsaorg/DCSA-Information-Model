@@ -16,7 +16,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     transport_event.transport_call_id,
     transport_event.delay_reason_code,
     transport_event.change_remark,
-    NULL::text AS shipment_information_type_code,
+    NULL::text AS document_type_code,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::UUID AS shipment_id
@@ -31,7 +31,7 @@ UNION
     NULL::text AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
-    shipment_event.shipment_information_type_code,
+    shipment_event.document_type_code,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.shipment_id
@@ -46,7 +46,7 @@ UNION
     equipment_event.transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
-    NULL::text AS shipment_information_type_code,
+    NULL::text AS document_type_code,
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
     NULL::UUID AS shipment_id
