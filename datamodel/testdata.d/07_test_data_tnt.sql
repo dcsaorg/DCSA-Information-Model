@@ -91,7 +91,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_classifier_code,
     event_type,
     event_date_time,
-    event_type_code,
+    shipment_event_type_code,
     shipment_id,
     shipment_information_type_code
 ) VALUES (
@@ -109,7 +109,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_classifier_code,
     event_type,
     event_date_time,
-    event_type_code,
+    shipment_event_type_code,
     shipment_id,
     shipment_information_type_code
 ) VALUES (
@@ -127,7 +127,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_classifier_code,
     event_type,
     event_date_time,
-    event_type_code,
+    shipment_event_type_code,
     shipment_id,
     shipment_information_type_code
 ) VALUES (
@@ -145,7 +145,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     event_classifier_code,
     event_type,
     event_date_time,
-    event_type_code,
+    equipment_event_type_code,
     transport_call_id,
     equipment_reference,
     empty_indicator_code
@@ -165,7 +165,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     event_classifier_code,
     event_type,
     event_date_time,
-    event_type_code,
+    transport_event_type_code,
     transport_call_id,
     delay_reason_code,
     change_remark
