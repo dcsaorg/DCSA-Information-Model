@@ -154,7 +154,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     'ACT',
     'EQUIPMENT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
-    'ARRI',
+    'LOAD',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     'equipref3453',
     'EMPTY'
