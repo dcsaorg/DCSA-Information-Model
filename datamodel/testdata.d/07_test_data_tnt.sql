@@ -99,9 +99,9 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     'PLN',
     'SHIPMENT',
     '2020-07-15',
-    'DEPA',
+    'APPR',
     uuid('6e2d856c-d871-11ea-a630-03e5334d1800'),
-    'VGM'
+    'BKG'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
@@ -117,9 +117,9 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     'PLN',
     'SHIPMENT',
     TO_DATE('2020/07/15 13:14:15', 'yyyy/mm/dd hh24:mi:ss'),
-    'DEPA',
+    'APPR',
     uuid('6e2d856c-d871-11ea-a630-03e5334d1800'),
-    'VGM'
+    'BKG'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
@@ -135,9 +135,9 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     'PLN',
     'SHIPMENT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
-    'ARRI',
+    'CONF',
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1'),
-    'VGM'
+    'BKG'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment_event (
