@@ -567,7 +567,7 @@ CREATE TABLE dcsa_im_v3_0.service (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier (id),
     carrier_service_code varchar(5),
-    carrier_service_name varhcar(50),
+    carrier_service_name varchar(50),
     tradelane_id varchar(8)
 );
 
