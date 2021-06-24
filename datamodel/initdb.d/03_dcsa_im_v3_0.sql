@@ -496,7 +496,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event_type (
     equipment_event_type_code varchar(4) PRIMARY KEY,
     equipment_event_type_name varchar(100) NOT NULL,
-    equipment_event_type_description text NOT NULL
+    equipment_event_type_description varchar(300) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_type CASCADE;
@@ -509,7 +509,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event_type (
     transport_event_type_code varchar(4) PRIMARY KEY,
     transport_event_type_name varchar(100) NOT NULL,
-    transport_event_type_description varchar(250) NOT NULL
+    transport_event_type_description varchar(250) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.empty_indicator CASCADE;
