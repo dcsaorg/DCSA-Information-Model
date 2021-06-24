@@ -530,7 +530,7 @@ CREATE TABLE dcsa_im_v3_0.event (
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15),
-    empty_indicator_code text NOT NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
+    empty_indicator_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);

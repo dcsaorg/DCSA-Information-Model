@@ -1,4 +1,4 @@
-shipment_information_type_code,shipment_information_type_name
+document_type_code,document_type_name
 TRD,Transport document
 BKG,Booking
 SHI,Shipping Instructions
