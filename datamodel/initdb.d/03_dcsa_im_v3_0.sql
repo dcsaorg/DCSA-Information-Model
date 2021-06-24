@@ -492,34 +492,62 @@ CREATE TABLE dcsa_im_v3_0.event_classifier (
     event_classifier_description varchar(250) NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.equipment_event_type (
+    equipment_event_type_code varchar(4) PRIMARY KEY,
+    equipment_event_type_name varchar(100) NOT NULL,
+    equipment_event_type_description varchar(300) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.document_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.document_type (
+    document_type_code varchar(3) PRIMARY KEY,
+    document_type_name varchar(100) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_event_type (
+    transport_event_type_code varchar(4) PRIMARY KEY,
+    transport_event_type_name varchar(100) NOT NULL,
+    transport_event_type_description varchar(250) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.empty_indicator CASCADE;
+CREATE TABLE dcsa_im_v3_0.empty_indicator (
+    empty_indicator_code varchar(5) PRIMARY KEY,
+    empty_indicator_name varchar(100) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.event CASCADE;
 CREATE TABLE dcsa_im_v3_0.event (
     event_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     event_type text NOT NULL,
     event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     event_created_date_time timestamp with time zone DEFAULT now() NOT NULL,
-    event_date_time timestamp with time zone NOT NULL,
-    event_type_code varchar(4) NOT NULL
+    event_date_time timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15),
-    empty_indicator_code text NOT NULL,
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
+    empty_indicator_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
+    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
     shipment_id uuid NOT NULL,
-    shipment_information_type_code varchar(3) NOT NULL
+    shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
+    document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3),
     change_remark varchar(250),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
+    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
 --Helper table in order to filter Events on schedule_id

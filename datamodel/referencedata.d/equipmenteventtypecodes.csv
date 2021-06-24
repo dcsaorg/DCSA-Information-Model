@@ -1,0 +1,12 @@
+equipment_event_type_code,equipment_event_type_name,equipment_event_type_description
+LOAD,Load,The action of lifting cargo or a container on board of the mode of transportation. Load is complete once the cargo or container has been lifted on board the mode of transport and secured.
+DISC,Discharge,The action of lifting cargo or containers off a mode of transport. Discharge is the opposite of load.
+GTIN,Gate in,The action when a container is introduced into a controlled area like a port - or inland terminal. Gate in has been completed once the operator of the area is legally in possession of the container.
+GTOT,Gate out,The action when a container is removed from a controlled area like a port – or inland terminal. Gate-out has been completed once the possession of the container has been transferred from the operator of the terminal to the entity who is picking up the container.
+STUF,Stuffing,The process of loading the cargo in a container or in/onto another piece of equipment.
+STRP,Stripping,The action of unloading cargo from containers or equipment.
+PICK,Pick-up,The action of collecting the container at customer location.
+DROP,Drop-off, The action of delivering the container at customer location.
+INSP,Inspected,Identifies that the seal on equipment has been inspected.
+RSEA,Resealed,Identifies that the equipment has been resealed after inspection.
+RMVD,Removed,Identifies that a Seal has been removed from the equipment for inspection.
