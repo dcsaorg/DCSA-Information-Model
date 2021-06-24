@@ -566,7 +566,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_voyage_number varchar(50) NULL,
-    service_id uuid NULL
+    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
@@ -585,6 +585,15 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     commercial_voyage_id uuid NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.service CASCADE;
+CREATE TABLE dcsa_im_v3_0.service (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    carrier_service_code varchar(5),
+    carrier_service_name varhcar(50),
+    tradelane_id varchar(8)
 );
 
 COMMIT;
