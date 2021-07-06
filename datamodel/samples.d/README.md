@@ -23,4 +23,6 @@ best-effort basis.  Corrections are welcome (via PR).
 
  * facilities.csv: Subset of https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/
 
+ * hscodes.csv: Subset of the "Harmonized System" list. Defined by: WCO (http://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx)
+
  * unlocationcodes.csv: Subset of https://unece.org/trade/cefact/unlocode-code-list-country-and-territory
