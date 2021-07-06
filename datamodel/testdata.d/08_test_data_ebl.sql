@@ -75,6 +75,32 @@ INSERT INTO dcsa_im_v3_0.booking (
     'KGM'
 );
 
+
+INSERT INTO dcsa_im_v3_0.booking (
+    carrier_booking_reference,
+    receipt_delivery_type_at_origin,
+    receipt_delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract,
+    commodity_type,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
+) VALUES (
+    'CR1239719872',
+    'CY',
+    'CFS',
+    'FCL',
+    'LCL',
+    DATE '2020-03-08',
+    'UNKNOWN',
+    'Donno',
+    13233.4,
+    'KGM'
+);
+
+
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
     collection_datetime,
@@ -87,6 +113,60 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-03-31',
     uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
     'BR1239719871'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment (
+    id,
+    collection_datetime,
+    delivery_datetime,
+    carrier_id,
+    carrier_booking_reference
+) VALUES (
+    uuid_generate_v4(),
+    DATE '2020-03-08',
+    DATE '2020-04-01',
+    uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
+    'CR1239719872'
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'CR',
+    'AB-123743CR',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'PO',
+    'PO0027',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'CR',
+    'BC-346267CR',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'PO',
+    'PO0028',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
 );
 
 INSERT INTO dcsa_im_v3_0.voyage (
