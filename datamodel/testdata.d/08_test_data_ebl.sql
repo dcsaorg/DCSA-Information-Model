@@ -518,12 +518,5 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     'KGM'
 );
 
-INSERT INTO dcsa_im_v3_0.hs_code (
-    hs_code,
-    code_description
-) VALUES (
-    '411510',
-    'Leather; composition leather with a basis of leather or leather fibre, in slabs, sheets or strip, whether or not in rolls'
-);
 
 COMMIT;
