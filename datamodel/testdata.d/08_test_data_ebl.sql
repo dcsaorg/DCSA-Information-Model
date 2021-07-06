@@ -395,7 +395,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     'transport reference',
     'Transport name',
-    '1',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     '1801323'
@@ -413,7 +413,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     'transport reference xx',
     'Transport name xx',
-    '2',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     null
@@ -431,7 +431,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     'transport reference yy',
     'Transport name yy',
-    '2',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     null
