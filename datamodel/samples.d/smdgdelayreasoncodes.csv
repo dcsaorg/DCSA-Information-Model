@@ -1,0 +1,48 @@
+delay_reason_code,delay_reason_name,delay_reason_description
+ACC,Accident involving personnel,Accident involving personnel, vessel related
+DEV,Deviation to avoid bad weather,Deviation to avoid bad weather
+EDD,Emergency Dry Docking,Emergency Dry Docking
+ENG,Engine repairs,Engine repairs
+MVX,Proforma moves exceeded,Proforma moves exceeded
+PAU,Vessel detained by port authorities,Vessel detained by port authorities
+SPE,Ship - personnel or equipment unavailable,Ship - personnel or equipment not ready or unavailable
+STW,Stowage adjustment,Stowage adjustment
+VGR,Vessel Gear Breakdown,Vessel Gear Breakdown
+OTV,Others - Vessel Related,Others - Vessel Related
+AIP,Accident involving personnel,Terminal accident involving personnel
+ANA,Authorities not available,Authorities not available
+BUN,Bunkering delays,Bunkering delays
+CGS,Arr OFF Proforma - Berth congestion,Arr OFF Proforma - Berth congestion
+CRN,Crane shortage,Crane shortage
+FTE,Failure or unavailability of Terminal equipment,Failure or unavailability of Terminal equipment
+HLD,Hatch Lids,Hatch Lids
+LAB,Labor Shortage,Labor Shortage
+LAS,Lashing delays,Lashing delays
+LOT,Labour - Other,Labour - Other
+MIL,Military excercise,Military excercise
+PBC,Arr ON Proforma - Berth congestion,Arr ON Proforma - Berth congestion
+PIT,Pilot / Tug not available,Pilot / Tug not available
+PLT,Planning (Terminal),Planning at Terminal
+PRD,Low Productivity,Low Productivity
+QUA,Quarantine Inspection,Quarantine Inspection by Authorities
+YRD,Yard congestion,Yard congestion
+OTS,Others - Shore Related,Others - Shore Related
+CAE,Cargo - Awaiting Exports,Cargo - Awaiting Exports
+CIN,Cargo inspection by Authorities,Cargo inspection by Authorities
+DIN,Deficient or inadequate information,Deficient or inadequate information
+LEK,Leaking Container,Leaking Container
+REF,Reefer malfunction,Reefer malfunction
+SPH,Special cargo handling,Special cargo handling including Dangerous Goods (DG)
+STF,Misstuffed Container,Misstuffed Container
+UCC,Non-containerised cargo handling,Non-containerised (break bulk) or OOG (out of gauge) cargo handling requiring manual intervention
+WGT,Misdeclared Cargo weight,Misdeclared Cargo weight
+OTC,Others - Cargo,Related,Others - Cargo Related
+HOL,Bank Holidays,Bank Holidays
+QUV,Quarantine Vessel,Quarantine Vessel before berthing due to epidemic
+PTF,Port traffic restrictions,Port traffic restrictions
+RSC,Save and Rescue,Save and Rescue
+STR,Strike,Strike
+TID,Tidal restrictions,Tidal restrictions
+VIN,Vessel inspections by Coast Guard,Vessel inspections by Coast Guard
+WEA,Bad weather,Bad weather
+OTF,Others - Force Majeure Related,Others - Force Majeure Related
