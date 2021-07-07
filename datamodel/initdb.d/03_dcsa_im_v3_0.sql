@@ -542,7 +542,7 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
---  shipment_id uuid NOT NULL,
+    document_id varchar(100) NOT NULL,
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
