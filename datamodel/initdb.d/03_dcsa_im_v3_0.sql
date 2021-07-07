@@ -547,6 +547,13 @@ CREATE TABLE dcsa_im_v3_0.shipment_event (
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
+CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
+    delay_reason_code varchar(3) NOT NULL PRIMARY KEY,
+    delay_reason_name varchar(100) NOT NULL,
+    delay_reason_description varchar(250) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
@@ -567,13 +574,20 @@ CREATE TABLE dcsa_im_v3_0.schedule (
     date_range text
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.tradelane CASCADE;
+CREATE TABLE dcsa_im_v3_0.tradelane (
+    id varchar(8) PRIMARY KEY,
+    tradelane_name varchar(150) NOT NULL,
+    vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.service CASCADE;
 CREATE TABLE dcsa_im_v3_0.service (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier (id),
     carrier_service_code varchar(5),
     carrier_service_name varchar(50),
-    tradelane_id varchar(8) REFERENCES dcsa_im_v3_0.tradelane(id)
+    tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.service_proforma CASCADE;
@@ -630,13 +644,6 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
-CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
-    delay_reason_code varchar(3) NOT NULL PRIMARY KEY,
-    delay_reason_name varchar(100) NOT NULL,
-    delay_reason_description varchar(250) NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_type (
     vessel_sharing_agreement_type_code varchar(3) NOT NULL PRIMARY KEY,
@@ -656,13 +663,6 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_partner CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_partner (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
-    vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.tradelane CASCADE;
-CREATE TABLE dcsa_im_v3_0.tradelane (
-    id varchar(8) PRIMARY KEY,
-    tradelane_name varchar(150) NOT NULL,
     vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
 );
 
