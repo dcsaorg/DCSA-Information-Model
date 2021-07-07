@@ -8,12 +8,14 @@ BEGIN;
 DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
 CREATE VIEW dcsa_im_v3_0.aggregated_events AS
  SELECT transport_event.event_id,
+    'TRANSPORT' AS event_type,
     transport_event.event_classifier_code,
     transport_event.transport_event_type_code,
     NULL::text AS document_type_code,
     NULL::text AS equipment_event_type_code,
     transport_event.event_date_time,
     transport_event.event_created_date_time,
+    NULL::text AS document_id,
     transport_event.transport_call_id,
     transport_event.delay_reason_code,
     transport_event.change_remark,
@@ -22,12 +24,14 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
+    'SHIPMENT' AS event_type,
     shipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     shipment_event.document_type_code,
     NULL::text AS equipment_event_type_code,
     shipment_event.event_date_time,
     shipment_event.event_created_date_time,
+    shipment_event.document_id AS document_id,
     NULL::text AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
@@ -36,12 +40,14 @@ UNION
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
+    'EQUIPMENT' AS event_type,
     equipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     NULL::text AS document_type_code,
     equipment_event.equipment_event_type_code,
     equipment_event.event_date_time,
     equipment_event.event_created_date_time,
+    NULL::text AS document_id,
     equipment_event.transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
