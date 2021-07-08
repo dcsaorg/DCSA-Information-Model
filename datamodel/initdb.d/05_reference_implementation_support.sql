@@ -15,12 +15,12 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS equipment_event_type_code,
     transport_event.event_date_time,
     transport_event.event_created_date_time,
-    NULL::text AS document_id,
     transport_event.transport_call_id,
     transport_event.delay_reason_code,
     transport_event.change_remark,
     NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code
+    NULL::text AS empty_indicator_code,
+    NULL::UUID AS shipment_id
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
@@ -31,12 +31,12 @@ UNION
     NULL::text AS equipment_event_type_code,
     shipment_event.event_date_time,
     shipment_event.event_created_date_time,
-    shipment_event.document_id AS document_id,
     NULL::text AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
     NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code
+    NULL::text AS empty_indicator_code,
+    shipment_event.shipment_id
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
@@ -47,12 +47,12 @@ UNION
     equipment_event.equipment_event_type_code,
     equipment_event.event_date_time,
     equipment_event.event_created_date_time,
-    NULL::text AS document_id,
     equipment_event.transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
     equipment_event.equipment_reference,
-    equipment_event.empty_indicator_code
+    equipment_event.empty_indicator_code,
+    NULL::UUID AS shipment_id
    FROM dcsa_im_v3_0.equipment_event;
 
 
