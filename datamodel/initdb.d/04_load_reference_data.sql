@@ -21,5 +21,6 @@ BEGIN;
 \copy dcsa_im_v3_0.document_type from '../referencedata.d/documenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_event_type from '../referencedata.d/transporteventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.operations_event_type from '../referencedata.d/operationseventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 
 COMMIT;

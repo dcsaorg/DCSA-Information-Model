@@ -169,61 +169,54 @@ INSERT INTO dcsa_im_v3_0.references (
 INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_date_time,
     shipment_event_type_code,
-    shipment_id,
-    document_type_code
+    document_type_code,
+    shipment_id
 ) VALUES (
     uuid('784871e7-c9cd-4f59-8d88-2e033fa799a1'),
     'PLN',
-    'SHIPMENT',
     '2020-07-15',
     'APPR',
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971'),
-    'BKG'
+    'BKG',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971')
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_date_time,
     shipment_event_type_code,
-    shipment_id,
-    document_type_code
+    document_type_code,
+    shipment_id
 ) VALUES (
     uuid('e48f2bc0-c746-11ea-a3ff-db48243a89f4'),
     'PLN',
-    'SHIPMENT',
     TO_DATE('2020/07/15 13:14:15', 'yyyy/mm/dd hh24:mi:ss'),
     'APPR',
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971'),
-    'BKG'
+    'BKG',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971')
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_date_time,
     shipment_event_type_code,
-    shipment_id,
-    document_type_code
+    document_type_code,
+    shipment_id
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1'),
     'PLN',
-    'SHIPMENT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'CONF',
-    uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1'),
-    'BKG'
+    'BKG',
+    uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1')
 );
 
 INSERT INTO dcsa_im_v3_0.equipment_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_date_time,
     equipment_event_type_code,
     transport_call_id,
@@ -232,7 +225,6 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea2'),
     'ACT',
-    'EQUIPMENT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'LOAD',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
@@ -243,7 +235,6 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
 INSERT INTO dcsa_im_v3_0.transport_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_date_time,
     transport_event_type_code,
     transport_call_id,
@@ -252,18 +243,16 @@ INSERT INTO dcsa_im_v3_0.transport_event (
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea3'),
     'ACT',
-    'TRANSPORT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
     uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
-    'ABC',
-    'Do not know a valid delay reason code...'
+    'ANA',
+    'Authorities not available'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_created_date_time,
     event_date_time,
     transport_event_type_code,
@@ -273,7 +262,6 @@ INSERT INTO dcsa_im_v3_0.transport_event (
 ) VALUES (
     uuid('84db923d-2a19-4eb0-beb5-446c1ec57d34'),
     'ACT',
-    'TRANSPORT',
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
     'ARRI',
@@ -286,7 +274,6 @@ INSERT INTO dcsa_im_v3_0.transport_event (
 INSERT INTO dcsa_im_v3_0.equipment_event (
     event_id,
     event_classifier_code,
-    event_type,
     event_created_date_time,
     event_date_time,
     equipment_event_type_code,
@@ -296,7 +283,6 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
 ) VALUES (
     uuid('84db923d-2a19-4eb0-beb5-446c1ec57d34'),
     'EST',
-    'EQUIPMENT',
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
     'LOAD',

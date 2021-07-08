@@ -8,7 +8,7 @@ BEGIN;
 DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
 CREATE VIEW dcsa_im_v3_0.aggregated_events AS
  SELECT transport_event.event_id,
-    transport_event.event_type,
+    'TRANSPORT' AS event_type,
     transport_event.event_classifier_code,
     transport_event.transport_event_type_code,
     NULL::text AS document_type_code,
@@ -24,7 +24,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
-    shipment_event.event_type,
+    'SHIPMENT' AS event_type,
     shipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     shipment_event.document_type_code,
@@ -40,7 +40,7 @@ UNION
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
-    equipment_event.event_type,
+    'EQUIPMENT' AS event_type,
     equipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     NULL::text AS document_type_code,
