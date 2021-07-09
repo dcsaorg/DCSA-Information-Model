@@ -76,7 +76,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      carrier_service_code varchar(5) NULL,
      carrier_voyage_number varchar(50) NULL,
      vessel_imo_number varchar(7) NULL,
-    -- these two combined is a cursor for the subscription to unique identify which
+    --these two combined is a cursor for the subscription to unique identify which
     -- event was the last delivered
      last_event_date_created_date_time timestamp with time zone,
      last_event_id uuid NULL,
