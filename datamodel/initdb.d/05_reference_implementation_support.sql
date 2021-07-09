@@ -59,27 +59,33 @@ UNION
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
-    subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    callback_url text NOT NULL,
-    booking_reference varchar(35),
-    transport_document_id varchar(20),
-    transport_document_type text,
-    equipment_reference varchar(15),
-    schedule_id uuid NULL,
-    transport_call_id uuid NULL,
-
-    signature_method varchar(20) NOT NULL,
-    secret bytea NOT NULL,
+     subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+     callback_url text NOT NULL,
+     carrier_booking_reference varchar(35),
+     transport_document_id varchar(20),
+     transport_document_type text,
+     equipment_reference varchar(15),
+     schedule_id uuid NULL,
+     transport_call_id varchar(100) NULL,
+     signature_method varchar(20) NOT NULL,
+     secret bytea NOT NULL,
+     transport_event_type_code varchar(20) ,
+     transport_document_reference text NULL,
+     transport_document_type_code text NULL,
+     shipment_event_type_code varchar(4) NULL,
+     carrier_service_code varchar(5) NULL,
+     carrier_voyage_number varchar(50) NULL,
+     vessel_imo_number varchar(7) NULL,
     -- these two combined is a cursor for the subscription to unique identify which
     -- event was the last delivered
-    last_event_date_created_date_time timestamp with time zone,
-    last_event_id uuid NULL,
-    last_bundle_size int NULL,
-    last_status_message text NULL,
-    accumulated_retry_delay bigint NULL,
+     last_event_date_created_date_time timestamp with time zone,
+     last_event_id uuid NULL,
+     last_bundle_size int NULL,
+     last_status_message text NULL,
+     accumulated_retry_delay bigint NULL,
     -- Retry state
-    retry_after timestamp with time zone NULL,
-    retry_count int DEFAULT 0 NOT NULL
+     retry_after timestamp with time zone NULL,
+     retry_count int DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
