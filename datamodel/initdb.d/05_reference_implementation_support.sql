@@ -62,6 +62,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
      callback_url text NOT NULL,
      carrier_booking_reference varchar(35),
+        booking_reference varchar(35),
      transport_document_id varchar(20),
      transport_document_type text,
      equipment_reference varchar(15),
