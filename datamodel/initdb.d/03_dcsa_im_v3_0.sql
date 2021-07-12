@@ -557,7 +557,6 @@ CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
     delay_reason_description varchar(250) NULL
 );
 
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
