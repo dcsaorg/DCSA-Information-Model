@@ -75,6 +75,32 @@ INSERT INTO dcsa_im_v3_0.booking (
     'KGM'
 );
 
+
+INSERT INTO dcsa_im_v3_0.booking (
+    carrier_booking_reference,
+    receipt_delivery_type_at_origin,
+    receipt_delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract,
+    commodity_type,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
+) VALUES (
+    'CR1239719872',
+    'CY',
+    'CFS',
+    'FCL',
+    'LCL',
+    DATE '2020-03-08',
+    'UNKNOWN',
+    'Donno',
+    13233.4,
+    'KGM'
+);
+
+
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
     collection_datetime,
@@ -87,6 +113,60 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-03-31',
     uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
     'BR1239719871'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment (
+    id,
+    collection_datetime,
+    delivery_datetime,
+    carrier_id,
+    carrier_booking_reference
+) VALUES (
+    uuid_generate_v4(),
+    DATE '2020-03-08',
+    DATE '2020-04-01',
+    uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
+    'CR1239719872'
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'CR',
+    'AB-123743CR',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'PO',
+    'PO0027',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'CR',
+    'BC-346267CR',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
+);
+
+INSERT INTO dcsa_im_v3_0.references (
+    reference_type,
+    reference_value,
+    shipment_id
+) VALUES (
+    'PO',
+    'PO0028',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
 );
 
 INSERT INTO dcsa_im_v3_0.voyage (
@@ -165,16 +245,12 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code,
-    other_facility,
-    location_id
+    facility_type_code
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
-    null,
-    'POTE',
-    null,
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -205,16 +281,12 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code,
-    other_facility,
-    location_id
+    facility_type_code
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
-    null,
-    'COFS',
-    null,
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
+    'COFS'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -308,7 +380,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     'Emma Maersk',
     'DK',
     null,
-    null
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -323,7 +395,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     'transport reference',
     'Transport name',
-    '1',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     '1801323'
@@ -341,7 +413,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     'transport reference xx',
     'Transport name xx',
-    '2',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     null
@@ -359,7 +431,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     'transport reference yy',
     'Transport name yy',
-    '2',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     null
@@ -526,12 +598,5 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     'KGM'
 );
 
-INSERT INTO dcsa_im_v3_0.hs_code (
-    hs_code,
-    code_description
-) VALUES (
-    '411510',
-    'Leather; composition leather with a basis of leather or leather fibre, in slabs, sheets or strip, whether or not in rolls'
-);
 
 COMMIT;
