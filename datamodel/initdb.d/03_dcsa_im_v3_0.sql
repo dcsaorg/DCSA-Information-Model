@@ -84,6 +84,14 @@ CREATE TABLE dcsa_im_v3_0.carrier (
     nmfta_code varchar(4) NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
+CREATE TABLE dcsa_im_v3_0.party_contact_details (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    name varchar(100) NULL,
+    phone varchar(30) NULL,
+    email varchar(100) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
 CREATE TABLE dcsa_im_v3_0.party (
     id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
@@ -241,14 +249,6 @@ CREATE TABLE dcsa_im_v3_0.party_function (
     party_function_code varchar(3) PRIMARY KEY,
     party_function_name varchar(100) NOT NULL,
     party_function_description varchar(250) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
-CREATE TABLE dcsa_im_v3_0.party_contact_details (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    name varchar(100) NULL,
-    phone varchar(30) NULL,
-    email varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
