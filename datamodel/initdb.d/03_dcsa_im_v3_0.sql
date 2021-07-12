@@ -92,7 +92,8 @@ CREATE TABLE dcsa_im_v3_0.party (
     tax_reference_2 varchar(20) NULL,
     public_key varchar(500) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
-    nmfta_code varchar(4) NULL
+    nmfta_code varchar(4) NULL,
+    party_contact_details_id uuid NULL REFERENCES dcsa_im_v3_0.party_contact_details(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
@@ -149,7 +150,7 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
     requested_equipment_units integer NOT NULL,
     confirmed_equipment_type varchar(4) NULL,
     confirmed_equipment_units integer NULL,
-    is_shipper_owned  boolean NULL
+    is_shipper_owned  boolean NOT NULL DEFAULT false
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_times CASCADE;
@@ -252,7 +253,8 @@ CREATE TABLE dcsa_im_v3_0.party_contact_details (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
-    party_id varchar(100) NOT NULL DEFAULT uuid_generate_v4()::text REFERENCES dcsa_im_v3_0.party (id),
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
@@ -269,10 +271,7 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
     -- Same key as document_party
-    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party (id),
-    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
+    document_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.document_party(id),
     address_line varchar(250) NOT NULL,
     address_line_number int NOT NULL
 );
@@ -543,9 +542,10 @@ ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
-    shipment_id uuid NOT NULL,
+    document_id varchar(100) NOT NULL,
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
-    document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code)
+    document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code),
+    reason varchar(100) NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id);
