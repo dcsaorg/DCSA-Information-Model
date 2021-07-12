@@ -275,9 +275,8 @@ CREATE TABLE dcsa_im_v3_0.displayed_address (
     address_line varchar(250) NOT NULL,
     address_line_number int NOT NULL
 );
-CREATE INDEX ON dcsa_im_v3_0.displayed_address (party_id, party_function);
-CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipment_id);
-CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipping_instruction_id);
+
+CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.charge_type (
