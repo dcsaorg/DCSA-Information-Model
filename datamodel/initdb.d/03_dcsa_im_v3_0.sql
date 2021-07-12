@@ -539,12 +539,16 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
+ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
     shipment_id uuid NOT NULL,
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
+
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
 CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
@@ -553,6 +557,7 @@ CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
     delay_reason_description varchar(250) NULL
 );
 
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
@@ -560,6 +565,8 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
+
+ALTER TABLE dcsa_im_v3_0.transport_event ADD PRIMARY KEY (event_id);
 
 --Helper table in order to filter Events on schedule_id
 DROP TABLE IF EXISTS dcsa_im_v3_0.schedule CASCADE;
