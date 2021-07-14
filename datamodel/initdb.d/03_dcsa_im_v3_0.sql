@@ -253,7 +253,6 @@ CREATE TABLE dcsa_im_v3_0.party_function (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
@@ -271,12 +270,17 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
     -- Same key as document_party
-    document_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.document_party(id),
+    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party (id),
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+    party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
     address_line varchar(250) NOT NULL,
     address_line_number int NOT NULL
 );
 
-CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id);
+CREATE INDEX ON dcsa_im_v3_0.displayed_address (party_id, party_function);
+CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.displayed_address (shipping_instruction_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.charge_type (
