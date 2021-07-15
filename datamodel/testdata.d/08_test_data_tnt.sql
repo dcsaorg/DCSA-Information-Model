@@ -214,6 +214,42 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     'ABC123123123'
 );
 
+INSERT INTO dcsa_im_v3_0.iso_equipment_code (
+    iso_equipment_code,
+    iso_equipment_name,
+    iso_equipment_size_code,
+    iso_equipment_type_code_a
+) VALUES (
+    '22G1',
+    'Twenty foot dry',
+    '22',
+    'G1'
+);
+
+INSERT INTO dcsa_im_v3_0.equipment(
+    equipment_reference,
+    iso_equipment_code,
+    tare_weight,
+    weight_unit
+) VALUES (
+    'equipref3453',
+    '22G1',
+    null,
+    null
+);
+
+INSERT INTO dcsa_im_v3_0.equipment(
+    equipment_reference,
+    iso_equipment_code,
+    tare_weight,
+    weight_unit
+) VALUES (
+    APZU4812090',
+    '22G1',
+    null,
+    null
+);
+
 INSERT INTO dcsa_im_v3_0.equipment_event (
     event_id,
     event_classifier_code,
