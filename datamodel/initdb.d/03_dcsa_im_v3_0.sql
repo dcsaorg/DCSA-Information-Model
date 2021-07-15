@@ -481,7 +481,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
     transport_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport(id),
     sequence_number integer NOT NULL,
-    commercial_voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commercial_voyage(commercial_voyage_id),
+    commercial_voyage_id uuid NULL REFERENCES dcsa_im_v3_0.commercial_voyage(commercial_voyage_id),
     is_under_shippers_responsibility boolean NOT NULL,
     UNIQUE (shipment_id, transport_id, sequence_number) -- sequence_number must be unique together with transport and shipment
 );
