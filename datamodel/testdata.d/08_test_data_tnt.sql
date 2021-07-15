@@ -220,10 +220,10 @@ INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_size_code,
     iso_equipment_type_code_a
 ) VALUES (
-    '22G1',
-    'Twenty foot dry',
-    '22',
-    'G1'
+    '22G2',
+    'Twenty foot dry 2',
+    '23',
+    'G2'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment(
@@ -245,7 +245,7 @@ INSERT INTO dcsa_im_v3_0.equipment(
     weight_unit
 ) VALUES (
     APZU4812090',
-    '22G1',
+    '22G2',
     null,
     null
 );
