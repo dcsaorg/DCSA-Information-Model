@@ -111,7 +111,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
     DATE '2020-03-07',
     DATE '2020-03-31',
-    uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     'BR1239719871'
 );
 
@@ -125,7 +125,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
     uuid_generate_v4(),
     DATE '2020-03-08',
     DATE '2020-04-01',
-    uuid('5c7e736a-402e-11eb-b3e9-cff0135e510a'),
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     'CR1239719872'
 );
 
