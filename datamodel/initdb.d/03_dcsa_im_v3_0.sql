@@ -650,7 +650,7 @@ CREATE TABLE dcsa_im_v3_0.operations_event_type (
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_service_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.operations_event_type (
+CREATE TABLE dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_code varchar(4) NOT NULL PRIMARY KEY,
     port_call_service_type_name varchar(30) NOT NULL,
     port_call_service_type_description varchar(250) NULL
