@@ -470,6 +470,12 @@ CREATE TABLE dcsa_im_v3_0.transport (
     vessel_imo_number varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage CASCADE;
+CREATE TABLE dcsa_im_v3_0.commercial_voyage (
+    commercial_voyage_id uuid PRIMARY KEY,
+    commercial_voyage_name text NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_transport (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
@@ -628,12 +634,6 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call_voyage (
     voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage CASCADE;
-CREATE TABLE dcsa_im_v3_0.commercial_voyage (
-    commercial_voyage_id uuid PRIMARY KEY,
-    commercial_voyage_name text NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
