@@ -244,7 +244,7 @@ INSERT INTO dcsa_im_v3_0.equipment(
     tare_weight,
     weight_unit
 ) VALUES (
-    APZU4812090',
+    'APZU4812090',
     '22G2',
     null,
     null
