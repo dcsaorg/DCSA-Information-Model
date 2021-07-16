@@ -538,7 +538,7 @@ ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event (
-    document_id varchar(100) NOT NULL,
+    document_id varchar(50) NOT NULL,
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code),
     reason varchar(100) NULL
