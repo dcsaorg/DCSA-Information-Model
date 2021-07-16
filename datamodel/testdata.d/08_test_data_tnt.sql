@@ -59,6 +59,7 @@ INSERT INTO dcsa_im_v3_0.transport (
 );
 
 
+
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_reference,
     receipt_delivery_type_at_origin,
@@ -156,6 +157,18 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'ABC123123123'
 );
 
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+    transport_id,
+    shipment_id,
+    sequence_number,
+    is_under_shippers_responsibility
+) VALUES (
+    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE load_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed' OR discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    1,
+    false
+);
+
 INSERT INTO dcsa_im_v3_0.references (
     reference_type,
     reference_value,
@@ -233,7 +246,7 @@ INSERT INTO dcsa_im_v3_0.equipment(
     weight_unit
 ) VALUES (
     'equipref3453',
-    '22G1',
+    '22G2',
     null,
     null
 );
@@ -248,6 +261,31 @@ INSERT INTO dcsa_im_v3_0.equipment(
     '22G2',
     null,
     null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_equipment (
+    shipment_id,
+    equipment_reference,
+    cargo_gross_weight,
+    cargo_gross_weight_unit
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    'APZU4812090',
+    1424.2,
+    'KGM'
+);
+
+INSERT INTO dcsa_im_v3_0.seal (
+    shipment_equipment_id,
+    seal_number,
+    seal_source,
+    seal_type
+) VALUES (
+     (SELECT DISTINCT shipment_equipment.id FROM dcsa_im_v3_0.shipment_equipment JOIN dcsa_im_v3_0.shipment ON (shipment.id = shipment_equipment.shipment_id)
+            WHERE carrier_booking_reference = 'ABC123123123' AND equipment_reference = 'APZU4812090'),
+     'SN123457',
+     'CUS',
+     'WIR'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment_event (
@@ -326,5 +364,42 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     'EMPTY',
     'APZU4812090'
 );
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_classifier_code,
+    event_date_time,
+    event_created_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    'EST',
+    TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    TO_DATE('2003/05/01 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    'DEPA',
+    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    'ANA',
+    'Authorities not available'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_classifier_code,
+    event_date_time,
+    event_created_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    'ACT',
+    TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    'DEPA',
+    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    'ANA',
+    'Authorities not available'
+);
+
 
 COMMIT;
