@@ -20,7 +20,8 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     transport_event.change_remark,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
-    NULL::text AS document_id
+    NULL::text AS document_id,
+    NULL::text AS reason
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
@@ -36,7 +37,8 @@ UNION
     NULL::text AS change_remark,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
-    shipment_event.document_id AS document_id
+    shipment_event.document_id AS document_id,
+    shipment_event.reason AS reason
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
@@ -52,7 +54,8 @@ UNION
     NULL::text AS change_remark,
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
-    NULL::text AS document_id
+    NULL::text AS document_id,
+    NULL::text AS reason
    FROM dcsa_im_v3_0.equipment_event;
 
 
