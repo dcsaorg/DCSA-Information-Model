@@ -68,7 +68,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      transport_document_id varchar(20),
      transport_document_type text,
      equipment_reference varchar(15),
-     schedule_id uuid NULL,
+     schedule_id varchar(100) NULL,
      transport_call_id varchar(100) NULL,
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
@@ -79,16 +79,11 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      carrier_service_code varchar(5) NULL,
      carrier_voyage_number varchar(50) NULL,
      vessel_imo_number varchar(7) NULL,
-    --these two combined is a cursor for the subscription to unique identify which
-    -- event was the last delivered
-     last_event_date_created_date_time timestamp with time zone,
-     last_event_id uuid NULL,
-     last_bundle_size int NULL,
-     last_status_message text NULL,
-     accumulated_retry_delay bigint NULL,
     -- Retry state
      retry_after timestamp with time zone NULL,
-     retry_count int DEFAULT 0 NOT NULL
+     retry_count int DEFAULT 0 NOT NULL,
+     last_bundle_size int NULL,
+     accumulated_retry_delay bigint NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
@@ -107,5 +102,30 @@ CREATE UNIQUE INDEX deduplicate_location
 
 CREATE UNIQUE INDEX deduplicate_address
     ON dcsa_im_v3_0.address (postal_code, name, country, state_region, city, street, street_number, floor);
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.unmapped_event_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.unmapped_event_queue (
+    event_id uuid PRIMARY KEY,
+    enqueued_at_date_time timestamp with time zone NOT NULL default now()
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.pending_event_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.pending_event_queue (
+    delivery_id uuid PRIMARY KEY default uuid_generate_v4(),
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    event_id uuid NOT NULL,
+    -- TODO: Consider moving the payload OR the state to its own table as updating state will duplicate the row
+    -- temporarily in the database (which means that the payload will cause bloat as long as it is on the
+    -- same row).
+    payload TEXT NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL default now(),
+    -- State and status
+    last_attempt_date_time timestamp with time zone NULL,
+    last_error_message text NULL,
+    retry_count int DEFAULT 0 NOT NULL,
+
+    UNIQUE (subscription_id, event_id)
+);
 
 COMMIT;
