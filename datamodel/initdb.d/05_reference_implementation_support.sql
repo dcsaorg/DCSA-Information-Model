@@ -56,9 +56,24 @@ UNION
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason
-   FROM dcsa_im_v3_0.equipment_event;
-
-
+   FROM dcsa_im_v3_0.equipment_event
+UNION
+ SELECT operations_event.event_id,
+    'OPERATIONS' AS event_type,
+    operations_event.event_classifier_code,
+    NULL::text AS transport_event_type_code,
+    NULL::text AS document_type_code,
+    NULL::text AS equipment_event_type_code,
+    operations_event.event_date_time,
+    operations_event.event_created_date_time,
+    operations_event.transport_call_id,
+    NULL::text AS delay_reason_code,
+    NULL::text AS change_remark,
+    NULL::text AS equipment_reference,
+    NULL::text AS empty_indicator_code,
+    NULL::text AS document_id,
+    NULL::text AS reason
+   FROM dcsa_im_v3_0.operations_event;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
