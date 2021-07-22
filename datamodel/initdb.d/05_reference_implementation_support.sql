@@ -147,4 +147,11 @@ CREATE TABLE dcsa_im_v3_0.pending_event_queue (
     UNIQUE (subscription_id, event_id)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.notification_endpoint CASCADE;
+CREATE TABLE dcsa_im_v3_0.notification_endpoint (
+    endpoint_id uuid PRIMARY KEY default uuid_generate_v4(),
+    subscription_id varchar(100) NULL, -- NO Foreign key (the IDs are external)
+    secret bytea NOT NULL
+);
+
 COMMIT;
