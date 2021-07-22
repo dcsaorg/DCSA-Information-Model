@@ -56,7 +56,7 @@ UNION
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason
-   FROM dcsa_im_v3_0.equipment_event;
+   FROM dcsa_im_v3_0.equipment_event
 UNION
  SELECT operations_event.event_id,
     'OPERATIONS' AS event_type,
