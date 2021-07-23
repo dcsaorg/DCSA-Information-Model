@@ -28,7 +28,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
         FROM dcsa_im_v3_0.shipment s
         JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
         JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-        WHERE t.discharge_transport_call_id = transport_event.transport_call_id
+        WHERE t.discharge_transport_call_id = transport_call_id
     ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.transport_event
 UNION
