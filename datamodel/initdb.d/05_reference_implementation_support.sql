@@ -82,7 +82,14 @@ UNION
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
-    NULL::text AS reason
+    NULL::text AS reason,
+    (
+        SELECT DISTINCT s.carrier_booking_reference
+        FROM dcsa_im_v3_0.shipment s
+        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
+        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
+        WHERE t.discharge_transport_call_id = transport_call_id
+    ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.equipment_event
 UNION
  SELECT operations_event.event_id,
