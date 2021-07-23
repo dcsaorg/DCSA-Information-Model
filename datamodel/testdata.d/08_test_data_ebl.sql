@@ -376,7 +376,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
-    '1801323',
+    '9321483',
     'Emma Maersk',
     'DK',
     null,
@@ -398,7 +398,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    '1801323'
+    '9321483'
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
