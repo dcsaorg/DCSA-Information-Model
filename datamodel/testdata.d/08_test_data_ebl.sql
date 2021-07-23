@@ -102,13 +102,11 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 
 INSERT INTO dcsa_im_v3_0.shipment (
-    id,
     collection_datetime,
     delivery_datetime,
     carrier_id,
     carrier_booking_reference
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
     DATE '2020-03-07',
     DATE '2020-03-31',
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
@@ -170,76 +168,17 @@ INSERT INTO dcsa_im_v3_0.references (
 );
 
 INSERT INTO dcsa_im_v3_0.voyage (
-    id,
     carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
-    '2106W'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879e'),
-    '2107E'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879f'),
-    '2108W'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8790'),
-    '2218W'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8791'),
-    '2219E'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8792'),
-    '2418W'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8793'),
-    '2419E'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8794'),
-    '3418W'
-);
-
-INSERT INTO dcsa_im_v3_0.voyage (
-    id,
-    carrier_voyage_number
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8795'),
-    '3419E'
-);
+) VALUES
+    ('2106W'),
+    ('2107E'),
+    ('2108W'),
+    ('2218W'),
+    ('2219E'),
+    ('2418W'),
+    ('2419E'),
+    ('3418W'),
+    ('3419E');
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
@@ -257,23 +196,13 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
     transport_call_id
 ) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call_voyage (
-    voyage_id,
-    transport_call_id
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879e'),
+), (
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call_voyage (
-    voyage_id,
-    transport_call_id
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879f'),
+), (
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2108W'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
 );
 
@@ -293,15 +222,10 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
     transport_call_id
 ) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8790'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2218W'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call_voyage (
-    voyage_id,
-    transport_call_id
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8791'),
+), (
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2219E'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
 );
 
@@ -325,15 +249,10 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
     transport_call_id
 ) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8792'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2418W'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call_voyage (
-    voyage_id,
-    transport_call_id
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8793'),
+), (
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2419E'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
 );
 
@@ -357,15 +276,10 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
     transport_call_id
 ) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8794'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '3418W'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call_voyage (
-    voyage_id,
-    transport_call_id
-) VALUES (
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d8795'),
+), (
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '3419E'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
@@ -444,7 +358,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     1,
     null,
@@ -458,7 +372,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     2,
     null,
@@ -472,7 +386,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     3,
     null,
@@ -502,7 +416,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     is_to_be_notified
 ) VALUES (
     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'OS',
     true
 );
@@ -514,7 +428,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     is_to_be_notified
 ) VALUES (
     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'CN',
     true
 );
@@ -525,7 +439,7 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     location_id,
     location_type
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
     'PRE'
 );
@@ -535,7 +449,7 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     location_id,
     location_type
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     'POL'
 );
@@ -545,7 +459,7 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     location_id,
     location_type
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     'POD'
 );
@@ -555,7 +469,7 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     location_id,
     location_type
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
     'PDE'
 );
@@ -592,7 +506,7 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     cargo_gross_weight_unit
 ) VALUES (
     uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e0f'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'BMOU2149612',
     4000,
     'KGM'
