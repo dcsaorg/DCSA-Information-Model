@@ -22,7 +22,14 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
-    NULL::text AS reason
+    NULL::text AS reason,
+    (
+        SELECT DISTINCT s.carrier_booking_reference
+        FROM dcsa_im_v3_0.shipment s
+        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
+        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
+        WHERE t.discharge_transport_call_id = transport_call_id
+    ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
@@ -40,7 +47,24 @@ UNION
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
-    shipment_event.reason AS reason
+    shipment_event.reason AS reason,
+    (
+        CASE shipment_event.document_type_code
+            WHEN 'BKG'
+            THEN  document_id
+            WHEN 'TRD'
+            THEN (SELECT DISTINCT s.carrier_booking_reference
+                  FROM dcsa_im_v3_0.transport_document td
+                  JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
+                  JOIN dcsa_im_v3_0.shipment s ON ci.shipment_id = s.id
+                  WHERE td.transport_document_reference = document_id)
+            WHEN 'SHI'
+            THEN (SELECT DISTINCT s.carrier_booking_reference
+                  FROM dcsa_im_v3_0.shipment s
+                  JOIN dcsa_im_v3_0.cargo_item ci ON s.id = ci.shipment_id
+                  WHERE ci.shipping_instruction_id = document_id)
+        END
+     ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
@@ -58,7 +82,14 @@ UNION
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
-    NULL::text AS reason
+    NULL::text AS reason,
+    (
+        SELECT DISTINCT s.carrier_booking_reference
+        FROM dcsa_im_v3_0.shipment s
+        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
+        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
+        WHERE t.discharge_transport_call_id = transport_call_id
+    ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.equipment_event
 UNION
  SELECT operations_event.event_id,
@@ -76,7 +107,14 @@ UNION
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
-    NULL::text AS reason
+    NULL::text AS reason,
+    (
+        SELECT DISTINCT s.carrier_booking_reference
+        FROM dcsa_im_v3_0.shipment s
+        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
+        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
+        WHERE t.discharge_transport_call_id = transport_call_id
+    ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.operations_event;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
