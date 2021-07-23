@@ -24,7 +24,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'ADT'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE'
 );
 
