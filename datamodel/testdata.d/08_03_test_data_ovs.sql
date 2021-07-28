@@ -9,8 +9,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'PILO',
-    'PILO_port_call_service_type_name',
-    'PILO_port_call_service_type_description'
+    'PILO_name',
+    'PILO_description'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
@@ -19,8 +19,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'MOOR',
-    'MOOR_port_call_service_type_name',
-    'MOOR_port_call_service_type_description'
+    'MOOR_name',
+    'MOOR_description'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
@@ -29,8 +29,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'CRGO',
-    'CRGO_port_call_service_type_name',
-    'CRGO_port_call_service_type_description'
+    'CRGO_name',
+    'CRGO_description'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
@@ -39,8 +39,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'TOWG',
-    'TOWG_port_call_service_type_name',
-    'TOWG_port_call_service_type_description'
+    'TOWG_name',
+    'TOWG_description'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
@@ -49,8 +49,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'BUNK',
-    'BUNK_port_call_service_type_name',
-    'BUNK_port_call_service_type_description'
+    'BUNK_name',
+    'BUNK_description'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
@@ -59,8 +59,8 @@ INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description
 ) VALUES (
     'WSDP',
-    'WSDP_port_call_service_type_name',
-    'WSDP_port_call_service_type_description'
+    'WSDP_name',
+    'WSDP_description'
 );
 
 INSERT INTO dcsa_im_v3_0.operations_event (
