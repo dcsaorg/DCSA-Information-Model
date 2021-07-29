@@ -23,6 +23,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason,
+    NULL::text as operations_event_type_code,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
@@ -48,6 +49,7 @@ UNION
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
     shipment_event.reason AS reason,
+    NULL::text as operations_event_type_code,
     (
         CASE shipment_event.document_type_code
             WHEN 'BKG'
@@ -83,6 +85,7 @@ UNION
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason,
+    NULL::text as operations_event_type_code,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
@@ -108,6 +111,7 @@ UNION
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason,
+    NULL::text as operations_event_type_code,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
