@@ -24,6 +24,13 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS document_id,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
+    NULL::text as publisher_role,
+    NULL::text as publisher_code_list_provider,
+    NULL::text as event_location,
+    NULL::text as port_call_service_type_code,
+    NULL::text as facility_type_code,
+    NULL::text as vessel_position,
+    NULL::text as publisher,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
@@ -50,6 +57,13 @@ UNION
     shipment_event.document_id AS document_id,
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
+    NULL::text as publisher_role,
+    NULL::text as publisher_code_list_provider,
+    NULL::text as event_location,
+    NULL::text as port_call_service_type_code,
+    NULL::text as facility_type_code,
+    NULL::text as vessel_position,
+    NULL::text as publisher,
     (
         CASE shipment_event.document_type_code
             WHEN 'BKG'
@@ -86,6 +100,13 @@ UNION
     NULL::text AS document_id,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
+    NULL::text as publisher_role,
+    NULL::text as publisher_code_list_provider,
+    NULL::text as event_location,
+    NULL::text as port_call_service_type_code,
+    NULL::text as facility_type_code,
+    NULL::text as vessel_position,
+    NULL::text as publisher,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
@@ -112,6 +133,13 @@ UNION
     NULL::text AS document_id,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
+    NULL::text as publisher_role,
+    NULL::text as publisher_code_list_provider,
+    NULL::text as event_location,
+    NULL::text as port_call_service_type_code,
+    NULL::text as facility_type_code,
+    NULL::text as vessel_position,
+    NULL::text as publisher,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
