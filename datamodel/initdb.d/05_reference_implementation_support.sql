@@ -132,14 +132,14 @@ UNION
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
     NULL::text AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::text as publisher_code_list_provider,
-    NULL::text as event_location,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::text as vessel_position,
-    NULL::text as publisher,
+    operations_event.operations_event_type_code,
+    operations_event.publisher_role,
+    operations_event.publisher_code_list_provider,
+    operations_event.event_location,
+    operations_event.port_call_service_type_code,
+    operations_event.facility_type_code,
+    operations_event.vessel_position,
+    operations_event.publisher,
     (
         SELECT DISTINCT s.carrier_booking_reference
         FROM dcsa_im_v3_0.shipment s
