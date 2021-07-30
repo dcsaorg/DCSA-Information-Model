@@ -58,7 +58,21 @@ INSERT INTO dcsa_im_v3_0.transport (
     '1234567'
 );
 
-
+INSERT INTO dcsa_im_v3_0.transport (
+    transport_reference,
+    transport_name,
+    mode_of_transport,
+    load_transport_call_id,
+    discharge_transport_call_id,
+    vessel_imo_number
+) VALUES (
+    'transport reference return',
+    'Transport name (NYC -> Singapore)',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL') ,
+    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    '1234567'
+);
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_reference,
@@ -163,11 +177,24 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     sequence_number,
     is_under_shippers_responsibility
 ) VALUES (
-    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE load_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed' OR discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     1,
     false
 );
+
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+    transport_id,
+    shipment_id,
+    sequence_number,
+    is_under_shippers_responsibility
+) VALUES (
+    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE load_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    1,
+    false
+);
+
 
 INSERT INTO dcsa_im_v3_0.references (
     reference_type,
