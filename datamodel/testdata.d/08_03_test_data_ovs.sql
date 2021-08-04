@@ -3,6 +3,117 @@
 
 BEGIN;
 
+
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+) VALUES (
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    'Henrik',
+    'Kronprincessegade',
+    '54',
+    '5. sal',
+    '1306',
+    'København',
+    'N/A',
+    'Denmark'
+);
+
+INSERT INTO  dcsa_im_v3_0.party (
+    id,
+    party_name,
+    tax_reference_1,
+    tax_reference_2,
+    public_key,
+    address_id,
+    nmfta_code
+) VALUES ( 
+    uuid('be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'),
+    'Asseco Denmark',
+    'CVR-25645774',
+    'CVR-25645774',
+    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    'MMCU'
+);
+
+INSERT INTO dcsa_im_v3_0.vessel (
+    vessel_imo_number,
+    vessel_name,
+    vessel_flag,
+    vessel_call_sign_number,
+    vessel_operator_carrier_id
+) VALUES (
+    '1801323',
+    'King of the World',
+    'DE',
+    'NCVV',
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    address_id,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23'),
+    'Eiffel Tower',
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    '48.8585500',
+    '2.294492036',
+    'USNYC'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code
+) VALUES (
+    uuid('7f2d833c-2c7f-4fc5-a71a-e510881da64a'),
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
+    'BRTH'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code
+) VALUES (
+    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE'
+);
+
+INSERT INTO dcsa_im_v3_0.transport (
+    transport_reference,
+    transport_name,
+    mode_of_transport,
+    load_transport_call_id,
+    discharge_transport_call_id,
+    vessel_imo_number
+) VALUES (
+    'transport reference',
+    'Transport name (Singapore -> NYC)',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    uuid('7f2d833c-2c7f-4fc5-a71a-e510881da64a'),
+    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
+    '1801323'
+);
+
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_code,
     port_call_service_type_name,
@@ -75,15 +186,15 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     event_location,
     facility_type_code
 ) VALUES (
-    uuid('a7a30556-ef7c-11eb-9a03-0242ac130003'),
+    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
     uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
     'ANA',
     'HAT',
-    'CRGO',
-    'this is definitely an event location',
+    'BUNK',
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23'),
     'POTE'
 );
 
