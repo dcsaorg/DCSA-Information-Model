@@ -35,7 +35,7 @@ INSERT INTO  dcsa_im_v3_0.party (
     address_id,
     nmfta_code
 ) VALUES ( 
-    uuid('be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'),
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
     'Asseco Denmark',
     'CVR-25645774',
     'CVR-25645774',
