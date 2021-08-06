@@ -52,7 +52,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     vessel_operator_carrier_id
 ) VALUES (
     '9811000',
-    'King of the World',
+    'Ever Given',
     'DE',
     'NCVV',
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
