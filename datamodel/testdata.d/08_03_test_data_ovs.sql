@@ -184,7 +184,8 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     publisher_role,
     port_call_service_type_code,
     event_location,
-    facility_type_code
+    facility_type_code,
+    publisher
 ) VALUES (
     uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
     'ACT',
@@ -195,7 +196,8 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'HAT',
     'BUNK',
     uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23'),
-    'POTE'
+    'POTE',
+    uuid('be5bc290-7bac-48bb-a211-f3fa5a3ab3ae')
 );
 
 INSERT INTO dcsa_im_v3_0.operations_event (
@@ -208,7 +210,8 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     publisher_role,
     port_call_service_type_code,
     event_location,
-    facility_type_code
+    facility_type_code,
+    publisher
 ) VALUES (
     uuid('03482296-ef9c-11eb-9a03-0242ac130003'),
     'EST',
@@ -218,8 +221,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ANA',
     'KAT',
     'WSDP',
-    'this is definitely also another event location',
-    'BRTH'
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23'),
+    'BRTH',
+    uuid('be5bc290-7bac-48bb-a211-f3fa5a3ab3ae')
 );
 
 COMMIT;
