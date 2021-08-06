@@ -80,7 +80,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code
 ) VALUES (
-    uuid('7f2d833c-2c7f-4fc5-a71a-e510881da64a'),
+    '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'BRTH'
@@ -92,8 +92,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code
 ) VALUES (
-    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
-    1,
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
+    2,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE'
 );
@@ -109,8 +109,8 @@ INSERT INTO dcsa_im_v3_0.transport (
     'transport reference',
     'Transport name (Singapore -> NYC)',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    uuid('7f2d833c-2c7f-4fc5-a71a-e510881da64a'),
-    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
+    '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
     '1801323'
 );
 
@@ -191,7 +191,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
-    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     'ANA',
     'HAT',
     'BUNK',
@@ -217,7 +217,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'EST',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'ARRI',
-    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    '123e4567-e89b-12d3-a456-426614174000',
     'ANA',
     'KAT',
     'WSDP',
