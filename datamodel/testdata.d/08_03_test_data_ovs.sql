@@ -66,7 +66,7 @@ INSERT INTO dcsa_im_v3_0.location (
     longitude,
     un_location_code
 ) VALUES (
-    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23'),
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
     'Eiffel Tower',
     uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
     '48.8585500',
