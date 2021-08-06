@@ -51,7 +51,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
-    '9321483',
+    '9811000',
     'King of the World',
     'DE',
     'NCVV',
