@@ -193,7 +193,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'DEPA',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     'ANA',
-    'TA',
+    'TR',
     'BUNK',
     '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
     'POTE',
