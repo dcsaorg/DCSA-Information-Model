@@ -55,7 +55,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     'Ever Given',
     'PA',
     'H3RC',
-    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'EMC')
 );
 
 INSERT INTO dcsa_im_v3_0.location (
