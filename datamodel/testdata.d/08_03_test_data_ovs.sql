@@ -53,7 +53,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
 ) VALUES (
     '9811000',
     'Ever Given',
-    'DE',
+    'PA',
     'NCVV',
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
 );
