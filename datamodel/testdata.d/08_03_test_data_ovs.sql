@@ -111,7 +111,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
-    '1801323'
+    '9321483'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
