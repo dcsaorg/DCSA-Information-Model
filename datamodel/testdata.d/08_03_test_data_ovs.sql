@@ -223,7 +223,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'WSDP',
     '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
     'BRTH',
-    uuid('be5bc290-7bac-48bb-a211-f3fa5a3ab3ae')
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
 );
 
 COMMIT;
