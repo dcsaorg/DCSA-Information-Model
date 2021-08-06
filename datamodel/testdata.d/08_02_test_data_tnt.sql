@@ -177,7 +177,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     sequence_number,
     is_under_shippers_responsibility
 ) VALUES (
-    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE load_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed' OR discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     1,
     false
