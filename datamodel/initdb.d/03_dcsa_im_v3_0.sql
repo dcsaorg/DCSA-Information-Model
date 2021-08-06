@@ -663,10 +663,10 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     publisher varchar(100) NULL,
     publisher_role varchar(3) NULL,
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
-    event_location varchar(100) NULL,
+    event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
-    vessel_position varchar(100) NULL,
+    vessel_position varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
