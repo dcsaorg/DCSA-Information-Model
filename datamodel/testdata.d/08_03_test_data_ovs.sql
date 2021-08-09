@@ -226,6 +226,38 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
 );
 
+INSERT INTO dcsa_im_v3_0.service (
+    id,
+    carrier_id,
+    carrier_service_code,
+    carrier_service_name
+) VALUES (
+    '03482296-ef9c-11eb-9a03-0242ac131999',
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    'A_CSC',
+    'A_carrier_service_name'
+);
+
+
+INSERT INTO dcsa_im_v3_0.voyage (
+    id,
+    carrier_voyage_number,
+    service_id
+) VALUES (
+    '03482296-ef9c-11eb-9a03-0242ac131233',
+    'A_carrier_voyage_number',
+    '03482296-ef9c-11eb-9a03-0242ac131999'
+);
+
+
+INSERT INTO dcsa_im_v3_0.transport_call_voyage (
+    voyage_id,
+    transport_call_id
+) VALUES (
+    '03482296-ef9c-11eb-9a03-0242ac131233',
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'
+);
+
 COMMIT;
 
 -- REMOVE DATA OVERLAPPING WITH 08_02_test_data_tnt.sql
