@@ -172,7 +172,8 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      retry_after timestamp with time zone NULL,
      retry_count int DEFAULT 0 NOT NULL,
      last_bundle_size int NULL,
-     accumulated_retry_delay bigint NULL
+     accumulated_retry_delay bigint NULL,
+     equipment_event_type_code varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
