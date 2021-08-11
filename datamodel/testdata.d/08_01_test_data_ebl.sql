@@ -563,7 +563,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     is_electronic,
     is_charges_displayed
 ) VALUES (
-    uuid('01670315-a51f-4a11-b947-ce8e245128eb'),
+    '01670315-a51f-4a11-b947-ce8e245128eb',
     'BOL',
     TRUE,
     2,
