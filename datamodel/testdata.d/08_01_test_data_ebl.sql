@@ -513,4 +513,64 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 );
 
 
+
+
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+) VALUES (
+    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
+    'Lagkagehuset',
+    'Islands Brygge',
+    '43',
+    'St',
+    '2300',
+    'København S',
+    'N/A',
+    'Denmark'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    address_id,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    'Lagkagehuset Islands Brygge',
+    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
+    '55.6642249',
+    '12.57341045',
+    'USNYC'
+);
+
+INSERT INTO dcsa_im_v3_0.shipping_instruction (
+    id,
+    transport_document_type,
+    is_shipped_onboard_type,
+    number_of_copies,
+    number_of_originals,
+    invoice_payable_at,
+    is_electronic,
+    is_charges_displayed
+) VALUES (
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    'BOL',
+    TRUE,
+    2,
+    4,
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    TRUE,
+    TRUE
+);
+
 COMMIT;
