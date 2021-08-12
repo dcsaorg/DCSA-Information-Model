@@ -537,6 +537,28 @@ INSERT INTO dcsa_im_v3_0.address (
     'Denmark'
 );
 
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+) VALUES (
+    uuid('3301364f-a11d-45bf-817d-0af64d8bb62c'),
+    'Sundby Bad',
+    'Sundbyvestervej',
+    '50',
+    'St',
+    '2300',
+    'København S',
+    'N/A',
+    'Denmark'
+);
+
 INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name,
@@ -550,7 +572,23 @@ INSERT INTO dcsa_im_v3_0.location (
     uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
     '55.6642249',
     '12.57341045',
-    'USNYC'
+    'DKCPH'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    address_id,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    '0bd7ba93-663c-4e60-bbe9-67ec5a47526d',
+    'Sundby Bad',
+    uuid('3301364f-a11d-45bf-817d-0af64d8bb62c'),
+    '55.6479934',
+    '12.60273568',
+    'DKCPH'
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
@@ -572,5 +610,40 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE,
     TRUE
 );
+
+
+
+
+
+
+
+INSERT INTO dcsa_im_v3_0.transport_document (
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    terms_and_conditions,
+    number_of_originals,
+    issuer,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages
+) VALUES (
+    'transport_document_1',
+    '0bd7ba93-663c-4e60-bbe9-67ec5a47526d',
+    DATE '2020-03-07',
+    DATE '2020-03-08',
+    DATE '2020-03-09',
+    'terms_and_conditions text',
+    10,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    'DKK',
+    7000.00,
+    1
+);
+
 
 COMMIT;
