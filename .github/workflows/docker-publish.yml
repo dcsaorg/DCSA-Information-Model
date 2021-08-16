@@ -8,7 +8,7 @@ name: Docker
 on:
   push:
     branches:
-      - DDT-160-Push-image-to-ghcr
+      - master
     
 env:
   # Use docker.io for Docker Hub if empty
@@ -32,10 +32,7 @@ jobs:
       - name: Build Docker image        
         run:
           docker-compose up --build --no-start   
-
-      - name: List images
-        run: docker images
-          
+        
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
