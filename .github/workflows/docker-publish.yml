@@ -8,7 +8,7 @@ name: Docker
 on:
   push:
     branches:
-      - DDT-160-Push-image-to-ghcr
+      - master
     
 env:
   # Use docker.io for Docker Hub if empty
@@ -51,8 +51,7 @@ jobs:
       - name: print
         run: | 
           echo "labels > ${{ steps.meta.outputs.labels }}"
-          echo "tags > ${{ steps.meta.outputs.tags }}"
-        
+          echo "tags > ${{ steps.meta.outputs.tags }}"        
         
       - name: tag
         run:   docker tag dcsa-information-model_dcsa-test-db ghcr.io/dcsaorg/dcsa-information-model:latest
