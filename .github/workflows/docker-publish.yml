@@ -8,7 +8,7 @@ name: Docker
 on:
   push:
     branches:
-      - master
+      - DDT-160-Push-image-to-ghcr
     
 env:
   # Use docker.io for Docker Hub if empty
