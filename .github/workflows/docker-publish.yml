@@ -33,5 +33,5 @@ jobs:
       # https://github.com/marketplace/actions/docker-build-push-action
       - name: Build Docker image        
         run:
-          docker-compose build     
+          docker-compose up --detach --build --no-start    
           
