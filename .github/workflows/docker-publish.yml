@@ -40,9 +40,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ghcr.io/${{ github.repository_owner }}/dcsa_db:latest
+      - name: push to ghcr.io
+        run:  docker-compose push
