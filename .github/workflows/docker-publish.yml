@@ -31,7 +31,10 @@ jobs:
                  
       - name: Build Docker image        
         run:
-          docker-compose up --build --no-start    
+          docker-compose up --build --no-start   
+
+      - name: List images
+        run: docker images
           
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
