@@ -40,5 +40,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: push to ghcr.io
-        run:  docker-compose push
+      - name: tag
+        run:   docker dcsa-test-db tag ghcr.io/dcsaorg/DCSA-Information-Model:latest
+        
+      - name: push        
+        run: docker push ghcr.io/dcsaorg/DCSA-Information-Model:latest
