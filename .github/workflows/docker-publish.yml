@@ -41,7 +41,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: tag
-        run:   docker dcsa-test-db tag ghcr.io/dcsaorg/DCSA-Information-Model:latest
+        run:   docker tag dcsa-test-db ghcr.io/dcsaorg/DCSA-Information-Model:latest
         
       - name: push        
         run: docker push ghcr.io/dcsaorg/DCSA-Information-Model:latest
