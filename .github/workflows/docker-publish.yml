@@ -47,4 +47,4 @@ jobs:
         run:   docker tag dcsa-information-model_dcsa-test-db ghcr.io/dcsaorg/dcsa-information-model:latest
         
       - name: push        
-        run: docker push ghcr.io/dcsaorg/DCSA-Information-Model:latest
+        run: docker push ghcr.io/dcsaorg/dcsa-information-model:latest
