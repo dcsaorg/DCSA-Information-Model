@@ -1,0 +1,52 @@
+name: Docker
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches:
+      - master
+    
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: maven-settings-xml-action
+        uses: whelk-io/maven-settings-xml-action@v12
+        with:
+          repositories: '[{ "id": "github", "name": "DCSA Backend repo", "url": "https://maven.pkg.github.com/dcsaorg/DCSA-Core", "releases": { "enabled": "true" }, "snapshots": { "enabled": "true" } }]'
+          servers: '[{ "id": "github", "username": "${{ secrets.DCSA_USER }}", "password": "${{ secrets.DCSA_PACKAGES_PAT }}" }]'
+        
+      - name: maven build
+        run: mvn -B package --file pom.xml
+        
+        
+      # Build and push Docker image
+      # https://github.com/marketplace/actions/docker-build-push-action
+      - name: Build and push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:          
+          image: dcsa-db
+          registry: ghcr.io            
+          githubOrg: dcsaorg
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          addLatest: ${{ true }}
