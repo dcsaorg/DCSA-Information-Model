@@ -161,10 +161,8 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      transport_call_id varchar(100) NULL,
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
-     transport_event_type_code varchar(20) ,
      transport_document_reference text NULL,
      transport_document_type_code text NULL,
-     shipment_event_type_code varchar(4) NULL,
      carrier_service_code varchar(5) NULL,
      carrier_voyage_number varchar(50) NULL,
      vessel_imo_number varchar(7) NULL,
@@ -172,8 +170,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      retry_after timestamp with time zone NULL,
      retry_count int DEFAULT 0 NOT NULL,
      last_bundle_size int NULL,
-     accumulated_retry_delay bigint NULL,
-     equipment_event_type_code varchar(100) NULL
+     accumulated_retry_delay bigint NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
@@ -184,6 +181,26 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
     PRIMARY KEY (subscription_id, event_type)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_shipment_event_type (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    shipment_event_type_code varchar(4) REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
+    PRIMARY KEY (subscription_id, shipment_event_type_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_transport_event_type (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    transport_event_type_code varchar(4) REFERENCES dcsa_im_v3_0.transport_event_type (transport_event_type_code),
+    PRIMARY KEY (subscription_id, transport_event_type_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_equipment_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    equipment_event_type_code varchar(4) REFERENCES dcsa_im_v3_0.equipment_event_type (equipment_event_type_code),
+    PRIMARY KEY (subscription_id, equipment_event_type_code)
+);
 
 -- Indexes to help the reference implementation deduplicate these. Fields are ordered by how discriminatory they are
 -- presumed to be in the general case or how fast they would like to check.
