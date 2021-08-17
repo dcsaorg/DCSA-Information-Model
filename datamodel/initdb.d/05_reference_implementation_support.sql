@@ -202,6 +202,13 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type (
     PRIMARY KEY (subscription_id, equipment_event_type_code)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_operations_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_operations_event_type (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    operations_event_type_code varchar(4) REFERENCES dcsa_im_v3_0.operations_event_type (operations_event_type_code),
+    PRIMARY KEY (subscription_id, operations_event_type_code)
+);
+
 -- Indexes to help the reference implementation deduplicate these. Fields are ordered by how discriminatory they are
 -- presumed to be in the general case or how fast they would like to check.
 CREATE UNIQUE INDEX deduplicate_location
