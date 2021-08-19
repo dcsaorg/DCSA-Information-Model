@@ -162,7 +162,6 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
      transport_document_reference text NULL,
-     transport_document_type_code text NULL,
      carrier_service_code varchar(5) NULL,
      carrier_voyage_number varchar(50) NULL,
      vessel_imo_number varchar(7) NULL,
@@ -179,6 +178,13 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
     event_type text,
 
     PRIMARY KEY (subscription_id, event_type)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_document_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_transport_document_type (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    transport_document_type_code varchar(4) REFERENCES dcsa_im_v3_0.transport_document_type (transport_document_type_code),
+    PRIMARY KEY (subscription_id, transport_document_type_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type CASCADE;
