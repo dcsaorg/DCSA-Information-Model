@@ -563,18 +563,6 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
 
 ALTER TABLE dcsa_im_v3_0.transport_event ADD PRIMARY KEY (event_id);
 
---Helper table in order to filter Events on schedule_id
-DROP TABLE IF EXISTS dcsa_im_v3_0.schedule CASCADE;
-CREATE TABLE dcsa_im_v3_0.schedule (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_operator_carrier_code varchar(10) NOT NULL,
-    vessel_operator_carrier_code_list_provider text NOT NULL,
-    vessel_partner_carrier_code varchar(10) NOT NULL,
-    vessel_partner_carrier_code_list_provider text,
-    start_date date,
-    date_range text
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_type (
     vessel_sharing_agreement_type_code varchar(3) NOT NULL PRIMARY KEY,
