@@ -180,16 +180,34 @@ INSERT INTO dcsa_im_v3_0.voyage (
     ('3418W'),
     ('3419E');
 
+INSERT INTO dcsa_im_v3_0.vessel (
+    vessel_imo_number,
+    vessel_name,
+    vessel_flag,
+    vessel_call_sign_number,
+    vessel_operator_carrier_id
+) VALUES (
+    '9321483',
+    'Emma Maersk',
+    'DK',
+    null,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
+);
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
-    'POTE'
+    'POTE',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    '9321483'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -210,12 +228,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
-    'COFS'
+    'COFS',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
+    null
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -235,14 +257,18 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     other_facility,
-    location_id
+    location_id,
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
     null,
     'COFS',
     null,
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
+    null
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -262,14 +288,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     other_facility,
-    location_id
+    location_id,
+    mode_of_transport,
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
     null,
     'INTE',
     null,
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -283,72 +311,46 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
-INSERT INTO dcsa_im_v3_0.vessel (
-    vessel_imo_number,
-    vessel_name,
-    vessel_flag,
-    vessel_call_sign_number,
-    vessel_operator_carrier_id
-) VALUES (
-    '9321483',
-    'Emma Maersk',
-    'DK',
-    null,
-    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
-);
-
 INSERT INTO dcsa_im_v3_0.transport (
     id,
     transport_reference,
     transport_name,
-    mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel_imo_number
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     'transport reference',
     'Transport name',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    '9321483'
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
     id,
     transport_reference,
     transport_name,
-    mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel_imo_number
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     'transport reference xx',
     'Transport name xx',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    null
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
     id,
     transport_reference,
     transport_name,
-    mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel_imo_number
+    discharge_transport_call_id
 ) VALUES (
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     'transport reference yy',
     'Transport name yy',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
-    null
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_transport (
