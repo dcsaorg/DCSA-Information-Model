@@ -299,6 +299,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
+    null
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
