@@ -104,16 +104,6 @@ CREATE TABLE dcsa_im_v3_0.party (
     party_contact_details_id uuid NULL REFERENCES dcsa_im_v3_0.party_contact_details(id)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_call (
-    id varchar(100) PRIMARY KEY,
-    transport_call_sequence_number integer,
-    facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
-    facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-    other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
-    location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id)
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     carrier_booking_reference varchar(35) PRIMARY KEY,
@@ -459,15 +449,25 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_operator_carrier_id uuid REFERENCES dcsa_im_v3_0.carrier (id)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_call (
+    id varchar(100) PRIMARY KEY,
+    transport_call_sequence_number integer,
+    facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
+    facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
+    other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
+    location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
+    mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
+    vessel_imo_number varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_reference varchar(50) NULL,
     transport_name varchar(100) NULL,
-    mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     load_transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    discharge_transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    vessel_imo_number varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
+    discharge_transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage CASCADE;
