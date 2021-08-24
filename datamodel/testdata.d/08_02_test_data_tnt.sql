@@ -3,31 +3,6 @@
 
 BEGIN;
 
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code
-) VALUES (
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
-    1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
-    'POTE'
-);
-
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code
-) VALUES (
-    '123e4567-e89b-12d3-a456-426614174000',
-    1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
-    'POTE'
-);
-
 INSERT INTO dcsa_im_v3_0.vessel (
     vessel_imo_number,
     vessel_name,
@@ -42,20 +17,49 @@ INSERT INTO dcsa_im_v3_0.vessel (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK')
 );
 
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
+) VALUES (
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    '1234567'
+);
+
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
+) VALUES (
+    '123e4567-e89b-12d3-a456-426614174000',
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
+    'POTE',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    '1234567'
+);
+
 INSERT INTO dcsa_im_v3_0.transport (
     transport_reference,
     transport_name,
-    mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel_imo_number
+    discharge_transport_call_id
 ) VALUES (
     'transport reference',
     'Transport name (Singapore -> NYC)',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
-    uuid('123e4567-e89b-12d3-a456-426614174000'),
-    '1234567'
+    uuid('123e4567-e89b-12d3-a456-426614174000')
 );
 
 
