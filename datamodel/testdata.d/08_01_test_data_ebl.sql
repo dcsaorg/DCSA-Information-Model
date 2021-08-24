@@ -289,7 +289,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_type_code,
     other_facility,
     location_id,
-    mode_of_transport
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
