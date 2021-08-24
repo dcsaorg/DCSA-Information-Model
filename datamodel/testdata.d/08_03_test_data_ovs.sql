@@ -78,12 +78,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
-    'BRTH'
+    'BRTH',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    '9811000'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -101,17 +105,13 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 INSERT INTO dcsa_im_v3_0.transport (
     transport_reference,
     transport_name,
-    mode_of_transport,
     load_transport_call_id,
-    discharge_transport_call_id,
-    vessel_imo_number
+    discharge_transport_call_id
 ) VALUES (
     'transport reference',
     'Transport name (Singapore -> NYC)',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
-    'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
-    '9811000'
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60'
 );
 
 INSERT INTO dcsa_im_v3_0.port_call_service_type (
