@@ -94,12 +94,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
     facility_id,
-    facility_type_code
+    facility_type_code,
+    mode_of_transport,
+    vessel_imo_number
 ) VALUES (
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
     2,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
-    'POTE'
+    'POTE',
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    '9811000'
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
