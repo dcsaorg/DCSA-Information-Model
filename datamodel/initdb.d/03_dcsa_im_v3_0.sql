@@ -451,7 +451,7 @@ CREATE TABLE dcsa_im_v3_0.vessel (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
-    id varchar(100) PRIMARY KEY,
+    id varchar(100) DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_call_sequence_number integer,
     facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
