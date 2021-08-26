@@ -621,7 +621,8 @@ CREATE TABLE dcsa_im_v3_0.voyage (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call_voyage (
     voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.voyage(id),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
+    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    UNIQUE (voyage_id, transport_call_id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
