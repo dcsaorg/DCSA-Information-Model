@@ -118,66 +118,6 @@ INSERT INTO dcsa_im_v3_0.transport (
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60'
 );
 
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'PILO',
-    'PILO_name',
-    'PILO_description'
-);
-
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'MOOR',
-    'MOOR_name',
-    'MOOR_description'
-);
-
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'CRGO',
-    'CRGO_name',
-    'CRGO_description'
-);
-
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'TOWG',
-    'TOWG_name',
-    'TOWG_description'
-);
-
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'BUNK',
-    'BUNK_name',
-    'BUNK_description'
-);
-
-INSERT INTO dcsa_im_v3_0.port_call_service_type (
-    port_call_service_type_code,
-    port_call_service_type_name,
-    port_call_service_type_description
-) VALUES (
-    'WSDP',
-    'WSDP_name',
-    'WSDP_description'
-);
-
 INSERT INTO dcsa_im_v3_0.operations_event (
     event_id,
     event_classifier_code,
