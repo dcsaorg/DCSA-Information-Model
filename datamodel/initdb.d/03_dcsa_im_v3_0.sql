@@ -100,8 +100,21 @@ CREATE TABLE dcsa_im_v3_0.party (
     tax_reference_2 varchar(20) NULL,
     public_key varchar(500) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
-    nmfta_code varchar(4) NULL,
     party_contact_details_id uuid NULL REFERENCES dcsa_im_v3_0.party_contact_details(id)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
+CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
+    code_list_responsible_agency_code varchar(3) NOT NULL,
+    code_list_responsible_agency_name varchar(100) NOT NULL,
+    code_list_responsible_agency_description varchar(300) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.party_code_list_responsible_agency CASCADE;
+CREATE TABLE dcsa_im_v3_0.party_code_list_responsible_agency (
+    code_list_responsible_agency_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(code_list_responsible_agency_code),
+    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    party_code varchar(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
