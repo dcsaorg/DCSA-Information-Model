@@ -114,7 +114,8 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.party_code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_code_list_responsible_agency (
     code_list_responsible_agency_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(code_list_responsible_agency_code),
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    party_code varchar(100) NOT NULL
+    party_code varchar(100) NOT NULL,
+    UNIQUE (code_list_responsible_agency_code, party_id, party_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
