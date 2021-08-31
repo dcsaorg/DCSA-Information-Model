@@ -48,8 +48,8 @@ INSERT INTO  dcsa_im_v3_0.party_code_list_responsible_agency (
     party_code
 ) VALUES (
     '182',
-    "be5bc290-7bac-48bb-a211-f3fa5a3ab3ae",
-    "MMCU"
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
+    'MMCU'
 );
 
 INSERT INTO dcsa_im_v3_0.vessel (
