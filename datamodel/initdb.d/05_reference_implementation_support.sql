@@ -157,7 +157,6 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      transport_document_id varchar(20),
      transport_document_type text,
      equipment_reference varchar(15),
-     schedule_id varchar(100) NULL,
      transport_call_id varchar(100) NULL,
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
