@@ -254,4 +254,13 @@ CREATE TABLE dcsa_im_v3_0.notification_endpoint (
     secret bytea NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification CASCADE;
+CREATE TABLE dcsa_im_v3_0.pending_email_notification (
+    id uuid PRIMARY KEY default uuid_generate_v4(),
+    event_id uuid NOT NULL,
+    template_name text NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL default now(),
+    UNIQUE (event_id, template_name)
+);
+
 COMMIT;
