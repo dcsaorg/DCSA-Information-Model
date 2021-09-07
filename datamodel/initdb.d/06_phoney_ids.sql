@@ -34,4 +34,7 @@ ALTER TABLE dcsa_im_v3_0.transport_call_voyage
 ALTER TABLE dcsa_im_v3_0.references
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
+ALTER TABLE dcsa_im_v3_0.party_code_list_responsible_agency
+    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
+
 COMMIT;
