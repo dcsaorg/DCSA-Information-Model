@@ -32,15 +32,23 @@ INSERT INTO  dcsa_im_v3_0.party (
     tax_reference_1,
     tax_reference_2,
     public_key,
-    address_id,
-    nmfta_code
+    address_id
 ) VALUES ( 
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
     'Asseco Denmark',
     'CVR-25645774',
     'CVR-25645774',
     'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
-    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207')
+);
+
+INSERT INTO  dcsa_im_v3_0.party_code_list_responsible_agency (
+    code_list_responsible_agency_code,
+    party_id,
+    party_code
+) VALUES (
+    '182',
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
     'MMCU'
 );
 
