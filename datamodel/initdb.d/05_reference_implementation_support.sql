@@ -157,7 +157,6 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      transport_document_id varchar(20),
      transport_document_type text,
      equipment_reference varchar(15),
-     schedule_id varchar(100) NULL,
      transport_call_id varchar(100) NULL,
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
@@ -253,6 +252,15 @@ CREATE TABLE dcsa_im_v3_0.notification_endpoint (
     endpoint_id uuid PRIMARY KEY default uuid_generate_v4(),
     subscription_id varchar(100) NULL, -- NO Foreign key (the IDs are external)
     secret bytea NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification CASCADE;
+CREATE TABLE dcsa_im_v3_0.pending_email_notification (
+    id uuid PRIMARY KEY default uuid_generate_v4(),
+    event_id uuid NOT NULL,
+    template_name text NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL default now(),
+    UNIQUE (event_id, template_name)
 );
 
 COMMIT;
