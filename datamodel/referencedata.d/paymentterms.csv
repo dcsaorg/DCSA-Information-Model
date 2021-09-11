@@ -1,1 +1,3 @@
-
+payment_terms code,payment_terms_name,payment_terms_description
+PRE,PrePaid,Fee paid prior to transportation
+COL,Collect,Fee paid upon collection of the goods
