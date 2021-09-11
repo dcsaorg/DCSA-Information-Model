@@ -1,1 +1,4 @@
-
+transport_plan_stage_type_code,transport_plan_stage_type_name,transport_plan_stage_type_description
+PRC,Pre-Carriage,
+MNC,Main Carriage Transport,
+ONC,On-Carriage Transport,
