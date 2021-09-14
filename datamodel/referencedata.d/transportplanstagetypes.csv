@@ -1,4 +1,4 @@
 transport_plan_stage_type_code,transport_plan_stage_type_name,transport_plan_stage_type_description
-PRC,Pre-Carriage,
-MNC,Main Carriage Transport,
-ONC,On-Carriage Transport,
+PRC,Pre-Carriage,Transport leg occurring prior to the main transport leg.
+MNC,Main Carriage Transport,"The main transport leg(s), happening on one or more main vessels."
+ONC,On-Carriage Transport,The transport leg occuring after the main leg to the final destination.
