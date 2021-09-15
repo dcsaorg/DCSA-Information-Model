@@ -110,8 +110,8 @@ CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
     code_list_responsible_agency_description varchar(300)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.party_code_list_responsible_agency CASCADE;
-CREATE TABLE dcsa_im_v3_0.party_code_list_responsible_agency (
+DROP TABLE IF EXISTS dcsa_im_v3_0.party_identifying_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.party_identifying_code (
     code_list_responsible_agency_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(code_list_responsible_agency_code),
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     party_code varchar(100) NOT NULL,
