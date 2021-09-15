@@ -42,7 +42,7 @@ INSERT INTO  dcsa_im_v3_0.party (
     uuid('8791f557-fe69-42c9-a420-f39f09dd6207')
 );
 
-INSERT INTO  dcsa_im_v3_0.party_code_list_responsible_agency (
+INSERT INTO  dcsa_im_v3_0.party_identifying_code (
     code_list_responsible_agency_code,
     party_id,
     party_code
