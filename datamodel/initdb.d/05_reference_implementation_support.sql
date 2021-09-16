@@ -251,7 +251,15 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.notification_endpoint CASCADE;
 CREATE TABLE dcsa_im_v3_0.notification_endpoint (
     endpoint_id uuid PRIMARY KEY default uuid_generate_v4(),
     subscription_id varchar(100) NULL, -- NO Foreign key (the IDs are external)
-    secret bytea NOT NULL
+    secret bytea NOT NULL,
+    -- Optional metadata about the endpoint useful for knowing what it is used for.
+    endpoint_reference varchar(100) NULL,
+    -- If true, then the endpoint is managed automatically via the application itself (via configuration)
+    -- If false, it is created outside configuration.
+    managed_endpoint boolean NOT NULL DEFAULT false,
+    subscription_url varchar(100) NULL,
+
+    CHECK (NOT managed_endpoint OR subscription_url IS NOT NULL)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification CASCADE;
