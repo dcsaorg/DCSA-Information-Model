@@ -10,4 +10,7 @@ BEGIN;
 \copy dcsa_im_v3_0.hs_code from '../samples.d/hscodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.smdg_delay_reason from '../samples.d/smdgdelayreasoncodes.csv' CSV HEADER
 
+-- Data only used by UI Support
+\copy dcsa_im_v3_0.port_timezone from '../samples.d/porttimezones.csv' CSV HEADER
+
 COMMIT;
