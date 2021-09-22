@@ -1,7 +1,7 @@
 Port Call Service Type Code,Port Call Service Name,Port Call Service Description
-PILO,Pilotage,TODO (PILO)
-MOOR,Mooring,TODO (MOOR)
-CRGO,Cargo operations,TODO (CRGO)
-TOWG,Towage,TODO (TOWG)
-BUNK,Bunkering,TODO (BUNK)
-WSDP,Waste disposal,TODO (WSDP)
+PILO,Pilotage,"The activity of conducting a vessel within restricted waters. Also, the fee for the services of a pilot."
+MOOR,Mooring,"The activity of attaching a vessel to a berth using mooring lines. The service is usually provided by linesmen."
+CRGO,Cargo operations,"The activity of discharging, shifting, loading and lashing containers (both full and empty) as well as other cargo from/to a vessel during port stay."
+TOWG,Towage,"The activity of one vessel (boat/tug) assisting another vessel with manoeuvres within the port area."
+BUNK,Bunkering,"The transfer of liquid or gaseous fuel from land-based or floating facilities into a ship’s permanent tanks"
+WSDP,Waste disposal,"The activity of removing waste from a vessel to shore during port stay"
