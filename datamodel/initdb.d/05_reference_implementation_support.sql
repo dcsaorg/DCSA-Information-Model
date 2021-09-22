@@ -126,7 +126,7 @@ UNION
     operations_event.event_date_time,
     operations_event.event_created_date_time,
     operations_event.transport_call_id,
-    NULL::text AS delay_reason_code,
+    operations_event.delay_reason_code,
     NULL::text AS change_remark,
     operations_event.remark,
     NULL::text AS equipment_reference,
