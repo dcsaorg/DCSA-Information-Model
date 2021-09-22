@@ -1,0 +1,8 @@
+cut-off_time_code,cut-off_time_name,cut-off_time_description
+DCO,Documentation cut-off,Document cut-off time for SI
+VCO,VGM cut-off,VGM cut-off time for submission
+FCO,FCL delivery cut-off,Latest deadline for delivering containers at the terminal gate
+LCO,LCL delivery cut-off,Latest deadline for delivering LCL cargo at the container freight station
+ECP,Empty container pick-up date and time,Time and date for shipper to pick-up empty container(s)
+EFC,Earliest full-container delivery date,Earliest date where containers can be delivered at the terminal gate also called gate-opening
+AFD,AMS filing due date,Date when AMS filing should latest be done in the last port of call before visiting the first US port
