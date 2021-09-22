@@ -17,7 +17,7 @@ Data sources
 Below is a list of the data sources for each the files maintained on a
 best-effort basis.  Corrections are welcome (via PR).
 
- * carriers.csv: Subset of https://smdg.org/documents/smdg-code-lists/smdg-liner-codes/
+ * carriers.csv: Subset of https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/
 
  * countrycodes.csv: Subset of https://unece.org/trade/cefact/unlocode-code-list-country-and-territory
 
