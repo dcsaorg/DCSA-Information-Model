@@ -5,3 +5,5 @@ CRGO,Cargo operations,"The activity of discharging, shifting, loading and lashin
 TOWG,Towage,"The activity of one vessel (boat/tug) assisting another vessel with manoeuvres within the port area."
 BUNK,Bunkering,"The transfer of liquid or gaseous fuel from land-based or floating facilities into a ship’s permanent tanks"
 WSDP,Waste disposal,"The activity of removing waste from a vessel to shore during port stay"
+FAST,Fast,"FAST is all fast"
+GWAY,Gangway,"GWAY is gangway down and secure (authorized personnel can board the vessel)"
