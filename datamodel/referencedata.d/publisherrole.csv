@@ -1,1 +1,10 @@
-
+publisher_code,publisher_information_type_name
+CA,Carrier operations
+AG,Carrier local agent
+VSL,Vessel
+ATH,Port Authorities
+PLT,Pilot
+TWG,Towage provider
+LSH,Lashing provider
+BUK,Bunkering service provider
+TR,Terminal
