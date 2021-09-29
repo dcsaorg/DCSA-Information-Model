@@ -658,8 +658,8 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    publisher varchar(100) NULL,
-    publisher_role varchar(3) NULL,
+    publisher varchar(100) NOT NULL,
+    publisher_role varchar(3) NOT NULL,
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
