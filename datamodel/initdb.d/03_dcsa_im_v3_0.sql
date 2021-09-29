@@ -492,7 +492,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_transport (
     transport_plan_stage varchar(50) NULL,
     commercial_voyage_id uuid NULL REFERENCES dcsa_im_v3_0.commercial_voyage(commercial_voyage_id),
     is_under_shippers_responsibility boolean NOT NULL,
-    UNIQUE (shipment_id, transport_id, sequence_number) -- sequence_number must be unique together with transport and shipment
+    UNIQUE (shipment_id, transport_id, transport_plan_stage_sequence_number) -- transport_plan_stage_sequence_number must be unique together with transport and shipment
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_classifier CASCADE;
