@@ -537,9 +537,9 @@ CREATE TABLE dcsa_im_v3_0.event (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
-    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
-    empty_indicator_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+    empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
+    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
@@ -566,7 +566,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     change_remark varchar(250),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code)
 ) INHERITS (dcsa_im_v3_0.event);
 
