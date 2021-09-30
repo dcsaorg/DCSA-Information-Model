@@ -3,6 +3,8 @@
 
 BEGIN;
 
+SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
+
 INSERT INTO dcsa_im_v3_0.vessel (
     vessel_imo_number,
     vessel_name,
@@ -405,5 +407,6 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     'Authorities not available'
 );
 
+SELECT 'End: 08_02_test_data_tnt.sql' as progress;
 
 COMMIT;
