@@ -56,6 +56,7 @@ CREATE TABLE dcsa_im_v3_0.location (
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
     latitude varchar(10) NULL,
     longitude varchar(11) NULL,
+    facility_id uuid NULL,  -- REFERENCES facility (but there is a circular relation, so we add the FK later)
     un_location_code char(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code)
 );
 
@@ -75,6 +76,9 @@ CREATE TABLE dcsa_im_v3_0.facility (
     facility_smdg_code varchar(6) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     location_id varchar(100) REFERENCES dcsa_im_v3_0.location(id)
 );
+
+ALTER TABLE dcsa_im_v3_0.location
+    ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier (
