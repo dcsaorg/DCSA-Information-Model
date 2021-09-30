@@ -561,14 +561,14 @@ ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
 CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
-    delay_reason_code varchar(3) NOT NULL PRIMARY KEY,
+    delay_reason_code varchar(4) NOT NULL PRIMARY KEY,
     delay_reason_name varchar(100) NOT NULL,
     delay_reason_description varchar(250) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
-    delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
+    delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     change_remark varchar(250),
     transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code)
@@ -667,7 +667,7 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
-    delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
+    delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     vessel_position varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL
 ) INHERITS (dcsa_im_v3_0.event);
