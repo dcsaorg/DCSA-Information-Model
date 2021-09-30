@@ -76,6 +76,9 @@ CREATE TABLE dcsa_im_v3_0.facility (
     facility_smdg_code varchar(6) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     location_id varchar(100) REFERENCES dcsa_im_v3_0.location(id)
 );
+ALTER TABLE dcsa_im_v3_0.location
+    ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
+
 
 ALTER TABLE dcsa_im_v3_0.location
     ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
@@ -458,7 +461,7 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign_number varchar(10) NULL,
-    vessel_operator_carrier_id uuid REFERENCES dcsa_im_v3_0.carrier (id)
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
@@ -607,7 +610,7 @@ CREATE TABLE dcsa_im_v3_0.tradelane (
 DROP TABLE IF EXISTS dcsa_im_v3_0.service CASCADE;
 CREATE TABLE dcsa_im_v3_0.service (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
     carrier_service_code varchar(5),
     carrier_service_name varchar(50),
     tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id)

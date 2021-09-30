@@ -217,7 +217,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_operations_event_type (
 -- Indexes to help the reference implementation deduplicate these. Fields are ordered by how discriminatory they are
 -- presumed to be in the general case or how fast they would like to check.
 CREATE UNIQUE INDEX deduplicate_location
-    ON dcsa_im_v3_0.location (address_id, un_location_code, location_name, latitude, longitude);
+    ON dcsa_im_v3_0.location (address_id, facility_id, un_location_code, location_name, latitude, longitude);
 
 CREATE UNIQUE INDEX deduplicate_address
     ON dcsa_im_v3_0.address (postal_code, name, country, state_region, city, street, street_number, floor);
@@ -251,7 +251,15 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.notification_endpoint CASCADE;
 CREATE TABLE dcsa_im_v3_0.notification_endpoint (
     endpoint_id uuid PRIMARY KEY default uuid_generate_v4(),
     subscription_id varchar(100) NULL, -- NO Foreign key (the IDs are external)
-    secret bytea NOT NULL
+    secret bytea NOT NULL,
+    -- Optional metadata about the endpoint useful for knowing what it is used for.
+    endpoint_reference varchar(100) NULL,
+    -- If true, then the endpoint is managed automatically via the application itself (via configuration)
+    -- If false, it is created outside configuration.
+    managed_endpoint boolean NOT NULL DEFAULT false,
+    subscription_url varchar(100) NULL,
+
+    CHECK (NOT managed_endpoint OR subscription_url IS NOT NULL)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification CASCADE;
