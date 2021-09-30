@@ -360,7 +360,7 @@ INSERT INTO dcsa_im_v3_0.transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
@@ -374,7 +374,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
@@ -388,7 +388,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
