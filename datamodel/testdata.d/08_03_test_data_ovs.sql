@@ -3,6 +3,7 @@
 
 BEGIN;
 
+SELECT 'Start: 08_03_test_data_ovs.sql...' as progress;
 
 INSERT INTO dcsa_im_v3_0.address (
     id,
@@ -209,6 +210,8 @@ INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     '03482296-ef9c-11eb-9a03-0242ac131233',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'
 );
+
+SELECT 'End: 08_03_test_data_ovs.sql' as progress;
 
 COMMIT;
 
