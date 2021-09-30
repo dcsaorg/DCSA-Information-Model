@@ -3,7 +3,7 @@
 
 BEGIN;
 
-SELECT 'Start: 08_test_data_ebl.sql...' as progress;
+SELECT 'Start: 08_01_test_data_ebl.sql...' as progress;
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
@@ -579,6 +579,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE
 );
 
-SELECT 'End: 08_test_data_ebl.sql' as progress;
+SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
 COMMIT;
