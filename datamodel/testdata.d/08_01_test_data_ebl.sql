@@ -567,7 +567,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     number_of_originals,
     invoice_payable_at,
     is_electronic,
-    is_charges_displayed
+    are_charges_displayed
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
     'BOL',
