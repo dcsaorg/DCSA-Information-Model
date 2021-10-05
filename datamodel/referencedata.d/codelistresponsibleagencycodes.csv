@@ -1,12 +1,14 @@
-code_list_responsible_agency_code,code_list_responsible_agency_name,code_list_responsible_agency_description
-5,ISO,
-6,UN/ECE,
-11,Lloyd's register of shipping,
-20,BIC (Bureau International des Containeurs),
-54,IMO (incl. IMDG),
-182,Standard Carrier Alpha Code (SCAC),
-274,ITIGG,
-296,ITU,
-306,SMDG,
-399,EXIS,
-zzz,Mutually defined,
+code_list_responsible_agency_code,code_list_responsible_agency_name,code_list_responsible_agency_description,dcsa_code
+5,ISO,ISO
+6,UN/ECE,,UNECE
+11,Lloyd's register of shipping,,LLOYD
+20,BIC (Bureau International des Containeurs),,BIC
+54,IMO (incl. IMDG),,IMO
+182,Standard Carrier Alpha Code (SCAC),,SCAC
+274,ITIGG,,ITIGG
+296,ITU,,ITU
+306,SMDG,,SMDG
+399,EXIS,,EXIS
+,FMC,Federal Maritime Commission,FMC
+,CBSA,Canada Border Services Agency,CBSA
+zzz,Mutually defined,,ZZZ
