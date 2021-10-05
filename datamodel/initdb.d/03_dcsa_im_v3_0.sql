@@ -112,14 +112,15 @@ CREATE TABLE dcsa_im_v3_0.party (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
-    code_list_responsible_agency_code varchar(3) NOT NULL PRIMARY KEY,
+    code_list_responsible_agency_code varchar(3) NULL,
     code_list_responsible_agency_name varchar(100) NOT NULL,
-    code_list_responsible_agency_description varchar(300)
+    code_list_responsible_agency_description varchar(300),
+    dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY,
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_identifying_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_identifying_code (
-    code_list_responsible_agency_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(code_list_responsible_agency_code),
+    dcsa_responsible_agency_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(dcsa_responsible_agency_code),
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     party_code varchar(100) NOT NULL,
     code_list_name varchar(100)
