@@ -4,3 +4,8 @@ BKG,Booking
 SHI,Shipping Instructions
 SRM,Shipment Release Message
 ARN,Arrival Notice
+VGM,Verified Gross Mass
+CAS,Cargo Survey
+CUS,Customs Inspection
+DGD,Dangerous Good Declaration
+OOG,Out Of Gauge
