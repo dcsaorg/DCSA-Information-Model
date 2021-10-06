@@ -1,3 +1,4 @@
 communication_channel_qualifier_code,communication_channel_qualifier_name,communication_channel_qualifier_description
 EM,Electronic mail,Exchange of mail by electronic means
 EI,EDI transmission,Number identifying the service and service user
+AO,JSONAPI,Uniform Resource Location
