@@ -204,10 +204,12 @@ INSERT INTO dcsa_im_v3_0.voyage (
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
-    transport_call_id
+    transport_call_id,
+    is_import_voyage
 ) VALUES (
     '03482296-ef9c-11eb-9a03-0242ac131233',
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed'
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    true
 );
 
 COMMIT;
