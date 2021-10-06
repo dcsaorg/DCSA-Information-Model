@@ -212,16 +212,20 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
-    transport_call_id
+    transport_call_id,
+    is_import_voyage
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    true
 ), (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E'),
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    true
 ), (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2108W'),
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa')
+    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
+    true
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -242,13 +246,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
-    transport_call_id
+    transport_call_id,
+    is_import_voyage
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2218W'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    true
 ), (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2219E'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
+    true
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -273,13 +280,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
-    transport_call_id
+    transport_call_id,
+    is_import_voyage
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2418W'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    true
 ), (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2419E'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    true
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -304,13 +314,16 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
     voyage_id,
-    transport_call_id
+    transport_call_id,
+    is_import_voyage
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '3418W'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    true
 ), (
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '3419E'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    true
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
