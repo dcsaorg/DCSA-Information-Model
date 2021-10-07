@@ -10,7 +10,7 @@ SURR,Surrendered,Indicates that a document has been surrendered by the customer 
 SUBM,Submitted,Indicates that a document has been submitted by the customer to the carrier.
 VOID,Void,Cancellation of an original document.
 CONF,Confirmed,Indicates that the document is confirmed.
-REQS,Requested,
+REQS,Requested,"A status indicator that can be used with a number of identifiers to denote that a certain activity, service or document has been requested by the carrier, customer or authorities. This status remains constant until the requested activity is 'Completed'."
 CMPL,Completed,
 HOLD,On Hold,
 RELS,Released,
