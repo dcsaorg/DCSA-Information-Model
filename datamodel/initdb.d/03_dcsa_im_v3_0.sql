@@ -79,7 +79,6 @@ CREATE TABLE dcsa_im_v3_0.facility (
 ALTER TABLE dcsa_im_v3_0.location
     ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
 
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
