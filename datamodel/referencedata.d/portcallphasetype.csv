@@ -1,1 +1,5 @@
-
+Port_Call_Phase_Type_Code,Port_Call_Phase_Type_Name,Port_Call_Phase_Type_Description
+INBD,Inbound,Ship’s physical movement from approach to (anchor) berth
+ALGS,Alongside,Time from First Line Secured till Last Line Released
+SHIF,Shifting,Ship’s physical movement from (anchor) berth to (anchor) berth
+OUTB,Outbound,Ship’s physical movement from (anchor) berth to its next destination
