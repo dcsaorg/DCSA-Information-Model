@@ -1,4 +1,4 @@
-Port Call Service Type Code,Port Call Service Name,Port Call Service Description
+port_call_service_type_code,port_call_service_type_name,port_call_service_type_description
 PILO,Pilotage,"The activity of conducting a vessel within restricted waters. Also, the fee for the services of a pilot."
 MOOR,Mooring,"The activity of attaching a vessel to a berth using mooring lines. The service is usually provided by linesmen."
 CRGO,Cargo operations,"The activity of discharging, shifting, loading and lashing containers (both full and empty) as well as other cargo from/to a vessel during port stay."
