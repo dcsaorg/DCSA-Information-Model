@@ -9,7 +9,9 @@ on:
   push:
     branches:
       - master
-    
+      - live-hamburg
+      - live-singapore
+
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
@@ -26,9 +28,15 @@ jobs:
       packages: write
 
     steps:
+      - name: Branch name
+        run: |-
+          tag_name=$(echo "${GITHUB_REF}" | sed 's/.*\///g; s/master/latest/')
+          echo DOCKER_TAG_NAME=${tag_name}
+          echo DOCKER_TAG_NAME=${tag_name} >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v2
-                 
+
       - name: Build Docker image        
         run:
           docker-compose up --build --no-start   
@@ -54,7 +62,7 @@ jobs:
           echo "tags > ${{ steps.meta.outputs.tags }}"        
         
       - name: tag
-        run:   docker tag dcsa-information-model_dcsa-test-db ghcr.io/dcsaorg/dcsa-information-model:latest
+        run: docker tag dcsa-information-model_dcsa-test-db ghcr.io/dcsaorg/dcsa-information-model:${{ env.DOCKER_TAG_NAME }}
         
       - name: push        
-        run: docker push ghcr.io/dcsaorg/dcsa-information-model:latest
+        run: docker push ghcr.io/dcsaorg/dcsa-information-model:${{ env.DOCKER_TAG_NAME }}
