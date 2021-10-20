@@ -279,4 +279,27 @@ CREATE TABLE dcsa_im_v3_0.port_timezone (
     iana_timezone text NOT NULL
 );
 
+-- Only used by UI support to assist the UI
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_delivery_status CASCADE;
+CREATE OR REPLACE VIEW dcsa_im_v3_0.event_delivery_status AS
+        SELECT unmapped_event_queue.event_id,
+               'PENDING_DELIVERY' AS event_delivery_status,
+               unmapped_event_queue.enqueued_at_date_time,
+               null AS last_attempt_date_time,
+               null AS last_error_message,
+               0 AS retry_count,
+               operations_event.transport_call_id
+        FROM dcsa_im_v3_0.unmapped_event_queue
+        JOIN dcsa_im_v3_0.operations_event ON (unmapped_event_queue.event_id = operations_event.event_id)
+    UNION
+        SELECT pending_event_queue.event_id,
+               (CASE WHEN pending_event_queue.retry_count > 0 THEN 'ATTEMPTED_DELIVERY' ELSE 'PENDING_DELIVERY' END) AS event_delivery_status,
+               pending_event_queue.enqueued_at_date_time,
+               pending_event_queue.last_attempt_date_time,
+               pending_event_queue.last_error_message,
+               pending_event_queue.retry_count,
+               operations_event.transport_call_id
+        FROM dcsa_im_v3_0.pending_event_queue
+        JOIN dcsa_im_v3_0.operations_event ON (pending_event_queue.event_id = operations_event.event_id);
+
 COMMIT;
