@@ -302,4 +302,30 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.event_delivery_status AS
         FROM dcsa_im_v3_0.pending_event_queue
         JOIN dcsa_im_v3_0.operations_event ON (pending_event_queue.event_id = operations_event.event_id);
 
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.negotiation_cycle CASCADE;
+CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
+     cycle_key text PRIMARY KEY,
+     cycle_name text NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
+CREATE TABLE dcsa_im_v3_0.timestamp_definition (
+    id text PRIMARY KEY,
+    timestamp_type_name text NOT NULL UNIQUE,
+    publisher_role varchar(3) NOT NULL,  -- TODO: Reference publisher role table
+    primary_receiver varchar(3) NOT NULL,  -- TODO: Reference publisher role table
+    event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
+    operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
+    port_call_phase_type_code varchar(4) NULL, -- TODO, REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
+    port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
+    facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
+    is_berth_location_needed boolean NOT NULL,
+    is_pbp_location_needed boolean NOT NULL,
+    is_terminal_needed boolean NOT NULL,
+    is_vessel_position_needed boolean NOT NULL,
+    negotiation_cycle text NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key),
+    provided_in_standard text NOT NULL
+);
+
 COMMIT;
