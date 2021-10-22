@@ -297,7 +297,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     primary_receiver varchar(3) NOT NULL,  -- TODO: Reference publisher role table
     event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
-    port_call_phase_type_code varchar(4) NULL, -- TODO, REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
+    port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
     is_berth_location_needed boolean NOT NULL,
@@ -309,5 +309,47 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
 );
+
+-- Ideally, this would be inlined of the operations_event table as a field.  However, operations_event
+-- is an official entity and the timestamp_definition is not.  Lets not "contaminate" official IM
+-- with unofficial attributes where we can avoid it.
+DROP TABLE IF EXISTS dcsa_im_v3_0.ops_event_timestamp_definition CASCADE;
+CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
+    event_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.operations_event (event_id),
+    timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (id)
+);
+CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
+
+
+-- Only used by UI support to assist the UI
+DROP VIEW IF EXISTS dcsa_im_v3_0.ui_timestamp_info CASCADE;
+CREATE OR REPLACE VIEW dcsa_im_v3_0.ui_timestamp_info AS
+    SELECT operations_event.event_id,
+       (CASE WHEN pending_event.retry_count IS NULL THEN 'DELIVERY_FINISHED'
+             WHEN pending_event.retry_count > 0 THEN 'ATTEMPTED_DELIVERY'
+             ELSE 'PENDING_DELIVERY'
+           END) AS event_delivery_status,
+       ops_event_timestamp_definition.timestamp_definition,
+       pending_event.enqueued_at_date_time,
+       pending_event.last_attempt_date_time,
+       pending_event.last_error_message,
+       pending_event.retry_count,
+       operations_event.transport_call_id
+        FROM dcsa_im_v3_0.operations_event
+                 LEFT JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (ops_event_timestamp_definition.event_id = operations_event.event_id)
+                 LEFT JOIN (SELECT unmapped_event_queue.event_id,
+                                   unmapped_event_queue.enqueued_at_date_time,
+                                   null AS last_attempt_date_time,
+                                   null AS last_error_message,
+                                   0 AS retry_count
+                            FROM dcsa_im_v3_0.unmapped_event_queue
+                            UNION
+                            SELECT pending_event_queue.event_id,
+                                   pending_event_queue.enqueued_at_date_time,
+                                   pending_event_queue.last_attempt_date_time,
+                                   pending_event_queue.last_error_message,
+                                   pending_event_queue.retry_count
+                            FROM dcsa_im_v3_0.pending_event_queue
+        ) AS pending_event ON (pending_event.event_id = operations_event.event_id);
 
 COMMIT;
