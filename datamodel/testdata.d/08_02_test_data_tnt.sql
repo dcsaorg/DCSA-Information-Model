@@ -290,8 +290,8 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 INSERT INTO dcsa_im_v3_0.seal (
     shipment_equipment_id,
     seal_number,
-    seal_source,
-    seal_type
+    seal_source_code,
+    seal_type_code
 ) VALUES (
      (SELECT DISTINCT shipment_equipment.id FROM dcsa_im_v3_0.shipment_equipment JOIN dcsa_im_v3_0.shipment ON (shipment.id = shipment_equipment.shipment_id)
             WHERE carrier_booking_reference = 'ABC123123123' AND equipment_reference = 'APZU4812090'),
