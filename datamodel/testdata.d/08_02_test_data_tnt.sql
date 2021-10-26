@@ -277,12 +277,14 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     shipment_id,
     equipment_reference,
     cargo_gross_weight,
-    cargo_gross_weight_unit
+    cargo_gross_weight_unit,
+    is_shipper_owned
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'APZU4812090',
     1424.2,
-    'KGM'
+    'KGM',
+    false
 );
 
 INSERT INTO dcsa_im_v3_0.seal (

@@ -517,13 +517,15 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     shipment_id,
     equipment_reference,
     cargo_gross_weight,
-    cargo_gross_weight_unit
+    cargo_gross_weight_unit,
+    is_shipper_owned
 ) VALUES (
     uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'BMOU2149612',
     4000,
-    'KGM'
+    'KGM',
+    false
 );
 
 
