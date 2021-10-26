@@ -51,7 +51,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '48fddb68-74d9-4b30-8bc9-2fbe70aff303'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
