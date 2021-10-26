@@ -25,6 +25,6 @@ BEGIN;
 \copy dcsa_im_v3_0.port_call_phase_type from '../referencedata.d/portcallphasetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.port_call_service_type from '../referencedata.d/portcallservicetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.code_list_responsible_agency from '../referencedata.d/codelistresponsibleagencycodes.csv' with NULL AS E'\'\'' CSV HEADER
-\copy dcsa_im_v3_0.transportplanstagetype from '../referencedata.d/transportplanstagetypes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.transport_plan_stage_type from '../referencedata.d/transportplanstagetypes.csv' with NULL AS E'\'\'' CSV HEADER
 
 COMMIT;
