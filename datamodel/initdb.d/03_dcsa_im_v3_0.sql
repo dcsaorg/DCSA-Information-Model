@@ -494,7 +494,7 @@ CREATE TABLE dcsa_im_v3_0.commercial_voyage (
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_plan_stage_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.commercial_voyage (
+CREATE TABLE dcsa_im_v3_0.transport_plan_stage_type (
     transport_plan_stage_code varchar(3) PRIMARY KEY,
     transport_plan_stage_name varchar(100) NOT NULL,
     transport_plan_stage_description varchar(250) NOT NULL
