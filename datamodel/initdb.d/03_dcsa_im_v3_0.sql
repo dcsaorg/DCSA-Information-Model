@@ -474,8 +474,8 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    import_voyage_id uuid NULL REFERENCES dcsa_im_v3_0.voyage(id),
-    export_voyage_id uuid NULL REFERENCES dcsa_im_v3_0.voyage(id)
+    import_voyage_id uuid NULL, -- Will add the reference later once Voyage is added,
+    export_voyage_id uuid NULL -- Will add the reference later once Voyage is added
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
@@ -644,6 +644,11 @@ CREATE TABLE dcsa_im_v3_0.voyage (
     carrier_voyage_number varchar(50) NOT NULL,
     service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id)
 );
+
+ALTER TABLE dcsa_im_v3_0.transport_call
+    ADD FOREIGN KEY (import_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id);
+ALTER TABLE dcsa_im_v3_0.transport_call
+    ADD FOREIGN KEY (export_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call_voyage (
