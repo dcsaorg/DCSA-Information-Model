@@ -283,4 +283,55 @@ CREATE TABLE dcsa_im_v3_0.port_timezone (
     iana_timezone text NOT NULL
 );
 
+-- Only used by UI support to assist the UI
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_delivery_status CASCADE;
+CREATE OR REPLACE VIEW dcsa_im_v3_0.event_delivery_status AS
+        SELECT unmapped_event_queue.event_id,
+               'PENDING_DELIVERY' AS event_delivery_status,
+               unmapped_event_queue.enqueued_at_date_time,
+               null AS last_attempt_date_time,
+               null AS last_error_message,
+               0 AS retry_count,
+               operations_event.transport_call_id
+        FROM dcsa_im_v3_0.unmapped_event_queue
+        JOIN dcsa_im_v3_0.operations_event ON (unmapped_event_queue.event_id = operations_event.event_id)
+    UNION
+        SELECT pending_event_queue.event_id,
+               (CASE WHEN pending_event_queue.retry_count > 0 THEN 'ATTEMPTED_DELIVERY' ELSE 'PENDING_DELIVERY' END) AS event_delivery_status,
+               pending_event_queue.enqueued_at_date_time,
+               pending_event_queue.last_attempt_date_time,
+               pending_event_queue.last_error_message,
+               pending_event_queue.retry_count,
+               operations_event.transport_call_id
+        FROM dcsa_im_v3_0.pending_event_queue
+        JOIN dcsa_im_v3_0.operations_event ON (pending_event_queue.event_id = operations_event.event_id);
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.negotiation_cycle CASCADE;
+CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
+     cycle_key text PRIMARY KEY,
+     cycle_name text NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
+CREATE TABLE dcsa_im_v3_0.timestamp_definition (
+    id text PRIMARY KEY,
+    timestamp_type_name text NOT NULL UNIQUE,
+    publisher_role varchar(3) NOT NULL,  -- TODO: Reference publisher role table
+    primary_receiver varchar(3) NOT NULL,  -- TODO: Reference publisher role table
+    event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
+    operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
+    port_call_phase_type_code varchar(4) NULL, -- TODO, REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
+    port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
+    facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
+    is_berth_location_needed boolean NOT NULL,
+    is_pbp_location_needed boolean NOT NULL,
+    is_terminal_needed boolean NOT NULL,
+    is_vessel_position_needed boolean NOT NULL,
+    negotiation_cycle text NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key),
+    provided_in_standard text NOT NULL,
+    accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
+    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
+);
+
 COMMIT;
