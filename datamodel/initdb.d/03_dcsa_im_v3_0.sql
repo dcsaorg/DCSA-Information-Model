@@ -129,7 +129,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
     cargo_movement_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
     booking_request_datetime timestamp with time zone NOT NULL,
-    service_contract varchar(30) NOT NULL,
+    service_contract_reference varchar(30) NOT NULL,
     cargo_gross_weight real NOT NULL,
     cargo_gross_weight_unit varchar(3) NOT NULL,
     commodity_type varchar(20) NOT NULL
