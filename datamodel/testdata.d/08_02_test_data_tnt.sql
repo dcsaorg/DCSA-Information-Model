@@ -6,12 +6,14 @@ BEGIN;
 SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
 
 INSERT INTO dcsa_im_v3_0.vessel (
+    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
+    '48fddb68-74d9-4b30-8bc9-2fbe70aff303',
     '1234567',
     'King of the Seas',
     'DE',
@@ -25,14 +27,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_d
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '1234567'
+    '48fddb68-74d9-4b30-8bc9-2fbe70aff303'
 );
 
 
@@ -42,14 +44,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '1234567'
+    '48fddb68-74d9-4b30-8bc9-2fbe70aff303'
 );
 
 INSERT INTO dcsa_im_v3_0.transport (

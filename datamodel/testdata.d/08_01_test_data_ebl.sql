@@ -183,12 +183,14 @@ INSERT INTO dcsa_im_v3_0.voyage (
     ('3419E');
 
 INSERT INTO dcsa_im_v3_0.vessel (
+    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
+    '5001ed69-c108-4283-bde0-1f0368e63532',
     '9321483',
     'Emma Maersk',
     'DK',
@@ -202,14 +204,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '9321483'
+    '5001ed69-c108-4283-bde0-1f0368e63532'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -232,7 +234,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
@@ -261,7 +263,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
@@ -292,7 +294,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,

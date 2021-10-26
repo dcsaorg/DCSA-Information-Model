@@ -56,12 +56,14 @@ INSERT INTO  dcsa_im_v3_0.party_identifying_code (
 );
 
 INSERT INTO dcsa_im_v3_0.vessel (
+    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
+    '903df966-63de-45a6-bfc8-4daecbb3ed96',
     '9811000',
     'Ever Given',
     'PA',
@@ -91,14 +93,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'BRTH',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '9811000'
+    '903df966-63de-45a6-bfc8-4daecbb3ed96'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -107,14 +109,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
     2,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '9811000'
+    '903df966-63de-45a6-bfc8-4daecbb3ed96'
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
