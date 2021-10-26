@@ -49,7 +49,7 @@ INSERT INTO  dcsa_im_v3_0.party_identifying_code (
     party_code,
     code_list_name
 ) VALUES (
-    '182',
+    'SCAC',
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
     'MMCU',
     'LCL'
