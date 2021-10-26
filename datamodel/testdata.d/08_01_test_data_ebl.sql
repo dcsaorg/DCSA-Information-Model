@@ -209,7 +209,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '5001ed69-c108-4283-bde0-1f0368e63532'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483')
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
