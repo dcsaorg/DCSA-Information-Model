@@ -183,14 +183,12 @@ INSERT INTO dcsa_im_v3_0.voyage (
     ('3419E');
 
 INSERT INTO dcsa_im_v3_0.vessel (
-    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
-    '5001ed69-c108-4283-bde0-1f0368e63532',
     '9321483',
     'Emma Maersk',
     'DK',

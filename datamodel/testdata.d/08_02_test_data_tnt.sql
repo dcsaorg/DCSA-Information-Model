@@ -6,14 +6,12 @@ BEGIN;
 SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
 
 INSERT INTO dcsa_im_v3_0.vessel (
-    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
-    '48fddb68-74d9-4b30-8bc9-2fbe70aff303',
     '1234567',
     'King of the Seas',
     'DE',

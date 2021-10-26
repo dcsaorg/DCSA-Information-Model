@@ -56,14 +56,12 @@ INSERT INTO  dcsa_im_v3_0.party_identifying_code (
 );
 
 INSERT INTO dcsa_im_v3_0.vessel (
-    id,
     vessel_imo_number,
     vessel_name,
     vessel_flag,
     vessel_call_sign_number,
     vessel_operator_carrier_id
 ) VALUES (
-    '903df966-63de-45a6-bfc8-4daecbb3ed96',
     '9811000',
     'Ever Given',
     'PA',
