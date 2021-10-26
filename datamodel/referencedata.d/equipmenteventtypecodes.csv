@@ -7,6 +7,7 @@ STUF,Stuffing,The process of loading the cargo in a container or in/onto another
 STRP,Stripping,The action of unloading cargo from containers or equipment.
 PICK,Pick-up,The action of collecting the container at customer location.
 DROP,Drop-off, The action of delivering the container at customer location.
+HOLD,On Hold,A status indicator that can be used with a number of activity identifiers to denote that a container or shipment has been placed on hold i.e. can’t  progress in the process.
 INSP,Inspected,Identifies that the seal on equipment has been inspected.
 RSEA,Resealed,Identifies that the equipment has been resealed after inspection.
 RMVD,Removed,Identifies that a Seal has been removed from the equipment for inspection.
