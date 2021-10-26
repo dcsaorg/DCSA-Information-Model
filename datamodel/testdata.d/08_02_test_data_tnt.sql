@@ -73,7 +73,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -98,7 +98,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -122,7 +122,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
