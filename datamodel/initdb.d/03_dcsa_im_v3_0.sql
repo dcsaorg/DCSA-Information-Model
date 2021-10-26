@@ -416,7 +416,7 @@ CREATE TABLE dcsa_im_v3_0.seal (
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.seal (shipment_equipment_id);
 CREATE INDEX ON dcsa_im_v3_0.seal (seal_source_code);
-CREATE INDEX ON dcsa_im_v3_0.seal (seal_type);
+CREATE INDEX ON dcsa_im_v3_0.seal (seal_type_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location_type (
