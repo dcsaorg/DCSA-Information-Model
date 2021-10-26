@@ -27,7 +27,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_d
+    vessel_id
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     1,
