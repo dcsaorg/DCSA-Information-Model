@@ -10,3 +10,7 @@ SURR,Surrendered,Indicates that a document has been surrendered by the customer 
 SUBM,Submitted,Indicates that a document has been submitted by the customer to the carrier.
 VOID,Void,Cancellation of an original document.
 CONF,Confirmed,Indicates that the document is confirmed.
+REQS,Requested,"A status indicator that can be used with a number of identifiers to denote that a certain activity, service or document has been requested by the carrier, customer or authorities. This status remains constant until the requested activity is  “Completed”."
+CMPL,Completed,"A status indicator that can be used with a number of activity identifiers to denote that a certain activity, service or document has been completed."
+HOLD,On Hold,"A status indicator that can be used with a number of activity identifiers to denote that a container or shipment has been placed on hold i.e. can’t  progress in the process."
+RELS,Released,"A status indicator that can be used with a number of activity identifiers to denote that a container or shipment has been released i.e. allowed to move from depot or terminal by authorities or service provider."
