@@ -108,10 +108,10 @@ CREATE TABLE dcsa_im_v3_0.party (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
+    dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY,
     code_list_responsible_agency_code varchar(3) NULL,
     code_list_responsible_agency_name varchar(100) NOT NULL,
-    code_list_responsible_agency_description varchar(300),
-    dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY
+    code_list_responsible_agency_description varchar(300)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_identifying_code CASCADE;
@@ -642,20 +642,13 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_voyage_number varchar(50) NOT NULL,
-    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id)
+    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
 ALTER TABLE dcsa_im_v3_0.transport_call
-    ADD FOREIGN KEY (import_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id);
+    ADD FOREIGN KEY (import_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id) INITIALLY DEFERRED;
 ALTER TABLE dcsa_im_v3_0.transport_call
-    ADD FOREIGN KEY (export_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_call_voyage (
-    voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.voyage(id),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    UNIQUE (voyage_id, transport_call_id)
-);
+    ADD FOREIGN KEY (export_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id) INITIALLY DEFERRED;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
