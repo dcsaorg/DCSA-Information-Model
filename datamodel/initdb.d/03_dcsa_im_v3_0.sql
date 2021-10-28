@@ -145,24 +145,22 @@ CREATE TABLE dcsa_im_v3_0.booking (
     import_license_reference varchar(35) NULL,
     is_destination_filing_required boolean NOT NULL,
     inco_terms varchar(3) NOT NULL,
-    expected_departure_date timestamp NULL
-    transport_document_type_code varchar(3) NULL
+    expected_departure_date timestamp NULL,
+    transport_document_type_code varchar(3) NULL,
     transport_document_reference varchar(20) NULL,
-    booking_channel_reference varchar(20) NULL
+    booking_channel_reference varchar(20) NULL,
     communication_channel_code varchar(20) NULL,
     is_equipment_substitution_allowed varchar(2) NULL,
     vessel_id uuid NULL,
-    carrier_voyage_number varchar(50) NULL,
-    transport_document_type_code varchar(20) NULL
+    carrier_voyage_number varchar(50) NULL
 );
-CREATE INDEX ON dcsa_im_v3_0.booking (carrier_booking_reference);
+CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
-    carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_im_v3_0.booking (carrier_booking_reference),
     terms_and_conditions text NULL
 );
 
@@ -179,7 +177,7 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_times CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_times (
-    booking_id NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     cutOffTimeCode varchar(3) NOT NULL,
     cutOffTime timestamp NOT NULL
 );
