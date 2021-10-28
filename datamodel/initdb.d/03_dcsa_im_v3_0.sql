@@ -129,7 +129,7 @@ CREATE TABLE dcsa_im_v3_0.party_identifying_code (
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_booking_request_reference varchar(100) NULL,
+    carrier_booking_request_reference varchar(100) NOT NULL,
     submission_datetime timestamp null,
     receipt_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
     delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
