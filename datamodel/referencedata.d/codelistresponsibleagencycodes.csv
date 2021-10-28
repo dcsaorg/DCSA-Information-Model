@@ -5,7 +5,7 @@ LLOYD,11,LR,Lloyd's register of shipping
 BIC,20,BIC (Bureau International des Containeurs),The container industry's international organisation responsible for the issuance of container-related codes
 IMO,54,IMO (incl. IMDG),
 SCAC,182,"US, Standard Carrier Alpha Code (Motor)",Organisation maintaining the SCAC lists and transportation operating in North America
-ITIGG,274,ITIGG,International Transport Implementation Guidelines Group for ITIGG
+ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
 ITU,296,ITU,
 SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
 EXIS,399,EXIS,
