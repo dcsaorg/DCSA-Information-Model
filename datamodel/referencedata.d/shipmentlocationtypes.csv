@@ -2,6 +2,7 @@ Shipment Location Type Code,Location Type Description
 PRE,Place of Receipt
 PDE,Place of Delivery
 PCF,Pre-carriage From
+PSR, Precarriage under shipper’s responsibility
 OIR,Onward In-land Routing
 POL,Port of Loading
 POD,Port of Discharge

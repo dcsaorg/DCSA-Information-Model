@@ -3,6 +3,8 @@
 
 BEGIN;
 
+SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
+
 INSERT INTO dcsa_im_v3_0.vessel (
     vessel_imo_number,
     vessel_name,
@@ -23,14 +25,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '1234567'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567')
 );
 
 
@@ -40,14 +42,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '1234567'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -71,7 +73,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -96,7 +98,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -120,7 +122,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -164,12 +166,14 @@ INSERT INTO dcsa_im_v3_0.shipment (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     transport_id,
     shipment_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
     is_under_shippers_responsibility
 ) VALUES (
     (SELECT DISTINCT transport.id FROM dcsa_im_v3_0.transport WHERE load_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed' OR discharge_transport_call_id = '8b64d20b-523b-4491-b2e5-32cfa5174eed'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     1,
+    'PRC',
     false
 );
 
@@ -271,19 +275,21 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     shipment_id,
     equipment_reference,
     cargo_gross_weight,
-    cargo_gross_weight_unit
+    cargo_gross_weight_unit,
+    is_shipper_owned
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'APZU4812090',
     1424.2,
-    'KGM'
+    'KGM',
+    false
 );
 
 INSERT INTO dcsa_im_v3_0.seal (
     shipment_equipment_id,
     seal_number,
-    seal_source,
-    seal_type
+    seal_source_code,
+    seal_type_code
 ) VALUES (
      (SELECT DISTINCT shipment_equipment.id FROM dcsa_im_v3_0.shipment_equipment JOIN dcsa_im_v3_0.shipment ON (shipment.id = shipment_equipment.shipment_id)
             WHERE carrier_booking_reference = 'ABC123123123' AND equipment_reference = 'APZU4812090'),
@@ -405,5 +411,6 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     'Authorities not available'
 );
 
+SELECT 'End: 08_02_test_data_tnt.sql' as progress;
 
 COMMIT;

@@ -3,6 +3,8 @@
 
 BEGIN;
 
+SELECT 'Start: 08_01_test_data_ebl.sql...' as progress;
+
 INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
@@ -58,7 +60,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -83,7 +85,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
+    service_contract_reference,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
@@ -200,14 +202,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '9321483'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483')
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -230,7 +232,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
@@ -259,7 +261,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
@@ -290,7 +292,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
@@ -358,13 +360,15 @@ INSERT INTO dcsa_im_v3_0.transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     1,
+    'PRC',
     null,
     false
 );
@@ -372,13 +376,15 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     2,
+    'PRC',
     null,
     false
 );
@@ -386,13 +392,15 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
-    sequence_number,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     3,
+    'PRC',
     null,
     true
 );
@@ -507,13 +515,15 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     shipment_id,
     equipment_reference,
     cargo_gross_weight,
-    cargo_gross_weight_unit
+    cargo_gross_weight_unit,
+    is_shipper_owned
 ) VALUES (
     uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'BMOU2149612',
     4000,
-    'KGM'
+    'KGM',
+    false
 );
 
 
@@ -565,7 +575,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     number_of_originals,
     invoice_payable_at,
     is_electronic,
-    is_charges_displayed
+    are_charges_displayed
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
     'BOL',
@@ -576,5 +586,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE,
     TRUE
 );
+
+SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
 COMMIT;
