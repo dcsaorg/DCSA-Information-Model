@@ -514,7 +514,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
-    vessel_imo_number varchar(7) NULL REFERENCES dcsa_im_v3_0.vessel (vessel_imo_number)
+    vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel (id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
