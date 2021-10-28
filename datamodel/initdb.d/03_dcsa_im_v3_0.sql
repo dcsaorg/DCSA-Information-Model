@@ -179,13 +179,9 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_times CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_times (
-    service_terms_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    latest_time_of_si_submission timestamp with time zone NOT NULL,
-    vgm_cut_off timestamp with time zone NOT NULL,
-    fcl_delivery_cut_off timestamp with time zone NOT NULL,
-    lcl_delivery_cut_off timestamp with time zone NOT NULL,
-    empty_container_pickup_date_and_time timestamp with time zone NULL,
-    earliest_full_container_delivery_date timestamp with time zone NULL
+    booking_id NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    cutOffTimeCode varchar(3) NOT NULL,
+    cutOffTime timestamp NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
