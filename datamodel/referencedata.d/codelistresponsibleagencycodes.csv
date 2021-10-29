@@ -1,14 +1,14 @@
-code_list_responsible_agency_code,code_list_responsible_agency_name,code_list_responsible_agency_description,dcsa_code
-5,ISO,,ISO
-6,UN/ECE,,UNECE
-11,Lloyd's register of shipping,,LLOYD
-20,BIC (Bureau International des Containeurs),,BIC
-54,IMO (incl. IMDG),,IMO
-182,Standard Carrier Alpha Code (SCAC),,SCAC
-274,ITIGG,,ITIGG
-296,ITU,,ITU
-306,SMDG,,SMDG
-399,EXIS,,EXIS
-163,FMC,Federal Maritime Commission,FMC
-,CBSA,Canada Border Services Agency,CBSA
-zzz,Mutually defined,,ZZZ
+dcsa_code,code_list_responsible_agency_code,code_list_responsible_agency_name,code_list_responsible_agency_description
+ISO,5,ISO,International Organization for Standardization
+UNECE,6,UN/ECE,United Nations Economic Commission for Europe
+LLOYD,11,LR,Lloyd's register of shipping
+BIC,20,BIC (Bureau International des Containeurs),The container industry's international organisation responsible for the issuance of container-related codes
+IMO,54,IMO (incl. IMDG),
+SCAC,182,"US, Standard Carrier Alpha Code (Motor)",Organisation maintaining the SCAC lists and transportation operating in North America
+ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
+ITU,296,ITU,
+SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
+EXIS,399,EXIS,
+FMC,,FMC,Federal Maritime Commission
+CBSA,,CBSA,Canada Border Services Agency
+ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list

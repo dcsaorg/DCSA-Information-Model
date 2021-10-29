@@ -79,10 +79,6 @@ CREATE TABLE dcsa_im_v3_0.facility (
 ALTER TABLE dcsa_im_v3_0.location
     ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
 
-
-ALTER TABLE dcsa_im_v3_0.location
-    ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -112,10 +108,10 @@ CREATE TABLE dcsa_im_v3_0.party (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
+    dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY,
     code_list_responsible_agency_code varchar(3) NULL,
-    code_list_responsible_agency_name varchar(100) NOT NULL,
-    code_list_responsible_agency_description varchar(300),
-    dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY
+    code_list_responsible_agency_name varchar(100) NULL,
+    code_list_responsible_agency_description varchar(300)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_identifying_code CASCADE;
@@ -232,7 +228,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_event_type (
     shipment_event_type_code varchar(4) PRIMARY KEY,
     shipment_event_type_name varchar(30) NOT NULL,
-    shipment_event_type_description varchar(250) NOT NULL
+    shipment_event_type_description varchar(350) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
@@ -262,6 +258,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     issue_date date NULL,
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
+    number_of_originals integer NULL,
     terms_and_conditions text NULL,
     issuer uuid NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
@@ -318,7 +315,7 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
     document_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.document_party (id),
-    address_line varchar(250) NOT NULL,
+    address_line_text varchar(250) NOT NULL,
     address_line_number int NOT NULL
 );
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id, address_line_number);
@@ -377,7 +374,7 @@ CREATE INDEX ON dcsa_im_v3_0.equipment (iso_equipment_code);
 DROP TABLE IF EXISTS dcsa_im_v3_0.package_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.package_code (
     package_code varchar(3) PRIMARY KEY,
-    description varchar(50) NOT NULL
+    package_code_description varchar(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_equipment CASCADE;
@@ -386,7 +383,8 @@ CREATE TABLE dcsa_im_v3_0.shipment_equipment (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
     equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     cargo_gross_weight real NULL,
-    cargo_gross_weight_unit varchar(3) NULL
+    cargo_gross_weight_unit varchar(3) NULL,
+    is_shipper_owned boolean NOT NULL
 );
 
 -- Supporting FK constraints
@@ -408,7 +406,7 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.hs_code (
     hs_code varchar(10) PRIMARY KEY,
-    code_description varchar(250) NOT NULL
+    hs_code_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
@@ -448,26 +446,26 @@ CREATE TABLE dcsa_im_v3_0.cargo_line_item (
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (
     seal_source_code varchar(5) PRIMARY KEY,
-    description varchar(50) NOT NULL
+    seal_source_description varchar(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_type (
     seal_type_code varchar(5) PRIMARY KEY,
-    description varchar(50) NOT NULL
+    seal_type_description varchar(50) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal (
     shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id),
     seal_number varchar(15) NOT NULL,
-    seal_source varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
-    seal_type varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
+    seal_source_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
+    seal_type_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
 );
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.seal (shipment_equipment_id);
-CREATE INDEX ON dcsa_im_v3_0.seal (seal_source);
-CREATE INDEX ON dcsa_im_v3_0.seal (seal_type);
+CREATE INDEX ON dcsa_im_v3_0.seal (seal_source_code);
+CREATE INDEX ON dcsa_im_v3_0.seal (seal_type_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location_type (
@@ -505,6 +503,16 @@ CREATE TABLE dcsa_im_v3_0.mode_of_transport (
     dcsa_transport_type varchar(50) NULL UNIQUE
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    vessel_imo_number varchar(7) NULL,
+    vessel_name varchar(35) NULL,
+    vessel_flag char(2) NULL,
+    vessel_call_sign_number varchar(10) NULL,
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
     id varchar(100) DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -514,7 +522,9 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
-    vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel (id)
+    vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
+    import_voyage_id uuid NULL, -- Will add the reference later once Voyage is added,
+    export_voyage_id uuid NULL -- Will add the reference later once Voyage is added
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
@@ -532,12 +542,19 @@ CREATE TABLE dcsa_im_v3_0.commercial_voyage (
     commercial_voyage_name text NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_plan_stage_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_plan_stage_type (
+    transport_plan_stage_code varchar(3) PRIMARY KEY,
+    transport_plan_stage_name varchar(100) NOT NULL,
+    transport_plan_stage_description varchar(250) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_transport (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
     transport_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport(id),
     transport_plan_stage_sequence_number integer NOT NULL,
-    transport_plan_stage varchar(50) NULL,
+    transport_plan_stage_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.transport_plan_stage_type(transport_plan_stage_code),
     commercial_voyage_id uuid NULL REFERENCES dcsa_im_v3_0.commercial_voyage(commercial_voyage_id),
     is_under_shippers_responsibility boolean NOT NULL,
     UNIQUE (shipment_id, transport_id, transport_plan_stage_sequence_number) -- transport_plan_stage_sequence_number must be unique together with transport and shipment
@@ -560,7 +577,8 @@ CREATE TABLE dcsa_im_v3_0.equipment_event_type (
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_type (
     document_type_code varchar(3) PRIMARY KEY,
-    document_type_name varchar(100) NOT NULL
+    document_type_name varchar(100) NOT NULL,
+    document_type_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event_type CASCADE;
@@ -588,7 +606,8 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code)
+    equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code),
+    event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
@@ -671,16 +690,14 @@ CREATE TABLE dcsa_im_v3_0.service_proforma (
 DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_voyage_number varchar(50) NULL,
-    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id)
+    carrier_voyage_number varchar(50) NOT NULL,
+    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_voyage CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_call_voyage (
-    voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.voyage(id),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    UNIQUE (voyage_id, transport_call_id)
-);
+ALTER TABLE dcsa_im_v3_0.transport_call
+    ADD FOREIGN KEY (import_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id) INITIALLY DEFERRED;
+ALTER TABLE dcsa_im_v3_0.transport_call
+    ADD FOREIGN KEY (export_voyage_id) REFERENCES dcsa_im_v3_0.voyage (id) INITIALLY DEFERRED;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
@@ -702,12 +719,20 @@ CREATE TABLE dcsa_im_v3_0.port_call_service_type (
     port_call_service_type_description varchar(250) NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_phase_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_phase_type (
+     port_call_phase_type_code varchar(4) NOT NULL PRIMARY KEY,
+     port_call_phase_type_name varchar(30) NOT NULL,
+     port_call_phase_type_description varchar(250) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
     transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    publisher varchar(100) NOT NULL,
-    publisher_role varchar(3) NOT NULL,
+    publisher varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code),
+    port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
