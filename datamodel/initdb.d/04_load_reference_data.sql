@@ -28,7 +28,7 @@ BEGIN;
 \copy dcsa_im_v3_0.payment_term_type from '../referencedata.d/paymentterms.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.inco_terms from '../referencedata.d/incotermscodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.communication_channel_qualifier from '../referencedata.d/communicationchannelqualifier.csv' with NULL AS E'\'\'' CSV HEADER
-\copy dcsa_im_v3_0.cut_off_time from '../referencedata.d/cutofftimescodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.cut_off_times from '../referencedata.d/cutofftimescodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_plan_stage_type from '../referencedata.d/transportplanstagetypes.csv' with NULL AS E'\'\'' CSV HEADER
 
 COMMIT;
