@@ -1,6 +1,11 @@
-document_type_code,document_type_name
-TRD,Transport document
-BKG,Booking
-SHI,Shipping Instructions
-SRM,Shipment Release Message
-ARN,Arrival Notice
+document_type_code,document_type_name,document_type_description
+BKG,Booking,
+SHI,Shipping Instructions,
+VGM,Verified Gross Mass,
+SRM,Shipment Release Message,
+TRD,Transport document,
+ARN,Arrival Notice,
+CAS,Cargo Survey,
+CUS,Customs Inspection,
+DGD,Dangerous Good Declaration,
+OOG,Out Of Gauge,

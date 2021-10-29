@@ -4,3 +4,4 @@ SI,Shipper’s Reference,Reference assigned to the shipment by the shipper.
 PO,Purchase Order Reference,The PO reference that the shipper or freight forwarder received from the consignee and then shared with the carrier.
 CR,Customer’s Reference,Reference assigned to the shipment by the customer.
 AAO,Consignee’s Reference,Reference assigned to the shipment by the consignee.
+EQ,Equipment Reference,Reference to the equipment that is associated with document.

@@ -9,3 +9,12 @@ N2,Second Notify Party.,The second party which is to be notified.
 NI,Notify party,Party to be notified of arrival of goods.
 DDR,"Consignor's freight forwarder",Identification of freight forwarder giving services to the consignor (shipper).
 DDS,"Consignee's freight forwarder",Identification of freight forwarder giving services to the consignee.
+CA,Carrier operations,
+AG,Carrier local agent,
+VSL,Vessel,
+ATH,Port Authorities,
+PLT,Pilot,
+TWG,Towage provider,
+LSH,Lashing provider,
+BUK,Bunkering service provider,
+TR,Terminal,
