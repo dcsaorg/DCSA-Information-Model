@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
     dcsa_responsible_agency_code varchar(5) NOT NULL PRIMARY KEY,
     code_list_responsible_agency_code varchar(3) NULL,
-    code_list_responsible_agency_name varchar(100) NOT NULL,
+    code_list_responsible_agency_name varchar(100) NULL,
     code_list_responsible_agency_description varchar(300)
 );
 
