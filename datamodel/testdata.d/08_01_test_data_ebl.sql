@@ -175,7 +175,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'CARRIER_VOYAGE_NUMBER_01'
 );
 
-
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     submission_datetime,
