@@ -195,7 +195,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     transport_document_reference varchar(20) NULL,
     booking_channel_reference varchar(20) NULL,
     communication_channel_code varchar(2) NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
-    is_equipment_substitution_allowed varchar(2) NULL,
+    is_equipment_substitution_allowed boolean NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     carrier_voyage_number varchar(50) NULL
 );

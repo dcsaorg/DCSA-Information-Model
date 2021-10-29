@@ -53,53 +53,179 @@ INSERT INTO dcsa_im_v3_0.location (
     'The Warehouse'
 );
 
+INSERT INTO dcsa_im_v3_0.payment_term_type (
+    payment_term_code,
+    payment_term_name,
+    payment_term_description
+) VALUES (
+    'PRE',
+    'Prepaid',
+    'Description of Prepaid code'
+);
+
+INSERT INTO dcsa_im_v3_0.payment_term_type (
+    payment_term_code,
+    payment_term_name,
+    payment_term_description
+) VALUES (
+    'COL',
+    'Collect',
+    'Description of Collect code'
+);
+
+INSERT INTO dcsa_im_v3_0.inco_terms (
+    inco_terms_code,
+    inco_terms_name,
+    inco_terms_description
+) VALUES (
+    'FCA',
+    'Free Carrier',
+    'Description of Free Carrier code'
+);
+
+INSERT INTO dcsa_im_v3_0.inco_terms (
+    inco_terms_code,
+    inco_terms_name,
+    inco_terms_description
+) VALUES (
+    'FOB',
+    'Free on Board',
+    'Description of Free on Board code'
+);
+
+INSERT INTO dcsa_im_v3_0.communication_channel_qualifier (
+    communication_channel_qualifier_code,
+    communication_channel_qualifier_name,
+    communication_channel_qualifier_description
+) VALUES (
+    'EI',
+    'EDIT Transmission',
+    'Description of EDI Transmission code'
+);
+
+INSERT INTO dcsa_im_v3_0.communication_channel_qualifier (
+    communication_channel_qualifier_code,
+    communication_channel_qualifier_name,
+    communication_channel_qualifier_description
+) VALUES (
+    'EM',
+    'Email',
+    'Description of Email code'
+);
+
+INSERT INTO dcsa_im_v3_0.communication_channel_qualifier (
+    communication_channel_qualifier_code,
+    communication_channel_qualifier_name,
+    communication_channel_qualifier_description
+) VALUES (
+    'AO',
+    'API',
+    'Description of API code'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
-    carrier_booking_reference,
-    receipt_delivery_type_at_origin,
-    receipt_delivery_type_at_destination,
+    carrier_booking_request_reference,
+    submission_datetime,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
-    commodity_type,
-    cargo_gross_weight,
-    cargo_gross_weight_unit
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    is_destination_filing_required,
+    inco_terms,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    carrier_voyage_number
 ) VALUES (
-    'BR1239719871',
+    'CARRIER_BOOKING_REQUEST_REFERENCE_01',
+    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
-    'LCL',
+    'BB',
     DATE '2020-03-07',
-    'You will surrender',
-    'Donno',
-    13233.4,
-    'KGM'
+    'SERVICE_CONTRACT_REFERENCE_01',
+    'PRE',
+    TRUE,
+    TRUE,
+    'EXPORT_DECLARATION_REFERENCE_01',
+    FALSE,
+    'IMPORT_LICENSE_REFERENCE_01',
+    TRUE,
+    'FCA',
+    DATE '2020-03-07',
+    'SWB',
+    'TRANSPORT_DOC_REF_01',
+    'BOOKING_CHA_REF_01',
+    'EI',
+    FALSE,
+    (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    'CARRIER_VOYAGE_NUMBER_01'
 );
 
 
 INSERT INTO dcsa_im_v3_0.booking (
-    carrier_booking_reference,
-    receipt_delivery_type_at_origin,
-    receipt_delivery_type_at_destination,
+    carrier_booking_request_reference,
+    submission_datetime,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
-    service_contract,
-    commodity_type,
-    cargo_gross_weight,
-    cargo_gross_weight_unit
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    is_destination_filing_required,
+    inco_terms,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    carrier_voyage_number
 ) VALUES (
-    'CR1239719872',
+    'CARRIER_BOOKING_REQUEST_REFERENCE_02',
+    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
-    'LCL',
-    DATE '2020-03-08',
-    'UNKNOWN',
-    'Donno',
-    13233.4,
-    'KGM'
+    'BB',
+    DATE '2020-03-07',
+    'SERVICE_CONTRACT_REFERENCE_02',
+    'PRE',
+    TRUE,
+    TRUE,
+    'EXPORT_DECLARATION_REFERENCE_02',
+    FALSE,
+    'IMPORT_LICENSE_REFERENCE_02',
+    TRUE,
+    'FCA',
+    DATE '2020-03-07',
+    'SWB',
+    'TRANSPORT_DOC_REF_02',
+    'BOOKING_CHA_REF_02',
+    'EI',
+    FALSE,
+    (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    'CARRIER_VOYAGE_NUMBER_02'
 );
 
 
