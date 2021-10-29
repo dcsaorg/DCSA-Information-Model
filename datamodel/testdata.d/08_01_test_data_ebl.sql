@@ -230,29 +230,27 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 
 INSERT INTO dcsa_im_v3_0.shipment (
-    collection_datetime,
-    delivery_datetime,
     carrier_id,
-    carrier_booking_reference
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions
 ) VALUES (
-    DATE '2020-03-07',
-    DATE '2020-03-31',
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
-    'BR1239719871'
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    'BR1239719871',
+    'TERMS AND CONDITIONS!'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment (
-    id,
-    collection_datetime,
-    delivery_datetime,
     carrier_id,
-    carrier_booking_reference
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions
 ) VALUES (
-    uuid_generate_v4(),
-    DATE '2020-03-08',
-    DATE '2020-04-01',
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
-    'CR1239719872'
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_02'),
+    'CR1239719872',
+    'TERMS AND CONDITIONS!'
 );
 
 INSERT INTO dcsa_im_v3_0.references (
@@ -328,14 +326,14 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    '9321483'
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483')
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call_voyage (
@@ -358,7 +356,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
@@ -387,7 +385,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
@@ -418,7 +416,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     other_facility,
     location_id,
     mode_of_transport,
-    vessel_imo_number
+    vessel_id
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
