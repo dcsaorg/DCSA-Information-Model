@@ -122,33 +122,93 @@ CREATE TABLE dcsa_im_v3_0.party_identifying_code (
     code_list_name varchar(100)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.payment_term_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.payment_term_type (
+    payment_term_code varchar(3) PRIMARY KEY,
+    payment_term_name varchar(100) NOT NULL,
+    payment_term_description varchar(250) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.inco_terms CASCADE;
+CREATE TABLE dcsa_im_v3_0.inco_terms (
+    inco_terms_code varchar(3) PRIMARY KEY,
+    inco_terms_name varchar(100) NOT NULL,
+    inco_terms_description varchar(250) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_document_type (
+    transport_document_type_code varchar(3) PRIMARY KEY,
+    transport_document_type_name varchar(20) NULL,
+    transport_document_type_description varchar(500) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.cut_off_times CASCADE;
+CREATE TABLE dcsa_im_v3_0.cut_off_times (
+    cut_off_times_code varchar(3) PRIMARY KEY,
+    cut_off_times_name varchar(100) NULL,
+    cut_off_times_description varchar(250) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    vessel_imo_number varchar(7) NULL,
+    vessel_name varchar(35) NULL,
+    vessel_flag char(2) NULL,
+    vessel_call_sign_number varchar(10) NULL,
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.communication_channel_qualifier CASCADE;
+CREATE TABLE dcsa_im_v3_0.communication_channel_qualifier (
+    communication_channel_qualifier_code varchar(2) PRIMARY KEY,
+    communication_channel_qualifier_name varchar(100) NOT NULL,
+    communication_channel_qualifier_description varchar(250) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
-    carrier_booking_reference varchar(35) PRIMARY KEY,
-    receipt_delivery_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
-    receipt_delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    carrier_booking_request_reference varchar(100) NOT NULL,
+    submission_datetime timestamp null,
+    receipt_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
+    delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type),
     cargo_movement_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
     cargo_movement_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type),
     booking_request_datetime timestamp with time zone NOT NULL,
     service_contract_reference varchar(30) NOT NULL,
-    cargo_gross_weight real NOT NULL,
-    cargo_gross_weight_unit varchar(3) NOT NULL,
-    commodity_type varchar(20) NOT NULL
+    payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
+    is_partial_load_allowed boolean NOT NULL,
+    is_export_declaration_required boolean NOT NULL,
+    export_declaration_reference varchar(35) NULL,
+    is_import_license_required boolean NOT NULL,
+    import_license_reference varchar(35) NULL,
+    is_destination_filing_required boolean NOT NULL,
+    inco_terms varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.inco_terms(inco_terms_code),
+    expected_departure_date timestamp NULL,
+    transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
+    transport_document_reference varchar(20) NULL,
+    booking_channel_reference varchar(20) NULL,
+    communication_channel_code varchar(2) NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
+    is_equipment_substitution_allowed boolean NULL,
+    vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
+    carrier_voyage_number varchar(50) NULL
 );
-CREATE INDEX ON dcsa_im_v3_0.booking (carrier_booking_reference);
+CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_im_v3_0.booking (carrier_booking_reference),
-    collection_datetime timestamp with time zone NOT NULL,
-    delivery_datetime timestamp with time zone NOT NULL,
-    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id)
+    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    carrier_booking_reference varchar(35) NOT NULL,
+    terms_and_conditions text NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment (
-    carrier_booking_reference varchar(35) NOT NULL REFERENCES dcsa_im_v3_0.booking (carrier_booking_reference),
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     requested_equipment_type varchar(4) NOT NULL,
     requested_equipment_units integer NOT NULL,
@@ -159,13 +219,9 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_times CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_times (
-    service_terms_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    latest_time_of_si_submission timestamp with time zone NOT NULL,
-    vgm_cut_off timestamp with time zone NOT NULL,
-    fcl_delivery_cut_off timestamp with time zone NOT NULL,
-    lcl_delivery_cut_off timestamp with time zone NOT NULL,
-    empty_container_pickup_date_and_time timestamp with time zone NULL,
-    earliest_full_container_delivery_date timestamp with time zone NULL
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    cut_off_time_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cut_off_times(cut_off_times_code),
+    cut_off_time timestamp NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
@@ -173,13 +229,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_event_type (
     shipment_event_type_code varchar(4) PRIMARY KEY,
     shipment_event_type_name varchar(30) NOT NULL,
     shipment_event_type_description varchar(350) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.transport_document_type (
-    transport_document_type_code varchar(3) PRIMARY KEY,
-    transport_document_type_name varchar(20) NULL,
-    transport_document_type_description varchar(500) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
