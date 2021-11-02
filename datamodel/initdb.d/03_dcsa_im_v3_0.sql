@@ -293,7 +293,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_function (
     party_function_code varchar(3) PRIMARY KEY,
     party_function_name varchar(100) NOT NULL,
-    party_function_description varchar(250) NOT NULL
+    party_function_description varchar(350) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
