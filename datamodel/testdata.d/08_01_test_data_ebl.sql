@@ -35,6 +35,7 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
+    status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -60,6 +61,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
+    'RECE',
     DATE '2020-03-07',
     'CY',
     'CFS',
@@ -87,6 +89,7 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
+    status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -112,6 +115,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
+    'RECE',
     DATE '2020-03-07',
     'CY',
     'CFS',

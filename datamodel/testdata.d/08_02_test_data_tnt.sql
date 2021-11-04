@@ -90,6 +90,7 @@ INSERT INTO dcsa_im_v3_0.transport (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
+    status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -115,6 +116,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'BR1239719971',
+    'PENU',
     DATE '2020-03-07',
     'CY',
     'CFS',
@@ -142,6 +144,7 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
+    status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -167,6 +170,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'BR1239719872',
+    'PENA',
     DATE '2020-04-15',
     'CY',
     'CFS',
@@ -194,6 +198,7 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
+    status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -219,6 +224,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'ABC123123123',
+    'ISSU',
     DATE '2020-03-10',
     'CY',
     'CFS',
