@@ -669,10 +669,10 @@ CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
-    transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code)
+    transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code),
     delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     change_remark varchar(250),
-    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.transport_event ADD PRIMARY KEY (event_id);
