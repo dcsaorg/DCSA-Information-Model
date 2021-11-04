@@ -76,7 +76,7 @@ CREATE TABLE dcsa_im_v3_0.location (
     location_name varchar(100) NULL,
     latitude varchar(10) NULL,
     longitude varchar(11) NULL,
-    un_location_code char(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code)
+    un_location_code char(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code),
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
     facility_id uuid NULL  -- REFERENCES facility (but there is a circular relation, so we add the FK later)
 );
@@ -448,7 +448,7 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     description_of_goods text NOT NULL,
     hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     weight real NULL,
