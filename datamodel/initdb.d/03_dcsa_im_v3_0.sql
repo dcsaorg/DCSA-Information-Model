@@ -3,6 +3,13 @@
 
 BEGIN;
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.shipment_event_type (
+    shipment_event_type_code varchar(4) PRIMARY KEY,
+    shipment_event_type_name varchar(30) NOT NULL,
+    shipment_event_type_description varchar(350) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.unit_of_measure CASCADE;
 CREATE TABLE dcsa_im_v3_0.unit_of_measure (
     unit_of_measure_code varchar(3) PRIMARY KEY,
@@ -266,13 +273,6 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
 CREATE TABLE dcsa_im_v3_0.value_added_service_request (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.shipment_event_type (
-    shipment_event_type_code varchar(4) PRIMARY KEY,
-    shipment_event_type_name varchar(30) NOT NULL,
-    shipment_event_type_description varchar(350) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
