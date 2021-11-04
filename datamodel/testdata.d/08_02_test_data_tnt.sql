@@ -44,7 +44,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
@@ -61,7 +61,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     export_voyage_id,
     import_voyage_id
@@ -104,7 +104,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_import_license_required,
     import_license_reference,
     is_destination_filing_required,
-    inco_terms,
+    incoterms,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -156,7 +156,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_import_license_required,
     import_license_reference,
     is_destination_filing_required,
-    inco_terms,
+    incoterms,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -208,7 +208,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_import_license_required,
     import_license_reference,
     is_destination_filing_required,
-    inco_terms,
+    incoterms,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -248,24 +248,28 @@ INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     booking_id,
     carrier_booking_reference,
-    terms_and_conditions
+    terms_and_conditions,
+    confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     'BR1239719971',
-    'TERMS AND CONDITIONS!'
+    'TERMS AND CONDITIONS!',
+    DATE '2021-12-12T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     booking_id,
     carrier_booking_reference,
-    terms_and_conditions
+    terms_and_conditions,
+    confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
-    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_02'),
     'ABC123123123',
-    'TERMS AND CONDITIONS!'
+    'TERMS AND CONDITIONS!',
+    DATE '2021-12-12T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_transport (
@@ -283,7 +287,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
 );
 
 INSERT INTO dcsa_im_v3_0.references (
-    reference_type,
+    reference_type_code,
     reference_value,
     shipment_id
 ) VALUES (
