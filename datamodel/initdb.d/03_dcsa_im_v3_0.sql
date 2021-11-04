@@ -377,7 +377,7 @@ CREATE TABLE dcsa_im_v3_0.charge (
     charge_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.charge_type(charge_type_code),
     currency_amount real NOT NULL,
     currency_code varchar(3) NOT NULL,
-    payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term(payment_term_code),
+    payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
     calculation_basis varchar(50) NOT NULL,
     unit_price real NOT NULL,
     quantity real NOT NULL
