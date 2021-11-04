@@ -514,12 +514,14 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     is_shipped_onboard_type,
     number_of_copies,
+    requested_number_of_originals,
     is_electronic,
     are_charges_displayed
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
     TRUE,
     2,
+    4,
     TRUE,
     TRUE
 );
