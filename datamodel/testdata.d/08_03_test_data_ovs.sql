@@ -115,7 +115,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     import_voyage_id,
     export_voyage_id

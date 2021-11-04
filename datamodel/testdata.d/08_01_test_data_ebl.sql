@@ -49,7 +49,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_import_license_required,
     import_license_reference,
     is_destination_filing_required,
-    inco_terms,
+    incoterms,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -101,7 +101,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_import_license_required,
     import_license_reference,
     is_destination_filing_required,
-    inco_terms,
+    incoterms,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -142,28 +142,36 @@ INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     booking_id,
     carrier_booking_reference,
-    terms_and_conditions
+    terms_and_conditions,
+    place_of_issue,
+    confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     'BR1239719871',
-    'TERMS AND CONDITIONS!'
+    'TERMS AND CONDITIONS!',
+    uuid('01670315-a51f-4a11-b947-ce8e245128eb'),
+    DATE '2020-03-07T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     booking_id,
     carrier_booking_reference,
-    terms_and_conditions
+    terms_and_conditions,
+    place_of_issue,
+    confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_02'),
     'CR1239719872',
-    'TERMS AND CONDITIONS!'
+    'TERMS AND CONDITIONS!',
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    DATE '2020-03-07T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.references (
-    reference_type,
+    reference_type_code,
     reference_value,
     shipment_id
 ) VALUES (
@@ -216,7 +224,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     import_voyage_id,
     export_voyage_id
@@ -236,7 +244,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     import_voyage_id,
     export_voyage_id
@@ -259,7 +267,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_type_code,
     other_facility,
     location_id,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     import_voyage_id,
     export_voyage_id
@@ -284,7 +292,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_type_code,
     other_facility,
     location_id,
-    mode_of_transport,
+    mode_of_transport_code,
     vessel_id,
     import_voyage_id,
     export_voyage_id
@@ -380,37 +388,45 @@ INSERT INTO dcsa_im_v3_0.document_party (
     party_id,
     shipment_id,
     party_function,
-    is_to_be_notified
+    is_to_be_notified,
+    booking_id
 ) VALUES (
     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'OS',
-    true
+    true,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
 ), (
     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'CN',
-    true
+    true,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
+    booking_id,
     location_id,
-    location_type
+    shipment_location_type_code
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
     'PRE'
 ), (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     'POL'
 ), (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     'POD'
 ), (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
     'PDE'
 );
@@ -496,20 +512,16 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
-    transport_document_type,
     is_shipped_onboard_type,
     number_of_copies,
-    number_of_originals,
-    invoice_payable_at,
+    requested_number_of_originals,
     is_electronic,
     are_charges_displayed
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
-    'BOL',
     TRUE,
     2,
     4,
-    '01670315-a51f-4a11-b947-ce8e245128eb',
     TRUE,
     TRUE
 );
