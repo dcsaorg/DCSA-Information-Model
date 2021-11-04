@@ -1,4 +1,4 @@
-Receipt Delivery Type,Description
-CY,"Container yard (incl. rail ramp), where the carrier takes possession of a fully stuffed container delivered by the customer at the carrier or carrier's appointed supplier's facility or where a container is released to the customer by the carrier."
-SD,"Store door, indicating that the carrier is taking possession of or delivers a fully stuffed container at the customer's appointed premises."
-CFS,"Container freight station, indicating that the carrier has received the cargo and is responsible for stuffing of the cargo within the container or the customer receives the cargo directly from the container freight station."
+Receipt Delivery Type Code,Receipt Delivery Type Name, Receipt Delivery Type Description
+CY,Container yard (incl. rail ramp), "Where the carrier takes possession of a fully stuffed container delivered by the customer at the carrier or carrier's appointed supplier's facility or where a container is released to the customer by the carrier."
+SD,Store Door, "Indicating that the carrier is taking possession of or delivers a fully stuffed container at the customer's appointed premises."
+CFS,Container Freight Station, "indicating that the carrier has received the cargo and is responsible for stuffing of the cargo within the container or the customer receives the cargo directly from the container freight station."
