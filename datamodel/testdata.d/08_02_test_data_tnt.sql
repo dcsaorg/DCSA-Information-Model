@@ -90,7 +90,7 @@ INSERT INTO dcsa_im_v3_0.transport (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    status,
+    document_status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -144,7 +144,7 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    status,
+    document_status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
@@ -198,7 +198,7 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    status,
+    document_status,
     submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
