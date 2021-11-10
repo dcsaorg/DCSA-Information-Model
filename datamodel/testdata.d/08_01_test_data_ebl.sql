@@ -174,7 +174,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-03-07T12:12:12'
 );
 
-INSERT INTO dcsa_im_v3_0.references (
+INSERT INTO dcsa_im_v3_0.reference (
     reference_type_code,
     reference_value,
     shipment_id
