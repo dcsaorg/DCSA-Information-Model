@@ -3,6 +3,7 @@ RECE,Received,Indicates that a document is received by the carrier or shipper
 DRFT,Drafted,Indicates that a document is in draft mode being updated by either the shipper or the carrier.
 PENA,Pending Approval,Indicates that a document has been submitted by the shipper or carrier and is now awaiting approval by the counterpart.
 PENU,Pending Update,Indicates that the carrier requested an update from the shipper which is not received yet.
+PENC,Pending Confirmation,Indicates that a document has been submitted by the shipper and is now awaiting approval by the carrier.
 REJE,Rejected,Indicates that a document has been rejected by the carrier.
 APPR,Approved,Indicates that a document has been approved by the counterpart.
 ISSU,Issued,Indicates that a document has been issued by the carrier.
