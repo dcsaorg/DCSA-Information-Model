@@ -58,7 +58,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number
+    carrier_voyage_number,
+    place_of_issue
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
     'RECE',
@@ -84,7 +85,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_01'
+    'CARRIER_VOYAGE_NUMBER_01',
+    uuid('01670315-a51f-4a11-b947-ce8e245128eb')
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -112,7 +114,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number
+    carrier_voyage_number,
+    place_of_issue
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
     'RECE',
@@ -138,7 +141,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_02'
+    'CARRIER_VOYAGE_NUMBER_02',
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d')
 );
 
 
@@ -147,14 +151,12 @@ INSERT INTO dcsa_im_v3_0.shipment (
     booking_id,
     carrier_booking_reference,
     terms_and_conditions,
-    place_of_issue,
     confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     'BR1239719871',
     'TERMS AND CONDITIONS!',
-    uuid('01670315-a51f-4a11-b947-ce8e245128eb'),
     DATE '2020-03-07T12:12:12'
 );
 
@@ -163,14 +165,12 @@ INSERT INTO dcsa_im_v3_0.shipment (
     booking_id,
     carrier_booking_reference,
     terms_and_conditions,
-    place_of_issue,
     confirmation_datetime
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_02'),
     'CR1239719872',
     'TERMS AND CONDITIONS!',
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
     DATE '2020-03-07T12:12:12'
 );
 
