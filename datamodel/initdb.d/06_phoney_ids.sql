@@ -25,7 +25,7 @@ ALTER TABLE dcsa_im_v3_0.shipment_transport
 ALTER TABLE dcsa_im_v3_0.seal
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
-ALTER TABLE dcsa_im_v3_0.references
+ALTER TABLE dcsa_im_v3_0.reference
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
 ALTER TABLE dcsa_im_v3_0.party_identifying_code
