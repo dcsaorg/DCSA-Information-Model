@@ -225,7 +225,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     communication_channel_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    carrier_voyage_number varchar(50) NULL
+    carrier_voyage_number varchar(50) NULL,
+    place_of_issue varchar(100) NULL
 );
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
@@ -236,7 +237,6 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     carrier_booking_reference varchar(35) NOT NULL,
     terms_and_conditions text NULL,
-    place_of_issue varchar(100) NULL,
     confirmation_datetime timestamp with time zone NOT NULL
 );
 
@@ -285,8 +285,8 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     are_charges_displayed boolean NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.references CASCADE;
-CREATE TABLE dcsa_im_v3_0.references (
+DROP TABLE IF EXISTS dcsa_im_v3_0.reference CASCADE;
+CREATE TABLE dcsa_im_v3_0.reference (
     reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
     reference_value varchar(100) NOT NULL,
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
