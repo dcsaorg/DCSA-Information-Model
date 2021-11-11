@@ -261,7 +261,7 @@ CREATE TABLE dcsa_im_v3_0.notification_endpoint (
     -- If true, then the endpoint is managed automatically via the application itself (via configuration)
     -- If false, it is created outside configuration.
     managed_endpoint boolean NOT NULL DEFAULT false,
-    subscription_url varchar(100) NULL,
+    subscription_url varchar(500) NULL,
 
     CHECK (NOT managed_endpoint OR subscription_url IS NOT NULL)
 );
@@ -307,7 +307,8 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     negotiation_cycle text NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key),
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
-    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
+    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
+    canonical_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
 );
 
 -- Ideally, this would be inlined of the operations_event table as a field.  However, operations_event
