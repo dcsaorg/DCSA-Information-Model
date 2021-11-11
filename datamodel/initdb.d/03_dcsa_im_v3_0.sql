@@ -212,7 +212,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     export_declaration_reference varchar(35) NULL,
     is_import_license_required boolean NOT NULL,
     import_license_reference varchar(35) NULL,
-    submission_datetime timestamp NOT NULL,
+    submission_datetime timestamp with time zone NOT NULL,
     is_ams_aci_filing_required boolean NULL,
     is_destination_filing_required boolean NULL,
     contract_quotation_reference varchar(35) NULL,
