@@ -14,8 +14,8 @@ UC12,RTA-PBP,ATH,CA,REQ,ARRI,INBD,null,PBPL,false,true,false,false,TA-PBP,jit1_0
 UC13,PTA-PBP,CA,ATH,PLN,ARRI,INBD,null,PBPL,false,true,false,true,TA-PBP,jit1_0,null,null,null
 UC14,ETS-Bunkering,BUK,VSL,EST,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC16,UC16,null
 UC15,ETC-Bunkering,BUK,VSL,EST,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC17,UC17,null
-UC16,RTS-Bunkering,VSL,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC16,null
-UC17,RTC-Bunkering,VSL,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC17,null
+UC16,RTS-Bunkering,VSL,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC14,null
+UC17,RTC-Bunkering,VSL,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC15,null
 UC18,PTS-Bunkering,BUK,VSL,PLN,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
 UC19,PTC-Bunkering,BUK,VSL,PLN,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
 UC20,EOSP,CA,ATH,ACT,ARRI,INBD,null,null,false,false,false,true,Special,jit1_1,null,null,null
@@ -56,21 +56,23 @@ UC47-OUTB,ATS-Pilotage (Outbound),PLT,ATH,ACT,STRT,OUTB,PILO,null,false,false,tr
 UC48-OUTB,ATS-Towage (Outbound),TWG,ATH,ACT,STRT,OUTB,TOWG,null,false,false,true,true,T-Towage-Outbound,jit1_1,null,null,null
 UC49-OUTB,ATC-Towage (Outbound),TWG,ATH,ACT,CMPL,OUTB,TOWG,null,false,false,true,true,T-Towage-Outbound,jit1_1,null,null,null
 UC50,SOSP,CA,ATH,ACT,DEPA,OUTB,null,null,false,false,false,true,Special,jit1_1,null,null,null
-UC16-ALT-CA,RTS-Bunkering-ALT-CA,CA,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC16,null
-UC17-ALT-CA,RTC-Bunkering-ALT-CA,CA,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC17,null
-UC25-ALT-CA,ATA-Berth-ALT-CA,CA,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,null
-UC26-ALT-CA,AT-All fast-ALT-CA,CA,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC27-ALT-CA,Gangway down and safe-ALT-CA,CA,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC28-ALT-CA,Vessel Readiness for cargo operations-ALT-CA,CA,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC40-ALT-CA,PTD-Berth-ALT-CA,CA,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
-UC45-ALT-CA,Vessel ready to sail-ALT-CA,CA,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC46-ALT-CA,ATD-Berth-ALT-CA,CA,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
-UC16-ALT-AG,RTS-Bunkering-ALT-AG,AG,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC16,null
-UC17-ALT-AG,RTC-Bunkering-ALT-AG,AG,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC17,null
-UC25-ALT-AG,ATA-Berth-ALT-AG,AG,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,null
-UC26-ALT-AG,AT-All fast-ALT-AG,AG,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC27-ALT-AG,Gangway down and safe-ALT-AG,AG,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC28-ALT-AG,Vessel Readiness for cargo operations-ALT-AG,AG,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
-UC40-ALT-AG,PTD-Berth-ALT-AG,AG,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
-UC45-ALT-AG,Vessel ready to sail-ALT-AG,AG,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC46-ALT-AG,ATD-Berth-ALT-AG,AG,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
+UC16-ALT-CA,RTS-Bunkering-ALT-CA,CA,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC14,UC16
+UC17-ALT-CA,RTC-Bunkering-ALT-CA,CA,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC15,UC17
+UC25-ALT-CA,ATA-Berth-ALT-CA,CA,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,UC25
+UC26-ALT-CA,AT-All fast-ALT-CA,CA,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC26
+UC27-ALT-CA,Gangway down and safe-ALT-CA,CA,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC27
+UC28-ALT-CA,Vessel Readiness for cargo operations-ALT-CA,CA,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC28
+UC34-ALT-CA,ETD-Berth-ALT-CA,CA,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,UC34
+UC40-ALT-CA,PTD-Berth-ALT-CA,CA,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC40
+UC45-ALT-CA,Vessel ready to sail-ALT-CA,CA,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,UC45
+UC46-ALT-CA,ATD-Berth-ALT-CA,CA,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC46
+UC16-ALT-AG,RTS-Bunkering-ALT-AG,AG,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC14,UC16
+UC17-ALT-AG,RTC-Bunkering-ALT-AG,AG,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC15,UC17
+UC25-ALT-AG,ATA-Berth-ALT-AG,AG,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,UC25
+UC26-ALT-AG,AT-All fast-ALT-AG,AG,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC26
+UC27-ALT-AG,Gangway down and safe-ALT-AG,AG,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC27
+UC28-ALT-AG,Vessel Readiness for cargo operations-ALT-AG,AG,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC28
+UC34-ALT-AG,ETD-Berth-ALT-AG,AG,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,UC34
+UC40-ALT-AG,PTD-Berth-ALT-AG,AG,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC40
+UC45-ALT-AG,Vessel ready to sail-ALT-AG,AG,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,UC45
+UC46-ALT-AG,ATD-Berth-ALT-AG,AG,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC46
