@@ -3,7 +3,7 @@ UC1,ETA-Berth,CA,TR,EST,ARRI,INBD,null,BRTH,false,false,true,true,TA-Berth,jit1_
 UC2,RTA-Berth,TR,CA,REQ,ARRI,INBD,null,BRTH,true,false,true,false,TA-Berth,jit1_0,UC3,UC1,null
 UC3,PTA-Berth,CA,TR,PLN,ARRI,INBD,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
 UC4,ETS-Cargo Ops,TR,CA,EST,STRT,INBD,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_1,UC5,UC5,null
-UC5,RTS-Cargo Ops,TR,CA,REQ,STRT,INBD,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_1,UC6,UC6,null
+UC5,RTS-Cargo Ops,CA,TR,REQ,STRT,INBD,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_1,UC6,UC6,null
 UC6,PTS-Cargo Ops,TR,CA,PLN,STRT,INBD,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_1,null,null,null
 UC7,ETA-PBP,CA,ATH,EST,ARRI,INBD,null,PBPL,false,true,false,true,TA-PBP,jit1_0,UC12,UC12,null
 UC8,RTS-Pilotage (Inbound),ATH,PLT,REQ,STRT,INBD,PILO,null,false,true,true,false,T-Pilotage-Arrival,jit1_1,UC10,null,null
@@ -29,7 +29,7 @@ UC27,Gangway down and safe,VSL,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false
 UC28,Vessel Readiness for cargo operations,VSL,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,null
 UC29,ATS-Cargo Ops,TR,CA,ACT,STRT,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,null,null,null
 UC30,ETC-Cargo Ops,TR,CA,EST,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,UC31,UC31,null
-UC31,RTC-Cargo Ops,TR,CA,REQ,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,UC32,UC30,null
+UC31,RTC-Cargo Ops,CA,TR,REQ,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,UC32,UC30,null
 UC32,PTC-Cargo Ops,TR,CA,PLN,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,null,null,null
 UC33,ATS-Bunkering,BUK,VSL,ACT,STRT,ALGS,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
 UC34,ETD-Berth,VSL,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,null
