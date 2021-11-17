@@ -86,7 +86,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
-    uuid('01670315-a51f-4a11-b947-ce8e245128eb')
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -142,7 +142,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_02',
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d')
+    NULL
 );
 
 
