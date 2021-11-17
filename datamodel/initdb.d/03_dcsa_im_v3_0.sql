@@ -195,6 +195,43 @@ CREATE TABLE dcsa_im_v3_0.communication_channel_qualifier (
     communication_channel_qualifier_description varchar(250) NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_type (
+    vessel_sharing_agreement_type_code varchar(3) NOT NULL PRIMARY KEY,
+    vessel_sharing_agreement_type_name varchar(50) NULL,
+    vessel_sharing_agreement_type_description varchar(250) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    vessel_sharing_agreement_name varchar(50) NULL,
+    vessel_sharing_agreement_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement_type(vessel_sharing_agreement_type_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.tradelane CASCADE;
+CREATE TABLE dcsa_im_v3_0.tradelane (
+    id varchar(8) PRIMARY KEY,
+    tradelane_name varchar(150) NOT NULL,
+    vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.service CASCADE;
+CREATE TABLE dcsa_im_v3_0.service (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    carrier_service_code varchar(5),
+    carrier_service_name varchar(50),
+    tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
+CREATE TABLE dcsa_im_v3_0.voyage (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    carrier_voyage_number varchar(50) NOT NULL,
+    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -226,8 +263,9 @@ CREATE TABLE dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     carrier_voyage_number varchar(50) NULL,
-    place_of_issue varchar(100) NULL
+    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id)
 );
+
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment CASCADE;
@@ -251,6 +289,8 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment (
     is_shipper_owned boolean NOT NULL DEFAULT false
 );
 
+CREATE INDEX ON dcsa_im_v3_0.requested_equipment (booking_id);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.commodity (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
@@ -261,6 +301,8 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL
 );
+
+CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
@@ -274,6 +316,8 @@ CREATE TABLE dcsa_im_v3_0.value_added_service_request (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code)
 );
+
+CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
@@ -293,6 +337,8 @@ CREATE TABLE dcsa_im_v3_0.reference (
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id)
 );
+
+CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
@@ -354,6 +400,7 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (party_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (party_function);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
+CREATE INDEX ON dcsa_im_v3_0.document_party (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
@@ -533,6 +580,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
 -- UNIQUE constraint for that.
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_location_type_code);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.mode_of_transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.mode_of_transport (
@@ -678,41 +726,11 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
 
 ALTER TABLE dcsa_im_v3_0.transport_event ADD PRIMARY KEY (event_id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_type (
-    vessel_sharing_agreement_type_code varchar(3) NOT NULL PRIMARY KEY,
-    vessel_sharing_agreement_type_name varchar(50) NULL,
-    vessel_sharing_agreement_type_description varchar(250) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement CASCADE;
-CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_sharing_agreement_name varchar(50) NULL,
-    vessel_sharing_agreement_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement_type(vessel_sharing_agreement_type_code)
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_sharing_agreement_partner CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_sharing_agreement_partner (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.tradelane CASCADE;
-CREATE TABLE dcsa_im_v3_0.tradelane (
-    id varchar(8) PRIMARY KEY,
-    tradelane_name varchar(150) NOT NULL,
-    vessel_sharing_agreement_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_sharing_agreement(id)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.service CASCADE;
-CREATE TABLE dcsa_im_v3_0.service (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
-    carrier_service_code varchar(5),
-    carrier_service_name varchar(50),
-    tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.service_proforma CASCADE;
@@ -724,13 +742,6 @@ CREATE TABLE dcsa_im_v3_0.service_proforma (
     port_terminal_call_sequence_number integer NULL,
     port_terminal_code varchar(11) NULL,
     service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
-CREATE TABLE dcsa_im_v3_0.voyage (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_voyage_number varchar(50) NOT NULL,
-    service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
 ALTER TABLE dcsa_im_v3_0.transport_call
