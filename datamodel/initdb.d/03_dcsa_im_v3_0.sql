@@ -306,7 +306,7 @@ CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
     cut_off_time_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cut_off_time(cut_off_time_code),
     cut_off_time timestamp NOT NULL
 );
@@ -371,7 +371,7 @@ CREATE TABLE dcsa_im_v3_0.carrier_clauses (
     clause_content text NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document_carrier_clauses CASCADE;
+DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_carrier_clauses (
     carrier_clause_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier_clauses (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
