@@ -37,7 +37,7 @@ INSERT INTO dcsa_im_v3_0.location (
     ) VALUES (
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
     'Hamburg',
-    '53.5511° N',
+    '53.551° N',
     '9.9937° E',
     'DEHAM',
     '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
