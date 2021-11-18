@@ -41,7 +41,7 @@ UC35-OUTB,RTS-Pilotage (Outbound),ATH,PLT,REQ,STRT,OUTB,PILO,null,false,true,tru
 UC36-OUTB,RTS-Towage (Outbound),ATH,TWG,REQ,STRT,OUTB,TOWG,null,false,true,true,false,T-Towage-Outbound,jit1_1,UC38-SHIFT,null,null
 UC37-OUTB,PTS-Pilotage (Outbound),PLT,ATH,PLN,STRT,OUTB,PILO,null,false,true,true,false,T-Pilotage-Outbound,jit1_1,null,null,null
 UC38-OUTB,PTS-Towage (Outbound),TWG,ATH,PLN,STRT,OUTB,TOWG,null,false,true,true,false,T-Towage-Outbound,jit1_1,null,null,null
-UC39,RTD-Berth,ATH,VSL,REQ,DEPA,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,UC30,UC34,null
+UC39,RTD-Berth,ATH,VSL,REQ,DEPA,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,UC40,UC34,null
 UC40,PTD-Berth,VSL,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
 UC41,ATC-Bunkering,BUK,VSL,ACT,CMPL,ALGS,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
 UC42,ATC-Cargo Ops,TR,CA,ACT,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,null,null,null
