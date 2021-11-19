@@ -32,7 +32,7 @@ UC30,ETC-Cargo Ops,TR,CA,EST,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-O
 UC31,RTC-Cargo Ops,CA,TR,REQ,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,UC32,UC30,null
 UC32,PTC-Cargo Ops,TR,CA,PLN,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,null,null,null
 UC33,ATS-Bunkering,BUK,VSL,ACT,STRT,ALGS,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC34,ETD-Berth,VSL,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,null
+UC34,ETD-Berth,VSL,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TD-Berth,jit1_0,UC39,UC39,null
 UC35-SHIFT,RTS-Pilotage (Shift),ATH,PLT,REQ,STRT,SHIF,PILO,null,false,true,true,false,T-Pilotage-Shift,jit1_1,UC37-SHIFT,null,null
 UC36-SHIFT,RTS-Towage (Shift),ATH,TWG,REQ,STRT,SHIF,TOWG,null,false,true,true,false,T-Towage-Shift,jit1_1,UC38-SHIFT,null,null
 UC37-SHIFT,PTS-Pilotage (Shift),PLT,ATH,PLN,STRT,SHIF,PILO,null,false,true,true,false,T-Pilotage-Shift,jit1_1,null,null,null
@@ -41,14 +41,14 @@ UC35-OUTB,RTS-Pilotage (Outbound),ATH,PLT,REQ,STRT,OUTB,PILO,null,false,true,tru
 UC36-OUTB,RTS-Towage (Outbound),ATH,TWG,REQ,STRT,OUTB,TOWG,null,false,true,true,false,T-Towage-Outbound,jit1_1,UC38-SHIFT,null,null
 UC37-OUTB,PTS-Pilotage (Outbound),PLT,ATH,PLN,STRT,OUTB,PILO,null,false,true,true,false,T-Pilotage-Outbound,jit1_1,null,null,null
 UC38-OUTB,PTS-Towage (Outbound),TWG,ATH,PLN,STRT,OUTB,TOWG,null,false,true,true,false,T-Towage-Outbound,jit1_1,null,null,null
-UC39,RTD-Berth,ATH,VSL,REQ,DEPA,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,UC40,UC34,null
-UC40,PTD-Berth,VSL,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
+UC39,RTD-Berth,ATH,VSL,REQ,DEPA,ALGS,null,BRTH,true,false,true,false,TD-Berth,jit1_0,UC40,UC34,null
+UC40,PTD-Berth,VSL,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,null
 UC41,ATC-Bunkering,BUK,VSL,ACT,CMPL,ALGS,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
 UC42,ATC-Cargo Ops,TR,CA,ACT,CMPL,ALGS,CRGO,BRTH,true,false,true,false,T-Cargo-Ops,jit1_0,null,null,null
-UC43,ATC-Lashing,LSH,CA,ACT,CMPL,ALGS,LASH,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC44,Terminal ready for vessel departure,TR,VSL,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC45,Vessel ready to sail,VSL,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,null
-UC46,ATD-Berth,VSL,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,null
+UC43,ATC-Lashing,LSH,CA,ACT,CMPL,ALGS,LASH,BRTH,true,false,true,false,Special,jit1_1,null,null,null
+UC44,Terminal ready for vessel departure,TR,VSL,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,null
+UC45,Vessel ready to sail,VSL,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,null
+UC46,ATD-Berth,VSL,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,null
 UC47-SHIF,ATS-Pilotage (Shift),PLT,ATH,ACT,STRT,SHIF,PILO,null,false,false,true,true,T-Pilotage-Shift,jit1_1,null,null,null
 UC48-SHIF,ATS-Towage (Shift),TWG,ATH,ACT,STRT,SHIF,TOWG,null,false,false,true,true,T-Towage-Shift,jit1_1,null,null,null
 UC49-SHIF,ATC-Towage (Shift),TWG,ATH,ACT,CMPL,SHIF,TOWG,null,false,false,true,true,T-Towage-Shift,jit1_1,null,null,null
@@ -59,20 +59,20 @@ UC50,SOSP,CA,ATH,ACT,DEPA,OUTB,null,null,false,false,false,true,Special,jit1_1,n
 UC16-ALT-CA,RTS-Bunkering-ALT-CA,CA,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC14,UC16
 UC17-ALT-CA,RTC-Bunkering-ALT-CA,CA,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC15,UC17
 UC25-ALT-CA,ATA-Berth-ALT-CA,CA,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,UC25
-UC26-ALT-CA,AT-All fast-ALT-CA,CA,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC26
-UC27-ALT-CA,Gangway down and safe-ALT-CA,CA,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC27
-UC28-ALT-CA,Vessel Readiness for cargo operations-ALT-CA,CA,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC28
-UC34-ALT-CA,ETD-Berth-ALT-CA,CA,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,UC34
-UC40-ALT-CA,PTD-Berth-ALT-CA,CA,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC40
-UC45-ALT-CA,Vessel ready to sail-ALT-CA,CA,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,UC45
-UC46-ALT-CA,ATD-Berth-ALT-CA,CA,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC46
+UC26-ALT-CA,AT-All fast-ALT-CA,CA,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,Special,jit1_1,null,null,UC26
+UC27-ALT-CA,Gangway down and safe-ALT-CA,CA,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,Special,jit1_1,null,null,UC27
+UC28-ALT-CA,Vessel Readiness for cargo operations-ALT-CA,CA,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,UC28
+UC34-ALT-CA,ETD-Berth-ALT-CA,CA,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TD-Berth,jit1_0,UC39,UC39,UC34
+UC40-ALT-CA,PTD-Berth-ALT-CA,CA,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,UC40
+UC45-ALT-CA,Vessel ready to sail-ALT-CA,CA,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,UC45
+UC46-ALT-CA,ATD-Berth-ALT-CA,CA,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,UC46
 UC16-ALT-AG,RTS-Bunkering-ALT-AG,AG,BUK,REQ,STRT,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC18,UC14,UC16
 UC17-ALT-AG,RTC-Bunkering-ALT-AG,AG,BUK,REQ,CMPL,INBD,BUNK,BRTH,true,false,true,false,T-Bunkering,jit1_1,UC19,UC15,UC17
 UC25-ALT-AG,ATA-Berth-ALT-AG,AG,ATH,ACT,ARRI,ALGS,null,BRTH,true,false,true,false,TA-Berth,jit1_0,null,null,UC25
-UC26-ALT-AG,AT-All fast-ALT-AG,AG,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC26
-UC27-ALT-AG,Gangway down and safe-ALT-AG,AG,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC27
-UC28-ALT-AG,Vessel Readiness for cargo operations-ALT-AG,AG,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,TA-Berth,jit1_1,null,null,UC28
-UC34-ALT-AG,ETD-Berth-ALT-AG,AG,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TA-Berth,jit1_0,UC39,UC39,UC34
-UC40-ALT-AG,PTD-Berth-ALT-AG,AG,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC40
-UC45-ALT-AG,Vessel ready to sail-ALT-AG,AG,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,T-Bunkering,jit1_1,null,null,UC45
-UC46-ALT-AG,ATD-Berth-ALT-AG,AG,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TA-Berth,jit1_0,null,null,UC46
+UC26-ALT-AG,AT-All fast-ALT-AG,AG,ATH,ACT,ARRI,ALGS,FAST,BRTH,true,false,true,false,Special,jit1_1,null,null,UC26
+UC27-ALT-AG,Gangway down and safe-ALT-AG,AG,ATH,ACT,ARRI,ALGS,GWAY,BRTH,true,false,true,false,Special,jit1_1,null,null,UC27
+UC28-ALT-AG,Vessel Readiness for cargo operations-ALT-AG,AG,TR,ACT,ARRI,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,UC28
+UC34-ALT-AG,ETD-Berth-ALT-AG,AG,ATH,EST,DEPA,ALGS,null,BRTH,false,false,true,true,TD-Berth,jit1_0,UC39,UC39,UC34
+UC40-ALT-AG,PTD-Berth-ALT-AG,AG,ATH,PLN,DEPA,ALGS,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,UC40
+UC45-ALT-AG,Vessel ready to sail-ALT-AG,AG,TR,ACT,DEPA,ALGS,SAFE,BRTH,true,false,true,false,Special,jit1_1,null,null,UC45
+UC46-ALT-AG,ATD-Berth-ALT-AG,AG,ATH,ACT,DEPA,OUTB,null,BRTH,true,false,true,true,TD-Berth,jit1_0,null,null,UC46
