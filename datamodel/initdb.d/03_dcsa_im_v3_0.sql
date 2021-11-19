@@ -235,7 +235,7 @@ CREATE TABLE dcsa_im_v3_0.voyage (
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    carrier_booking_request_reference varchar(100) NOT NULL,
+    carrier_booking_request_reference varchar(100) NOT NULL UNIQUE DEFAULT uuid_generate_v4()::text,
     document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     receipt_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type_code),
     delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type_code),
