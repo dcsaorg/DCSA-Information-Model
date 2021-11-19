@@ -5,6 +5,46 @@ BEGIN;
 
 SELECT 'Start: 08_04_test_data_bkg.sql...' as progress;
 
+INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
+    shipment_id,
+    cut_off_time_code,
+    cut_off_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    'AFD',
+    DATE '2021-03-09'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
+    shipment_id,
+    cut_off_time_code,
+    cut_off_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
+    'DCO',
+    DATE '2021-05-01'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
+    shipment_id,
+    cut_off_time_code,
+    cut_off_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872'),
+    'ECP',
+    DATE '2020-07-07'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
+    shipment_id,
+    cut_off_time_code,
+    cut_off_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971'),
+    'EFC',
+    DATE '2020-01-06'
+);
+
 INSERT INTO dcsa_im_v3_0.address (
     id,
     name,

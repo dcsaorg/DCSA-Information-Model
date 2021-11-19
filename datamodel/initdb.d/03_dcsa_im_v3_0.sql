@@ -308,7 +308,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
     cut_off_time_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cut_off_time(cut_off_time_code),
-    cut_off_time timestamp NOT NULL
+    cut_off_time timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
