@@ -45,6 +45,72 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     DATE '2020-01-06'
 );
 
+
+INSERT INTO dcsa_im_v3_0.carrier_clauses (
+    id,
+    clause_content
+) VALUES (
+    'b8e312ad-7b00-4026-88ad-9881242ca4f4'::uuid,
+    'Carrier Clauses entity: comprises clauses, added by the carrier to the Shipment, which are subject to local rules/guidelines or certain mandatory information required to be shared with the customer. Usually printed below the cargo description.'
+);
+
+INSERT INTO dcsa_im_v3_0.carrier_clauses (
+    id,
+    clause_content
+) VALUES (
+    '93eedc86-f8a3-4ec3-8d30-ad1eb8a079d2'::uuid,
+    'Shipment Carrier Clauses entity: address the carrier clauses for a shipment.'
+);
+
+INSERT INTO dcsa_im_v3_0.carrier_clauses (
+    id,
+    clause_content
+) VALUES (
+    'cbe900e7-7ad9-45fc-8d9e-0d1628a1b4f7'::uuid,
+    'Incoterms entity: Transport obligations, costs and risks as agreed between buyer and seller.'
+);
+
+INSERT INTO dcsa_im_v3_0.carrier_clauses (
+    id,
+    clause_content
+) VALUES (
+    '3991a845-6cc8-404a-ac25-a1393e1d93a9'::uuid,
+    'Value Added Service Request entity: An entity containing data on requests for value added services. '
+);
+
+
+INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
+    carrier_clause_id,
+    shipment_id
+) VALUES (
+    'b8e312ad-7b00-4026-88ad-9881242ca4f4',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123')
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
+    carrier_clause_id,
+    shipment_id
+) VALUES (
+    '93eedc86-f8a3-4ec3-8d30-ad1eb8a079d2',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
+    carrier_clause_id,
+    shipment_id
+) VALUES (
+    'cbe900e7-7ad9-45fc-8d9e-0d1628a1b4f7',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
+    carrier_clause_id,
+    shipment_id
+) VALUES (
+    '3991a845-6cc8-404a-ac25-a1393e1d93a9',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971')
+);
+
 INSERT INTO dcsa_im_v3_0.address (
     id,
     name,
