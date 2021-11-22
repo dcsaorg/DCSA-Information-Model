@@ -225,6 +225,18 @@ INSERT INTO dcsa_im_v3_0.reference (
     NULL,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid);
 
+INSERT INTO dcsa_im_v3_0.iso_equipment_code (
+    iso_equipment_code,
+    iso_equipment_name,
+    iso_equipment_size_code,
+    iso_equipment_type_code_a
+) VALUES (
+    '22GP',
+    'GENERAL PURPOSE',
+    '22',
+    'GP'
+);
+
 INSERT INTO dcsa_im_v3_0.requested_equipment (
     id,
     booking_id,
