@@ -294,7 +294,7 @@ CREATE INDEX ON dcsa_im_v3_0.requested_equipment (booking_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.commodity (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
-    commodity_type varchar(20) NOT NULL,
+    commodity_type varchar(550) NOT NULL,
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
