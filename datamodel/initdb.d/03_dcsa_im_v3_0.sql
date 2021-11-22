@@ -278,6 +278,14 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     confirmation_datetime timestamp with time zone NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
+    iso_equipment_code varchar(4) PRIMARY KEY,
+    iso_equipment_name varchar(35) NULL,
+    iso_equipment_size_code varchar(2) NOT NULL,
+    iso_equipment_type_code_a varchar(2) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
@@ -439,14 +447,6 @@ CREATE TABLE dcsa_im_v3_0.document_version (
     binary_copy bytea NOT NULL,
     document_hash text NOT NULL,
     last_modified_datetime timestamp with time zone NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
-    iso_equipment_code varchar(4) PRIMARY KEY,
-    iso_equipment_name varchar(35) NULL,
-    iso_equipment_size_code varchar(2) NOT NULL,
-    iso_equipment_type_code_a varchar(2) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment CASCADE;
