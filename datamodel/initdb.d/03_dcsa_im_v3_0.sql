@@ -282,9 +282,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    requested_equipment_type varchar(4) NOT NULL,
+    requested_equipment_size_type varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     requested_equipment_units integer NOT NULL,
-    confirmed_equipment_type varchar(4) NULL,
+    confirmed_equipment_size_type varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
     is_shipper_owned boolean NOT NULL DEFAULT false
 );
