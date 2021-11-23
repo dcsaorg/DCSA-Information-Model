@@ -332,7 +332,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
     is_shipped_onboard_type boolean NOT NULL,
     number_of_copies integer NULL,
-    requested_number_of_originals integer NULL,
+    number_of_originals integer NULL,
     is_electronic boolean NULL,
     are_charges_displayed boolean NOT NULL
 );
@@ -355,7 +355,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     issue_date date NULL,
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
-    issued_number_of_originals integer NULL,
+    number_of_originals integer NULL,
     issuer uuid NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
