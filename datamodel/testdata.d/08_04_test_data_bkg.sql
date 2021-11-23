@@ -307,9 +307,9 @@ INSERT INTO dcsa_im_v3_0.requested_equipment (
     id,
     booking_id,
     shipment_id,
-    requested_equipment_size_type,
+    requested_equipment_sizetype,
     requested_equipment_units,
-    confirmed_equipment_size_type,
+    confirmed_equipment_sizetype,
     confirmed_equipment_units,
     is_shipper_owned
     ) VALUES (
