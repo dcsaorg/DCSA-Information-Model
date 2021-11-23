@@ -518,7 +518,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     is_shipped_onboard_type,
     number_of_copies,
-    requested_number_of_originals,
+    number_of_originals,
     is_electronic,
     are_charges_displayed
 ) VALUES (
