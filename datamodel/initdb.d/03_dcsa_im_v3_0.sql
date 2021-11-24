@@ -638,7 +638,8 @@ CREATE TABLE dcsa_im_v3_0.transport_plan_stage_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_transport (
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment(id),
     transport_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport(id),
     transport_plan_stage_sequence_number integer NOT NULL,
     transport_plan_stage_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.transport_plan_stage_type(transport_plan_stage_code),

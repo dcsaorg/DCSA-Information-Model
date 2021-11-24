@@ -348,6 +348,7 @@ INSERT INTO dcsa_im_v3_0.transport (
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_transport (
+    booking_id,
     shipment_id,
     transport_id,
     transport_plan_stage_sequence_number,
@@ -355,6 +356,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
+    null,
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
     1,
@@ -362,6 +364,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     null,
     false
 ), (
+    null,
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
     2,
@@ -369,6 +372,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     null,
     false
 ), (
+    null,
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
     3,
