@@ -45,6 +45,103 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     DATE '2020-01-06'
 );
 
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+    )VALUES(
+    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
+    'Lukas',
+    'Rohrdamm',
+    '81',
+    '5',
+    '32108',
+    'Bad Salzuflen Grastrup-hölsen',
+    'Nordrhein-Westfalen',
+    'Germany');
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    latitude,
+    longitude,
+    un_location_code,
+    address_id,
+    facility_id
+    ) VALUES (
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
+    'Hamburg',
+    '53.551° N',
+    '9.9937° E',
+    'DEHAM',
+    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
+    );
+
+-- Can be deleted once charge_type has been implemented properly
+INSERT INTO dcsa_im_v3_0.charge_type (
+    charge_type_code,
+    charge_type_name
+) VALUES (
+    'TBD',
+    'TO BE DELETED!'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_document (
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    number_of_originals,
+    issuer,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages
+) VALUES (
+    'be038e58-5365',
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
+    DATE '2020-11-25',
+    DATE '2020-12-24',
+    DATE '2020-12-31',
+    12,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
+    'WTK',
+    12.12,
+    12
+);
+
+INSERT INTO dcsa_im_v3_0.charge (
+    id,
+    transport_document_reference,
+    shipment_id,
+    charge_type_code,
+    currency_amount,
+    currency_code,
+    payment_term_code,
+    calculation_basis,
+    unit_price,
+    quantity
+) VALUES (
+    'f9d3c9ae-89c1-4394-a5fc-8e73538aaac4'::uuid,
+    'be038e58-5365',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    'TBD',
+    12.12,
+    'UMB',
+    'PRE',
+    'WHAT',
+    12.12,
+    123.321    
+);
 
 INSERT INTO dcsa_im_v3_0.carrier_clauses (
     id,
@@ -110,45 +207,6 @@ INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
     '3991a845-6cc8-404a-ac25-a1393e1d93a9',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971')
 );
-
-INSERT INTO dcsa_im_v3_0.address (
-    id,
-    name,
-    street,
-    street_number,
-    floor,
-    postal_code,
-    city,
-    state_region,
-    country
-    )VALUES(
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    'Lukas',
-    'Rohrdamm',
-    '81',
-    '5',
-    '32108',
-    'Bad Salzuflen Grastrup-hölsen',
-    'Nordrhein-Westfalen',
-    'Germany');
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name,
-    latitude,
-    longitude,
-    un_location_code,
-    address_id,
-    facility_id
-    ) VALUES (
-    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
-    'Hamburg',
-    '53.551° N',
-    '9.9937° E',
-    'DEHAM',
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
-    );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
