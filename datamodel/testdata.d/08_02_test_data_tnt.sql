@@ -1,6 +1,8 @@
 \set ON_ERROR_STOP true
 \connect dcsa_openapi
 
+# TODO: Add 2 events aligned with the equipment status for empty pickup and restituted using a facility code from BIC and test the DB insert using DCSA scripts.
+
 BEGIN;
 
 SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;

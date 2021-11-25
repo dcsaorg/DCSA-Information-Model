@@ -21,9 +21,12 @@ best-effort basis.  Corrections are welcome (via PR).
 
  * countrycodes.csv: Subset of https://unece.org/trade/cefact/unlocode-code-list-country-and-territory
 
- * facilities.csv: SMDG terminal list (see https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/)
-    - File is a subset of: https://raw.githubusercontent.com/smdg-org/Terminal-Code-List/master/SMDG%20Terminal%20Code%20List.csv
-    - Use `python3 update_facilities.py` to update the data set
+ * facilities.csv: BIC and SMDG facility code lists
+   - BIC facility code list (see https://www.bic-code.org/bic-facility-codes/)
+     * File is a subset of: https://raw.githubusercontent.com/bic-org/Facility-Code/master/sample-bic-facility-codes.csv
+   - SMDG terminal list (see https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/)
+     * File is a subset of: https://raw.githubusercontent.com/smdg-org/Terminal-Code-List/master/SMDG%20Terminal%20Code%20List.csv
+   - Use `python3 update_facilities.py` to update the data set
 
  * hscodes.csv: Subset of the "Harmonized System" list. Defined by: WCO (http://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx)
 
