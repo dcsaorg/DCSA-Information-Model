@@ -33,6 +33,44 @@ INSERT INTO dcsa_im_v3_0.location (
     'The Warehouse'
 );
 
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+) VALUES (
+    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
+    'Lagkagehuset',
+    'Islands Brygge',
+    '43',
+    'St',
+    '2300',
+    'København S',
+    'N/A',
+    'Denmark'
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    address_id,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    'Lagkagehuset Islands Brygge',
+    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
+    '55.6642249',
+    '12.57341045',
+    'USNYC'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
@@ -107,6 +145,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     import_license_reference,
     is_destination_filing_required,
     incoterms,
+    invoice_payable_at,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -134,6 +173,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'IMPORT_LICENSE_REFERENCE_02',
     TRUE,
     'FCA',
+    '84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d',
     DATE '2020-03-07',
     'SWB',
     'TRANSPORT_DOC_REF_02',
@@ -142,7 +182,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_02',
-    NULL
+    '01670315-a51f-4a11-b947-ce8e245128eb'
 );
 
 
@@ -477,45 +517,6 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     4000,
     'KGM',
     false
-);
-
-
-INSERT INTO dcsa_im_v3_0.address (
-    id,
-    name,
-    street,
-    street_number,
-    floor,
-    postal_code,
-    city,
-    state_region,
-    country
-) VALUES (
-    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
-    'Lagkagehuset',
-    'Islands Brygge',
-    '43',
-    'St',
-    '2300',
-    'København S',
-    'N/A',
-    'Denmark'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name,
-    address_id,
-    latitude,
-    longitude,
-    un_location_code
-) VALUES (
-    '01670315-a51f-4a11-b947-ce8e245128eb',
-    'Lagkagehuset Islands Brygge',
-    uuid('41272437-a160-4040-9a9d-c6676f9eb1b7'),
-    '55.6642249',
-    '12.57341045',
-    'USNYC'
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
