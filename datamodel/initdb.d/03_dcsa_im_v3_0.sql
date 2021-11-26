@@ -72,7 +72,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     facility_name varchar(100) NULL,
     un_location_code varchar(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code), -- The UN Locode prefixing the BIC / SMDG code
-    facility_bic_code varchar(9) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
+    facility_bic_code varchar(4) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     facility_smdg_code varchar(6) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     location_id varchar(100) REFERENCES dcsa_im_v3_0.location(id)
 );
