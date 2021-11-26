@@ -68,6 +68,7 @@ def main():
     df = df.rename(columns={"Terminal Code": "Facility SMDG Code"})
     df['Facility Name'] = df[['Terminal Facility Name', 'Facility Name']].fillna('').agg(''.join, axis=1)
     df = df.drop(columns=['Terminal Facility Name'])
+    df['Facility BIC Code'] = df['Facility BIC Code'].str[5:]
     #remove rows with unknown UNLOCODES from list
     df = df[df.UNLOCODE.isin(known_unlocodes)]
     #write the facilities.csv file
