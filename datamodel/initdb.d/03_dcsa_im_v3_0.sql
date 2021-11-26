@@ -273,7 +273,7 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
-    carrier_booking_reference varchar(35) NOT NULL,
+    carrier_booking_reference varchar(35) NOT NULL UNIQUE,
     terms_and_conditions text NULL,
     confirmation_datetime timestamp with time zone NOT NULL
 );
