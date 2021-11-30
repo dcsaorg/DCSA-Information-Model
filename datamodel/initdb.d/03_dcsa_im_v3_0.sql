@@ -705,7 +705,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_event (
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code),
     document_id varchar(100) NOT NULL,
-    reason varchar(100) NULL
+    reason varchar(250) NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id);
