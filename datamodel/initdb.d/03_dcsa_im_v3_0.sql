@@ -346,8 +346,6 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     are_charges_displayed boolean NOT NULL
 );
 
-CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
     transport_document_reference varchar(20) PRIMARY KEY,
@@ -537,6 +535,9 @@ CREATE TABLE dcsa_im_v3_0.reference (
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id)
 );
+
+CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.reference (cargo_item_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (
