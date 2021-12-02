@@ -339,7 +339,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.reference CASCADE;
 CREATE TABLE dcsa_im_v3_0.reference (
-    reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
+    reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code) CHECK (reference_type NOT IN ('EQ')),
     reference_value varchar(100) NOT NULL,
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
