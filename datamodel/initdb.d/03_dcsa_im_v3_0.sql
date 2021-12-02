@@ -343,7 +343,10 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     number_of_copies integer NULL,
     number_of_originals integer NULL,
     is_electronic boolean NULL,
-    are_charges_displayed boolean NOT NULL
+    are_charges_displayed_on_originals boolean NOT NULL,
+    are_charges_displayed_on_copies boolean NOT NULL,
+    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
@@ -581,6 +584,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     location_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.location (id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
     displayed_name varchar(250) NULL,
     event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
