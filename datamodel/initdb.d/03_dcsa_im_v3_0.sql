@@ -578,8 +578,8 @@ CREATE INDEX ON dcsa_im_v3_0.location (un_location_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location (
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     location_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.location (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
     displayed_name varchar(250) NULL,
