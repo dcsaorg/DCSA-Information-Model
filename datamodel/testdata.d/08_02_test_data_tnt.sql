@@ -170,7 +170,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'BR1239719872',
-    'PENA',
+    'PENU',
     DATE '2020-04-15',
     'CY',
     'CFS',
@@ -224,7 +224,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     carrier_voyage_number
 ) VALUES (
     'ABC123123123',
-    'ISSU',
+    'RECE',
     DATE '2020-03-10',
     'CY',
     'CFS',

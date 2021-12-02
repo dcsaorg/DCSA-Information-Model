@@ -242,7 +242,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     )VALUES(
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'ef223019-ff16-4870-be69-9dbaaaae9b11',
-    'PENA',
+    'PENU',
     'CY',
     'CY',
     'FCL',
