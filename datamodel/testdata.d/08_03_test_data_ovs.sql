@@ -173,7 +173,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'TR',
     'BUNK',
     '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
-    'POTE',
+    'BRTH',
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
 ), (
     uuid('03482296-ef9c-11eb-9a03-0242ac130003'),
