@@ -334,6 +334,122 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'TERMS AND CONDITIONS!',
     '2021-12-12 12:12:12.000');
 
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code,
+    location_id,
+    mode_of_transport_code,
+    vessel_id,
+    import_voyage_id,
+    export_voyage_id
+) VALUES (
+    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE',
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6'::uuid,
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_call (
+    id,
+    transport_call_sequence_number,
+    facility_id,
+    facility_type_code,
+    location_id,
+    mode_of_transport_code,
+    vessel_id,
+    import_voyage_id,
+    export_voyage_id
+) VALUES (
+    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE',
+    '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
+);
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_id,
+    event_classifier_code,
+    event_created_date_time,
+    event_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    uuid('2968b966-ee81-46ba-af87-0c5031c641f4'),
+    (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    'ARRI',
+    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    'WEA',
+    'Bad weather'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_id,
+    event_classifier_code,
+    event_created_date_time,
+    event_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    uuid('9d5d0824-b228-4ea8-b2cb-4ebd8da76e15'),
+    (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+    '2021-11-29T14:12:56+01:00'::timestamptz,
+    '2021-12-03T07:41:00+08:30'::timestamptz,
+    'DEPA',
+    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+    'WEA',
+    'Bad weather'
+);
+
+INSERT INTO dcsa_im_v3_0.transport (
+    id,
+    transport_reference,
+    transport_name,
+    load_transport_call_id,
+    discharge_transport_call_id
+) VALUES (
+    uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
+    'not another transport reference',
+    'Transport Name in action',
+    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    uuid('af0acf67-604c-4ffa-befe-77878a6a665d')
+);
+    
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+    booking_id,
+    shipment_id,
+    transport_id,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
+    commercial_voyage_id,
+    is_under_shippers_responsibility
+) VALUES (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'DCR987876762'),
+    uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
+    1,
+    'PRC',
+    null,
+    false
+);
+
 INSERT INTO dcsa_im_v3_0.reference (
     id,
     reference_type_code,
