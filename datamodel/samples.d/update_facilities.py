@@ -54,10 +54,9 @@ def main():
         sys.exit(1)
 
     try:
-        import requests
         import pandas
     except ImportError:
-        print("This script requires requests and pandas (pip3 install requests, pip3 install pandas or apt install python3-requests)")
+        print("This script requires pandas (pip3 install pandas - https://pandas.pydata.org/docs/getting_started/install.html)")
         sys.exit(1)
 
     known_unlocodes = parse_known_unlocodes(output_dir)
