@@ -3,18 +3,24 @@
 import csv
 import os
 import sys
+import pandas as pd
 
+"""
+ SMDG and BIC provide facility codes via API,
+ The below urls are either full or partial samples of the facilities they provide codes for.
+"""
+SMDG_DOWNLOAD_URL = 'https://raw.githubusercontent.com/smdg-org/Terminal-Code-List/master/SMDG%20Terminal%20Code%20List.csv'
+BIC_DOWNLOAD_URL = 'https://raw.githubusercontent.com/bic-org/Facility-Code/master/sample-bic-facility-codes.csv'
 
-DOWNLOAD_URL = 'https://raw.githubusercontent.com/smdg-org/Terminal-Code-List/master/SMDG%20Terminal%20Code%20List.csv'
-FIELDS_TO_KEEP = ['Terminal Facility Name', 'UNLOCODE', 'Terminal Code']
+HEADER_FIELDS = ['Facility Name','UNLOCODE', 'Facility SMDG Code', 'Facility BIC Code']
+FIELDS_TO_KEEP = ['Terminal Facility Name', 'Facility Name','UNLOCODE', 'Terminal Code', 'Facility BIC Code']
+
 UN_LOCODE_FIELD = 'UNLOCODE'
 FILENAME = "facilities.csv"
-
 
 def usage():
     print("Usage: python3 " + os.path.basename(sys.argv[0]) + ".py path/to/datamodel/samples.d")
     sys.exit(1)
-
 
 def parse_known_unlocodes(output_dir):
     known_unlocodes = None
@@ -48,32 +54,26 @@ def main():
         sys.exit(1)
 
     try:
-        import requests
+        import pandas
     except ImportError:
-        print("This script requires requests (pip3 install requests or apt install python3-requests)")
+        print("This script requires pandas (pip3 install pandas - https://pandas.pydata.org/docs/getting_started/install.html)")
         sys.exit(1)
 
     known_unlocodes = parse_known_unlocodes(output_dir)
 
-    content = requests.get(DOWNLOAD_URL).text
-    if content[0] == '\ufeff':
-        # Excel provided BOM character - remove it
-        # https://www.freecodecamp.org/news/a-quick-tale-about-feff-the-invisible-character-cd25cd4630e7/
-        content = content[1:]
+    #read SMDG and BIC facilities in and align the columns to DCSA facility entity fieldnames
+    df = pd.concat(map(pd.read_csv, [SMDG_DOWNLOAD_URL, BIC_DOWNLOAD_URL]))
+    df = df[FIELDS_TO_KEEP]
+    df = df.rename(columns={"Terminal Code": "Facility SMDG Code"})
+    df['Facility Name'] = df[['Terminal Facility Name', 'Facility Name']].fillna('').agg(''.join, axis=1)
+    df = df.drop(columns=['Terminal Facility Name'])
+    df['Facility BIC Code'] = df['Facility BIC Code'].str[5:]
+    #remove rows with unknown UNLOCODES from list
+    df = df[df.UNLOCODE.isin(known_unlocodes)]
+    #write the facilities.csv file
     facilities_file = os.path.join(output_dir, FILENAME)
-    new_facilities_file = facilities_file + ".new"
-    with open(new_facilities_file, "w") as fd:
-        csv_reader = csv.DictReader(content.splitlines())
-        csv_writer = csv.DictWriter(fd, fieldnames=FIELDS_TO_KEEP)
-        csv_writer.writeheader()
-        for row in csv_reader:
-            if known_unlocodes is not None and row[UN_LOCODE_FIELD] not in known_unlocodes:
-                continue
-            replacement_row = {f: row[f] for f in FIELDS_TO_KEEP}
-            csv_writer.writerow(replacement_row)
-    os.rename(new_facilities_file, facilities_file)
+    df.to_csv(facilities_file, index=False)
     print("Updated " + facilities_file)
-
 
 if __name__ == '__main__':
     main()
