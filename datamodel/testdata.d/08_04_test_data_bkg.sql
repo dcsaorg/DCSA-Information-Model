@@ -433,7 +433,6 @@ INSERT INTO dcsa_im_v3_0.transport (
 );
     
 INSERT INTO dcsa_im_v3_0.shipment_transport (
-    booking_id,
     shipment_id,
     transport_id,
     transport_plan_stage_sequence_number,
@@ -441,7 +440,6 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     commercial_voyage_id,
     is_under_shippers_responsibility
 ) VALUES (
-    null,
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'DCR987876762'),
     uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
     1,
