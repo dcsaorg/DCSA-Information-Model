@@ -113,7 +113,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number
+    export_voyage_number
 ) VALUES (
     'BR1239719971',
     'PENU',
@@ -167,7 +167,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number
+    export_voyage_number
 ) VALUES (
     'BR1239719872',
     'PENU',
@@ -221,7 +221,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number
+    export_voyage_number
 ) VALUES (
     'ABC123123123',
     'RECE',

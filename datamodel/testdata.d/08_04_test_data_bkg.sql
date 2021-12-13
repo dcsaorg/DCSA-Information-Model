@@ -237,7 +237,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number,
+    export_voyage_number,
     place_of_issue
     )VALUES(
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,

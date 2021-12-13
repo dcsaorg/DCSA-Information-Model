@@ -96,7 +96,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number,
+    export_voyage_number,
     place_of_issue
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
@@ -153,7 +153,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    carrier_voyage_number,
+    export_voyage_number,
     place_of_issue
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
