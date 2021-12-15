@@ -232,6 +232,14 @@ CREATE TABLE dcsa_im_v3_0.voyage (
     service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.mode_of_transport CASCADE;
+CREATE TABLE dcsa_im_v3_0.mode_of_transport (
+    mode_of_transport_code varchar(3) PRIMARY KEY,
+    mode_of_transport_name varchar(100) NULL,
+    mode_of_transport_description varchar(250) NULL,
+    dcsa_transport_type varchar(50) NULL UNIQUE
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -263,7 +271,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     export_voyage_number varchar(50) NULL,
-    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id)
+    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
@@ -334,19 +343,11 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     number_of_copies integer NULL,
     number_of_originals integer NULL,
     is_electronic boolean NULL,
-    are_charges_displayed boolean NOT NULL
+    are_charges_displayed_on_originals boolean NOT NULL,
+    are_charges_displayed_on_copies boolean NOT NULL,
+    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code)
 );
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.reference CASCADE;
-CREATE TABLE dcsa_im_v3_0.reference (
-    reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code) CHECK (reference_type_code NOT IN ('EQ')),
-    reference_value varchar(100) NOT NULL,
-    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id)
-);
-
-CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
@@ -382,7 +383,8 @@ CREATE TABLE dcsa_im_v3_0.carrier_clauses (
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_carrier_clauses (
     carrier_clause_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier_clauses (id),
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    transport_document_reference varchar(20) NULL REFERENCES dcsa_im_v3_0.transport_document (transport_document_reference)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
@@ -527,6 +529,19 @@ CREATE TABLE dcsa_im_v3_0.cargo_line_item (
     UNIQUE (cargo_item_id, cargo_line_item_id)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.reference CASCADE;
+CREATE TABLE dcsa_im_v3_0.reference (
+    reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
+    reference_value varchar(100) NOT NULL,
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
+    cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id)
+);
+
+CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.reference (cargo_item_id);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (
     seal_source_code varchar(5) PRIMARY KEY,
@@ -566,9 +581,10 @@ CREATE INDEX ON dcsa_im_v3_0.location (un_location_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location (
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     location_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.location (id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
     displayed_name varchar(250) NULL,
     event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
@@ -581,14 +597,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_location_type_code);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.mode_of_transport CASCADE;
-CREATE TABLE dcsa_im_v3_0.mode_of_transport (
-    mode_of_transport_code varchar(3) PRIMARY KEY,
-    mode_of_transport_name varchar(100) NULL,
-    mode_of_transport_description varchar(250) NULL,
-    dcsa_transport_type varchar(50) NULL UNIQUE
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
