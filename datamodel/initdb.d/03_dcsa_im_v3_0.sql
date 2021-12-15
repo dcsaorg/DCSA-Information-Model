@@ -270,7 +270,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     communication_channel_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    carrier_voyage_number varchar(50) NULL,
+    export_voyage_number varchar(50) NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
@@ -646,7 +646,6 @@ CREATE TABLE dcsa_im_v3_0.transport_plan_stage_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_transport CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_transport (
-    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment(id),
     transport_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport(id),
     transport_plan_stage_sequence_number integer NOT NULL,
