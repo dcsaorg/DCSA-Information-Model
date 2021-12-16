@@ -98,8 +98,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     vessel_id,
     export_voyage_number,
     place_of_issue,
-    event_created_date_time,
-    event_date_time
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
     'RECE',
@@ -159,8 +159,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     vessel_id,
     export_voyage_number,
     place_of_issue,
-    event_created_date_time,
-    event_date_time
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
     'RECE',

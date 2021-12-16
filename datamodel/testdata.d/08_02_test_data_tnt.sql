@@ -114,8 +114,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    event_created_date_time,
-    event_date_time
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'BR1239719971',
     'PENU',
@@ -172,8 +172,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    event_created_date_time,
-    event_date_time
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'BR1239719872',
     'PENU',
@@ -230,8 +230,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    event_created_date_time,
-    event_date_time
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'ABC123123123',
     'RECE',
