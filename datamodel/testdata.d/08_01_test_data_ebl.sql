@@ -97,7 +97,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    place_of_issue
+    place_of_issue,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
     'RECE',
@@ -124,7 +126,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
-    NULL
+    NULL,
+    DATE '2021-12-09',
+    DATE '2021-12-09'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -154,7 +158,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    place_of_issue
+    place_of_issue,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
     'RECE',
@@ -182,7 +188,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_02',
-    '01670315-a51f-4a11-b947-ce8e245128eb'
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2021-12-15',
+    DATE '2021-12-16'
 );
 
 
