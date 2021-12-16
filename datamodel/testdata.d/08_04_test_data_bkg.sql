@@ -238,7 +238,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
-    place_of_issue
+    place_of_issue,
+    event_created_date_time,
+    event_date_time
     )VALUES(
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'ef223019-ff16-4870-be69-9dbaaaae9b11',
@@ -269,7 +271,10 @@ INSERT INTO dcsa_im_v3_0.booking (
      true,
      NULL,
      NULL,
-     NULL);
+     NULL,
+    DATE '2021-12-01',
+    DATE '2021-12-01'
+     );
 
 INSERT INTO dcsa_im_v3_0.commodity(
     id,
