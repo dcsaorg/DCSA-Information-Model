@@ -311,16 +311,25 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     canonical_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
 );
 
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.payload CASCADE;
+CREATE TABLE dcsa_im_v3_0.payload (
+    payload_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    payload bytea NOT NULL,
+    created_at timestamp with time zone NOT NULL DEFAULT now()
+);
+
 -- Ideally, this would be inlined of the operations_event table as a field.  However, operations_event
 -- is an official entity and the timestamp_definition is not.  Lets not "contaminate" official IM
 -- with unofficial attributes where we can avoid it.
 DROP TABLE IF EXISTS dcsa_im_v3_0.ops_event_timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
     event_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.operations_event (event_id),
+    payload_id uuid NULL REFERENCES dcsa_im_v3_0.payload(payload_id),
     timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (id)
 );
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
-
+CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (payload_id);
 
 -- Only used by UI support to assist the UI
 DROP VIEW IF EXISTS dcsa_im_v3_0.ui_timestamp_info CASCADE;
@@ -396,5 +405,6 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.id = ops_event_timestamp_definition.timestamp_definition)
                    WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
           ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
+
 
 COMMIT;
