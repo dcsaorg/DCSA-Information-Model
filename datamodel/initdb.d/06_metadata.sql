@@ -45,10 +45,8 @@ ALTER TABLE dcsa_im_v3_0.requested_equipment
 -- DateTime metadata
 
 -- Metadata for Booking table to avoid having to query shipmentEvent for 
--- date_times necessary for BookingResponseTO
+-- updated date_time necessary for BookingResponseTO
 
-ALTER TABLE dcsa_im_v3_0.booking
-    ADD COLUMN IF NOT EXISTS created_date_time timestamp with time zone NOT NULL;
 ALTER TABLE dcsa_im_v3_0.booking
     ADD COLUMN IF NOT EXISTS updated_date_time timestamp with time zone NOT NULL;
 
