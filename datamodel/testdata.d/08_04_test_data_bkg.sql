@@ -239,7 +239,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     vessel_id,
     export_voyage_number,
     place_of_issue,
-    created_date_time,
     updated_date_time
 ) VALUES (
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
@@ -272,7 +271,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     NULL,
     NULL,
     NULL,
-    DATE '2021-12-01',
     DATE '2021-12-01'
 );
 
