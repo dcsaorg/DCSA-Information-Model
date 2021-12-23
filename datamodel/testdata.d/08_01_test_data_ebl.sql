@@ -195,13 +195,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     booking_id,
     carrier_booking_reference,
     terms_and_conditions,
-    confirmation_datetime
+    confirmation_datetime,
+    updated_date_time
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     'BR1239719871',
     'TERMS AND CONDITIONS!',
-    DATE '2020-03-07T12:12:12'
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment (
@@ -209,13 +211,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     booking_id,
     carrier_booking_reference,
     terms_and_conditions,
-    confirmation_datetime
+    confirmation_datetime,
+    updated_date_time
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_02'),
     'CR1239719872',
     'TERMS AND CONDITIONS!',
-    DATE '2020-03-07T12:12:12'
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
 );
 
 INSERT INTO dcsa_im_v3_0.reference (
