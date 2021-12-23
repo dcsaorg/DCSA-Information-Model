@@ -270,6 +270,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      true,
      NULL,
      NULL,
+     NULL,
      DATE '2021-12-01');
 
 INSERT INTO dcsa_im_v3_0.commodity(
