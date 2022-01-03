@@ -50,4 +50,7 @@ ALTER TABLE dcsa_im_v3_0.requested_equipment
 ALTER TABLE dcsa_im_v3_0.booking
     ADD COLUMN IF NOT EXISTS updated_date_time timestamp with time zone NOT NULL;
 
+ALTER TABLE dcsa_im_v3_0.shipment
+    ADD COLUMN IF NOT EXISTS updated_date_time timestamp with time zone NOT NULL;
+
 COMMIT;

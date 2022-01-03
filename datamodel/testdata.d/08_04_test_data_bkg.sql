@@ -327,14 +327,16 @@ INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     carrier_booking_reference,
     terms_and_conditions,
-    confirmation_datetime
+    confirmation_datetime,
+    updated_date_time
     ) VALUES (
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'DCR987876762',
     'TERMS AND CONDITIONS!',
-    '2021-12-12 12:12:12.000');
+    '2021-12-12 12:12:12.000',
+    DATE '2021-12-12T12:12:12');
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
