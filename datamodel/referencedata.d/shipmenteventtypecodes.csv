@@ -15,4 +15,5 @@ REQS,Requested,"A status indicator that can be used with a number of identifiers
 CMPL,Completed,"A status indicator that can be used with a number of activity identifiers to denote that a certain activity, service or document has been completed."
 HOLD,On Hold,"A status indicator that can be used with a number of activity identifiers to denote that a container or shipment has been placed on hold i.e. can’t  progress in the process."
 RELS,Released,"A status indicator that can be used with a number of activity identifiers to denote that a container or shipment has been released i.e. allowed to move from depot or terminal by authorities or service provider."
-CANC, Cancelled, "A status indicator to be used when the booking is cancelled by the Shipper"
+CANC,Cancelled, "A status indicator to be used when the booking is cancelled by the Shipper"
+COMP,Completed, "A status indicator to be used for a booking when B/L is issued"
