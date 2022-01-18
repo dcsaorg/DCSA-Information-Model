@@ -9,8 +9,7 @@ on:
   push:
     branches:
       - master
-      - live-hamburg
-      - live-singapore
+      - live-*
 
 env:
   # Use docker.io for Docker Hub if empty
