@@ -265,7 +265,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     invoice_payable_at varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     expected_departure_date date NULL,
     expected_arrival_date_start date NULL CHECK ((expected_arrival_date_start IS NULL AND expected_arrival_date_end IS NULL) OR expected_arrival_date_start <= expected_arrival_date_end),
-    expected_arrival_date_end date NULL CHECK ((expected_arrival_date_start IS NULL AND expected_arrival_date_end IS NULL) OR expected_arrival_date_start <= expected_arrival_date_end),
+    expected_arrival_date_end date NULL,
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     transport_document_reference varchar(20) NULL,
     booking_channel_reference varchar(20) NULL,
