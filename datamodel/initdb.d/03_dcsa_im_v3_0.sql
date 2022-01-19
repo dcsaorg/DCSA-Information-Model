@@ -264,6 +264,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     incoterms varchar(3) NULL REFERENCES dcsa_im_v3_0.incoterms(incoterms_code),
     invoice_payable_at varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     expected_departure_date timestamp NULL,
+    expected_arrival_date_start timestamp NULL,
+    expected_arrival_date_end timestamp NULL,
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     transport_document_reference varchar(20) NULL,
     booking_channel_reference varchar(20) NULL,
