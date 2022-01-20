@@ -84,15 +84,6 @@ INSERT INTO dcsa_im_v3_0.location (
     (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
     );
 
--- Can be deleted once charge_type has been implemented properly
-INSERT INTO dcsa_im_v3_0.charge_type (
-    charge_type_code,
-    charge_type_name
-) VALUES (
-    'TBD',
-    'TO BE DELETED!'
-);
-
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,

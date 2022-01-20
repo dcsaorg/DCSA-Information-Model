@@ -420,19 +420,12 @@ CREATE TABLE dcsa_im_v3_0.displayed_address (
 );
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id, address_line_number);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.charge_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.charge_type (
-    charge_type_code varchar(3) NOT NULL PRIMARY KEY,
-    charge_type_name varchar(20) NOT NULL,
-    charge_type_description varchar(100) NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge CASCADE;
 CREATE TABLE dcsa_im_v3_0.charge (
     id varchar(100) PRIMARY KEY,
     transport_document_reference varchar(20) NOT NULL REFERENCES dcsa_im_v3_0.transport_document(transport_document_reference),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    charge_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.charge_type(charge_type_code),
+    charge_type_code varchar(20) NOT NULL,
     currency_amount real NOT NULL,
     currency_code varchar(3) NOT NULL,
     payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
