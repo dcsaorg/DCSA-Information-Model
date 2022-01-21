@@ -181,7 +181,7 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_imo_number varchar(7) NULL,
+    vessel_imo_number varchar(7) NULL UNIQUE,
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign_number varchar(10) NULL,
@@ -592,16 +592,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_location_type_code);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
-CREATE TABLE dcsa_im_v3_0.vessel (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_imo_number varchar(7) NULL UNIQUE,
-    vessel_name varchar(35) NULL,
-    vessel_flag char(2) NULL,
-    vessel_call_sign_number varchar(10) NULL,
-    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
