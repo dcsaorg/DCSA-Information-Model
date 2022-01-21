@@ -9,12 +9,12 @@ N2,Second Notify Party.,The second party which is to be notified.
 NI,Notify party,Party to be notified of arrival of goods.
 DDR,"Consignor's freight forwarder",Identification of freight forwarder giving services to the consignor (shipper).
 DDS,"Consignee's freight forwarder",Identification of freight forwarder giving services to the consignee.
-CA,Carrier operations,
+CA,Carrier operations,"The activity of discharging, shifting, loading, and lashing containers (both full and empty) as well as other cargo from/to a vessel during port stay. Normally quantified with a move-count and a number of moves per hour."
 AG,Carrier local agent,
-VSL,Vessel,
+VSL,Vessel,"A floating, sea going structure (mother vessels and feeder vessels) with either an internal or external mode of propulsion designed for the transport of cargo and/or passengers. Ocean vessels are uniquely identified by an IMO number consisting of 7 digits, or alternatively by their AIS signal with an MMSI number"
 ATH,Port Authorities,
-PLT,Pilot,
+PLT,Pilot,The activity of conducting a vessel within restricted waters.
 TWG,Towage provider,
 LSH,Lashing provider,
 BUK,Bunkering service provider,
-TR,Terminal,
+TR,Terminal,"A facility for loading, moving or discharging containers. Terminals can be both inland terminals for trucks and rail or port terminals are accessed by vessels and these can contain multiple berths."

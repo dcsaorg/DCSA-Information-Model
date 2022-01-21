@@ -1,10 +1,16 @@
-Shipment Location Type Code,Location Type Description
-PRE,Place of Receipt
-PDE,Place of Delivery
-PCF,Pre-carriage From
-PSR, Precarriage under shipper’s responsibility
-OIR,Onward In-land Routing
-POL,Port of Loading
-POD,Port of Discharge
-ORI,Origin of goods
-DRL,Depot release location
+Shipment Location Type Code,Shipment Location Type Name,Shipment Location Type Description
+PRE,Place of Receipt,"The location where the cargo is handed over by the shipper, or his agent, to the shipping line. This indicates the point at which the shipping line takes on responsibility for carriage of the container."
+POL,Port of Loading,"The location where the cargo is loaded onto a first sea-going vessel for water transportation."
+POD,Port of Discharge,"The location where the cargo is discharged from the last sea-going vessel."
+PDE,Place of Delivery,"The location where the cargo is handed over to the consignee, or his agent, by the shipping line and where responsibility of the shipping line ceases."
+PCF,Pre-carriage From,
+PSR, Precarriage under shipper’s responsibility,"Place and mode of transportation for pre-carriage (e.g. truck, barge, rail) under shipper's responsibility"
+OIR,Onward In-land Routing,"The location where the cargo is transported from port of discharge to consignee location on consignee's responsibility (merchant haulage)."
+DRL,Depot release location,
+ORI,Origin of goods,
+IEL,Container intermediate export stop off location,
+PTP,Prohibited transshipment port,
+RTP,Requested transshipment port,
+FCD,Full container drop-off location,
+ECP,Empty container pick-up date and time,
+FDE,Final destination,
