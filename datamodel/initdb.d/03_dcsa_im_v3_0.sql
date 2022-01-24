@@ -404,7 +404,7 @@ CREATE TABLE dcsa_im_v3_0.document_party (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
     is_to_be_notified boolean NOT NULL,
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id)
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id)
 );
 
 -- Supporting FK constraints
