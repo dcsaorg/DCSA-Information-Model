@@ -181,11 +181,12 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_imo_number varchar(7) NULL UNIQUE,
+    vessel_imo_number varchar(7) NULL,
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign_number varchar(10) NULL,
-    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    vessel_valid_until timestamp with time zone NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.communication_channel_qualifier CASCADE;
