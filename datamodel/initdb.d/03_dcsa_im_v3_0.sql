@@ -493,7 +493,6 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     description_of_goods text NOT NULL,
     hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     weight real NULL,
