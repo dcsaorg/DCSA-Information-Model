@@ -345,6 +345,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     number_of_copies integer NULL,
     number_of_originals integer NULL,
     is_electronic boolean NULL,
+    is_to_order boolean NOT NULL,
     are_charges_displayed_on_originals boolean NOT NULL,
     are_charges_displayed_on_copies boolean NOT NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
