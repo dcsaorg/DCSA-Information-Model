@@ -506,7 +506,6 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
 );
 
 -- Supporting FK constraints
-CREATE INDEX ON dcsa_im_v3_0.cargo_item (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (hs_code);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (package_code);
