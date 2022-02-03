@@ -81,7 +81,8 @@ UNION
             WHEN 'SHI'
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.shipment s
-                  JOIN dcsa_im_v3.0.shipment_equipment se ON ci.shipment_equipment_id = se.id
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON ci.shipment_equipment_id = se.id
+
                   JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
                   WHERE ci.shipping_instruction_id = document_id)
             WHEN 'CBR'
