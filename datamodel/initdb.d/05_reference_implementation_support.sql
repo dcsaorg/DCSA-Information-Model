@@ -74,8 +74,7 @@ UNION
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.transport_document td
                   JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-                  JOIN dcsa_im_v3_0.shipment_equipment se ON ci.shipment_equipment_id = se.id
-
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
                   JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
                   WHERE td.transport_document_reference = document_id)
             WHEN 'SHI'
