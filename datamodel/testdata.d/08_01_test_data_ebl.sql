@@ -529,6 +529,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     number_of_copies,
     number_of_originals,
     is_electronic,
+    is_to_order,
     are_charges_displayed_on_originals,
     are_charges_displayed_on_copies
 ) VALUES (
@@ -536,6 +537,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE,
     2,
     4,
+    TRUE,
     TRUE,
     TRUE,
     FALSE
