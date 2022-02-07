@@ -397,7 +397,6 @@ INSERT INTO dcsa_im_v3_0.shipment (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     location_id,
     mode_of_transport_code,
@@ -407,7 +406,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'::uuid,
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
@@ -419,7 +417,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     location_id,
     mode_of_transport_code,
@@ -429,7 +426,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
