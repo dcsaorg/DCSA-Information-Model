@@ -27,7 +27,7 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
-    facilityID
+    facility_id
 ) VALUES (
     uuid('6f29ce3c-403d-22df-9579-6bd2f4cf4ed4'),
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT')
@@ -35,7 +35,7 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
-    facilityID
+    facility_id
 ) VALUES (
     uuid('8f29ce3c-403d-3311-9579-6bd2f4cf4ed7'),
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM')
