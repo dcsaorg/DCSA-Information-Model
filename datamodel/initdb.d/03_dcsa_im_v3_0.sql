@@ -346,10 +346,15 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     number_of_copies integer NULL,
     number_of_originals integer NULL,
     is_electronic boolean NULL,
+    is_to_order boolean NOT NULL,
     are_charges_displayed_on_originals boolean NOT NULL,
     are_charges_displayed_on_copies boolean NOT NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
-    transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code)
+    transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
+    displayed_name_for_place_of_receipt varchar(250) NULL,
+    displayed_name_for_port_of_load varchar(250) NULL,
+    displayed_name_for_port_of_discharge varchar(250) NULL,
+    displayed_name_for_place_of_delivery varchar(250) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
