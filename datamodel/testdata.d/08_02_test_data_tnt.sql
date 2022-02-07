@@ -43,16 +43,16 @@ INSERT INTO dcsa_im_v3_0.location (
     id,
     facility_id
 ) VALUES (
-    uuid('6f29ce3c-403d-22df-9579-6bd2f4cf4ed4'),
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SIKOP' AND facility_smdg_code = 'LUKA')
+    uuid('6f29ce3c-403d-1345-9579-6bd2f4cf4ed4'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'AEKLF' AND facility_smdg_code = 'KCTKLF')
 );
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
     facility_id
 ) VALUES (
-    uuid('8f29ce3c-403d-3311-9579-6bd2f4cf4ed7'),
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SNDKR' AND facility_smdg_code = 'DPWSN')
+    uuid('8f29ce3c-403d-3311-1234-6bd2f4cf4ed7'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'AOLAD' AND facility_smdg_code = 'BOA')
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -65,7 +65,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed',
     1,
-    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'SIKOP' AND facility.facility_smdg_code = 'LUKA')),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'AEKLF' AND facility.facility_smdg_code = 'KCTKLF')),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567')
@@ -84,7 +84,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000',
     1,
-    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'SNDKR' AND facility.facility_smdg_code = 'DPWSN')),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'AOLAD' AND facility.facility_smdg_code = 'BOA')),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
