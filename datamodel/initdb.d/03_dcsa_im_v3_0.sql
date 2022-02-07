@@ -122,8 +122,14 @@ CREATE TABLE dcsa_im_v3_0.party (
     tax_reference_1 varchar(20) NULL,
     tax_reference_2 varchar(20) NULL,
     public_key varchar(500) NULL,
-    address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id)
+    address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
+    ebl_platform uuid NULL,
+    lei varchar(20) NULL,
+    url varchar(250) NULL
 );
+
+ALTER TABLE dcsa_im_v3_0.party
+    ADD FOREIGN KEY (ebl_platform) REFERENCES dcsa_im_v3_0.party(id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
