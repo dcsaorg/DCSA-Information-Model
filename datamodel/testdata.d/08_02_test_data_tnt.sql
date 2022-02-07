@@ -84,7 +84,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000',
     1,
-    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'AOLAD' AND facility.facility_smdg_code = 'BOA')),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'AOLAD' AND facility.facility_smdg_code = 'BOA') LIMIT 1),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
