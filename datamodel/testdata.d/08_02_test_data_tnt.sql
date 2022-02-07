@@ -43,7 +43,7 @@ INSERT INTO dcsa_im_v3_0.location (
     id,
     facility_id
 ) VALUES (
-    uuid('6f29ce3c-403d-1345-9579-6bd2f4cf4ed4'),
+    uuid('6f29ce3c-403d-1345-9579-6bd2f4cf4114'),
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'AEKLF' AND facility_smdg_code = 'KCTKLF')
 );
 
