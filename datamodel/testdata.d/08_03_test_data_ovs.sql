@@ -129,7 +129,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     1,
-    '0c9de36d-1f9f-4d91-9a43-c6aeb93198a0',
+    uuid('0c9de36d-1f9f-4d91-9a43-c6aeb93198a0'),
     'BRTH',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
