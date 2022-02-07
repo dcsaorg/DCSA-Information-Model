@@ -123,7 +123,7 @@ CREATE TABLE dcsa_im_v3_0.party (
     tax_reference_2 varchar(20) NULL,
     public_key varchar(500) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id),
-    ebl_platform uuid NULL,
+    ebl_platform varchar(100) NULL,
     lei varchar(20) NULL,
     url varchar(250) NULL
 );
