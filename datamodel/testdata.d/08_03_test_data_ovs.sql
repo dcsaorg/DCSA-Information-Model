@@ -113,7 +113,7 @@ INSERT INTO dcsa_im_v3_0.location (
     id,
     facility_id
 ) VALUES (
-    uuid('af23ce3c-403d-1345-9579-6bd2f4cf4edf'),
+    '6523ce3c-403d-1345-9579-6bd2f4cf4745',
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'ARLPS' AND facility_smdg_code = 'LPMOL')
 );
 
