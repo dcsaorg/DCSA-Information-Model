@@ -117,6 +117,14 @@ INSERT INTO dcsa_im_v3_0.location (
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'ARLPS' AND facility_smdg_code = 'LPMOL')
 );
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    facility_id
+) VALUES (
+    uuid('b61abd37-f434-49d9-ad7c-f6baded2b902'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'ARLPS' AND facility_smdg_code = 'LPMOL')
+);
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
