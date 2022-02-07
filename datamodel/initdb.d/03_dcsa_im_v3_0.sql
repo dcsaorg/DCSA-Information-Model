@@ -602,9 +602,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
     id varchar(100) DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_call_sequence_number integer,
-    facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-    other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
