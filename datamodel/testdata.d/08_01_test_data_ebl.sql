@@ -319,7 +319,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
-    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'NLRTM' AND facility.facility_smdg_code = 'APM')),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'NLRTM' AND facility.facility_smdg_code = 'APM') LIMIT 1),
     'COFS',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     null,
