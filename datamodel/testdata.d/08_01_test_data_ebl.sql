@@ -27,6 +27,22 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
+    facilityID
+) VALUES (
+    uuid('6f29ce3c-403d-22df-9579-6bd2f4cf4ed4'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT')
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    facilityID
+) VALUES (
+    uuid('8f29ce3c-403d-3311-9579-6bd2f4cf4ed7'),
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM')
+);
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
     location_name
 ) VALUES (
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
@@ -274,7 +290,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
+    location_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id,
@@ -283,7 +299,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'SGSIN' AND facility.facility_smdg_code = 'PSABT')),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
@@ -294,7 +310,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
+    location_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id,
@@ -303,7 +319,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
+    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'NLRTM' AND facility.facility_smdg_code = 'APM')),
     'COFS',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     null,
@@ -315,9 +331,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
-    other_facility,
     location_id,
     mode_of_transport_code,
     vessel_id,
@@ -326,9 +340,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     1,
-    null,
     'COFS',
-    null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     null,
@@ -340,9 +352,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
-    other_facility,
     location_id,
     mode_of_transport_code,
     vessel_id,
@@ -351,9 +361,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     1,
-    null,
     'INTE',
-    null,
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
     null,
