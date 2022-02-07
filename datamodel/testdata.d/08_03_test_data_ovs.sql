@@ -129,7 +129,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ) VALUES (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
     1,
-    (SELECT location.id FROM dcsa_im_v3_0.location location WHERE location.facility_id = (SELECT facility.id FROM dcsa_im_v3_0.facility facility WHERE facility.un_location_code = 'ARLPS' AND facility.facility_smdg_code = 'LPMOL') LIMIT 1),
+    '6523ce3c-403d-1345-9579-6bd2f4cf4745',
     'BRTH',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
