@@ -146,7 +146,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 ), (
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
     2,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    uuid('b61abd37-f434-49d9-ad7c-f6baded2b902'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
