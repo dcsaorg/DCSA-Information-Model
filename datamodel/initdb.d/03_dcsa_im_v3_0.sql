@@ -501,13 +501,13 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     description_of_goods text NOT NULL,
     hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
-    weight real NULL,
+    weight real NOT NULL,
     volume real NULL,
-    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
-    number_of_packages integer NULL,
+    number_of_packages integer NOT NULL,
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    package_code varchar(3) NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
+    package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
     shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id)
 );
 
