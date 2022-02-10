@@ -660,28 +660,24 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
 );
 
 INSERT INTO dcsa_im_v3_0.cargo_item (
-    shipment_id,
     shipping_instruction_id,
     description_of_goods,
     hs_code,
     number_of_packages,
     shipment_equipment_id
 ) VALUES (
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'bca68f1d3b804ff88aaa1e43055432f7'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     'Expensive Shoes',
     '411510',
     5000,
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '832deb4bd4ea4b728430b857c59bd057'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     'Massive Yacht',
     '720711',
     1,
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     'Leather Jackets',
     '411510',
