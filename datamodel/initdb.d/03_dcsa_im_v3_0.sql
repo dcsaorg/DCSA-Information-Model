@@ -341,6 +341,7 @@ CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
+    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code) CHECK(document_status IN ('RECE','PENU','DRFT','PENA','APPR','ISSU','SURR','VOID')),
     is_shipped_onboard_type boolean NOT NULL,
     number_of_copies integer NULL,
     number_of_originals integer NULL,
