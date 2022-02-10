@@ -525,22 +525,28 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
+    document_status,
     is_shipped_onboard_type,
     number_of_copies,
     number_of_originals,
     is_electronic,
     is_to_order,
     are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
+    'RECE',
     TRUE,
     2,
     4,
     TRUE,
     TRUE,
     TRUE,
-    FALSE
+    FALSE,
+    DATE '2021-12-24',
+    DATE '2021-12-31'    
 );
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
