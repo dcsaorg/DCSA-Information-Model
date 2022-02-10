@@ -559,7 +559,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.seal CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal (
     shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id),
     seal_number varchar(15) NOT NULL,
-    seal_source_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
+    seal_source_code varchar(5) NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
     seal_type_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
 );
 -- Supporting FK constraints
