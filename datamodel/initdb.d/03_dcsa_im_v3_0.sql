@@ -347,8 +347,8 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     number_of_originals integer NULL,
     is_electronic boolean NULL,
     is_to_order boolean NOT NULL,
-    are_charges_displayed_on_originals boolean NOT NULL,
-    are_charges_displayed_on_copies boolean NOT NULL,
+    are_charges_displayed_on_originals boolean NULL,
+    are_charges_displayed_on_copies boolean NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     displayed_name_for_place_of_receipt varchar(250) NULL,
@@ -559,7 +559,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.seal CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal (
     shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id),
     seal_number varchar(15) NOT NULL,
-    seal_source_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
+    seal_source_code varchar(5) NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
     seal_type_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
 );
 -- Supporting FK constraints
