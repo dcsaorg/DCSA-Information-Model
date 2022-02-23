@@ -659,6 +659,36 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2021-02-09'
 );
 
+INSERT INTO dcsa_im_v3_0.transport_document (
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    number_of_originals,
+    issuer,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    '1af13f0b-a1ea-4ff8',
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2020-11-25',
+    DATE '2020-12-24',
+    DATE '2020-12-31',
+    12,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85'::uuid,
+    'WTK',
+    12.12,
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
+);
+
 INSERT INTO dcsa_im_v3_0.cargo_item (
     shipping_instruction_id,
     description_of_goods,
@@ -683,6 +713,12 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '411510',
     2500,
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
+), (
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    'luftballons',
+    '411510',
+    99,
+    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 );
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
