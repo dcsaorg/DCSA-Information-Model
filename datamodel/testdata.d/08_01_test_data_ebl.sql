@@ -597,7 +597,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     updated_date_time
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
-    'RECE',
+    'PENA',
     TRUE,
     2,
     4,
@@ -682,6 +682,34 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85'::uuid,
+    'WTK',
+    12.12,
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
+);
+
+INSERT INTO dcsa_im_v3_0.transport_document (
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    number_of_originals,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    'b58d82fb-1696-4829',
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2020-11-25',
+    DATE '2020-12-24',
+    DATE '2020-12-31',
+    24,
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0'::uuid,
     'WTK',
     12.12,
     12,
