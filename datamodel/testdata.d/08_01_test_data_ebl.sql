@@ -659,6 +659,40 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2021-02-09'
 );
 
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   reason
+) VALUES (
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'SHI',
+   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+   null
+), (
+  'ACT',
+  '2021-01-08T17:22:53Z',
+  '2021-01-08T17:22:53Z',
+  'PENU',
+  'SHI',
+  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+  'Carrier Booking Reference present in both shipping instruction as well as cargo items.'
+), (
+  'ACT',
+  '2021-01-08T18:22:53Z',
+  '2021-01-08T18:22:53Z',
+  'PENC',
+  'SHI',
+  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+  null
+);
+
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
