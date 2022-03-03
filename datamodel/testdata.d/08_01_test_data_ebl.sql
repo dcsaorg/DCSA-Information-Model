@@ -101,7 +101,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
-    'RECE',
+    'CONF',
     DATE '2020-03-07',
     'CY',
     'CFS',
