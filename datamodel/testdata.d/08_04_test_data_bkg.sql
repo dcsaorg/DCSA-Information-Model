@@ -118,7 +118,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     id,
     transport_document_reference,
     shipment_id,
-    charge_type_code,
+    charge_type,
     currency_amount,
     currency_code,
     payment_term_code,
