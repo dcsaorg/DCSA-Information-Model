@@ -95,7 +95,9 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     shipping_instruction_id,
     declared_value_currency,
     declared_value,
-    number_of_rider_pages
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'be038e58-5365',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -107,7 +109,9 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
     'WTK',
     12.12,
-    12
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
 );
 
 INSERT INTO dcsa_im_v3_0.charge (

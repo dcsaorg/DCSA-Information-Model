@@ -222,6 +222,36 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-04-07T12:12:12'
 );
 
+INSERT INTO dcsa_im_v3_0.shipment (
+    carrier_id,
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions,
+    confirmation_datetime,
+    updated_date_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    'bca68f1d3b804ff88aaa1e43055432f7',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+),(
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    '832deb4bd4ea4b728430b857c59bd057',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+),(
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    '994f0c2b590347ab86ad34cd1ffba505',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+);
+
 INSERT INTO dcsa_im_v3_0.reference (
     reference_type_code,
     reference_value,
@@ -523,24 +553,172 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     false
 );
 
+INSERT INTO dcsa_im_v3_0.shipment_equipment (
+    id,
+    shipment_id,
+    equipment_reference,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    is_shipper_owned
+) VALUES (
+    uuid('6824b6ca-f3da-4154-96f1-264886b68d53'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'bca68f1d3b804ff88aaa1e43055432f7'),
+    'BMOU2149612',
+    4000,
+    'KGM',
+    false
+),(
+    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '832deb4bd4ea4b728430b857c59bd057'),
+    'BMOU2149612',
+    4000,
+    'KGM',
+    false
+),(
+    uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
+    'BMOU2149612',
+    4000,
+    'KGM',
+    false
+);
+
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
+    document_status,
     is_shipped_onboard_type,
     number_of_copies,
     number_of_originals,
     is_electronic,
     is_to_order,
     are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
+    'RECE',
     TRUE,
     2,
     4,
     TRUE,
     TRUE,
     TRUE,
-    FALSE
+    FALSE,
+    DATE '2021-12-24',
+    DATE '2021-12-31'
+);
+
+INSERT INTO dcsa_im_v3_0.shipping_instruction (
+    id,
+    document_status,
+    is_shipped_onboard_type,
+    number_of_copies,
+    number_of_originals,
+    is_electronic,
+    is_to_order,
+    are_charges_displayed_on_originals,
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2022-01-24',
+    DATE '2022-01-31'
+),(
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2022-02-01',
+    DATE '2022-02-07'
+),(
+    '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+    'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2021-02-08',
+    DATE '2021-02-09'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_document (
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    number_of_originals,
+    issuer,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    '1af13f0b-a1ea-4ff8',
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2020-11-25',
+    DATE '2020-12-24',
+    DATE '2020-12-31',
+    12,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85'::uuid,
+    'WTK',
+    12.12,
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
+);
+
+INSERT INTO dcsa_im_v3_0.cargo_item (
+    shipping_instruction_id,
+    description_of_goods,
+    hs_code,
+    number_of_packages,
+    shipment_equipment_id
+) VALUES (
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    'Expensive Shoes',
+    '411510',
+    5000,
+    uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+), (
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    'Massive Yacht',
+    '720711',
+    1,
+    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
+), (
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    'Leather Jackets',
+    '411510',
+    2500,
+    uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
+), (
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    'luftballons',
+    '411510',
+    99,
+    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 );
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;

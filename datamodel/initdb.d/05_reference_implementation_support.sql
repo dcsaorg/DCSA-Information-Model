@@ -74,13 +74,17 @@ UNION
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.transport_document td
                   JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-                  JOIN dcsa_im_v3_0.shipment s ON ci.shipment_id = s.id
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
+                  JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
                   WHERE td.transport_document_reference = document_id)
             WHEN 'SHI'
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.shipment s
-                  JOIN dcsa_im_v3_0.cargo_item ci ON s.id = ci.shipment_id
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.shipment_id = s.id
+                  JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
                   WHERE ci.shipping_instruction_id = document_id)
+            WHEN 'CBR'
+            THEN NULL::text
         END
      ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.shipment_event
