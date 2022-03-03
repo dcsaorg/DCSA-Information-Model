@@ -704,7 +704,8 @@ CREATE TABLE dcsa_im_v3_0.shipment_event (
     reason varchar(250) NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
-ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id);
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id),
+                                        ADD CONSTRAINT event_classifier_code_is_act CHECK (event_classifier_code = 'ACT');
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
 CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
