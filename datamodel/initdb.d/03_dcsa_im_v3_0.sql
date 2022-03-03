@@ -433,7 +433,7 @@ CREATE TABLE dcsa_im_v3_0.charge (
     id varchar(100) PRIMARY KEY,
     transport_document_reference varchar(20) NOT NULL REFERENCES dcsa_im_v3_0.transport_document(transport_document_reference),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    charge_type_code varchar(20) NOT NULL,
+    charge_type varchar(20) NOT NULL,
     currency_amount real NOT NULL,
     currency_code varchar(3) NOT NULL,
     payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
