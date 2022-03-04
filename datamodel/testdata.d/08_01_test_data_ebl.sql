@@ -785,6 +785,15 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     99,
     '234',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
+), (
+   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+   'Air ballons',
+   '411510',
+   99.9,
+   'KGM',
+   99,
+   '234',
+   uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
