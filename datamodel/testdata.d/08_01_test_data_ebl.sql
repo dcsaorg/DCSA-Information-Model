@@ -222,6 +222,9 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-04-07T12:12:12'
 );
 
+/**
+ * Data used in integration tests - Do not modify - make your own data
+ */
 INSERT INTO dcsa_im_v3_0.shipment (
     carrier_id,
     booking_id,
@@ -247,6 +250,13 @@ INSERT INTO dcsa_im_v3_0.shipment (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     '994f0c2b590347ab86ad34cd1ffba505',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+),(
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    '02c965382f5a41feb9f19b24b5fe2906',
     'TERMS AND CONDITIONS!',
     DATE '2020-03-07T12:12:12',
     DATE '2020-04-07T12:12:12'
@@ -553,6 +563,9 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
     false
 );
 
+/**
+ * Data used in integration tests - Do not modify - make your own data
+ */
 INSERT INTO dcsa_im_v3_0.shipment_equipment (
     id,
     shipment_id,
@@ -577,6 +590,13 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 ),(
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
+    'BMOU2149612',
+    4000,
+    'KGM',
+    false
+),(
+    uuid('ca030eb6-009b-411c-985c-527ce008b35a'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '02c965382f5a41feb9f19b24b5fe2906'),
     'BMOU2149612',
     4000,
     'KGM',
@@ -609,6 +629,9 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2021-12-31'
 );
 
+/**
+ * Data used in integration tests - Do not modify - make your own data
+ */
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     document_status,
@@ -623,7 +646,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     updated_date_time
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'RECE',
+    'APPR',
     TRUE,
     2,
     4,
@@ -648,6 +671,18 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
 ),(
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
     'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2021-02-08',
+    DATE '2021-02-09'
+),(
+    'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
+    'PENU',
     TRUE,
     2,
     4,
@@ -740,6 +775,9 @@ INSERT INTO dcsa_im_v3_0.package_code(
     'test description4'
 );
 
+/**
+ * Data used in integration tests - Do not modify - make your own data
+ */
 INSERT INTO dcsa_im_v3_0.cargo_item (
     shipping_instruction_id,
     description_of_goods,
@@ -794,7 +832,18 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
    99,
    '234',
    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
+), (
+    'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
+    'Leather Jackets',
+    '411510',
+    23.5,
+    'KGM',
+    2500,
+    '789',
+    uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 );
+
+
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
