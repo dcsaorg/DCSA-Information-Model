@@ -723,35 +723,67 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     '2021-12-01T07:41:00+08:30'::timestamptz
 );
 
+INSERT INTO dcsa_im_v3_0.package_code(
+    package_code,
+    package_code_description
+) VALUES (
+    '123',
+    'test description1'
+), (
+    '234',
+    'test description2'
+), (
+    '456',
+    'test description3'
+), (
+    '789',
+    'test description4'
+);
+
 INSERT INTO dcsa_im_v3_0.cargo_item (
     shipping_instruction_id,
     description_of_goods,
     hs_code,
+    weight,
+    weight_unit,
     number_of_packages,
+    package_code,
     shipment_equipment_id
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     'Expensive Shoes',
     '411510',
+    50.0,
+    'KGM',
     5000,
+    '123',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     'Massive Yacht',
     '720711',
+    1000.0,
+    'KGM',
     1,
+    '456',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     'Leather Jackets',
     '411510',
+    23.5,
+    'KGM',
     2500,
+    '789',
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
 ), (
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     'luftballons',
     '411510',
+    99.9,
+    'KGM',
     99,
+    '234',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 );
 
