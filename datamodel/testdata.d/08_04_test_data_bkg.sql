@@ -636,7 +636,7 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'DCSA',
-    'peanut@jeff-fa-fa.com',
+    'info@dcsa.org',
     '+31123456789',
     'https://www.dcsa.org');
 
