@@ -118,7 +118,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     id,
     transport_document_reference,
     shipment_id,
-    charge_type_code,
+    charge_type,
     currency_amount,
     currency_code,
     payment_term_code,
@@ -630,13 +630,15 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     party_id,
     name,
     email,
-    phone
+    phone,
+    url
     ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
-    'Peanut',
-    'peanut@jeff-fa-fa.com',
-    '+31123456789');
+    'DCSA',
+    'info@dcsa.org',
+    '+31123456789',
+    'https://www.dcsa.org');
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,
