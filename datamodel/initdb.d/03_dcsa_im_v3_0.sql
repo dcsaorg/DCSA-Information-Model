@@ -129,9 +129,10 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    name varchar(100) NULL,
+    name varchar(100) NOT NULL,
     email varchar(100) NULL,
-    phone varchar(30) NULL
+    phone varchar(30) NULL,
+    url varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
