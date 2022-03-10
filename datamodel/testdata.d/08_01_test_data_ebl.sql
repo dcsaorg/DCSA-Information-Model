@@ -692,6 +692,18 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     FALSE,
     DATE '2021-02-08',
     DATE '2021-02-09'
+),(
+    '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    'APPR',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2022-03-01',
+    DATE '2022-03-07'
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
@@ -726,7 +738,39 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
   'SHI',
   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
   null
-);
+), (
+   'ACT',
+   '2022-03-01T18:22:53Z',
+   '2022-03-01T18:22:53Z',
+   'RECE',
+   'SHI',
+   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+   null
+), (
+   'ACT',
+   '2022-03-03T18:22:53Z',
+   '2022-03-03T18:22:53Z',
+   'DRFT',
+   'SHI',
+   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+   null
+), (
+   'ACT',
+   '2022-03-03T18:22:53Z',
+   '2022-03-03T18:22:53Z',
+   'DRFT',
+   'TRD',
+   '2b02401c-b2fb-5009',
+   null
+), (
+   'ACT',
+   '2022-03-05T13:56:12Z',
+   '2022-03-05T13:56:12Z',
+   'APPR',
+   'TRD',
+   '2b02401c-b2fb-5009',
+   null
+ );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
@@ -756,6 +800,20 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz
+), (
+  '2b02401c-b2fb-5009',
+  '01670315-a51f-4a11-b947-ce8e245128eb',
+  DATE '2020-11-25',
+  DATE '2020-12-24',
+  DATE '2020-12-31',
+  12,
+  (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+  '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
+  'WTK',
+  12.12,
+  12,
+  '2022-03-03T18:22:53Z'::timestamptz,
+  '2022-03-05T13:56:12Z'::timestamptz
 );
 
 INSERT INTO dcsa_im_v3_0.package_code(
@@ -841,9 +899,16 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     2500,
     '789',
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
+), (
+   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+   'Leather Jackets',
+   '411510',
+   23.5,
+   'KGM',
+   2500,
+   '789',
+   uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 );
-
-
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
