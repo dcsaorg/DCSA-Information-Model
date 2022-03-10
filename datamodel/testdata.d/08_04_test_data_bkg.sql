@@ -638,7 +638,7 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     'Peanut',
     'peanut@jeff-fa-fa.com',
     '+31123456789',
-    'www.peanuts.com');
+    'https://www.dcsa.org');
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,
