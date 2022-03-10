@@ -722,7 +722,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
   'ACT',
   '2021-01-08T18:22:53Z',
   '2021-01-08T18:22:53Z',
-  'PENC',
+  'DRFT',
   'SHI',
   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
   null
