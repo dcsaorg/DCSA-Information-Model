@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Initialize and run the database
-      run: docker-compose -f docker-compose.yml up -d -V
+      run: docker-compose -f docker-compose.yml up -d -V --build
+
     - name: "Check database is up"
       run: echo "SELECT 1;" | docker exec -i -u postgres dcsa_db psql -d dcsa_openapi -f - 2>/dev/null || sleep 5
 
     - name: "Dump database logs"
       run: docker logs dcsa_db
+
     - name: "Verify database is running"
       run: echo "SELECT 1;" | docker exec -i -u postgres dcsa_db psql -d dcsa_openapi -f -
-
-    - name: Load DCSA test data
-      run: cat datamodel/testdata.d/*.sql | docker exec -i -u postgres dcsa_db psql -d dcsa_openapi -f -

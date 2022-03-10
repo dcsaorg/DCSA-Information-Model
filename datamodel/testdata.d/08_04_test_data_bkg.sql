@@ -635,10 +635,10 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
-    'Peanut',
-    'peanut@jeff-fa-fa.com',
+    'DCSA',
+    'info@dcsa.org',
     '+31123456789',
-    'www.peanuts.com');
+    'https://www.dcsa.org');
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,

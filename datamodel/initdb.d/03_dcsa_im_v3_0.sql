@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    name varchar(100) NULL,
+    name varchar(100) NOT NULL,
     email varchar(100) NULL,
     phone varchar(30) NULL,
     url varchar(100) NULL
@@ -265,8 +265,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     incoterms varchar(3) NULL REFERENCES dcsa_im_v3_0.incoterms(incoterms_code),
     invoice_payable_at varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     expected_departure_date date NULL,
-    expected_arrival_date_start date NULL CHECK ((expected_arrival_date_start IS NULL) OR (expected_arrival_date_end IS NULL) OR expected_arrival_date_start <= expected_arrival_date_end),
-    expected_arrival_date_end date NULL,
+    expected_arrival_at_final_destination_start_date date NULL CHECK ((expected_arrival_at_final_destination_start_date IS NULL) OR (expected_arrival_at_final_destination_end_date IS NULL) OR expected_arrival_at_final_destination_start_date <= expected_arrival_at_final_destination_end_date),
+    expected_arrival_at_final_destination_end_date date NULL,
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     transport_document_reference varchar(20) NULL,
     booking_channel_reference varchar(20) NULL,
