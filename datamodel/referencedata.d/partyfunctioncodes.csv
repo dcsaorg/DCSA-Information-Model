@@ -21,3 +21,4 @@ TR,Terminal,"A facility for loading, moving or discharging containers. Terminals
 EBL,EBL Solution Provider,"The solution provider for managing the electronic bill of lading."
 SCO,Service contract owner,"The party signing the service contract with the carrier."
 BA,Booking Agent,"Party acting as a booking office for transport and forwarding services."
+HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."
