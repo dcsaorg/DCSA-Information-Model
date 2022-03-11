@@ -355,7 +355,8 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     displayed_name_for_place_of_receipt varchar(250) NULL,
     displayed_name_for_port_of_load varchar(250) NULL,
     displayed_name_for_port_of_discharge varchar(250) NULL,
-    displayed_name_for_place_of_delivery varchar(250) NULL
+    displayed_name_for_place_of_delivery varchar(250) NULL,
+    amendment_to_transport_document varchar(20) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
@@ -372,6 +373,10 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     declared_value real NULL,
     number_of_rider_pages integer NULL
 );
+
+
+ALTER TABLE dcsa_im_v3_0.shipping_instruction
+    ADD FOREIGN KEY (amendment_to_transport_document) REFERENCES dcsa_im_v3_0.transport_document (transport_document_reference);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
 CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
