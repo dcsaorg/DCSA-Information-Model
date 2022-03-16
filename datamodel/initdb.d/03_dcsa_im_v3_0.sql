@@ -361,7 +361,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
-    transport_document_reference varchar(20) PRIMARY KEY,
+    transport_document_reference varchar(20) DEFAULT LEFT(uuid_generate_v4()::text, 20) PRIMARY KEY,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     issue_date date NULL,
     shipped_onboard_date date NULL,
