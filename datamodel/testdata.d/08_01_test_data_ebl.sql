@@ -5,6 +5,48 @@ BEGIN;
 
 SELECT 'Start: 08_01_test_data_ebl.sql...' as progress;
 
+
+INSERT INTO dcsa_im_v3_0.address (
+    id,
+    name,
+    street,
+    street_number,
+    floor,
+    postal_code,
+    city,
+    state_region,
+    country
+    )VALUES(
+    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
+    'Lukas',
+    'Rohrdamm',
+    '81',
+    '5',
+    '32108',
+    'Bad Salzuflen Grastrup-hölsen',
+    'Nordrhein-Westfalen',
+    'Germany');
+
+
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    latitude,
+    longitude,
+    un_location_code,
+    address_id,
+    facility_id
+    ) VALUES (
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
+    'Hamburg',
+    '53.551° N',
+    '9.9937° E',
+    'DEHAM',
+    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
+    );
+
+
 INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name
@@ -72,6 +114,7 @@ INSERT INTO dcsa_im_v3_0.location (
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
+    id,
     carrier_booking_request_reference,
     document_status,
     submission_datetime,
@@ -98,8 +141,10 @@ INSERT INTO dcsa_im_v3_0.booking (
     vessel_id,
     export_voyage_number,
     place_of_issue,
-    updated_date_time
+    updated_date_time,
+    invoice_payable_at
 ) VALUES (
+    'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
     'RECE',
     DATE '2020-03-07',
@@ -126,7 +171,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
     NULL,
-    DATE '2021-12-09'
+    DATE '2021-12-09',
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -257,6 +303,13 @@ INSERT INTO dcsa_im_v3_0.shipment (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     '02c965382f5a41feb9f19b24b5fe2906',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+),(
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+    'AR1239719871',
     'TERMS AND CONDITIONS!',
     DATE '2020-03-07T12:12:12',
     DATE '2020-04-07T12:12:12'
@@ -463,7 +516,14 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     'PRC',
     null,
     true
-);
+), (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
+      uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
+      3,
+      'PRC',
+      null,
+      true
+  );
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
@@ -474,7 +534,43 @@ INSERT INTO dcsa_im_v3_0.party (
 ), (
     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'Malwart Düsseldorf'
-);
+), (
+     '9dd9a4c4-4039-11eb-8770-0b2b19847fab',
+     'Malwart Lyngy'
+ );
+
+ INSERT INTO dcsa_im_v3_0.party_contact_details (
+     id,
+     party_id,
+     name,
+     email,
+     phone,
+     url
+     ) VALUES (
+     'b24d099e-a6f6-404e-b082-776f7f589023'::uuid,
+     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
+     'DCSA',
+     'info@dcsa.org',
+     '+31123456789',
+     'https://www.dcsa.org'
+     ),
+     (
+     'b24d099e-a6f6-404e-b082-776f7f589064'::uuid,
+     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
+     'DCSA',
+     'info@dcsa.org',
+     '+31123456789',
+     'https://www.dcsa.org'
+     ),
+     (
+      'b24d099e-a6f6-404e-b082-776f7f589022'::uuid,
+      '9dd9a4c4-4039-11eb-8770-0b2b19847fab',
+      'DCSA',
+      'info@dcsa.org',
+      '+31123456789',
+      'https://www.dcsa.org'
+      );
+
 
 INSERT INTO dcsa_im_v3_0.document_party (
     party_id,
@@ -494,7 +590,13 @@ INSERT INTO dcsa_im_v3_0.document_party (
     'CN',
     true,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
-);
+), (
+      '9dd9a4c4-4039-11eb-8770-0b2b19847fab',
+      (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
+      'CN',
+      true,
+      (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
+  );
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
@@ -521,7 +623,12 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
     'PDE'
-);
+),(
+      (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
+      (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01'),
+      uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
+      'PDE'
+  );
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
@@ -597,6 +704,13 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 ),(
     uuid('ca030eb6-009b-411c-985c-527ce008b35a'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '02c965382f5a41feb9f19b24b5fe2906'),
+    'BMOU2149612',
+    4000,
+    'KGM',
+    false
+),(
+    uuid('aa030eb6-009b-411c-985c-527ce008b35a'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
     'BMOU2149612',
     4000,
     'KGM',
@@ -704,7 +818,20 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     FALSE,
     DATE '2022-03-01',
     DATE '2022-03-07'
-);
+),(
+      '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+      'APPR',
+      TRUE,
+      2,
+      4,
+      TRUE,
+      TRUE,
+      TRUE,
+      FALSE,
+      DATE '2022-03-01',
+      DATE '2022-03-07'
+  );
+
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
    event_classifier_code,
@@ -814,8 +941,21 @@ INSERT INTO dcsa_im_v3_0.transport_document (
   12,
   '2022-03-03T18:22:53Z'::timestamptz,
   '2022-03-05T13:56:12Z'::timestamptz
-);
-
+), (
+   '9b02401c-b2fb-5009',
+   '01670315-a51f-4a11-b947-ce8e245128eb',
+   DATE '2020-11-25',
+   DATE '2020-12-24',
+   DATE '2020-12-31',
+   12,
+   (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+   '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
+   'WTK',
+   12.12,
+   12,
+   '2022-03-03T18:22:53Z'::timestamptz,
+   '2022-03-05T13:56:12Z'::timestamptz
+ );
 INSERT INTO dcsa_im_v3_0.package_code(
     package_code,
     package_code_description
@@ -908,6 +1048,41 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
    2500,
    '789',
    uuid('ca030eb6-009b-411c-985c-527ce008b35a')
+);
+
+INSERT INTO dcsa_im_v3_0.cargo_item (
+  id,
+  shipping_instruction_id,
+  description_of_goods,
+  hs_code,
+  weight,
+  weight_unit,
+  number_of_packages,
+  package_code,
+  shipment_equipment_id
+  ) VALUES (
+  '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+  '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+  'Leather Jackets',
+ '411510',
+ 23.5,
+ 'KGM',
+ 2500,
+ '789',
+ uuid('aa030eb6-009b-411c-985c-527ce008b35a')
+  );
+
+INSERT INTO dcsa_im_v3_0.cargo_line_item(
+    cargo_line_item_id,
+     cargo_item_id,
+      shipping_marks,
+       id
+)
+VALUES (
+'9653b630-7847-467c-bcf7-15374dcc6ae2',
+'2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+ 'shipping marks',
+'aab30eb6-009b-411c-985c-527ce008b35a'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -1186,6 +1361,67 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-03-07T12:12:12',
     DATE '2020-04-07T12:12:12'
 );
+
+  INSERT INTO dcsa_im_v3_0.transport_event (
+  event_id,
+  event_classifier_code,
+  event_created_date_time,
+  event_date_time,
+  transport_event_type_code,
+  transport_call_id,
+  delay_reason_code,
+  change_remark
+) VALUES (
+  uuid('2968b966-ee81-46ba-af87-0c5031c641f3'),
+  (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+  '2021-11-28T14:12:56+01:00'::timestamptz,
+  '2021-12-01T07:41:00+08:30'::timestamptz,
+  'ARRI',
+  uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+  'WEA',
+  'Bad weather'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_id,
+    event_classifier_code,
+    event_created_date_time,
+    event_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    uuid('2968b966-ee81-46ba-af87-0c5031c641f2'),
+    (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    'DEPA',
+    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    'WEA',
+    'Bad weather'
+);
+
+INSERT INTO dcsa_im_v3_0.commodity(
+    id,
+    booking_id,
+    commodity_type,
+    hs_code,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    export_license_issue_date,
+    export_license_expiry_date
+) VALUES (
+    'a5b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
+    'Hand Bags',
+    '411510',
+    1200.0,
+    'KGM',
+    NULL,
+    NULL
+);
+
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
