@@ -45,45 +45,6 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     DATE '2020-01-06'
 );
 
-INSERT INTO dcsa_im_v3_0.address (
-    id,
-    name,
-    street,
-    street_number,
-    floor,
-    postal_code,
-    city,
-    state_region,
-    country
-    )VALUES(
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    'Lukas',
-    'Rohrdamm',
-    '81',
-    '5',
-    '32108',
-    'Bad Salzuflen Grastrup-hölsen',
-    'Nordrhein-Westfalen',
-    'Germany');
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name,
-    latitude,
-    longitude,
-    un_location_code,
-    address_id,
-    facility_id
-    ) VALUES (
-    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
-    'Hamburg',
-    '53.551° N',
-    '9.9937° E',
-    'DEHAM',
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
-    );
-
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
