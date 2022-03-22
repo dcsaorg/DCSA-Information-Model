@@ -411,4 +411,14 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
           ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
 
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_solution_provider_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
+    ebl_solution_provider_name varchar(50) NOT NULL,
+    ebl_solution_provider_code varchar(5) PRIMARY KEY,
+    ebl_solution_provider_url varchar(100) NOT NULL,
+    ebl_solution_provider_description varchar(250) NULL
+);
+
+\copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
+
 COMMIT;
