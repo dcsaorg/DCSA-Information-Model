@@ -9,6 +9,7 @@ DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
 CREATE VIEW dcsa_im_v3_0.aggregated_events AS
  SELECT transport_event.event_id,
     'TRANSPORT' AS event_type,
+    'TC_ID' AS link_type,
     transport_event.event_classifier_code,
     transport_event.transport_event_type_code,
     NULL::text AS shipment_event_type_code,
@@ -31,18 +32,12 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
     NULL::text as vessel_position,
-    NULL::text as publisher,
-    (
-        SELECT DISTINCT s.carrier_booking_reference
-        FROM dcsa_im_v3_0.shipment s
-        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
-        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-        WHERE t.discharge_transport_call_id = transport_call_id
-    ) AS carrier_booking_reference
+    NULL::text as publisher
    FROM dcsa_im_v3_0.transport_event
 UNION
  SELECT shipment_event.event_id,
     'SHIPMENT' AS event_type,
+    shipment_event.document_type_code AS link_type,
     shipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     shipment_event.shipment_event_type_code,
@@ -65,32 +60,12 @@ UNION
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
     NULL::text as vessel_position,
-    NULL::text as publisher,
-    (
-        CASE shipment_event.document_type_code
-            WHEN 'BKG'
-            THEN  document_id
-            WHEN 'TRD'
-            THEN (SELECT DISTINCT s.carrier_booking_reference
-                  FROM dcsa_im_v3_0.transport_document td
-                  JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
-                  JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
-                  WHERE td.transport_document_reference = document_id)
-            WHEN 'SHI'
-            THEN (SELECT DISTINCT s.carrier_booking_reference
-                  FROM dcsa_im_v3_0.shipment s
-                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.shipment_id = s.id
-                  JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
-                  WHERE ci.shipping_instruction_id = document_id)
-            WHEN 'CBR'
-            THEN NULL::text
-        END
-     ) AS carrier_booking_reference
+    NULL::text as publisher
    FROM dcsa_im_v3_0.shipment_event
 UNION
  SELECT equipment_event.event_id,
     'EQUIPMENT' AS event_type,
+    'TC_ID' AS link_type,
     equipment_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     NULL::text AS shipment_event_type_code,
@@ -113,18 +88,12 @@ UNION
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
     NULL::text as vessel_position,
-    NULL::text as publisher,
-    (
-        SELECT DISTINCT s.carrier_booking_reference
-        FROM dcsa_im_v3_0.shipment s
-        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
-        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-        WHERE t.discharge_transport_call_id = transport_call_id
-    ) AS carrier_booking_reference
+    NULL::text as publisher
    FROM dcsa_im_v3_0.equipment_event
 UNION
  SELECT operations_event.event_id,
     'OPERATIONS' AS event_type,
+    'TC_ID' AS link_type,
     operations_event.event_classifier_code,
     NULL::text AS transport_event_type_code,
     NULL::text AS shipment_event_type_code,
@@ -147,15 +116,46 @@ UNION
     operations_event.port_call_service_type_code,
     operations_event.facility_type_code,
     operations_event.vessel_position,
-    operations_event.publisher,
-    (
-        SELECT DISTINCT s.carrier_booking_reference
-        FROM dcsa_im_v3_0.shipment s
-        JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
-        JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-        WHERE t.discharge_transport_call_id = transport_call_id
-    ) AS carrier_booking_reference
+    operations_event.publisher
    FROM dcsa_im_v3_0.operations_event;
+
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_carrier_booking_reference CASCADE;
+CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
+    SELECT DISTINCT s.carrier_booking_reference,
+                    'TC_ID' AS link_type,
+                    COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
+                    null AS "document_id"
+    FROM dcsa_im_v3_0.shipment s
+    JOIN dcsa_im_v3_0.shipment_transport st ON s.id = st.shipment_id
+    JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
+   UNION
+    SELECT DISTINCT s.carrier_booking_reference,
+                    'TRD' AS link_type,
+                    null AS transport_call_id,
+                    -- Should be transport document ID when we are getting document versioning.
+                    td.transport_document_reference AS document_id
+    FROM dcsa_im_v3_0.transport_document td
+    JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
+    JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
+    JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
+   UNION
+    SELECT DISTINCT s.carrier_booking_reference,
+                    'SHI' AS link_type,
+                    null AS transport_call_id,
+                    -- Should be shipping instruction ID when we are getting document versioning.
+                    si.id AS "document_id"
+    FROM dcsa_im_v3_0.shipment s
+    JOIN dcsa_im_v3_0.shipment_equipment se ON se.shipment_id = s.id
+    JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
+    JOIN dcsa_im_v3_0.shipping_instruction si ON ci.shipping_instruction_id = si.id
+   UNION
+    SELECT DISTINCT s.carrier_booking_reference,
+                    'BKG' AS link_type,
+                    null AS transport_call_id,
+                    -- Should be shipment ID instead when we are getting document versioning
+                    s.carrier_booking_reference AS "document_id"
+    FROM dcsa_im_v3_0.shipment s
+  ;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
