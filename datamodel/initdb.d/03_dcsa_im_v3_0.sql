@@ -331,14 +331,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
     cut_off_time timestamp with time zone NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
-CREATE TABLE dcsa_im_v3_0.value_added_service_request (
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
-    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code)
-);
-
-CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
@@ -358,6 +350,16 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     displayed_name_for_place_of_delivery varchar(250) NULL,
     amendment_to_transport_document varchar(20) NULL
 );
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
+CREATE TABLE dcsa_im_v3_0.value_added_service_request (
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
+    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction(id),
+    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code) CHECK ((booking_id IS NULL AND shipping_instruction_id IS NOT NULL) OR (booking_id IS NOT NULL AND shipping_instruction_id IS NULL))
+);
+
+CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (shipping_instruction_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
