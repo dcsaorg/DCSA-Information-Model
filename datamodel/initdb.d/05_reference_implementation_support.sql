@@ -74,13 +74,17 @@ UNION
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.transport_document td
                   JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-                  JOIN dcsa_im_v3_0.shipment s ON ci.shipment_id = s.id
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
+                  JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
                   WHERE td.transport_document_reference = document_id)
             WHEN 'SHI'
             THEN (SELECT DISTINCT s.carrier_booking_reference
                   FROM dcsa_im_v3_0.shipment s
-                  JOIN dcsa_im_v3_0.cargo_item ci ON s.id = ci.shipment_id
+                  JOIN dcsa_im_v3_0.shipment_equipment se ON se.shipment_id = s.id
+                  JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
                   WHERE ci.shipping_instruction_id = document_id)
+            WHEN 'CBR'
+            THEN NULL::text
         END
      ) AS carrier_booking_reference
    FROM dcsa_im_v3_0.shipment_event
@@ -406,5 +410,15 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
                    WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
           ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
 
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_solution_provider_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
+    ebl_solution_provider_name varchar(50) NOT NULL,
+    ebl_solution_provider_code varchar(5) PRIMARY KEY,
+    ebl_solution_provider_url varchar(100) NOT NULL,
+    ebl_solution_provider_description varchar(250) NULL
+);
+
+\copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
 
 COMMIT;

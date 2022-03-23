@@ -18,3 +18,7 @@ TWG,Towage provider,
 LSH,Lashing provider,
 BUK,Bunkering service provider,
 TR,Terminal,"A facility for loading, moving or discharging containers. Terminals can be both inland terminals for trucks and rail or port terminals are accessed by vessels and these can contain multiple berths."
+EBL,EBL Solution Provider,"The solution provider for managing the electronic bill of lading."
+SCO,Service contract owner,"The party signing the service contract with the carrier."
+BA,Booking Agent,"Party acting as a booking office for transport and forwarding services."
+HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."

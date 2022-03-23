@@ -45,45 +45,6 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     DATE '2020-01-06'
 );
 
-INSERT INTO dcsa_im_v3_0.address (
-    id,
-    name,
-    street,
-    street_number,
-    floor,
-    postal_code,
-    city,
-    state_region,
-    country
-    )VALUES(
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    'Lukas',
-    'Rohrdamm',
-    '81',
-    '5',
-    '32108',
-    'Bad Salzuflen Grastrup-hölsen',
-    'Nordrhein-Westfalen',
-    'Germany');
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name,
-    latitude,
-    longitude,
-    un_location_code,
-    address_id,
-    facility_id
-    ) VALUES (
-    'c703277f-84ca-4816-9ccf-fad8e202d3b6',
-    'Hamburg',
-    '53.551° N',
-    '9.9937° E',
-    'DEHAM',
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE facility_name = 'DP WORLD JEBEL ALI - CT1' AND un_location_code = 'AEJEA' AND facility_smdg_code = 'DPWJA')
-    );
-
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
@@ -95,7 +56,9 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     shipping_instruction_id,
     declared_value_currency,
     declared_value,
-    number_of_rider_pages
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
 ) VALUES (
     'be038e58-5365',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -107,14 +70,16 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
     'WTK',
     12.12,
-    12
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
 );
 
 INSERT INTO dcsa_im_v3_0.charge (
     id,
     transport_document_reference,
     shipment_id,
-    charge_type_code,
+    charge_type,
     currency_amount,
     currency_code,
     payment_term_code,
@@ -626,13 +591,15 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     party_id,
     name,
     email,
-    phone
+    phone,
+    url
     ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
-    'Peanut',
-    'peanut@jeff-fa-fa.com',
-    '+31123456789');
+    'DCSA',
+    'info@dcsa.org',
+    '+31123456789',
+    'https://www.dcsa.org');
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,
