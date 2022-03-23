@@ -1422,6 +1422,15 @@ INSERT INTO dcsa_im_v3_0.commodity(
     NULL
 );
 
+INSERT INTO dcsa_im_v3_0.value_added_service_request (
+    id,
+    shipping_instruction_id,
+    value_added_service_code
+) VALUES (
+    '0f7ec0aa-28a3-4fb7-98bc-3ec2f925a314'::uuid,
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0'::uuid,
+    'SIOT');
+
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
