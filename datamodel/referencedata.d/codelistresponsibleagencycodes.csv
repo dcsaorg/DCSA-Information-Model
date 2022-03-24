@@ -9,7 +9,7 @@ ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
 ITU,296,ITU,International Telecommunication Union
 SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
 EXIS,399,EXIS,Exis Technologies Ltd.
-FMC,,FMC,Federal Maritime Commission
+FMC,163,FMC,Federal Maritime Commission
 CBSA,,CBSA,Canada Border Services Agency
 ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
 DCSA,,Digitial Container Shipping Association,Maintainer of the EBL Solution provider list
