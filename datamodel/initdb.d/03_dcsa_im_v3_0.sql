@@ -353,13 +353,11 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
 CREATE TABLE dcsa_im_v3_0.value_added_service_request (
-    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
-    shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction(id),
-    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code) CHECK ((booking_id IS NULL AND shipping_instruction_id IS NOT NULL) OR (booking_id IS NOT NULL AND shipping_instruction_id IS NULL))
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
+    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
-CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (shipping_instruction_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
