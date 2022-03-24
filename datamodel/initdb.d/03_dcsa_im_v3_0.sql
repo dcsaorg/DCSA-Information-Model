@@ -358,7 +358,6 @@ CREATE TABLE dcsa_im_v3_0.value_added_service_request (
 );
 
 CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
-CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (shipping_instruction_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
