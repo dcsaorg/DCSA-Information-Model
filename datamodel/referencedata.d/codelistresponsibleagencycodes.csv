@@ -6,9 +6,9 @@ BIC,20,BIC (Bureau International des Containeurs),The container industry's inter
 IMO,54,IMO (incl. IMDG),
 SCAC,182,"US, Standard Carrier Alpha Code (Motor)",Organisation maintaining the SCAC lists and transportation operating in North America
 ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
-ITU,296,ITU,
+ITU,296,ITU,International Telecommunication Union
 SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
-EXIS,399,EXIS,
+EXIS,399,EXIS,Exis Technologies Ltd.
 FMC,,FMC,Federal Maritime Commission
 CBSA,,CBSA,Canada Border Services Agency
 ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
