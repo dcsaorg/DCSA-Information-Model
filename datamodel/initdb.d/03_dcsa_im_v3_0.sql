@@ -476,8 +476,8 @@ CREATE TABLE dcsa_im_v3_0.package_code (
     package_code_description varchar(50) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_equipment CASCADE;
-CREATE TABLE dcsa_im_v3_0.shipment_equipment (
+DROP TABLE IF EXISTS dcsa_im_v3_0.utilized_transport_equipment CASCADE;
+CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
     equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
@@ -487,12 +487,12 @@ CREATE TABLE dcsa_im_v3_0.shipment_equipment (
 );
 
 -- Supporting FK constraints
-CREATE INDEX ON dcsa_im_v3_0.shipment_equipment (equipment_reference);
-CREATE INDEX ON dcsa_im_v3_0.shipment_equipment (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
+CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (shipment_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
-    shipment_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.shipment_equipment (id),
+    utilized_transport_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
     temperature_min real NULL,
     temperature_max real NULL,
     temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
@@ -502,9 +502,29 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     ventilation_max real NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
+CREATE TABLE dcsa_im_v3_0.consignment_item (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    description_of_goods text NOT NULL,
+    hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
+    shipping_instruction_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+    weight real NOT NULL,
+    volume real NULL,
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
+);
+
+-- Supporting FK constraints
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipping_instruction_id);
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (hs_code);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    -- SHOULD BE NOT NULL EVENTUALLY
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     description_of_goods text NOT NULL,
     hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     weight real NOT NULL,
@@ -514,14 +534,15 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     number_of_packages integer NOT NULL,
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
-    shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id)
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
 );
 
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (hs_code);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (shipping_instruction_id);
+CREATE INDEX ON dcsa_im_v3_0.cargo_item (consignment_item_id);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (package_code);
-CREATE INDEX ON dcsa_im_v3_0.cargo_item (shipment_equipment_id);
+CREATE INDEX ON dcsa_im_v3_0.cargo_item (utilized_transport_equipment_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_line_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_line_item (
@@ -541,11 +562,13 @@ CREATE TABLE dcsa_im_v3_0.reference (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id varchar(100) NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
-    cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id)
+    cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id),
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
 CREATE INDEX ON dcsa_im_v3_0.reference (cargo_item_id);
+CREATE INDEX ON dcsa_im_v3_0.reference (consignment_item_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (
@@ -561,13 +584,13 @@ CREATE TABLE dcsa_im_v3_0.seal_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal (
-    shipment_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment_equipment (id),
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
     seal_number varchar(15) NOT NULL,
     seal_source_code varchar(5) NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
     seal_type_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
 );
 -- Supporting FK constraints
-CREATE INDEX ON dcsa_im_v3_0.seal (shipment_equipment_id);
+CREATE INDEX ON dcsa_im_v3_0.seal (utilized_transport_equipment_id);
 CREATE INDEX ON dcsa_im_v3_0.seal (seal_source_code);
 CREATE INDEX ON dcsa_im_v3_0.seal (seal_type_code);
 
