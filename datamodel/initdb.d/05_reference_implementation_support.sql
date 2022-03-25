@@ -136,8 +136,8 @@ CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
                     td.transport_document_reference AS document_id
     FROM dcsa_im_v3_0.transport_document td
     JOIN dcsa_im_v3_0.cargo_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-    JOIN dcsa_im_v3_0.shipment_equipment se ON se.id = ci.shipment_equipment_id
-    JOIN dcsa_im_v3_0.shipment s ON se.shipment_id = s.id
+    JOIN dcsa_im_v3_0.utilized_transport_equipment ute ON ute.id = ci.utilized_transport_equipment_id
+    JOIN dcsa_im_v3_0.shipment s ON ute.shipment_id = s.id
    UNION
     SELECT DISTINCT s.carrier_booking_reference,
                     'SHI' AS link_type,
@@ -145,8 +145,8 @@ CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
                     -- Should be shipping instruction ID when we are getting document versioning.
                     si.id AS "document_id"
     FROM dcsa_im_v3_0.shipment s
-    JOIN dcsa_im_v3_0.shipment_equipment se ON se.shipment_id = s.id
-    JOIN dcsa_im_v3_0.cargo_item ci ON se.id = ci.shipment_equipment_id
+    JOIN dcsa_im_v3_0.utilized_transport_equipment ute ON ute.shipment_id = s.id
+    JOIN dcsa_im_v3_0.cargo_item ci ON ute.id = ci.utilized_transport_equipment_id
     JOIN dcsa_im_v3_0.shipping_instruction si ON ci.shipping_instruction_id = si.id
    UNION
     SELECT DISTINCT s.carrier_booking_reference,

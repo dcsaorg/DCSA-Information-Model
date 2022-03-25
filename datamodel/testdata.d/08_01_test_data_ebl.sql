@@ -654,7 +654,7 @@ INSERT INTO dcsa_im_v3_0.equipment (
     'KGM'
 );
 
-INSERT INTO dcsa_im_v3_0.shipment_equipment (
+INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     id,
     shipment_id,
     equipment_reference,
@@ -673,7 +673,7 @@ INSERT INTO dcsa_im_v3_0.shipment_equipment (
 /**
  * Data used in integration tests - Do not modify - make your own data
  */
-INSERT INTO dcsa_im_v3_0.shipment_equipment (
+INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     id,
     shipment_id,
     equipment_reference,
@@ -1042,7 +1042,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     weight_unit,
     number_of_packages,
     package_code,
-    shipment_equipment_id
+    utilized_transport_equipment_id
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     'Expensive Shoes',
@@ -1125,7 +1125,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   weight_unit,
   number_of_packages,
   package_code,
-  shipment_equipment_id
+  utilized_transport_equipment_id
   ) VALUES (
   '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
   '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
