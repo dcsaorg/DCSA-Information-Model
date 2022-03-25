@@ -319,7 +319,7 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
     cargo_gross_volume integer NULL,
-    cargo_gross_volume_unit varchar(3) NULL CONSTRAINT cargo_gross_volume_unit CHECK (cargo_gross_volume_unit = 'CBM' OR cargo_gross_volume_unit = 'CFT'),
+    cargo_gross_volume_unit varchar(3) NULL CONSTRAINT cargo_gross_volume_unit CHECK (cargo_gross_volume_unit IN ('CBM','CFT')),
     number_of_packages integer NULL,
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL
