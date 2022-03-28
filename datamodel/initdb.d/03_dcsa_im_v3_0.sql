@@ -318,7 +318,7 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
-    cargo_gross_volume integer NULL,
+    cargo_gross_volume real NULL,
     cargo_gross_volume_unit varchar(3) NULL CONSTRAINT cargo_gross_volume_unit CHECK (cargo_gross_volume_unit IN ('CBM','CFT')),
     number_of_packages integer NULL,
     export_license_issue_date date NULL,
