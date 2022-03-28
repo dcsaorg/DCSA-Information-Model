@@ -471,14 +471,15 @@ CREATE TABLE dcsa_im_v3_0.equipment (
     weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)
 );
 
+-- Supporting FK constraints
+CREATE INDEX ON dcsa_im_v3_0.equipment (iso_equipment_code);
+CREATE INDEX ON dcsa_im_v3_0.equipment (equipment_reference);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_reference (
     requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment(id),
     equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment(equipment_reference)
 );
-
--- Supporting FK constraints
-CREATE INDEX ON dcsa_im_v3_0.equipment (iso_equipment_code);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.package_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.package_code (
