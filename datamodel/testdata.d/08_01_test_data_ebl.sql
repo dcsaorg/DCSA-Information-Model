@@ -1027,6 +1027,7 @@ INSERT INTO dcsa_im_v3_0.package_code(
  */
 INSERT INTO dcsa_im_v3_0.cargo_item (
     consignment_item_id,
+    equipment_reference,
     weight,
     weight_unit,
     number_of_packages,
@@ -1034,6 +1035,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     utilized_transport_equipment_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0' AND hs_code = '411510'),
+    'BMOU2149612',
     50.0,
     'KGM',
     5000,
@@ -1041,6 +1043,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0' AND hs_code = '720711'),
+    'BMOU2149612',
     1000.0,
     'KGM',
     1,
@@ -1048,6 +1051,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
+    'BMOU2149612',
     23.5,
     'KGM',
     2500,
@@ -1055,6 +1059,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
+    'BMOU2149612',
     99.9,
     'KGM',
     99,
@@ -1062,6 +1067,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
+    'BMOU2149612',
     99.9,
     'KGM',
     99,
@@ -1069,6 +1075,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'cb6354c9-1ceb-452c-aed0-3cb25a04647a'),
+    'BMOU2149612',
     23.5,
     'KGM',
     2500,
@@ -1076,6 +1083,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
+    'BMOU2149612',
     23.5,
     'KGM',
     2500,
@@ -1085,6 +1093,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
 
 INSERT INTO dcsa_im_v3_0.cargo_item (
   id,
+  equipment_reference,
   consignment_item_id,
   weight,
   weight_unit,
@@ -1093,6 +1102,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   utilized_transport_equipment_id
   ) VALUES (
   '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+  'BMOU2149612',
   (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
   23.5,
   'KGM',

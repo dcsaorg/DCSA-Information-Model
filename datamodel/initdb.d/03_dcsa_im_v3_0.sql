@@ -521,6 +521,7 @@ CREATE INDEX ON dcsa_im_v3_0.consignment_item (hs_code);
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment(equipment_reference),
     consignment_item_id uuid NOT NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     weight real NOT NULL,
     volume real NULL,
@@ -528,7 +529,7 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
     number_of_packages integer NOT NULL,
     package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
-    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
+    utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
 );
 
 -- Supporting FK constraints
