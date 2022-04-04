@@ -24,6 +24,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -52,6 +53,7 @@ UNION ALL
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
+    shipment_event.document_reference AS document_reference,
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -80,6 +82,7 @@ UNION ALL
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
     NULL::text AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -108,6 +111,7 @@ UNION ALL
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     NULL::text AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     operations_event.operations_event_type_code,
     operations_event.publisher_role,
@@ -140,7 +144,7 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     'SHI' AS link_type,
                     null AS transport_call_id,
                     -- Should be shipping instruction ID when we are getting document versioning.
-                    si.id AS "document_id"
+                    si.shipping_instruction_reference AS "document_id"
     FROM dcsa_im_v3_0.shipping_instruction si
     JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
    UNION ALL
@@ -415,5 +419,8 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
 );
 
 \copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
+
+--- DDT-948
+ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
 
 COMMIT;
