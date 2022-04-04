@@ -77,7 +77,7 @@ INSERT INTO dcsa_im_v3_0.transport_document (
 
 INSERT INTO dcsa_im_v3_0.charge (
     id,
-    transport_document_reference,
+    transport_document_id,
     shipment_id,
     charge_type,
     currency_amount,
@@ -88,7 +88,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     quantity
 ) VALUES (
     'f9d3c9ae-89c1-4394-a5fc-8e73538aaac4'::uuid,
-    'be038e58-5365',
+    (SELECT id FROM dcsa_im_v3_0.transport_document WHERE  transport_document_reference = 'be038e58-5365'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'TBD',
     12.12,
