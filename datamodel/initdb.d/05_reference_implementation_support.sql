@@ -34,7 +34,7 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text as vessel_position,
     NULL::text as publisher
    FROM dcsa_im_v3_0.transport_event
-UNION
+UNION ALL
  SELECT shipment_event.event_id,
     'SHIPMENT' AS event_type,
     shipment_event.document_type_code AS link_type,
@@ -62,7 +62,7 @@ UNION
     NULL::text as vessel_position,
     NULL::text as publisher
    FROM dcsa_im_v3_0.shipment_event
-UNION
+UNION ALL
  SELECT equipment_event.event_id,
     'EQUIPMENT' AS event_type,
     'TC_ID' AS link_type,
@@ -90,7 +90,7 @@ UNION
     NULL::text as vessel_position,
     NULL::text as publisher
    FROM dcsa_im_v3_0.equipment_event
-UNION
+UNION ALL
  SELECT operations_event.event_id,
     'OPERATIONS' AS event_type,
     'TC_ID' AS link_type,
@@ -127,7 +127,7 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     null AS "document_id"
     FROM dcsa_im_v3_0.shipment_transport st
     JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-   UNION
+   UNION ALL
     SELECT DISTINCT ci.shipment_id AS shipment_id,
                     'TRD' AS link_type,
                     null AS transport_call_id,
@@ -135,7 +135,7 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     td.transport_document_reference AS document_id
     FROM dcsa_im_v3_0.transport_document td
     JOIN dcsa_im_v3_0.consignment_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-   UNION
+   UNION ALL
     SELECT DISTINCT ci.shipment_id AS shipment_id,
                     'SHI' AS link_type,
                     null AS transport_call_id,
@@ -143,7 +143,7 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     si.id AS "document_id"
     FROM dcsa_im_v3_0.shipping_instruction si
     JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
-   UNION
+   UNION ALL
     SELECT DISTINCT s.id AS shipment_id,
                     'BKG' AS link_type,
                     null AS transport_call_id,
