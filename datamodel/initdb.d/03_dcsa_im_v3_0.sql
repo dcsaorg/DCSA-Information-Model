@@ -279,7 +279,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     valid_until timestamp with time zone NULL
 );
 
-CREATE UNIQUE INDEX unq_valid_until_booking_idx ON dcsa_im_v3_0.booking(valid_until) WHERE valid_until IS NULL;
+CREATE UNIQUE INDEX unq_valid_until_booking_idx ON dcsa_im_v3_0.booking(carrier_booking_request_reference) WHERE valid_until IS NULL;
 
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
@@ -294,7 +294,7 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     valid_until timestamp with time zone NULL
 );
 
-CREATE UNIQUE INDEX unq_valid_until_shipment_idx ON dcsa_im_v3_0.shipment(valid_until) WHERE valid_until IS NULL;
+CREATE UNIQUE INDEX unq_valid_until_shipment_idx ON dcsa_im_v3_0.shipment(carrier_booking_reference) WHERE valid_until IS NULL;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
@@ -343,7 +343,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    shipping_instruction_reference  varchar(100) DEFAULT uuid_generate_v4()::text,
+    shipping_instruction_reference  varchar(100) NOT NULL DEFAULT uuid_generate_v4()::text,
     document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code) CHECK(document_status IN ('RECE','PENU','DRFT','PENA','APPR','ISSU','SURR','VOID')),
     is_shipped_onboard_type boolean NOT NULL,
     number_of_copies integer NULL,
@@ -362,7 +362,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     valid_until timestamp with time zone NULL
 );
 
-CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(valid_until) WHERE valid_until IS NULL;
+CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(shipping_instruction_reference) WHERE valid_until IS NULL;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
 CREATE TABLE dcsa_im_v3_0.value_added_service_request (
@@ -375,7 +375,7 @@ CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    transport_document_reference varchar(20) DEFAULT LEFT(uuid_generate_v4()::text, 20),
+    transport_document_reference varchar(20) NOT NULL DEFAULT LEFT(uuid_generate_v4()::text, 20),
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     issue_date date NULL,
     shipped_onboard_date date NULL,
@@ -389,7 +389,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     valid_until timestamp with time zone NULL
 );
 
-CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(valid_until) WHERE valid_until IS NULL;
+CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(transport_document_reference) WHERE valid_until IS NULL;
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
     ADD FOREIGN KEY (amendment_to_transport_document) REFERENCES dcsa_im_v3_0.transport_document (id);
