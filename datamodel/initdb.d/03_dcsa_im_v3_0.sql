@@ -429,7 +429,7 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (booking_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
     document_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.document_party (id),
-    address_line_number int NOT NULL,
+    address_line_number integer NOT NULL,
     address_line_text varchar(250) NOT NULL
 );
 CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id, address_line_number);
