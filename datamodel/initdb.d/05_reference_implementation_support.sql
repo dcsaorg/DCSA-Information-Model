@@ -137,7 +137,7 @@ CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
                     'TRD' AS link_type,
                     null AS transport_call_id,
                     -- Should be transport document ID when we are getting document versioning.
-                    td.transport_document_reference AS document_id
+                    CAST(td.id AS VARCHAR) AS document_id
     FROM dcsa_im_v3_0.transport_document td
     JOIN dcsa_im_v3_0.consignment_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
     JOIN dcsa_im_v3_0.shipment s ON ci.shipment_id = s.id
@@ -146,7 +146,7 @@ CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
                     'SHI' AS link_type,
                     null AS transport_call_id,
                     -- Should be shipping instruction ID when we are getting document versioning.
-                    si.shipping_instruction_reference AS "document_id"
+                    CAST(si.id AS VARCHAR) AS "document_id"
     FROM dcsa_im_v3_0.shipping_instruction si
     JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
     JOIN dcsa_im_v3_0.shipment s ON ci.shipment_id = s.id
@@ -155,7 +155,7 @@ CREATE VIEW dcsa_im_v3_0.event_carrier_booking_reference AS
                     'BKG' AS link_type,
                     null AS transport_call_id,
                     -- Should be shipment ID instead when we are getting document versioning
-                    s.carrier_booking_reference AS "document_id"
+                    CAST(s.id AS VARCHAR) AS "document_id"
     FROM dcsa_im_v3_0.shipment s
   ;
 
