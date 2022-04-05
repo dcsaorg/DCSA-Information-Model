@@ -128,7 +128,8 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
     SELECT DISTINCT st.shipment_id AS shipment_id,
                     'TC_ID' AS link_type,
                     COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
-                    null AS "document_id"
+                    null AS "document_id",
+                    null AS "document_reference"
     FROM dcsa_im_v3_0.shipment_transport st
     JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
    UNION
@@ -136,7 +137,8 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     'TRD' AS link_type,
                     null AS transport_call_id,
                     -- Should be transport document ID when we are getting document versioning.
-                    CAST(td.id AS VARCHAR) AS document_id
+                    CAST(td.id AS VARCHAR) AS document_id,
+                    td.transport_document_reference AS document_reference
     FROM dcsa_im_v3_0.transport_document td
     JOIN dcsa_im_v3_0.consignment_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
    UNION
@@ -144,7 +146,8 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     'SHI' AS link_type,
                     null AS transport_call_id,
                     -- Should be shipping instruction ID when we are getting document versioning.
-                    CAST(si.id AS VARCHAR) AS "document_id"
+                    CAST(si.id AS VARCHAR) AS document_id,
+                    si.shipping_instruction_reference AS document_reference
     FROM dcsa_im_v3_0.shipping_instruction si
     JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
    UNION
@@ -152,7 +155,8 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
                     'BKG' AS link_type,
                     null AS transport_call_id,
                     -- Should be shipment ID instead when we are getting document versioning
-                    CAST(s.id AS VARCHAR) AS "document_id"
+                    CAST(s.id AS VARCHAR) AS document_id,
+                    s.carrier_booking_reference AS document_reference
     FROM dcsa_im_v3_0.shipment s
   ;
 
