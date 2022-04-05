@@ -318,13 +318,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('784871e7-c9cd-4f59-8d88-2e033fa799a1'),
     'ACT',
     '2020-07-15',
     'APPR',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'BR1239719971'),
     'BR1239719971'
 );
 
@@ -334,13 +336,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('e48f2bc0-c746-11ea-a3ff-db48243a89f4'),
     'ACT',
     TO_DATE('2020/07/15 13:14:15', 'yyyy/mm/dd hh24:mi:ss'),
     'APPR',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'BR1239719971'),
     'BR1239719971'
 );
 
@@ -350,13 +354,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1'),
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'CONF',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'ABC123123123'),
     'ABC123123123'
 );
 
