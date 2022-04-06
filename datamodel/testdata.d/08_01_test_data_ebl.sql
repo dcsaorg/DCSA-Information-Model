@@ -719,6 +719,7 @@ INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
+    shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
     number_of_copies,
@@ -731,6 +732,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     updated_date_time
 ) VALUES (
     '01670315-a51f-4a11-b947-ce8e245128eb',
+    'SI_REF_1',
     'RECE',
     TRUE,
     2,
@@ -748,6 +750,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
  */
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
+    shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
     number_of_copies,
@@ -760,6 +763,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     updated_date_time
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    'SI_REF_2',
     'APPR',
     TRUE,
     2,
@@ -772,6 +776,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2022-01-31'
 ),(
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    'SI_REF_3',
     'RECE',
     TRUE,
     2,
@@ -784,6 +789,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2022-02-07'
 ),(
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+    'SI_REF_4',
     'RECE',
     TRUE,
     2,
@@ -796,6 +802,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2021-02-09'
 ),(
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
+    'SI_REF_5',
     'PENU',
     TRUE,
     2,
@@ -808,6 +815,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2021-02-09'
 ),(
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    'SI_REF_6',
     'APPR',
     TRUE,
     2,
@@ -820,6 +828,7 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     DATE '2022-03-07'
 ),(
       '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+      'SI_REF_7',
       'APPR',
       TRUE,
       2,
@@ -890,72 +899,6 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     'KGM'
 );
 
-INSERT INTO dcsa_im_v3_0.shipment_event (
-   event_classifier_code,
-   event_date_time,
-   event_created_date_time,
-   shipment_event_type_code,
-   document_type_code,
-   document_id,
-   reason
-) VALUES (
-   'ACT',
-   '2021-01-08T13:22:53Z',
-   '2021-01-08T13:22:53Z',
-   'RECE',
-   'SHI',
-   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-   null
-), (
-  'ACT',
-  '2021-01-08T17:22:53Z',
-  '2021-01-08T17:22:53Z',
-  'PENU',
-  'SHI',
-  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-  'Carrier Booking Reference present in both shipping instruction as well as cargo items.'
-), (
-  'ACT',
-  '2021-01-08T18:22:53Z',
-  '2021-01-08T18:22:53Z',
-  'DRFT',
-  'SHI',
-  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-  null
-), (
-   'ACT',
-   '2022-03-01T18:22:53Z',
-   '2022-03-01T18:22:53Z',
-   'RECE',
-   'SHI',
-   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-   null
-), (
-   'ACT',
-   '2022-03-03T18:22:53Z',
-   '2022-03-03T18:22:53Z',
-   'DRFT',
-   'SHI',
-   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-   null
-), (
-   'ACT',
-   '2022-03-03T18:22:53Z',
-   '2022-03-03T18:22:53Z',
-   'DRFT',
-   'TRD',
-   '2b02401c-b2fb-5009',
-   null
-), (
-   'ACT',
-   '2022-03-05T13:56:12Z',
-   '2022-03-05T13:56:12Z',
-   'APPR',
-   'TRD',
-   '2b02401c-b2fb-5009',
-   null
- );
-
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
@@ -1013,6 +956,81 @@ INSERT INTO dcsa_im_v3_0.transport_document (
    '2022-03-03T18:22:53Z'::timestamptz,
    '2022-03-05T13:56:12Z'::timestamptz
  );
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'SHI',
+   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+   (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
+   null
+), (
+  'ACT',
+  '2021-01-08T17:22:53Z',
+  '2021-01-08T17:22:53Z',
+  'PENU',
+  'SHI',
+  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+  (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
+  'Carrier Booking Reference present in both shipping instruction as well as cargo items.'
+), (
+  'ACT',
+  '2021-01-08T18:22:53Z',
+  '2021-01-08T18:22:53Z',
+  'DRFT',
+  'SHI',
+  '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+  (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
+  null
+), (
+   'ACT',
+   '2022-03-01T18:22:53Z',
+   '2022-03-01T18:22:53Z',
+   'RECE',
+   'SHI',
+   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
+   null
+), (
+   'ACT',
+   '2022-03-03T18:22:53Z',
+   '2022-03-03T18:22:53Z',
+   'DRFT',
+   'SHI',
+   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+   (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
+   null
+), (
+   'ACT',
+   '2022-03-03T18:22:53Z',
+   '2022-03-03T18:22:53Z',
+   'DRFT',
+   'TRD',
+   (SELECT id FROM dcsa_im_v3_0.transport_document td WHERE td.transport_document_reference = '2b02401c-b2fb-5009'),
+   '2b02401c-b2fb-5009',
+   null
+), (
+   'ACT',
+   '2022-03-05T13:56:12Z',
+   '2022-03-05T13:56:12Z',
+   'APPR',
+   'TRD',
+   (SELECT id FROM dcsa_im_v3_0.transport_document td WHERE td.transport_document_reference = '2b02401c-b2fb-5009'),
+   '2b02401c-b2fb-5009',
+   null
+ );
+
 INSERT INTO dcsa_im_v3_0.package_code(
     package_code,
     package_code_description
