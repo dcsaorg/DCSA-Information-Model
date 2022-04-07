@@ -189,10 +189,9 @@ CREATE VIEW dcsa_im_v3_0.event_shipment AS
  *
  */
 DROP VIEW IF EXISTS dcsa_im_v3_0.event_document_reference CASCADE;
--- 
 CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             -- For Transport Call based events
-            SELECT DISTINCT COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'CBR' AS document_reference_type,
@@ -203,9 +202,13 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.booking b
             JOIN dcsa_im_v3_0.shipment s ON s.booking_id = b.id
             JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = s.id
-            JOIN dcsa_im_v3_0.transport t ON t.id = st.transport_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                         FROM dcsa_im_v3_0.transport_call tc
+                         JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                              OR t.discharge_transport_call_id = tc.id
+                         ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-            SELECT DISTINCT COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'BKG' AS document_reference_type,
@@ -215,9 +218,13 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                             NULL::text AS transport_document_reference
             FROM dcsa_im_v3_0.shipment s
             JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = s.id
-            JOIN dcsa_im_v3_0.transport t ON t.id = st.transport_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-            SELECT DISTINCT COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'SHI' AS document_reference_type,
@@ -228,9 +235,13 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.shipping_instruction si
             JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
             JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = ci.shipment_id
-            JOIN dcsa_im_v3_0.transport t ON t.id = st.transport_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-            SELECT DISTINCT COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'TRD' AS document_reference_type,
@@ -241,7 +252,11 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.transport_document td
             JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = td.shipping_instruction_id
             JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = ci.shipment_id
-            JOIN dcsa_im_v3_0.transport t ON t.id = st.transport_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
     ) UNION ALL (
             -- For CBR related ShipmentEvents
             -- DISTINCT by definition
@@ -255,7 +270,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                             NULL::text AS transport_document_reference
             FROM dcsa_im_v3_0.booking b
         UNION ALL
-            -- DISTINCT due to 1:1 relation
+            -- DISTINCT. It is a 1:N relation but all the shipments will have unique CBRs
             SELECT          NULL as transport_call_id,
                             b.id AS document_id,
                             'CBR' AS link_type,
@@ -294,7 +309,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = ci.shipping_instruction_id
     ) UNION ALL (
             -- For BKG related ShipmentEvents
-            -- DISTINCT due to 1:1 relation
+            -- DISTINCT - all the shipments are associated with exactly on booking.
             SELECT          NULL as transport_call_id,
                             s.id AS document_id,
                             'BKG' AS link_type,
