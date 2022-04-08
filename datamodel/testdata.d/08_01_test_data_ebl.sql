@@ -656,14 +656,12 @@ INSERT INTO dcsa_im_v3_0.equipment (
 
 INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     id,
-    shipment_id,
     equipment_reference,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     is_shipper_owned
 ) VALUES (
     uuid('e0b81540-4066-11eb-9a35-7734806583a6'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     'BMOU2149612',
     4000,
     'KGM',
@@ -675,42 +673,36 @@ INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
  */
 INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     id,
-    shipment_id,
     equipment_reference,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     is_shipper_owned
 ) VALUES (
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'bca68f1d3b804ff88aaa1e43055432f7'),
     'BMOU2149612',
     4000,
     'KGM',
     false
 ),(
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '832deb4bd4ea4b728430b857c59bd057'),
     'BMOU2149612',
     4000,
     'KGM',
     false
 ),(
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
     'BMOU2149612',
     4000,
     'KGM',
     false
 ),(
     uuid('ca030eb6-009b-411c-985c-527ce008b35a'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '02c965382f5a41feb9f19b24b5fe2906'),
     'BMOU2149612',
     4000,
     'KGM',
     false
 ),(
     uuid('aa030eb6-009b-411c-985c-527ce008b35a'),
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
     'BMOU2149612',
     4000,
     'KGM',
@@ -1034,9 +1026,6 @@ INSERT INTO dcsa_im_v3_0.package_code(
  * Data used in integration tests - Do not modify - make your own data
  */
 INSERT INTO dcsa_im_v3_0.cargo_item (
-    shipping_instruction_id,
-    description_of_goods,
-    hs_code,
     consignment_item_id,
     weight,
     weight_unit,
@@ -1044,9 +1033,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     package_code,
     utilized_transport_equipment_id
 ) VALUES (
-    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Expensive Shoes',
-    '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0' AND hs_code = '411510'),
     50.0,
     'KGM',
@@ -1054,9 +1040,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '123',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
-    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Massive Yacht',
-    '720711',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0' AND hs_code = '720711'),
     1000.0,
     'KGM',
@@ -1064,9 +1047,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '456',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
-    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
-    'Leather Jackets',
-    '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     23.5,
     'KGM',
@@ -1074,9 +1054,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '789',
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
 ), (
-    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
-    'luftballons',
-    '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     99.9,
     'KGM',
@@ -1084,9 +1061,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '234',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
-   '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-   'Air ballons',
-   '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
     99.9,
     'KGM',
@@ -1094,9 +1068,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '234',
    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
-    'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
-    'Leather Jackets',
-    '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'cb6354c9-1ceb-452c-aed0-3cb25a04647a'),
     23.5,
     'KGM',
@@ -1104,9 +1075,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '789',
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 ), (
-   '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-   'Leather Jackets',
-   '411510',
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
     23.5,
     'KGM',
@@ -1117,9 +1085,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
 
 INSERT INTO dcsa_im_v3_0.cargo_item (
   id,
-  shipping_instruction_id,
-  description_of_goods,
-  hs_code,
   consignment_item_id,
   weight,
   weight_unit,
@@ -1128,9 +1093,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   utilized_transport_equipment_id
   ) VALUES (
   '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-  '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-  'Leather Jackets',
- '411510',
   (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
   23.5,
   'KGM',

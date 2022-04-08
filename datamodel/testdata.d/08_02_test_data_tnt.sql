@@ -397,13 +397,13 @@ INSERT INTO dcsa_im_v3_0.equipment(
 );
 
 INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
-    shipment_id,
+    id,
     equipment_reference,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     is_shipper_owned
 ) VALUES (
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    '39e2504d-cdd6-4dbf-83e9-50412627a3b0',
     'APZU4812090',
     1424.2,
     'KGM',
@@ -416,8 +416,7 @@ INSERT INTO dcsa_im_v3_0.seal (
     seal_source_code,
     seal_type_code
 ) VALUES (
-     (SELECT DISTINCT utilized_transport_equipment.id FROM dcsa_im_v3_0.utilized_transport_equipment JOIN dcsa_im_v3_0.shipment ON (shipment.id = utilized_transport_equipment.shipment_id)
-            WHERE carrier_booking_reference = 'ABC123123123' AND equipment_reference = 'APZU4812090'),
+     '39e2504d-cdd6-4dbf-83e9-50412627a3b0',
      'SN123457',
      'CUS',
      'WIR'
