@@ -341,7 +341,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_shipped_onboard_type boolean NOT NULL,
     number_of_copies integer NULL,
     number_of_originals integer NULL,
-    is_electronic boolean NULL,
+    is_electronic boolean NOT NULL,
     is_to_order boolean NOT NULL,
     are_charges_displayed_on_originals boolean NULL,
     are_charges_displayed_on_copies boolean NULL,
