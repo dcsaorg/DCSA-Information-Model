@@ -717,13 +717,13 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.service_schedule_vessel_transportevent CASCADE
 CREATE TABLE dcsa_im_v3_0.service_schedule_vessel_transportevent (
     service_schedule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.service_schedule (id),
     vessel_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel (id),
-    actual_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
+    actual_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     planned_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
-    estimated_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
-    actual_departure_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
+    estimated_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
+    actual_departure_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     planned_departure_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
-    estimated_departure_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
-    port_call_status_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
+    estimated_departure_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
+    port_call_status_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     transport_call_sequence integer NOT NULL
 );
 
