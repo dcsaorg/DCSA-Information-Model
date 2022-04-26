@@ -728,13 +728,13 @@ CREATE TABLE dcsa_im_v3_0.service_schedule_vessel_transportevent (
 );
 
 ALTER TABLE dcsa_im_v3_0.service
-    ADD universal_service_reference varchar(9) NULL UNIQUE;
+    ADD universal_service_reference varchar(8) NULL UNIQUE;
 
 ALTER TABLE dcsa_im_v3_0.vessel
     ADD is_dummy boolean NULL,
-    ADD lenght integer NULL,
-    ADD width integer NULL,
-    ADD dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FTL','MTR'))
+    ADD length numeric NULL,
+    ADD width numeric NULL,
+    ADD dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
     ;
 
 ALTER TABLE dcsa_im_v3_0.transport_call
