@@ -123,43 +123,6 @@ UNION ALL
     operations_event.publisher
    FROM dcsa_im_v3_0.operations_event;
 
-DROP VIEW IF EXISTS dcsa_im_v3_0.event_shipment CASCADE;
-CREATE VIEW dcsa_im_v3_0.event_shipment AS
-    SELECT DISTINCT st.shipment_id AS shipment_id,
-                    'TC_ID' AS link_type,
-                    COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
-                    null::uuid AS document_id,
-                    null AS document_reference
-    FROM dcsa_im_v3_0.shipment_transport st
-    JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-   UNION ALL
-    SELECT DISTINCT ci.shipment_id AS shipment_id,
-                    'TRD' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be transport document ID when we are getting document versioning.
-                    td.id AS document_id,
-                    td.transport_document_reference AS document_reference
-    FROM dcsa_im_v3_0.transport_document td
-    JOIN dcsa_im_v3_0.consignment_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-   UNION ALL
-    SELECT DISTINCT ci.shipment_id AS shipment_id,
-                    'SHI' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be shipping instruction ID when we are getting document versioning.
-                    si.id AS document_id,
-                    si.shipping_instruction_reference AS document_reference
-    FROM dcsa_im_v3_0.shipping_instruction si
-    JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
-   UNION ALL
-    SELECT DISTINCT s.id AS shipment_id,
-                    'BKG' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be shipment ID instead when we are getting document versioning
-                    s.id AS document_id,
-                    s.carrier_booking_reference AS document_reference
-    FROM dcsa_im_v3_0.shipment s
-  ;
-
 /* View to assist with the GET /events endpoint.  It provide the following information:
  *
  * It provides a link_type and a document_id (for ShipmentEvent) or transport_call_id (other events).
