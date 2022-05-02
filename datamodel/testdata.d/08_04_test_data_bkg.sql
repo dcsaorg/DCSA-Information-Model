@@ -554,6 +554,22 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     null,
     false
 );
+    
+INSERT INTO dcsa_im_v3_0.shipment_transport (
+    shipment_id,
+    transport_id,
+    transport_plan_stage_sequence_number,
+    transport_plan_stage_code,
+    commercial_voyage_id,
+    is_under_shippers_responsibility
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'C501576CD94F'),
+    uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
+    1,
+    'PRC',
+    null,
+    false
+);
 
 INSERT INTO dcsa_im_v3_0.reference (
     id,
