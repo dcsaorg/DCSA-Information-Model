@@ -112,6 +112,7 @@ INSERT INTO dcsa_im_v3_0.voyage (
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
@@ -120,7 +121,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     import_voyage_id,
     export_voyage_id
 ) VALUES (
-    '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
+    '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
+    'TC-REF-08_03-A',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'BRTH',
@@ -129,7 +131,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
     uuid('03482296-ef9c-11eb-9a03-0242ac131233')
 ), (
-    'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60'::uuid,
+    'TC-REF-08_03-B',
     2,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -147,8 +150,8 @@ INSERT INTO dcsa_im_v3_0.transport (
 ) VALUES (
     'transport reference',
     'Transport name (Singapore -> NYC)',
-    '7f2d833c-2c7f-4fc5-a71a-e510881da64a',
-    'b785317a-2340-4db7-8fb3-c8dfb1edfa60'
+    '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.operations_event (
@@ -168,7 +171,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'ANA',
     'TR',
     'BUNK',
@@ -180,7 +183,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'EST',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'ARRI',
-    '123e4567-e89b-12d3-a456-426614174000',
+    '123e4567-e89b-12d3-a456-426614174000'::uuid,
     'ANA',
     'CA',
     'WSDP',
