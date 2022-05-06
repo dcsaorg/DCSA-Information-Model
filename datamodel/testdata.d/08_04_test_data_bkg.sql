@@ -389,7 +389,7 @@ INSERT INTO dcsa_im_v3_0.commodity (
     export_license_expiry_date
     ) VALUES (
     '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
-    '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
+    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Bloom',
     '720711',
     2000.0,
