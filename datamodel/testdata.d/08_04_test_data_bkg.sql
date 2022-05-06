@@ -846,7 +846,51 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
    'RECE',
    'CBR',
    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
-   (SELECT shipping_instruction_reference FROM dcsa_im_v3_0.shipping_instruction si WHERE si.id = 'c144c6df-440e-4065-8430-f46b9fa67e65'),
+   'cbrr-b83765166707812c8ff4',
+   null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   'd7dde15f-5ddc-42ce-8103-9fa1c4da0bde'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'BKG',
+   (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'cbr-b83765166707812c8ff4'),
+   'cbr-b83765166707812c8ff4',
+   null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   '8b654176-fe41-41fd-a457-a632d6811246'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'SHI',
+   'c144c6df-440e-4065-8430-f46b9fa67e65',
+   'c144c6dff46b9fa67e65',
    null
 );
 /* End: Test data for events with carrierBookingReference and carrierBookingRequestReference */
