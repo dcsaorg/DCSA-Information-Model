@@ -397,6 +397,24 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.commodity (
+    id,
+    booking_id,
+    commodity_type,
+    hs_code,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    export_license_issue_date,
+    export_license_expiry_date
+    ) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
+    '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
+    'Bloom',
+    '720711',
+    2000.0,
+    'LBR',
+    NULL,
+    NULL);
 
 INSERT INTO dcsa_im_v3_0.value_added_service_request (
     id,
