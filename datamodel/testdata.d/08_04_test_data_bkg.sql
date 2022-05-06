@@ -717,6 +717,185 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
      NULL);
 
 
+/* Start: Test data for events with carrierBookingReference and carrierBookingRequestReference */
+INSERT INTO dcsa_im_v3_0.booking (
+    id,
+    carrier_booking_request_reference,
+    document_status,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    submission_datetime,
+    is_ams_aci_filing_required,
+    is_destination_filing_required,
+    contract_quotation_reference,
+    incoterms,
+    invoice_payable_at,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    export_voyage_number,
+    place_of_issue,
+    updated_date_time
+) VALUES (
+    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
+    'cbrr-b83765166707812c8ff4', /* carrier_booking_request_reference */
+    'PENU', /* document_status */
+    'CY', /* receipt_type_at_origin */
+    'CY', /* delivery_type_at_destination */
+    'FCL', /* cargo_movement_type_at_origin */
+    'LCL', /* cargo_movement_type_at_destination */
+    '2021-11-03 02:11:00.000', /* booking_request_datetime */
+    'Test', /* service_contract_reference */
+     NULL, /* payment_term_code */
+     true, /* is_partial_load_allowed */
+     true, /* is_export_declaration_required */
+     'Export declaration reference', /* export_declaration_reference */
+     true, /* is_import_license_required */
+     'Import declaration reference', /* import_license_reference */
+     '2021-11-03 10:41:00.000', /* submission_datetime */
+     true, /* is_ams_aci_filing_required */
+     true, /* is_destination_filing_required */
+     NULL, /* contract_quotation_reference */
+     NULL, /* incoterms */
+     NULL, /* invoice_payable_at */
+     DATE '2020-03-07', /* expected_departure_date */
+     NULL, /* transport_document_type_code */
+     NULL, /* transport_document_reference */
+     NULL, /* booking_channel_reference */
+     'AO', /* communication_channel_code */
+     true, /* is_equipment_substitution_allowed */
+     NULL, /* vessel_id */
+     NULL, /* export_voyage_number */
+     NULL, /* place_of_issue */
+     DATE '2021-12-01' /* updated_date_time */
+);
+
+INSERT INTO dcsa_im_v3_0.shipment (
+    carrier_id,
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions,
+    confirmation_datetime,
+    updated_date_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
+    'cbr-b83765166707812c8ff4',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+);
+
+INSERT INTO dcsa_im_v3_0.shipping_instruction (
+    id,
+    shipping_instruction_reference,
+    document_status,
+    is_shipped_onboard_type,
+    number_of_copies,
+    number_of_originals,
+    is_electronic,
+    is_to_order,
+    are_charges_displayed_on_originals,
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    'c144c6df-440e-4065-8430-f46b9fa67e65',
+    'c144c6dff46b9fa67e65',
+    'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2021-12-24',
+    DATE '2021-12-31'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   '97eb7c09-571e-438f-8f65-ac6a29ba04e5'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'CBR',
+   'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
+   'cbrr-b83765166707812c8ff4',
+   null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   'd7dde15f-5ddc-42ce-8103-9fa1c4da0bde'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'BKG',
+   (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'cbr-b83765166707812c8ff4'),
+   'cbr-b83765166707812c8ff4',
+   null
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   '8b654176-fe41-41fd-a457-a632d6811246'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'SHI',
+   'c144c6df-440e-4065-8430-f46b9fa67e65',
+   'c144c6dff46b9fa67e65',
+   null
+);
+/* End: Test data for events with carrierBookingReference and carrierBookingRequestReference */
+
+
 SELECT 'End: 08_04_test_data_bkg.sql' as progress;
 
 COMMIT;
