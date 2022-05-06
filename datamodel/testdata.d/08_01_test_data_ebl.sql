@@ -366,47 +366,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code,
-    mode_of_transport_code,
-    vessel_id,
-    import_voyage_id,
-    export_voyage_id
-) VALUES (
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
-    'POTE',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
-    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code,
-    mode_of_transport_code,
-    vessel_id,
-    import_voyage_id,
-    export_voyage_id
-) VALUES (
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
-    'COFS',
-    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
-    null,
-    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2218W'),
-    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2219E')
-);
-
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
@@ -417,7 +377,32 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     import_voyage_id,
     export_voyage_id
 ) VALUES (
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+    '286c605e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    'TC-REF-08_01-A',
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
+    'POTE',
+    null,
+    null,
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
+), (
+    '770b7624-403d-11eb-b44b-d3f4ad185386'::uuid,
+    'TC-REF-08_01-B',
+    1,
+    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'NLRTM' AND facility_smdg_code = 'APM'),
+    'COFS',
+    null,
+    null,
+    (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'RAIL'),
+    null,
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2218W'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2219E')
+), (
+    '770b7624-403d-11eb-b44b-d3f4ad185387'::uuid,
+    'TC-REF-08_01-C',
     1,
     null,
     'COFS',
@@ -427,22 +412,9 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     null,
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2418W'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2419E')
-);
-
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code,
-    other_facility,
-    location_id,
-    mode_of_transport_code,
-    vessel_id,
-    import_voyage_id,
-    export_voyage_id
-) VALUES (
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+), (
+    '770b7624-403d-11eb-b44b-d3f4ad185388'::uuid,
+    'TC-REF-08_01-D',
     1,
     null,
     'INTE',
@@ -461,31 +433,23 @@ INSERT INTO dcsa_im_v3_0.transport (
     load_transport_call_id,
     discharge_transport_call_id
 ) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e1f'),
+    '561a5606-402e-11eb-b19a-0f3aa4962e1f'::uuid,
     'transport reference',
     'Transport name',
-    uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386')
-);
-
-INSERT INTO dcsa_im_v3_0.transport (
-    id,
-    transport_reference,
-    transport_name,
-    load_transport_call_id,
-    discharge_transport_call_id
-) VALUES (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e2f'),
+    '286c605e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    '770b7624-403d-11eb-b44b-d3f4ad185386'::uuid
+), (
+    '561a5606-402e-11eb-b19a-0f3aa4962e2f'::uuid,
     'transport reference xx',
     'Transport name xx',
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387')
+    '770b7624-403d-11eb-b44b-d3f4ad185386'::uuid,
+    '770b7624-403d-11eb-b44b-d3f4ad185387'::uuid
 ), (
-    uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'),
+    '561a5606-402e-11eb-b19a-0f3aa4962e3f'::uuid,
     'transport reference yy',
     'Transport name yy',
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388')
+    '770b7624-403d-11eb-b44b-d3f4ad185387'::uuid,
+    '770b7624-403d-11eb-b44b-d3f4ad185388'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.shipment_transport (
@@ -1424,27 +1388,16 @@ INSERT INTO dcsa_im_v3_0.shipment (
   '2021-11-28T14:12:56+01:00'::timestamptz,
   '2021-12-01T07:41:00+08:30'::timestamptz,
   'ARRI',
-  uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
+  '770b7624-403d-11eb-b44b-d3f4ad185387'::uuid,
   'WEA',
   'Bad weather'
-);
-
-INSERT INTO dcsa_im_v3_0.transport_event (
-    event_id,
-    event_classifier_code,
-    event_created_date_time,
-    event_date_time,
-    transport_event_type_code,
-    transport_call_id,
-    delay_reason_code,
-    change_remark
-) VALUES (
+), (
     uuid('2968b966-ee81-46ba-af87-0c5031c641f2'),
     (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
     'DEPA',
-    uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
+    '770b7624-403d-11eb-b44b-d3f4ad185388'::uuid,
     'WEA',
     'Bad weather'
 );

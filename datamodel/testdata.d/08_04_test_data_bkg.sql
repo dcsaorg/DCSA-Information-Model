@@ -461,6 +461,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
@@ -470,7 +471,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     import_voyage_id,
     export_voyage_id
 ) VALUES (
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
+    'TC-REF-08_04-A',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -479,20 +481,9 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code,
-    location_id,
-    mode_of_transport_code,
-    vessel_id,
-    import_voyage_id,
-    export_voyage_id
-) VALUES (
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+), (
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid,
+    'TC-REF-08_04-B',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -518,27 +509,16 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
     'ARRI',
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
     'WEA',
     'Bad weather'
-);
-
-INSERT INTO dcsa_im_v3_0.transport_event (
-    event_id,
-    event_classifier_code,
-    event_created_date_time,
-    event_date_time,
-    transport_event_type_code,
-    transport_call_id,
-    delay_reason_code,
-    change_remark
-) VALUES (
+), (
     uuid('9d5d0824-b228-4ea8-b2cb-4ebd8da76e15'),
     (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
     '2021-11-29T14:12:56+01:00'::timestamptz,
     '2021-12-03T07:41:00+08:30'::timestamptz,
     'DEPA',
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid,
     'WEA',
     'Bad weather'
 );
@@ -553,8 +533,8 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
     'not another transport reference',
     'Transport Name in action',
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d')
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid
 );
     
 INSERT INTO dcsa_im_v3_0.shipment_transport (
@@ -571,16 +551,7 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     'PRC',
     null,
     false
-);
-    
-INSERT INTO dcsa_im_v3_0.shipment_transport (
-    shipment_id,
-    transport_id,
-    transport_plan_stage_sequence_number,
-    transport_plan_stage_code,
-    commercial_voyage_id,
-    is_under_shippers_responsibility
-) VALUES (
+), (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'C501576CD94F'),
     uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
     1,
@@ -685,22 +656,17 @@ INSERT INTO dcsa_im_v3_0.displayed_address (
     document_party_id,
     address_line_number,
     address_line_text
-    ) VALUES (
+) VALUES (
     '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     1,
-    'Gubener Str. 42');
-
-INSERT INTO dcsa_im_v3_0.displayed_address (
-    id,
-    document_party_id,
-    address_line_number,
-    address_line_text
-    ) VALUES (
+    'Gubener Str. 42'
+), (
     '659013f6-cf4b-46c5-a2b5-20a173a05ce6'::uuid,
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     2,
-    'Rhinstrasse 87');
+    'Rhinstrasse 87'
+);
 
 INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,
@@ -866,19 +832,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
    'cbrr-b83765166707812c8ff4',
    null
-);
-
-INSERT INTO dcsa_im_v3_0.shipment_event (
-   event_id,
-   event_classifier_code,
-   event_date_time,
-   event_created_date_time,
-   shipment_event_type_code,
-   document_type_code,
-   document_id,
-   document_reference,
-   reason
-) VALUES (
+), (
    'd7dde15f-5ddc-42ce-8103-9fa1c4da0bde'::uuid,
    'ACT',
    '2021-01-08T13:22:53Z',
@@ -888,19 +842,7 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'cbr-b83765166707812c8ff4'),
    'cbr-b83765166707812c8ff4',
    null
-);
-
-INSERT INTO dcsa_im_v3_0.shipment_event (
-   event_id,
-   event_classifier_code,
-   event_date_time,
-   event_created_date_time,
-   shipment_event_type_code,
-   document_type_code,
-   document_id,
-   document_reference,
-   reason
-) VALUES (
+), (
    '8b654176-fe41-41fd-a457-a632d6811246'::uuid,
    'ACT',
    '2021-01-08T13:22:53Z',

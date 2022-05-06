@@ -634,7 +634,8 @@ CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
-    id varchar(100) DEFAULT uuid_generate_v4() PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    transport_call_reference varchar(100) NOT NULL DEFAULT uuid_generate_v4(),
     transport_call_sequence_number integer,
     facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
@@ -651,8 +652,8 @@ CREATE TABLE dcsa_im_v3_0.transport (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_reference varchar(50) NULL,
     transport_name varchar(100) NULL,
-    load_transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    discharge_transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
+    load_transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    discharge_transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage CASCADE;
@@ -725,7 +726,7 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code),
     equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
-    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
@@ -755,7 +756,7 @@ CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code),
     delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     change_remark varchar(250),
-    transport_call_id varchar(100) NULL REFERENCES dcsa_im_v3_0.transport_call(id)
+    transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.transport_event ADD PRIMARY KEY (event_id);
@@ -785,7 +786,7 @@ ALTER TABLE dcsa_im_v3_0.transport_call
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commercial_voyage_transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.commercial_voyage_transport_call (
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     commercial_voyage_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commercial_voyage(commercial_voyage_id)
 );
 
@@ -816,7 +817,7 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH')),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
     event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
-    transport_call_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code) CHECK(facility_type_code IN ('PBPL', 'BRTH')),
     delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
