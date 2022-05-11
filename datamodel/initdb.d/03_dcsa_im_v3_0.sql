@@ -186,8 +186,13 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign varchar(10) NULL,
-    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    is_dummy boolean NOT NULL default false,
+    length numeric NULL,
+    width numeric NULL,
+    dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
 );
+
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.communication_channel_qualifier CASCADE;
 CREATE TABLE dcsa_im_v3_0.communication_channel_qualifier (

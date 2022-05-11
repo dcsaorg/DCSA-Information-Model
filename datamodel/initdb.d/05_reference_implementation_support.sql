@@ -707,16 +707,16 @@ CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(tr
 
 --- DDT-1017
 DROP TABLE IF EXISTS dcsa_im_v3_0.service_schedule CASCADE;
-CREATE TABLE dcsa_im_v3_0.service_schedule (
+CREATE TABLE dcsa_im_v3_0.vessel_schedule (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    vessel_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel (id),
     service_id uuid NOT NULL REFERENCES dcsa_im_v3_0.service (id),
-    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier (id)
+    created_date_time timestamp with time zone NOT NULL DEFAULT now()
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.service_schedule_vessel_transportevent CASCADE;
-CREATE TABLE dcsa_im_v3_0.service_schedule_vessel_transportevent (
-    service_schedule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.service_schedule (id),
-    vessel_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel (id),
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_schedule_terminal_visits CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel_schedule_terminal_visits (
+    vessel_schedule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_schedule (id),
     actual_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     planned_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     estimated_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
@@ -724,21 +724,13 @@ CREATE TABLE dcsa_im_v3_0.service_schedule_vessel_transportevent (
     planned_departure_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     estimated_departure_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     port_call_status_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
-    transport_call_sequence integer NOT NULL
+    transport_call_sequence integer NOT NULL,
+    created_date_time timestamp with time zone NOT NULL DEFAULT now()
 );
 
 ALTER TABLE dcsa_im_v3_0.service
     ADD universal_service_reference varchar(8) NULL UNIQUE;
 
-ALTER TABLE dcsa_im_v3_0.vessel
-    ADD is_dummy boolean NULL,
-    ADD length numeric NULL,
-    ADD width numeric NULL,
-    ADD dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
-    ;
-
-ALTER TABLE dcsa_im_v3_0.transport_call
-    ADD transport_call_reference varchar(100) NULL UNIQUE;
 
 
 COMMIT;
