@@ -1422,7 +1422,8 @@ INSERT INTO dcsa_im_v3_0.commodity(
     NULL
 );
 
--------------- test shipmentLocation query --------------
+-------- ShipmentLocationRepository.findByTransportDocumentID BEGIN --------
+------------------------------- DO NOT MODIFY ------------------------------
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
@@ -1621,6 +1622,9 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '123',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 );
+
+-------- ShipmentLocationRepository.findByTransportDocumentID END --------
+------------------------------ DO NOT MODIFY -----------------------------
 
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
