@@ -716,6 +716,7 @@ CREATE TABLE dcsa_im_v3_0.vessel_schedule (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_schedule_terminal_visits CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_schedule_terminal_visits (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY, -- JPA/Hibernate requires an identifiying field
     vessel_schedule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_schedule (id),
     actual_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     planned_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
