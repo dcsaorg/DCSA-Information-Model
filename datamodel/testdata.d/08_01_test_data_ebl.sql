@@ -1485,7 +1485,37 @@ INSERT INTO dcsa_im_v3_0.booking (
     invoice_payable_at
 ) VALUES (
     'a169d494-d6dd-4334-b951-512e4e16f075'::uuid,
-    'KUBERNETES_IN_ACTION',
+    'KUBERNETES_IN_ACTION_01',
+    'RECE',
+    DATE '2020-03-07',
+    'CY',
+    'CFS',
+    'FCL',
+    'BB',
+    DATE '2020-03-07',
+    'SERVICE_CONTRACT_REFERENCE_01',
+    'PRE',
+    TRUE,
+    TRUE,
+    'EXPORT_DECLARATION_REFERENCE_01',
+    FALSE,
+    'IMPORT_LICENSE_REFERENCE_01',
+    TRUE,
+    'FCA',
+    DATE '2020-03-07',
+    'SWB',
+    'TRANSPORT_DOC_REF_01',
+    'BOOKING_CHA_REF_01',
+    'EI',
+    FALSE,
+    (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    'CARRIER_VOYAGE_NUMBER_01',
+    NULL,
+    DATE '2021-12-09',
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6'
+), (
+    '59ede518-2224-4ecf-a0d0-4d641d365e1b'::uuid,
+    'KUBERNETES_IN_ACTION_02',
     'RECE',
     DATE '2020-03-07',
     'CY',
@@ -1524,8 +1554,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     updated_date_time
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
-    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     'E379021B7782',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+), (
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
+    'A379021B7782',
     'TERMS AND CONDITIONS!',
     DATE '2020-03-07T12:12:12',
     DATE '2020-04-07T12:12:12'
@@ -1547,7 +1584,7 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     'KGM'
 ), (
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'A379021B7782'),
     'Even more expensive Shoes',
     '411510',
     4000,
@@ -1593,10 +1630,40 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_location_type_code,
     displayed_name
 ) VALUES (
-    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION'),
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
     'PRE',
+    'HELLO!'
+),  (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'POL',
+    'HELLO!'
+), (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'POD',
+    'HELLO!'
+), (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'PRE',
+    'HELLO!'
+),  (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'POL',
+    'HELLO!'
+), (
+    null,
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
+    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    'POD',
     'HELLO!'
 );
 
