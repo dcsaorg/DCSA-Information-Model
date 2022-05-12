@@ -1577,7 +1577,7 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     weight,
     weight_unit
 ) VALUES (
-    '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f,'
+    '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
     'Expensive shoes',
@@ -1634,6 +1634,32 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     '2021-12-01T07:41:00+08:30'::timestamptz
 );
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    'b4454ae5-dcd4-4955-8080-1f986aa5c6c3',
+    'Copenhagen',
+    '55.671° N',
+    '12.453° E',
+    null
+),(
+    '1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40',
+    'Orlando',
+    '28.481° N',
+    '-81.48° E',
+    null
+),(
+    'ea9af21d-8471-47ac-aa59-e949ea74b08e',
+    'Miami',
+    '25.782° N',
+    '-80.36° E',
+    'USMIA'
+);
+
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     booking_id,
@@ -1643,37 +1669,37 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
 ) VALUES (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
     'PRE',
     'HELLO!'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
     'POL',
     'HELLO!'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
     'POD',
     'HELLO!'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
     'PRE',
     'HELLO!'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
     'POL',
     'HELLO!'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
-    uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
+    uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
     'POD',
     'HELLO!'
 );
@@ -1687,7 +1713,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     utilized_transport_equipment_id
 ) VALUES (
     '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f'::uuid,
-    (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'a1c7b95d-3004-40a5-bae1-e379021b7782' AND hs_code = '411510' AND description_of_goods = 'Expensive Shoes'),
     50.0,
     'KGM',
     5000,
@@ -1695,7 +1720,6 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     '06c0e716-3128-4172-be09-7f82b7ec02ca'::uuid,
-    (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'a1c7b95d-3004-40a5-bae1-e379021b7782' AND hs_code = '411510' AND description_of_goods = 'Even more expensive Shoes'),
     50.0,
     'KGM',
     5000,
