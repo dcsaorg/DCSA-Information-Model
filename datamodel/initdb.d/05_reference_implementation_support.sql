@@ -728,9 +728,5 @@ CREATE TABLE dcsa_im_v3_0.vessel_schedule_terminal_visits (
     created_date_time timestamp with time zone NOT NULL DEFAULT now()
 );
 
-ALTER TABLE dcsa_im_v3_0.service
-    ADD universal_service_reference varchar(8) NULL UNIQUE;
-
-
 
 COMMIT;
