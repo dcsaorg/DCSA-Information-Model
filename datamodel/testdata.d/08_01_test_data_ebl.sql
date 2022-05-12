@@ -1569,6 +1569,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
 );
 
 INSERT INTO dcsa_im_v3_0.consignment_item (
+    id,
     shipping_instruction_id,
     shipment_id,
     description_of_goods,
@@ -1576,16 +1577,26 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     weight,
     weight_unit
 ) VALUES (
+    '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f,'
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    'Expensive Shoes',
+    'Expensive shoes',
     '411510',
     4000,
     'KGM'
 ), (
+    '06c0e716-3128-4172-be09-7f82b7ec02ca',
+    'a1c7b95d-3004-40a5-bae1-e379021b7782',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
+    'Slightly less expensive shoes',
+    '411510',
+    4000,
+    'KGM'
+), (
+    'cf1798fe-9447-4ea8-a4a6-9515de751d5e',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'A379021B7782'),
-    'Even more expensive Shoes',
+    'Even more expensive shoes',
     '411510',
     4000,
     'KGM'
@@ -1675,6 +1686,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     package_code,
     utilized_transport_equipment_id
 ) VALUES (
+    '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f'::uuid,
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'a1c7b95d-3004-40a5-bae1-e379021b7782' AND hs_code = '411510' AND description_of_goods = 'Expensive Shoes'),
     50.0,
     'KGM',
@@ -1682,7 +1694,15 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     '123',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
+    '06c0e716-3128-4172-be09-7f82b7ec02ca'::uuid,
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'a1c7b95d-3004-40a5-bae1-e379021b7782' AND hs_code = '411510' AND description_of_goods = 'Even more expensive Shoes'),
+    50.0,
+    'KGM',
+    5000,
+    '123',
+    uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+), (
+    'cf1798fe-9447-4ea8-a4a6-9515de751d5e'::uuid,
     50.0,
     'KGM',
     5000,
