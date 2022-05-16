@@ -236,6 +236,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_voyage_number varchar(50) NOT NULL,
+    universal_voyage_reference varchar(5) NULL,
     service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
