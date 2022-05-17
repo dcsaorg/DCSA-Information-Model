@@ -53,7 +53,7 @@ UNION ALL
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
-    shipment_event.document_reference AS document_reference,
+    null::text AS document_reference,
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -686,5 +686,8 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
 
 --- DDT-948
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
+
+-- DDT-1058
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100);
 
 COMMIT;
