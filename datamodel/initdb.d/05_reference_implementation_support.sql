@@ -4,6 +4,10 @@
 
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
+
+-- DDT-1058
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100);
+
 -- Aggregated table containing all events
 DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
 CREATE VIEW dcsa_im_v3_0.aggregated_events AS
@@ -686,8 +690,5 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
 
 --- DDT-948
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
-
--- DDT-1058
-ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100);
 
 COMMIT;
