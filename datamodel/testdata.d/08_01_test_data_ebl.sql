@@ -1737,6 +1737,188 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
 -------- ShipmentLocationRepository.findByTransportDocumentID END --------
 ------------------------------ DO NOT MODIFY -----------------------------
 
+
+
+
+
+----------------- Data for ApproveTransportDocument BEGIN ----------------
+------------------------------ DO NOT MODIFY -----------------------------
+
+INSERT INTO dcsa_im_v3_0.shipping_instruction (
+    id,
+    shipping_instruction_reference,
+    document_status,
+    is_shipped_onboard_type,
+    number_of_copies,
+    number_of_originals,
+    is_electronic,
+    is_to_order,
+    are_charges_displayed_on_originals,
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    '2c337fcc-2814-42b3-a752-f1847e74cba7',
+    'SI_REF_10',
+    'DRFT',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2021-12-24',
+    DATE '2021-12-31'
+);
+
+INSERT INTO dcsa_im_v3_0.booking (
+    id,
+    carrier_booking_request_reference,
+    document_status,
+    submission_datetime,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    is_destination_filing_required,
+    incoterms,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    export_voyage_number,
+    place_of_issue,
+    updated_date_time,
+    invoice_payable_at
+) VALUES (
+    '66802442-4702-4464-9d61-d659fdb7e33c'::uuid,
+    'KUBERNETES_IN_ACTION_03',
+    'CONF',
+    DATE '2020-03-07',
+    'CY',
+    'CFS',
+    'FCL',
+    'BB',
+    DATE '2020-03-07',
+    'SERVICE_CONTRACT_REFERENCE_01',
+    'PRE',
+    TRUE,
+    TRUE,
+    'EXPORT_DECLARATION_REFERENCE_01',
+    FALSE,
+    'IMPORT_LICENSE_REFERENCE_01',
+    TRUE,
+    'FCA',
+    DATE '2020-03-07',
+    'SWB',
+    'TRANSPORT_DOC_REF_01',
+    'BOOKING_CHA_REF_01',
+    'EI',
+    FALSE,
+    (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
+    'CARRIER_VOYAGE_NUMBER_01',
+    NULL,
+    DATE '2021-12-09',
+    'c703277f-84ca-4816-9ccf-fad8e202d3b6'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment (
+    carrier_id,
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions,
+    confirmation_datetime,
+    updated_date_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_03'),
+    'D659FDB7E33C',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+);
+
+INSERT INTO dcsa_im_v3_0.consignment_item (
+    id,
+    shipping_instruction_id,
+    shipment_id,
+    description_of_goods,
+    hs_code,
+    weight,
+    weight_unit
+) VALUES (
+    '5d943239-23fc-4d5c-ab70-a33a469f9e59',
+    '2c337fcc-2814-42b3-a752-f1847e74cba7',
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'D659FDB7E33C'),
+    'Expensive shoes',
+    '411510',
+    4000,
+    'KGM'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_document (
+    id,
+    transport_document_reference,
+    place_of_issue,
+    issue_date,
+    shipped_onboard_date,
+    received_for_shipment_date,
+    number_of_originals,
+    issuer,
+    shipping_instruction_id,
+    declared_value_currency,
+    declared_value,
+    number_of_rider_pages,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    'cf48ad0a-9a4b-48a7-b752-c248fb5d88d9'::uuid,
+    'c90a0ed6-ccc9-48e3',
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2022-05-16',
+    DATE '2022-05-15',
+    DATE '2022-05-14',
+    12,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    '2c337fcc-2814-42b3-a752-f1847e74cba7'::uuid,
+    'WTK',
+    12.12,
+    12,
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz
+);
+
+INSERT INTO dcsa_im_v3_0.cargo_item (
+    consignment_item_id,
+    weight,
+    weight_unit,
+    number_of_packages,
+    package_code,
+    utilized_transport_equipment_id
+) VALUES (
+    '5d943239-23fc-4d5c-ab70-a33a469f9e59'::uuid,
+    50.0,
+    'KGM',
+    5000,
+    '123',
+    uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+);
+
+------------------ Data for ApproveTransportDocument END -----------------
+------------------------------ DO NOT MODIFY -----------------------------
+
 SELECT 'End: 08_01_test_data_ebl.sql' as progress;
 
 COMMIT;
