@@ -692,4 +692,16 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
 --- DDT-948
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
 
+ALTER TABLE dcsa_im_v3_0.booking ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_booking_idx ON dcsa_im_v3_0.booking(carrier_booking_request_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.shipment ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_shipment_idx ON dcsa_im_v3_0.shipment(carrier_booking_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.shipping_instruction ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(shipping_instruction_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.transport_document ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(transport_document_reference) WHERE valid_until IS NULL;
+
 COMMIT;
