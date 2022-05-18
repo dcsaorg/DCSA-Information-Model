@@ -914,7 +914,7 @@ INSERT INTO dcsa_im_v3_0.transport_document (
    12,
    '2022-03-03T18:22:53Z'::timestamptz,
    '2022-03-05T13:56:12Z'::timestamptz,
-    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
+   '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
  );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
