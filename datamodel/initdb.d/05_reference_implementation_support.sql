@@ -57,7 +57,7 @@ UNION ALL
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
-    null::text AS document_reference,
+    shipment_event.document_reference AS document_reference,
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
