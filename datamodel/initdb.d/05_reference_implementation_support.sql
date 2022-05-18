@@ -6,7 +6,8 @@
 BEGIN;
 
 -- DDT-1058
-ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100);
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
+
 
 -- Aggregated table containing all events
 DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
