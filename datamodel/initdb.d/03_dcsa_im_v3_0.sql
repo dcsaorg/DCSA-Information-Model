@@ -377,7 +377,8 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
     declared_value real NULL,
-    number_of_rider_pages integer NULL
+    number_of_rider_pages integer NULL,
+    issuingParty varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id)
 );
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
