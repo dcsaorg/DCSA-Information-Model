@@ -52,7 +52,7 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    issuer,
+    carrier,
     shipping_instruction_id,
     declared_value_currency,
     declared_value,
@@ -77,7 +77,7 @@ INSERT INTO dcsa_im_v3_0.transport_document (
 
 INSERT INTO dcsa_im_v3_0.charge (
     id,
-    transport_document_reference,
+    transport_document_id,
     shipment_id,
     charge_type,
     currency_amount,
@@ -88,7 +88,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     quantity
 ) VALUES (
     'f9d3c9ae-89c1-4394-a5fc-8e73538aaac4'::uuid,
-    'be038e58-5365',
+    (SELECT id FROM dcsa_im_v3_0.transport_document WHERE  transport_document_reference = 'be038e58-5365'),
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'TBD',
     12.12,
@@ -294,6 +294,71 @@ INSERT INTO dcsa_im_v3_0.booking (
      NULL,
      DATE '2021-12-01');
 
+INSERT INTO dcsa_im_v3_0.booking (
+    id,
+    carrier_booking_request_reference,
+    document_status,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    submission_datetime,
+    is_ams_aci_filing_required,
+    is_destination_filing_required,
+    contract_quotation_reference,
+    incoterms,
+    invoice_payable_at,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    export_voyage_number,
+    place_of_issue,
+    updated_date_time
+) VALUES (
+    '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
+    'a3a34f10-acc5-4e23-b52e-146f63458c90',
+    'CONF',
+    'CY',
+    'CY',
+    'FCL',
+    'LCL',
+    '2021-12-20 02:11:00.000',
+    'Test',
+     NULL,
+     true,
+     true,
+     'Export declaration reference',
+     true,
+     'Import declaration reference',
+     '2021-11-03 10:41:00.000',
+     true,
+     true,
+     NULL,
+     NULL,
+     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
+     DATE '2020-03-07',
+     NULL,
+     NULL,
+     NULL,
+     'AO',
+     true,
+     NULL,
+     NULL,
+     NULL,
+     DATE '2021-12-01');
+
 INSERT INTO dcsa_im_v3_0.commodity(
     id,
     booking_id,
@@ -332,6 +397,24 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.commodity (
+    id,
+    booking_id,
+    commodity_type,
+    hs_code,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    export_license_issue_date,
+    export_license_expiry_date
+    ) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
+    '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
+    'Bloom',
+    '720711',
+    2000.0,
+    'LBR',
+    NULL,
+    NULL);
 
 INSERT INTO dcsa_im_v3_0.value_added_service_request (
     id,
@@ -359,8 +442,26 @@ INSERT INTO dcsa_im_v3_0.shipment (
     '2021-12-12 12:12:12.000',
     DATE '2021-12-12T12:12:12');
 
+INSERT INTO dcsa_im_v3_0.shipment (
+    id,
+    booking_id,
+    carrier_id,
+    carrier_booking_reference,
+    terms_and_conditions,
+    confirmation_datetime,
+    updated_date_time
+    ) VALUES (
+    'cb40eee5-9e24-41ee-8276-2e03aa2744ed'::uuid,
+    '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    'C501576CD94F',
+    'TERMS AND CONDITIONS!',
+    '2022-02-02 02:22:22.000',
+    DATE '2022-03-03T12:12:12');
+
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
@@ -370,7 +471,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     import_voyage_id,
     export_voyage_id
 ) VALUES (
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
+    'TC-REF-08_04-A',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -379,20 +481,9 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2106W'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = '2107E')
-);
-
-INSERT INTO dcsa_im_v3_0.transport_call (
-    id,
-    transport_call_sequence_number,
-    facility_id,
-    facility_type_code,
-    location_id,
-    mode_of_transport_code,
-    vessel_id,
-    import_voyage_id,
-    export_voyage_id
-) VALUES (
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+), (
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid,
+    'TC-REF-08_04-B',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -418,27 +509,16 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
     'ARRI',
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
     'WEA',
     'Bad weather'
-);
-
-INSERT INTO dcsa_im_v3_0.transport_event (
-    event_id,
-    event_classifier_code,
-    event_created_date_time,
-    event_date_time,
-    transport_event_type_code,
-    transport_call_id,
-    delay_reason_code,
-    change_remark
-) VALUES (
+), (
     uuid('9d5d0824-b228-4ea8-b2cb-4ebd8da76e15'),
     (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
     '2021-11-29T14:12:56+01:00'::timestamptz,
     '2021-12-03T07:41:00+08:30'::timestamptz,
     'DEPA',
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d'),
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid,
     'WEA',
     'Bad weather'
 );
@@ -453,8 +533,8 @@ INSERT INTO dcsa_im_v3_0.transport (
     uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
     'not another transport reference',
     'Transport Name in action',
-    uuid('e7b0ae8f-b479-40d8-b3de-56c4c2474211'),
-    uuid('af0acf67-604c-4ffa-befe-77878a6a665d')
+    'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
+    'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid
 );
     
 INSERT INTO dcsa_im_v3_0.shipment_transport (
@@ -466,6 +546,13 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     is_under_shippers_responsibility
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'DCR987876762'),
+    uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
+    1,
+    'PRC',
+    null,
+    false
+), (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'C501576CD94F'),
     uuid('6b14b74d-401a-4e66-a5ad-d3cd42953441'),
     1,
     'PRC',
@@ -569,22 +656,17 @@ INSERT INTO dcsa_im_v3_0.displayed_address (
     document_party_id,
     address_line_number,
     address_line_text
-    ) VALUES (
+) VALUES (
     '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     1,
-    'Gubener Str. 42');
-
-INSERT INTO dcsa_im_v3_0.displayed_address (
-    id,
-    document_party_id,
-    address_line_number,
-    address_line_text
-    ) VALUES (
+    'Gubener Str. 42'
+), (
     '659013f6-cf4b-46c5-a2b5-20a173a05ce6'::uuid,
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     2,
-    'Rhinstrasse 87');
+    'Rhinstrasse 87'
+);
 
 INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,
@@ -617,6 +699,161 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     'POL',
     'Hamburg',
      NULL);
+
+
+/* Start: Test data for events with carrierBookingReference and carrierBookingRequestReference */
+INSERT INTO dcsa_im_v3_0.booking (
+    id,
+    carrier_booking_request_reference,
+    document_status,
+    receipt_type_at_origin,
+    delivery_type_at_destination,
+    cargo_movement_type_at_origin,
+    cargo_movement_type_at_destination,
+    booking_request_datetime,
+    service_contract_reference,
+    payment_term_code,
+    is_partial_load_allowed,
+    is_export_declaration_required,
+    export_declaration_reference,
+    is_import_license_required,
+    import_license_reference,
+    submission_datetime,
+    is_ams_aci_filing_required,
+    is_destination_filing_required,
+    contract_quotation_reference,
+    incoterms,
+    invoice_payable_at,
+    expected_departure_date,
+    transport_document_type_code,
+    transport_document_reference,
+    booking_channel_reference,
+    communication_channel_code,
+    is_equipment_substitution_allowed,
+    vessel_id,
+    export_voyage_number,
+    place_of_issue,
+    updated_date_time
+) VALUES (
+    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
+    'cbrr-b83765166707812c8ff4', /* carrier_booking_request_reference */
+    'PENU', /* document_status */
+    'CY', /* receipt_type_at_origin */
+    'CY', /* delivery_type_at_destination */
+    'FCL', /* cargo_movement_type_at_origin */
+    'LCL', /* cargo_movement_type_at_destination */
+    '2021-11-03 02:11:00.000', /* booking_request_datetime */
+    'Test', /* service_contract_reference */
+     NULL, /* payment_term_code */
+     true, /* is_partial_load_allowed */
+     true, /* is_export_declaration_required */
+     'Export declaration reference', /* export_declaration_reference */
+     true, /* is_import_license_required */
+     'Import declaration reference', /* import_license_reference */
+     '2021-11-03 10:41:00.000', /* submission_datetime */
+     true, /* is_ams_aci_filing_required */
+     true, /* is_destination_filing_required */
+     NULL, /* contract_quotation_reference */
+     NULL, /* incoterms */
+     NULL, /* invoice_payable_at */
+     DATE '2020-03-07', /* expected_departure_date */
+     NULL, /* transport_document_type_code */
+     NULL, /* transport_document_reference */
+     NULL, /* booking_channel_reference */
+     'AO', /* communication_channel_code */
+     true, /* is_equipment_substitution_allowed */
+     NULL, /* vessel_id */
+     NULL, /* export_voyage_number */
+     NULL, /* place_of_issue */
+     DATE '2021-12-01' /* updated_date_time */
+);
+
+INSERT INTO dcsa_im_v3_0.shipment (
+    carrier_id,
+    booking_id,
+    carrier_booking_reference,
+    terms_and_conditions,
+    confirmation_datetime,
+    updated_date_time
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
+    'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
+    'cbr-b83765166707812c8ff4',
+    'TERMS AND CONDITIONS!',
+    DATE '2020-03-07T12:12:12',
+    DATE '2020-04-07T12:12:12'
+);
+
+INSERT INTO dcsa_im_v3_0.shipping_instruction (
+    id,
+    shipping_instruction_reference,
+    document_status,
+    is_shipped_onboard_type,
+    number_of_copies,
+    number_of_originals,
+    is_electronic,
+    is_to_order,
+    are_charges_displayed_on_originals,
+    are_charges_displayed_on_copies,
+    created_date_time,
+    updated_date_time
+) VALUES (
+    'c144c6df-440e-4065-8430-f46b9fa67e65',
+    'c144c6dff46b9fa67e65',
+    'RECE',
+    TRUE,
+    2,
+    4,
+    TRUE,
+    TRUE,
+    TRUE,
+    FALSE,
+    DATE '2021-12-24',
+    DATE '2021-12-31'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_event (
+   event_id,
+   event_classifier_code,
+   event_date_time,
+   event_created_date_time,
+   shipment_event_type_code,
+   document_type_code,
+   document_id,
+   document_reference,
+   reason
+) VALUES (
+   '97eb7c09-571e-438f-8f65-ac6a29ba04e5'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'CBR',
+   'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid,
+   'cbrr-b83765166707812c8ff4',
+   null
+), (
+   'd7dde15f-5ddc-42ce-8103-9fa1c4da0bde'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'BKG',
+   (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'cbr-b83765166707812c8ff4'),
+   'cbr-b83765166707812c8ff4',
+   null
+), (
+   '8b654176-fe41-41fd-a457-a632d6811246'::uuid,
+   'ACT',
+   '2021-01-08T13:22:53Z',
+   '2021-01-08T13:22:53Z',
+   'RECE',
+   'SHI',
+   'c144c6df-440e-4065-8430-f46b9fa67e65',
+   'c144c6dff46b9fa67e65',
+   null
+);
+/* End: Test data for events with carrierBookingReference and carrierBookingRequestReference */
 
 
 SELECT 'End: 08_04_test_data_bkg.sql' as progress;

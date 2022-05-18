@@ -41,13 +41,15 @@ INSERT INTO dcsa_im_v3_0.vessel (
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id
 ) VALUES (
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
+    'TC-REF-08_02-A',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
@@ -58,6 +60,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
+    transport_call_reference,
     transport_call_sequence_number,
     facility_id,
     facility_type_code,
@@ -66,7 +69,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     export_voyage_id,
     import_voyage_id
 ) VALUES (
-    '123e4567-e89b-12d3-a456-426614174000',
+    '123e4567-e89b-12d3-a456-426614174000'::uuid,
+    'TC-REF-08_02-B',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
@@ -84,8 +88,8 @@ INSERT INTO dcsa_im_v3_0.transport (
 ) VALUES (
     'transport reference',
     'Transport name (Singapore -> NYC)',
-    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
-    uuid('123e4567-e89b-12d3-a456-426614174000')
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
+    '123e4567-e89b-12d3-a456-426614174000'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
@@ -318,13 +322,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('784871e7-c9cd-4f59-8d88-2e033fa799a1'),
     'ACT',
     '2020-07-15',
     'APPR',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'BR1239719971'),
     'BR1239719971'
 );
 
@@ -334,13 +340,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('e48f2bc0-c746-11ea-a3ff-db48243a89f4'),
     'ACT',
     TO_DATE('2020/07/15 13:14:15', 'yyyy/mm/dd hh24:mi:ss'),
     'APPR',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'BR1239719971'),
     'BR1239719971'
 );
 
@@ -350,13 +358,15 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
     event_date_time,
     shipment_event_type_code,
     document_type_code,
-    document_id
+    document_id,
+    document_reference
 ) VALUES (
     uuid('5e51e72c-d872-11ea-811c-0f8f10a32ea1'),
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'CONF',
     'BKG',
+    (SELECT id FROM dcsa_im_v3_0.booking b WHERE b.carrier_booking_request_reference = 'ABC123123123'),
     'ABC123123123'
 );
 
@@ -435,7 +445,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'LOAD',
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed',
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'equipref3453',
     'EMPTY'
 );
@@ -473,7 +483,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
     'ARRI',
-    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'WEA',
     'Bad weather'
 );
@@ -494,7 +504,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
     'LOAD',
-    uuid('8b64d20b-523b-4491-b2e5-32cfa5174eed'),
+    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'EMPTY',
     'APZU4812090'
 );
@@ -512,7 +522,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     TO_DATE('2003/05/01 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
-    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    '123e4567-e89b-12d3-a456-426614174000'::uuid,
     'ANA',
     'Authorities not available'
 );
@@ -530,7 +540,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'DEPA',
-    uuid('123e4567-e89b-12d3-a456-426614174000'),
+    '123e4567-e89b-12d3-a456-426614174000'::uuid,
     'ANA',
     'Authorities not available'
 );

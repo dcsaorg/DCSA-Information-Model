@@ -4,6 +4,11 @@
 
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
+
+-- DDT-1058
+ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
+
+
 -- Aggregated table containing all events
 DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
 CREATE VIEW dcsa_im_v3_0.aggregated_events AS
@@ -23,7 +28,8 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS remark,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
-    NULL::text AS document_id,
+    NULL::uuid AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -45,13 +51,14 @@ UNION ALL
     NULL::text AS equipment_event_type_code,
     shipment_event.event_date_time,
     shipment_event.event_created_date_time,
-    NULL::text AS transport_call_id,
+    NULL::uuid AS transport_call_id,
     NULL::text AS delay_reason_code,
     NULL::text AS change_remark,
     NULL::text AS remark,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
     shipment_event.document_id AS document_id,
+    shipment_event.document_reference AS document_reference,
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -79,7 +86,8 @@ UNION ALL
     NULL::text AS remark,
     equipment_event.equipment_reference,
     equipment_event.empty_indicator_code,
-    NULL::text AS document_id,
+    NULL::uuid AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
@@ -107,7 +115,8 @@ UNION ALL
     operations_event.remark,
     NULL::text AS equipment_reference,
     NULL::text AS empty_indicator_code,
-    NULL::text AS document_id,
+    NULL::uuid AS document_id,
+    NULL::text AS document_reference,
     NULL::text AS reason,
     operations_event.operations_event_type_code,
     operations_event.publisher_role,
@@ -119,38 +128,302 @@ UNION ALL
     operations_event.publisher
    FROM dcsa_im_v3_0.operations_event;
 
-DROP VIEW IF EXISTS dcsa_im_v3_0.event_shipment CASCADE;
-CREATE VIEW dcsa_im_v3_0.event_shipment AS
-    SELECT DISTINCT st.shipment_id AS shipment_id,
-                    'TC_ID' AS link_type,
-                    COALESCE(t.load_transport_call_id, t.discharge_transport_call_id) AS transport_call_id,
-                    null AS "document_id"
-    FROM dcsa_im_v3_0.shipment_transport st
-    JOIN dcsa_im_v3_0.transport t ON st.transport_id = t.id
-   UNION ALL
-    SELECT DISTINCT ci.shipment_id AS shipment_id,
-                    'TRD' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be transport document ID when we are getting document versioning.
-                    td.transport_document_reference AS document_id
-    FROM dcsa_im_v3_0.transport_document td
-    JOIN dcsa_im_v3_0.consignment_item ci ON td.shipping_instruction_id = ci.shipping_instruction_id
-   UNION ALL
-    SELECT DISTINCT ci.shipment_id AS shipment_id,
-                    'SHI' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be shipping instruction ID when we are getting document versioning.
-                    si.id AS "document_id"
-    FROM dcsa_im_v3_0.shipping_instruction si
-    JOIN dcsa_im_v3_0.consignment_item ci ON si.id = ci.shipping_instruction_id
-   UNION ALL
-    SELECT DISTINCT s.id AS shipment_id,
-                    'BKG' AS link_type,
-                    null AS transport_call_id,
-                    -- Should be shipment ID instead when we are getting document versioning
-                    s.carrier_booking_reference AS "document_id"
-    FROM dcsa_im_v3_0.shipment s
-  ;
+/* View to assist with the GET /events endpoint.  It provide the following information:
+ *
+ * It provides a link_type and a document_id (for ShipmentEvent) or transport_call_id (other events).
+ * These can be used for JOIN'ing between aggregated_events using something like:
+ *     FROM aggregated_events ae
+ *     JOIN event_document_reference edr ON (ae.link_type = edr.link_type AND (
+ *                   ae.transport_call_id = edr.transport_call_id
+ *                OR ae.document_id = edr.document_id
+ *     )
+ *
+ * Additionally, this view provides the following columns:
+ *   * document_reference_type (enum value to be used in the documentReferences payload)
+ *   * document_reference_value (the actual reference to the document to be used in the documentReferences payload)
+ *   * carrier_booking_request_reference (used for query parameters)
+ *   * carrier_booking_reference (used for query parameters)
+ *   * transport_document_reference (used for query parameters)
+ *
+ * The query parameter based columns are technical redundant with document_reference_value (+ a filter on the relevant
+ * type).  However, they are easier to use / reason about in case multiple query parameters are used.  As an example,
+ * given the query parameters:
+ *     carrierBookingReference=X&transportDocumentReference=Y
+ * When we have them as separate columns, this can trivially be translated into:
+ *     "WHERE carrier_booking_reference = 'X' AND transport_document_reference = 'Y'"
+ *
+ * However, the equivalent query using document_reference_value + document_reference_type would be considerably more
+ * complex to write and even harder to convince people that it was correct.
+ *
+ */
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_document_reference CASCADE;
+CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
+            -- For Transport Call based events
+            SELECT DISTINCT tc.id AS transport_call_id,
+                            null::uuid AS document_id,
+                            'TC_ID' AS link_type,
+                            'CBR' AS document_reference_type,
+                            b.carrier_booking_request_reference AS document_reference_value,
+                            b.carrier_booking_request_reference AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.booking b
+            JOIN dcsa_im_v3_0.shipment s ON s.booking_id = b.id
+            JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = s.id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                         FROM dcsa_im_v3_0.transport_call tc
+                         JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                              OR t.discharge_transport_call_id = tc.id
+                         ) tc ON tc.transport_id = st.transport_id
+        UNION ALL
+            SELECT DISTINCT tc.id AS transport_call_id,
+                            null::uuid AS document_id,
+                            'TC_ID' AS link_type,
+                            'BKG' AS document_reference_type,
+                            s.carrier_booking_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            s.carrier_booking_reference AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipment s
+            JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = s.id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
+        UNION ALL
+            SELECT DISTINCT tc.id AS transport_call_id,
+                            null::uuid AS document_id,
+                            'TC_ID' AS link_type,
+                            'SHI' AS document_reference_type,
+                            si.shipping_instruction_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipping_instruction si
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
+            JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = ci.shipment_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
+        UNION ALL
+            SELECT DISTINCT tc.id AS transport_call_id,
+                            null::uuid AS document_id,
+                            'TC_ID' AS link_type,
+                            'TRD' AS document_reference_type,
+                            td.transport_document_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            td.transport_document_reference AS transport_document_reference
+            FROM dcsa_im_v3_0.transport_document td
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = td.shipping_instruction_id
+            JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = ci.shipment_id
+            JOIN (SELECT DISTINCT tc.id, t.id AS transport_id
+                  FROM dcsa_im_v3_0.transport_call tc
+                  JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+                       OR t.discharge_transport_call_id = tc.id
+            ) tc ON tc.transport_id = st.transport_id
+    ) UNION ALL (
+            -- For CBR related ShipmentEvents
+            -- DISTINCT by definition
+            SELECT          NULL::uuid as transport_call_id,
+                            b.id AS document_id,
+                            'CBR' AS link_type,
+                            'CBR' AS document_reference_type,
+                            b.carrier_booking_request_reference AS document_reference_value,
+                            b.carrier_booking_request_reference AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.booking b
+        UNION ALL
+            -- DISTINCT. It is a 1:N relation but all the shipments will have unique CBRs
+            SELECT          NULL::uuid as transport_call_id,
+                            b.id AS document_id,
+                            'CBR' AS link_type,
+                            'BKG' AS document_reference_type,
+                            s.carrier_booking_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            s.carrier_booking_reference AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.booking b
+            JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            b.id AS document_id,
+                            'CBR' AS link_type,
+                            'SHI' AS document_reference_type,
+                            si.shipping_instruction_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.booking b
+            JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
+            JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = ci.shipping_instruction_id
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            b.id AS document_id,
+                            'CBR' AS link_type,
+                            'TRD' AS document_reference_type,
+                            td.transport_document_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            td.transport_document_reference AS transport_document_reference
+            FROM dcsa_im_v3_0.booking b
+            JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
+            JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = ci.shipping_instruction_id
+    ) UNION ALL (
+            -- For BKG related ShipmentEvents
+            -- DISTINCT - all the shipments are associated with exactly on booking.
+            SELECT          NULL::uuid as transport_call_id,
+                            s.id AS document_id,
+                            'BKG' AS link_type,
+                            'CBR' AS document_reference_type,
+                            b.carrier_booking_request_reference AS document_reference_value,
+                            b.carrier_booking_request_reference AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipment s
+            JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
+        UNION ALL
+            -- DISTINCT by definition
+            SELECT          NULL::uuid as transport_call_id,
+                            s.id AS document_id,
+                            'BKG' AS link_type,
+                            'BKG' AS document_reference_type,
+                            s.carrier_booking_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            s.carrier_booking_reference AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipment s
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            s.id AS document_id,
+                            'BKG' AS link_type,
+                            'SHI' AS document_reference_type,
+                            si.shipping_instruction_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipment s
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
+            JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = ci.shipping_instruction_id
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            s.id AS document_id,
+                            'BKG' AS link_type,
+                            'TRD' AS document_reference_type,
+                            td.transport_document_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            td.transport_document_reference AS transport_document_reference
+            FROM dcsa_im_v3_0.shipment s
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
+            JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = ci.shipping_instruction_id
+    ) UNION ALL (
+            -- For SHI related ShipmentEvents
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            si.id AS document_id,
+                            'SHI' AS link_type,
+                            'CBR' AS document_reference_type,
+                            b.carrier_booking_request_reference AS document_reference_value,
+                            b.carrier_booking_request_reference AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipping_instruction si
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
+            JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
+            JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            si.id AS document_id,
+                            'SHI' AS link_type,
+                            'BKG' AS document_reference_type,
+                            s.carrier_booking_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            s.carrier_booking_reference AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipping_instruction si
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
+            JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
+        UNION ALL
+            -- DISTINCT by definition
+            SELECT          NULL::uuid as transport_call_id,
+                            si.id AS document_id,
+                            'SHI' AS link_type,
+                            'SHI' AS document_reference_type,
+                            si.shipping_instruction_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.shipping_instruction si
+        UNION ALL
+            -- DISTINCT due to 1:1 relation
+            SELECT          NULL::uuid as transport_call_id,
+                            si.id AS document_id,
+                            'SHI' AS link_type,
+                            'TRD' AS document_reference_type,
+                            td.transport_document_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            td.transport_document_reference AS transport_document_reference
+            FROM dcsa_im_v3_0.shipping_instruction si
+            JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = si.id
+    ) UNION ALL (
+            -- For TRD related ShipmentEvents
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            td.id AS document_id,
+                            'TRD' AS link_type,
+                            'CBR' AS document_reference_type,
+                            b.carrier_booking_request_reference AS document_reference_value,
+                            b.carrier_booking_request_reference AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.transport_document td
+            JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = td.shipping_instruction_id
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
+            JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
+            JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
+        UNION ALL
+            SELECT DISTINCT NULL::uuid as transport_call_id,
+                            td.id AS document_id,
+                            'TRD' AS link_type,
+                            'BKG' AS document_reference_type,
+                            s.carrier_booking_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            s.carrier_booking_reference AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.transport_document td
+            JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = td.shipping_instruction_id
+            JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipping_instruction_id = si.id
+            JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
+        UNION ALL
+            -- DISTINCT due to 1:1 relation
+            SELECT          NULL::uuid as transport_call_id,
+                            td.id AS document_id,
+                            'TRD' AS link_type,
+                            'SHI' AS document_reference_type,
+                            si.shipping_instruction_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            NULL::text AS transport_document_reference
+            FROM dcsa_im_v3_0.transport_document td
+            JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = td.shipping_instruction_id
+        UNION ALL
+            -- DISTINCT by definition
+            SELECT          NULL::uuid as transport_call_id,
+                            td.id AS document_id,
+                            'TRD' AS link_type,
+                            'TRD' AS document_reference_type,
+                            td.transport_document_reference AS document_reference_value,
+                            NULL::text AS carrier_booking_request_reference,
+                            NULL::text AS carrier_booking_reference,
+                            td.transport_document_reference AS transport_document_reference
+            FROM dcsa_im_v3_0.transport_document td
+);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
@@ -160,7 +433,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      transport_document_id varchar(20),
      transport_document_type text,
      equipment_reference varchar(15),
-     transport_call_id varchar(100) NULL,
+     transport_call_reference varchar(100) NULL,
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
      transport_document_reference text NULL,
@@ -415,5 +688,20 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
 );
 
 \copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
+
+--- DDT-948
+ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
+
+ALTER TABLE dcsa_im_v3_0.booking ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_booking_idx ON dcsa_im_v3_0.booking(carrier_booking_request_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.shipment ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_shipment_idx ON dcsa_im_v3_0.shipment(carrier_booking_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.shipping_instruction ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(shipping_instruction_reference) WHERE valid_until IS NULL;
+
+ALTER TABLE dcsa_im_v3_0.transport_document ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(transport_document_reference) WHERE valid_until IS NULL;
 
 COMMIT;
