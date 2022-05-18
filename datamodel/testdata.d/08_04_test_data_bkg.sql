@@ -52,7 +52,7 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    issuer,
+    carrier,
     shipping_instruction_id,
     declared_value_currency,
     declared_value,
