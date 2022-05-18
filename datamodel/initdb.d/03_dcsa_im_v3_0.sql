@@ -275,11 +275,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     export_voyage_number varchar(50) NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
-    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code),
-    valid_until timestamp with time zone NULL
+    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
-
-CREATE UNIQUE INDEX unq_valid_until_booking_idx ON dcsa_im_v3_0.booking(carrier_booking_request_reference) WHERE valid_until IS NULL;
 
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
 
@@ -290,11 +287,8 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     carrier_booking_reference varchar(35) NOT NULL UNIQUE,
     terms_and_conditions text NULL,
-    confirmation_datetime timestamp with time zone NOT NULL,
-    valid_until timestamp with time zone NULL
+    confirmation_datetime timestamp with time zone NOT NULL
 );
-
-CREATE UNIQUE INDEX unq_valid_until_shipment_idx ON dcsa_im_v3_0.shipment(carrier_booking_reference) WHERE valid_until IS NULL;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
@@ -358,11 +352,8 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     displayed_name_for_port_of_load varchar(250) NULL,
     displayed_name_for_port_of_discharge varchar(250) NULL,
     displayed_name_for_place_of_delivery varchar(250) NULL,
-    amendment_to_transport_document uuid NULL,
-    valid_until timestamp with time zone NULL
+    amendment_to_transport_document uuid NULL
 );
-
-CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(shipping_instruction_reference) WHERE valid_until IS NULL;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
 CREATE TABLE dcsa_im_v3_0.value_added_service_request (
@@ -385,11 +376,8 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
     declared_value real NULL,
-    number_of_rider_pages integer NULL,
-    valid_until timestamp with time zone NULL
+    number_of_rider_pages integer NULL
 );
-
-CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(transport_document_reference) WHERE valid_until IS NULL;
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
     ADD FOREIGN KEY (amendment_to_transport_document) REFERENCES dcsa_im_v3_0.transport_document (id);
