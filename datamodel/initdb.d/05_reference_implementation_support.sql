@@ -579,8 +579,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     negotiation_cycle text NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key),
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
-    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
-    canonical_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
+    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
 );
 
 
