@@ -469,7 +469,7 @@ CREATE TABLE dcsa_im_v3_0.equipment (
     -- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
     iso_equipment_code char(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     tare_weight real NULL,
-    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)
+    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)  CHECK (weight_unit IN ('KGM','LBR'))
 );
 
 -- Supporting FK constraints
@@ -493,7 +493,7 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     cargo_gross_weight real NULL,
-    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     is_shipper_owned boolean NOT NULL
 );
 
@@ -505,7 +505,7 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     utilized_transport_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
     temperature_min real NULL,
     temperature_max real NULL,
-    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
     humidity_min real NULL,
     humidity_max real NULL,
     ventilation_min real NULL,
@@ -520,8 +520,8 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     weight real NOT NULL,
     volume real NULL,
-    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) ,
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
 );
 
