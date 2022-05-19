@@ -45,6 +45,14 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     DATE '2020-01-06'
 );
 
+INSERT INTO dcsa_im_v3_0.party (
+    id,
+    party_name 
+) VALUES (
+    'c49ea2d6-3806-46c8-8490-294affc71286',
+    'FDM Quality Control'
+);
+
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
@@ -58,7 +66,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     declared_value,
     number_of_rider_pages,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    issuingParty
 ) VALUES (
     'be038e58-5365',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -72,7 +81,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
-    '2021-12-01T07:41:00+08:30'::timestamptz
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    'c49ea2d6-3806-46c8-8490-294affc71286'
 );
 
 INSERT INTO dcsa_im_v3_0.charge (
