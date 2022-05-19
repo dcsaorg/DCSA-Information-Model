@@ -868,7 +868,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     declared_value,
     number_of_rider_pages,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    issuingParty
 ) VALUES (
     '1af13f0b-a1ea-4ff8',
     '01670315-a51f-4a11-b947-ce8e245128eb',
@@ -882,21 +883,23 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
-    '2021-12-01T07:41:00+08:30'::timestamptz
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
 ), (
-  '2b02401c-b2fb-5009',
-  '01670315-a51f-4a11-b947-ce8e245128eb',
-  DATE '2020-11-25',
-  DATE '2020-12-24',
-  DATE '2020-12-31',
-  12,
-  (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
-  '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
-  'WTK',
-  12.12,
-  12,
-  '2022-03-03T18:22:53Z'::timestamptz,
-  '2022-03-05T13:56:12Z'::timestamptz
+    '2b02401c-b2fb-5009',
+    '01670315-a51f-4a11-b947-ce8e245128eb',
+    DATE '2020-11-25',
+    DATE '2020-12-24',
+    DATE '2020-12-31',
+    12,
+    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
+    '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
+    'WTK',
+    12.12,
+    12,
+    '2022-03-03T18:22:53Z'::timestamptz,
+    '2022-03-05T13:56:12Z'::timestamptz,
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
 ), (
    '9b02401c-b2fb-5009',
    '01670315-a51f-4a11-b947-ce8e245128eb',
@@ -910,7 +913,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
    12.12,
    12,
    '2022-03-03T18:22:53Z'::timestamptz,
-   '2022-03-05T13:56:12Z'::timestamptz
+   '2022-03-05T13:56:12Z'::timestamptz,
+   '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
  );
 
 INSERT INTO dcsa_im_v3_0.shipment_event (
@@ -1425,6 +1429,14 @@ INSERT INTO dcsa_im_v3_0.commodity(
 -------- ShipmentLocationRepository.findByTransportDocumentID BEGIN --------
 ------------------------------- DO NOT MODIFY ------------------------------
 
+INSERT INTO dcsa_im_v3_0.party (
+    id,
+    party_name
+) VALUES (
+    '499918a2-d12d-4df6-840c-dd92357002df',
+    'FTL International'
+);
+
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     shipping_instruction_reference,
@@ -1616,7 +1628,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     declared_value,
     number_of_rider_pages,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    issuingParty
 ) VALUES (
     'de561650-d43d-46af-88c3-0ab380bb5365'::uuid,
     '0cc0bef0-a7c8-4c03',
@@ -1631,7 +1644,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
-    '2021-12-01T07:41:00+08:30'::timestamptz
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    '499918a2-d12d-4df6-840c-dd92357002df'
 );
 
 INSERT INTO dcsa_im_v3_0.location (
@@ -1743,6 +1757,14 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
 
 ----------------- Data for ApproveTransportDocument BEGIN ----------------
 ------------------------------ DO NOT MODIFY -----------------------------
+
+INSERT INTO dcsa_im_v3_0.party (
+    id,
+    party_name
+) VALUES (
+    '8e463a84-0a2d-47cd-9332-51e6cb36b635',
+    'Superdæk Albertslund'
+);
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
@@ -1882,7 +1904,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     declared_value,
     number_of_rider_pages,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    issuingParty
 ) VALUES (
     'cf48ad0a-9a4b-48a7-b752-c248fb5d88d9'::uuid,
     'c90a0ed6-ccc9-48e3',
@@ -1897,7 +1920,8 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
-    '2021-12-01T07:41:00+08:30'::timestamptz
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    '8e463a84-0a2d-47cd-9332-51e6cb36b635'
 );
 
 INSERT INTO dcsa_im_v3_0.cargo_item (
