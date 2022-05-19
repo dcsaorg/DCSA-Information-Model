@@ -318,9 +318,9 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     commodity_type varchar(550) NOT NULL,
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     cargo_gross_weight real NULL,
-    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
-    cargo_gross_volume_unit varchar(3) NULL CONSTRAINT cargo_gross_volume_unit CHECK (cargo_gross_volume_unit IN ('CBM','CFT')),
+    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
     number_of_packages integer NULL,
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL
@@ -521,7 +521,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     weight real NOT NULL,
     volume real NULL,
     weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) ,
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
 );
 
@@ -536,8 +536,8 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     consignment_item_id uuid NOT NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     weight real NOT NULL,
     volume real NULL,
-    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code),
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
     number_of_packages integer NOT NULL,
     package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
     utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
