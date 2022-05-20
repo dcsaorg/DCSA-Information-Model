@@ -373,7 +373,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
     number_of_originals integer NULL,
-    carrier uuid NULL REFERENCES dcsa_im_v3_0.carrier(id),
+    carrier uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     declared_value_currency varchar(3) NULL,
     declared_value real NULL,
