@@ -185,9 +185,14 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_imo_number varchar(7) NULL UNIQUE,
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
-    vessel_call_sign_number varchar(10) NULL,
-    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id)
+    vessel_call_sign varchar(10) NULL,
+    vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
+    is_dummy boolean NOT NULL default false,
+    length numeric NULL,
+    width numeric NULL,
+    dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
 );
+
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.communication_channel_qualifier CASCADE;
 CREATE TABLE dcsa_im_v3_0.communication_channel_qualifier (
@@ -223,13 +228,15 @@ CREATE TABLE dcsa_im_v3_0.service (
     carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
     carrier_service_code varchar(5),
     carrier_service_name varchar(50),
-    tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id)
+    tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id),
+    universal_service_reference varchar(8) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
 CREATE TABLE dcsa_im_v3_0.voyage (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_voyage_number varchar(50) NOT NULL,
+    universal_voyage_reference varchar(5) NULL,
     service_id uuid NULL REFERENCES dcsa_im_v3_0.service (id) INITIALLY DEFERRED
 );
 
@@ -640,7 +647,8 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     import_voyage_id uuid NULL, -- Will add the reference later once Voyage is added,
-    export_voyage_id uuid NULL -- Will add the reference later once Voyage is added
+    export_voyage_id uuid NULL, -- Will add the reference later once Voyage is added
+    port_call_status_code char(4) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
