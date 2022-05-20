@@ -49,30 +49,32 @@ INSERT INTO dcsa_im_v3_0.location (
 
 INSERT INTO dcsa_im_v3_0.location (
     id,
-    location_name
+    location_name,
+    un_location_code
 ) VALUES (
     uuid('84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d'),
-    'The Factory'
+    'The Factory',
+    'USMIA'
 ), (
     uuid('286c605e-4043-11eb-9c0b-7b4196cf71fa'),
-    'Port of Singapore'
+    'Port of Singapore',
+    'USMIA'
 ), (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185386'),
-    'Port of Rotterdam'
+    'Port of Rotterdam',
+    'USMIA'
 ), (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185387'),
-    'Genneb'
+    'Genneb',
+    'USMIA'
 ), (
     uuid('770b7624-403d-11eb-b44b-d3f4ad185388'),
-    'Nijmegen'
-);
-
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name
-) VALUES (
+    'Nijmegen',
+    'USMIA'
+), (
     uuid('7f29ce3c-403d-11eb-9579-6bd2f4cf4ed6'),
-    'The Warehouse'
+    'The Warehouse',
+    'USMIA'
 );
 
 INSERT INTO dcsa_im_v3_0.address (
@@ -1659,13 +1661,13 @@ INSERT INTO dcsa_im_v3_0.location (
     'Copenhagen',
     '55.671° N',
     '12.453° E',
-    null
+    'USMIA'
 ),(
     '1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40',
     'Orlando',
     '28.481° N',
     '-81.48° E',
-    null
+    'USMIA'
 ),(
     'ea9af21d-8471-47ac-aa59-e949ea74b08e',
     'Miami',
