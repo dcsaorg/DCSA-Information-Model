@@ -29,7 +29,7 @@ INSERT INTO dcsa_im_v3_0.vessel (
     vessel_imo_number,
     vessel_name,
     vessel_flag,
-    vessel_call_sign_number,
+    vessel_call_sign,
     vessel_operator_carrier_id
 ) VALUES (
     '1234567',
