@@ -22,6 +22,7 @@ BEGIN;
 \copy dcsa_im_v3_0.payment_term_type from '../referencedata.d/paymentterms.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.port_call_phase_type from '../referencedata.d/portcallphasetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.port_call_service_type from '../referencedata.d/portcallservicetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.port_call_status_code from '../referencedata.d/portcallstatuscodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.receipt_delivery_type from '../referencedata.d/receiptdeliverytypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.reference_type from '../referencedata.d/referencetypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.seal_source from '../referencedata.d/sealsourcecodes.csv' with NULL AS E'\'\'' CSV HEADER

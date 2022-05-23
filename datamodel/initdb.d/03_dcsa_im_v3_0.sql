@@ -635,6 +635,13 @@ CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_location_type_code);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_status_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_status_code (
+    port_call_status_code varchar(4) NOT NULL PRIMARY KEY,
+    port_call_status_name varchar(30) NOT NULL,
+    port_call_status_description varchar(250) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_call (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -648,7 +655,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     import_voyage_id uuid NULL, -- Will add the reference later once Voyage is added,
     export_voyage_id uuid NULL, -- Will add the reference later once Voyage is added
-    port_call_status_code char(4) NULL
+    port_call_status_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_code (port_call_status_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
