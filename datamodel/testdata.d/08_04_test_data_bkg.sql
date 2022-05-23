@@ -53,6 +53,22 @@ INSERT INTO dcsa_im_v3_0.party (
     'FDM Quality Control'
 );
 
+INSERT INTO dcsa_im_v3_0.party_contact_details (
+    id,
+    party_id,
+    name,
+    email,
+    phone,
+    url
+) VALUES (
+    'be59706b-b059-455b-bb20-aeb8d79605fe'::uuid,
+    'c49ea2d6-3806-46c8-8490-294affc71286',
+    'FDM',
+    'info@fdm.org',
+    '+31123456789',
+    'https://www.fdm.org'
+);
+
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
     place_of_issue,
@@ -623,13 +639,30 @@ INSERT INTO dcsa_im_v3_0.party (
     tax_reference_2,
     public_key,
     address_id
-    ) VALUES (
+) VALUES (
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
     'CVR-25645774',
     'CVR-25645774',
     'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
-    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid);
+    '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid
+);
+
+INSERT INTO dcsa_im_v3_0.party_contact_details (
+    id,
+    party_id,
+    name,
+    email,
+    phone,
+    url
+) VALUES (
+    'c4645dd4-56a7-4c32-898f-cc86d5252248'::uuid,
+    '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
+    'Hapag Lloyd',
+    'info@h-l.org',
+    '+31123456789',
+    'https://www.hapag-llyod.org'
+);
 
 INSERT INTO dcsa_im_v3_0.party_identifying_code (
     id,
