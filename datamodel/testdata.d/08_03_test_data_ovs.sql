@@ -69,23 +69,6 @@ INSERT INTO dcsa_im_v3_0.vessel (
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'EMC')
 );
 
-INSERT INTO dcsa_im_v3_0.location (
-    id,
-    location_name,
-    address_id,
-    latitude,
-    longitude,
-    un_location_code
-) VALUES (
-    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
-    'Eiffel Tower',
-    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
-    '48.8585500',
-    '2.294492036',
-    'USNYC'
-);
-
-
 INSERT INTO dcsa_im_v3_0.service (
     id,
     carrier_id,
@@ -109,6 +92,21 @@ INSERT INTO dcsa_im_v3_0.voyage (
      '03482296-ef9c-11eb-9a03-0242ac131999'
 );
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    address_id,
+    latitude,
+    longitude,
+    un_location_code
+) VALUES (
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
+    'Eiffel Tower',
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    '48.8585500',
+    '2.294492036',
+    'USNYC'
+);
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
@@ -119,7 +117,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     mode_of_transport_code,
     vessel_id,
     import_voyage_id,
-    export_voyage_id
+    export_voyage_id,
+    location_id
 ) VALUES (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
     'TC-REF-08_03-A',
@@ -129,7 +128,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
     uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
-    uuid('03482296-ef9c-11eb-9a03-0242ac131233')
+    uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23')
 ), (
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60'::uuid,
     'TC-REF-08_03-B',
@@ -139,7 +139,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
     uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
-    uuid('03482296-ef9c-11eb-9a03-0242ac131233')
+    uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -184,6 +185,18 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'ARRI',
     '123e4567-e89b-12d3-a456-426614174000'::uuid,
+    'ANA',
+    'CA',
+    'WSDP',
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
+    'BRTH',
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
+), (
+    uuid('84956fbe-89f3-410e-a728-63e9f8ecebde'),
+    'EST',
+    TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    'ARRI',
+    '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
     'ANA',
     'CA',
     'WSDP',
