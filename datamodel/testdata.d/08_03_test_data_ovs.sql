@@ -106,6 +106,13 @@ INSERT INTO dcsa_im_v3_0.location (
     '48.8585500',
     '2.294492036',
     'USNYC'
+), (
+    '6748a259-fb7e-4f27-9a88-3669e8b9c5f8',
+    'Eiffel Tower 2',
+    uuid('8791f557-fe69-42c9-a420-f39f09dd6207'),
+    '48.8585500',
+    '2.294492036',
+    'SGSIN'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_call (
@@ -138,9 +145,9 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
-    uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
-    uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
-    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd23')
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E'),
+    uuid('6748a259-fb7e-4f27-9a88-3669e8b9c5f8')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -159,6 +166,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     event_id,
     event_classifier_code,
     event_date_time,
+    event_created_date_time,
     operations_event_type_code,
     transport_call_id,
     delay_reason_code,
@@ -168,11 +176,12 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     facility_type_code,
     publisher
 ) VALUES (
-    uuid('b785317a-2340-4db7-8fb3-c8dfb1edfa60'),
+    uuid('a0993e06-a222-42ec-816f-ec1d775cfd10'),
     'ACT',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    '2022-05-08T13:22:53Z',
     'DEPA',
-    '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60'::uuid,
     'ANA',
     'TR',
     'BUNK',
@@ -183,24 +192,13 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     uuid('03482296-ef9c-11eb-9a03-0242ac130003'),
     'EST',
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
-    'ARRI',
-    '123e4567-e89b-12d3-a456-426614174000'::uuid,
-    'ANA',
-    'CA',
-    'WSDP',
-    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
-    'BRTH',
-    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
-), (
-    uuid('84956fbe-89f3-410e-a728-63e9f8ecebde'),
-    'EST',
-    TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
+    '2022-02-08T13:22:53Z',
     'ARRI',
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
     'ANA',
     'CA',
     'WSDP',
-    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
+    '6748a259-fb7e-4f27-9a88-3669e8b9c5f8',
     'BRTH',
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
 );
