@@ -131,7 +131,7 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'TC-REF-08_03-A',
     1,
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
-    'BRTH',
+    'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
     uuid('03482296-ef9c-11eb-9a03-0242ac131233'),
