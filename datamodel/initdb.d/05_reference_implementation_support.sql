@@ -678,8 +678,6 @@ CREATE TABLE dcsa_im_v3_0.ebl_solution_provider_type (
     ebl_solution_provider_description varchar(250) NULL
 );
 
-\copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
-
 --- DDT-948
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id);
 
@@ -695,6 +693,8 @@ CREATE UNIQUE INDEX unq_valid_until_si_idx ON dcsa_im_v3_0.shipping_instruction(
 ALTER TABLE dcsa_im_v3_0.transport_document ADD valid_until timestamp with time zone NULL;
 CREATE UNIQUE INDEX unq_valid_until_td_idx ON dcsa_im_v3_0.transport_document(transport_document_reference) WHERE valid_until IS NULL;
 
+ALTER TABLE dcsa_im_v3_0.vessel ADD valid_until timestamp with time zone NULL;
+CREATE UNIQUE INDEX unq_valid_until_vessel_idx ON dcsa_im_v3_0.vessel(vessel_imo_number) WHERE valid_until IS NULL;
 
 --- DDT-1017
 DROP TABLE IF EXISTS dcsa_im_v3_0.service_schedule CASCADE;

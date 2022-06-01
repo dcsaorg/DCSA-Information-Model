@@ -182,7 +182,7 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    vessel_imo_number varchar(7) NULL UNIQUE,
+    vessel_imo_number varchar(7) NULL,
     vessel_name varchar(35) NULL,
     vessel_flag char(2) NULL,
     vessel_call_sign varchar(10) NULL,

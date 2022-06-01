@@ -11,6 +11,7 @@ SELECT 'Start: 07_load_sample_data.sql...' as progress;
 \copy dcsa_im_v3_0.facility (facility_name, un_location_code, facility_smdg_code, facility_bic_code) from '../samples.d/facilities.csv' CSV HEADER
 \copy dcsa_im_v3_0.hs_code from '../samples.d/hscodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.smdg_delay_reason from '../samples.d/smdgdelayreasoncodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.ebl_solution_provider_type from '../referencedata.d/eblsolutionproviders.csv' with NULL AS E'\'\'' CSV HEADER
 
 -- Used in our implementation of JIT
 \copy dcsa_im_v3_0.negotiation_cycle from '../samples.d/negotiationcycles.csv' with NULL AS E'\'\'' CSV HEADER
