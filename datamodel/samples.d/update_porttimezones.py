@@ -2,14 +2,15 @@
 
 import csv
 import os
+import re
 import sys
-import urllib.request
 
 
 DOWNLOAD_URL = 'https://raw.githubusercontent.com/marek5050/UN-Locode-with-Timezone/master/data/easy_allCountries.csv'
 FIELDS_TO_KEEP = ['unlocode', 'timezone']
 UN_LOCODE_FIELD = 'unlocode'
 FILENAME = 'porttimezones.csv'
+VALID_TIMEZONE = re.compile(r"^[A-Z][\w_-]+(/[A-Z][\w_-]+)+")
 
 
 def usage():
@@ -69,6 +70,10 @@ def main():
         csv_writer.writeheader()
         for row in csv_reader:
             if known_unlocodes is not None and row[UN_LOCODE_FIELD] not in known_unlocodes:
+                continue
+            if 'timezone' in row and not VALID_TIMEZONE.fullmatch(row['timezone']):
+                print("W: Skipping data for " + row[UN_LOCODE_FIELD] + " as \"" + row['timezone']
+                      + "\" does not seem like a valid timezone")
                 continue
             replacement_row = {f: row[f] for f in FIELDS_TO_KEEP}
             csv_writer.writerow(replacement_row)
