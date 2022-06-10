@@ -94,7 +94,7 @@ INSERT INTO dcsa_im_v3_0.service (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
      'A_CSC',
      'A_carrier_service_name',
-     'SR00001A'
+     'SR00001B'
 );
 
 INSERT INTO dcsa_im_v3_0.service (
@@ -305,7 +305,7 @@ INSERT INTO dcsa_im_v3_0.vessel_schedule(
     service_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00001A')
+    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00001B')
 );
 
 INSERT INTO dcsa_im_v3_0.vessel_schedule(
