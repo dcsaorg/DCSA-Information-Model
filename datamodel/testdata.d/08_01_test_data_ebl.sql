@@ -142,6 +142,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time,
     invoice_payable_at
@@ -172,6 +174,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'
@@ -204,6 +208,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time
 ) VALUES (
@@ -233,6 +239,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_02',
+    'WTK',
+    12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
 );
@@ -863,10 +871,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     number_of_originals,
     carrier,
     shipping_instruction_id,
-    vessel_name,
-    export_voyage_number,
-    declared_value_currency,
-    declared_value,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
@@ -880,10 +884,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85'::uuid,
-    'vessel name',
-    'export voyage number',
-    'WTK',
-    12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
@@ -897,10 +897,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
-    'vessel name',
-    'export voyage number',
-    'WTK',
-    12.12,
     12,
     '2022-03-03T18:22:53Z'::timestamptz,
     '2022-03-05T13:56:12Z'::timestamptz,
@@ -914,10 +910,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
    12,
    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
    '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
-    'vessel name',
-    'export voyage number',
-   'WTK',
-   12.12,
    12,
    '2022-03-03T18:22:53Z'::timestamptz,
    '2022-03-05T13:56:12Z'::timestamptz,
@@ -1133,6 +1125,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time
 ) VALUES (
@@ -1161,6 +1155,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_03',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09'
 );
@@ -1192,6 +1188,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time
 ) VALUES (
@@ -1221,6 +1219,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_04',
+    'WTK',
+    12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
 );
@@ -1252,6 +1252,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time
 ) VALUES (
@@ -1280,6 +1282,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_05',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09'
 );
@@ -1311,6 +1315,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time
 ) VALUES (
@@ -1340,6 +1346,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_06',
+    'WTK',
+    12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
 );
@@ -1515,6 +1523,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time,
     invoice_payable_at
@@ -1545,6 +1555,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'
@@ -1575,6 +1587,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'
@@ -1647,10 +1661,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     number_of_originals,
     carrier,
     shipping_instruction_id,
-    vessel_name,
-    export_voyage_number,
-    declared_value_currency,
-    declared_value,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
@@ -1665,10 +1675,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'a1c7b95d-3004-40a5-bae1-e379021b7782'::uuid,
-    'vessel name',
-    'export voyage number',
-    'WTK',
-    12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
@@ -1864,6 +1870,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed,
     vessel_id,
     export_voyage_number,
+    declared_value_currency,
+    declared_value,
     place_of_issue,
     updated_date_time,
     invoice_payable_at
@@ -1894,6 +1902,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     'CARRIER_VOYAGE_NUMBER_01',
+    'WTK',
+    12.12,
     NULL,
     DATE '2021-12-09',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'
@@ -1943,10 +1953,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     number_of_originals,
     carrier,
     shipping_instruction_id,
-    vessel_name,
-    export_voyage_number,
-    declared_value_currency,
-    declared_value,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
@@ -1961,10 +1967,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '2c337fcc-2814-42b3-a752-f1847e74cba7'::uuid,
-    'vessel name',
-    'export voyage number',
-    'WTK',
-    12.12,
     12,
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,

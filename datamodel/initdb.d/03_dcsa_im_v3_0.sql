@@ -281,6 +281,8 @@ CREATE TABLE dcsa_im_v3_0.booking (
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     export_voyage_number varchar(50) NULL,
+    declared_value_currency varchar(3) NULL,
+    declared_value real NULL,
     place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
     pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
@@ -382,10 +384,6 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     number_of_originals integer NULL,
     carrier uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    vessel_name varchar(35) NULL,
-    export_voyage_number varchar(50) NULL,
-    declared_value_currency varchar(3) NULL,
-    declared_value real NULL,
     number_of_rider_pages integer NULL,
     issuingParty varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id)
 );
