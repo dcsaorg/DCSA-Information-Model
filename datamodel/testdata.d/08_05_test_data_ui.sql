@@ -41,7 +41,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'PLN', /* event_classifier_code */
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745', /* publisher */
     'PLT', /* publisher_role */
-    'ARRI', /* operations_event_type_code */
+    'STRT', /* operations_event_type_code */
     '06aca2f6-f1d0-48f8-ba46-9a3480adfd23', /* event_location */
     'b785317a-2340-4db7-8fb3-c8dfb1edfa60', /* transport_call_id */
     'PILO', /* port_call_service_type_code */
