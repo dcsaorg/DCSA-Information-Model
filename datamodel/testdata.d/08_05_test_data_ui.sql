@@ -36,20 +36,20 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     null,
     'INBD'
 ), (
-    '538312da-674c-4278-bf9f-10e2a7c018e3',
-    DATE '2022-03-07',
-    'ACT',
-    '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
-    'TR',
-    'DEPA',
-    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
-    'b785317a-2340-4db7-8fb3-c8dfb1edfa60',
-    'BUNK',
-    'BRTH',
-    'ANA',
-    null,
-    null,
-    null
+    '538312da-674c-4278-bf9f-10e2a7c018e3', /* event_id */
+    DATE '2022-03-07', /* event_date_time */
+    'PLN', /* event_classifier_code */
+    '7bf6f428-58f0-4347-9ce8-d6be2f5d5745', /* publisher */
+    'PLT', /* publisher_role */
+    'ARRI', /* operations_event_type_code */
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23', /* event_location */
+    'b785317a-2340-4db7-8fb3-c8dfb1edfa60', /* transport_call_id */
+    'PILO', /* port_call_service_type_code */
+    null, /* facility_type_code */
+    'ANA', /* delay_reason_code */
+    null, /* vessel_position */
+    null, /* remark */
+    'INBD' /* port_call_phase_type_code */
 );
 
 INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
@@ -63,7 +63,7 @@ INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
 ), (
     '538312da-674c-4278-bf9f-10e2a7c018e3',
     null,
-    'UC2'
+    'UC10'
 );
 
 SELECT 'End: 08_05_test_data_ui.sql' as progress;
