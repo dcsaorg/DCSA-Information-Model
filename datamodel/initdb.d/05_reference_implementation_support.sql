@@ -564,6 +564,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
+    port_call_phase varchar(100) NULL,
     is_berth_location_needed boolean NOT NULL,
     is_pbp_location_needed boolean NOT NULL,
     is_terminal_needed boolean NOT NULL,
