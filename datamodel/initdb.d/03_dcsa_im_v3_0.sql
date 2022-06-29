@@ -196,7 +196,7 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     is_dummy boolean NOT NULL default false,
     length numeric NULL,
     width numeric NULL,
-    type varchar(4) NULL REFERENCES dcsa_im_v3_0.vessel_type (vessel_type_code),
+    type varchar(4) NULL REFERENCES dcsa_im_v3_0.vessel_type (code),
     dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
 );
 
