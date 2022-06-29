@@ -1,4 +1,4 @@
-vessel_type_code,vessel_type_description
+code,description
 GCGO,General cargo
 CONT,Container
 RORO,RoRo
