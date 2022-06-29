@@ -1,0 +1,12 @@
+vessel_type_code,vessel_type_description
+GCGO,General cargo
+CONT,Container
+RORO,RoRo
+CARC,Car carrier
+PASS,Passenger
+FERY,Ferry
+BULK,Bulk
+TANK,Tanker
+LGTK,Liquified gaz tanker
+ASSI,Assistance
+PILO,Pilot boa
