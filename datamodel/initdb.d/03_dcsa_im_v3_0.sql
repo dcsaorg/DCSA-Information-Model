@@ -181,8 +181,8 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_type (
-    vessel_type_code varchar(4) PRIMARY KEY,
-    vessel_type_description varchar(100) NOT NULL
+    code varchar(4) PRIMARY KEY,
+    description varchar(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
