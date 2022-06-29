@@ -35,5 +35,6 @@ BEGIN;
 \copy dcsa_im_v3_0.unit_of_measure from '../referencedata.d/unitofmeasures.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.value_added_service from '../referencedata.d/valueaddedservicecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.vessel_sharing_agreement_type from '../referencedata.d/vesselsharingagreementtypes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.vessel_type from '../referencedata.d/vesseltypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 
 COMMIT;

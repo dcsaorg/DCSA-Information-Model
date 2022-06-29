@@ -179,6 +179,12 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
     cut_off_time_description varchar(250) NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.vessel_type (
+    code varchar(4) PRIMARY KEY,
+    description varchar(100) NOT NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -190,9 +196,9 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     is_dummy boolean NOT NULL default false,
     length numeric NULL,
     width numeric NULL,
+    type varchar(4) NULL REFERENCES dcsa_im_v3_0.vessel_type (code),
     dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
 );
-
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.communication_channel_qualifier CASCADE;
 CREATE TABLE dcsa_im_v3_0.communication_channel_qualifier (
