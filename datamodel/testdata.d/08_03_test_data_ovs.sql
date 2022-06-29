@@ -294,7 +294,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     '7f2d833c-2c7f-4fc5-a71a-e510881da64a'::uuid,
     'ANA',
     'CA',
-    'WSDP',
+    'SAFE',
     '6748a259-fb7e-4f27-9a88-3669e8b9c5f8',
     'BRTH',
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
