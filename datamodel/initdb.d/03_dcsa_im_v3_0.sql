@@ -844,4 +844,11 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
 
 ALTER TABLE dcsa_im_v3_0.operations_event ADD PRIMARY KEY (event_id);
 
+-- Only used by UI support to assist the UI
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_timezone CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_timezone (
+    un_location_code char(5) PRIMARY KEY REFERENCES dcsa_im_v3_0.un_location (un_location_code),
+    iana_timezone text NOT NULL
+);
+
 COMMIT;

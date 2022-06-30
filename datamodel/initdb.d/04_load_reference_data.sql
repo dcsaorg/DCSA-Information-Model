@@ -31,10 +31,25 @@ BEGIN;
 \copy dcsa_im_v3_0.shipment_location_type from '../referencedata.d/shipmentlocationtypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_document_type from '../referencedata.d/transportdocumenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_event_type from '../referencedata.d/transporteventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+<<<<<<< Updated upstream
 \copy dcsa_im_v3_0.transport_plan_stage_type from '../referencedata.d/transportplanstagetypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.unit_of_measure from '../referencedata.d/unitofmeasures.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.value_added_service from '../referencedata.d/valueaddedservicecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.vessel_sharing_agreement_type from '../referencedata.d/vesselsharingagreementtypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.vessel_type from '../referencedata.d/vesseltypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+=======
+\copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.operations_event_type from '../referencedata.d/operationseventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.port_call_service_type from '../referencedata.d/portcallservicetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.code_list_responsible_agency from '../referencedata.d/codelistresponsibleagencycodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.carrier (carrier_name, smdg_code, nmfta_code) from '../samples.d/carriers.csv' CSV HEADER
+\copy dcsa_im_v3_0.country from '../samples.d/countrycodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.un_location from '../samples.d/unlocationcodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.facility (facility_name, un_location_code, facility_smdg_code) from '../samples.d/facilities.csv' CSV HEADER
+\copy dcsa_im_v3_0.hs_code from '../samples.d/hscodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.smdg_delay_reason from '../samples.d/smdgdelayreasoncodes.csv' CSV HEADER
+-- Data only used by UI Support
+\copy dcsa_im_v3_0.port_timezone from '../samples.d/porttimezones.csv' CSV HEADER
+>>>>>>> Stashed changes
 
 COMMIT;
