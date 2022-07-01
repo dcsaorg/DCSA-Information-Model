@@ -12,10 +12,10 @@ def declare_timestamps():
 
     Timestamps are added to the CSV in the order this function outputs them.
 
-    Use generate_xty_timestamps(...) for "ETA-Berth" and similar timestamps
+    Use generic_xty_timestamps(...) for "ETA-Berth" and similar timestamps
     that follow this pattern.
 
-    Use emit_special_timestamp(...) for "EOSP", "AT-All Fast" and similar
+    Use generate_special_timestamp(...) for "EOSP", "AT-All Fast" and similar
     special-case timestamps.
     """
     # Add XTA-Berth
@@ -47,7 +47,7 @@ def declare_timestamps():
     xty_service_timestamps(
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['TOWG'],
-        [NULL_VALUE, 'ALGS'],
+        [NULL_VALUE, 'INBD'],
         "Services Planning",
         'jit1_0',
         include_phase_in_name=True,
@@ -59,7 +59,7 @@ def declare_timestamps():
     xty_service_timestamps(
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['MOOR'],
-        [NULL_VALUE, 'ALGS'],
+        [NULL_VALUE, 'INBD'],
         "Services Planning",
         'jit1_2',
         include_phase_in_name=True,
@@ -72,7 +72,7 @@ def declare_timestamps():
     xty_service_timestamps(
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['PILO'],
-        [NULL_VALUE, 'ALGS'],
+        [NULL_VALUE, 'INBD'],
         "Services Planning",
         'jit1_0',
         include_phase_in_name=True,
@@ -327,9 +327,9 @@ def next_id():
 
 
 def xty_service_timestamps(
-        event_classifier_codes: List[str],
-        port_call_service_type_codes: List[str],
-        port_call_phase_type_codes: List[str],
+        event_classifier_codes: Iterable[str],
+        port_call_service_type_codes: Iterable[str],
+        port_call_phase_type_codes: Iterable[str],
         port_call_part: str,
         provided_in_standard: str,
         include_phase_in_name: bool = False,
@@ -345,7 +345,7 @@ def xty_service_timestamps(
     for port_call_service_type_code in port_call_service_type_codes:
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
-        yield from generic_xty_timestamps(
+        generic_xty_timestamps(
             service_info.publisher_patterns,
             event_classifier_codes,
             operations_event_type_codes,
@@ -353,7 +353,7 @@ def xty_service_timestamps(
             port_call_phase_type_codes,
             port_call_part,
             provided_in_standard,
-            port_call_service_type_codes=port_call_service_type_codes,
+            port_call_service_type_codes=[port_call_service_type_code],
             include_phase_in_name=include_phase_in_name,
             need_vessel_position_for=need_vessel_position_for,
             need_event_location_for=need_event_location_for,
@@ -439,12 +439,12 @@ def generic_xty_timestamps(
         else:
             name_stem = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
             _ensure_named(name_stem, 'facilityTypeCode', facility_type_code)
-        if include_phase_in_name:
+        if port_call_phase_type_code == NULL_VALUE:
+            phase_name_part = ' (<implicit>)' if backwards_compat_phase_code else ''
+        elif include_phase_in_name:
             n = PHASE_TYPE_CODE2NAME_STEM[port_call_phase_type_code]
             _ensure_named(n, 'portCallPhaseTypeCode', port_call_phase_type_code)
             phase_name_part = ' (' + n + ')'
-        elif backwards_compat_phase_code and port_call_phase_type_code == NULL_VALUE:
-            phase_name_part = ' (<implicit>)'
         else:
             phase_name_part = ''
         publisher_pattern = initial_publisher_pattern
@@ -455,8 +455,12 @@ def generic_xty_timestamps(
             # In the default pattern, anyone is allowed to sent ACT
             publisher_pattern = initial_publisher_pattern.copy()
             publisher_pattern.extend((r, p) for p, r in initial_publisher_pattern)
-        full_name = ''.join((event_classifier_code[0], 'T', operations_event_type_code[0], '-',
-                             name_stem, phase_name_part))
+        if operations_event_type_code == 'CANC':
+            full_name = ''.join(('Cancel ', event_classifier_code[0], 'T<ALL>-',
+                                 name_stem, phase_name_part))
+        else:
+            full_name = ''.join((event_classifier_code[0], 'T', operations_event_type_code[0], '-',
+                                 name_stem, phase_name_part))
         _make_timestamp(
             full_name,
             event_classifier_code,
@@ -469,7 +473,8 @@ def generic_xty_timestamps(
             publisher_pattern,
             need_vessel_position=event_classifier_code in need_vessel_position_for,
             need_event_location=event_classifier_code in need_event_location_for,
-            is_pattern_timestamp=True
+            # 'CANC' does not follow the pattern.
+            is_pattern_timestamp=operations_event_type_code != 'CANC'
         )
 
 
@@ -653,7 +658,7 @@ def main():
 
     declare_timestamps()
     if not ALL_TS:
-        print("E: No timestamps generated!?  Missing `yield from` in declare_timestamps()")
+        print("E: No timestamps generated in declare_timestamps()!?")
         sys.exit(1)
     assert bool(USED_PUBLISHER_PATTERNS)
     print(f"Generated {publisher_pattern_filename}")
