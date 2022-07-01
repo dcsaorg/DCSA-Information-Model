@@ -555,10 +555,8 @@ CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition (
-    id text PRIMARY KEY,
+    timestamp_id text PRIMARY KEY,
     timestamp_type_name text NOT NULL UNIQUE,
-    publisher_role varchar(3) NOT NULL,  -- TODO: Reference publisher role table
-    primary_receiver varchar(3) NOT NULL,  -- TODO: Reference publisher role table
     event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
@@ -575,6 +573,19 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.publisher_pattern CASCADE;
+CREATE TABLE dcsa_im_v3_0.publisher_pattern (
+    pattern_id text PRIMARY KEY,
+    publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
+    primary_receiver varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition_publisher_pattern CASCADE;
+CREATE TABLE dcsa_im_v3_0.timestamp_definition_publisher_pattern (
+    timestamp_id text REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id),
+    pattern_id text REFERENCES dcsa_im_v3_0.publisher_pattern (pattern_id),
+    UNIQUE (timestamp_id, pattern_id)
+);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.payload CASCADE;
 CREATE TABLE dcsa_im_v3_0.payload (
