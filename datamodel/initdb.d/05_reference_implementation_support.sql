@@ -595,6 +595,12 @@ CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (payload_id);
 
+
+-- DDT-1110/1127
+ALTER TABLE dcsa_im_v3_0.operations_event
+    ADD vessel_draft integer NULL,
+    ADD miles_remaining_to_destination integer NULL;
+
 -- Only used by UI support to assist the UI
 DROP VIEW IF EXISTS dcsa_im_v3_0.ui_timestamp_info CASCADE;
 CREATE OR REPLACE VIEW dcsa_im_v3_0.ui_timestamp_info AS
@@ -635,14 +641,16 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
     SELECT transport_call.*,
            latest_change.event_created_date_time AS latest_event_created_date_time,
            latest_eta_berth.event_date_time AS eta_berth_date_time,
-           latest_atd_berth.event_date_time AS atd_berth_date_time
+           latest_atd_berth.event_date_time AS atd_berth_date_time,
+           latest_eta_berth.vessel_draft AS vessel_draft,
+           latest_eta_berth.miles_remaining_to_destination AS miles_remaining_to_destination
            FROM dcsa_im_v3_0.transport_call
       LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
                  FROM dcsa_im_v3_0.operations_event
                  GROUP BY transport_call_id
            ) AS latest_change ON (transport_call.id = latest_change.transport_call_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, operations_event.transport_call_id
+               SELECT operations_event.event_date_time, operations_event.transport_call_id, operations_event.vessel_draft, operations_event.miles_remaining_to_destination
                FROM dcsa_im_v3_0.operations_event JOIN (
                    SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
                        FROM dcsa_im_v3_0.operations_event
