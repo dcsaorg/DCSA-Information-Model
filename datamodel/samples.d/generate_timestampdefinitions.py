@@ -115,6 +115,17 @@ def declare_timestamps():
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
+    generic_xty_timestamps(
+        PUBLISHER_PATTERN_CA2ATH,
+        EST_REQ_PLN,
+        ['ARRI'],
+        ['PBPL'],
+        [NULL_VALUE, 'INBD'],
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+    )
+
 
 
 
