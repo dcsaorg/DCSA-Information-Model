@@ -21,7 +21,7 @@ def declare_timestamps():
     # Add XTA-Berth
     generic_xty_timestamps(
         PUBLISHER_PATTERN_CA2TR,
-        ALL_EVENT_CLASSIFIER_CODES,
+        EST_REQ_PLN,
         UNCANCELABLE_ARRI_OPERATIONS_EVENT_TYPE_CODE,
         ['BRTH'],
         [NULL_VALUE, 'INBD'],
@@ -36,7 +36,7 @@ def declare_timestamps():
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['CRGO'],
         [NULL_VALUE, 'ALGS'],
-        "Berth Arrival Planning",
+        "Services Planning",
         'jit1_0',
         is_cancelable=True,
         need_vessel_position_for=EST_PLN,
@@ -48,8 +48,9 @@ def declare_timestamps():
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['TOWG'],
         [NULL_VALUE, 'ALGS'],
-        "Berth Arrival Planning",
+        "Services Planning",
         'jit1_0',
+        include_phase_in_name=True,
         is_cancelable=True,
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
@@ -59,8 +60,9 @@ def declare_timestamps():
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['MOOR'],
         [NULL_VALUE, 'ALGS'],
-        "Berth Arrival Planning",
+        "Services Planning",
         'jit1_2',
+        include_phase_in_name=True,
         is_cancelable=True,
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
@@ -71,8 +73,9 @@ def declare_timestamps():
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['PILO'],
         [NULL_VALUE, 'ALGS'],
-        "Berth Arrival Planning",
+        "Services Planning",
         'jit1_0',
+        include_phase_in_name=True,
         is_cancelable=True,
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
@@ -104,13 +107,15 @@ def declare_timestamps():
     generic_xty_timestamps(
         PUBLISHER_PATTERN_CA2ATH,
         ['ACT'],
-        UNCANCELABLE_DEPA_OPERATIONS_EVENT_TYPE_CODE,
+        ['DEPA'],
         ['BRTH'],
         [NULL_VALUE, 'OUTB'],
         "Port Departure Execution",
         'jit1_0',
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
+
+
 
 
 NULL_VALUE = "null"
