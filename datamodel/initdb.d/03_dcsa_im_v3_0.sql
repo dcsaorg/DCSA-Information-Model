@@ -839,7 +839,9 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     vessel_position varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL,
-    port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code)
+    port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
+    vessel_draft integer NULL,
+    miles_remaining_to_destination integer NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event ADD PRIMARY KEY (event_id);

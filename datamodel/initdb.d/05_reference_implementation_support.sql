@@ -595,12 +595,6 @@ CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (payload_id);
 
-
--- DDT-1110/1127
-ALTER TABLE dcsa_im_v3_0.operations_event
-    ADD vessel_draft integer NULL,
-    ADD miles_remaining_to_destination integer NULL;
-
 -- Only used by UI support to assist the UI
 DROP VIEW IF EXISTS dcsa_im_v3_0.ui_timestamp_info CASCADE;
 CREATE OR REPLACE VIEW dcsa_im_v3_0.ui_timestamp_info AS
