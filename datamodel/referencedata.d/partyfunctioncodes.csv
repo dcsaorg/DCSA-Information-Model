@@ -22,3 +22,6 @@ EBL,EBL Solution Provider,"The solution provider for managing the electronic bil
 SCO,Service contract owner,"The party signing the service contract with the carrier."
 BA,Booking Agent,"Party acting as a booking office for transport and forwarding services."
 HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."
+MOR, Mooring service provider, "The party offering the mooring services."
+SLU, Sludge service provider, "The party offering the Slugde services."
+SVP, Any other service provider,

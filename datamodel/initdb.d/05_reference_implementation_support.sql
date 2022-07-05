@@ -555,7 +555,7 @@ CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition (
-    timestamp_id text PRIMARY KEY,
+    id text PRIMARY KEY,
     timestamp_type_name text NOT NULL UNIQUE,
     event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
@@ -565,9 +565,9 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     port_call_phase varchar(100) NULL,
     is_berth_location_needed boolean NOT NULL,
     is_pbp_location_needed boolean NOT NULL,
+    is_anchorage_location_needed boolean NOT NULL,
     is_terminal_needed boolean NOT NULL,
     is_vessel_position_needed boolean NOT NULL,
-    negotiation_cycle text NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key),
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
@@ -582,7 +582,7 @@ CREATE TABLE dcsa_im_v3_0.publisher_pattern (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition_publisher_pattern CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition_publisher_pattern (
-    timestamp_id text REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id),
+    timestamp_id text REFERENCES dcsa_im_v3_0.timestamp_definition (id),
     pattern_id text REFERENCES dcsa_im_v3_0.publisher_pattern (pattern_id),
     UNIQUE (timestamp_id, pattern_id)
 );

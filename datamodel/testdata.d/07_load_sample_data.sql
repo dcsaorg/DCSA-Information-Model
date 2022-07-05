@@ -14,7 +14,9 @@ SELECT 'Start: 07_load_sample_data.sql...' as progress;
 
 -- Used in our implementation of JIT
 \copy dcsa_im_v3_0.negotiation_cycle from '../samples.d/negotiationcycles.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.publisher_pattern from '../samples.d/publisherpattern.csv' with NULL AS 'null' CSV HEADER
 \copy dcsa_im_v3_0.timestamp_definition from '../samples.d/timestampdefinitions.csv' with NULL AS 'null' CSV HEADER
+\copy dcsa_im_v3_0.timestamp_definition_publisher_pattern from '../samples.d/timestampdefinitions_publisherpattern.csv' with NULL AS 'null' CSV HEADER
 
 -- Data only used by UI Support
 \copy dcsa_im_v3_0.port_timezone from '../samples.d/porttimezones.csv' CSV HEADER
