@@ -55,18 +55,6 @@ def declare_timestamps():
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
     )
-    # ETS-Mooring (Inbound)
-    xty_service_timestamps(
-        EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
-        ['MOOR'],
-        [NULL_VALUE, 'INBD'],
-        "Services Planning",
-        'jit1_2',
-        include_phase_in_name=True,
-        is_cancelable=True,
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
-    )
 
     # ETS-Pilotage (Inbound)
     xty_service_timestamps(
@@ -81,6 +69,44 @@ def declare_timestamps():
         need_event_location_for=REQ_PLN_ACT,
     )
 
+    # ETS-Mooring (Inbound) UC 19 - 24
+    xty_service_timestamps(
+        EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
+        ['MOOR'],
+        [NULL_VALUE, 'INBD'],
+        "Services Planning",
+        'jit1_2',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_vessel_position_for=EST_PLN,
+        need_event_location_for=REQ_PLN_ACT,
+    )
+
+    # Bunkering UC 25 - 30
+    xty_service_timestamps(
+        EST_REQ_PLN,
+        ['BUNK'],
+        [NULL_VALUE, 'ALGS'],
+        "Services Planning",
+        'jit1_2',
+        include_phase_in_name=False,
+        is_cancelable=True,
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+    )
+
+    # ETA PBP UC 31-33 + 35
+    generic_xty_timestamps(
+        PUBLISHER_PATTERN_CA2ATH,
+        ALL_EVENT_CLASSIFIER_CODES,
+        ['ARRI'],
+        ['PBPL'],
+        [NULL_VALUE, 'INBD'],
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+    )
+
+    # EOSP UC 34
     generate_special_timestamp(
         'ESOP',
         PUBLISHER_PATTERN_CA2ATH,
@@ -92,7 +118,211 @@ def declare_timestamps():
         need_vessel_position=True,  # FIXME: IFS says Optional, we do not support "required" or "absent".
     )
 
-    # Add XTD-Berth except ATD-Berth (different part and phase)
+    # ATS-Pilotage (Inbound) UC 36 + 40
+    xty_service_timestamps(
+        ACT,
+        ['PILO'],
+        [NULL_VALUE, 'INBD'],
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_vessel_position_for=ACT,
+        need_event_location_for=ACT,
+    )
+
+    # ATS-Towage (Inbound) UC 37 + 38
+    xty_service_timestamps(
+        ACT,
+        ['TOWG'],
+        [NULL_VALUE, 'INBD'],
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_vessel_position_for=ACT,
+        need_event_location_for=ACT,
+    )
+
+    # ATS-Mooring (Inbound) UC 39 + 44
+    xty_service_timestamps(
+        ACT,
+        ['MOOR'],
+        [NULL_VALUE, 'INBD'],
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=ACT,
+    )
+
+    #ATA-Berth UC 41
+    generate_special_timestamp(
+        'ATA-Berth',
+        as_publisher_patterns(['TR'], ['ATH']),
+        'ARRI',
+        'BRTH',
+        'ALGS',
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        need_vessel_position=False,
+    )
+
+    # AT All fast UC 42
+    generate_special_timestamp(
+        'AT All fast',
+        PUBLISHER_PATTERN_CA2ATH,
+        'ARRI',
+        'BRTH',
+        'ALGS',
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        'FAST',
+        need_vessel_position=False,
+    )
+
+    # Gangway Down and Safe UC 43
+    generate_special_timestamp(
+        'Gangway Down and Safe',
+        PUBLISHER_PATTERN_CA2ATH,
+        'ARRI',
+        'BRTH',
+        'ALGS',
+        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
+        'jit1_0',
+        'GWAY',
+        need_vessel_position=False,
+    )
+
+    # Vessel Readiness for Cargo ops UC 45
+    generate_special_timestamp(
+        'Vessel Readiness for Cargo operations',
+        PUBLISHER_PATTERN_CA2ATH,
+        'ARRI',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'VRDY',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATS Cargo Ops UC 46
+    generate_special_timestamp(
+        'ATS cargo ops',
+        PUBLISHER_PATTERN_TR2CA,
+        'STRT',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'CRGO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATS Cargo Ops discharge UC 47
+    generate_special_timestamp(
+        'ATS cargo ops discharge start',
+        PUBLISHER_PATTERN_TR2CA,
+        'STRT',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'DCRO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATS Cargo Ops discharge completed UC 48
+    generate_special_timestamp(
+        'ATS cargo ops discharge completed',
+        PUBLISHER_PATTERN_TR2CA,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'DCRO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATS Cargo Ops Load completed UC 49
+    generate_special_timestamp(
+        'ATS cargo ops Load',
+        PUBLISHER_PATTERN_TR2CA,
+        'STRT',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'LCRO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ETC Cargo Ops Load UC 50
+    generate_special_timestamp(
+        'ETC cargo ops',
+        PUBLISHER_PATTERN_TR2CA,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'CRGO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #RTC Cargo Ops Load UC 51
+    generate_special_timestamp(
+        'RTC cargo ops',
+        PUBLISHER_PATTERN_CA2TR,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'CRGO',
+        need_vessel_position=False,
+        need_event_location=True,
+        event_classifier_code='EST',
+    )
+
+    #PTC Cargo Ops Load UC 52
+    generate_special_timestamp(
+        'PTC cargo ops',
+        PUBLISHER_PATTERN_TR2CA,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'CRGO',
+        need_vessel_position=False,
+        need_event_location=True,
+        event_classifier_code='PLN',
+    )
+
+    #ATS UC 53
+    generate_special_timestamp(
+        'ATS Bunkering',
+        as_publisher_patterns(['BUK'], ['CA']),
+        'STRT',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_0',
+        'BUNK',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    # Add XTD-Berth except ATD-Berth (different part and phase) UC 54 + 67 + 68
     generic_xty_timestamps(
         PUBLISHER_PATTERN_CA2ATH,
         EST_REQ_PLN,
@@ -104,9 +334,142 @@ def declare_timestamps():
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
+    #Pilotage UC 55 - 57 + 61 - 63
+    xty_service_timestamps(
+        EST_REQ_PLN,
+        ['PILO'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=EST_REQ_PLN,
+    )
+
+    #Towage UC 58 - 60 + UC 64 - 66
+    xty_service_timestamps(
+        EST_REQ_PLN,
+        ['TOWG'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=EST_REQ_PLN,
+    )
+
+    #ATC Bunkering UC 69
+    generate_special_timestamp(
+        'ATC Bunkering',
+        as_publisher_patterns(['BUK'], ['CA']),
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Port Departure Planning And Services Completion",
+        'jit1_1',
+        'BUNK',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATC Cargo Ops Load UC 70
+    generate_special_timestamp(
+        'ATC cargo ops Load',
+        PUBLISHER_PATTERN_TR2CA,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        'LCRO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATC Cargo Ops UC 71
+    generate_special_timestamp(
+        'ATC cargo ops',
+        PUBLISHER_PATTERN_TR2CA,
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        'CRGO',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #Mooring UC 72 - 77
+    xty_service_timestamps(
+        EST_REQ_PLN,
+        ['MOOR'],
+        ['OUTB'],
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=EST_REQ_PLN,
+    )
+
+    #ATC Lashing UC 78
+    generate_special_timestamp(
+        'ATC Lashing',
+        as_publisher_patterns(['MOR'], ['CA']),
+        'CMPL',
+        'BRTH',
+        'ALGS',
+        "Port Departure Planning And Services Completion",
+        'jit1_2',
+        'LASH',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #Terminal Ready for vessel departure UC 79
+    generate_special_timestamp(
+        'Terminal Ready for vessel departure',
+        PUBLISHER_PATTERN_TR2CA,
+        'DEPA',
+        'BRTH',
+        'ALGS',
+        "Port Departure Execution",
+        'jit1_1',
+        'SAFE',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #Vessel ready to sail UC 80
+    generate_special_timestamp(
+        'Vessel Ready to sail',
+        PUBLISHER_PATTERN_CA2TR,
+        'DEPA',
+        'BRTH',
+        'ALGS',
+        "Port Departure Execution",
+        'jit1_1',
+        'VRDY',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+
+    #ATS Mooring UC 81 + ATC Mooring UC 84
+    xty_service_timestamps(
+        ACT,
+        ['MOOR'],
+        ['OUTB'],
+        "Port Departure Execution",
+        'jit1_2',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=ACT,
+    )
+
+    # ATD Berth UC 82
     generic_xty_timestamps(
         PUBLISHER_PATTERN_CA2ATH,
-        ['ACT'],
+        ACT,
         ['DEPA'],
         ['BRTH'],
         [NULL_VALUE, 'OUTB'],
@@ -115,19 +478,134 @@ def declare_timestamps():
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
-    generic_xty_timestamps(
-        PUBLISHER_PATTERN_CA2ATH,
-        EST_REQ_PLN,
-        ['ARRI'],
-        ['PBPL'],
-        [NULL_VALUE, 'INBD'],
-        "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
-        'jit1_0',
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+    # ATS Pilotage UC 83 + ATC Pilotage UC 87
+    xty_service_timestamps(
+        ACT,
+        ['PILO'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Execution",
+        'jit1_1',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=ACT,
     )
 
+    #ATS Towage UC 85 + ATC Towage UC 86
+    xty_service_timestamps(
+        ACT,
+        ['TOWG'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Execution",
+        'jit1_1',
+        include_phase_in_name=True,
+        is_cancelable=True,
+        need_event_location_for=ACT,
+    )
 
+    #SOSP UC 88
+    generate_special_timestamp(
+        'SOSP',
+        PUBLISHER_PATTERN_CA2ATH,
+        'DEPA',
+        NULL_VALUE,
+        'OUTB',
+        "Port Departure Execution",
+        'jit1_1',
+        NULL_VALUE,
+        need_vessel_position=False,
+        need_event_location=False,
+    )
 
+    # Anchorage UC 89 - UC 96
+    generic_xty_timestamps(
+        PUBLISHER_PATTERN_CA2ATH,
+        EST_PLN_REQ_ACT,
+        ['ARRI', 'DEPA'],
+        ['ANCH'],
+        [NULL_VALUE],
+        "Other Services - Anchorage Planning And Execution",
+        'jit1_2',
+        include_phase_in_name=True,
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        need_vessel_position_for=ALL_EVENT_CLASSIFIER_CODES
+    )
+
+    #ATS Anchorage OPS UC 97
+    generate_special_timestamp(
+        'ATS Anchorage Ops',
+        PUBLISHER_PATTERN_CA2ATH,
+        'ARRI',
+        'ANCH',
+        NULL_VALUE,
+        "Other Services - Anchorage Planning And Execution",
+        'jit1_2',
+        'ANCO',
+        need_vessel_position=True, #FIXME need to support optional
+        need_event_location=True,
+    )
+
+    #ATC Anchorage OPS UC 98
+    generate_special_timestamp(
+        'ATC Anchorage Ops',
+        PUBLISHER_PATTERN_CA2ATH,
+        'DEPA',
+        'ANCH',
+        NULL_VALUE,
+        "Other Services - Anchorage Planning And Execution",
+        'jit1_2',
+        'ANCO',
+        need_vessel_position=True, #FIXME need to support optional
+        need_event_location=True,
+    )
+
+    #Sludge UC 99 106
+    generic_xty_timestamps(
+        as_publisher_patterns(['CA'], ['SVP']),
+        EST_PLN_REQ_ACT,
+        ['STRT', 'CMPL'],
+        ['BRTH'],
+        [NULL_VALUE],
+        "Other Services - Sludge Planning And Execution",
+        'jit1_2',
+        ['SLUG'],
+        need_vessel_position_for=EST_PLN_REQ_ACT,
+        need_event_location_for=EST_PLN_REQ_ACT,
+    )
+
+    #Shore power UC 107 + 108
+    xty_service_timestamps(
+        ACT,
+        ['SHPW'],
+        ['ALGS'],
+        "Other Services - Shore Power Execution",
+        'jit1_2',
+        is_cancelable=True,
+        need_event_location_for=ACT,
+    )
+
+    #Cancel port call UC 109
+    generate_special_timestamp(
+        'Cancel Port Call',
+        PUBLISHER_PATTERN_CA2ATH,
+        'CANC',
+        NULL_VALUE,
+        NULL_VALUE,
+        "OMIT Port Call Or Cancel A Service",
+        'jit1_2',
+        need_vessel_position=True, #FIXME need to support optional
+    )
+
+    #Omit port call UC 110
+    generate_special_timestamp(
+        'Omit Port Call',
+        PUBLISHER_PATTERN_CA2ATH,
+        'OMIT',
+        NULL_VALUE,
+        NULL_VALUE,
+        "OMIT Port Call Or Cancel A Service",
+        'jit1_2',
+        need_vessel_position=True, #FIXME need to support optional
+    )
 
 NULL_VALUE = "null"
 
@@ -243,17 +721,19 @@ class ServiceTypeInfo:
 
 SERVICE_TYPE_CODE2INFO = {
     # FIXME: Pull the name from the data file
+    #FIXME: need to support multiple facility types e.g. Sludge and Bunkering
     'CRGO': ServiceTypeInfo('Cargo Ops', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'DCRO': ServiceTypeInfo('Cargo Ops Discharge', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LCRO': ServiceTypeInfo('Cargo Ops Load', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LASH': ServiceTypeInfo('Lashing', ['BRTH'], as_publisher_patterns(['LSH'], CARRIER_ROLES)),
     'MOOR': ServiceTypeInfo('Mooring', ['BRTH'], as_publisher_patterns(['MOR'], CARRIER_ROLES)),
     'BUNK': ServiceTypeInfo('Bunkering', ['BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
+    #FIXME: Pilo has different facility type codes depending on started or completed
     'PILO': ServiceTypeInfo('Pilotage', ['BRTH'], as_publisher_patterns(['PLT'], CARRIER_ROLES)),
     'TOWG': ServiceTypeInfo('Towage', ['BRTH'], as_publisher_patterns(['TWG'], CARRIER_ROLES)),
     'SHPW': ServiceTypeInfo('Shore Power', ['BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'ANCO': ServiceTypeInfo('Anchorage Operations', ['ANCH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'SLUG': ServiceTypeInfo('Sludge', ['BRTH', 'ANCH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'SLUG': ServiceTypeInfo('Sludge', ['BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     # Services that do not have a clear-cut service name (including "null")
     'SAFE': UNNAMED,
     'FAST': UNNAMED,
@@ -266,6 +746,12 @@ REQ_PLN_ACT = frozenset({
     'PLN',
     'ACT',
 })
+ACT = frozenset({
+    'ACT',
+})
+EST = frozenset({
+    'EST',
+})
 EST_REQ_PLN = frozenset({
     'EST',
     'REQ',
@@ -274,6 +760,12 @@ EST_REQ_PLN = frozenset({
 EST_PLN = frozenset({
   'EST',
   'PLN',
+})
+EST_PLN_REQ_ACT = frozenset({
+    'EST',
+    'PLN',
+    'REQ',
+    'ACT',
 })
 VALID_JIT_VERSIONS = frozenset({
     'jit1_0',
