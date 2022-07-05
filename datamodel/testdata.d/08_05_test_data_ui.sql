@@ -59,11 +59,11 @@ INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
 ) VALUES (
     'd330b6f5-edcb-4e9e-a09f-e98e91deba95',
     null,
-    'UC2'
+    'TS1'
 ), (
     '538312da-674c-4278-bf9f-10e2a7c018e3',
     null,
-    'UC10'
+    'TS50'
 );
 
 SELECT 'End: 08_05_test_data_ui.sql' as progress;
