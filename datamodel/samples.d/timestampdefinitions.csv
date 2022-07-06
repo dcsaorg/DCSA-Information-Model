@@ -1,234 +1,223 @@
 timestampID,timestampTypeName,eventClassifierCode,operationsEventTypeCode,portCallPhaseTypeCode,portCallServiceTypeCode,facilityTypeCode,portCallPart,isBerthLocationNeeded,isPBPLocationNeeded,isAnchorageLocationNeeded,isTerminalNeeded,isVesselPositionNeeded,providedInStandard,acceptTimestampDefinition,rejectTimestampDefinition
-TS1,RTA-Berth (<implicit>),REQ,ARRI,null,null,BRTH,Berth Arrival Planning,True,False,False,True,False,jit1_0,TS3,TS5
-TS2,RTA-Berth,REQ,ARRI,INBD,null,BRTH,Berth Arrival Planning,True,False,False,True,False,jit1_0,TS4,TS6
-TS3,PTA-Berth (<implicit>),PLN,ARRI,null,null,BRTH,Berth Arrival Planning,True,False,False,True,True,jit1_0,null,null
-TS4,PTA-Berth,PLN,ARRI,INBD,null,BRTH,Berth Arrival Planning,True,False,False,True,True,jit1_0,null,null
-TS5,ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,Berth Arrival Planning,False,False,False,True,True,jit1_0,TS1,TS1
-TS6,ETA-Berth,EST,ARRI,INBD,null,BRTH,Berth Arrival Planning,False,False,False,True,True,jit1_0,TS2,TS2
-TS7,RTS-Cargo Ops (<implicit>),REQ,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS13,TS19
-TS8,RTS-Cargo Ops,REQ,STRT,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS14,TS20
-TS9,RTC-Cargo Ops (<implicit>),REQ,CMPL,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS15,TS21
-TS10,RTC-Cargo Ops,REQ,CMPL,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS16,TS22
-TS11,Cancel RT<ALL>-Cargo Ops (<implicit>),REQ,CANC,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS12,Cancel RT<ALL>-Cargo Ops,REQ,CANC,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS13,PTS-Cargo Ops (<implicit>),PLN,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS14,PTS-Cargo Ops,PLN,STRT,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS15,PTC-Cargo Ops (<implicit>),PLN,CMPL,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS16,PTC-Cargo Ops,PLN,CMPL,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS17,Cancel PT<ALL>-Cargo Ops (<implicit>),PLN,CANC,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS18,Cancel PT<ALL>-Cargo Ops,PLN,CANC,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS19,ETS-Cargo Ops (<implicit>),EST,STRT,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS7,TS7
-TS20,ETS-Cargo Ops,EST,STRT,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS8,TS8
-TS21,ETC-Cargo Ops (<implicit>),EST,CMPL,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS9,TS9
-TS22,ETC-Cargo Ops,EST,CMPL,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS10,TS10
-TS23,Cancel ET<ALL>-Cargo Ops (<implicit>),EST,CANC,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS24,Cancel ET<ALL>-Cargo Ops,EST,CANC,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS25,RTS-Towage (<implicit>),REQ,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS31,TS37
-TS26,RTS-Towage (Inbound),REQ,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS32,TS38
-TS27,RTC-Towage (<implicit>),REQ,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS33,TS39
-TS28,RTC-Towage (Inbound),REQ,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS34,TS40
-TS29,Cancel RT<ALL>-Towage (<implicit>),REQ,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS30,Cancel RT<ALL>-Towage (Inbound),REQ,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS31,PTS-Towage (<implicit>),PLN,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS32,PTS-Towage (Inbound),PLN,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS33,PTC-Towage (<implicit>),PLN,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS34,PTC-Towage (Inbound),PLN,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS35,Cancel PT<ALL>-Towage (<implicit>),PLN,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS36,Cancel PT<ALL>-Towage (Inbound),PLN,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS37,ETS-Towage (<implicit>),EST,STRT,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS25,TS25
-TS38,ETS-Towage (Inbound),EST,STRT,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS26,TS26
-TS39,ETC-Towage (<implicit>),EST,CMPL,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS27,TS27
-TS40,ETC-Towage (Inbound),EST,CMPL,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS28,TS28
-TS41,Cancel ET<ALL>-Towage (<implicit>),EST,CANC,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS42,Cancel ET<ALL>-Towage (Inbound),EST,CANC,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS43,RTS-Pilotage (<implicit>),REQ,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS49,TS55
-TS44,RTS-Pilotage (Inbound),REQ,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS50,TS56
-TS45,RTC-Pilotage (<implicit>),REQ,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS51,TS57
-TS46,RTC-Pilotage (Inbound),REQ,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS52,TS58
-TS47,Cancel RT<ALL>-Pilotage (<implicit>),REQ,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS48,Cancel RT<ALL>-Pilotage (Inbound),REQ,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
-TS49,PTS-Pilotage (<implicit>),PLN,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS50,PTS-Pilotage (Inbound),PLN,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS51,PTC-Pilotage (<implicit>),PLN,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS52,PTC-Pilotage (Inbound),PLN,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS53,Cancel PT<ALL>-Pilotage (<implicit>),PLN,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS54,Cancel PT<ALL>-Pilotage (Inbound),PLN,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
-TS55,ETS-Pilotage (<implicit>),EST,STRT,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS43,TS43
-TS56,ETS-Pilotage (Inbound),EST,STRT,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS44,TS44
-TS57,ETC-Pilotage (<implicit>),EST,CMPL,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS45,TS45
-TS58,ETC-Pilotage (Inbound),EST,CMPL,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS46,TS46
-TS59,Cancel ET<ALL>-Pilotage (<implicit>),EST,CANC,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS60,Cancel ET<ALL>-Pilotage (Inbound),EST,CANC,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
-TS61,RTS-Mooring (<implicit>),REQ,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS67,TS73
-TS62,RTS-Mooring (Inbound),REQ,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS68,TS74
-TS63,RTC-Mooring (<implicit>),REQ,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS69,TS75
-TS64,RTC-Mooring (Inbound),REQ,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS70,TS76
-TS65,Cancel RT<ALL>-Mooring (<implicit>),REQ,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS66,Cancel RT<ALL>-Mooring (Inbound),REQ,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS67,PTS-Mooring (<implicit>),PLN,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS68,PTS-Mooring (Inbound),PLN,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS69,PTC-Mooring (<implicit>),PLN,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS70,PTC-Mooring (Inbound),PLN,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS71,Cancel PT<ALL>-Mooring (<implicit>),PLN,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS72,Cancel PT<ALL>-Mooring (Inbound),PLN,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
-TS73,ETS-Mooring (<implicit>),EST,STRT,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS61,TS61
-TS74,ETS-Mooring (Inbound),EST,STRT,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS62,TS62
-TS75,ETC-Mooring (<implicit>),EST,CMPL,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS63,TS63
-TS76,ETC-Mooring (Inbound),EST,CMPL,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS64,TS64
-TS77,Cancel ET<ALL>-Mooring (<implicit>),EST,CANC,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null
-TS78,Cancel ET<ALL>-Mooring (Inbound),EST,CANC,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null
-TS79,RTS-Bunkering (<implicit>),REQ,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS85,TS91
-TS80,RTS-Bunkering,REQ,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS86,TS92
-TS81,RTC-Bunkering (<implicit>),REQ,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS87,TS93
-TS82,RTC-Bunkering,REQ,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS88,TS94
-TS83,Cancel RT<ALL>-Bunkering (<implicit>),REQ,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS84,Cancel RT<ALL>-Bunkering,REQ,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS85,PTS-Bunkering (<implicit>),PLN,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS86,PTS-Bunkering,PLN,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS87,PTC-Bunkering (<implicit>),PLN,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS88,PTC-Bunkering,PLN,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS89,Cancel PT<ALL>-Bunkering (<implicit>),PLN,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS90,Cancel PT<ALL>-Bunkering,PLN,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS91,ETS-Bunkering (<implicit>),EST,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS79,TS79
-TS92,ETS-Bunkering,EST,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS80,TS80
-TS93,ETC-Bunkering (<implicit>),EST,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS81,TS81
-TS94,ETC-Bunkering,EST,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS82,TS82
-TS95,Cancel ET<ALL>-Bunkering (<implicit>),EST,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
-TS96,Cancel ET<ALL>-Bunkering,EST,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS1,ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,Berth Arrival Planning,False,False,False,True,True,jit1_0,TS3,TS3
+TS2,ETA-Berth,EST,ARRI,INBD,null,BRTH,Berth Arrival Planning,False,False,False,True,True,jit1_0,TS4,TS4
+TS3,RTA-Berth (<implicit>),REQ,ARRI,null,null,BRTH,Berth Arrival Planning,True,False,False,True,False,jit1_0,TS5,TS1
+TS4,RTA-Berth,REQ,ARRI,INBD,null,BRTH,Berth Arrival Planning,True,False,False,True,False,jit1_0,TS6,TS2
+TS5,PTA-Berth (<implicit>),PLN,ARRI,null,null,BRTH,Berth Arrival Planning,True,False,False,True,True,jit1_0,null,null
+TS6,PTA-Berth,PLN,ARRI,INBD,null,BRTH,Berth Arrival Planning,True,False,False,True,True,jit1_0,null,null
+TS7,ETS-Cargo Ops (<implicit>),EST,STRT,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,TS13,TS13
+TS8,ETS-Cargo Ops,EST,STRT,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,TS14,TS14
+TS9,ETC-Cargo Ops (<implicit>),EST,CMPL,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,TS15,TS15
+TS10,ETC-Cargo Ops,EST,CMPL,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,TS16,TS16
+TS11,Cancel ET<ALL>-Cargo Ops (<implicit>),EST,CANC,null,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,null,null
+TS12,Cancel ET<ALL>-Cargo Ops,EST,CANC,ALGS,CRGO,BRTH,Services Planning,False,False,False,True,True,jit1_1,null,null
+TS13,RTS-Cargo Ops (<implicit>),REQ,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,TS19,TS7
+TS14,RTS-Cargo Ops,REQ,STRT,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,TS20,TS8
+TS15,RTC-Cargo Ops (<implicit>),REQ,CMPL,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,TS21,TS9
+TS16,RTC-Cargo Ops,REQ,CMPL,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,TS22,TS10
+TS17,Cancel RT<ALL>-Cargo Ops (<implicit>),REQ,CANC,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,null,null
+TS18,Cancel RT<ALL>-Cargo Ops,REQ,CANC,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,null,null
+TS19,PTS-Cargo Ops (<implicit>),PLN,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS20,PTS-Cargo Ops,PLN,STRT,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS21,PTC-Cargo Ops (<implicit>),PLN,CMPL,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS22,PTC-Cargo Ops,PLN,CMPL,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS23,Cancel PT<ALL>-Cargo Ops (<implicit>),PLN,CANC,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS24,Cancel PT<ALL>-Cargo Ops,PLN,CANC,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null
+TS25,ETS-Towage (<implicit>),EST,STRT,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS31,TS31
+TS26,ETS-Towage (Inbound),EST,STRT,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS32,TS32
+TS27,ETC-Towage (<implicit>),EST,CMPL,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS33,TS33
+TS28,ETC-Towage (Inbound),EST,CMPL,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS34,TS34
+TS29,Cancel ET<ALL>-Towage (<implicit>),EST,CANC,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
+TS30,Cancel ET<ALL>-Towage (Inbound),EST,CANC,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
+TS31,RTS-Towage (<implicit>),REQ,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS37,TS25
+TS32,RTS-Towage (Inbound),REQ,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS38,TS26
+TS33,RTC-Towage (<implicit>),REQ,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS39,TS27
+TS34,RTC-Towage (Inbound),REQ,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS40,TS28
+TS35,Cancel RT<ALL>-Towage (<implicit>),REQ,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
+TS36,Cancel RT<ALL>-Towage (Inbound),REQ,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
+TS37,PTS-Towage (<implicit>),PLN,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS38,PTS-Towage (Inbound),PLN,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS39,PTC-Towage (<implicit>),PLN,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS40,PTC-Towage (Inbound),PLN,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS41,Cancel PT<ALL>-Towage (<implicit>),PLN,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS42,Cancel PT<ALL>-Towage (Inbound),PLN,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS43,ETS-Pilotage (<implicit>),EST,STRT,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS49,TS49
+TS44,ETS-Pilotage (Inbound),EST,STRT,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS50,TS50
+TS45,ETC-Pilotage (<implicit>),EST,CMPL,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS51,TS51
+TS46,ETC-Pilotage (Inbound),EST,CMPL,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,TS52,TS52
+TS47,Cancel ET<ALL>-Pilotage (<implicit>),EST,CANC,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
+TS48,Cancel ET<ALL>-Pilotage (Inbound),EST,CANC,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null
+TS49,RTS-Pilotage (<implicit>),REQ,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS55,TS43
+TS50,RTS-Pilotage (Inbound),REQ,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS56,TS44
+TS51,RTC-Pilotage (<implicit>),REQ,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS57,TS45
+TS52,RTC-Pilotage (Inbound),REQ,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,TS58,TS46
+TS53,Cancel RT<ALL>-Pilotage (<implicit>),REQ,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
+TS54,Cancel RT<ALL>-Pilotage (Inbound),REQ,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null
+TS55,PTS-Pilotage (<implicit>),PLN,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS56,PTS-Pilotage (Inbound),PLN,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS57,PTC-Pilotage (<implicit>),PLN,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS58,PTC-Pilotage (Inbound),PLN,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS59,Cancel PT<ALL>-Pilotage (<implicit>),PLN,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS60,Cancel PT<ALL>-Pilotage (Inbound),PLN,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null
+TS61,ETS-Mooring (<implicit>),EST,STRT,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS67,TS67
+TS62,ETS-Mooring (Inbound),EST,STRT,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS68,TS68
+TS63,ETC-Mooring (<implicit>),EST,CMPL,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS69,TS69
+TS64,ETC-Mooring (Inbound),EST,CMPL,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,TS70,TS70
+TS65,Cancel ET<ALL>-Mooring (<implicit>),EST,CANC,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null
+TS66,Cancel ET<ALL>-Mooring (Inbound),EST,CANC,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null
+TS67,RTS-Mooring (<implicit>),REQ,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS73,TS61
+TS68,RTS-Mooring (Inbound),REQ,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS74,TS62
+TS69,RTC-Mooring (<implicit>),REQ,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS75,TS63
+TS70,RTC-Mooring (Inbound),REQ,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS76,TS64
+TS71,Cancel RT<ALL>-Mooring (<implicit>),REQ,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS72,Cancel RT<ALL>-Mooring (Inbound),REQ,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS73,PTS-Mooring (<implicit>),PLN,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS74,PTS-Mooring (Inbound),PLN,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS75,PTC-Mooring (<implicit>),PLN,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS76,PTC-Mooring (Inbound),PLN,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS77,Cancel PT<ALL>-Mooring (<implicit>),PLN,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS78,Cancel PT<ALL>-Mooring (Inbound),PLN,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null
+TS79,ETS-Bunkering (<implicit>),EST,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS85,TS85
+TS80,ETS-Bunkering,EST,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS86,TS86
+TS81,ETC-Bunkering (<implicit>),EST,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS87,TS87
+TS82,ETC-Bunkering,EST,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS88,TS88
+TS83,Cancel ET<ALL>-Bunkering (<implicit>),EST,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS84,Cancel ET<ALL>-Bunkering,EST,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS85,RTS-Bunkering (<implicit>),REQ,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS91,TS79
+TS86,RTS-Bunkering,REQ,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS92,TS80
+TS87,RTC-Bunkering (<implicit>),REQ,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS93,TS81
+TS88,RTC-Bunkering,REQ,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,TS94,TS82
+TS89,Cancel RT<ALL>-Bunkering (<implicit>),REQ,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS90,Cancel RT<ALL>-Bunkering,REQ,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS91,PTS-Bunkering (<implicit>),PLN,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS92,PTS-Bunkering,PLN,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS93,PTC-Bunkering (<implicit>),PLN,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS94,PTC-Bunkering,PLN,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS95,Cancel PT<ALL>-Bunkering (<implicit>),PLN,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
+TS96,Cancel PT<ALL>-Bunkering,PLN,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null
 TS97,ATA-PBPL (<implicit>),ACT,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
 TS98,ATA-PBPL,ACT,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
-TS99,RTA-PBPL (<implicit>),REQ,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS101,TS103
-TS100,RTA-PBPL,REQ,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS102,TS104
-TS101,PTA-PBPL (<implicit>),PLN,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
-TS102,PTA-PBPL,PLN,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
-TS103,ETA-PBPL (<implicit>),EST,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS99,TS99
-TS104,ETA-PBPL,EST,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS100,TS100
+TS99,ETA-PBPL (<implicit>),EST,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS101,TS101
+TS100,ETA-PBPL,EST,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS102,TS102
+TS101,RTA-PBPL (<implicit>),REQ,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS103,TS99
+TS102,RTA-PBPL,REQ,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,TS104,TS100
+TS103,PTA-PBPL (<implicit>),PLN,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
+TS104,PTA-PBPL,PLN,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,True,False,False,False,jit1_0,null,null
 TS105,ESOP,ACT,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,True,jit1_1,null,null
 TS106,ATS-Pilotage (<implicit>),ACT,STRT,null,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
 TS107,ATS-Pilotage (Inbound),ACT,STRT,INBD,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
 TS108,ATC-Pilotage (<implicit>),ACT,CMPL,null,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
 TS109,ATC-Pilotage (Inbound),ACT,CMPL,INBD,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS110,Cancel AT<ALL>-Pilotage (<implicit>),ACT,CANC,null,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS111,Cancel AT<ALL>-Pilotage (Inbound),ACT,CANC,INBD,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS112,ATS-Towage (<implicit>),ACT,STRT,null,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS113,ATS-Towage (Inbound),ACT,STRT,INBD,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS114,ATC-Towage (<implicit>),ACT,CMPL,null,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS115,ATC-Towage (Inbound),ACT,CMPL,INBD,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS116,Cancel AT<ALL>-Towage (<implicit>),ACT,CANC,null,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS117,Cancel AT<ALL>-Towage (Inbound),ACT,CANC,INBD,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_0,null,null
-TS118,ATS-Mooring (<implicit>),ACT,STRT,null,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS119,ATS-Mooring (Inbound),ACT,STRT,INBD,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS120,ATC-Mooring (<implicit>),ACT,CMPL,null,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS121,ATC-Mooring (Inbound),ACT,CMPL,INBD,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS122,Cancel AT<ALL>-Mooring (<implicit>),ACT,CANC,null,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS123,Cancel AT<ALL>-Mooring (Inbound),ACT,CANC,INBD,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_0,null,null
-TS124,ATA-Berth,ACT,ARRI,ALGS,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_0,null,null
-TS125,AT All fast,ACT,ARRI,ALGS,FAST,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_0,null,null
-TS126,Gangway Down and Safe,ACT,ARRI,ALGS,GWAY,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_0,null,null
-TS127,Vessel Readiness for Cargo operations,ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS128,ATS cargo ops,ACT,STRT,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS129,ATS cargo ops discharge start,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS130,ATS cargo ops discharge completed,ACT,CMPL,ALGS,DCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS131,ATS cargo ops Load,ACT,STRT,ALGS,LCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS132,ETC cargo ops,ACT,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS133,RTC cargo ops,EST,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS134,PTC cargo ops,PLN,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS135,ATS Bunkering,ACT,STRT,ALGS,BUNK,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
-TS136,RTD-Berth (<implicit>),REQ,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS138,TS140
-TS137,RTD-Berth,REQ,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS139,TS141
-TS138,PTD-Berth (<implicit>),PLN,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,null,null
-TS139,PTD-Berth,PLN,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,null,null
-TS140,ETD-Berth (<implicit>),EST,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS136,TS136
-TS141,ETD-Berth,EST,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS137,TS137
-TS142,RTS-Pilotage (Outbound),REQ,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS148,TS154
-TS143,RTS-Pilotage (Shifting),REQ,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS149,TS155
-TS144,RTC-Pilotage (Outbound),REQ,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS150,TS156
-TS145,RTC-Pilotage (Shifting),REQ,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS151,TS157
-TS146,Cancel RT<ALL>-Pilotage (Outbound),REQ,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS147,Cancel RT<ALL>-Pilotage (Shifting),REQ,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS148,PTS-Pilotage (Outbound),PLN,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS149,PTS-Pilotage (Shifting),PLN,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS150,PTC-Pilotage (Outbound),PLN,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS151,PTC-Pilotage (Shifting),PLN,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS152,Cancel PT<ALL>-Pilotage (Outbound),PLN,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS153,Cancel PT<ALL>-Pilotage (Shifting),PLN,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS154,ETS-Pilotage (Outbound),EST,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS142,TS142
-TS155,ETS-Pilotage (Shifting),EST,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS143,TS143
-TS156,ETC-Pilotage (Outbound),EST,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS144,TS144
-TS157,ETC-Pilotage (Shifting),EST,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS145,TS145
-TS158,Cancel ET<ALL>-Pilotage (Outbound),EST,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS159,Cancel ET<ALL>-Pilotage (Shifting),EST,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS160,RTS-Towage (Outbound),REQ,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS166,TS172
-TS161,RTS-Towage (Shifting),REQ,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS167,TS173
-TS162,RTC-Towage (Outbound),REQ,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS168,TS174
-TS163,RTC-Towage (Shifting),REQ,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS169,TS175
-TS164,Cancel RT<ALL>-Towage (Outbound),REQ,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS165,Cancel RT<ALL>-Towage (Shifting),REQ,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS166,PTS-Towage (Outbound),PLN,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS167,PTS-Towage (Shifting),PLN,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS168,PTC-Towage (Outbound),PLN,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS169,PTC-Towage (Shifting),PLN,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS170,Cancel PT<ALL>-Towage (Outbound),PLN,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS171,Cancel PT<ALL>-Towage (Shifting),PLN,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS172,ETS-Towage (Outbound),EST,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS160,TS160
-TS173,ETS-Towage (Shifting),EST,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS161,TS161
-TS174,ETC-Towage (Outbound),EST,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS162,TS162
-TS175,ETC-Towage (Shifting),EST,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS163,TS163
-TS176,Cancel ET<ALL>-Towage (Outbound),EST,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS177,Cancel ET<ALL>-Towage (Shifting),EST,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS178,ATC Bunkering,ACT,CMPL,ALGS,BUNK,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
-TS179,ATC cargo ops Load,ACT,CMPL,ALGS,LCRO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS180,ATC cargo ops,ACT,CMPL,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS181,RTS-Mooring (Outbound),REQ,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS184,TS187
-TS182,RTC-Mooring (Outbound),REQ,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS185,TS188
-TS183,Cancel RT<ALL>-Mooring (Outbound),REQ,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS184,PTS-Mooring (Outbound),PLN,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS185,PTC-Mooring (Outbound),PLN,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS186,Cancel PT<ALL>-Mooring (Outbound),PLN,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS187,ETS-Mooring (Outbound),EST,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS181,TS181
-TS188,ETC-Mooring (Outbound),EST,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS182,TS182
-TS189,Cancel ET<ALL>-Mooring (Outbound),EST,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS190,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
-TS191,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS192,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS193,ATS-Mooring (Outbound),ACT,STRT,OUTB,MOOR,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
-TS194,ATC-Mooring (Outbound),ACT,CMPL,OUTB,MOOR,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
-TS195,Cancel AT<ALL>-Mooring (Outbound),ACT,CANC,OUTB,MOOR,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
-TS196,ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,True,False,False,True,False,jit1_0,null,null
-TS197,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,True,False,False,True,False,jit1_0,null,null
-TS198,ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS199,ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS200,ATC-Pilotage (Outbound),ACT,CMPL,OUTB,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS201,ATC-Pilotage (Shifting),ACT,CMPL,SHIF,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS202,Cancel AT<ALL>-Pilotage (Outbound),ACT,CANC,OUTB,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS203,Cancel AT<ALL>-Pilotage (Shifting),ACT,CANC,SHIF,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS204,ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS205,ATS-Towage (Shifting),ACT,STRT,SHIF,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS206,ATC-Towage (Outbound),ACT,CMPL,OUTB,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS207,ATC-Towage (Shifting),ACT,CMPL,SHIF,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS208,Cancel AT<ALL>-Towage (Outbound),ACT,CANC,OUTB,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS209,Cancel AT<ALL>-Towage (Shifting),ACT,CANC,SHIF,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
-TS210,SOSP,ACT,DEPA,OUTB,null,null,Port Departure Execution,False,False,False,False,False,jit1_1,null,null
-TS211,ATA-Anchorage (<implicit>),ACT,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS212,ATD-Anchorage (<implicit>),ACT,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS213,RTA-Anchorage (<implicit>),REQ,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS215,TS217
-TS214,RTD-Anchorage (<implicit>),REQ,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS216,TS218
-TS215,PTA-Anchorage (<implicit>),PLN,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS216,PTD-Anchorage (<implicit>),PLN,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS217,ETA-Anchorage (<implicit>),EST,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS213,TS213
-TS218,ETD-Anchorage (<implicit>),EST,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS214,TS214
-TS219,ATS Anchorage Ops,ACT,ARRI,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS220,ATC Anchorage Ops,ACT,DEPA,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
-TS221,ATS-Sludge (<implicit>),ACT,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
-TS222,ATC-Sludge (<implicit>),ACT,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
-TS223,RTS-Sludge (<implicit>),REQ,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS225,TS227
-TS224,RTC-Sludge (<implicit>),REQ,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS226,TS228
-TS225,PTS-Sludge (<implicit>),PLN,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
-TS226,PTC-Sludge (<implicit>),PLN,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
-TS227,ETS-Sludge (<implicit>),EST,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS223,TS223
-TS228,ETC-Sludge (<implicit>),EST,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS224,TS224
-TS229,ATS-Shore Power,ACT,STRT,ALGS,SHPW,BRTH,Other Services - Shore Power Execution,True,False,False,True,False,jit1_2,null,null
-TS230,ATC-Shore Power,ACT,CMPL,ALGS,SHPW,BRTH,Other Services - Shore Power Execution,True,False,False,True,False,jit1_2,null,null
-TS231,Cancel AT<ALL>-Shore Power,ACT,CANC,ALGS,SHPW,BRTH,Other Services - Shore Power Execution,True,False,False,True,False,jit1_2,null,null
-TS232,Cancel Port Call,ACT,CANC,null,null,null,OMIT Port Call Or Cancel A Service,False,False,False,False,True,jit1_2,null,null
-TS233,Omit Port Call,ACT,OMIT,null,null,null,OMIT Port Call Or Cancel A Service,False,False,False,False,True,jit1_2,null,null
+TS110,ATS-Towage (<implicit>),ACT,STRT,null,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_1,null,null
+TS111,ATS-Towage (Inbound),ACT,STRT,INBD,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_1,null,null
+TS112,ATC-Towage (<implicit>),ACT,CMPL,null,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_1,null,null
+TS113,ATC-Towage (Inbound),ACT,CMPL,INBD,TOWG,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,True,jit1_1,null,null
+TS114,ATS-Mooring (<implicit>),ACT,STRT,null,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_2,null,null
+TS115,ATS-Mooring (Inbound),ACT,STRT,INBD,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_2,null,null
+TS116,ATC-Mooring (<implicit>),ACT,CMPL,null,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_2,null,null
+TS117,ATC-Mooring (Inbound),ACT,CMPL,INBD,MOOR,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",True,False,False,True,False,jit1_2,null,null
+TS118,ATA-Berth,ACT,ARRI,ALGS,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_0,null,null
+TS119,AT All fast,ACT,ARRI,ALGS,FAST,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_1,null,null
+TS120,Gangway Down and Safe,ACT,ARRI,ALGS,GWAY,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",False,False,False,True,False,jit1_1,null,null
+TS121,Vessel Readiness for Cargo operations,ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_2,null,null
+TS122,Vessel Readiness for Cargo operations SAFE,ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_1,null,null
+TS123,ATS cargo ops,ACT,STRT,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
+TS124,ATS cargo ops discharge start,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_2,null,null
+TS125,ATS cargo ops discharge completed,ACT,CMPL,ALGS,DCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_2,null,null
+TS126,ATS cargo ops Load,ACT,STRT,ALGS,LCRO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_2,null,null
+TS127,ETC cargo ops,ACT,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_2,null,null
+TS128,RTC cargo ops,EST,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
+TS129,PTC cargo ops,PLN,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_0,null,null
+TS130,ATS Bunkering,ACT,STRT,ALGS,BUNK,BRTH,Start Cargo Operations And Services,True,False,False,True,False,jit1_1,null,null
+TS131,ETD-Berth (<implicit>),EST,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS133,TS133
+TS132,ETD-Berth,EST,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS134,TS134
+TS133,RTD-Berth (<implicit>),REQ,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS135,TS131
+TS134,RTD-Berth,REQ,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,TS136,TS132
+TS135,PTD-Berth (<implicit>),PLN,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,null,null
+TS136,PTD-Berth,PLN,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,null,null
+TS137,ETS-Pilotage (Outbound),EST,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS143,TS143
+TS138,ETS-Pilotage (Shifting),EST,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS144,TS144
+TS139,ETC-Pilotage (Outbound),EST,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS145,TS145
+TS140,ETC-Pilotage (Shifting),EST,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS146,TS146
+TS141,Cancel ET<ALL>-Pilotage (Outbound),EST,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS142,Cancel ET<ALL>-Pilotage (Shifting),EST,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS143,RTS-Pilotage (Outbound),REQ,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS149,TS137
+TS144,RTS-Pilotage (Shifting),REQ,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS150,TS138
+TS145,RTC-Pilotage (Outbound),REQ,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS151,TS139
+TS146,RTC-Pilotage (Shifting),REQ,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS152,TS140
+TS147,Cancel RT<ALL>-Pilotage (Outbound),REQ,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS148,Cancel RT<ALL>-Pilotage (Shifting),REQ,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS149,PTS-Pilotage (Outbound),PLN,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS150,PTS-Pilotage (Shifting),PLN,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS151,PTC-Pilotage (Outbound),PLN,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS152,PTC-Pilotage (Shifting),PLN,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS153,Cancel PT<ALL>-Pilotage (Outbound),PLN,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS154,Cancel PT<ALL>-Pilotage (Shifting),PLN,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS155,ETS-Towage (Outbound),EST,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS161,TS161
+TS156,ETS-Towage (Shifting),EST,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS162,TS162
+TS157,ETC-Towage (Outbound),EST,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS163,TS163
+TS158,ETC-Towage (Shifting),EST,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS164,TS164
+TS159,Cancel ET<ALL>-Towage (Outbound),EST,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS160,Cancel ET<ALL>-Towage (Shifting),EST,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS161,RTS-Towage (Outbound),REQ,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS167,TS155
+TS162,RTS-Towage (Shifting),REQ,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS168,TS156
+TS163,RTC-Towage (Outbound),REQ,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS169,TS157
+TS164,RTC-Towage (Shifting),REQ,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,TS170,TS158
+TS165,Cancel RT<ALL>-Towage (Outbound),REQ,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS166,Cancel RT<ALL>-Towage (Shifting),REQ,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS167,PTS-Towage (Outbound),PLN,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS168,PTS-Towage (Shifting),PLN,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS169,PTC-Towage (Outbound),PLN,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS170,PTC-Towage (Shifting),PLN,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS171,Cancel PT<ALL>-Towage (Outbound),PLN,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS172,Cancel PT<ALL>-Towage (Shifting),PLN,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS173,ATC Bunkering,ACT,CMPL,ALGS,BUNK,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS174,ATC cargo ops Load,ACT,CMPL,ALGS,LCRO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS175,ATC cargo ops,ACT,CMPL,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS176,ETS-Mooring (Outbound),EST,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS179,TS179
+TS177,ETC-Mooring (Outbound),EST,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS180,TS180
+TS178,Cancel ET<ALL>-Mooring (Outbound),EST,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS179,RTS-Mooring (Outbound),REQ,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS182,TS176
+TS180,RTC-Mooring (Outbound),REQ,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,TS183,TS177
+TS181,Cancel RT<ALL>-Mooring (Outbound),REQ,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS182,PTS-Mooring (Outbound),PLN,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS183,PTC-Mooring (Outbound),PLN,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS184,Cancel PT<ALL>-Mooring (Outbound),PLN,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null
+TS185,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null
+TS186,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS187,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
+TS188,Vessel Ready to sail SAFE,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS189,ATS-Mooring (Outbound),ACT,STRT,OUTB,MOOR,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
+TS190,ATC-Mooring (Outbound),ACT,CMPL,OUTB,MOOR,BRTH,Port Departure Execution,True,False,False,True,False,jit1_2,null,null
+TS191,ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,True,False,False,True,False,jit1_0,null,null
+TS192,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,True,False,False,True,False,jit1_0,null,null
+TS193,ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS194,ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS195,ATC-Pilotage (Outbound),ACT,CMPL,OUTB,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS196,ATC-Pilotage (Shifting),ACT,CMPL,SHIF,PILO,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS197,ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS198,ATS-Towage (Shifting),ACT,STRT,SHIF,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS199,ATC-Towage (Outbound),ACT,CMPL,OUTB,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS200,ATC-Towage (Shifting),ACT,CMPL,SHIF,TOWG,BRTH,Port Departure Execution,True,False,False,True,False,jit1_1,null,null
+TS201,SOSP,ACT,DEPA,OUTB,null,null,Port Departure Execution,False,False,False,False,False,jit1_1,null,null
+TS202,ATA-Anchorage (<implicit>),ACT,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS203,ATD-Anchorage (<implicit>),ACT,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS204,ETA-Anchorage (<implicit>),EST,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS206,TS206
+TS205,ETD-Anchorage (<implicit>),EST,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS207,TS207
+TS206,RTA-Anchorage (<implicit>),REQ,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS208,TS204
+TS207,RTD-Anchorage (<implicit>),REQ,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,TS209,TS205
+TS208,PTA-Anchorage (<implicit>),PLN,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS209,PTD-Anchorage (<implicit>),PLN,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS210,ATS Anchorage Ops,ACT,ARRI,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS211,ATC Anchorage Ops,ACT,DEPA,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,False,False,True,False,True,jit1_2,null,null
+TS212,ATS-Sludge (<implicit>),ACT,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
+TS213,ATC-Sludge (<implicit>),ACT,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
+TS214,ETS-Sludge (<implicit>),EST,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS216,TS216
+TS215,ETC-Sludge (<implicit>),EST,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS217,TS217
+TS216,RTS-Sludge (<implicit>),REQ,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS218,TS214
+TS217,RTC-Sludge (<implicit>),REQ,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,TS219,TS215
+TS218,PTS-Sludge (<implicit>),PLN,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
+TS219,PTC-Sludge (<implicit>),PLN,CMPL,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,True,False,False,True,True,jit1_2,null,null
+TS220,ATS-Shore Power,ACT,STRT,ALGS,SHPW,BRTH,Other Services - Shore Power Execution,True,False,False,True,False,jit1_2,null,null
+TS221,ATC-Shore Power,ACT,CMPL,ALGS,SHPW,BRTH,Other Services - Shore Power Execution,True,False,False,True,False,jit1_2,null,null
+TS222,Omit Port Call,ACT,OMIT,null,null,null,OMIT Port Call Or Cancel A Service,False,False,False,False,True,jit1_2,null,null

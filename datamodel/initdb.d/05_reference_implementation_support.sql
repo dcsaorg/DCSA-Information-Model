@@ -555,7 +555,7 @@ CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition (
-    id text PRIMARY KEY,
+    timestamp_id text PRIMARY KEY,
     timestamp_type_name text NOT NULL UNIQUE,
     event_classifier_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.event_classifier(event_classifier_code),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
@@ -569,8 +569,8 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     is_terminal_needed boolean NOT NULL,
     is_vessel_position_needed boolean NOT NULL,
     provided_in_standard text NOT NULL,
-    accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED,
-    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(id) INITIALLY DEFERRED
+    accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
+    reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.publisher_pattern CASCADE;
@@ -582,7 +582,7 @@ CREATE TABLE dcsa_im_v3_0.publisher_pattern (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition_publisher_pattern CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition_publisher_pattern (
-    timestamp_id text REFERENCES dcsa_im_v3_0.timestamp_definition (id),
+    timestamp_id text REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id),
     pattern_id text REFERENCES dcsa_im_v3_0.publisher_pattern (pattern_id),
     UNIQUE (timestamp_id, pattern_id)
 );
@@ -601,7 +601,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.ops_event_timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
     event_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.operations_event (event_id),
     payload_id uuid NULL REFERENCES dcsa_im_v3_0.payload(payload_id),
-    timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (id)
+    timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id)
 );
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (payload_id);
@@ -660,12 +660,12 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
                    SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
                        FROM dcsa_im_v3_0.operations_event
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
-                       JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.id = ops_event_timestamp_definition.timestamp_definition)
+                       JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
                        WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
                        GROUP BY transport_call_id
                    ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
-                   JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.id = ops_event_timestamp_definition.timestamp_definition)
+                   JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
                    WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
           ) AS latest_eta_berth ON (transport_call.id = latest_eta_berth.transport_call_id)
       LEFT JOIN (
@@ -674,12 +674,12 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
                    SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
                        FROM dcsa_im_v3_0.operations_event
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
-                       JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.id = ops_event_timestamp_definition.timestamp_definition)
+                       JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
                        WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
                        GROUP BY transport_call_id
                    ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
-                   JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.id = ops_event_timestamp_definition.timestamp_definition)
+                   JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
                    WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
           ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
 

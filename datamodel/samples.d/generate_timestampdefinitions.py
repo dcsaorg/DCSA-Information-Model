@@ -37,7 +37,7 @@ def declare_timestamps():
         ['CRGO'],
         [NULL_VALUE, 'ALGS'],
         "Services Planning",
-        'jit1_0',
+        'jit1_1',
         is_cancelable=True,
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
@@ -126,7 +126,7 @@ def declare_timestamps():
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_vessel_position_for=ACT,
         need_event_location_for=ACT,
     )
@@ -137,9 +137,9 @@ def declare_timestamps():
         ['TOWG'],
         [NULL_VALUE, 'INBD'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
-        'jit1_0',
+        'jit1_1',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_vessel_position_for=ACT,
         need_event_location_for=ACT,
     )
@@ -150,16 +150,16 @@ def declare_timestamps():
         ['MOOR'],
         [NULL_VALUE, 'INBD'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
-        'jit1_0',
+        'jit1_2',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_event_location_for=ACT,
     )
 
     #ATA-Berth UC 41
     generate_special_timestamp(
         'ATA-Berth',
-        as_publisher_patterns(['TR'], ['ATH']),
+        as_publisher_patterns(['TR', 'CA'], ['ATH']),
         'ARRI',
         'BRTH',
         'ALGS',
@@ -176,7 +176,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
-        'jit1_0',
+        'jit1_1',
         'FAST',
         need_vessel_position=False,
     )
@@ -189,7 +189,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
-        'jit1_0',
+        'jit1_1',
         'GWAY',
         need_vessel_position=False,
     )
@@ -202,8 +202,20 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_2',
         'VRDY',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+    generate_special_timestamp(
+        'Vessel Readiness for Cargo operations SAFE',
+        PUBLISHER_PATTERN_CA2ATH,
+        'ARRI',
+        'BRTH',
+        'ALGS',
+        "Start Cargo Operations And Services",
+        'jit1_1',
+        'SAFE',
         need_vessel_position=False,
         need_event_location=True,
     )
@@ -230,7 +242,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_2',
         'DCRO',
         need_vessel_position=False,
         need_event_location=True,
@@ -244,7 +256,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_2',
         'DCRO',
         need_vessel_position=False,
         need_event_location=True,
@@ -258,7 +270,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_2',
         'LCRO',
         need_vessel_position=False,
         need_event_location=True,
@@ -272,7 +284,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_2',
         'CRGO',
         need_vessel_position=False,
         need_event_location=True,
@@ -316,7 +328,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Start Cargo Operations And Services",
-        'jit1_0',
+        'jit1_1',
         'BUNK',
         need_vessel_position=False,
         need_event_location=True,
@@ -340,7 +352,7 @@ def declare_timestamps():
         ['PILO'],
         ['OUTB', 'SHIF'],
         "Port Departure Planning And Services Completion",
-        'jit1_2',
+        'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
         need_event_location_for=EST_REQ_PLN,
@@ -352,7 +364,7 @@ def declare_timestamps():
         ['TOWG'],
         ['OUTB', 'SHIF'],
         "Port Departure Planning And Services Completion",
-        'jit1_2',
+        'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
         need_event_location_for=EST_REQ_PLN,
@@ -420,7 +432,7 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Port Departure Planning And Services Completion",
-        'jit1_2',
+        'jit1_1',
         'LASH',
         need_vessel_position=False,
         need_event_location=True,
@@ -448,8 +460,20 @@ def declare_timestamps():
         'BRTH',
         'ALGS',
         "Port Departure Execution",
-        'jit1_1',
+        'jit1_2',
         'VRDY',
+        need_vessel_position=False,
+        need_event_location=True,
+    )
+    generate_special_timestamp(
+        'Vessel Ready to sail SAFE',
+        PUBLISHER_PATTERN_CA2TR,
+        'DEPA',
+        'BRTH',
+        'ALGS',
+        "Port Departure Execution",
+        'jit1_1',
+        'SAFE',
         need_vessel_position=False,
         need_event_location=True,
     )
@@ -462,7 +486,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_2',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_event_location_for=ACT,
     )
 
@@ -486,7 +510,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_event_location_for=ACT,
     )
 
@@ -498,7 +522,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         include_phase_in_name=True,
-        is_cancelable=True,
+        is_cancelable=False,
         need_event_location_for=ACT,
     )
 
@@ -579,20 +603,8 @@ def declare_timestamps():
         ['ALGS'],
         "Other Services - Shore Power Execution",
         'jit1_2',
-        is_cancelable=True,
+        is_cancelable=False,
         need_event_location_for=ACT,
-    )
-
-    #Cancel port call UC 109
-    generate_special_timestamp(
-        'Cancel Port Call',
-        PUBLISHER_PATTERN_CA2ATH,
-        'CANC',
-        NULL_VALUE,
-        NULL_VALUE,
-        "OMIT Port Call Or Cancel A Service",
-        'jit1_2',
-        need_vessel_position=True, #FIXME need to support optional
     )
 
     #Omit port call UC 110
@@ -827,7 +839,7 @@ def xty_service_timestamps(
         include_phase_in_name: bool = False,
         need_vessel_position_for=frozenset(),
         need_event_location_for=frozenset(),
-        is_cancelable: bool = True,
+        is_cancelable: bool = True, #FIXME Cancel events must always have the eventClassifierCode=ACT
         backwards_compat_phase_code: bool = True,
 ):
     if is_cancelable:
