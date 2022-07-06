@@ -59,7 +59,7 @@ INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
 ) VALUES (
     'd330b6f5-edcb-4e9e-a09f-e98e91deba95',
     null,
-    (select td.timestamp_id  from dcsa_im_v3_0.timestamp_definition td where td.timestamp_type_name = 'RTA-Berth (<implicit>)')
+    (select td.timestamp_id  from dcsa_im_v3_0.timestamp_definition td where td.timestamp_type_name = 'RTA-Berth')
 ), (
     '538312da-674c-4278-bf9f-10e2a7c018e3',
     null,

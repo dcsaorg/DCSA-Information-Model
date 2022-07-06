@@ -196,7 +196,7 @@ def declare_timestamps():
 
     # Vessel Readiness for Cargo ops UC 45
     generate_special_timestamp(
-        'Vessel Readiness for Cargo operations',
+        'Vessel Readiness for Cargo operations [JIT 1.2]',
         PUBLISHER_PATTERN_CA2ATH,
         'ARRI',
         'BRTH',
@@ -208,7 +208,7 @@ def declare_timestamps():
         need_event_location=True,
     )
     generate_special_timestamp(
-        'Vessel Readiness for Cargo operations SAFE',
+        'Vessel Readiness for Cargo operations [JIT 1.1]',
         PUBLISHER_PATTERN_CA2ATH,
         'ARRI',
         'BRTH',
@@ -454,7 +454,7 @@ def declare_timestamps():
 
     #Vessel ready to sail UC 80
     generate_special_timestamp(
-        'Vessel Ready to sail',
+        'Vessel Ready to sail [JIT 1.2]',
         PUBLISHER_PATTERN_CA2TR,
         'DEPA',
         'BRTH',
@@ -466,7 +466,7 @@ def declare_timestamps():
         need_event_location=True,
     )
     generate_special_timestamp(
-        'Vessel Ready to sail SAFE',
+        'Vessel Ready to sail [JIT 1.1]',
         PUBLISHER_PATTERN_CA2TR,
         'DEPA',
         'BRTH',
