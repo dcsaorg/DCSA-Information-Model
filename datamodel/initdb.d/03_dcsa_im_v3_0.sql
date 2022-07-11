@@ -554,7 +554,8 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
     number_of_packages integer NOT NULL,
     package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
-    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+    package_name_on_bl varchar(50) NULL
 );
 
 -- Supporting FK constraints
