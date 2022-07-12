@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.reference_type (
     reference_type_code varchar(3) PRIMARY KEY,
     reference_type_name varchar(100) NOT NULL,
-    reference_type_description varchar(200) NOT NULL
+    reference_type_description varchar(400) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.receipt_delivery_type CASCADE;
