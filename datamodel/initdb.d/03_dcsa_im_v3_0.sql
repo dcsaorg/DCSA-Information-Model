@@ -660,9 +660,10 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    import_voyage_id uuid NULL, -- Will add the reference later once Voyage is added,
-    export_voyage_id uuid NULL, -- Will add the reference later once Voyage is added
-    port_call_status_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_code (port_call_status_code)
+    import_voyage_id uuid NULL, -- references on line 800
+    export_voyage_id uuid NULL, -- references on line 800
+    port_call_status_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_code (port_call_status_code),
+    port_visit_reference varchar(50) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
