@@ -842,9 +842,9 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     vessel_position varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL,
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
-    vessel_draft integer NULL,
+    vessel_draft real NULL,
     vessel_draft_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT vessel_draft_unit CHECK (vessel_draft_unit IN ('FOT','MTR')),
-    miles_remaining_to_destination integer NULL
+    miles_remaining_to_destination real NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event ADD PRIMARY KEY (event_id);
