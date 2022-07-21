@@ -19,7 +19,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     delay_reason_code,
     vessel_position,
     remark,
-    port_call_phase_type_code    
+    port_call_phase_type_code,
+    vessel_draft_unit,
+    miles_remaining_to_destination
 ) VALUES (
     'd330b6f5-edcb-4e9e-a09f-e98e91deba95',
     DATE '2022-03-07',
@@ -34,7 +36,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     null,
     '1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40',
     null,
-    'INBD'
+    'INBD',
+    'FOT',
+    3.0
 ), (
     '538312da-674c-4278-bf9f-10e2a7c018e3', /* event_id */
     DATE '2022-03-07', /* event_date_time */
@@ -49,7 +53,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ANA', /* delay_reason_code */
     null, /* vessel_position */
     null, /* remark */
-    'INBD' /* port_call_phase_type_code */
+    'INBD', /* port_call_phase_type_code */
+     'MTR', /* vessel_draft_unit */
+     3.2 /* miles_remaining_to_destination */
 );
 
 INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
