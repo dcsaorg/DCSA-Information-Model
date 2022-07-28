@@ -33,12 +33,12 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::text as event_location,
+    NULL::uuid as event_location,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::text as vessel_position,
-    NULL::text as publisher
+    NULL::uuid as vessel_position,
+    NULL::uuid as publisher
    FROM dcsa_im_v3_0.transport_event
 UNION ALL
  SELECT shipment_event.event_id,
@@ -62,12 +62,12 @@ UNION ALL
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::text as event_location,
+    NULL::uuid as event_location,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::text as vessel_position,
-    NULL::text as publisher
+    NULL::uuid as vessel_position,
+    NULL::uuid as publisher
    FROM dcsa_im_v3_0.shipment_event
 UNION ALL
  SELECT equipment_event.event_id,
@@ -91,12 +91,12 @@ UNION ALL
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::text as event_location,
+    NULL::uuid as event_location,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::text as vessel_position,
-    NULL::text as publisher
+    NULL::uuid as vessel_position,
+    NULL::uuid as publisher
    FROM dcsa_im_v3_0.equipment_event
 UNION ALL
  SELECT operations_event.event_id,
