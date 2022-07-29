@@ -79,7 +79,7 @@ CREATE TABLE dcsa_im_v3_0.address (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.location CASCADE;
 CREATE TABLE dcsa_im_v3_0.location (
-    id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     location_name varchar(100) NULL,
     latitude varchar(10) NULL,
     longitude varchar(11) NULL,
@@ -102,7 +102,7 @@ CREATE TABLE dcsa_im_v3_0.facility (
     un_location_code varchar(5) NULL REFERENCES dcsa_im_v3_0.un_location (un_location_code), -- The UN Locode prefixing the BIC / SMDG code
     facility_bic_code varchar(4) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
     facility_smdg_code varchar(6) NULL, -- suffix uniquely identifying the facility when prefixed with the UN Locode
-    location_id varchar(100) REFERENCES dcsa_im_v3_0.location(id)
+    location_id uuid REFERENCES dcsa_im_v3_0.location(id)
 );
 ALTER TABLE dcsa_im_v3_0.location
     ADD FOREIGN KEY (facility_id) REFERENCES dcsa_im_v3_0.facility (id);
@@ -117,7 +117,7 @@ CREATE TABLE dcsa_im_v3_0.carrier (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
 CREATE TABLE dcsa_im_v3_0.party (
-    id varchar(100) DEFAULT uuid_generate_v4()::text PRIMARY KEY,
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     party_name varchar(100) NULL,
     tax_reference_1 varchar(20) NULL,
     tax_reference_2 varchar(20) NULL,
@@ -128,7 +128,7 @@ CREATE TABLE dcsa_im_v3_0.party (
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     name varchar(100) NOT NULL,
     email varchar(100) NULL,
     phone varchar(30) NULL,
@@ -146,7 +146,7 @@ CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_identifying_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_identifying_code (
     dcsa_responsible_agency_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.code_list_responsible_agency(dcsa_responsible_agency_code),
-    party_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     code_list_name varchar(100),
     party_code varchar(100) NOT NULL
 );
@@ -276,7 +276,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     is_destination_filing_required boolean NULL,
     contract_quotation_reference varchar(35) NULL,
     incoterms varchar(3) NULL REFERENCES dcsa_im_v3_0.incoterms(incoterms_code),
-    invoice_payable_at varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    invoice_payable_at uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     expected_departure_date date NULL,
     expected_arrival_at_place_of_delivery_start_date date NULL CHECK ((expected_arrival_at_place_of_delivery_start_date IS NULL) OR (expected_arrival_at_place_of_delivery_end_date IS NULL) OR expected_arrival_at_place_of_delivery_start_date <= expected_arrival_at_place_of_delivery_end_date),
     expected_arrival_at_place_of_delivery_end_date date NULL,
@@ -289,7 +289,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     export_voyage_number varchar(50) NULL,
     declared_value_currency varchar(3) NULL,
     declared_value real NULL,
-    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
 
@@ -362,7 +362,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_to_order boolean NOT NULL,
     are_charges_displayed_on_originals boolean NULL,
     are_charges_displayed_on_copies boolean NULL,
-    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     displayed_name_for_place_of_receipt varchar(250) NULL,
     displayed_name_for_port_of_load varchar(250) NULL,
@@ -383,7 +383,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_document_reference varchar(20) NOT NULL DEFAULT LEFT(uuid_generate_v4()::text, 20),
-    place_of_issue varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id),
+    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     issue_date date NULL,
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
@@ -391,7 +391,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     carrier uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     number_of_rider_pages integer NULL,
-    issuingParty varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id)
+    issuingParty uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id)
 );
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
@@ -400,10 +400,10 @@ ALTER TABLE dcsa_im_v3_0.shipping_instruction
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
 CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
     transport_document_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_document (id),
-    title_holder varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    title_holder uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     signature varchar(500) NOT NULL,
     endorsement_datetime timestamp with time zone NOT NULL,
-    endorsee varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    endorsee uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
 );
 
@@ -430,7 +430,7 @@ CREATE TABLE dcsa_im_v3_0.party_function (
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    party_id varchar(100) NOT NULL DEFAULT uuid_generate_v4()::text REFERENCES dcsa_im_v3_0.party (id),
+    party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party (id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
@@ -628,7 +628,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_location CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_location (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
-    location_id varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.location (id),
+    location_id uuid NOT NULL REFERENCES dcsa_im_v3_0.location (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
     displayed_name varchar(250) NULL,
     event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
@@ -657,7 +657,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
     other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
-    location_id varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
+    location_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     import_voyage_id uuid NULL, -- references on line 800
@@ -746,7 +746,7 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location(id)
+    event_location uuid NULL REFERENCES dcsa_im_v3_0.location(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
@@ -831,15 +831,15 @@ CREATE TABLE dcsa_im_v3_0.port_call_phase_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
-    publisher varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    publisher uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH')),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
-    event_location varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
+    event_location uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code) CHECK(facility_type_code IN ('PBPL', 'BRTH')),
     delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
-    vessel_position varchar(100) NULL REFERENCES dcsa_im_v3_0.location (id),
+    vessel_position uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL,
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     vessel_draft real NULL,
