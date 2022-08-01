@@ -24,4 +24,4 @@ BA,Booking Agent,"Party acting as a booking office for transport and forwarding 
 HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."
 MOR, Mooring service provider, "The party offering the mooring services."
 SLU, Sludge service provider, "The party offering the Slugde services."
-SVP, Any other service provider,
+SVP, Other service provider,Any other service not covered
