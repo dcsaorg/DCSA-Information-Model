@@ -14,8 +14,8 @@ AG,Carrier local agent,
 VSL,Vessel,"A floating, sea going structure (mother vessels and feeder vessels) with either an internal or external mode of propulsion designed for the transport of cargo and/or passengers. Ocean vessels are uniquely identified by an IMO number consisting of 7 digits, or alternatively by their AIS signal with an MMSI number"
 ATH,Port Authorities,
 PLT,Pilot,The activity of conducting a vessel within restricted waters.
-TWG,Towage provider,
-LSH,Lashing provider,
+TWG,Towage service provider,
+LSH,Lashing service provider,
 BUK,Bunkering service provider,
 TR,Terminal,"A facility for loading, moving or discharging containers. Terminals can be both inland terminals for trucks and rail or port terminals are accessed by vessels and these can contain multiple berths."
 EBL,EBL Solution Provider,"The solution provider for managing the electronic bill of lading."
