@@ -718,25 +718,29 @@ class ServiceTypeInfo:
 
     def __init__(self, name, facility_type_codes, publisher_patterns):
         self.name = name
-        self.facility_type_codes = facility_type_codes
+        self.facility_type_codes = [facility_type_codes] if isinstance(facility_type_codes, str) else facility_type_codes
         self.publisher_patterns = publisher_patterns
 
+    def facility_type_codes_for(self, operations_event_type_code):
+        if isinstance(self.facility_type_codes, list):
+            return self.facility_type_codes
+        return [self.facility_type_codes[operations_event_type_code]]
 
 SERVICE_TYPE_CODE2INFO = {
-    # FIXME: Pull the name from the data file
+    # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
+    # check between the portcallservicetypecodes.csv file and the names used here.
     #FIXME: need to support multiple facility types e.g. Sludge and Bunkering
-    'CRGO': ServiceTypeInfo('Cargo Ops', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'LCRO': ServiceTypeInfo('Cargo Ops Load', ['BRTH'], as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'LASH': ServiceTypeInfo('Lashing', ['BRTH'], as_publisher_patterns(['LSH'], CARRIER_ROLES)),
-    'MOOR': ServiceTypeInfo('Mooring', ['BRTH'], as_publisher_patterns(['MOR'], CARRIER_ROLES)),
-    'BUNK': ServiceTypeInfo('Bunkering', ['BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
-    #FIXME: Pilo has different facility type codes depending on started or completed
-    'PILO': ServiceTypeInfo('Pilotage', ['BRTH'], as_publisher_patterns(['PLT'], CARRIER_ROLES)),
-    'TOWG': ServiceTypeInfo('Towage', ['BRTH'], as_publisher_patterns(['TWG'], CARRIER_ROLES)),
-    'SHPW': ServiceTypeInfo('Shore Power', ['BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'ANCO': ServiceTypeInfo('Anchorage Operations', ['ANCH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'SLUG': ServiceTypeInfo('Sludge', ['BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'CRGO': ServiceTypeInfo('Cargo Ops', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
+    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
+    'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
+    'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
+    'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], CARRIER_ROLES)),
+    'BUNK': ServiceTypeInfo('Bunkering', 'BRTH', as_publisher_patterns(['BUK'], CARRIER_ROLES)),
+    'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], CARRIER_ROLES)),
+    'TOWG': ServiceTypeInfo('Towage', 'BRTH', as_publisher_patterns(['TWG'], CARRIER_ROLES)),
+    'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'SLUG': ServiceTypeInfo('Sludge', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     # Services that do not have a clear-cut service name (including "null")
     'SAFE': UNNAMED,
     'FAST': UNNAMED,
@@ -846,20 +850,21 @@ def xty_service_timestamps(
     for port_call_service_type_code in sorted(port_call_service_type_codes):
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
-        generic_xty_timestamps(
-            service_info.publisher_patterns,
-            event_classifier_codes,
-            operations_event_type_codes,
-            service_info.facility_type_codes,
-            port_call_phase_type_codes,
-            port_call_part,
-            provided_in_standard,
-            port_call_service_type_codes=[port_call_service_type_code],
-            include_phase_in_name=include_phase_in_name,
-            need_vessel_position_for=need_vessel_position_for,
-            need_event_location_for=need_event_location_for,
-            backwards_compat_phase_code=backwards_compat_phase_code,
-        )
+        for operations_event_type_code in operations_event_type_codes:
+            generic_xty_timestamps(
+                service_info.publisher_patterns,
+                event_classifier_codes,
+                [operations_event_type_code],
+                service_info.facility_type_codes_for(operations_event_type_code),
+                port_call_phase_type_codes,
+                port_call_part,
+                provided_in_standard,
+                port_call_service_type_codes=[port_call_service_type_code],
+                include_phase_in_name=include_phase_in_name,
+                need_vessel_position_for=need_vessel_position_for,
+                need_event_location_for=need_event_location_for,
+                backwards_compat_phase_code=backwards_compat_phase_code,
+            )
 
 
 def generate_special_timestamp(
