@@ -924,6 +924,7 @@ def generic_xty_timestamps(
         _ensure_known(facility_type_code, FACILITY_TYPE_CODE2NAME_STEM, "facilityTypeCode")
         _ensure_known(port_call_service_type_code, SERVICE_TYPE_CODE2INFO, "portCallServiceTypeCode")
         _ensure_known(port_call_phase_type_code, PHASE_TYPE_CODE2NAME_STEM, "portCallPhaseTypeCode")
+        ts_version = provided_in_standard
 
         if port_call_service_type_code != NULL_VALUE:
             service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
@@ -949,8 +950,15 @@ def generic_xty_timestamps(
             publisher_pattern = initial_publisher_pattern.copy()
             publisher_pattern.extend((r, p) for p, r in initial_publisher_pattern)
         if operations_event_type_code == 'CANC':
-            full_name = ''.join(('Cancel ', event_classifier_code[0], 'T<ALL>-',
-                                 name_stem, phase_name_part))
+            full_name = ''.join(('Cancel ', name_stem, phase_name_part))
+            if full_name in ALL_TS:
+                # Forgive multiple cancels - it is not worth the hassle to report / deal with
+                continue
+            # Cancel was introduced in JIT 1.2, so any timestamp with cancel before 1.2 had the cancel
+            # version introduced in 1.2
+            ts_version = max(ts_version, 'jit1_2')
+            # Cancel is always ACT
+            event_classifier_code = 'ACT'
         else:
             full_name = ''.join((event_classifier_code[0], 'T', operations_event_type_code[0], '-',
                                  name_stem, phase_name_part))
@@ -962,7 +970,7 @@ def generic_xty_timestamps(
             port_call_service_type_code,
             facility_type_code,
             port_call_part,
-            provided_in_standard,
+            ts_version,
             publisher_pattern,
             need_vessel_position=event_classifier_code in need_vessel_position_for,
             need_event_location=event_classifier_code in need_event_location_for,
