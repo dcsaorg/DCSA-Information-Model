@@ -8,8 +8,22 @@ ATA-Anchorage (<implicit>),ATH2CA
 ATA-Anchorage (<implicit>),ATH2VSL
 ATA-Anchorage (<implicit>),CA2ATH
 ATA-Anchorage (<implicit>),VSL2ATH
+ATA-Berth,AG2ATH
+ATA-Berth,ATH2AG
+ATA-Berth,ATH2CA
+ATA-Berth,ATH2TR
+ATA-Berth,ATH2VSL
 ATA-Berth,CA2ATH
 ATA-Berth,TR2ATH
+ATA-Berth,VSL2ATH
+ATA-Berth (<implicit>),AG2ATH
+ATA-Berth (<implicit>),ATH2AG
+ATA-Berth (<implicit>),ATH2CA
+ATA-Berth (<implicit>),ATH2TR
+ATA-Berth (<implicit>),ATH2VSL
+ATA-Berth (<implicit>),CA2ATH
+ATA-Berth (<implicit>),TR2ATH
+ATA-Berth (<implicit>),VSL2ATH
 ATA-PBPL,AG2ATH
 ATA-PBPL,ATH2AG
 ATA-PBPL,ATH2CA
@@ -25,14 +39,28 @@ ATA-PBPL (<implicit>),VSL2ATH
 ATC Anchorage Ops,AG2ATH
 ATC Anchorage Ops,CA2ATH
 ATC Anchorage Ops,VSL2ATH
-ATC Bunkering,BUK2CA
 ATC Lashing,MOR2CA
-ATC cargo ops,TR2AG
-ATC cargo ops,TR2CA
-ATC cargo ops,TR2VSL
 ATC cargo ops Load,TR2AG
 ATC cargo ops Load,TR2CA
 ATC cargo ops Load,TR2VSL
+ATC-Bunkering,AG2BUK
+ATC-Bunkering,BUK2AG
+ATC-Bunkering,BUK2CA
+ATC-Bunkering,BUK2VSL
+ATC-Bunkering,CA2BUK
+ATC-Bunkering,VSL2BUK
+ATC-Bunkering (<implicit>),AG2BUK
+ATC-Bunkering (<implicit>),BUK2AG
+ATC-Bunkering (<implicit>),BUK2CA
+ATC-Bunkering (<implicit>),BUK2VSL
+ATC-Bunkering (<implicit>),CA2BUK
+ATC-Bunkering (<implicit>),VSL2BUK
+ATC-Cargo Ops,AG2TR
+ATC-Cargo Ops,CA2TR
+ATC-Cargo Ops,TR2AG
+ATC-Cargo Ops,TR2CA
+ATC-Cargo Ops,TR2VSL
+ATC-Cargo Ops,VSL2TR
 ATC-Mooring (<implicit>),AG2MOR
 ATC-Mooring (<implicit>),CA2MOR
 ATC-Mooring (<implicit>),MOR2AG
@@ -128,10 +156,6 @@ ATD-Berth (<implicit>),VSL2ATH
 ATS Anchorage Ops,AG2ATH
 ATS Anchorage Ops,CA2ATH
 ATS Anchorage Ops,VSL2ATH
-ATS Bunkering,BUK2CA
-ATS cargo ops,TR2AG
-ATS cargo ops,TR2CA
-ATS cargo ops,TR2VSL
 ATS cargo ops Load,TR2AG
 ATS cargo ops Load,TR2CA
 ATS cargo ops Load,TR2VSL
@@ -141,6 +165,30 @@ ATS cargo ops discharge completed,TR2VSL
 ATS cargo ops discharge start,TR2AG
 ATS cargo ops discharge start,TR2CA
 ATS cargo ops discharge start,TR2VSL
+ATS-Bunkering,AG2BUK
+ATS-Bunkering,BUK2AG
+ATS-Bunkering,BUK2CA
+ATS-Bunkering,BUK2VSL
+ATS-Bunkering,CA2BUK
+ATS-Bunkering,VSL2BUK
+ATS-Bunkering (<implicit>),AG2BUK
+ATS-Bunkering (<implicit>),BUK2AG
+ATS-Bunkering (<implicit>),BUK2CA
+ATS-Bunkering (<implicit>),BUK2VSL
+ATS-Bunkering (<implicit>),CA2BUK
+ATS-Bunkering (<implicit>),VSL2BUK
+ATS-Cargo Ops,AG2TR
+ATS-Cargo Ops,CA2TR
+ATS-Cargo Ops,TR2AG
+ATS-Cargo Ops,TR2CA
+ATS-Cargo Ops,TR2VSL
+ATS-Cargo Ops,VSL2TR
+ATS-Cargo Ops (<implicit>),AG2TR
+ATS-Cargo Ops (<implicit>),CA2TR
+ATS-Cargo Ops (<implicit>),TR2AG
+ATS-Cargo Ops (<implicit>),TR2CA
+ATS-Cargo Ops (<implicit>),TR2VSL
+ATS-Cargo Ops (<implicit>),VSL2TR
 ATS-Mooring (<implicit>),AG2MOR
 ATS-Mooring (<implicit>),CA2MOR
 ATS-Mooring (<implicit>),MOR2AG
@@ -215,18 +263,18 @@ ATS-Towage (Shifting),TWG2AG
 ATS-Towage (Shifting),TWG2CA
 ATS-Towage (Shifting),TWG2VSL
 ATS-Towage (Shifting),VSL2TWG
+Cancel AT<ALL>-Cargo Ops,AG2TR
+Cancel AT<ALL>-Cargo Ops,CA2TR
+Cancel AT<ALL>-Cargo Ops,TR2AG
+Cancel AT<ALL>-Cargo Ops,TR2CA
+Cancel AT<ALL>-Cargo Ops,TR2VSL
+Cancel AT<ALL>-Cargo Ops,VSL2TR
 Cancel ET<ALL>-Bunkering,BUK2AG
 Cancel ET<ALL>-Bunkering,BUK2CA
 Cancel ET<ALL>-Bunkering,BUK2VSL
 Cancel ET<ALL>-Bunkering (<implicit>),BUK2AG
 Cancel ET<ALL>-Bunkering (<implicit>),BUK2CA
 Cancel ET<ALL>-Bunkering (<implicit>),BUK2VSL
-Cancel ET<ALL>-Cargo Ops,TR2AG
-Cancel ET<ALL>-Cargo Ops,TR2CA
-Cancel ET<ALL>-Cargo Ops,TR2VSL
-Cancel ET<ALL>-Cargo Ops (<implicit>),TR2AG
-Cancel ET<ALL>-Cargo Ops (<implicit>),TR2CA
-Cancel ET<ALL>-Cargo Ops (<implicit>),TR2VSL
 Cancel ET<ALL>-Mooring (<implicit>),MOR2AG
 Cancel ET<ALL>-Mooring (<implicit>),MOR2CA
 Cancel ET<ALL>-Mooring (<implicit>),MOR2VSL
@@ -266,12 +314,6 @@ Cancel PT<ALL>-Bunkering,BUK2VSL
 Cancel PT<ALL>-Bunkering (<implicit>),BUK2AG
 Cancel PT<ALL>-Bunkering (<implicit>),BUK2CA
 Cancel PT<ALL>-Bunkering (<implicit>),BUK2VSL
-Cancel PT<ALL>-Cargo Ops,TR2AG
-Cancel PT<ALL>-Cargo Ops,TR2CA
-Cancel PT<ALL>-Cargo Ops,TR2VSL
-Cancel PT<ALL>-Cargo Ops (<implicit>),TR2AG
-Cancel PT<ALL>-Cargo Ops (<implicit>),TR2CA
-Cancel PT<ALL>-Cargo Ops (<implicit>),TR2VSL
 Cancel PT<ALL>-Mooring (<implicit>),MOR2AG
 Cancel PT<ALL>-Mooring (<implicit>),MOR2CA
 Cancel PT<ALL>-Mooring (<implicit>),MOR2VSL
@@ -311,12 +353,6 @@ Cancel RT<ALL>-Bunkering,VSL2BUK
 Cancel RT<ALL>-Bunkering (<implicit>),AG2BUK
 Cancel RT<ALL>-Bunkering (<implicit>),CA2BUK
 Cancel RT<ALL>-Bunkering (<implicit>),VSL2BUK
-Cancel RT<ALL>-Cargo Ops,AG2TR
-Cancel RT<ALL>-Cargo Ops,CA2TR
-Cancel RT<ALL>-Cargo Ops,VSL2TR
-Cancel RT<ALL>-Cargo Ops (<implicit>),AG2TR
-Cancel RT<ALL>-Cargo Ops (<implicit>),CA2TR
-Cancel RT<ALL>-Cargo Ops (<implicit>),VSL2TR
 Cancel RT<ALL>-Mooring (<implicit>),AG2MOR
 Cancel RT<ALL>-Mooring (<implicit>),CA2MOR
 Cancel RT<ALL>-Mooring (<implicit>),VSL2MOR
@@ -368,9 +404,6 @@ ETA-PBPL,VSL2ATH
 ETA-PBPL (<implicit>),AG2ATH
 ETA-PBPL (<implicit>),CA2ATH
 ETA-PBPL (<implicit>),VSL2ATH
-ETC cargo ops,TR2AG
-ETC cargo ops,TR2CA
-ETC cargo ops,TR2VSL
 ETC-Bunkering,BUK2AG
 ETC-Bunkering,BUK2CA
 ETC-Bunkering,BUK2VSL
@@ -380,9 +413,6 @@ ETC-Bunkering (<implicit>),BUK2VSL
 ETC-Cargo Ops,TR2AG
 ETC-Cargo Ops,TR2CA
 ETC-Cargo Ops,TR2VSL
-ETC-Cargo Ops (<implicit>),TR2AG
-ETC-Cargo Ops (<implicit>),TR2CA
-ETC-Cargo Ops (<implicit>),TR2VSL
 ETC-Mooring (<implicit>),MOR2AG
 ETC-Mooring (<implicit>),MOR2CA
 ETC-Mooring (<implicit>),MOR2VSL
@@ -493,9 +523,6 @@ PTA-PBPL,VSL2ATH
 PTA-PBPL (<implicit>),AG2ATH
 PTA-PBPL (<implicit>),CA2ATH
 PTA-PBPL (<implicit>),VSL2ATH
-PTC cargo ops,TR2AG
-PTC cargo ops,TR2CA
-PTC cargo ops,TR2VSL
 PTC-Bunkering,BUK2AG
 PTC-Bunkering,BUK2CA
 PTC-Bunkering,BUK2VSL
@@ -505,9 +532,6 @@ PTC-Bunkering (<implicit>),BUK2VSL
 PTC-Cargo Ops,TR2AG
 PTC-Cargo Ops,TR2CA
 PTC-Cargo Ops,TR2VSL
-PTC-Cargo Ops (<implicit>),TR2AG
-PTC-Cargo Ops (<implicit>),TR2CA
-PTC-Cargo Ops (<implicit>),TR2VSL
 PTC-Mooring (<implicit>),MOR2AG
 PTC-Mooring (<implicit>),MOR2CA
 PTC-Mooring (<implicit>),MOR2VSL
@@ -612,9 +636,6 @@ RTA-PBPL,ATH2VSL
 RTA-PBPL (<implicit>),ATH2AG
 RTA-PBPL (<implicit>),ATH2CA
 RTA-PBPL (<implicit>),ATH2VSL
-RTC cargo ops,AG2TR
-RTC cargo ops,CA2TR
-RTC cargo ops,VSL2TR
 RTC-Bunkering,AG2BUK
 RTC-Bunkering,CA2BUK
 RTC-Bunkering,VSL2BUK
@@ -624,9 +645,6 @@ RTC-Bunkering (<implicit>),VSL2BUK
 RTC-Cargo Ops,AG2TR
 RTC-Cargo Ops,CA2TR
 RTC-Cargo Ops,VSL2TR
-RTC-Cargo Ops (<implicit>),AG2TR
-RTC-Cargo Ops (<implicit>),CA2TR
-RTC-Cargo Ops (<implicit>),VSL2TR
 RTC-Mooring (<implicit>),AG2MOR
 RTC-Mooring (<implicit>),CA2MOR
 RTC-Mooring (<implicit>),VSL2MOR
