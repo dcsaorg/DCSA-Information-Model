@@ -263,129 +263,51 @@ ATS-Towage (Shifting),TWG2AG
 ATS-Towage (Shifting),TWG2CA
 ATS-Towage (Shifting),TWG2VSL
 ATS-Towage (Shifting),VSL2TWG
-Cancel AT<ALL>-Cargo Ops,AG2TR
-Cancel AT<ALL>-Cargo Ops,CA2TR
-Cancel AT<ALL>-Cargo Ops,TR2AG
-Cancel AT<ALL>-Cargo Ops,TR2CA
-Cancel AT<ALL>-Cargo Ops,TR2VSL
-Cancel AT<ALL>-Cargo Ops,VSL2TR
-Cancel ET<ALL>-Bunkering,BUK2AG
-Cancel ET<ALL>-Bunkering,BUK2CA
-Cancel ET<ALL>-Bunkering,BUK2VSL
-Cancel ET<ALL>-Bunkering (<implicit>),BUK2AG
-Cancel ET<ALL>-Bunkering (<implicit>),BUK2CA
-Cancel ET<ALL>-Bunkering (<implicit>),BUK2VSL
-Cancel ET<ALL>-Mooring (<implicit>),MOR2AG
-Cancel ET<ALL>-Mooring (<implicit>),MOR2CA
-Cancel ET<ALL>-Mooring (<implicit>),MOR2VSL
-Cancel ET<ALL>-Mooring (Inbound),MOR2AG
-Cancel ET<ALL>-Mooring (Inbound),MOR2CA
-Cancel ET<ALL>-Mooring (Inbound),MOR2VSL
-Cancel ET<ALL>-Mooring (Outbound),MOR2AG
-Cancel ET<ALL>-Mooring (Outbound),MOR2CA
-Cancel ET<ALL>-Mooring (Outbound),MOR2VSL
-Cancel ET<ALL>-Pilotage (<implicit>),PLT2AG
-Cancel ET<ALL>-Pilotage (<implicit>),PLT2CA
-Cancel ET<ALL>-Pilotage (<implicit>),PLT2VSL
-Cancel ET<ALL>-Pilotage (Inbound),PLT2AG
-Cancel ET<ALL>-Pilotage (Inbound),PLT2CA
-Cancel ET<ALL>-Pilotage (Inbound),PLT2VSL
-Cancel ET<ALL>-Pilotage (Outbound),PLT2AG
-Cancel ET<ALL>-Pilotage (Outbound),PLT2CA
-Cancel ET<ALL>-Pilotage (Outbound),PLT2VSL
-Cancel ET<ALL>-Pilotage (Shifting),PLT2AG
-Cancel ET<ALL>-Pilotage (Shifting),PLT2CA
-Cancel ET<ALL>-Pilotage (Shifting),PLT2VSL
-Cancel ET<ALL>-Towage (<implicit>),TWG2AG
-Cancel ET<ALL>-Towage (<implicit>),TWG2CA
-Cancel ET<ALL>-Towage (<implicit>),TWG2VSL
-Cancel ET<ALL>-Towage (Inbound),TWG2AG
-Cancel ET<ALL>-Towage (Inbound),TWG2CA
-Cancel ET<ALL>-Towage (Inbound),TWG2VSL
-Cancel ET<ALL>-Towage (Outbound),TWG2AG
-Cancel ET<ALL>-Towage (Outbound),TWG2CA
-Cancel ET<ALL>-Towage (Outbound),TWG2VSL
-Cancel ET<ALL>-Towage (Shifting),TWG2AG
-Cancel ET<ALL>-Towage (Shifting),TWG2CA
-Cancel ET<ALL>-Towage (Shifting),TWG2VSL
-Cancel PT<ALL>-Bunkering,BUK2AG
-Cancel PT<ALL>-Bunkering,BUK2CA
-Cancel PT<ALL>-Bunkering,BUK2VSL
-Cancel PT<ALL>-Bunkering (<implicit>),BUK2AG
-Cancel PT<ALL>-Bunkering (<implicit>),BUK2CA
-Cancel PT<ALL>-Bunkering (<implicit>),BUK2VSL
-Cancel PT<ALL>-Mooring (<implicit>),MOR2AG
-Cancel PT<ALL>-Mooring (<implicit>),MOR2CA
-Cancel PT<ALL>-Mooring (<implicit>),MOR2VSL
-Cancel PT<ALL>-Mooring (Inbound),MOR2AG
-Cancel PT<ALL>-Mooring (Inbound),MOR2CA
-Cancel PT<ALL>-Mooring (Inbound),MOR2VSL
-Cancel PT<ALL>-Mooring (Outbound),MOR2AG
-Cancel PT<ALL>-Mooring (Outbound),MOR2CA
-Cancel PT<ALL>-Mooring (Outbound),MOR2VSL
-Cancel PT<ALL>-Pilotage (<implicit>),PLT2AG
-Cancel PT<ALL>-Pilotage (<implicit>),PLT2CA
-Cancel PT<ALL>-Pilotage (<implicit>),PLT2VSL
-Cancel PT<ALL>-Pilotage (Inbound),PLT2AG
-Cancel PT<ALL>-Pilotage (Inbound),PLT2CA
-Cancel PT<ALL>-Pilotage (Inbound),PLT2VSL
-Cancel PT<ALL>-Pilotage (Outbound),PLT2AG
-Cancel PT<ALL>-Pilotage (Outbound),PLT2CA
-Cancel PT<ALL>-Pilotage (Outbound),PLT2VSL
-Cancel PT<ALL>-Pilotage (Shifting),PLT2AG
-Cancel PT<ALL>-Pilotage (Shifting),PLT2CA
-Cancel PT<ALL>-Pilotage (Shifting),PLT2VSL
-Cancel PT<ALL>-Towage (<implicit>),TWG2AG
-Cancel PT<ALL>-Towage (<implicit>),TWG2CA
-Cancel PT<ALL>-Towage (<implicit>),TWG2VSL
-Cancel PT<ALL>-Towage (Inbound),TWG2AG
-Cancel PT<ALL>-Towage (Inbound),TWG2CA
-Cancel PT<ALL>-Towage (Inbound),TWG2VSL
-Cancel PT<ALL>-Towage (Outbound),TWG2AG
-Cancel PT<ALL>-Towage (Outbound),TWG2CA
-Cancel PT<ALL>-Towage (Outbound),TWG2VSL
-Cancel PT<ALL>-Towage (Shifting),TWG2AG
-Cancel PT<ALL>-Towage (Shifting),TWG2CA
-Cancel PT<ALL>-Towage (Shifting),TWG2VSL
-Cancel RT<ALL>-Bunkering,AG2BUK
-Cancel RT<ALL>-Bunkering,CA2BUK
-Cancel RT<ALL>-Bunkering,VSL2BUK
-Cancel RT<ALL>-Bunkering (<implicit>),AG2BUK
-Cancel RT<ALL>-Bunkering (<implicit>),CA2BUK
-Cancel RT<ALL>-Bunkering (<implicit>),VSL2BUK
-Cancel RT<ALL>-Mooring (<implicit>),AG2MOR
-Cancel RT<ALL>-Mooring (<implicit>),CA2MOR
-Cancel RT<ALL>-Mooring (<implicit>),VSL2MOR
-Cancel RT<ALL>-Mooring (Inbound),AG2MOR
-Cancel RT<ALL>-Mooring (Inbound),CA2MOR
-Cancel RT<ALL>-Mooring (Inbound),VSL2MOR
-Cancel RT<ALL>-Mooring (Outbound),AG2MOR
-Cancel RT<ALL>-Mooring (Outbound),CA2MOR
-Cancel RT<ALL>-Mooring (Outbound),VSL2MOR
-Cancel RT<ALL>-Pilotage (<implicit>),AG2PLT
-Cancel RT<ALL>-Pilotage (<implicit>),CA2PLT
-Cancel RT<ALL>-Pilotage (<implicit>),VSL2PLT
-Cancel RT<ALL>-Pilotage (Inbound),AG2PLT
-Cancel RT<ALL>-Pilotage (Inbound),CA2PLT
-Cancel RT<ALL>-Pilotage (Inbound),VSL2PLT
-Cancel RT<ALL>-Pilotage (Outbound),AG2PLT
-Cancel RT<ALL>-Pilotage (Outbound),CA2PLT
-Cancel RT<ALL>-Pilotage (Outbound),VSL2PLT
-Cancel RT<ALL>-Pilotage (Shifting),AG2PLT
-Cancel RT<ALL>-Pilotage (Shifting),CA2PLT
-Cancel RT<ALL>-Pilotage (Shifting),VSL2PLT
-Cancel RT<ALL>-Towage (<implicit>),AG2TWG
-Cancel RT<ALL>-Towage (<implicit>),CA2TWG
-Cancel RT<ALL>-Towage (<implicit>),VSL2TWG
-Cancel RT<ALL>-Towage (Inbound),AG2TWG
-Cancel RT<ALL>-Towage (Inbound),CA2TWG
-Cancel RT<ALL>-Towage (Inbound),VSL2TWG
-Cancel RT<ALL>-Towage (Outbound),AG2TWG
-Cancel RT<ALL>-Towage (Outbound),CA2TWG
-Cancel RT<ALL>-Towage (Outbound),VSL2TWG
-Cancel RT<ALL>-Towage (Shifting),AG2TWG
-Cancel RT<ALL>-Towage (Shifting),CA2TWG
-Cancel RT<ALL>-Towage (Shifting),VSL2TWG
+Cancel Bunkering,BUK2AG
+Cancel Bunkering,BUK2CA
+Cancel Bunkering,BUK2VSL
+Cancel Bunkering (<implicit>),BUK2AG
+Cancel Bunkering (<implicit>),BUK2CA
+Cancel Bunkering (<implicit>),BUK2VSL
+Cancel Cargo Ops,AG2TR
+Cancel Cargo Ops,CA2TR
+Cancel Cargo Ops,TR2AG
+Cancel Cargo Ops,TR2CA
+Cancel Cargo Ops,TR2VSL
+Cancel Cargo Ops,VSL2TR
+Cancel Mooring (<implicit>),MOR2AG
+Cancel Mooring (<implicit>),MOR2CA
+Cancel Mooring (<implicit>),MOR2VSL
+Cancel Mooring (Inbound),MOR2AG
+Cancel Mooring (Inbound),MOR2CA
+Cancel Mooring (Inbound),MOR2VSL
+Cancel Mooring (Outbound),MOR2AG
+Cancel Mooring (Outbound),MOR2CA
+Cancel Mooring (Outbound),MOR2VSL
+Cancel Pilotage (<implicit>),PLT2AG
+Cancel Pilotage (<implicit>),PLT2CA
+Cancel Pilotage (<implicit>),PLT2VSL
+Cancel Pilotage (Inbound),PLT2AG
+Cancel Pilotage (Inbound),PLT2CA
+Cancel Pilotage (Inbound),PLT2VSL
+Cancel Pilotage (Outbound),PLT2AG
+Cancel Pilotage (Outbound),PLT2CA
+Cancel Pilotage (Outbound),PLT2VSL
+Cancel Pilotage (Shifting),PLT2AG
+Cancel Pilotage (Shifting),PLT2CA
+Cancel Pilotage (Shifting),PLT2VSL
+Cancel Towage (<implicit>),TWG2AG
+Cancel Towage (<implicit>),TWG2CA
+Cancel Towage (<implicit>),TWG2VSL
+Cancel Towage (Inbound),TWG2AG
+Cancel Towage (Inbound),TWG2CA
+Cancel Towage (Inbound),TWG2VSL
+Cancel Towage (Outbound),TWG2AG
+Cancel Towage (Outbound),TWG2CA
+Cancel Towage (Outbound),TWG2VSL
+Cancel Towage (Shifting),TWG2AG
+Cancel Towage (Shifting),TWG2CA
+Cancel Towage (Shifting),TWG2VSL
 ESOP,AG2ATH
 ESOP,CA2ATH
 ESOP,VSL2ATH

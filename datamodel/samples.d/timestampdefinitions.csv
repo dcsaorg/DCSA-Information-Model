@@ -11,74 +11,58 @@ PTS-Cargo Ops,PTS-Cargo Ops,PLN,STRT,ALGS,CRGO,BRTH,Services Planning,True,False
 PTS-Cargo Ops (<implicit>),PTS-Cargo Ops (<implicit>),PLN,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,True,jit1_1,null,null,FIXME: fill out
 RTS-Cargo Ops,RTS-Cargo Ops,REQ,STRT,ALGS,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,PTS-Cargo Ops,ETS-Cargo Ops,FIXME: fill out
 RTS-Cargo Ops (<implicit>),RTS-Cargo Ops (<implicit>),REQ,STRT,null,CRGO,BRTH,Services Planning,True,False,False,True,False,jit1_1,PTS-Cargo Ops (<implicit>),ETS-Cargo Ops (<implicit>),FIXME: fill out
-Cancel ET<ALL>-Towage (Inbound),Cancel ET<ALL>-Towage (Inbound),EST,CANC,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel ET<ALL>-Towage (<implicit>),Cancel ET<ALL>-Towage (<implicit>),EST,CANC,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null,FIXME: fill out
+Cancel Towage (Inbound),Cancel Towage (Inbound),ACT,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Towage (<implicit>),Cancel Towage (<implicit>),ACT,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Towage (Inbound),ETC-Towage (Inbound),EST,CMPL,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTC-Towage (Inbound),RTC-Towage (Inbound),FIXME: fill out
 ETC-Towage (<implicit>),ETC-Towage (<implicit>),EST,CMPL,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTC-Towage (<implicit>),RTC-Towage (<implicit>),FIXME: fill out
 ETS-Towage (Inbound),ETS-Towage (Inbound),EST,STRT,INBD,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTS-Towage (Inbound),RTS-Towage (Inbound),FIXME: fill out
 ETS-Towage (<implicit>),ETS-Towage (<implicit>),EST,STRT,null,TOWG,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTS-Towage (<implicit>),RTS-Towage (<implicit>),FIXME: fill out
-Cancel PT<ALL>-Towage (Inbound),Cancel PT<ALL>-Towage (Inbound),PLN,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel PT<ALL>-Towage (<implicit>),Cancel PT<ALL>-Towage (<implicit>),PLN,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTC-Towage (Inbound),PTC-Towage (Inbound),PLN,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTC-Towage (<implicit>),PTC-Towage (<implicit>),PLN,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTS-Towage (Inbound),PTS-Towage (Inbound),PLN,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTS-Towage (<implicit>),PTS-Towage (<implicit>),PLN,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel RT<ALL>-Towage (Inbound),Cancel RT<ALL>-Towage (Inbound),REQ,CANC,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null,FIXME: fill out
-Cancel RT<ALL>-Towage (<implicit>),Cancel RT<ALL>-Towage (<implicit>),REQ,CANC,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null,FIXME: fill out
 RTC-Towage (Inbound),RTC-Towage (Inbound),REQ,CMPL,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTC-Towage (Inbound),ETC-Towage (Inbound),FIXME: fill out
 RTC-Towage (<implicit>),RTC-Towage (<implicit>),REQ,CMPL,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTC-Towage (<implicit>),ETC-Towage (<implicit>),FIXME: fill out
 RTS-Towage (Inbound),RTS-Towage (Inbound),REQ,STRT,INBD,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTS-Towage (Inbound),ETS-Towage (Inbound),FIXME: fill out
 RTS-Towage (<implicit>),RTS-Towage (<implicit>),REQ,STRT,null,TOWG,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTS-Towage (<implicit>),ETS-Towage (<implicit>),FIXME: fill out
-Cancel ET<ALL>-Pilotage (Inbound),Cancel ET<ALL>-Pilotage (Inbound),EST,CANC,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel ET<ALL>-Pilotage (<implicit>),Cancel ET<ALL>-Pilotage (<implicit>),EST,CANC,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,null,null,FIXME: fill out
+Cancel Pilotage (Inbound),Cancel Pilotage (Inbound),ACT,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Pilotage (<implicit>),Cancel Pilotage (<implicit>),ACT,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Pilotage (Inbound),ETC-Pilotage (Inbound),EST,CMPL,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTC-Pilotage (Inbound),RTC-Pilotage (Inbound),FIXME: fill out
 ETC-Pilotage (<implicit>),ETC-Pilotage (<implicit>),EST,CMPL,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTC-Pilotage (<implicit>),RTC-Pilotage (<implicit>),FIXME: fill out
 ETS-Pilotage (Inbound),ETS-Pilotage (Inbound),EST,STRT,INBD,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTS-Pilotage (Inbound),RTS-Pilotage (Inbound),FIXME: fill out
 ETS-Pilotage (<implicit>),ETS-Pilotage (<implicit>),EST,STRT,null,PILO,BRTH,Services Planning,False,False,False,True,True,jit1_0,RTS-Pilotage (<implicit>),RTS-Pilotage (<implicit>),FIXME: fill out
-Cancel PT<ALL>-Pilotage (Inbound),Cancel PT<ALL>-Pilotage (Inbound),PLN,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel PT<ALL>-Pilotage (<implicit>),Cancel PT<ALL>-Pilotage (<implicit>),PLN,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTC-Pilotage (Inbound),PTC-Pilotage (Inbound),PLN,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTC-Pilotage (<implicit>),PTC-Pilotage (<implicit>),PLN,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTS-Pilotage (Inbound),PTS-Pilotage (Inbound),PLN,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
 PTS-Pilotage (<implicit>),PTS-Pilotage (<implicit>),PLN,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,True,jit1_0,null,null,FIXME: fill out
-Cancel RT<ALL>-Pilotage (Inbound),Cancel RT<ALL>-Pilotage (Inbound),REQ,CANC,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null,FIXME: fill out
-Cancel RT<ALL>-Pilotage (<implicit>),Cancel RT<ALL>-Pilotage (<implicit>),REQ,CANC,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,null,null,FIXME: fill out
 RTC-Pilotage (Inbound),RTC-Pilotage (Inbound),REQ,CMPL,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTC-Pilotage (Inbound),ETC-Pilotage (Inbound),FIXME: fill out
 RTC-Pilotage (<implicit>),RTC-Pilotage (<implicit>),REQ,CMPL,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTC-Pilotage (<implicit>),ETC-Pilotage (<implicit>),FIXME: fill out
 RTS-Pilotage (Inbound),RTS-Pilotage (Inbound),REQ,STRT,INBD,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTS-Pilotage (Inbound),ETS-Pilotage (Inbound),FIXME: fill out
 RTS-Pilotage (<implicit>),RTS-Pilotage (<implicit>),REQ,STRT,null,PILO,BRTH,Services Planning,True,False,False,True,False,jit1_0,PTS-Pilotage (<implicit>),ETS-Pilotage (<implicit>),FIXME: fill out
-Cancel ET<ALL>-Mooring (Inbound),Cancel ET<ALL>-Mooring (Inbound),EST,CANC,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null,FIXME: fill out
-Cancel ET<ALL>-Mooring (<implicit>),Cancel ET<ALL>-Mooring (<implicit>),EST,CANC,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,null,null,FIXME: fill out
+Cancel Mooring (Inbound),Cancel Mooring (Inbound),ACT,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Mooring (<implicit>),Cancel Mooring (<implicit>),ACT,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Mooring (Inbound),ETC-Mooring (Inbound),EST,CMPL,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,RTC-Mooring (Inbound),RTC-Mooring (Inbound),FIXME: fill out
 ETC-Mooring (<implicit>),ETC-Mooring (<implicit>),EST,CMPL,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,RTC-Mooring (<implicit>),RTC-Mooring (<implicit>),FIXME: fill out
 ETS-Mooring (Inbound),ETS-Mooring (Inbound),EST,STRT,INBD,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,RTS-Mooring (Inbound),RTS-Mooring (Inbound),FIXME: fill out
 ETS-Mooring (<implicit>),ETS-Mooring (<implicit>),EST,STRT,null,MOOR,BRTH,Services Planning,False,False,False,True,True,jit1_2,RTS-Mooring (<implicit>),RTS-Mooring (<implicit>),FIXME: fill out
-Cancel PT<ALL>-Mooring (Inbound),Cancel PT<ALL>-Mooring (Inbound),PLN,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
-Cancel PT<ALL>-Mooring (<implicit>),Cancel PT<ALL>-Mooring (<implicit>),PLN,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
 PTC-Mooring (Inbound),PTC-Mooring (Inbound),PLN,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
 PTC-Mooring (<implicit>),PTC-Mooring (<implicit>),PLN,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
 PTS-Mooring (Inbound),PTS-Mooring (Inbound),PLN,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
 PTS-Mooring (<implicit>),PTS-Mooring (<implicit>),PLN,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,True,jit1_2,null,null,FIXME: fill out
-Cancel RT<ALL>-Mooring (Inbound),Cancel RT<ALL>-Mooring (Inbound),REQ,CANC,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel RT<ALL>-Mooring (<implicit>),Cancel RT<ALL>-Mooring (<implicit>),REQ,CANC,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 RTC-Mooring (Inbound),RTC-Mooring (Inbound),REQ,CMPL,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTC-Mooring (Inbound),ETC-Mooring (Inbound),FIXME: fill out
 RTC-Mooring (<implicit>),RTC-Mooring (<implicit>),REQ,CMPL,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTC-Mooring (<implicit>),ETC-Mooring (<implicit>),FIXME: fill out
 RTS-Mooring (Inbound),RTS-Mooring (Inbound),REQ,STRT,INBD,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTS-Mooring (Inbound),ETS-Mooring (Inbound),FIXME: fill out
 RTS-Mooring (<implicit>),RTS-Mooring (<implicit>),REQ,STRT,null,MOOR,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTS-Mooring (<implicit>),ETS-Mooring (<implicit>),FIXME: fill out
-Cancel ET<ALL>-Bunkering,Cancel ET<ALL>-Bunkering,EST,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel ET<ALL>-Bunkering (<implicit>),Cancel ET<ALL>-Bunkering (<implicit>),EST,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Bunkering,Cancel Bunkering,ACT,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Bunkering (<implicit>),Cancel Bunkering (<implicit>),ACT,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Bunkering,ETC-Bunkering,EST,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,RTC-Bunkering,RTC-Bunkering,FIXME: fill out
 ETC-Bunkering (<implicit>),ETC-Bunkering (<implicit>),EST,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,RTC-Bunkering (<implicit>),RTC-Bunkering (<implicit>),FIXME: fill out
 ETS-Bunkering,ETS-Bunkering,EST,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,RTS-Bunkering,RTS-Bunkering,FIXME: fill out
 ETS-Bunkering (<implicit>),ETS-Bunkering (<implicit>),EST,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,RTS-Bunkering (<implicit>),RTS-Bunkering (<implicit>),FIXME: fill out
-Cancel PT<ALL>-Bunkering,Cancel PT<ALL>-Bunkering,PLN,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel PT<ALL>-Bunkering (<implicit>),Cancel PT<ALL>-Bunkering (<implicit>),PLN,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTC-Bunkering,PTC-Bunkering,PLN,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTC-Bunkering (<implicit>),PTC-Bunkering (<implicit>),PLN,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTS-Bunkering,PTS-Bunkering,PLN,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTS-Bunkering (<implicit>),PTS-Bunkering (<implicit>),PLN,STRT,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel RT<ALL>-Bunkering,Cancel RT<ALL>-Bunkering,REQ,CANC,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel RT<ALL>-Bunkering (<implicit>),Cancel RT<ALL>-Bunkering (<implicit>),REQ,CANC,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 RTC-Bunkering,RTC-Bunkering,REQ,CMPL,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTC-Bunkering,ETC-Bunkering,FIXME: fill out
 RTC-Bunkering (<implicit>),RTC-Bunkering (<implicit>),REQ,CMPL,null,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTC-Bunkering (<implicit>),ETC-Bunkering (<implicit>),FIXME: fill out
 RTS-Bunkering,RTS-Bunkering,REQ,STRT,ALGS,BUNK,BRTH,Services Planning,True,False,False,True,False,jit1_2,PTS-Bunkering,ETS-Bunkering,FIXME: fill out
@@ -126,38 +110,30 @@ PTD-Berth,PTD-Berth,PLN,DEPA,ALGS,null,BRTH,Port Departure Planning And Services
 PTD-Berth (<implicit>),PTD-Berth (<implicit>),PLN,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,null,null,FIXME: fill out
 RTD-Berth,RTD-Berth,REQ,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,PTD-Berth,ETD-Berth,FIXME: fill out
 RTD-Berth (<implicit>),RTD-Berth (<implicit>),REQ,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_0,PTD-Berth (<implicit>),ETD-Berth (<implicit>),FIXME: fill out
-Cancel ET<ALL>-Pilotage (Outbound),Cancel ET<ALL>-Pilotage (Outbound),EST,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel ET<ALL>-Pilotage (Shifting),Cancel ET<ALL>-Pilotage (Shifting),EST,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
+Cancel Pilotage (Outbound),Cancel Pilotage (Outbound),ACT,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,False,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Pilotage (Shifting),Cancel Pilotage (Shifting),ACT,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,False,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Pilotage (Outbound),ETC-Pilotage (Outbound),EST,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTC-Pilotage (Outbound),RTC-Pilotage (Outbound),FIXME: fill out
 ETC-Pilotage (Shifting),ETC-Pilotage (Shifting),EST,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTC-Pilotage (Shifting),RTC-Pilotage (Shifting),FIXME: fill out
 ETS-Pilotage (Outbound),ETS-Pilotage (Outbound),EST,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),FIXME: fill out
 ETS-Pilotage (Shifting),ETS-Pilotage (Shifting),EST,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTS-Pilotage (Shifting),RTS-Pilotage (Shifting),FIXME: fill out
-Cancel PT<ALL>-Pilotage (Outbound),Cancel PT<ALL>-Pilotage (Outbound),PLN,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel PT<ALL>-Pilotage (Shifting),Cancel PT<ALL>-Pilotage (Shifting),PLN,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTC-Pilotage (Outbound),PTC-Pilotage (Outbound),PLN,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTC-Pilotage (Shifting),PTC-Pilotage (Shifting),PLN,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTS-Pilotage (Outbound),PTS-Pilotage (Outbound),PLN,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTS-Pilotage (Shifting),PTS-Pilotage (Shifting),PLN,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel RT<ALL>-Pilotage (Outbound),Cancel RT<ALL>-Pilotage (Outbound),REQ,CANC,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel RT<ALL>-Pilotage (Shifting),Cancel RT<ALL>-Pilotage (Shifting),REQ,CANC,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 RTC-Pilotage (Outbound),RTC-Pilotage (Outbound),REQ,CMPL,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTC-Pilotage (Outbound),ETC-Pilotage (Outbound),FIXME: fill out
 RTC-Pilotage (Shifting),RTC-Pilotage (Shifting),REQ,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTC-Pilotage (Shifting),ETC-Pilotage (Shifting),FIXME: fill out
 RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),REQ,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTS-Pilotage (Outbound),ETS-Pilotage (Outbound),FIXME: fill out
 RTS-Pilotage (Shifting),RTS-Pilotage (Shifting),REQ,STRT,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTS-Pilotage (Shifting),ETS-Pilotage (Shifting),FIXME: fill out
-Cancel ET<ALL>-Towage (Outbound),Cancel ET<ALL>-Towage (Outbound),EST,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel ET<ALL>-Towage (Shifting),Cancel ET<ALL>-Towage (Shifting),EST,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
+Cancel Towage (Outbound),Cancel Towage (Outbound),ACT,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,False,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Towage (Shifting),Cancel Towage (Shifting),ACT,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,False,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Towage (Outbound),ETC-Towage (Outbound),EST,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTC-Towage (Outbound),RTC-Towage (Outbound),FIXME: fill out
 ETC-Towage (Shifting),ETC-Towage (Shifting),EST,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTC-Towage (Shifting),RTC-Towage (Shifting),FIXME: fill out
 ETS-Towage (Outbound),ETS-Towage (Outbound),EST,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTS-Towage (Outbound),RTS-Towage (Outbound),FIXME: fill out
 ETS-Towage (Shifting),ETS-Towage (Shifting),EST,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,RTS-Towage (Shifting),RTS-Towage (Shifting),FIXME: fill out
-Cancel PT<ALL>-Towage (Outbound),Cancel PT<ALL>-Towage (Outbound),PLN,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel PT<ALL>-Towage (Shifting),Cancel PT<ALL>-Towage (Shifting),PLN,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTC-Towage (Outbound),PTC-Towage (Outbound),PLN,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTC-Towage (Shifting),PTC-Towage (Shifting),PLN,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTS-Towage (Outbound),PTS-Towage (Outbound),PLN,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 PTS-Towage (Shifting),PTS-Towage (Shifting),PLN,STRT,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel RT<ALL>-Towage (Outbound),Cancel RT<ALL>-Towage (Outbound),REQ,CANC,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
-Cancel RT<ALL>-Towage (Shifting),Cancel RT<ALL>-Towage (Shifting),REQ,CANC,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 RTC-Towage (Outbound),RTC-Towage (Outbound),REQ,CMPL,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTC-Towage (Outbound),ETC-Towage (Outbound),FIXME: fill out
 RTC-Towage (Shifting),RTC-Towage (Shifting),REQ,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTC-Towage (Shifting),ETC-Towage (Shifting),FIXME: fill out
 RTS-Towage (Outbound),RTS-Towage (Outbound),REQ,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,PTS-Towage (Outbound),ETS-Towage (Outbound),FIXME: fill out
@@ -165,15 +141,13 @@ RTS-Towage (Shifting),RTS-Towage (Shifting),REQ,STRT,SHIF,TOWG,BRTH,Port Departu
 ATC-Bunkering,ATC-Bunkering,ACT,CMPL,ALGS,BUNK,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 ATC-Bunkering (<implicit>),ATC-Bunkering (<implicit>),ACT,CMPL,null,BUNK,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
 ATC cargo ops Load,ATC cargo ops Load,ACT,CMPL,ALGS,LCRO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel AT<ALL>-Cargo Ops,Cancel AT<ALL>-Cargo Ops,ACT,CANC,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Cargo Ops,Cancel Cargo Ops,ACT,CANC,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ATC-Cargo Ops,ATC-Cargo Ops,ACT,CMPL,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel ET<ALL>-Mooring (Outbound),Cancel ET<ALL>-Mooring (Outbound),EST,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
+Cancel Mooring (Outbound),Cancel Mooring (Outbound),ACT,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,False,False,False,True,False,jit1_2,null,null,FIXME: fill out
 ETC-Mooring (Outbound),ETC-Mooring (Outbound),EST,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,RTC-Mooring (Outbound),RTC-Mooring (Outbound),FIXME: fill out
 ETS-Mooring (Outbound),ETS-Mooring (Outbound),EST,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,RTS-Mooring (Outbound),RTS-Mooring (Outbound),FIXME: fill out
-Cancel PT<ALL>-Mooring (Outbound),Cancel PT<ALL>-Mooring (Outbound),PLN,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTC-Mooring (Outbound),PTC-Mooring (Outbound),PLN,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 PTS-Mooring (Outbound),PTS-Mooring (Outbound),PLN,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
-Cancel RT<ALL>-Mooring (Outbound),Cancel RT<ALL>-Mooring (Outbound),REQ,CANC,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,null,null,FIXME: fill out
 RTC-Mooring (Outbound),RTC-Mooring (Outbound),REQ,CMPL,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,PTC-Mooring (Outbound),ETC-Mooring (Outbound),FIXME: fill out
 RTS-Mooring (Outbound),RTS-Mooring (Outbound),REQ,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_2,PTS-Mooring (Outbound),ETS-Mooring (Outbound),FIXME: fill out
 ATC Lashing,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Services Completion,True,False,False,True,False,jit1_1,null,null,FIXME: fill out
