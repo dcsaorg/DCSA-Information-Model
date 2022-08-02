@@ -29,6 +29,7 @@ def declare_timestamps():
         'jit1_0',
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
+        negotiation_cycle='TA-Berth',
     )
 
     # ETS-Cargo Ops
@@ -105,6 +106,7 @@ def declare_timestamps():
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        negotiation_cycle='TA-PBPL',
     )
 
     # EOSP UC 34
@@ -166,6 +168,7 @@ def declare_timestamps():
         [NULL_VALUE, 'ALGS'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
+        negotiation_cycle='TA-Berth'
     )
 
     # AT All fast UC 42
@@ -244,6 +247,7 @@ def declare_timestamps():
         'DCRO',
         need_vessel_position=False,
         need_event_location=True,
+        negotiation_cycle='T-Cargo Ops'
     )
 
     #ATS Cargo Ops discharge completed UC 48
@@ -258,6 +262,7 @@ def declare_timestamps():
         'DCRO',
         need_vessel_position=False,
         need_event_location=True,
+        negotiation_cycle='T-Cargo Ops'
     )
 
     #ATS Cargo Ops Load completed UC 49
@@ -272,6 +277,7 @@ def declare_timestamps():
         'LCRO',
         need_vessel_position=False,
         need_event_location=True,
+        negotiation_cycle='T-Cargo Ops'
     )
 
     # ETC Cargo Ops UC 50
@@ -319,6 +325,7 @@ def declare_timestamps():
         "Port Departure Planning And Services Completion",
         'jit1_0',
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        negotiation_cycle='TD-Berth',
     )
 
     #Pilotage UC 55 - 57 + 61 - 63
@@ -471,6 +478,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_0',
         need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        negotiation_cycle='TD-Berth',
     )
 
     # ATS Pilotage UC 83 + ATC Pilotage UC 87
@@ -866,6 +874,7 @@ def generate_special_timestamp(
         event_classifier_code: str = 'ACT',
         need_vessel_position: bool = False,
         need_event_location: bool = False,
+        negotiation_cycle: str = 'Special',
 
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
@@ -886,6 +895,7 @@ def generate_special_timestamp(
         port_call_part,
         provided_in_standard,
         publisher_pattern,
+        negotiation_cycle,  # negotiation cycle
         need_vessel_position=need_vessel_position,
         need_event_location=need_event_location,
         is_pattern_timestamp=False
@@ -905,12 +915,20 @@ def generic_xty_timestamps(
         need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
         need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
         backwards_compat_phase_code: bool = True,
+        negotiation_cycle: Optional[str] = None,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
     _ensure_known(port_call_part, VALID_PORT_CALL_PARTS, "portCallPart")
     if port_call_service_type_codes is None:
         # Service timestamps can easily use generate_service_timestamps instead, so we default to have this be NULL
         port_call_service_type_codes = [NULL_VALUE]
+
+    negotiation_cycle_prefix = None
+
+    if negotiation_cycle is None:
+        negotiation_cycle_prefix = 'T-'
+
+
     for event_classifier_code, operations_event_type_code, facility_type_code, port_call_service_type_code, port_call_phase_type_code in sorted(product(
             event_classifier_codes,
             operations_event_type_codes,
@@ -962,6 +980,12 @@ def generic_xty_timestamps(
         else:
             full_name = ''.join((event_classifier_code[0], 'T', operations_event_type_code[0], '-',
                                  name_stem, phase_name_part))
+
+        ts_negotiation_cycle = negotiation_cycle
+        if ts_negotiation_cycle is None:
+            assert negotiation_cycle_prefix is not None
+            ts_negotiation_cycle = ''.join((negotiation_cycle_prefix, name_stem, phase_name_part))
+
         _make_timestamp(
             full_name,
             event_classifier_code,
@@ -972,6 +996,7 @@ def generic_xty_timestamps(
             port_call_part,
             ts_version,
             publisher_pattern,
+            ts_negotiation_cycle,
             need_vessel_position=event_classifier_code in need_vessel_position_for,
             need_event_location=event_classifier_code in need_event_location_for,
             # 'CANC' does not follow the pattern.
@@ -1023,6 +1048,7 @@ def _make_timestamp(timestamp_name,
                     port_call_part,
                     provided_in_standard,
                     publisher_pattern,
+                    negotiation_cycle,
                     is_pattern_timestamp=False,
                     need_vessel_position=False,
                     need_event_location=False,
@@ -1034,7 +1060,6 @@ def _make_timestamp(timestamp_name,
     ts_fields = [
         timestamp_name,
         timestamp_name,
-        # publisher_link_id,  # Publisher Link ID
         event_classifier_code,
         operations_event_type_code,
         port_call_phase_type_code,
@@ -1049,7 +1074,7 @@ def _make_timestamp(timestamp_name,
         provided_in_standard,  # providedInStandard
         NULL_VALUE,  # acceptTimestampDefinition
         NULL_VALUE,  # rejectTimestampDefinition
-        'FIXME: fill out',  # negotiationCycle
+        negotiation_cycle,  # negotiationCycle
     ]
     global FIELDS_ORDER
     assert len(ts_fields) == len(FIELDS_ORDER)
