@@ -726,6 +726,7 @@ class ServiceTypeInfo:
             return self.facility_type_codes
         return [self.facility_type_codes[operations_event_type_code]]
 
+
 SERVICE_TYPE_CODE2INFO = {
     # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
     # check between the portcallservicetypecodes.csv file and the names used here.
@@ -735,12 +736,12 @@ SERVICE_TYPE_CODE2INFO = {
     'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], CARRIER_ROLES)),
-    'BUNK': ServiceTypeInfo('Bunkering', 'BRTH', as_publisher_patterns(['BUK'], CARRIER_ROLES)),
+    'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
     'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], CARRIER_ROLES)),
     'TOWG': ServiceTypeInfo('Towage', 'BRTH', as_publisher_patterns(['TWG'], CARRIER_ROLES)),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'SLUG': ServiceTypeInfo('Sludge', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     # Services that do not have a clear-cut service name (including "null")
     'SAFE': UNNAMED,
     'FAST': UNNAMED,
@@ -851,11 +852,12 @@ def xty_service_timestamps(
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
         for operations_event_type_code in operations_event_type_codes:
+            facility_type_codes = service_info.facility_type_codes_for(operations_event_type_code)
             generic_xty_timestamps(
                 service_info.publisher_patterns,
                 event_classifier_codes,
                 [operations_event_type_code],
-                service_info.facility_type_codes_for(operations_event_type_code),
+                facility_type_codes,
                 port_call_phase_type_codes,
                 port_call_part,
                 provided_in_standard,
@@ -864,6 +866,7 @@ def xty_service_timestamps(
                 need_vessel_position_for=need_vessel_position_for,
                 need_event_location_for=need_event_location_for,
                 backwards_compat_phase_code=backwards_compat_phase_code,
+                include_facility_type_in_name=len(facility_type_codes) > 1,
             )
 
 
@@ -917,6 +920,7 @@ def generic_xty_timestamps(
         provided_in_standard: str,
         port_call_service_type_codes: Optional[List[str]] = None,
         include_phase_in_name: bool = False,
+        include_facility_type_in_name: bool = False,
         need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
         need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
         backwards_compat_phase_code: bool = True,
@@ -932,7 +936,6 @@ def generic_xty_timestamps(
 
     if negotiation_cycle is None:
         negotiation_cycle_prefix = 'T-'
-
 
     for event_classifier_code, operations_event_type_code, facility_type_code, port_call_service_type_code, port_call_phase_type_code in sorted(product(
             event_classifier_codes,
@@ -964,6 +967,13 @@ def generic_xty_timestamps(
             phase_name_part = ' (' + n + ')'
         else:
             phase_name_part = ''
+
+        facility_type_name_part = ''
+        if include_facility_type_in_name:
+            facility_type_code_name = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
+            _ensure_named(facility_type_code_name, 'facilityTypeCode', facility_type_code)
+            facility_type_name_part = f'@{facility_type_code_name}'
+
         publisher_pattern = initial_publisher_pattern
         if event_classifier_code == 'REQ':
             # In the default pattern, REQ reverses publisher and receiver
@@ -973,7 +983,7 @@ def generic_xty_timestamps(
             publisher_pattern = initial_publisher_pattern.copy()
             publisher_pattern.extend((r, p) for p, r in initial_publisher_pattern)
         if operations_event_type_code == 'CANC':
-            full_name = ''.join(('Cancel ', name_stem, phase_name_part))
+            full_name = ''.join(('Cancel ', name_stem, facility_type_name_part, phase_name_part))
             if full_name in ALL_TS:
                 # Forgive multiple cancels - it is not worth the hassle to report / deal with
                 continue
@@ -984,7 +994,7 @@ def generic_xty_timestamps(
             event_classifier_code = 'ACT'
         else:
             full_name = ''.join((event_classifier_code[0], 'T', operations_event_type_code[0], '-',
-                                 name_stem, phase_name_part))
+                                 name_stem, facility_type_name_part, phase_name_part))
 
         ts_negotiation_cycle = negotiation_cycle
         if ts_negotiation_cycle is None:
