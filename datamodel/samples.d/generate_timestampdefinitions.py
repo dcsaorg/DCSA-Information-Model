@@ -4,7 +4,7 @@ from collections import defaultdict, namedtuple
 from itertools import product
 import os
 import sys
-from typing import Optional, List, Dict, Iterable
+from typing import Optional, List, Dict, Iterable, Set, Union, FrozenSet
 
 
 def declare_timestamps():
@@ -38,7 +38,8 @@ def declare_timestamps():
         [NULL_VALUE, 'ALGS'],
         "Services Planning",
         'jit1_1',
-        is_cancelable=True,
+        # We only generated the STRT here, CMPL (and CANC) comes later
+        operations_event_type_codes=['STRT'],
         need_vessel_position_for=EST_PLN,
         need_event_location_for=REQ_PLN_ACT,
     )
@@ -156,16 +157,15 @@ def declare_timestamps():
         need_event_location_for=ACT,
     )
 
-    #ATA-Berth UC 41
-    generate_special_timestamp(
-        'ATA-Berth',
-        as_publisher_patterns(['TR', 'CA'], ['ATH']),
-        'ARRI',
-        'BRTH',
-        'ALGS',
+    # ATA-Berth UC 41
+    generic_xty_timestamps(
+        as_publisher_patterns(['TR', 'CA', 'AG', 'VSL'], ['ATH']),
+        ACT,
+        UNCANCELABLE_ARRI_OPERATIONS_EVENT_TYPE_CODE,
+        ['BRTH'],
+        [NULL_VALUE, 'ALGS'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
-        need_vessel_position=False,
     )
 
     # AT All fast UC 42
@@ -220,21 +220,19 @@ def declare_timestamps():
         need_event_location=True,
     )
 
-    #ATS Cargo Ops UC 46
-    generate_special_timestamp(
-        'ATS cargo ops',
-        PUBLISHER_PATTERN_TR2CA,
-        'STRT',
-        'BRTH',
-        'ALGS',
+    # ATS Cargo Ops UC 46
+    xty_service_timestamps(
+        ACT,
+        ['CRGO'],
+        [NULL_VALUE, 'ALGS'],
         "Start Cargo Operations And Services",
         'jit1_0',
-        'CRGO',
-        need_vessel_position=False,
-        need_event_location=True,
+        # We only generated the STRT here, CMPL (and CANC) comes later
+        operations_event_type_codes=['STRT'],
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
-    #ATS Cargo Ops discharge UC 47
+    # ATS Cargo Ops discharge UC 47
     generate_special_timestamp(
         'ATS cargo ops discharge start',
         PUBLISHER_PATTERN_TR2CA,
@@ -276,62 +274,39 @@ def declare_timestamps():
         need_event_location=True,
     )
 
-    #ETC Cargo Ops Load UC 50
-    generate_special_timestamp(
-        'ETC cargo ops',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ETC Cargo Ops UC 50
+    xty_service_timestamps(
+        EST,
+        ['CRGO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_2',
-        'CRGO',
-        need_vessel_position=False,
-        need_event_location=True,
+        operations_event_type_codes=['CMPL'],
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        is_cancelable=True,
     )
 
-    #RTC Cargo Ops Load UC 51
-    generate_special_timestamp(
-        'RTC cargo ops',
-        PUBLISHER_PATTERN_CA2TR,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ETC Cargo Ops UC 51 + 52
+    xty_service_timestamps(
+        REQ_PLN,
+        ['CRGO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_0',
-        'CRGO',
-        need_vessel_position=False,
-        need_event_location=True,
-        event_classifier_code='EST',
+        operations_event_type_codes=['CMPL'],  # UC 50 handles CANC
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
-    #PTC Cargo Ops Load UC 52
-    generate_special_timestamp(
-        'PTC cargo ops',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
-        "Start Cargo Operations And Services",
-        'jit1_0',
-        'CRGO',
-        need_vessel_position=False,
-        need_event_location=True,
-        event_classifier_code='PLN',
-    )
-
-    #ATS UC 53
-    generate_special_timestamp(
-        'ATS Bunkering',
-        as_publisher_patterns(['BUK'], ['CA']),
-        'STRT',
-        'BRTH',
-        'ALGS',
+    # ATS UC 53
+    xty_service_timestamps(
+        ACT,
+        ['BUNK'],
+        [NULL_VALUE, 'ALGS'],
         "Start Cargo Operations And Services",
         'jit1_1',
-        'BUNK',
-        need_vessel_position=False,
-        need_event_location=True,
+        include_phase_in_name=False,
+        operations_event_type_codes=['STRT'],
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
     # Add XTD-Berth except ATD-Berth (different part and phase) UC 54 + 67 + 68
@@ -370,18 +345,15 @@ def declare_timestamps():
         need_event_location_for=EST_REQ_PLN,
     )
 
-    #ATC Bunkering UC 69
-    generate_special_timestamp(
-        'ATC Bunkering',
-        as_publisher_patterns(['BUK'], ['CA']),
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Bunkering UC 69
+    xty_service_timestamps(
+        ACT,
+        ['BUNK'],
+        [NULL_VALUE, 'ALGS'],
         "Port Departure Planning And Services Completion",
         'jit1_1',
-        'BUNK',
-        need_vessel_position=False,
-        need_event_location=True,
+        operations_event_type_codes=['CMPL'],
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
     )
 
     #ATC Cargo Ops Load UC 70
@@ -398,18 +370,17 @@ def declare_timestamps():
         need_event_location=True,
     )
 
-    #ATC Cargo Ops UC 71
-    generate_special_timestamp(
-        'ATC cargo ops',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Cargo Ops UC 71
+    xty_service_timestamps(
+        ACT,
+        ['CRGO'],
+        ['ALGS'],
         "Port Departure Planning And Services Completion",
         'jit1_2',
-        'CRGO',
-        need_vessel_position=False,
-        need_event_location=True,
+        # Reminder: CANC also applies to "STRT"
+        operations_event_type_codes=['CMPL', 'CANC'],
+        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        is_cancelable=False,  # Generated by UC 50
     )
 
     #Mooring UC 72 - 77
@@ -607,6 +578,16 @@ def declare_timestamps():
         need_event_location_for=ACT,
     )
 
+    # The standard does not declare these, but
+    ignore_nonexistent_timestamps(
+        'ETS-Shore Power',
+        'RTS-Shore Power',
+        'PTS-Shore Power',
+        'ETC-Shore Power',
+        'RTC-Shore Power',
+        'PTC-Shore Power',
+    )
+
     #Omit port call UC 110
     generate_special_timestamp(
         'Omit Port Call',
@@ -618,6 +599,7 @@ def declare_timestamps():
         'jit1_2',
         need_vessel_position=True, #FIXME need to support optional
     )
+
 
 NULL_VALUE = "null"
 
@@ -714,6 +696,7 @@ VALID_PUBLISHER_ROLES = frozenset({
     'BUK',
     'SVP',
 })
+TS_NOT_IN_STANDARD = set()
 
 PublisherPattern = namedtuple('PublisherPattern', ['publisher_role', 'primary_receiver_role'])
 
@@ -760,6 +743,10 @@ REQ_PLN_ACT = [
 ]
 ACT = ['ACT']
 EST = ['EST']
+REQ_PLN = [
+    'REQ',
+    'PLN',
+]
 EST_REQ_PLN = [
     'EST',
     'REQ',
@@ -819,6 +806,17 @@ PUBLISHER_PATTERN_TR2CA = [
 PUBLISHER_PATTERN_CA2ATH = as_publisher_patterns(CARRIER_ROLES, ['ATH'])
 
 
+def ignore_nonexistent_timestamps(*timestamp_names):
+    """Useful for silencing irrelevant warnings
+
+    E.g. There is no ETS-Shore Power (etc.), but the automatic checking will assume
+    there they should exist because ATS-Shore Power exists.  Calling this method
+    can be used to hide these warnings (so we do not overlook real problems)
+    """
+    global TS_NOT_IN_STANDARD
+    TS_NOT_IN_STANDARD.update(timestamp_names)
+
+
 def xty_service_timestamps(
         event_classifier_codes: Iterable[str],
         port_call_service_type_codes: Iterable[str],
@@ -826,15 +824,17 @@ def xty_service_timestamps(
         port_call_part: str,
         provided_in_standard: str,
         include_phase_in_name: bool = False,
-        need_vessel_position_for=frozenset(),
-        need_event_location_for=frozenset(),
-        is_cancelable: bool = True, #FIXME Cancel events must always have the eventClassifierCode=ACT
+        need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
+        need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
+        operations_event_type_codes=None,
+        is_cancelable: bool = True,  # FIXME Cancel events must always have the eventClassifierCode=ACT
         backwards_compat_phase_code: bool = True,
 ):
-    if is_cancelable:
-        operations_event_type_codes = CANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
-    else:
-        operations_event_type_codes = UNCANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
+    if operations_event_type_codes is None:
+        if is_cancelable:
+            operations_event_type_codes = CANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
+        else:
+            operations_event_type_codes = UNCANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
     for port_call_service_type_code in sorted(port_call_service_type_codes):
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
@@ -902,8 +902,8 @@ def generic_xty_timestamps(
         provided_in_standard: str,
         port_call_service_type_codes: Optional[List[str]] = None,
         include_phase_in_name: bool = False,
-        need_vessel_position_for=frozenset(),
-        need_event_location_for=frozenset(),
+        need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
+        need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
         backwards_compat_phase_code: bool = True,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
@@ -1019,6 +1019,10 @@ def _make_timestamp(timestamp_name,
                     need_vessel_position=False,
                     need_event_location=False,
                     ):
+
+    if timestamp_name in TS_NOT_IN_STANDARD:
+        raise ValueError(f'\"{timestamp_name}\" was created but also marked as a "Do not warn about this TS being missing as the standard does not declare it"')
+
     ts_fields = [
         timestamp_name,
         timestamp_name,
@@ -1087,8 +1091,10 @@ def _check_missing_related_timestamps(timestamp: Timestamp, all_ts_table: Dict[s
             alternative_name = code[0] + timestamp.timestamp_name[1:]
             if alternative_name == timestamp.timestamp_name:
                 continue
-            if alternative_name not in all_ts_table and alternative_name not in ALREADY_WARNED_MISSING_TIMESTAMP:
-                print(f"W: Possibly missing timestamp {alternative_name} (discovered via {timestamp.timestamp_name})")
+            if (alternative_name not in all_ts_table
+                    and alternative_name not in TS_NOT_IN_STANDARD
+                    and alternative_name not in ALREADY_WARNED_MISSING_TIMESTAMP):
+                print(f"W: Possibly missing timestamp \"{alternative_name}\" (discovered via {timestamp.timestamp_name})")
                 ALREADY_WARNED_MISSING_TIMESTAMP.add(alternative_name)
 
 
