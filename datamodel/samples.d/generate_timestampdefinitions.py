@@ -643,21 +643,21 @@ FIELDS_ORDER = [
     'isAnchorageLocationNeeded',
     'isTerminalNeeded',
     'isVesselPositionNeeded',
-#    'negotiationCycle',
     'providedInStandard',
     COLUMN_ACCEPT_TS,
     COLUMN_REJECT_TS,
+    'negotiationCycle',
 ]
 
 TS_ID_COUNTER = 0
 UNNAMED = object()
 
-ALL_EVENT_CLASSIFIER_CODES = frozenset({
+ALL_EVENT_CLASSIFIER_CODES = [
     'EST',
     'REQ',
     'PLN',
     'ACT',
-})
+]
 CANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE = [
     'STRT',
     'CMPL',
@@ -753,38 +753,33 @@ SERVICE_TYPE_CODE2INFO = {
     'VRDY': UNNAMED,
     NULL_VALUE: UNNAMED,  # "null" is not translated to None
 }
-REQ_PLN_ACT = frozenset({
+REQ_PLN_ACT = [
     'REQ',
     'PLN',
     'ACT',
-})
-ACT = frozenset({
-    'ACT',
-})
-EST = frozenset({
-    'EST',
-})
-EST_REQ_PLN = frozenset({
+]
+ACT = ['ACT']
+EST = ['EST']
+EST_REQ_PLN = [
     'EST',
     'REQ',
     'PLN',
-})
-EST_PLN = frozenset({
+]
+EST_PLN = [
   'EST',
   'PLN',
-})
-EST_PLN_REQ_ACT = frozenset({
+]
+EST_PLN_REQ_ACT = [
     'EST',
     'PLN',
     'REQ',
     'ACT',
-})
-VALID_JIT_VERSIONS = frozenset({
+]
+VALID_JIT_VERSIONS = [
     'jit1_0',
     'jit1_1',
     'jit1_2',
-})
-VALID_NEGOTIATION_CYCLES = set()
+]
 VALID_OPERATIONS_EVENT_TYPE_CODES = set()
 VALID_PORT_CALL_PARTS = frozenset({
     "Berth Arrival Planning",
@@ -824,12 +819,6 @@ PUBLISHER_PATTERN_TR2CA = [
 PUBLISHER_PATTERN_CA2ATH = as_publisher_patterns(CARRIER_ROLES, ['ATH'])
 
 
-def next_id():
-    global TS_ID_COUNTER
-    TS_ID_COUNTER += 1
-    return 'TS' + str(TS_ID_COUNTER)
-
-
 def xty_service_timestamps(
         event_classifier_codes: Iterable[str],
         port_call_service_type_codes: Iterable[str],
@@ -846,7 +835,7 @@ def xty_service_timestamps(
         operations_event_type_codes = CANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
     else:
         operations_event_type_codes = UNCANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
-    for port_call_service_type_code in port_call_service_type_codes:
+    for port_call_service_type_code in sorted(port_call_service_type_codes):
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
         generic_xty_timestamps(
@@ -876,7 +865,7 @@ def generate_special_timestamp(
         port_call_service_type_code: str = NULL_VALUE,
         event_classifier_code: str = 'ACT',
         need_vessel_position: bool = False,
-        need_event_location: bool = False
+        need_event_location: bool = False,
 
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
@@ -922,13 +911,13 @@ def generic_xty_timestamps(
     if port_call_service_type_codes is None:
         # Service timestamps can easily use generate_service_timestamps instead, so we default to have this be NULL
         port_call_service_type_codes = [NULL_VALUE]
-    for event_classifier_code, operations_event_type_code, facility_type_code, port_call_service_type_code, port_call_phase_type_code in product(
+    for event_classifier_code, operations_event_type_code, facility_type_code, port_call_service_type_code, port_call_phase_type_code in sorted(product(
             event_classifier_codes,
             operations_event_type_codes,
             facility_type_codes,
             port_call_service_type_codes,
             port_call_phase_type_codes
-    ):
+    )):
 
         _ensure_known(event_classifier_code, ALL_EVENT_CLASSIFIER_CODES, "eventClassifierCoder")
         _ensure_known(operations_event_type_code, VALID_OPERATIONS_EVENT_TYPE_CODES, "operationsEventTypeCode")
@@ -1031,7 +1020,7 @@ def _make_timestamp(timestamp_name,
                     need_event_location=False,
                     ):
     ts_fields = [
-        next_id(),
+        timestamp_name,
         timestamp_name,
         # publisher_link_id,  # Publisher Link ID
         event_classifier_code,
@@ -1048,6 +1037,7 @@ def _make_timestamp(timestamp_name,
         provided_in_standard,  # providedInStandard
         NULL_VALUE,  # acceptTimestampDefinition
         NULL_VALUE,  # rejectTimestampDefinition
+        'FIXME: fill out',  # negotiationCycle
     ]
     global FIELDS_ORDER
     assert len(ts_fields) == len(FIELDS_ORDER)
@@ -1191,7 +1181,7 @@ def _write_csv_from_iter(filename, field_names, iterable):
     with open(filename, 'w', newline='') as fd:
         writer = csv.DictWriter(fd, fieldnames=field_names)
         writer.writeheader()
-        for r in iterable:
+        for r in sorted(iterable, key=lambda v: tuple(v)):
             row = dict(zip(field_names, list(r)))
             writer.writerow(row)
 
