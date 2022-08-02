@@ -94,7 +94,7 @@ INSERT INTO dcsa_im_v3_0.service (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
      'A_CSC',
      'A_carrier_service_name',
-     'SR00001B'
+     'SR0001D'
 );
 
 INSERT INTO dcsa_im_v3_0.service (
@@ -108,7 +108,7 @@ INSERT INTO dcsa_im_v3_0.service (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
      'B_HLC',
      'B_carrier_service_name',
-     'SR00002C'
+     'SR0002B'
 );
 
 INSERT INTO dcsa_im_v3_0.service (
@@ -122,7 +122,7 @@ INSERT INTO dcsa_im_v3_0.service (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
      'B_HLC',
      'B_carrier_service_name_1',
-     'SR00003D'
+     'SR0003H'
 );
 
 INSERT INTO dcsa_im_v3_0.voyage (
@@ -305,7 +305,7 @@ INSERT INTO dcsa_im_v3_0.vessel_schedule(
     service_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00001B')
+    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR0001D')
 );
 
 INSERT INTO dcsa_im_v3_0.vessel_schedule(
@@ -313,7 +313,7 @@ INSERT INTO dcsa_im_v3_0.vessel_schedule(
     service_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567'),
-    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00002C')
+    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR0002B')
 );
 
 INSERT INTO dcsa_im_v3_0.vessel_schedule(
@@ -321,7 +321,7 @@ INSERT INTO dcsa_im_v3_0.vessel_schedule(
     service_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9811000'),
-    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00002C')
+    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR0002B')
 );
 
 INSERT INTO dcsa_im_v3_0.vessel_schedule(
@@ -329,7 +329,7 @@ INSERT INTO dcsa_im_v3_0.vessel_schedule(
     service_id
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9136307'),
-    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR00003D')
+    (SELECT id FROM dcsa_im_v3_0.service WHERE universal_service_reference = 'SR0003H')
 );
 
 SELECT 'End: 08_03_test_data_ovs.sql' as progress;
