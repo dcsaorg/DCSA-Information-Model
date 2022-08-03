@@ -769,7 +769,6 @@ class ServiceTypeInfo:
 SERVICE_TYPE_CODE2INFO = {
     # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
     # check between the portcallservicetypecodes.csv file and the names used here.
-    #FIXME: need to support multiple facility types e.g. Sludge and Bunkering
     'CRGO': ServiceTypeInfo('Cargo Ops', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
@@ -777,8 +776,7 @@ SERVICE_TYPE_CODE2INFO = {
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], CARRIER_ROLES)),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
     'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], CARRIER_ROLES)),
-    # FIXME: Towage has different facility depending on classifier
-    'TOWG': ServiceTypeInfo('Towage', 'BRTH', as_publisher_patterns(['TWG'], CARRIER_ROLES)),
+    'TOWG': ServiceTypeInfo('Towage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['TWG'], CARRIER_ROLES)),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
