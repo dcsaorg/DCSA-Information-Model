@@ -314,6 +314,7 @@ def declare_timestamps():
         include_phase_in_name=False,
         operations_event_type_codes=['STRT'],
         event_location_requirement_for=in_all_cases(REQUIRED),
+        include_implicit_phase_in_name=True,
     )
 
     # Add XTD-Berth except ATD-Berth (different part and phase) UC 54 + 67 + 68
@@ -327,6 +328,7 @@ def declare_timestamps():
         'jit1_0',
         event_location_requirement_for=in_all_cases(REQUIRED),
         negotiation_cycle='TD-Berth',
+        include_implicit_phase_in_name=True,
     )
 
     #Pilotage UC 55 - 57 + 61 - 63
@@ -884,7 +886,7 @@ def xty_service_timestamps(
         vessel_position_requirement_for: Optional[Dict[str, str]] = None,
         operations_event_type_codes=None,
         is_cancelable: bool = True,
-        backwards_compat_phase_code: bool = True,
+        include_implicit_phase_in_name: Optional[bool] = None,
 ):
     if operations_event_type_codes is None:
         if is_cancelable:
@@ -908,7 +910,7 @@ def xty_service_timestamps(
                 include_phase_in_name=include_phase_in_name,
                 vessel_position_requirement_for=vessel_position_requirement_for,
                 event_location_requirement_for=event_location_requirement_for,
-                backwards_compat_phase_code=backwards_compat_phase_code,
+                include_implicit_phase_in_name=include_implicit_phase_in_name,
                 include_facility_type_in_name=len(facility_type_codes) > 1,
             )
 
@@ -956,7 +958,7 @@ def generate_special_timestamp(
 def _determine_pattern_name_parts(port_call_service_type_code,
                                   port_call_phase_type_code,
                                   facility_type_code,
-                                  backwards_compat_phase_code,
+                                  include_implicit_phase_in_name,
                                   include_phase_in_name,
                                   include_facility_type_in_name
                                   ):
@@ -968,7 +970,7 @@ def _determine_pattern_name_parts(port_call_service_type_code,
         name_stem = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
         _ensure_named(name_stem, 'facilityTypeCode', facility_type_code)
     if port_call_phase_type_code == NULL_VALUE:
-        phase_name_part = ' (<implicit>)' if backwards_compat_phase_code else ''
+        phase_name_part = ' (<implicit>)' if include_implicit_phase_in_name or include_phase_in_name else ''
     elif include_phase_in_name:
         n = PHASE_TYPE_CODE2NAME_STEM[port_call_phase_type_code]
         _ensure_named(n, 'portCallPhaseTypeCode', port_call_phase_type_code)
@@ -998,11 +1000,15 @@ def generic_xty_timestamps(
         include_facility_type_in_name: bool = False,
         event_location_requirement_for: Optional[Dict[str, str]] = None,
         vessel_position_requirement_for: Optional[Dict[str, str]] = None,
-        backwards_compat_phase_code: bool = True,
+        include_implicit_phase_in_name: Optional[bool] = None,
         negotiation_cycle: Optional[str] = None,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
     _ensure_known(port_call_part, VALID_PORT_CALL_PARTS, "portCallPart")
+
+    if include_implicit_phase_in_name is None:
+        include_implicit_phase_in_name = len(port_call_phase_type_codes) > 1 and NULL_VALUE in port_call_phase_type_codes
+
     if port_call_service_type_codes is None:
         # Service timestamps can easily use generate_service_timestamps instead, so we default to have this be NULL
         port_call_service_type_codes = [NULL_VALUE]
@@ -1037,7 +1043,7 @@ def generic_xty_timestamps(
             port_call_service_type_code,
             port_call_phase_type_code,
             facility_type_code,
-            backwards_compat_phase_code,
+            include_implicit_phase_in_name,
             include_phase_in_name,
             include_facility_type_in_name
         )
