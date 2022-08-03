@@ -51,7 +51,7 @@ def declare_timestamps():
         ['TOWG'],
         [NULL_VALUE, 'INBD'],
         "Services Planning",
-        'jit1_0',
+        'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
         vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
