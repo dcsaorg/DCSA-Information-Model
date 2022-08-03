@@ -953,6 +953,38 @@ def generate_special_timestamp(
     )
 
 
+def _determine_pattern_name_parts(port_call_service_type_code,
+                                  port_call_phase_type_code,
+                                  facility_type_code,
+                                  backwards_compat_phase_code,
+                                  include_phase_in_name,
+                                  include_facility_type_in_name
+                                  ):
+    if port_call_service_type_code != NULL_VALUE:
+        service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
+        _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
+        name_stem = service_info.name
+    else:
+        name_stem = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
+        _ensure_named(name_stem, 'facilityTypeCode', facility_type_code)
+    if port_call_phase_type_code == NULL_VALUE:
+        phase_name_part = ' (<implicit>)' if backwards_compat_phase_code else ''
+    elif include_phase_in_name:
+        n = PHASE_TYPE_CODE2NAME_STEM[port_call_phase_type_code]
+        _ensure_named(n, 'portCallPhaseTypeCode', port_call_phase_type_code)
+        phase_name_part = ' (' + n + ')'
+    else:
+        phase_name_part = ''
+
+    facility_type_name_part = ''
+    if include_facility_type_in_name:
+        facility_type_code_name = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
+        _ensure_named(facility_type_code_name, 'facilityTypeCode', facility_type_code)
+        facility_type_name_part = f'@{facility_type_code_name}'
+
+    return name_stem, facility_type_name_part, phase_name_part
+
+
 def generic_xty_timestamps(
         initial_publisher_pattern: List['PublisherPattern'],
         event_classifier_codes: Iterable[str],
@@ -1001,27 +1033,14 @@ def generic_xty_timestamps(
         _ensure_known(port_call_phase_type_code, PHASE_TYPE_CODE2NAME_STEM, "portCallPhaseTypeCode")
         ts_version = provided_in_standard
 
-        if port_call_service_type_code != NULL_VALUE:
-            service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
-            _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
-            name_stem = service_info.name
-        else:
-            name_stem = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
-            _ensure_named(name_stem, 'facilityTypeCode', facility_type_code)
-        if port_call_phase_type_code == NULL_VALUE:
-            phase_name_part = ' (<implicit>)' if backwards_compat_phase_code else ''
-        elif include_phase_in_name:
-            n = PHASE_TYPE_CODE2NAME_STEM[port_call_phase_type_code]
-            _ensure_named(n, 'portCallPhaseTypeCode', port_call_phase_type_code)
-            phase_name_part = ' (' + n + ')'
-        else:
-            phase_name_part = ''
-
-        facility_type_name_part = ''
-        if include_facility_type_in_name:
-            facility_type_code_name = FACILITY_TYPE_CODE2NAME_STEM[facility_type_code]
-            _ensure_named(facility_type_code_name, 'facilityTypeCode', facility_type_code)
-            facility_type_name_part = f'@{facility_type_code_name}'
+        name_stem, facility_type_name_part, phase_name_part = _determine_pattern_name_parts(
+            port_call_service_type_code,
+            port_call_phase_type_code,
+            facility_type_code,
+            backwards_compat_phase_code,
+            include_phase_in_name,
+            include_facility_type_in_name
+        )
 
         publisher_pattern = initial_publisher_pattern
         if event_classifier_code == 'REQ':
