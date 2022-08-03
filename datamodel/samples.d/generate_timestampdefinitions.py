@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 import csv
 from collections import defaultdict, namedtuple
-from itertools import product
+from itertools import product, repeat
 import os
 import sys
-from typing import Optional, List, Dict, Iterable, Set, Union, FrozenSet
+from typing import Optional, List, Dict, Iterable
 
 
 def declare_timestamps():
@@ -27,8 +27,8 @@ def declare_timestamps():
         [NULL_VALUE, 'INBD'],
         "Berth Arrival Planning",
         'jit1_0',
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
+        vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
+        event_location_requirement_for=ifelse(REQ_PLN_ACT, REQUIRED, EXCLUDED),
         negotiation_cycle='TA-Berth',
     )
 
@@ -41,8 +41,8 @@ def declare_timestamps():
         'jit1_1',
         # We only generated the STRT here, CMPL (and CANC) comes later
         operations_event_type_codes=['STRT'],
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
+        vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ETS-Towage (Inbound)
@@ -54,8 +54,8 @@ def declare_timestamps():
         'jit1_0',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
+        vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ETS-Pilotage (Inbound)
@@ -67,8 +67,8 @@ def declare_timestamps():
         'jit1_0',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
+        vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ETS-Mooring (Inbound) UC 19 - 24
@@ -80,8 +80,8 @@ def declare_timestamps():
         'jit1_2',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_vessel_position_for=EST_PLN,
-        need_event_location_for=REQ_PLN_ACT,
+        vessel_position_requirement_for=ifelse(EST_PLN, OPTIONAL, EXCLUDED),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # Bunkering UC 25 - 30
@@ -93,7 +93,7 @@ def declare_timestamps():
         'jit1_2',
         include_phase_in_name=False,
         is_cancelable=True,
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ETA PBP UC 31-33 + 35
@@ -105,7 +105,7 @@ def declare_timestamps():
         [NULL_VALUE, 'INBD'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
         negotiation_cycle='TA-PBPL',
     )
 
@@ -118,7 +118,7 @@ def declare_timestamps():
         'INBD',
         'Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution',
         'jit1_1',
-        need_vessel_position=True,  # FIXME: IFS says Optional, we do not support "required" or "absent".
+        vessel_position_requirement=OPTIONAL,
     )
 
     # ATS-Pilotage (Inbound) UC 36 + 40
@@ -130,8 +130,8 @@ def declare_timestamps():
         'jit1_0',
         include_phase_in_name=True,
         is_cancelable=False,
-        need_vessel_position_for=ACT,
-        need_event_location_for=ACT,
+        vessel_position_requirement_for=in_all_cases(OPTIONAL),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATS-Towage (Inbound) UC 37 + 38
@@ -143,8 +143,8 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=True,
         is_cancelable=False,
-        need_vessel_position_for=ACT,
-        need_event_location_for=ACT,
+        vessel_position_requirement_for=in_all_cases(OPTIONAL),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATS-Mooring (Inbound) UC 39 + 44
@@ -156,7 +156,7 @@ def declare_timestamps():
         'jit1_2',
         include_phase_in_name=True,
         is_cancelable=False,
-        need_event_location_for=ACT,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATA-Berth UC 41
@@ -168,7 +168,8 @@ def declare_timestamps():
         [NULL_VALUE, 'ALGS'],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
-        negotiation_cycle='TA-Berth'
+        negotiation_cycle='TA-Berth',
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # AT All fast UC 42
@@ -181,7 +182,7 @@ def declare_timestamps():
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_1',
         'FAST',
-        need_vessel_position=False,
+        vessel_position_requirement=EXCLUDED,
     )
 
     # Gangway Down and Safe UC 43
@@ -194,7 +195,7 @@ def declare_timestamps():
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_1',
         'GWAY',
-        need_vessel_position=False,
+        vessel_position_requirement=EXCLUDED,
     )
 
     # Vessel Readiness for Cargo ops UC 45
@@ -207,8 +208,8 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_2',
         'VRDY',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
     generate_special_timestamp(
         'Vessel Readiness for Cargo operations [JIT 1.1]',
@@ -219,8 +220,8 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_1',
         'SAFE',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
 
     # ATS Cargo Ops UC 46
@@ -232,7 +233,7 @@ def declare_timestamps():
         'jit1_0',
         # We only generated the STRT here, CMPL (and CANC) comes later
         operations_event_type_codes=['STRT'],
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATS Cargo Ops discharge UC 47
@@ -245,8 +246,8 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_2',
         'DCRO',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
         negotiation_cycle='T-Cargo Ops'
     )
 
@@ -260,8 +261,8 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_2',
         'DCRO',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
         negotiation_cycle='T-Cargo Ops'
     )
 
@@ -275,8 +276,8 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_2',
         'LCRO',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
         negotiation_cycle='T-Cargo Ops'
     )
 
@@ -288,7 +289,7 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_2',
         operations_event_type_codes=['CMPL'],
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
         is_cancelable=True,
     )
 
@@ -300,7 +301,7 @@ def declare_timestamps():
         "Start Cargo Operations And Services",
         'jit1_0',
         operations_event_type_codes=['CMPL'],  # UC 50 handles CANC
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATS UC 53
@@ -312,7 +313,7 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=False,
         operations_event_type_codes=['STRT'],
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # Add XTD-Berth except ATD-Berth (different part and phase) UC 54 + 67 + 68
@@ -324,7 +325,7 @@ def declare_timestamps():
         [NULL_VALUE, 'ALGS'],
         "Port Departure Planning And Services Completion",
         'jit1_0',
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
         negotiation_cycle='TD-Berth',
     )
 
@@ -337,7 +338,7 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_event_location_for=EST_REQ_PLN,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     #Towage UC 58 - 60 + UC 64 - 66
@@ -349,7 +350,7 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_event_location_for=EST_REQ_PLN,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATC Bunkering UC 69
@@ -360,7 +361,7 @@ def declare_timestamps():
         "Port Departure Planning And Services Completion",
         'jit1_1',
         operations_event_type_codes=['CMPL'],
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     #ATC Cargo Ops Load UC 70
@@ -373,8 +374,8 @@ def declare_timestamps():
         "Port Departure Planning And Services Completion",
         'jit1_2',
         'LCRO',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
 
     # ATC Cargo Ops UC 71
@@ -386,7 +387,7 @@ def declare_timestamps():
         'jit1_2',
         # Reminder: CANC also applies to "STRT"
         operations_event_type_codes=['CMPL', 'CANC'],
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
         is_cancelable=False,  # Generated by UC 50
     )
 
@@ -399,7 +400,7 @@ def declare_timestamps():
         'jit1_2',
         include_phase_in_name=True,
         is_cancelable=True,
-        need_event_location_for=EST_REQ_PLN,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     #ATC Lashing UC 78
@@ -412,8 +413,8 @@ def declare_timestamps():
         "Port Departure Planning And Services Completion",
         'jit1_1',
         'LASH',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
 
     #Terminal Ready for vessel departure UC 79
@@ -426,8 +427,8 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         'SAFE',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
 
     #Vessel ready to sail UC 80
@@ -440,8 +441,8 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_2',
         'VRDY',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
     generate_special_timestamp(
         'Vessel Ready to sail [JIT 1.1]',
@@ -452,8 +453,8 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         'SAFE',
-        need_vessel_position=False,
-        need_event_location=True,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=REQUIRED,
     )
 
     #ATS Mooring UC 81 + ATC Mooring UC 84
@@ -465,7 +466,7 @@ def declare_timestamps():
         'jit1_2',
         include_phase_in_name=True,
         is_cancelable=False,
-        need_event_location_for=ACT,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # ATD Berth UC 82
@@ -477,35 +478,63 @@ def declare_timestamps():
         [NULL_VALUE, 'OUTB'],
         "Port Departure Execution",
         'jit1_0',
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
+        event_location_requirement_for=in_all_cases(REQUIRED),
         negotiation_cycle='TD-Berth',
     )
 
-    # ATS Pilotage UC 83 + ATC Pilotage UC 87
+    # ATS Pilotage UC 83
     xty_service_timestamps(
         ACT,
         ['PILO'],
         ['OUTB', 'SHIF'],
         "Port Departure Execution",
         'jit1_1',
+        operations_event_type_codes=['STRT'],
         include_phase_in_name=True,
         is_cancelable=False,
-        need_event_location_for=ACT,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
-    #ATS Towage UC 85 + ATC Towage UC 86
+    # ATS Towage UC 85
     xty_service_timestamps(
         ACT,
         ['TOWG'],
         ['OUTB', 'SHIF'],
         "Port Departure Execution",
         'jit1_1',
+        operations_event_type_codes=['STRT'],
         include_phase_in_name=True,
         is_cancelable=False,
-        need_event_location_for=ACT,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
-    #SOSP UC 88
+    #  ATC Towage UC 86
+    xty_service_timestamps(
+        ACT,
+        ['TOWG'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Execution",
+        'jit1_1',
+        operations_event_type_codes=['CMPL'],
+        include_phase_in_name=True,
+        is_cancelable=False,
+        event_location_requirement_for=in_all_cases(EXCLUDED),
+    )
+
+    # ATC Pilotage UC 87
+    xty_service_timestamps(
+        ACT,
+        ['PILO'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Execution",
+        'jit1_1',
+        operations_event_type_codes=['CMPL'],
+        include_phase_in_name=True,
+        is_cancelable=False,
+        event_location_requirement_for=in_all_cases(EXCLUDED),
+    )
+
+    # SOSP UC 88
     generate_special_timestamp(
         'SOSP',
         PUBLISHER_PATTERN_CA2ATH,
@@ -515,8 +544,8 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         NULL_VALUE,
-        need_vessel_position=False,
-        need_event_location=False,
+        vessel_position_requirement=EXCLUDED,
+        event_location_requirement=EXCLUDED,
     )
 
     # Anchorage UC 89 - UC 96
@@ -529,8 +558,8 @@ def declare_timestamps():
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
         include_phase_in_name=True,
-        need_event_location_for=ALL_EVENT_CLASSIFIER_CODES,
-        need_vessel_position_for=ALL_EVENT_CLASSIFIER_CODES
+        event_location_requirement_for=ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED),
+        vessel_position_requirement_for=in_all_cases(OPTIONAL),
     )
 
     #ATS Anchorage OPS UC 97
@@ -543,8 +572,8 @@ def declare_timestamps():
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
         'ANCO',
-        need_vessel_position=True, #FIXME need to support optional
-        need_event_location=True,
+        vessel_position_requirement=OPTIONAL,
+        event_location_requirement=REQUIRED,
     )
 
     #ATC Anchorage OPS UC 98
@@ -557,8 +586,8 @@ def declare_timestamps():
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
         'ANCO',
-        need_vessel_position=True, #FIXME need to support optional
-        need_event_location=True,
+        vessel_position_requirement=OPTIONAL,
+        event_location_requirement=REQUIRED,
     )
 
     #Sludge UC 99 106
@@ -571,8 +600,8 @@ def declare_timestamps():
         "Other Services - Sludge Planning And Execution",
         'jit1_2',
         ['SLUG'],
-        need_vessel_position_for=EST_PLN_REQ_ACT,
-        need_event_location_for=EST_PLN_REQ_ACT,
+        vessel_position_requirement_for=in_all_cases(OPTIONAL),
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     #Shore power UC 107 + 108
@@ -583,7 +612,7 @@ def declare_timestamps():
         "Other Services - Shore Power Execution",
         'jit1_2',
         is_cancelable=False,
-        need_event_location_for=ACT,
+        event_location_requirement_for=in_all_cases(REQUIRED),
     )
 
     # The standard does not declare these, but
@@ -605,8 +634,18 @@ def declare_timestamps():
         NULL_VALUE,
         "OMIT Port Call Or Cancel A Service",
         'jit1_2',
-        need_vessel_position=True, #FIXME need to support optional
+        vessel_position_requirement=OPTIONAL,
     )
+
+
+def in_all_cases(value: str) -> Dict[str, str]:
+    return defaultdict(lambda: value)
+
+
+def ifelse(if_one_of: List[str], value: str, else_value: str) -> Dict[str, str]:
+    d = defaultdict(lambda: else_value)
+    d.update(zip(if_one_of, repeat(value)))
+    return d
 
 
 NULL_VALUE = "null"
@@ -620,19 +659,15 @@ COLUMN_REJECT_TS = 'rejectTimestampDefinition'
 FIELDS_ORDER = [
     'timestampID',
     COLUMN_TIMESTAMP_TYPE_NAME,
-    #  'publisherLinkID',
-    #  'primaryReceiver',
     COLUMN_EVENT_CLASSIFIER_CODE,
     'operationsEventTypeCode',
     'portCallPhaseTypeCode',
     'portCallServiceTypeCode',
     'facilityTypeCode',
     'portCallPart',
-    'isBerthLocationNeeded',
-    'isPBPLocationNeeded',
-    'isAnchorageLocationNeeded',
+    'eventLocationRequirement',
     'isTerminalNeeded',
-    'isVesselPositionNeeded',
+    'vesselPositionRequirement',
     'providedInStandard',
     COLUMN_ACCEPT_TS,
     COLUMN_REJECT_TS,
@@ -673,7 +708,9 @@ UNCANCELABLE_ARRI_OPERATIONS_EVENT_TYPE_CODE = [
 UNCANCELABLE_DEPA_OPERATIONS_EVENT_TYPE_CODE = [
     'DEPA',
 ]
-
+EXCLUDED = 'EXCLUDED'
+OPTIONAL = 'OPTIONAL'
+REQUIRED = 'REQUIRED'
 PHASE_TYPE_CODE2NAME_STEM = {
     NULL_VALUE: UNNAMED,
     'INBD': 'Inbound',
@@ -738,6 +775,7 @@ SERVICE_TYPE_CODE2INFO = {
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], CARRIER_ROLES)),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
     'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], CARRIER_ROLES)),
+    # FIXME: Towage has different facility depending on classifier
     'TOWG': ServiceTypeInfo('Towage', 'BRTH', as_publisher_patterns(['TWG'], CARRIER_ROLES)),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
@@ -764,6 +802,11 @@ EST_REQ_PLN = [
     'EST',
     'REQ',
     'PLN',
+]
+EST_PLN_ACT = [
+    'EST',
+    'PLN',
+    'ACT',
 ]
 EST_PLN = [
   'EST',
@@ -837,10 +880,10 @@ def xty_service_timestamps(
         port_call_part: str,
         provided_in_standard: str,
         include_phase_in_name: bool = False,
-        need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
-        need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
+        event_location_requirement_for: Optional[Dict[str, str]] = None,
+        vessel_position_requirement_for: Optional[Dict[str, str]] = None,
         operations_event_type_codes=None,
-        is_cancelable: bool = True,  # FIXME Cancel events must always have the eventClassifierCode=ACT
+        is_cancelable: bool = True,
         backwards_compat_phase_code: bool = True,
 ):
     if operations_event_type_codes is None:
@@ -863,8 +906,8 @@ def xty_service_timestamps(
                 provided_in_standard,
                 port_call_service_type_codes=[port_call_service_type_code],
                 include_phase_in_name=include_phase_in_name,
-                need_vessel_position_for=need_vessel_position_for,
-                need_event_location_for=need_event_location_for,
+                vessel_position_requirement_for=vessel_position_requirement_for,
+                event_location_requirement_for=event_location_requirement_for,
                 backwards_compat_phase_code=backwards_compat_phase_code,
                 include_facility_type_in_name=len(facility_type_codes) > 1,
             )
@@ -880,8 +923,8 @@ def generate_special_timestamp(
         provided_in_standard: str,
         port_call_service_type_code: str = NULL_VALUE,
         event_classifier_code: str = 'ACT',
-        need_vessel_position: bool = False,
-        need_event_location: bool = False,
+        vessel_position_requirement: str = EXCLUDED,
+        event_location_requirement: str = EXCLUDED,
         negotiation_cycle: str = 'Special',
 
 ):
@@ -901,11 +944,11 @@ def generate_special_timestamp(
         port_call_service_type_code,
         facility_type_code,
         port_call_part,
+        event_location_requirement,
+        vessel_position_requirement,
         provided_in_standard,
         publisher_pattern,
         negotiation_cycle,  # negotiation cycle
-        need_vessel_position=need_vessel_position,
-        need_event_location=need_event_location,
         is_pattern_timestamp=False
     )
 
@@ -921,8 +964,8 @@ def generic_xty_timestamps(
         port_call_service_type_codes: Optional[List[str]] = None,
         include_phase_in_name: bool = False,
         include_facility_type_in_name: bool = False,
-        need_vessel_position_for: Union[FrozenSet, Set, List] = frozenset(),
-        need_event_location_for: Union[FrozenSet, Set, List] = frozenset(),
+        event_location_requirement_for: Optional[Dict[str, str]] = None,
+        vessel_position_requirement_for: Optional[Dict[str, str]] = None,
         backwards_compat_phase_code: bool = True,
         negotiation_cycle: Optional[str] = None,
 ):
@@ -931,6 +974,12 @@ def generic_xty_timestamps(
     if port_call_service_type_codes is None:
         # Service timestamps can easily use generate_service_timestamps instead, so we default to have this be NULL
         port_call_service_type_codes = [NULL_VALUE]
+
+    if event_location_requirement_for is None:
+        event_location_requirement_for = in_all_cases(EXCLUDED)
+
+    if vessel_position_requirement_for is None:
+        vessel_position_requirement_for = in_all_cases(EXCLUDED)
 
     negotiation_cycle_prefix = None
 
@@ -1001,6 +1050,9 @@ def generic_xty_timestamps(
             assert negotiation_cycle_prefix is not None
             ts_negotiation_cycle = ''.join((negotiation_cycle_prefix, name_stem, phase_name_part))
 
+        event_location_requirement = event_location_requirement_for[event_classifier_code]
+        vessel_position_requirement = vessel_position_requirement_for[event_classifier_code]
+
         _make_timestamp(
             full_name,
             event_classifier_code,
@@ -1009,11 +1061,11 @@ def generic_xty_timestamps(
             port_call_service_type_code,
             facility_type_code,
             port_call_part,
+            event_location_requirement,
+            vessel_position_requirement,
             ts_version,
             publisher_pattern,
             ts_negotiation_cycle,
-            need_vessel_position=event_classifier_code in need_vessel_position_for,
-            need_event_location=event_classifier_code in need_event_location_for,
             # 'CANC' does not follow the pattern.
             is_pattern_timestamp=operations_event_type_code != 'CANC'
         )
@@ -1061,12 +1113,12 @@ def _make_timestamp(timestamp_name,
                     port_call_service_type_code,
                     facility_type_code,
                     port_call_part,
+                    event_location_requirement,
+                    vessel_position_requirement,
                     provided_in_standard,
                     publisher_pattern,
                     negotiation_cycle,
                     is_pattern_timestamp=False,
-                    need_vessel_position=False,
-                    need_event_location=False,
                     ):
 
     if timestamp_name in TS_NOT_IN_STANDARD:
@@ -1081,11 +1133,9 @@ def _make_timestamp(timestamp_name,
         port_call_service_type_code,
         facility_type_code,
         port_call_part,  # Port Call Part
-        need_event_location and facility_type_code == 'BRTH',  # isBerthLocationNeeded
-        need_event_location and facility_type_code == 'PBPL',  # isPBPLocationNeeded
-        need_event_location and facility_type_code == 'ANCH',  # isANCHLocationNeeded
+        event_location_requirement,
         facility_type_code == 'BRTH',  # isTerminalNeeded
-        need_vessel_position,  # isVesselPositionNeeded
+        vessel_position_requirement,  # vesselPositionRequirement
         provided_in_standard,  # providedInStandard
         NULL_VALUE,  # acceptTimestampDefinition
         NULL_VALUE,  # rejectTimestampDefinition
