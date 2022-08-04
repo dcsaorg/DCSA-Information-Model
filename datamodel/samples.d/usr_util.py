@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 import argparse
 import csv
-import os
-import sys
+import re
 
+import sys
 # https://en.wikipedia.org/wiki/Damm_algorithm
 # Table is from that page
 from itertools import repeat, chain
+
+DIGITS_ONLY_PATTERN = re.compile(r'^\d+$')
 
 DAMM_TABLE = (
     (0, 3, 1, 7, 5, 9, 8, 6, 4, 2),
@@ -67,9 +69,7 @@ def determine_issue_with_usr(usr):
     actual_check_digit = ord(check_char) - ord('A')
     if actual_check_digit >= TABLE_SIZE:
         return False, "Check number must be in the range A-" + _check_number_to_letter(TABLE_SIZE)
-    try:
-        int(nr)
-    except ValueError:
+    if not DIGITS_ONLY_PATTERN.fullmatch(nr):
         return False, f"The middle digits must be numbers (the XXXXX in SRXXXXXY, got {nr})"
     expected_check_digit = _run_damm(nr)
     if actual_check_digit != expected_check_digit:
