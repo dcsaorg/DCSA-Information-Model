@@ -764,7 +764,7 @@ ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id),
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.smdg_delay_reason CASCADE;
 CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
-    delay_reason_code varchar(4) NOT NULL PRIMARY KEY,
+    delay_reason_code varchar(3) NOT NULL PRIMARY KEY,
     delay_reason_name varchar(100) NOT NULL,
     delay_reason_description varchar(250) NOT NULL
 );
@@ -772,7 +772,7 @@ CREATE TABLE dcsa_im_v3_0.smdg_delay_reason (
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_event (
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type(transport_event_type_code),
-    delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
+    delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     change_remark varchar(250),
     transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id)
 ) INHERITS (dcsa_im_v3_0.event);
@@ -831,15 +831,15 @@ CREATE TABLE dcsa_im_v3_0.port_call_phase_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
-    publisher uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
+    publisher_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
     publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH')),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
-    event_location uuid NULL REFERENCES dcsa_im_v3_0.location (id),
+    event_location_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code) CHECK(facility_type_code IN ('PBPL', 'BRTH')),
-    delay_reason_code varchar(4) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
-    vessel_position uuid NULL REFERENCES dcsa_im_v3_0.location (id),
+    delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
+    vessel_position_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL,
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     vessel_draft real NULL,
