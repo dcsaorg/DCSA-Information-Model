@@ -989,6 +989,8 @@ def generic_xty_timestamps(
             ts_version = max(ts_version, 'jit1_2')
             # Cancel is always ACT
             timestamp_detail = timestamp_detail.replace(event_classifier_code='ACT')
+            # Cancel has its own part together with OMIT (distinct from the part of the actual service itself)
+            ts_port_call_part = 'OMIT Port Call Or Cancel A Service'
         else:
             full_name = ''.join((timestamp_detail.event_classifier_code[0], 'T',
                                  timestamp_detail.operations_event_type_code[0], '-',
