@@ -746,7 +746,7 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id),
-    event_location uuid NULL REFERENCES dcsa_im_v3_0.location(id)
+    event_location_id uuid NULL REFERENCES dcsa_im_v3_0.location(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.equipment_event ADD PRIMARY KEY (event_id);
