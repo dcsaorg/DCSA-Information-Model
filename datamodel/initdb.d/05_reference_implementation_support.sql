@@ -33,12 +33,12 @@ CREATE VIEW dcsa_im_v3_0.aggregated_events AS
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::uuid as event_location,
+    NULL::uuid as event_location_id,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
+    NULL::uuid as vessel_position_id,
+    NULL::uuid as publisher_id
    FROM dcsa_im_v3_0.transport_event
 UNION ALL
  SELECT shipment_event.event_id,
@@ -62,12 +62,12 @@ UNION ALL
     shipment_event.reason AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::uuid as event_location,
+    NULL::uuid as event_location_id,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
+    NULL::uuid as vessel_position_id,
+    NULL::uuid as publisher_id
    FROM dcsa_im_v3_0.shipment_event
 UNION ALL
  SELECT equipment_event.event_id,
@@ -91,12 +91,12 @@ UNION ALL
     NULL::text AS reason,
     NULL::text as operations_event_type_code,
     NULL::text as publisher_role,
-    NULL::uuid as event_location,
+    NULL::uuid as event_location_id,
     NULL::text as port_call_phase_type_code,
     NULL::text as port_call_service_type_code,
     NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
+    NULL::uuid as vessel_position_id,
+    NULL::uuid as publisher_id
    FROM dcsa_im_v3_0.equipment_event
 UNION ALL
  SELECT operations_event.event_id,
@@ -120,12 +120,12 @@ UNION ALL
     NULL::text AS reason,
     operations_event.operations_event_type_code,
     operations_event.publisher_role,
-    operations_event.event_location,
+    operations_event.event_location_id,
     operations_event.port_call_phase_type_code,
     operations_event.port_call_service_type_code,
     operations_event.facility_type_code,
-    operations_event.vessel_position,
-    operations_event.publisher
+    operations_event.vessel_position_id,
+    operations_event.publisher_id
    FROM dcsa_im_v3_0.operations_event;
 
 /* View to assist with the GET /events endpoint.  It provide the following information:
