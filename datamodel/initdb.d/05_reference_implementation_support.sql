@@ -566,6 +566,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     event_location_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),
     is_terminal_needed boolean NOT NULL,
     vessel_position_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),
+    is_miles_to_destination_relevant boolean NOT NULL,
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,

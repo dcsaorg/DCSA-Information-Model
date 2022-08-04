@@ -36,6 +36,7 @@ def declare_timestamps():
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
         event_location_requirement=event_classifier_code_matches(ifelse(REQ_PLN_ACT, REQUIRED, EXCLUDED)),
         negotiation_cycle='TA-Berth',
+        is_miles_to_destination_relevant=event_classifier_code_matches(ifelse(EST_PLN, True, False)),
     )
 
     # ETS-Cargo Ops
@@ -63,6 +64,9 @@ def declare_timestamps():
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
+            ifelse(('ACT', 'STRT'), True, False)
+        )
     )
 
     # XTY-Towage (Inbound)  UC 13-18 + 37 + 38
@@ -77,6 +81,9 @@ def declare_timestamps():
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
+            ifelse(('ACT', 'STRT'), True, False)
+        )
     )
 
     # ETS-Mooring (Inbound) UC 19 - 24 +  39 + 44
@@ -116,6 +123,8 @@ def declare_timestamps():
         'jit1_0',
         event_location_requirement=REQUIRED,
         negotiation_cycle='TA-PBPL',
+        # IFS says EST, PLN *and* ACT can use MtD
+        is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
     )
 
     # EOSP UC 34
@@ -128,6 +137,7 @@ def declare_timestamps():
         'Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution',
         'jit1_1',
         vessel_position_requirement=OPTIONAL,
+        is_miles_to_destination_relevant=True,
     )
 
     # AT All fast UC 42 + Gangway Down and Safe UC 43
@@ -405,35 +415,29 @@ def declare_timestamps():
         include_phase_in_name=True,
         event_location_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         vessel_position_requirement=OPTIONAL,
+        # All except REQ has MtD in the IFS (even ATD-Anchorage, which seems weird)
+        is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True))
     )
 
     # ATY Anchorage OPS UC 97 + 98
-    generate_special_timestamp(
-        'ATS Anchorage Ops',
-        PUBLISHER_PATTERN_CA2ATH,
-        'ARRI',
-        'ANCH',
-        NULL_VALUE,
-        "Other Services - Anchorage Planning And Execution",
-        'jit1_2',
-        'ANCO',
-        vessel_position_requirement=OPTIONAL,
-        event_location_requirement=REQUIRED,
-    )
+    # NB: The names / ops code seems weird (e.g., ATS vs. ARRI). Have emailed Charles about it.
+    for name, ops_code in [('ATS Anchorage Ops', 'ARRI'),
+                           ('ATC Anchorage Ops', 'DEPA')]:
 
-    #ATC Anchorage OPS UC 98
-    generate_special_timestamp(
-        'ATC Anchorage Ops',
-        PUBLISHER_PATTERN_CA2ATH,
-        'DEPA',
-        'ANCH',
-        NULL_VALUE,
-        "Other Services - Anchorage Planning And Execution",
-        'jit1_2',
-        'ANCO',
-        vessel_position_requirement=OPTIONAL,
-        event_location_requirement=REQUIRED,
-    )
+        generate_special_timestamp(
+            name,
+            PUBLISHER_PATTERN_CA2ATH,
+            ops_code,
+            'ANCH',
+            NULL_VALUE,
+            "Other Services - Anchorage Planning And Execution",
+            'jit1_2',
+            'ANCO',
+            vessel_position_requirement=OPTIONAL,
+            event_location_requirement=REQUIRED,
+            is_miles_to_destination_relevant=True,
+        )
+
 
     #Sludge UC 99 106
     generic_xty_timestamps(
@@ -483,8 +487,8 @@ def declare_timestamps():
     )
 
 
-def ifelse(if_one_of: Union[List[str], str], value: 'T', else_value: 'T') -> Dict[str, 'T']:
-    if isinstance(if_one_of, str):
+def ifelse(if_one_of: Union[List['R'], 'R'], value: 'T', else_value: 'T') -> Dict['R', 'T']:
+    if not isinstance(if_one_of, list):
         if_one_of = [if_one_of]
     d = defaultdict(lambda: else_value)
     d.update(zip(if_one_of, repeat(value)))
@@ -511,6 +515,7 @@ FIELDS_ORDER = [
     'eventLocationRequirement',
     'isTerminalNeeded',
     'vesselPositionRequirement',
+    'isMilesToDestinationRelevant',
     'providedInStandard',
     COLUMN_ACCEPT_TS,
     COLUMN_REJECT_TS,
@@ -607,11 +612,12 @@ select_operations_event_type_code = operator.attrgetter('operations_event_type_c
 select_port_call_phase_type_code = operator.attrgetter('port_call_phase_type_code')
 
 
-T = TypeVar('T', str, List[str], List['PublisherPattern'])
+T = TypeVar('T', bool, str, List[str], List['PublisherPattern'])
+R = TypeVar('R')
 
 
 def as_condition(v: Union[T, "GetItemProtocol[T]"]) -> "GetItemProtocol[T]":
-    if isinstance(v, (str, list)):
+    if isinstance(v, (bool, str, list)):
         return Unconditionally(v)
     return v
 
@@ -628,6 +634,10 @@ def operations_event_type_code_matches(values):
     return IfValueMatchesCondition(select_operations_event_type_code, values)
 
 
+def event_classifier_and_operations_event_type_code_matches(values):
+    return IfValueMatchesCondition(lambda t: (t.event_classifier_code, t.operations_event_type_code), values)
+
+
 class GetItemProtocol(Protocol[T]):
 
     def __getitem__(self, item: TimestampDetail) -> T:
@@ -635,8 +645,8 @@ class GetItemProtocol(Protocol[T]):
         pass
 
 
-class IfValueMatchesCondition(Generic[T]):
-    def __init__(self, attrgetter: Callable[[TimestampDetail], str], values: Mapping[str, T]):
+class IfValueMatchesCondition(Generic[T, R]):
+    def __init__(self, attrgetter: Callable[[TimestampDetail], R], values: Mapping[R, T]):
         self._attrgetter = attrgetter
         self._values = values
 
@@ -787,6 +797,7 @@ def xty_service_timestamps(
         operations_event_type_codes=None,
         is_cancelable: bool = True,
         include_implicit_phase_in_name: Optional[bool] = None,
+        is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
 ):
     if operations_event_type_codes is None:
         if is_cancelable:
@@ -812,6 +823,7 @@ def xty_service_timestamps(
                 event_location_requirement=event_location_requirement,
                 include_implicit_phase_in_name=include_implicit_phase_in_name,
                 include_facility_type_in_name=len(facility_type_codes) > 1,
+                is_miles_to_destination_relevant=is_miles_to_destination_relevant,
             )
 
 
@@ -828,7 +840,7 @@ def generate_special_timestamp(
         vessel_position_requirement: str = EXCLUDED,
         event_location_requirement: str = EXCLUDED,
         negotiation_cycle: str = 'Special',
-
+        is_miles_to_destination_relevant=False,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
     _ensure_known(port_call_part, VALID_PORT_CALL_PARTS, "portCallPart")
@@ -851,7 +863,8 @@ def generate_special_timestamp(
         provided_in_standard,
         publisher_pattern,
         negotiation_cycle,  # negotiation cycle
-        is_pattern_timestamp=False
+        is_pattern_timestamp=False,
+        is_miles_to_destination_relevant=is_miles_to_destination_relevant,
     )
 
 
@@ -903,6 +916,7 @@ def generic_xty_timestamps(
         vessel_position_requirement: Union[str, "GetItemProtocol[str]"] = EXCLUDED,
         include_implicit_phase_in_name: Optional[bool] = None,
         negotiation_cycle: Optional[str] = None,
+        is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
 ):
 
     if include_implicit_phase_in_name is None:
@@ -919,6 +933,7 @@ def generic_xty_timestamps(
     vessel_position_requirement = as_condition(vessel_position_requirement)
 
     initial_publisher_pattern = as_condition(initial_publisher_pattern)
+    is_miles_to_destination_relevant = as_condition(is_miles_to_destination_relevant)
 
     if negotiation_cycle is None:
         negotiation_cycle_prefix = 'T-'
@@ -986,6 +1001,7 @@ def generic_xty_timestamps(
 
         ts_event_location_requirement = event_location_requirement[timestamp_detail]
         ts_vessel_position_requirement = vessel_position_requirement[timestamp_detail]
+        ts_is_miles_to_destination_relevant = is_miles_to_destination_relevant[timestamp_detail]
 
         _make_timestamp(
             full_name,
@@ -1001,7 +1017,8 @@ def generic_xty_timestamps(
             publisher_pattern,
             ts_negotiation_cycle,
             # 'CANC' does not follow the pattern.
-            is_pattern_timestamp=timestamp_detail.operations_event_type_code != 'CANC'
+            is_pattern_timestamp=timestamp_detail.operations_event_type_code != 'CANC',
+            is_miles_to_destination_relevant=ts_is_miles_to_destination_relevant,
         )
 
 
@@ -1053,6 +1070,7 @@ def _make_timestamp(timestamp_name,
                     publisher_pattern,
                     negotiation_cycle,
                     is_pattern_timestamp=False,
+                    is_miles_to_destination_relevant=False,
                     ):
 
     if timestamp_name in TS_NOT_IN_STANDARD:
@@ -1070,6 +1088,7 @@ def _make_timestamp(timestamp_name,
         event_location_requirement,
         facility_type_code == 'BRTH',  # isTerminalNeeded
         vessel_position_requirement,  # vesselPositionRequirement
+        is_miles_to_destination_relevant,
         provided_in_standard,  # providedInStandard
         NULL_VALUE,  # acceptTimestampDefinition
         NULL_VALUE,  # rejectTimestampDefinition
