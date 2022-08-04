@@ -201,7 +201,7 @@ def declare_timestamps():
     # Vessel Readiness for Cargo ops UC 45
     generate_special_timestamp(
         'Vessel Readiness for Cargo operations [JIT 1.2]',
-        PUBLISHER_PATTERN_CA2ATH,
+        PUBLISHER_PATTERN_CA2TR,
         'ARRI',
         'BRTH',
         'ALGS',
@@ -213,7 +213,7 @@ def declare_timestamps():
     )
     generate_special_timestamp(
         'Vessel Readiness for Cargo operations [JIT 1.1]',
-        PUBLISHER_PATTERN_CA2ATH,
+        PUBLISHER_PATTERN_CA2TR,
         'ARRI',
         'BRTH',
         'ALGS',
@@ -408,7 +408,7 @@ def declare_timestamps():
     #ATC Lashing UC 78
     generate_special_timestamp(
         'ATC Lashing',
-        as_publisher_patterns(['MOR'], ['CA']),
+        as_publisher_patterns(['LSH'], ['CA']),
         'CMPL',
         'BRTH',
         'ALGS',
@@ -773,13 +773,13 @@ SERVICE_TYPE_CODE2INFO = {
     'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
     'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
-    'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], CARRIER_ROLES)),
+    'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], ['ATH'])),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
-    'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], CARRIER_ROLES)),
-    'TOWG': ServiceTypeInfo('Towage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['TWG'], CARRIER_ROLES)),
+    'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], ['ATH'])),
+    'TOWG': ServiceTypeInfo('Towage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['TWG'], ['ATH'])),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SVP'], CARRIER_ROLES)),
+    'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(CARRIER_ROLES, ['ATH'])),
+    'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SLU'], CARRIER_ROLES)),
     # Services that do not have a clear-cut service name (including "null")
     'SAFE': UNNAMED,
     'FAST': UNNAMED,

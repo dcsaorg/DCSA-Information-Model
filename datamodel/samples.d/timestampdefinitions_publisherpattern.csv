@@ -39,7 +39,7 @@ ATA-PBPL (<implicit>),VSL2ATH
 ATC Anchorage Ops,AG2ATH
 ATC Anchorage Ops,CA2ATH
 ATC Anchorage Ops,VSL2ATH
-ATC Lashing,MOR2CA
+ATC Lashing,LSH2CA
 ATC cargo ops Load,TR2AG
 ATC cargo ops Load,TR2CA
 ATC cargo ops Load,TR2VSL
@@ -73,48 +73,20 @@ ATC-Cargo Ops,TR2AG
 ATC-Cargo Ops,TR2CA
 ATC-Cargo Ops,TR2VSL
 ATC-Cargo Ops,VSL2TR
-ATC-Mooring (<implicit>),AG2MOR
-ATC-Mooring (<implicit>),CA2MOR
-ATC-Mooring (<implicit>),MOR2AG
-ATC-Mooring (<implicit>),MOR2CA
-ATC-Mooring (<implicit>),MOR2VSL
-ATC-Mooring (<implicit>),VSL2MOR
-ATC-Mooring (Inbound),AG2MOR
-ATC-Mooring (Inbound),CA2MOR
-ATC-Mooring (Inbound),MOR2AG
-ATC-Mooring (Inbound),MOR2CA
-ATC-Mooring (Inbound),MOR2VSL
-ATC-Mooring (Inbound),VSL2MOR
-ATC-Mooring (Outbound),AG2MOR
-ATC-Mooring (Outbound),CA2MOR
-ATC-Mooring (Outbound),MOR2AG
-ATC-Mooring (Outbound),MOR2CA
-ATC-Mooring (Outbound),MOR2VSL
-ATC-Mooring (Outbound),VSL2MOR
-ATC-Pilotage (<implicit>),AG2PLT
-ATC-Pilotage (<implicit>),CA2PLT
-ATC-Pilotage (<implicit>),PLT2AG
-ATC-Pilotage (<implicit>),PLT2CA
-ATC-Pilotage (<implicit>),PLT2VSL
-ATC-Pilotage (<implicit>),VSL2PLT
-ATC-Pilotage (Inbound),AG2PLT
-ATC-Pilotage (Inbound),CA2PLT
-ATC-Pilotage (Inbound),PLT2AG
-ATC-Pilotage (Inbound),PLT2CA
-ATC-Pilotage (Inbound),PLT2VSL
-ATC-Pilotage (Inbound),VSL2PLT
-ATC-Pilotage (Outbound),AG2PLT
-ATC-Pilotage (Outbound),CA2PLT
-ATC-Pilotage (Outbound),PLT2AG
-ATC-Pilotage (Outbound),PLT2CA
-ATC-Pilotage (Outbound),PLT2VSL
-ATC-Pilotage (Outbound),VSL2PLT
-ATC-Pilotage (Shifting),AG2PLT
-ATC-Pilotage (Shifting),CA2PLT
-ATC-Pilotage (Shifting),PLT2AG
-ATC-Pilotage (Shifting),PLT2CA
-ATC-Pilotage (Shifting),PLT2VSL
-ATC-Pilotage (Shifting),VSL2PLT
+ATC-Mooring (<implicit>),ATH2MOR
+ATC-Mooring (<implicit>),MOR2ATH
+ATC-Mooring (Inbound),ATH2MOR
+ATC-Mooring (Inbound),MOR2ATH
+ATC-Mooring (Outbound),ATH2MOR
+ATC-Mooring (Outbound),MOR2ATH
+ATC-Pilotage (<implicit>),ATH2PLT
+ATC-Pilotage (<implicit>),PLT2ATH
+ATC-Pilotage (Inbound),ATH2PLT
+ATC-Pilotage (Inbound),PLT2ATH
+ATC-Pilotage (Outbound),ATH2PLT
+ATC-Pilotage (Outbound),PLT2ATH
+ATC-Pilotage (Shifting),ATH2PLT
+ATC-Pilotage (Shifting),PLT2ATH
 ATC-Shore Power,AG2SVP
 ATC-Shore Power,CA2SVP
 ATC-Shore Power,SVP2AG
@@ -123,30 +95,14 @@ ATC-Shore Power,SVP2VSL
 ATC-Shore Power,VSL2SVP
 ATC-Sludge,CA2SVP
 ATC-Sludge,SVP2CA
-ATC-Towage (<implicit>),AG2TWG
-ATC-Towage (<implicit>),CA2TWG
-ATC-Towage (<implicit>),TWG2AG
-ATC-Towage (<implicit>),TWG2CA
-ATC-Towage (<implicit>),TWG2VSL
-ATC-Towage (<implicit>),VSL2TWG
-ATC-Towage (Inbound),AG2TWG
-ATC-Towage (Inbound),CA2TWG
-ATC-Towage (Inbound),TWG2AG
-ATC-Towage (Inbound),TWG2CA
-ATC-Towage (Inbound),TWG2VSL
-ATC-Towage (Inbound),VSL2TWG
-ATC-Towage (Outbound),AG2TWG
-ATC-Towage (Outbound),CA2TWG
-ATC-Towage (Outbound),TWG2AG
-ATC-Towage (Outbound),TWG2CA
-ATC-Towage (Outbound),TWG2VSL
-ATC-Towage (Outbound),VSL2TWG
-ATC-Towage (Shifting),AG2TWG
-ATC-Towage (Shifting),CA2TWG
-ATC-Towage (Shifting),TWG2AG
-ATC-Towage (Shifting),TWG2CA
-ATC-Towage (Shifting),TWG2VSL
-ATC-Towage (Shifting),VSL2TWG
+ATC-Towage (<implicit>),ATH2TWG
+ATC-Towage (<implicit>),TWG2ATH
+ATC-Towage (Inbound),ATH2TWG
+ATC-Towage (Inbound),TWG2ATH
+ATC-Towage (Outbound),ATH2TWG
+ATC-Towage (Outbound),TWG2ATH
+ATC-Towage (Shifting),ATH2TWG
+ATC-Towage (Shifting),TWG2ATH
 ATD-Anchorage (<implicit>),AG2ATH
 ATD-Anchorage (<implicit>),ATH2AG
 ATD-Anchorage (<implicit>),ATH2CA
@@ -213,48 +169,20 @@ ATS-Cargo Ops (<implicit>),TR2AG
 ATS-Cargo Ops (<implicit>),TR2CA
 ATS-Cargo Ops (<implicit>),TR2VSL
 ATS-Cargo Ops (<implicit>),VSL2TR
-ATS-Mooring (<implicit>),AG2MOR
-ATS-Mooring (<implicit>),CA2MOR
-ATS-Mooring (<implicit>),MOR2AG
-ATS-Mooring (<implicit>),MOR2CA
-ATS-Mooring (<implicit>),MOR2VSL
-ATS-Mooring (<implicit>),VSL2MOR
-ATS-Mooring (Inbound),AG2MOR
-ATS-Mooring (Inbound),CA2MOR
-ATS-Mooring (Inbound),MOR2AG
-ATS-Mooring (Inbound),MOR2CA
-ATS-Mooring (Inbound),MOR2VSL
-ATS-Mooring (Inbound),VSL2MOR
-ATS-Mooring (Outbound),AG2MOR
-ATS-Mooring (Outbound),CA2MOR
-ATS-Mooring (Outbound),MOR2AG
-ATS-Mooring (Outbound),MOR2CA
-ATS-Mooring (Outbound),MOR2VSL
-ATS-Mooring (Outbound),VSL2MOR
-ATS-Pilotage (<implicit>),AG2PLT
-ATS-Pilotage (<implicit>),CA2PLT
-ATS-Pilotage (<implicit>),PLT2AG
-ATS-Pilotage (<implicit>),PLT2CA
-ATS-Pilotage (<implicit>),PLT2VSL
-ATS-Pilotage (<implicit>),VSL2PLT
-ATS-Pilotage (Inbound),AG2PLT
-ATS-Pilotage (Inbound),CA2PLT
-ATS-Pilotage (Inbound),PLT2AG
-ATS-Pilotage (Inbound),PLT2CA
-ATS-Pilotage (Inbound),PLT2VSL
-ATS-Pilotage (Inbound),VSL2PLT
-ATS-Pilotage (Outbound),AG2PLT
-ATS-Pilotage (Outbound),CA2PLT
-ATS-Pilotage (Outbound),PLT2AG
-ATS-Pilotage (Outbound),PLT2CA
-ATS-Pilotage (Outbound),PLT2VSL
-ATS-Pilotage (Outbound),VSL2PLT
-ATS-Pilotage (Shifting),AG2PLT
-ATS-Pilotage (Shifting),CA2PLT
-ATS-Pilotage (Shifting),PLT2AG
-ATS-Pilotage (Shifting),PLT2CA
-ATS-Pilotage (Shifting),PLT2VSL
-ATS-Pilotage (Shifting),VSL2PLT
+ATS-Mooring (<implicit>),ATH2MOR
+ATS-Mooring (<implicit>),MOR2ATH
+ATS-Mooring (Inbound),ATH2MOR
+ATS-Mooring (Inbound),MOR2ATH
+ATS-Mooring (Outbound),ATH2MOR
+ATS-Mooring (Outbound),MOR2ATH
+ATS-Pilotage (<implicit>),ATH2PLT
+ATS-Pilotage (<implicit>),PLT2ATH
+ATS-Pilotage (Inbound),ATH2PLT
+ATS-Pilotage (Inbound),PLT2ATH
+ATS-Pilotage (Outbound),ATH2PLT
+ATS-Pilotage (Outbound),PLT2ATH
+ATS-Pilotage (Shifting),ATH2PLT
+ATS-Pilotage (Shifting),PLT2ATH
 ATS-Shore Power,AG2SVP
 ATS-Shore Power,CA2SVP
 ATS-Shore Power,SVP2AG
@@ -263,30 +191,14 @@ ATS-Shore Power,SVP2VSL
 ATS-Shore Power,VSL2SVP
 ATS-Sludge,CA2SVP
 ATS-Sludge,SVP2CA
-ATS-Towage (<implicit>),AG2TWG
-ATS-Towage (<implicit>),CA2TWG
-ATS-Towage (<implicit>),TWG2AG
-ATS-Towage (<implicit>),TWG2CA
-ATS-Towage (<implicit>),TWG2VSL
-ATS-Towage (<implicit>),VSL2TWG
-ATS-Towage (Inbound),AG2TWG
-ATS-Towage (Inbound),CA2TWG
-ATS-Towage (Inbound),TWG2AG
-ATS-Towage (Inbound),TWG2CA
-ATS-Towage (Inbound),TWG2VSL
-ATS-Towage (Inbound),VSL2TWG
-ATS-Towage (Outbound),AG2TWG
-ATS-Towage (Outbound),CA2TWG
-ATS-Towage (Outbound),TWG2AG
-ATS-Towage (Outbound),TWG2CA
-ATS-Towage (Outbound),TWG2VSL
-ATS-Towage (Outbound),VSL2TWG
-ATS-Towage (Shifting),AG2TWG
-ATS-Towage (Shifting),CA2TWG
-ATS-Towage (Shifting),TWG2AG
-ATS-Towage (Shifting),TWG2CA
-ATS-Towage (Shifting),TWG2VSL
-ATS-Towage (Shifting),VSL2TWG
+ATS-Towage (<implicit>),ATH2TWG
+ATS-Towage (<implicit>),TWG2ATH
+ATS-Towage (Inbound),ATH2TWG
+ATS-Towage (Inbound),TWG2ATH
+ATS-Towage (Outbound),ATH2TWG
+ATS-Towage (Outbound),TWG2ATH
+ATS-Towage (Shifting),ATH2TWG
+ATS-Towage (Shifting),TWG2ATH
 Cancel Bunkering@Anchorage,BUK2AG
 Cancel Bunkering@Anchorage,BUK2CA
 Cancel Bunkering@Anchorage,BUK2VSL
@@ -305,39 +217,17 @@ Cancel Cargo Ops,TR2AG
 Cancel Cargo Ops,TR2CA
 Cancel Cargo Ops,TR2VSL
 Cancel Cargo Ops,VSL2TR
-Cancel Mooring (<implicit>),MOR2AG
-Cancel Mooring (<implicit>),MOR2CA
-Cancel Mooring (<implicit>),MOR2VSL
-Cancel Mooring (Inbound),MOR2AG
-Cancel Mooring (Inbound),MOR2CA
-Cancel Mooring (Inbound),MOR2VSL
-Cancel Mooring (Outbound),MOR2AG
-Cancel Mooring (Outbound),MOR2CA
-Cancel Mooring (Outbound),MOR2VSL
-Cancel Pilotage (<implicit>),PLT2AG
-Cancel Pilotage (<implicit>),PLT2CA
-Cancel Pilotage (<implicit>),PLT2VSL
-Cancel Pilotage (Inbound),PLT2AG
-Cancel Pilotage (Inbound),PLT2CA
-Cancel Pilotage (Inbound),PLT2VSL
-Cancel Pilotage (Outbound),PLT2AG
-Cancel Pilotage (Outbound),PLT2CA
-Cancel Pilotage (Outbound),PLT2VSL
-Cancel Pilotage (Shifting),PLT2AG
-Cancel Pilotage (Shifting),PLT2CA
-Cancel Pilotage (Shifting),PLT2VSL
-Cancel Towage (<implicit>),TWG2AG
-Cancel Towage (<implicit>),TWG2CA
-Cancel Towage (<implicit>),TWG2VSL
-Cancel Towage (Inbound),TWG2AG
-Cancel Towage (Inbound),TWG2CA
-Cancel Towage (Inbound),TWG2VSL
-Cancel Towage (Outbound),TWG2AG
-Cancel Towage (Outbound),TWG2CA
-Cancel Towage (Outbound),TWG2VSL
-Cancel Towage (Shifting),TWG2AG
-Cancel Towage (Shifting),TWG2CA
-Cancel Towage (Shifting),TWG2VSL
+Cancel Mooring (<implicit>),MOR2ATH
+Cancel Mooring (Inbound),MOR2ATH
+Cancel Mooring (Outbound),MOR2ATH
+Cancel Pilotage (<implicit>),PLT2ATH
+Cancel Pilotage (Inbound),PLT2ATH
+Cancel Pilotage (Outbound),PLT2ATH
+Cancel Pilotage (Shifting),PLT2ATH
+Cancel Towage (<implicit>),TWG2ATH
+Cancel Towage (Inbound),TWG2ATH
+Cancel Towage (Outbound),TWG2ATH
+Cancel Towage (Shifting),TWG2ATH
 ESOP,AG2ATH
 ESOP,CA2ATH
 ESOP,VSL2ATH
@@ -371,40 +261,18 @@ ETC-Bunkering@Berth (<implicit>),BUK2VSL
 ETC-Cargo Ops,TR2AG
 ETC-Cargo Ops,TR2CA
 ETC-Cargo Ops,TR2VSL
-ETC-Mooring (<implicit>),MOR2AG
-ETC-Mooring (<implicit>),MOR2CA
-ETC-Mooring (<implicit>),MOR2VSL
-ETC-Mooring (Inbound),MOR2AG
-ETC-Mooring (Inbound),MOR2CA
-ETC-Mooring (Inbound),MOR2VSL
-ETC-Mooring (Outbound),MOR2AG
-ETC-Mooring (Outbound),MOR2CA
-ETC-Mooring (Outbound),MOR2VSL
-ETC-Pilotage (<implicit>),PLT2AG
-ETC-Pilotage (<implicit>),PLT2CA
-ETC-Pilotage (<implicit>),PLT2VSL
-ETC-Pilotage (Inbound),PLT2AG
-ETC-Pilotage (Inbound),PLT2CA
-ETC-Pilotage (Inbound),PLT2VSL
-ETC-Pilotage (Outbound),PLT2AG
-ETC-Pilotage (Outbound),PLT2CA
-ETC-Pilotage (Outbound),PLT2VSL
-ETC-Pilotage (Shifting),PLT2AG
-ETC-Pilotage (Shifting),PLT2CA
-ETC-Pilotage (Shifting),PLT2VSL
+ETC-Mooring (<implicit>),MOR2ATH
+ETC-Mooring (Inbound),MOR2ATH
+ETC-Mooring (Outbound),MOR2ATH
+ETC-Pilotage (<implicit>),PLT2ATH
+ETC-Pilotage (Inbound),PLT2ATH
+ETC-Pilotage (Outbound),PLT2ATH
+ETC-Pilotage (Shifting),PLT2ATH
 ETC-Sludge,CA2SVP
-ETC-Towage (<implicit>),TWG2AG
-ETC-Towage (<implicit>),TWG2CA
-ETC-Towage (<implicit>),TWG2VSL
-ETC-Towage (Inbound),TWG2AG
-ETC-Towage (Inbound),TWG2CA
-ETC-Towage (Inbound),TWG2VSL
-ETC-Towage (Outbound),TWG2AG
-ETC-Towage (Outbound),TWG2CA
-ETC-Towage (Outbound),TWG2VSL
-ETC-Towage (Shifting),TWG2AG
-ETC-Towage (Shifting),TWG2CA
-ETC-Towage (Shifting),TWG2VSL
+ETC-Towage (<implicit>),TWG2ATH
+ETC-Towage (Inbound),TWG2ATH
+ETC-Towage (Outbound),TWG2ATH
+ETC-Towage (Shifting),TWG2ATH
 ETD-Anchorage (<implicit>),AG2ATH
 ETD-Anchorage (<implicit>),CA2ATH
 ETD-Anchorage (<implicit>),VSL2ATH
@@ -432,40 +300,18 @@ ETS-Cargo Ops,TR2VSL
 ETS-Cargo Ops (<implicit>),TR2AG
 ETS-Cargo Ops (<implicit>),TR2CA
 ETS-Cargo Ops (<implicit>),TR2VSL
-ETS-Mooring (<implicit>),MOR2AG
-ETS-Mooring (<implicit>),MOR2CA
-ETS-Mooring (<implicit>),MOR2VSL
-ETS-Mooring (Inbound),MOR2AG
-ETS-Mooring (Inbound),MOR2CA
-ETS-Mooring (Inbound),MOR2VSL
-ETS-Mooring (Outbound),MOR2AG
-ETS-Mooring (Outbound),MOR2CA
-ETS-Mooring (Outbound),MOR2VSL
-ETS-Pilotage (<implicit>),PLT2AG
-ETS-Pilotage (<implicit>),PLT2CA
-ETS-Pilotage (<implicit>),PLT2VSL
-ETS-Pilotage (Inbound),PLT2AG
-ETS-Pilotage (Inbound),PLT2CA
-ETS-Pilotage (Inbound),PLT2VSL
-ETS-Pilotage (Outbound),PLT2AG
-ETS-Pilotage (Outbound),PLT2CA
-ETS-Pilotage (Outbound),PLT2VSL
-ETS-Pilotage (Shifting),PLT2AG
-ETS-Pilotage (Shifting),PLT2CA
-ETS-Pilotage (Shifting),PLT2VSL
+ETS-Mooring (<implicit>),MOR2ATH
+ETS-Mooring (Inbound),MOR2ATH
+ETS-Mooring (Outbound),MOR2ATH
+ETS-Pilotage (<implicit>),PLT2ATH
+ETS-Pilotage (Inbound),PLT2ATH
+ETS-Pilotage (Outbound),PLT2ATH
+ETS-Pilotage (Shifting),PLT2ATH
 ETS-Sludge,CA2SVP
-ETS-Towage (<implicit>),TWG2AG
-ETS-Towage (<implicit>),TWG2CA
-ETS-Towage (<implicit>),TWG2VSL
-ETS-Towage (Inbound),TWG2AG
-ETS-Towage (Inbound),TWG2CA
-ETS-Towage (Inbound),TWG2VSL
-ETS-Towage (Outbound),TWG2AG
-ETS-Towage (Outbound),TWG2CA
-ETS-Towage (Outbound),TWG2VSL
-ETS-Towage (Shifting),TWG2AG
-ETS-Towage (Shifting),TWG2CA
-ETS-Towage (Shifting),TWG2VSL
+ETS-Towage (<implicit>),TWG2ATH
+ETS-Towage (Inbound),TWG2ATH
+ETS-Towage (Outbound),TWG2ATH
+ETS-Towage (Shifting),TWG2ATH
 Gangway Down and Safe,AG2ATH
 Gangway Down and Safe,CA2ATH
 Gangway Down and Safe,VSL2ATH
@@ -502,40 +348,18 @@ PTC-Bunkering@Berth (<implicit>),BUK2VSL
 PTC-Cargo Ops,TR2AG
 PTC-Cargo Ops,TR2CA
 PTC-Cargo Ops,TR2VSL
-PTC-Mooring (<implicit>),MOR2AG
-PTC-Mooring (<implicit>),MOR2CA
-PTC-Mooring (<implicit>),MOR2VSL
-PTC-Mooring (Inbound),MOR2AG
-PTC-Mooring (Inbound),MOR2CA
-PTC-Mooring (Inbound),MOR2VSL
-PTC-Mooring (Outbound),MOR2AG
-PTC-Mooring (Outbound),MOR2CA
-PTC-Mooring (Outbound),MOR2VSL
-PTC-Pilotage (<implicit>),PLT2AG
-PTC-Pilotage (<implicit>),PLT2CA
-PTC-Pilotage (<implicit>),PLT2VSL
-PTC-Pilotage (Inbound),PLT2AG
-PTC-Pilotage (Inbound),PLT2CA
-PTC-Pilotage (Inbound),PLT2VSL
-PTC-Pilotage (Outbound),PLT2AG
-PTC-Pilotage (Outbound),PLT2CA
-PTC-Pilotage (Outbound),PLT2VSL
-PTC-Pilotage (Shifting),PLT2AG
-PTC-Pilotage (Shifting),PLT2CA
-PTC-Pilotage (Shifting),PLT2VSL
+PTC-Mooring (<implicit>),MOR2ATH
+PTC-Mooring (Inbound),MOR2ATH
+PTC-Mooring (Outbound),MOR2ATH
+PTC-Pilotage (<implicit>),PLT2ATH
+PTC-Pilotage (Inbound),PLT2ATH
+PTC-Pilotage (Outbound),PLT2ATH
+PTC-Pilotage (Shifting),PLT2ATH
 PTC-Sludge,CA2SVP
-PTC-Towage (<implicit>),TWG2AG
-PTC-Towage (<implicit>),TWG2CA
-PTC-Towage (<implicit>),TWG2VSL
-PTC-Towage (Inbound),TWG2AG
-PTC-Towage (Inbound),TWG2CA
-PTC-Towage (Inbound),TWG2VSL
-PTC-Towage (Outbound),TWG2AG
-PTC-Towage (Outbound),TWG2CA
-PTC-Towage (Outbound),TWG2VSL
-PTC-Towage (Shifting),TWG2AG
-PTC-Towage (Shifting),TWG2CA
-PTC-Towage (Shifting),TWG2VSL
+PTC-Towage (<implicit>),TWG2ATH
+PTC-Towage (Inbound),TWG2ATH
+PTC-Towage (Outbound),TWG2ATH
+PTC-Towage (Shifting),TWG2ATH
 PTD-Anchorage (<implicit>),AG2ATH
 PTD-Anchorage (<implicit>),CA2ATH
 PTD-Anchorage (<implicit>),VSL2ATH
@@ -563,40 +387,18 @@ PTS-Cargo Ops,TR2VSL
 PTS-Cargo Ops (<implicit>),TR2AG
 PTS-Cargo Ops (<implicit>),TR2CA
 PTS-Cargo Ops (<implicit>),TR2VSL
-PTS-Mooring (<implicit>),MOR2AG
-PTS-Mooring (<implicit>),MOR2CA
-PTS-Mooring (<implicit>),MOR2VSL
-PTS-Mooring (Inbound),MOR2AG
-PTS-Mooring (Inbound),MOR2CA
-PTS-Mooring (Inbound),MOR2VSL
-PTS-Mooring (Outbound),MOR2AG
-PTS-Mooring (Outbound),MOR2CA
-PTS-Mooring (Outbound),MOR2VSL
-PTS-Pilotage (<implicit>),PLT2AG
-PTS-Pilotage (<implicit>),PLT2CA
-PTS-Pilotage (<implicit>),PLT2VSL
-PTS-Pilotage (Inbound),PLT2AG
-PTS-Pilotage (Inbound),PLT2CA
-PTS-Pilotage (Inbound),PLT2VSL
-PTS-Pilotage (Outbound),PLT2AG
-PTS-Pilotage (Outbound),PLT2CA
-PTS-Pilotage (Outbound),PLT2VSL
-PTS-Pilotage (Shifting),PLT2AG
-PTS-Pilotage (Shifting),PLT2CA
-PTS-Pilotage (Shifting),PLT2VSL
+PTS-Mooring (<implicit>),MOR2ATH
+PTS-Mooring (Inbound),MOR2ATH
+PTS-Mooring (Outbound),MOR2ATH
+PTS-Pilotage (<implicit>),PLT2ATH
+PTS-Pilotage (Inbound),PLT2ATH
+PTS-Pilotage (Outbound),PLT2ATH
+PTS-Pilotage (Shifting),PLT2ATH
 PTS-Sludge,CA2SVP
-PTS-Towage (<implicit>),TWG2AG
-PTS-Towage (<implicit>),TWG2CA
-PTS-Towage (<implicit>),TWG2VSL
-PTS-Towage (Inbound),TWG2AG
-PTS-Towage (Inbound),TWG2CA
-PTS-Towage (Inbound),TWG2VSL
-PTS-Towage (Outbound),TWG2AG
-PTS-Towage (Outbound),TWG2CA
-PTS-Towage (Outbound),TWG2VSL
-PTS-Towage (Shifting),TWG2AG
-PTS-Towage (Shifting),TWG2CA
-PTS-Towage (Shifting),TWG2VSL
+PTS-Towage (<implicit>),TWG2ATH
+PTS-Towage (Inbound),TWG2ATH
+PTS-Towage (Outbound),TWG2ATH
+PTS-Towage (Shifting),TWG2ATH
 RTA-Anchorage (<implicit>),ATH2AG
 RTA-Anchorage (<implicit>),ATH2CA
 RTA-Anchorage (<implicit>),ATH2VSL
@@ -627,40 +429,18 @@ RTC-Bunkering@Berth (<implicit>),VSL2BUK
 RTC-Cargo Ops,AG2TR
 RTC-Cargo Ops,CA2TR
 RTC-Cargo Ops,VSL2TR
-RTC-Mooring (<implicit>),AG2MOR
-RTC-Mooring (<implicit>),CA2MOR
-RTC-Mooring (<implicit>),VSL2MOR
-RTC-Mooring (Inbound),AG2MOR
-RTC-Mooring (Inbound),CA2MOR
-RTC-Mooring (Inbound),VSL2MOR
-RTC-Mooring (Outbound),AG2MOR
-RTC-Mooring (Outbound),CA2MOR
-RTC-Mooring (Outbound),VSL2MOR
-RTC-Pilotage (<implicit>),AG2PLT
-RTC-Pilotage (<implicit>),CA2PLT
-RTC-Pilotage (<implicit>),VSL2PLT
-RTC-Pilotage (Inbound),AG2PLT
-RTC-Pilotage (Inbound),CA2PLT
-RTC-Pilotage (Inbound),VSL2PLT
-RTC-Pilotage (Outbound),AG2PLT
-RTC-Pilotage (Outbound),CA2PLT
-RTC-Pilotage (Outbound),VSL2PLT
-RTC-Pilotage (Shifting),AG2PLT
-RTC-Pilotage (Shifting),CA2PLT
-RTC-Pilotage (Shifting),VSL2PLT
+RTC-Mooring (<implicit>),ATH2MOR
+RTC-Mooring (Inbound),ATH2MOR
+RTC-Mooring (Outbound),ATH2MOR
+RTC-Pilotage (<implicit>),ATH2PLT
+RTC-Pilotage (Inbound),ATH2PLT
+RTC-Pilotage (Outbound),ATH2PLT
+RTC-Pilotage (Shifting),ATH2PLT
 RTC-Sludge,SVP2CA
-RTC-Towage (<implicit>),AG2TWG
-RTC-Towage (<implicit>),CA2TWG
-RTC-Towage (<implicit>),VSL2TWG
-RTC-Towage (Inbound),AG2TWG
-RTC-Towage (Inbound),CA2TWG
-RTC-Towage (Inbound),VSL2TWG
-RTC-Towage (Outbound),AG2TWG
-RTC-Towage (Outbound),CA2TWG
-RTC-Towage (Outbound),VSL2TWG
-RTC-Towage (Shifting),AG2TWG
-RTC-Towage (Shifting),CA2TWG
-RTC-Towage (Shifting),VSL2TWG
+RTC-Towage (<implicit>),ATH2TWG
+RTC-Towage (Inbound),ATH2TWG
+RTC-Towage (Outbound),ATH2TWG
+RTC-Towage (Shifting),ATH2TWG
 RTD-Anchorage (<implicit>),ATH2AG
 RTD-Anchorage (<implicit>),ATH2CA
 RTD-Anchorage (<implicit>),ATH2VSL
@@ -688,52 +468,30 @@ RTS-Cargo Ops,VSL2TR
 RTS-Cargo Ops (<implicit>),AG2TR
 RTS-Cargo Ops (<implicit>),CA2TR
 RTS-Cargo Ops (<implicit>),VSL2TR
-RTS-Mooring (<implicit>),AG2MOR
-RTS-Mooring (<implicit>),CA2MOR
-RTS-Mooring (<implicit>),VSL2MOR
-RTS-Mooring (Inbound),AG2MOR
-RTS-Mooring (Inbound),CA2MOR
-RTS-Mooring (Inbound),VSL2MOR
-RTS-Mooring (Outbound),AG2MOR
-RTS-Mooring (Outbound),CA2MOR
-RTS-Mooring (Outbound),VSL2MOR
-RTS-Pilotage (<implicit>),AG2PLT
-RTS-Pilotage (<implicit>),CA2PLT
-RTS-Pilotage (<implicit>),VSL2PLT
-RTS-Pilotage (Inbound),AG2PLT
-RTS-Pilotage (Inbound),CA2PLT
-RTS-Pilotage (Inbound),VSL2PLT
-RTS-Pilotage (Outbound),AG2PLT
-RTS-Pilotage (Outbound),CA2PLT
-RTS-Pilotage (Outbound),VSL2PLT
-RTS-Pilotage (Shifting),AG2PLT
-RTS-Pilotage (Shifting),CA2PLT
-RTS-Pilotage (Shifting),VSL2PLT
+RTS-Mooring (<implicit>),ATH2MOR
+RTS-Mooring (Inbound),ATH2MOR
+RTS-Mooring (Outbound),ATH2MOR
+RTS-Pilotage (<implicit>),ATH2PLT
+RTS-Pilotage (Inbound),ATH2PLT
+RTS-Pilotage (Outbound),ATH2PLT
+RTS-Pilotage (Shifting),ATH2PLT
 RTS-Sludge,SVP2CA
-RTS-Towage (<implicit>),AG2TWG
-RTS-Towage (<implicit>),CA2TWG
-RTS-Towage (<implicit>),VSL2TWG
-RTS-Towage (Inbound),AG2TWG
-RTS-Towage (Inbound),CA2TWG
-RTS-Towage (Inbound),VSL2TWG
-RTS-Towage (Outbound),AG2TWG
-RTS-Towage (Outbound),CA2TWG
-RTS-Towage (Outbound),VSL2TWG
-RTS-Towage (Shifting),AG2TWG
-RTS-Towage (Shifting),CA2TWG
-RTS-Towage (Shifting),VSL2TWG
+RTS-Towage (<implicit>),ATH2TWG
+RTS-Towage (Inbound),ATH2TWG
+RTS-Towage (Outbound),ATH2TWG
+RTS-Towage (Shifting),ATH2TWG
 SOSP,AG2ATH
 SOSP,CA2ATH
 SOSP,VSL2ATH
 Terminal Ready for vessel departure,TR2AG
 Terminal Ready for vessel departure,TR2CA
 Terminal Ready for vessel departure,TR2VSL
-Vessel Readiness for Cargo operations [JIT 1.1],AG2ATH
-Vessel Readiness for Cargo operations [JIT 1.1],CA2ATH
-Vessel Readiness for Cargo operations [JIT 1.1],VSL2ATH
-Vessel Readiness for Cargo operations [JIT 1.2],AG2ATH
-Vessel Readiness for Cargo operations [JIT 1.2],CA2ATH
-Vessel Readiness for Cargo operations [JIT 1.2],VSL2ATH
+Vessel Readiness for Cargo operations [JIT 1.1],AG2TR
+Vessel Readiness for Cargo operations [JIT 1.1],CA2TR
+Vessel Readiness for Cargo operations [JIT 1.1],VSL2TR
+Vessel Readiness for Cargo operations [JIT 1.2],AG2TR
+Vessel Readiness for Cargo operations [JIT 1.2],CA2TR
+Vessel Readiness for Cargo operations [JIT 1.2],VSL2TR
 Vessel Ready to sail [JIT 1.1],AG2TR
 Vessel Ready to sail [JIT 1.1],CA2TR
 Vessel Ready to sail [JIT 1.1],VSL2TR
