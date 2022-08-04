@@ -1,0 +1,27 @@
+name: Database backend
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Expected
+      run: |
+        tee expected.txt <<EOF
+        SR00001D: OK
+        SR00002B: OK
+        SR00003H: OK
+        SR00001E: Check number does not match - number implies it should have been "D"
+        SR00002A: Check number does not match - number implies it should have been "B"
+        SR14501A: OK
+        SR40501A: Check number does not match - number implies it should have been "F"
+        EOF
+
+    - name: Actual
+      run: python3 datamodel/samples.d/usr_util.py validate-usr SR00001D SR00002B SR00003H SR00001E SR00002A SR14501A SR40501A > actual.txt
+
+    - name: Comparison
+      run: diff -u expected.txt actual.txt
