@@ -269,9 +269,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     delay_reason_code,
     publisher_role,
     port_call_service_type_code,
-    event_location,
+    event_location_id,
     facility_type_code,
-    publisher
+    publisher_id
 ) VALUES (
     uuid('a0993e06-a222-42ec-816f-ec1d775cfd10'),
     'ACT',
@@ -282,9 +282,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ANA',
     'TR',
     'BUNK',
-    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23',
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd23'::uuid,
     'BRTH',
-    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'::uuid
 ), (
     uuid('03482296-ef9c-11eb-9a03-0242ac130003'),
     'EST',
@@ -295,9 +295,9 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     'ANA',
     'CA',
     'SAFE',
-    '6748a259-fb7e-4f27-9a88-3669e8b9c5f8',
+    '6748a259-fb7e-4f27-9a88-3669e8b9c5f8'::uuid,
     'BRTH',
-    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'
+    'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.vessel_schedule(
