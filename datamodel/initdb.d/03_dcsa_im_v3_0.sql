@@ -235,7 +235,7 @@ CREATE TABLE dcsa_im_v3_0.service (
     carrier_service_code varchar(5),
     carrier_service_name varchar(50),
     tradelane_id varchar(8) NULL REFERENCES dcsa_im_v3_0.tradelane(id),
-    universal_service_reference varchar(8) NULL
+    universal_service_reference varchar(8) NULL CHECK (universal_service_reference ~ '^SR\d{5}[A-Z]$')
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.voyage CASCADE;
