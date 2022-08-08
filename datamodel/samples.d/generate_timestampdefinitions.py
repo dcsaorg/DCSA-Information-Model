@@ -813,7 +813,7 @@ def xty_service_timestamps(
     if include_implicit_phase_in_name is None:
         include_implicit_phase_in_name = len(port_call_phase_type_codes) > 1 and NULL_VALUE in port_call_phase_type_codes
 
-    for port_call_service_type_code in sorted(port_call_service_type_codes):
+    for port_call_service_type_code in port_call_service_type_codes:
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
         for port_call_phase_type_code, operations_event_type_code in product(port_call_phase_type_codes, operations_event_type_codes):
@@ -949,7 +949,7 @@ def generic_xty_timestamps(
     if negotiation_cycle is None:
         negotiation_cycle_prefix = 'T-'
 
-    for timestamp_detail in sorted(
+    for timestamp_detail in (
             TimestampDetail(*x) for x in product(
                 event_classifier_codes,
                 operations_event_type_codes,
@@ -981,15 +981,6 @@ def generic_xty_timestamps(
         )
 
         selected_publisher_pattern = initial_publisher_pattern[timestamp_detail]
-        publisher_pattern = selected_publisher_pattern
-        if timestamp_detail.event_classifier_code == 'REQ':
-            # In the default pattern, REQ reverses publisher and receiver
-            publisher_pattern = [(r, p) for p, r in selected_publisher_pattern]
-        elif timestamp_detail.event_classifier_code == 'ACT':
-            # In the default pattern, anyone is allowed to sent ACT (this also applies to CANC,
-            # where either party can emit the CANC - it happens to work because CANC is always an ACT)
-            publisher_pattern = selected_publisher_pattern.copy()
-            publisher_pattern.extend((r, p) for p, r in selected_publisher_pattern)
         if timestamp_detail.operations_event_type_code == 'CANC':
             full_name = ''.join(('Cancel ', name_stem, facility_type_name_part, phase_name_part))
             if full_name in ALL_TS:
@@ -1006,6 +997,16 @@ def generic_xty_timestamps(
             full_name = ''.join((timestamp_detail.event_classifier_code[0], 'T',
                                  timestamp_detail.operations_event_type_code[0], '-',
                                  name_stem, facility_type_name_part, phase_name_part))
+
+        publisher_pattern = selected_publisher_pattern
+        if timestamp_detail.event_classifier_code == 'REQ':
+            # In the default pattern, REQ reverses publisher and receiver
+            publisher_pattern = [(r, p) for p, r in selected_publisher_pattern]
+        elif timestamp_detail.event_classifier_code == 'ACT':
+            # In the default pattern, anyone is allowed to sent ACT (this also applies to CANC,
+            # where either party can emit the CANC - it happens to work because CANC is always an ACT)
+            publisher_pattern = selected_publisher_pattern.copy()
+            publisher_pattern.extend((r, p) for p, r in selected_publisher_pattern)
 
         ts_negotiation_cycle = negotiation_cycle
         if ts_negotiation_cycle is None:
