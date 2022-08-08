@@ -2,12 +2,12 @@ Timestamp ID,Pattern ID
 AT All fast,AG2ATH
 AT All fast,CA2ATH
 AT All fast,VSL2ATH
-ATA-Anchorage (<implicit>),AG2ATH
-ATA-Anchorage (<implicit>),ATH2AG
-ATA-Anchorage (<implicit>),ATH2CA
-ATA-Anchorage (<implicit>),ATH2VSL
-ATA-Anchorage (<implicit>),CA2ATH
-ATA-Anchorage (<implicit>),VSL2ATH
+ATA-Anchorage,AG2ATH
+ATA-Anchorage,ATH2AG
+ATA-Anchorage,ATH2CA
+ATA-Anchorage,ATH2VSL
+ATA-Anchorage,CA2ATH
+ATA-Anchorage,VSL2ATH
 ATA-Berth,AG2ATH
 ATA-Berth,ATH2AG
 ATA-Berth,ATH2CA
@@ -36,13 +36,16 @@ ATA-PBPL (<implicit>),ATH2CA
 ATA-PBPL (<implicit>),ATH2VSL
 ATA-PBPL (<implicit>),CA2ATH
 ATA-PBPL (<implicit>),VSL2ATH
-ATC Anchorage Ops,AG2ATH
-ATC Anchorage Ops,CA2ATH
-ATC Anchorage Ops,VSL2ATH
 ATC Lashing,LSH2CA
 ATC cargo ops Load,TR2AG
 ATC cargo ops Load,TR2CA
 ATC cargo ops Load,TR2VSL
+ATC-Anchorage Ops,AG2ATH
+ATC-Anchorage Ops,ATH2AG
+ATC-Anchorage Ops,ATH2CA
+ATC-Anchorage Ops,ATH2VSL
+ATC-Anchorage Ops,CA2ATH
+ATC-Anchorage Ops,VSL2ATH
 ATC-Bunkering@Anchorage,AG2BUK
 ATC-Bunkering@Anchorage,BUK2AG
 ATC-Bunkering@Anchorage,BUK2CA
@@ -103,12 +106,12 @@ ATC-Towage (Outbound),ATH2TWG
 ATC-Towage (Outbound),TWG2ATH
 ATC-Towage (Shifting),ATH2TWG
 ATC-Towage (Shifting),TWG2ATH
-ATD-Anchorage (<implicit>),AG2ATH
-ATD-Anchorage (<implicit>),ATH2AG
-ATD-Anchorage (<implicit>),ATH2CA
-ATD-Anchorage (<implicit>),ATH2VSL
-ATD-Anchorage (<implicit>),CA2ATH
-ATD-Anchorage (<implicit>),VSL2ATH
+ATD-Anchorage,AG2ATH
+ATD-Anchorage,ATH2AG
+ATD-Anchorage,ATH2CA
+ATD-Anchorage,ATH2VSL
+ATD-Anchorage,CA2ATH
+ATD-Anchorage,VSL2ATH
 ATD-Berth,AG2ATH
 ATD-Berth,ATH2AG
 ATD-Berth,ATH2CA
@@ -121,9 +124,6 @@ ATD-Berth (<implicit>),ATH2CA
 ATD-Berth (<implicit>),ATH2VSL
 ATD-Berth (<implicit>),CA2ATH
 ATD-Berth (<implicit>),VSL2ATH
-ATS Anchorage Ops,AG2ATH
-ATS Anchorage Ops,CA2ATH
-ATS Anchorage Ops,VSL2ATH
 ATS cargo ops Load,TR2AG
 ATS cargo ops Load,TR2CA
 ATS cargo ops Load,TR2VSL
@@ -133,6 +133,12 @@ ATS cargo ops discharge completed,TR2VSL
 ATS cargo ops discharge start,TR2AG
 ATS cargo ops discharge start,TR2CA
 ATS cargo ops discharge start,TR2VSL
+ATS-Anchorage Ops,AG2ATH
+ATS-Anchorage Ops,ATH2AG
+ATS-Anchorage Ops,ATH2CA
+ATS-Anchorage Ops,ATH2VSL
+ATS-Anchorage Ops,CA2ATH
+ATS-Anchorage Ops,VSL2ATH
 ATS-Bunkering@Anchorage,AG2BUK
 ATS-Bunkering@Anchorage,BUK2AG
 ATS-Bunkering@Anchorage,BUK2CA
@@ -238,9 +244,9 @@ Cancel Towage (Shifting),TWG2ATH
 ESOP,AG2ATH
 ESOP,CA2ATH
 ESOP,VSL2ATH
-ETA-Anchorage (<implicit>),AG2ATH
-ETA-Anchorage (<implicit>),CA2ATH
-ETA-Anchorage (<implicit>),VSL2ATH
+ETA-Anchorage,AG2ATH
+ETA-Anchorage,CA2ATH
+ETA-Anchorage,VSL2ATH
 ETA-Berth,AG2TR
 ETA-Berth,CA2TR
 ETA-Berth,VSL2TR
@@ -280,9 +286,9 @@ ETC-Towage (<implicit>),TWG2ATH
 ETC-Towage (Inbound),TWG2ATH
 ETC-Towage (Outbound),TWG2ATH
 ETC-Towage (Shifting),TWG2ATH
-ETD-Anchorage (<implicit>),AG2ATH
-ETD-Anchorage (<implicit>),CA2ATH
-ETD-Anchorage (<implicit>),VSL2ATH
+ETD-Anchorage,AG2ATH
+ETD-Anchorage,CA2ATH
+ETD-Anchorage,VSL2ATH
 ETD-Berth,AG2ATH
 ETD-Berth,CA2ATH
 ETD-Berth,VSL2ATH
@@ -325,9 +331,9 @@ Gangway Down and Safe,VSL2ATH
 Omit Port Call,AG2ATH
 Omit Port Call,CA2ATH
 Omit Port Call,VSL2ATH
-PTA-Anchorage (<implicit>),AG2ATH
-PTA-Anchorage (<implicit>),CA2ATH
-PTA-Anchorage (<implicit>),VSL2ATH
+PTA-Anchorage,AG2ATH
+PTA-Anchorage,CA2ATH
+PTA-Anchorage,VSL2ATH
 PTA-Berth,AG2TR
 PTA-Berth,CA2TR
 PTA-Berth,VSL2TR
@@ -367,9 +373,9 @@ PTC-Towage (<implicit>),TWG2ATH
 PTC-Towage (Inbound),TWG2ATH
 PTC-Towage (Outbound),TWG2ATH
 PTC-Towage (Shifting),TWG2ATH
-PTD-Anchorage (<implicit>),AG2ATH
-PTD-Anchorage (<implicit>),CA2ATH
-PTD-Anchorage (<implicit>),VSL2ATH
+PTD-Anchorage,AG2ATH
+PTD-Anchorage,CA2ATH
+PTD-Anchorage,VSL2ATH
 PTD-Berth,AG2ATH
 PTD-Berth,CA2ATH
 PTD-Berth,VSL2ATH
@@ -406,9 +412,9 @@ PTS-Towage (<implicit>),TWG2ATH
 PTS-Towage (Inbound),TWG2ATH
 PTS-Towage (Outbound),TWG2ATH
 PTS-Towage (Shifting),TWG2ATH
-RTA-Anchorage (<implicit>),ATH2AG
-RTA-Anchorage (<implicit>),ATH2CA
-RTA-Anchorage (<implicit>),ATH2VSL
+RTA-Anchorage,ATH2AG
+RTA-Anchorage,ATH2CA
+RTA-Anchorage,ATH2VSL
 RTA-Berth,TR2AG
 RTA-Berth,TR2CA
 RTA-Berth,TR2VSL
@@ -448,9 +454,9 @@ RTC-Towage (<implicit>),ATH2TWG
 RTC-Towage (Inbound),ATH2TWG
 RTC-Towage (Outbound),ATH2TWG
 RTC-Towage (Shifting),ATH2TWG
-RTD-Anchorage (<implicit>),ATH2AG
-RTD-Anchorage (<implicit>),ATH2CA
-RTD-Anchorage (<implicit>),ATH2VSL
+RTD-Anchorage,ATH2AG
+RTD-Anchorage,ATH2CA
+RTD-Anchorage,ATH2VSL
 RTD-Berth,ATH2AG
 RTD-Berth,ATH2CA
 RTD-Berth,ATH2VSL
