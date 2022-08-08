@@ -433,22 +433,18 @@ def declare_timestamps():
         is_cancelable=False,
     )
 
-
-    #Sludge UC 99 106
-    generic_xty_timestamps(
-        as_publisher_patterns(['CA'], ['SVP']),
+    # Sludge UC 99 - 106
+    xty_service_timestamps(
         EST_PLN_REQ_ACT,
-        ['STRT', 'CMPL'],
-        ['BRTH'],
+        ['SLUG'],
         [NULL_VALUE],
         "Other Services - Sludge Planning And Execution",
         'jit1_2',
-        ['SLUG'],
         vessel_position_requirement=OPTIONAL,
         event_location_requirement=REQUIRED,
     )
 
-    #Shore power UC 107 + 108
+    # Shore power UC 107 + 108
     xty_service_timestamps(
         ACT,
         ['SHPW'],
