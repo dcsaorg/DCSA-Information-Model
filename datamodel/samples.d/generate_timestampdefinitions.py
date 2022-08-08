@@ -412,31 +412,26 @@ def declare_timestamps():
         [NULL_VALUE],
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
-        include_phase_in_name=True,
         event_location_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         vessel_position_requirement=OPTIONAL,
         # All except REQ has MtD in the IFS (even ATD-Anchorage, which seems weird)
-        is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True))
+        is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
     )
 
     # ATY Anchorage OPS UC 97 + 98
-    # NB: The names / ops code seems weird (e.g., ATS vs. ARRI). Have emailed Charles about it.
-    for name, ops_code in [('ATS Anchorage Ops', 'ARRI'),
-                           ('ATC Anchorage Ops', 'DEPA')]:
-
-        generate_special_timestamp(
-            name,
-            PUBLISHER_PATTERN_CA2ATH,
-            ops_code,
-            'ANCH',
-            NULL_VALUE,
-            "Other Services - Anchorage Planning And Execution",
-            'jit1_2',
-            'ANCO',
-            vessel_position_requirement=OPTIONAL,
-            event_location_requirement=REQUIRED,
-            is_miles_to_destination_relevant=True,
-        )
+    xty_service_timestamps(
+        ACT,
+        ['ANCO'],
+        [NULL_VALUE],
+        "Other Services - Anchorage Planning And Execution",
+        'jit1_2',
+        vessel_position_requirement=OPTIONAL,
+        event_location_requirement=REQUIRED,
+        is_miles_to_destination_relevant=True,
+        # Group these with the XTY-Anchorage timestamps (seems to make more sense than having them float their own)
+        negotiation_cycle='T-Anchorage',
+        is_cancelable=False,
+    )
 
 
     #Sludge UC 99 106
@@ -462,16 +457,6 @@ def declare_timestamps():
         'jit1_2',
         is_cancelable=False,
         event_location_requirement=REQUIRED,
-    )
-
-    # The standard does not declare these, but
-    ignore_nonexistent_timestamps(
-        'ETS-Shore Power',
-        'RTS-Shore Power',
-        'PTS-Shore Power',
-        'ETC-Shore Power',
-        'RTC-Shore Power',
-        'PTC-Shore Power',
     )
 
     #Omit port call UC 110
@@ -500,6 +485,7 @@ NULL_VALUE = "null"
 COLUMN_ID = 'timestampID'
 COLUMN_TIMESTAMP_TYPE_NAME = 'timestampTypeName'
 COLUMN_EVENT_CLASSIFIER_CODE = 'eventClassifierCode'
+COLUMN_PORT_CALL_SERVICE_TYPE_CODE = 'portCallServiceTypeCode'
 COLUMN_ACCEPT_TS = 'acceptTimestampDefinition'
 COLUMN_REJECT_TS = 'rejectTimestampDefinition'
 
@@ -699,7 +685,7 @@ SERVICE_TYPE_CODE2INFO = {
     'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], ['ATH'])),
     'TOWG': ServiceTypeInfo('Towage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['TWG'], ['ATH'])),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
-    'ANCO': ServiceTypeInfo('Anchorage Operations', 'ANCH', as_publisher_patterns(CARRIER_ROLES, ['ATH'])),
+    'ANCO': ServiceTypeInfo('Anchorage Ops', 'ANCH', as_publisher_patterns(CARRIER_ROLES, ['ATH'])),
     'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SLU'], CARRIER_ROLES)),
     # Services that do not have a clear-cut service name (including "null")
     'SAFE': UNNAMED,
@@ -798,6 +784,7 @@ def xty_service_timestamps(
         is_cancelable: bool = True,
         include_implicit_phase_in_name: Optional[bool] = None,
         is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
+        negotiation_cycle: Optional[str] = None,
 ):
     if operations_event_type_codes is None:
         if is_cancelable:
@@ -823,6 +810,7 @@ def xty_service_timestamps(
                 event_location_requirement=event_location_requirement,
                 include_implicit_phase_in_name=include_implicit_phase_in_name,
                 include_facility_type_in_name=len(facility_type_codes) > 1,
+                negotiation_cycle=negotiation_cycle,
                 is_miles_to_destination_relevant=is_miles_to_destination_relevant,
             )
 
@@ -1043,6 +1031,10 @@ class Timestamp:
         return self.row_data[COLUMN_EVENT_CLASSIFIER_CODE]
 
     @property
+    def port_call_service_type_code(self):
+        return self.row_data[COLUMN_PORT_CALL_SERVICE_TYPE_CODE]
+
+    @property
     def accept_ts(self):
         return self.row_data[COLUMN_ACCEPT_TS]
 
@@ -1140,15 +1132,26 @@ ALREADY_WARNED_MISSING_TIMESTAMP = set()
 
 def _check_missing_related_timestamps(timestamp: Timestamp, all_ts_table: Dict[str, Timestamp]):
     if timestamp.is_pattern_timestamp:
+        missing = []
         for code in ALL_EVENT_CLASSIFIER_CODES:
             alternative_name = code[0] + timestamp.timestamp_name[1:]
             if alternative_name == timestamp.timestamp_name:
                 continue
-            if (alternative_name not in all_ts_table
-                    and alternative_name not in TS_NOT_IN_STANDARD
-                    and alternative_name not in ALREADY_WARNED_MISSING_TIMESTAMP):
-                print(f"W: Possibly missing timestamp \"{alternative_name}\" (discovered via {timestamp.timestamp_name})")
-                ALREADY_WARNED_MISSING_TIMESTAMP.add(alternative_name)
+            if alternative_name not in all_ts_table:
+                missing.append(alternative_name)
+
+        # Ignore missing timestamps if the timestamp is an actual for a service (several services
+        # only defines "ACT"s - e.g. Shore Power and Anchor Ops)
+        if (len(missing) == len(ALL_EVENT_CLASSIFIER_CODES) - 1
+                and timestamp.event_classifier_code == 'ACT'
+                and timestamp.port_call_service_type_code != NULL_VALUE
+        ):
+            return
+        for alternative_name in missing:
+            if alternative_name not in TS_NOT_IN_STANDARD or alternative_name not in ALREADY_WARNED_MISSING_TIMESTAMP:
+                continue
+            print(f"W: Possibly missing timestamp \"{alternative_name}\" (discovered via {timestamp.timestamp_name})")
+            ALREADY_WARNED_MISSING_TIMESTAMP.add(alternative_name)
 
 
 def _process_accept_reject_links(timestamp: Timestamp, all_ts_table: Dict[str, Timestamp]):
