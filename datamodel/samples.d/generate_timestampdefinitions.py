@@ -653,10 +653,10 @@ class ServiceTypeInfo:
         self.facility_type_codes = [facility_type_codes] if isinstance(facility_type_codes, str) else facility_type_codes
         self.publisher_patterns = publisher_patterns
 
-    def facility_type_codes_for(self, operations_event_type_code):
+    def facility_type_codes_for(self, key):
         if isinstance(self.facility_type_codes, list):
             return self.facility_type_codes
-        return [self.facility_type_codes[operations_event_type_code]]
+        return [self.facility_type_codes[key]]
 
 
 PUBLISHER_PATTERN_CA2TR = as_publisher_patterns(CARRIER_ROLES, ['TR'])
@@ -668,6 +668,27 @@ PUBLISHER_PATTERN_TR2CA = [
 ]
 PUBLISHER_PATTERN_CA2ATH = as_publisher_patterns(CARRIER_ROLES, ['ATH'])
 
+PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE = {
+    # Inbound (+ implicit) is PBPL -> BRTH
+    ('INBD', 'STRT'): 'PBPL',
+    ('INBD', 'CMPL'): 'BRTH',
+    ('INBD', 'CANC'): 'BRTH',
+
+    (NULL_VALUE, 'STRT'): 'PBPL',
+    (NULL_VALUE, 'CMPL'): 'BRTH',
+    (NULL_VALUE, 'CANC'): 'BRTH',
+
+    # Shift is BRTH -> BRTH
+    ('SHIF', 'STRT'): 'BRTH',
+    ('SHIF', 'CMPL'): 'BRTH',
+    ('SHIF', 'CANC'): 'BRTH',
+
+    # Outbound is BRTH -> Nothing
+    ('OUTB', 'STRT'): 'PBPL',
+    ('OUTB', 'CMPL'): NULL_VALUE,
+    ('OUTB', 'CANC'): NULL_VALUE,
+}
+
 
 SERVICE_TYPE_CODE2INFO = {
     # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
@@ -678,8 +699,9 @@ SERVICE_TYPE_CODE2INFO = {
     'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], ['ATH'])),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
-    'PILO': ServiceTypeInfo('Pilotage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['PLT'], ['ATH'])),
-    'TOWG': ServiceTypeInfo('Towage', {'STRT': 'PBPL', 'CMPL': 'BRTH', 'CANC': 'BRTH'}, as_publisher_patterns(['TWG'], ['ATH'])),
+
+    'PILO': ServiceTypeInfo('Pilotage', PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE, as_publisher_patterns(['PLT'], ['ATH'])),
+    'TOWG': ServiceTypeInfo('Towage', PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE, as_publisher_patterns(['TWG'], ['ATH'])),
     'SHPW': ServiceTypeInfo('Shore Power', 'BRTH', as_publisher_patterns(['SVP'], CARRIER_ROLES)),
     'ANCO': ServiceTypeInfo('Anchorage Ops', 'ANCH', as_publisher_patterns(CARRIER_ROLES, ['ATH'])),
     'SLUG': ServiceTypeInfo('Sludge', ['ANCH', 'BRTH'], as_publisher_patterns(['SLU'], CARRIER_ROLES)),
@@ -787,17 +809,22 @@ def xty_service_timestamps(
             operations_event_type_codes = CANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
         else:
             operations_event_type_codes = UNCANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
+
+    if include_implicit_phase_in_name is None:
+        include_implicit_phase_in_name = len(port_call_phase_type_codes) > 1 and NULL_VALUE in port_call_phase_type_codes
+
     for port_call_service_type_code in sorted(port_call_service_type_codes):
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
-        for operations_event_type_code in operations_event_type_codes:
-            facility_type_codes = service_info.facility_type_codes_for(operations_event_type_code)
+        for port_call_phase_type_code, operations_event_type_code in product(port_call_phase_type_codes, operations_event_type_codes):
+            facility_type_code_key = (port_call_phase_type_code, operations_event_type_code)
+            facility_type_codes = service_info.facility_type_codes_for(facility_type_code_key)
             generic_xty_timestamps(
                 service_info.publisher_patterns,
                 event_classifier_codes,
                 [operations_event_type_code],
                 facility_type_codes,
-                port_call_phase_type_codes,
+                [port_call_phase_type_code],
                 port_call_part,
                 provided_in_standard,
                 port_call_service_type_codes=[port_call_service_type_code],
