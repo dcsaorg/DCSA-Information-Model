@@ -397,16 +397,6 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
     ADD FOREIGN KEY (amendment_to_transport_document) REFERENCES dcsa_im_v3_0.transport_document (id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_endorsement_chain CASCADE;
-CREATE TABLE dcsa_im_v3_0.ebl_endorsement_chain (
-    transport_document_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_document (id),
-    title_holder uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    signature varchar(500) NOT NULL,
-    endorsement_datetime timestamp with time zone NOT NULL,
-    endorsee uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    CONSTRAINT "pk_im_endorsement_chain" PRIMARY KEY (transport_document_id,title_holder)
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
