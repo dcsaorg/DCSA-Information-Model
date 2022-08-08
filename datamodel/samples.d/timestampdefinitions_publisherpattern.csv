@@ -96,8 +96,18 @@ ATC-Shore Power,SVP2AG
 ATC-Shore Power,SVP2CA
 ATC-Shore Power,SVP2VSL
 ATC-Shore Power,VSL2SVP
-ATC-Sludge,CA2SVP
-ATC-Sludge,SVP2CA
+ATC-Sludge@Anchorage,AG2SLU
+ATC-Sludge@Anchorage,CA2SLU
+ATC-Sludge@Anchorage,SLU2AG
+ATC-Sludge@Anchorage,SLU2CA
+ATC-Sludge@Anchorage,SLU2VSL
+ATC-Sludge@Anchorage,VSL2SLU
+ATC-Sludge@Berth,AG2SLU
+ATC-Sludge@Berth,CA2SLU
+ATC-Sludge@Berth,SLU2AG
+ATC-Sludge@Berth,SLU2CA
+ATC-Sludge@Berth,SLU2VSL
+ATC-Sludge@Berth,VSL2SLU
 ATC-Towage (<implicit>),ATH2TWG
 ATC-Towage (<implicit>),TWG2ATH
 ATC-Towage (Inbound),ATH2TWG
@@ -195,8 +205,18 @@ ATS-Shore Power,SVP2AG
 ATS-Shore Power,SVP2CA
 ATS-Shore Power,SVP2VSL
 ATS-Shore Power,VSL2SVP
-ATS-Sludge,CA2SVP
-ATS-Sludge,SVP2CA
+ATS-Sludge@Anchorage,AG2SLU
+ATS-Sludge@Anchorage,CA2SLU
+ATS-Sludge@Anchorage,SLU2AG
+ATS-Sludge@Anchorage,SLU2CA
+ATS-Sludge@Anchorage,SLU2VSL
+ATS-Sludge@Anchorage,VSL2SLU
+ATS-Sludge@Berth,AG2SLU
+ATS-Sludge@Berth,CA2SLU
+ATS-Sludge@Berth,SLU2AG
+ATS-Sludge@Berth,SLU2CA
+ATS-Sludge@Berth,SLU2VSL
+ATS-Sludge@Berth,VSL2SLU
 ATS-Towage (<implicit>),ATH2TWG
 ATS-Towage (<implicit>),TWG2ATH
 ATS-Towage (Inbound),ATH2TWG
@@ -235,6 +255,18 @@ Cancel Pilotage (Inbound),ATH2PLT
 Cancel Pilotage (Inbound),PLT2ATH
 Cancel Pilotage (Outbound),PLT2ATH
 Cancel Pilotage (Shifting),PLT2ATH
+Cancel Sludge@Anchorage,AG2SLU
+Cancel Sludge@Anchorage,CA2SLU
+Cancel Sludge@Anchorage,SLU2AG
+Cancel Sludge@Anchorage,SLU2CA
+Cancel Sludge@Anchorage,SLU2VSL
+Cancel Sludge@Anchorage,VSL2SLU
+Cancel Sludge@Berth,AG2SLU
+Cancel Sludge@Berth,CA2SLU
+Cancel Sludge@Berth,SLU2AG
+Cancel Sludge@Berth,SLU2CA
+Cancel Sludge@Berth,SLU2VSL
+Cancel Sludge@Berth,VSL2SLU
 Cancel Towage (<implicit>),ATH2TWG
 Cancel Towage (<implicit>),TWG2ATH
 Cancel Towage (Inbound),ATH2TWG
@@ -281,7 +313,12 @@ ETC-Pilotage (<implicit>),PLT2ATH
 ETC-Pilotage (Inbound),PLT2ATH
 ETC-Pilotage (Outbound),PLT2ATH
 ETC-Pilotage (Shifting),PLT2ATH
-ETC-Sludge,CA2SVP
+ETC-Sludge@Anchorage,SLU2AG
+ETC-Sludge@Anchorage,SLU2CA
+ETC-Sludge@Anchorage,SLU2VSL
+ETC-Sludge@Berth,SLU2AG
+ETC-Sludge@Berth,SLU2CA
+ETC-Sludge@Berth,SLU2VSL
 ETC-Towage (<implicit>),TWG2ATH
 ETC-Towage (Inbound),TWG2ATH
 ETC-Towage (Outbound),TWG2ATH
@@ -320,7 +357,12 @@ ETS-Pilotage (<implicit>),PLT2ATH
 ETS-Pilotage (Inbound),PLT2ATH
 ETS-Pilotage (Outbound),PLT2ATH
 ETS-Pilotage (Shifting),PLT2ATH
-ETS-Sludge,CA2SVP
+ETS-Sludge@Anchorage,SLU2AG
+ETS-Sludge@Anchorage,SLU2CA
+ETS-Sludge@Anchorage,SLU2VSL
+ETS-Sludge@Berth,SLU2AG
+ETS-Sludge@Berth,SLU2CA
+ETS-Sludge@Berth,SLU2VSL
 ETS-Towage (<implicit>),TWG2ATH
 ETS-Towage (Inbound),TWG2ATH
 ETS-Towage (Outbound),TWG2ATH
@@ -368,7 +410,12 @@ PTC-Pilotage (<implicit>),PLT2ATH
 PTC-Pilotage (Inbound),PLT2ATH
 PTC-Pilotage (Outbound),PLT2ATH
 PTC-Pilotage (Shifting),PLT2ATH
-PTC-Sludge,CA2SVP
+PTC-Sludge@Anchorage,SLU2AG
+PTC-Sludge@Anchorage,SLU2CA
+PTC-Sludge@Anchorage,SLU2VSL
+PTC-Sludge@Berth,SLU2AG
+PTC-Sludge@Berth,SLU2CA
+PTC-Sludge@Berth,SLU2VSL
 PTC-Towage (<implicit>),TWG2ATH
 PTC-Towage (Inbound),TWG2ATH
 PTC-Towage (Outbound),TWG2ATH
@@ -407,7 +454,12 @@ PTS-Pilotage (<implicit>),PLT2ATH
 PTS-Pilotage (Inbound),PLT2ATH
 PTS-Pilotage (Outbound),PLT2ATH
 PTS-Pilotage (Shifting),PLT2ATH
-PTS-Sludge,CA2SVP
+PTS-Sludge@Anchorage,SLU2AG
+PTS-Sludge@Anchorage,SLU2CA
+PTS-Sludge@Anchorage,SLU2VSL
+PTS-Sludge@Berth,SLU2AG
+PTS-Sludge@Berth,SLU2CA
+PTS-Sludge@Berth,SLU2VSL
 PTS-Towage (<implicit>),TWG2ATH
 PTS-Towage (Inbound),TWG2ATH
 PTS-Towage (Outbound),TWG2ATH
@@ -449,7 +501,12 @@ RTC-Pilotage (<implicit>),ATH2PLT
 RTC-Pilotage (Inbound),ATH2PLT
 RTC-Pilotage (Outbound),ATH2PLT
 RTC-Pilotage (Shifting),ATH2PLT
-RTC-Sludge,SVP2CA
+RTC-Sludge@Anchorage,AG2SLU
+RTC-Sludge@Anchorage,CA2SLU
+RTC-Sludge@Anchorage,VSL2SLU
+RTC-Sludge@Berth,AG2SLU
+RTC-Sludge@Berth,CA2SLU
+RTC-Sludge@Berth,VSL2SLU
 RTC-Towage (<implicit>),ATH2TWG
 RTC-Towage (Inbound),ATH2TWG
 RTC-Towage (Outbound),ATH2TWG
@@ -488,7 +545,12 @@ RTS-Pilotage (<implicit>),ATH2PLT
 RTS-Pilotage (Inbound),ATH2PLT
 RTS-Pilotage (Outbound),ATH2PLT
 RTS-Pilotage (Shifting),ATH2PLT
-RTS-Sludge,SVP2CA
+RTS-Sludge@Anchorage,AG2SLU
+RTS-Sludge@Anchorage,CA2SLU
+RTS-Sludge@Anchorage,VSL2SLU
+RTS-Sludge@Berth,AG2SLU
+RTS-Sludge@Berth,CA2SLU
+RTS-Sludge@Berth,VSL2SLU
 RTS-Towage (<implicit>),ATH2TWG
 RTS-Towage (Inbound),ATH2TWG
 RTS-Towage (Outbound),ATH2TWG
