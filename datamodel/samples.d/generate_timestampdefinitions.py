@@ -684,7 +684,7 @@ PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE = {
     ('SHIF', 'CANC'): 'BRTH',
 
     # Outbound is BRTH -> Nothing
-    ('OUTB', 'STRT'): 'PBPL',
+    ('OUTB', 'STRT'): 'BRTH',
     ('OUTB', 'CMPL'): NULL_VALUE,
     ('OUTB', 'CANC'): NULL_VALUE,
 }

@@ -130,9 +130,9 @@ RTD-Berth (<implicit>),RTD-Berth (<implicit>),REQ,DEPA,null,null,BRTH,Port Depar
 RTD-Berth,RTD-Berth,REQ,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,PTD-Berth,ETD-Berth,TD-Berth
 PTD-Berth (<implicit>),PTD-Berth (<implicit>),PLN,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,TD-Berth
 PTD-Berth,PTD-Berth,PLN,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,TD-Berth
-ETS-Pilotage (Outbound),ETS-Pilotage (Outbound),EST,STRT,OUTB,PILO,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),T-Pilotage (Outbound)
-RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),REQ,STRT,OUTB,PILO,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,PTS-Pilotage (Outbound),ETS-Pilotage (Outbound),T-Pilotage (Outbound)
-PTS-Pilotage (Outbound),PTS-Pilotage (Outbound),PLN,STRT,OUTB,PILO,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
+ETS-Pilotage (Outbound),ETS-Pilotage (Outbound),EST,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),T-Pilotage (Outbound)
+RTS-Pilotage (Outbound),RTS-Pilotage (Outbound),REQ,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,PTS-Pilotage (Outbound),ETS-Pilotage (Outbound),T-Pilotage (Outbound)
+PTS-Pilotage (Outbound),PTS-Pilotage (Outbound),PLN,STRT,OUTB,PILO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
 ETC-Pilotage (Outbound),ETC-Pilotage (Outbound),EST,CMPL,OUTB,PILO,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,RTC-Pilotage (Outbound),RTC-Pilotage (Outbound),T-Pilotage (Outbound)
 RTC-Pilotage (Outbound),RTC-Pilotage (Outbound),REQ,CMPL,OUTB,PILO,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,PTC-Pilotage (Outbound),ETC-Pilotage (Outbound),T-Pilotage (Outbound)
 PTC-Pilotage (Outbound),PTC-Pilotage (Outbound),PLN,CMPL,OUTB,PILO,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
@@ -144,9 +144,9 @@ ETC-Pilotage (Shifting),ETC-Pilotage (Shifting),EST,CMPL,SHIF,PILO,BRTH,Port Dep
 RTC-Pilotage (Shifting),RTC-Pilotage (Shifting),REQ,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,PTC-Pilotage (Shifting),ETC-Pilotage (Shifting),T-Pilotage (Shifting)
 PTC-Pilotage (Shifting),PTC-Pilotage (Shifting),PLN,CMPL,SHIF,PILO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting)
 Cancel Pilotage (Shifting),Cancel Pilotage (Shifting),ACT,CANC,SHIF,PILO,BRTH,OMIT Port Call Or Cancel A Service,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Pilotage (Shifting)
-ETS-Towage (Outbound),ETS-Towage (Outbound),EST,STRT,OUTB,TOWG,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,RTS-Towage (Outbound),RTS-Towage (Outbound),T-Towage (Outbound)
-RTS-Towage (Outbound),RTS-Towage (Outbound),REQ,STRT,OUTB,TOWG,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,PTS-Towage (Outbound),ETS-Towage (Outbound),T-Towage (Outbound)
-PTS-Towage (Outbound),PTS-Towage (Outbound),PLN,STRT,OUTB,TOWG,PBPL,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
+ETS-Towage (Outbound),ETS-Towage (Outbound),EST,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,RTS-Towage (Outbound),RTS-Towage (Outbound),T-Towage (Outbound)
+RTS-Towage (Outbound),RTS-Towage (Outbound),REQ,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,PTS-Towage (Outbound),ETS-Towage (Outbound),T-Towage (Outbound)
+PTS-Towage (Outbound),PTS-Towage (Outbound),PLN,STRT,OUTB,TOWG,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
 ETC-Towage (Outbound),ETC-Towage (Outbound),EST,CMPL,OUTB,TOWG,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,RTC-Towage (Outbound),RTC-Towage (Outbound),T-Towage (Outbound)
 RTC-Towage (Outbound),RTC-Towage (Outbound),REQ,CMPL,OUTB,TOWG,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,PTC-Towage (Outbound),ETC-Towage (Outbound),T-Towage (Outbound)
 PTC-Towage (Outbound),PTC-Towage (Outbound),PLN,CMPL,OUTB,TOWG,null,Port Departure Planning And Services Completion,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
@@ -176,11 +176,11 @@ Vessel Ready to sail [JIT 1.2],Vessel Ready to sail [JIT 1.2],ACT,DEPA,ALGS,VRDY
 Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special
 ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,TD-Berth
 ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,TD-Berth
-ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,PBPL,Port Departure Execution,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
+ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
 ATC-Pilotage (Outbound),ATC-Pilotage (Outbound),ACT,CMPL,OUTB,PILO,null,Port Departure Execution,EXCLUDED,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound)
 ATS-Pilotage (Shifting),ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting)
 ATC-Pilotage (Shifting),ATC-Pilotage (Shifting),ACT,CMPL,SHIF,PILO,BRTH,Port Departure Execution,EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting)
-ATS-Towage (Outbound),ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,PBPL,Port Departure Execution,REQUIRED,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
+ATS-Towage (Outbound),ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
 ATC-Towage (Outbound),ATC-Towage (Outbound),ACT,CMPL,OUTB,TOWG,null,Port Departure Execution,EXCLUDED,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound)
 ATS-Towage (Shifting),ATS-Towage (Shifting),ACT,STRT,SHIF,TOWG,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Towage (Shifting)
 ATC-Towage (Shifting),ATC-Towage (Shifting),ACT,CMPL,SHIF,TOWG,BRTH,Port Departure Execution,EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,T-Towage (Shifting)
