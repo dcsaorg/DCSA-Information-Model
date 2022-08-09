@@ -34,7 +34,7 @@ def declare_timestamps():
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
-        event_location_requirement=event_classifier_code_matches(ifelse(REQ_PLN_ACT, REQUIRED, EXCLUDED)),
+        event_location_requirement=event_classifier_code_matches(ifelse(REQ_PLN_ACT, REQUIRED, OPTIONAL)),
         negotiation_cycle='TA-Berth',
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse(EST_PLN, True, False)),
     )

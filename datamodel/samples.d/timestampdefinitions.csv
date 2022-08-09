@@ -1,6 +1,6 @@
 timestampID,timestampTypeName,eventClassifierCode,operationsEventTypeCode,portCallPhaseTypeCode,portCallServiceTypeCode,facilityTypeCode,portCallPart,eventLocationRequirement,isTerminalNeeded,vesselPositionRequirement,isMilesToDestinationRelevant,providedInStandard,acceptTimestampDefinition,rejectTimestampDefinition,negotiationCycle
-ETA-Berth (<implicit>),ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,OPTIONAL,True,jit1_0,RTA-Berth (<implicit>),RTA-Berth (<implicit>),TA-Berth
-ETA-Berth,ETA-Berth,EST,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,OPTIONAL,True,jit1_1,RTA-Berth,RTA-Berth,TA-Berth
+ETA-Berth (<implicit>),ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",OPTIONAL,True,OPTIONAL,True,jit1_0,RTA-Berth (<implicit>),RTA-Berth (<implicit>),TA-Berth
+ETA-Berth,ETA-Berth,EST,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",OPTIONAL,True,OPTIONAL,True,jit1_1,RTA-Berth,RTA-Berth,TA-Berth
 RTA-Berth (<implicit>),RTA-Berth (<implicit>),REQ,ARRI,null,null,BRTH,Berth Arrival Planning,REQUIRED,True,EXCLUDED,False,jit1_0,PTA-Berth (<implicit>),ETA-Berth (<implicit>),TA-Berth
 RTA-Berth,RTA-Berth,REQ,ARRI,INBD,null,BRTH,Berth Arrival Planning,REQUIRED,True,EXCLUDED,False,jit1_1,PTA-Berth,ETA-Berth,TA-Berth
 PTA-Berth (<implicit>),PTA-Berth (<implicit>),PLN,ARRI,null,null,BRTH,Berth Arrival Planning,REQUIRED,True,OPTIONAL,True,jit1_0,null,null,TA-Berth
