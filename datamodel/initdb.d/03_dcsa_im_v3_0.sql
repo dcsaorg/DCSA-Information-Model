@@ -362,13 +362,13 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_to_order boolean NOT NULL,
     are_charges_displayed_on_originals boolean NULL,
     are_charges_displayed_on_copies boolean NULL,
-    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
+    place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
     displayed_name_for_place_of_receipt varchar(250) NULL,
     displayed_name_for_port_of_load varchar(250) NULL,
     displayed_name_for_port_of_discharge varchar(250) NULL,
     displayed_name_for_place_of_delivery varchar(250) NULL,
-    amendment_to_transport_document uuid NULL
+    amendment_to_transport_document_id uuid NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
@@ -395,7 +395,7 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
 );
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction
-    ADD FOREIGN KEY (amendment_to_transport_document) REFERENCES dcsa_im_v3_0.transport_document (id);
+    ADD FOREIGN KEY (amendment_to_transport_document_id) REFERENCES dcsa_im_v3_0.transport_document (id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
