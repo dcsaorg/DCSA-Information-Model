@@ -864,17 +864,17 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
 
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
-    place_of_issue,
+    place_of_issue_id,
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    carrier,
+    carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
-    issuingParty
+    issuing_party_id
 ) VALUES (
     '1af13f0b-a1ea-4ff8',
     '01670315-a51f-4a11-b947-ce8e245128eb',
@@ -1654,17 +1654,17 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
 INSERT INTO dcsa_im_v3_0.transport_document (
     id,
     transport_document_reference,
-    place_of_issue,
+    place_of_issue_id,
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    carrier,
+    carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
-    issuingParty
+    issuing_party_id
 ) VALUES (
     'de561650-d43d-46af-88c3-0ab380bb5365'::uuid,
     '0cc0bef0-a7c8-4c03',
@@ -1946,17 +1946,17 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
 INSERT INTO dcsa_im_v3_0.transport_document (
     id,
     transport_document_reference,
-    place_of_issue,
+    place_of_issue_id,
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    carrier,
+    carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
-    issuingParty
+    issuing_party_id
 ) VALUES (
     'cf48ad0a-9a4b-48a7-b752-c248fb5d88d9'::uuid,
     'c90a0ed6-ccc9-48e3',

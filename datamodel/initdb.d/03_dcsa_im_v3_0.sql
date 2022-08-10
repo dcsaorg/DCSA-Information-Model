@@ -383,15 +383,15 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_document_reference varchar(20) NOT NULL DEFAULT LEFT(uuid_generate_v4()::text, 20),
-    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
+    place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     issue_date date NULL,
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
     number_of_originals integer NULL,
-    carrier uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
+    carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     number_of_rider_pages integer NULL,
-    issuingParty uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id)
+    issuing_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id)
 );
 
 ALTER TABLE dcsa_im_v3_0.shipping_instruction

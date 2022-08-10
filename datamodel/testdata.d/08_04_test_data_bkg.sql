@@ -71,17 +71,17 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
 
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
-    place_of_issue,
+    place_of_issue_id,
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    carrier,
+    carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
-    issuingParty
+    issuing_party_id
 ) VALUES (
     'be038e58-5365',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
