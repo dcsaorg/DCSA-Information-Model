@@ -117,7 +117,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'BR1239719971',
@@ -144,7 +143,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_01',
     DATE '2021-11-04'
 );
 
@@ -173,7 +171,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'BR1239719872',
@@ -200,7 +197,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_02',
     DATE '2021-01-10'
 );
 
@@ -229,7 +225,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'ABC123123123',
@@ -256,7 +251,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_03',
     DATE '2021-12-16'
 );
 
