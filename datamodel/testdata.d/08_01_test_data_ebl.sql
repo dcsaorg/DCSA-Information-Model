@@ -141,12 +141,11 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time,
-    invoice_payable_at
+    invoice_payable_at_id
 ) VALUES (
     'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
@@ -173,7 +172,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_01',
     'WTK',
     12.12,
     NULL,
@@ -199,7 +197,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     import_license_reference,
     is_destination_filing_required,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -207,10 +205,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
@@ -238,7 +235,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_02',
     'WTK',
     12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
