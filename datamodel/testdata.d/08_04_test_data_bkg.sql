@@ -207,7 +207,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -215,10 +215,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
@@ -249,7 +248,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-     NULL,
     'WTK',
     12.12,
      NULL,
@@ -276,7 +274,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -284,10 +282,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     '31629725-418b-41e1-9d10-521763c656c4'::uuid,
@@ -318,7 +315,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-     NULL,
     'WTK',
     12.12,
      NULL,
@@ -345,7 +341,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -353,10 +349,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
@@ -386,7 +381,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      NULL,
      'AO',
      true,
-     NULL,
      NULL,
     'WTK',
     12.12,
@@ -774,7 +768,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -782,10 +776,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
@@ -816,7 +809,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO', /* communication_channel_code */
      true, /* is_equipment_substitution_allowed */
      NULL, /* vessel_id */
-     NULL, /* export_voyage_number */
     'WTK',  /* declared_value_currency */
     12.12, /* declared_value */
      NULL, /* place_of_issue */

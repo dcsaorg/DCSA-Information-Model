@@ -276,7 +276,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     is_destination_filing_required boolean NULL,
     contract_quotation_reference varchar(35) NULL,
     incoterms varchar(3) NULL REFERENCES dcsa_im_v3_0.incoterms(incoterms_code),
-    invoice_payable_at uuid NULL REFERENCES dcsa_im_v3_0.location(id),
+    invoice_payable_at_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     expected_departure_date date NULL,
     expected_arrival_at_place_of_delivery_start_date date NULL CHECK ((expected_arrival_at_place_of_delivery_start_date IS NULL) OR (expected_arrival_at_place_of_delivery_end_date IS NULL) OR expected_arrival_at_place_of_delivery_start_date <= expected_arrival_at_place_of_delivery_end_date),
     expected_arrival_at_place_of_delivery_end_date date NULL,
@@ -286,11 +286,11 @@ CREATE TABLE dcsa_im_v3_0.booking (
     communication_channel_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    export_voyage_number varchar(50) NULL,
-    declared_value_currency varchar(3) NULL,
+    declared_value_currency_code varchar(3) NULL,
     declared_value real NULL,
-    place_of_issue uuid NULL REFERENCES dcsa_im_v3_0.location(id),
-    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
+    place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
+    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code),
+    voyage_id UUID NULL REFERENCES dcsa_im_v3_0.voyage(id)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.booking (id);
