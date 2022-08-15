@@ -132,7 +132,7 @@ def declare_timestamps():
         'ESOP',
         PUBLISHER_PATTERN_CA2ATH,
         'ARRI',
-        'BRTH',
+        NULL_VALUE,
         'INBD',
         'Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution',
         'jit1_1',

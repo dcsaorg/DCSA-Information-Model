@@ -103,7 +103,7 @@ PTA-PBPL (<implicit>),PTA-PBPL (<implicit>),PLN,ARRI,null,null,PBPL,"Pilot Board
 PTA-PBPL,PTA-PBPL,PLN,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL
 ATA-PBPL (<implicit>),ATA-PBPL (<implicit>),ACT,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL
 ATA-PBPL,ATA-PBPL,ACT,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL
-ESOP,ESOP,ACT,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,OPTIONAL,True,jit1_1,null,null,Special
+ESOP,ESOP,ACT,ARRI,INBD,null,null,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,False,OPTIONAL,True,jit1_1,null,null,Special
 AT All fast,AT All fast,ACT,ARRI,ALGS,FAST,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,Special
 Gangway Down and Safe,Gangway Down and Safe,ACT,ARRI,ALGS,GWAY,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,Special
 Vessel Readiness for Cargo operations [JIT 1.2],Vessel Readiness for Cargo operations [JIT 1.2],ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special
