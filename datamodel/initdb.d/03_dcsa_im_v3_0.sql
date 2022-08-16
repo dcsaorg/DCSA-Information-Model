@@ -839,4 +839,5 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
 
 ALTER TABLE dcsa_im_v3_0.operations_event ADD PRIMARY KEY (event_id);
 
+
 COMMIT;
