@@ -733,7 +733,7 @@ CREATE TABLE dcsa_im_v3_0.message_routing_rule (
     api_url varchar(255) NOT NULL,
     login_type varchar(8) NOT NULL CHECK(login_type IN ('OIDC')),
     login_information jsonb NOT NULL,
-    vessel_mo_number varchar(255) NULL
+    vessel_imo_number varchar(255) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.outbox_message CASCADE;
