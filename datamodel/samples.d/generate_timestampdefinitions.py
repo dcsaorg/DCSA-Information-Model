@@ -50,6 +50,7 @@ def declare_timestamps():
         operations_event_type_codes=['STRT'],
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Cargo Ops'
     )
 
     # XTY-Pilotage (Inbound) UC 7-12 + 36 + 40
@@ -64,6 +65,8 @@ def declare_timestamps():
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        # The implicit one also counts as Inbound
+        negotiation_cycle='T-Pilotage (Inbound)',
         is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
             ifelse(('ACT', 'STRT'), True, False)
         )
@@ -81,6 +84,7 @@ def declare_timestamps():
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Towage (Inbound)',
         is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
             ifelse(('ACT', 'STRT'), True, False)
         )
@@ -98,6 +102,7 @@ def declare_timestamps():
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Mooring (Inbound)'
     )
 
     # Bunkering UC 25 - 30
@@ -110,6 +115,7 @@ def declare_timestamps():
         include_phase_in_name=False,
         is_cancelable=True,
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Bunkering',
     )
 
     # ETA PBP UC 31-33 + 35
@@ -181,6 +187,7 @@ def declare_timestamps():
         # We only generated the STRT here, CMPL (and CANC) comes later
         operations_event_type_codes=['STRT'],
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Cargo Ops'
     )
 
     # ATS Cargo Ops discharge UC 47
@@ -250,6 +257,7 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=False,
         event_location_requirement=REQUIRED,
+        negotiation_cycle='T-Bunkering'
     )
 
     # Add XTD-Berth except ATD-Berth (different part and phase) UC 54 + 67 + 68
@@ -749,6 +757,7 @@ VALID_JIT_VERSIONS = [
     'jit1_2',
 ]
 VALID_OPERATIONS_EVENT_TYPE_CODES = set()
+VALID_NEGOTIATION_CYCLE_KEYS = set()
 VALID_PORT_CALL_PARTS = frozenset({
     "Berth Arrival Planning",
     "Services Planning",
@@ -1092,7 +1101,9 @@ def _make_timestamp(timestamp_name,
                     ):
 
     if timestamp_name in TS_NOT_IN_STANDARD:
-        raise ValueError(f'\"{timestamp_name}\" was created but also marked as a "Do not warn about this TS being missing as the standard does not declare it"')
+        raise ValueError(f'"{timestamp_name}" was created but also marked as a "Do not warn about this TS being missing as the standard does not declare it"')
+    if negotiation_cycle not in VALID_NEGOTIATION_CYCLE_KEYS:
+        raise ValueError(f'"{timestamp_name}" had unknown negotiation cycle "{negotiation_cycle}"')
 
     ts_fields = [
         timestamp_name,
@@ -1200,11 +1211,17 @@ def _process_accept_reject_links(timestamp: Timestamp, all_ts_table: Dict[str, T
                 timestamp.reject_ts = reject_ts.id
 
 
-def _load_data_and_self_check(reference_data_dir):
+def _load_data_and_self_check(reference_data_dir, sample_data_dir):
     VALID_OPERATIONS_EVENT_TYPE_CODES.update(
         load_data_set(
             os.path.join(reference_data_dir, 'operationseventtypecodes.csv'),
             'operations_event_type_code',
+        ))
+
+    VALID_NEGOTIATION_CYCLE_KEYS.update(
+        load_data_set(
+            os.path.join(sample_data_dir, 'negotiationcycles.csv'),
+            'cycleKey',
         ))
 
     for service_type_code in load_data_set(
@@ -1234,7 +1251,7 @@ def main():
     publisher_pattern_filename = os.path.join(sample_data_dir, 'publisherpattern.csv')
     relation_file_filename = os.path.join(sample_data_dir, 'timestampdefinitions_publisherpattern.csv')
 
-    _load_data_and_self_check(reference_data_dir)
+    _load_data_and_self_check(reference_data_dir, sample_data_dir)
 
     declare_timestamps()
     if not ALL_TS:
