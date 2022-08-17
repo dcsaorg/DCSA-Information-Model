@@ -547,6 +547,18 @@ CREATE TABLE dcsa_im_v3_0.port_timezone (
     iana_timezone text NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_jit_port_visit CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_call_jit_port_visit (
+    port_visit_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id uuid NOT NULL UNIQUE REFERENCES dcsa_im_v3_0.transport_call(id),
+    UNIQUE (port_visit_id, transport_call_id)
+);
+
+DROP VIEW IF EXISTS dcsa_im_v3_0.jit_port_visit CASCADE;
+CREATE VIEW dcsa_im_v3_0.jit_port_visit AS
+    SELECT port_visit_id FROM dcsa_im_v3_0.transport_call_jit_port_visit
+    WHERE port_visit_id = transport_call_id;
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.negotiation_cycle CASCADE;
 CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
      cycle_key text PRIMARY KEY,
@@ -632,47 +644,54 @@ CREATE INDEX ON dcsa_im_v3_0.operations_event (event_created_date_time);
 CREATE INDEX ON dcsa_im_v3_0.operations_event (transport_call_id);
 
 -- Only used by UI support to assist the UI
-DROP VIEW IF EXISTS dcsa_im_v3_0.transport_call_with_timestamps CASCADE;
-CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
-    SELECT transport_call.*,
+DROP VIEW IF EXISTS dcsa_im_v3_0.jit_port_visit_ui_context CASCADE;
+CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
+    SELECT jit_port_visit.port_visit_id,  -- port call visit
            latest_change.event_created_date_time AS latest_event_created_date_time,
            latest_eta_berth.event_date_time AS eta_berth_date_time,
            latest_atd_berth.event_date_time AS atd_berth_date_time,
            latest_eta_berth.vessel_draft AS vessel_draft,
            latest_eta_berth.miles_remaining_to_destination AS miles_remaining_to_destination
-           FROM dcsa_im_v3_0.transport_call
-      LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+           FROM dcsa_im_v3_0.jit_port_visit
+      LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_jit_port_visit.port_visit_id
                  FROM dcsa_im_v3_0.operations_event
-                 GROUP BY transport_call_id
-           ) AS latest_change ON (transport_call.id = latest_change.transport_call_id)
+                 JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                 GROUP BY port_visit_id
+           ) AS latest_change ON (jit_port_visit.port_visit_id = latest_change.port_visit_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, operations_event.transport_call_id, operations_event.vessel_draft, operations_event.miles_remaining_to_destination
-               FROM dcsa_im_v3_0.operations_event JOIN (
-                   SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id, operations_event.vessel_draft, operations_event.miles_remaining_to_destination
+               FROM dcsa_im_v3_0.operations_event
+               JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+               JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
                        FROM dcsa_im_v3_0.operations_event
+                       JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                       WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
-                       GROUP BY transport_call_id
-                   ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                       WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)')
+                       GROUP BY port_visit_id
+                   ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                   WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
-          ) AS latest_eta_berth ON (transport_call.id = latest_eta_berth.transport_call_id)
+                   WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)')
+          ) AS latest_eta_berth ON (jit_port_visit.port_visit_id = latest_eta_berth.port_visit_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, operations_event.transport_call_id
-               FROM dcsa_im_v3_0.operations_event JOIN (
-                   SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id
+               FROM dcsa_im_v3_0.operations_event
+               JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+               JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
                        FROM dcsa_im_v3_0.operations_event
+                       JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                       WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
-                       GROUP BY transport_call_id
-                   ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                       WHERE timestamp_definition.timestamp_type_name IN ('ATD-Berth', 'ATD-Berth (<implicit>)')
+                       GROUP BY port_visit_id
+                   ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                   WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
-          ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
+                   WHERE timestamp_definition.timestamp_type_name IN ('ATD-Berth', 'ATD-Berth (<implicit>)')
+          ) AS latest_atd_berth ON (jit_port_visit.port_visit_id = latest_atd_berth.port_visit_id);
 
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_solution_provider_type CASCADE;
