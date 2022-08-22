@@ -16,6 +16,3 @@ jobs:
       run: docker logs dcsa_db
     - name: "Verify database is running"
       run: echo "SELECT 1;" | docker exec -i -u postgres dcsa_db psql -d dcsa_openapi -f -
-
-    - name: Load DCSA test data
-      run: cat datamodel/testdata.d/*.sql | docker exec -i -u postgres dcsa_db psql -d dcsa_openapi -f -
