@@ -822,7 +822,7 @@ CREATE TABLE dcsa_im_v3_0.port_call_phase_type (
 DROP TABLE IF EXISTS dcsa_im_v3_0.operations_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.operations_event (
     publisher_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH')),
+    publisher_role varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH', 'SLU', 'SVP', 'MOR')),
     operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type(operations_event_type_code),
     event_location_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
