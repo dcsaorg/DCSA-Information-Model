@@ -650,6 +650,11 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
            latest_change.event_created_date_time AS latest_event_created_date_time,
            latest_eta_berth.event_date_time AS eta_berth_date_time,
            latest_atd_berth.event_date_time AS atd_berth_date_time,
+           -- We use created for omits because it makes it easier for the UI to tell whether the OMIT is the latest
+           -- timestamp (via tc.latest_event_created_date_time == tc.omit_created_date_time).
+           -- The event_created_date_time timestamp is also useful for marking anything before that date time as
+           -- obsolete.
+           latest_omit.event_created_date_time AS omit_created_date_time,
            latest_eta_berth.vessel_draft AS vessel_draft,
            latest_eta_berth.miles_remaining_to_destination AS miles_remaining_to_destination
            FROM dcsa_im_v3_0.jit_port_visit
@@ -691,7 +696,24 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
                    WHERE timestamp_definition.timestamp_type_name IN ('ATD-Berth', 'ATD-Berth (<implicit>)')
-          ) AS latest_atd_berth ON (jit_port_visit.port_visit_id = latest_atd_berth.port_visit_id);
+          ) AS latest_atd_berth ON (jit_port_visit.port_visit_id = latest_atd_berth.port_visit_id)
+      LEFT JOIN (
+               SELECT operations_event.event_created_date_time, transport_call_jit_port_visit.port_visit_id
+               FROM dcsa_im_v3_0.operations_event
+                        JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                        JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
+                   FROM dcsa_im_v3_0.operations_event
+                            JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                            JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
+                            JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
+                   WHERE timestamp_definition.timestamp_type_name IN ('Omit Port Call')
+                   GROUP BY port_visit_id
+               ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
+                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
+               WHERE timestamp_definition.timestamp_type_name IN ('Omit Port Call')
+           ) AS latest_omit ON (jit_port_visit.port_visit_id = latest_omit.port_visit_id);
 
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_solution_provider_type CASCADE;
