@@ -827,7 +827,7 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     event_location_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     transport_call_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
-    facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code) CHECK(facility_type_code IN ('PBPL', 'BRTH')),
+    facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code) CHECK(facility_type_code IN ('PBPL', 'BRTH','ANCH')),
     delay_reason_code varchar(3) NULL REFERENCES dcsa_im_v3_0.smdg_delay_reason(delay_reason_code),
     vessel_position_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     remark varchar(500) NULL,
