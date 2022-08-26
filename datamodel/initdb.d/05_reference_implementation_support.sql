@@ -539,6 +539,17 @@ CREATE TABLE dcsa_im_v3_0.pending_email_notification (
     UNIQUE (event_id, template_name)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.pending_email_notification_dead (
+    id uuid PRIMARY KEY,
+    event_id uuid NOT NULL,
+    template_name text NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL,
+    last_failed_at_date_time timestamp with time zone NOT NULL default now(),
+    failure_reason_type varchar(200),
+    failure_reason_message text
+);
+
 
 -- Only used by UI support to assist the UI
 DROP TABLE IF EXISTS dcsa_im_v3_0.port_timezone CASCADE;
