@@ -801,7 +801,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_notification_dead (
     id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     message_routing_rule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.message_routing_rule (id),
     payload jsonb NOT NULL,
-    latest_delivery_attempted_datetime timestamp with time zone NULL
+    latest_delivery_attempted_datetime timestamp with time zone NOT NULL DEFAULT now()
 );
 
 COMMIT;
