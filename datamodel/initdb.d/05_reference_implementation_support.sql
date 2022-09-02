@@ -784,7 +784,7 @@ CREATE TABLE dcsa_im_v3_0.message_routing_rule (
     id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     api_url varchar(255) NOT NULL,
     login_type varchar(8) NOT NULL CHECK(login_type IN ('OIDC')),
-    login_information jsonb NOT NULL,
+    login_information TEXT NOT NULL,
     vessel_imo_number varchar(255) NULL
 );
 
@@ -792,7 +792,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.outbox_message CASCADE;
 CREATE TABLE dcsa_im_v3_0.outbox_message (
     id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     message_routing_rule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.message_routing_rule (id),
-    payload jsonb NOT NULL
+    payload TEXT NOT NULL
 );
 CREATE INDEX ON dcsa_im_v3_0.outbox_message (message_routing_rule_id);
 
@@ -800,7 +800,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_notification_dead CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_notification_dead (
     id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     message_routing_rule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.message_routing_rule (id),
-    payload jsonb NOT NULL,
+    payload TEXT NOT NULL,
     latest_delivery_attempted_datetime timestamp with time zone NOT NULL DEFAULT now()
 );
 
