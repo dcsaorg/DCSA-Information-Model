@@ -21,7 +21,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     remark,
     port_call_phase_type_code,
     vessel_draft_unit,
-    miles_remaining_to_destination
+    miles_to_destination_port
 ) VALUES (
     'd330b6f5-edcb-4e9e-a09f-e98e91deba95',
     DATE '2022-03-07',
@@ -55,7 +55,7 @@ INSERT INTO dcsa_im_v3_0.operations_event (
     null, /* remark */
     'INBD', /* port_call_phase_type_code */
      'MTR', /* vessel_draft_unit */
-     3.2 /* miles_remaining_to_destination */
+     3.2 /* miles_to_destination_port */
 );
 
 INSERT INTO dcsa_im_v3_0.ops_event_timestamp_definition (
