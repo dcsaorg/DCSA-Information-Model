@@ -243,38 +243,22 @@ Cancel Bunkering@Anchorage,BUK2CA
 Cancel Bunkering@Anchorage,BUK2VSL
 Cancel Bunkering@Anchorage,CA2BUK
 Cancel Bunkering@Anchorage,VSL2BUK
-Cancel Bunkering@Anchorage (<implicit>),AG2BUK
-Cancel Bunkering@Anchorage (<implicit>),BUK2AG
-Cancel Bunkering@Anchorage (<implicit>),BUK2CA
-Cancel Bunkering@Anchorage (<implicit>),BUK2VSL
-Cancel Bunkering@Anchorage (<implicit>),CA2BUK
-Cancel Bunkering@Anchorage (<implicit>),VSL2BUK
 Cancel Bunkering@Berth,AG2BUK
 Cancel Bunkering@Berth,BUK2AG
 Cancel Bunkering@Berth,BUK2CA
 Cancel Bunkering@Berth,BUK2VSL
 Cancel Bunkering@Berth,CA2BUK
 Cancel Bunkering@Berth,VSL2BUK
-Cancel Bunkering@Berth (<implicit>),AG2BUK
-Cancel Bunkering@Berth (<implicit>),BUK2AG
-Cancel Bunkering@Berth (<implicit>),BUK2CA
-Cancel Bunkering@Berth (<implicit>),BUK2VSL
-Cancel Bunkering@Berth (<implicit>),CA2BUK
-Cancel Bunkering@Berth (<implicit>),VSL2BUK
 Cancel Cargo Ops,AG2TR
 Cancel Cargo Ops,CA2TR
 Cancel Cargo Ops,TR2AG
 Cancel Cargo Ops,TR2CA
 Cancel Cargo Ops,TR2VSL
 Cancel Cargo Ops,VSL2TR
-Cancel Mooring (<implicit>),ATH2MOR
-Cancel Mooring (<implicit>),MOR2ATH
 Cancel Mooring (Inbound),ATH2MOR
 Cancel Mooring (Inbound),MOR2ATH
 Cancel Mooring (Outbound),ATH2MOR
 Cancel Mooring (Outbound),MOR2ATH
-Cancel Pilotage (<implicit>),ATH2PLT
-Cancel Pilotage (<implicit>),PLT2ATH
 Cancel Pilotage (Inbound),ATH2PLT
 Cancel Pilotage (Inbound),PLT2ATH
 Cancel Pilotage (Outbound),ATH2PLT
@@ -293,8 +277,6 @@ Cancel Sludge@Berth,SLU2AG
 Cancel Sludge@Berth,SLU2CA
 Cancel Sludge@Berth,SLU2VSL
 Cancel Sludge@Berth,VSL2SLU
-Cancel Towage (<implicit>),ATH2TWG
-Cancel Towage (<implicit>),TWG2ATH
 Cancel Towage (Inbound),ATH2TWG
 Cancel Towage (Inbound),TWG2ATH
 Cancel Towage (Outbound),ATH2TWG

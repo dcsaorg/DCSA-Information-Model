@@ -593,7 +593,8 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
-    negotiation_cycle varchar(50) NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key) INITIALLY DEFERRED
+    negotiation_cycle varchar(50) NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key) INITIALLY DEFERRED,
+    implicit_variant_of text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.publisher_pattern CASCADE;
