@@ -190,49 +190,28 @@ def declare_timestamps():
         negotiation_cycle='T-Cargo Ops'
     )
 
-    # ATS Cargo Ops discharge UC 47
-    generate_special_timestamp(
-        'ATS cargo ops discharge start',
-        PUBLISHER_PATTERN_TR2CA,
-        'STRT',
-        'BRTH',
-        'ALGS',
+    # ATS / ATC Cargo Ops Discharge UC 47 + 48
+    xty_service_timestamps(
+        ACT,
+        ['DCRO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_2',
-        'DCRO',
         vessel_position_requirement=EXCLUDED,
         event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
+        is_cancelable=False,
     )
 
-    #ATS Cargo Ops discharge completed UC 48
-    generate_special_timestamp(
-        'ATS cargo ops discharge completed',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Cargo Ops Load UC 49
+    xty_service_timestamps(
+        ACT,
+        ['LCRO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_2',
-        'DCRO',
-        vessel_position_requirement=EXCLUDED,
+        operations_event_type_codes=['STRT'],
         event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
-    )
-
-    #ATS Cargo Ops Load completed UC 49
-    generate_special_timestamp(
-        'ATS cargo ops Load',
-        PUBLISHER_PATTERN_TR2CA,
-        'STRT',
-        'BRTH',
-        'ALGS',
-        "Start Cargo Operations And Services",
-        'jit1_2',
-        'LCRO',
-        vessel_position_requirement=EXCLUDED,
-        event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
+        is_cancelable=False,
     )
 
     # ETC Cargo Ops UC 50 - 52
@@ -271,7 +250,6 @@ def declare_timestamps():
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
         event_location_requirement=REQUIRED,
         negotiation_cycle='TD-Berth',
-        include_implicit_phase_in_name=True,
     )
 
     #Pilotage UC 55 - 57 + 61 - 63 + Towage UC 58 - 60 + UC 64 - 66
@@ -286,18 +264,16 @@ def declare_timestamps():
         event_location_requirement=REQUIRED,
     )
 
-    #ATC Cargo Ops Load UC 70
-    generate_special_timestamp(
-        'ATC cargo ops Load',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Cargo Ops Load UC 70
+    xty_service_timestamps(
+        ACT,
+        ['LCRO'],
+        ['ALGS'],
         "Port Departure Planning And Services Completion",
         'jit1_2',
-        'LCRO',
-        vessel_position_requirement=EXCLUDED,
+        operations_event_type_codes=['CMPL'],
         event_location_requirement=REQUIRED,
+        is_cancelable=False,
     )
 
     # ATC Cargo Ops UC 71
@@ -656,10 +632,11 @@ class Unconditionally(Generic[T]):
 
 class ServiceTypeInfo:
 
-    def __init__(self, name, facility_type_codes, publisher_patterns):
+    def __init__(self, name, facility_type_codes, publisher_patterns, negotiation_cycle=None):
         self.name = name
         self.facility_type_codes = [facility_type_codes] if isinstance(facility_type_codes, str) else facility_type_codes
         self.publisher_patterns = publisher_patterns
+        self.negotiation_cycle = negotiation_cycle
 
     def facility_type_codes_for(self, key):
         if isinstance(self.facility_type_codes, list):
@@ -702,8 +679,10 @@ SERVICE_TYPE_CODE2INFO = {
     # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
     # check between the portcallservicetypecodes.csv file and the names used here.
     'CRGO': ServiceTypeInfo('Cargo Ops', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
+    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES),
+                            negotiation_cycle='T-Cargo Ops'),
+    'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES),
+                            negotiation_cycle='T-Cargo Ops'),
     'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], ['ATH'])),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
@@ -825,6 +804,8 @@ def xty_service_timestamps(
     for port_call_service_type_code in port_call_service_type_codes:
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
+        if negotiation_cycle is None:
+            negotiation_cycle = service_info.negotiation_cycle
         for port_call_phase_type_code, operations_event_type_code in product(port_call_phase_type_codes, operations_event_type_codes):
             facility_type_code_key = (port_call_phase_type_code, operations_event_type_code)
             facility_type_codes = service_info.facility_type_codes_for(facility_type_code_key)

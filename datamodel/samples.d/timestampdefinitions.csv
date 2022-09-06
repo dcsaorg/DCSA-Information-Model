@@ -110,9 +110,9 @@ Vessel Readiness for Cargo operations [JIT 1.2],Vessel Readiness for Cargo opera
 Vessel Readiness for Cargo operations [JIT 1.1],Vessel Readiness for Cargo operations [JIT 1.1],ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special
 ATS-Cargo Ops (<implicit>),ATS-Cargo Ops (<implicit>),ACT,STRT,null,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops
 ATS-Cargo Ops,ATS-Cargo Ops,ACT,STRT,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops
-ATS cargo ops discharge start,ATS cargo ops discharge start,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
-ATS cargo ops discharge completed,ATS cargo ops discharge completed,ACT,CMPL,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
-ATS cargo ops Load,ATS cargo ops Load,ACT,STRT,ALGS,LCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
+ATS-Cargo Ops Discharge,ATS-Cargo Ops Discharge,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
+ATC-Cargo Ops Discharge,ATC-Cargo Ops Discharge,ACT,CMPL,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
+ATS-Cargo Ops Load,ATS-Cargo Ops Load,ACT,STRT,ALGS,LCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
 ETC-Cargo Ops,ETC-Cargo Ops,EST,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,RTC-Cargo Ops,RTC-Cargo Ops,T-Cargo Ops
 RTC-Cargo Ops,RTC-Cargo Ops,REQ,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,PTC-Cargo Ops,ETC-Cargo Ops,T-Cargo Ops
 PTC-Cargo Ops,PTC-Cargo Ops,PLN,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops
@@ -158,7 +158,7 @@ ETC-Towage (Shifting),ETC-Towage (Shifting),EST,CMPL,SHIF,TOWG,BRTH,Port Departu
 RTC-Towage (Shifting),RTC-Towage (Shifting),REQ,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,PTC-Towage (Shifting),ETC-Towage (Shifting),T-Towage (Shifting)
 PTC-Towage (Shifting),PTC-Towage (Shifting),PLN,CMPL,SHIF,TOWG,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Towage (Shifting)
 Cancel Towage (Shifting),Cancel Towage (Shifting),ACT,CANC,SHIF,TOWG,BRTH,OMIT Port Call Or Cancel A Service,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Towage (Shifting)
-ATC cargo ops Load,ATC cargo ops Load,ACT,CMPL,ALGS,LCRO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special
+ATC-Cargo Ops Load,ATC-Cargo Ops Load,ACT,CMPL,ALGS,LCRO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
 ATC-Cargo Ops,ATC-Cargo Ops,ACT,CMPL,ALGS,CRGO,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
 Cancel Cargo Ops,Cancel Cargo Ops,ACT,CANC,ALGS,CRGO,BRTH,OMIT Port Call Or Cancel A Service,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops
 ETS-Mooring (Outbound),ETS-Mooring (Outbound),EST,STRT,OUTB,MOOR,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_2,RTS-Mooring (Outbound),RTS-Mooring (Outbound),T-Mooring (Outbound)
