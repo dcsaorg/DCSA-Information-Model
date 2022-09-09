@@ -29,7 +29,7 @@ def declare_timestamps():
         ALL_EVENT_CLASSIFIER_CODES,
         UNCANCELABLE_ARRI_OPERATIONS_EVENT_TYPE_CODE,
         ['BRTH'],
-        [NULL_VALUE, 'INBD'],
+        ['INBD', NULL_VALUE],
         event_classifier_code_matches(ifelse(REQ_PLN_ACT, "Berth Arrival Planning",
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
@@ -43,7 +43,7 @@ def declare_timestamps():
     xty_service_timestamps(
         EST_REQ_PLN,  # ATS-Cargo Ops comes later (different port call part)
         ['CRGO'],
-        [NULL_VALUE, 'ALGS'],
+        ['ALGS', NULL_VALUE],
         "Services Planning",
         'jit1_1',
         # We only generated the STRT here, CMPL (and CANC) comes later
@@ -57,7 +57,7 @@ def declare_timestamps():
     xty_service_timestamps(
         ALL_EVENT_CLASSIFIER_CODES,
         ['PILO'],
-        [NULL_VALUE, 'INBD'],
+        ['INBD', NULL_VALUE],
         event_classifier_code_matches(ifelse(REQ_PLN_ACT, "Services Planning",
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
@@ -76,7 +76,7 @@ def declare_timestamps():
     xty_service_timestamps(
         ALL_EVENT_CLASSIFIER_CODES,
         ['TOWG'],
-        [NULL_VALUE, 'INBD'],
+        ['INBD', NULL_VALUE],
         event_classifier_code_matches(ifelse(REQ_PLN_ACT, "Services Planning",
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         'jit1_1',
@@ -94,7 +94,7 @@ def declare_timestamps():
     xty_service_timestamps(
         ALL_EVENT_CLASSIFIER_CODES,
         ['MOOR'],
-        [NULL_VALUE, 'INBD'],
+        ['INBD', NULL_VALUE],
         event_classifier_code_matches(ifelse(REQ_PLN_ACT, "Services Planning",
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         'jit1_2',
@@ -109,7 +109,7 @@ def declare_timestamps():
     xty_service_timestamps(
         EST_REQ_PLN,
         ['BUNK'],
-        [NULL_VALUE, 'ALGS'],
+        ['ALGS', NULL_VALUE],
         "Services Planning",
         'jit1_2',
         include_phase_in_name=False,
@@ -124,7 +124,7 @@ def declare_timestamps():
         ALL_EVENT_CLASSIFIER_CODES,
         ['ARRI'],
         ['PBPL'],
-        [NULL_VALUE, 'INBD'],
+        ['INBD', NULL_VALUE],
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
         event_location_requirement=REQUIRED,
@@ -181,7 +181,7 @@ def declare_timestamps():
     xty_service_timestamps(
         ACT,
         ['CRGO'],
-        [NULL_VALUE, 'ALGS'],
+        ['ALGS', NULL_VALUE],
         "Start Cargo Operations And Services",
         'jit1_0',
         # We only generated the STRT here, CMPL (and CANC) comes later
@@ -190,49 +190,28 @@ def declare_timestamps():
         negotiation_cycle='T-Cargo Ops'
     )
 
-    # ATS Cargo Ops discharge UC 47
-    generate_special_timestamp(
-        'ATS cargo ops discharge start',
-        PUBLISHER_PATTERN_TR2CA,
-        'STRT',
-        'BRTH',
-        'ALGS',
+    # ATS / ATC Cargo Ops Discharge UC 47 + 48
+    xty_service_timestamps(
+        ACT,
+        ['DCRO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_2',
-        'DCRO',
         vessel_position_requirement=EXCLUDED,
         event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
+        is_cancelable=False,
     )
 
-    #ATS Cargo Ops discharge completed UC 48
-    generate_special_timestamp(
-        'ATS cargo ops discharge completed',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Cargo Ops Load UC 49
+    xty_service_timestamps(
+        ACT,
+        ['LCRO'],
+        ['ALGS'],
         "Start Cargo Operations And Services",
         'jit1_2',
-        'DCRO',
-        vessel_position_requirement=EXCLUDED,
+        operations_event_type_codes=['STRT'],
         event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
-    )
-
-    #ATS Cargo Ops Load completed UC 49
-    generate_special_timestamp(
-        'ATS cargo ops Load',
-        PUBLISHER_PATTERN_TR2CA,
-        'STRT',
-        'BRTH',
-        'ALGS',
-        "Start Cargo Operations And Services",
-        'jit1_2',
-        'LCRO',
-        vessel_position_requirement=EXCLUDED,
-        event_location_requirement=REQUIRED,
-        negotiation_cycle='T-Cargo Ops'
+        is_cancelable=False,
     )
 
     # ETC Cargo Ops UC 50 - 52
@@ -251,7 +230,7 @@ def declare_timestamps():
     xty_service_timestamps(
         ACT,
         ['BUNK'],
-        [NULL_VALUE, 'ALGS'],
+        ['ALGS', NULL_VALUE],
         operations_event_type_code_matches(ifelse('STRT', "Start Cargo Operations And Services",
                                                   "Port Departure Planning And Services Completion")),
         'jit1_1',
@@ -266,12 +245,11 @@ def declare_timestamps():
         EST_REQ_PLN,
         UNCANCELABLE_DEPA_OPERATIONS_EVENT_TYPE_CODE,
         ['BRTH'],
-        [NULL_VALUE, 'ALGS'],
+        ['ALGS', NULL_VALUE],
         "Port Departure Planning And Services Completion",
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
         event_location_requirement=REQUIRED,
         negotiation_cycle='TD-Berth',
-        include_implicit_phase_in_name=True,
     )
 
     #Pilotage UC 55 - 57 + 61 - 63 + Towage UC 58 - 60 + UC 64 - 66
@@ -286,18 +264,16 @@ def declare_timestamps():
         event_location_requirement=REQUIRED,
     )
 
-    #ATC Cargo Ops Load UC 70
-    generate_special_timestamp(
-        'ATC cargo ops Load',
-        PUBLISHER_PATTERN_TR2CA,
-        'CMPL',
-        'BRTH',
-        'ALGS',
+    # ATC Cargo Ops Load UC 70
+    xty_service_timestamps(
+        ACT,
+        ['LCRO'],
+        ['ALGS'],
         "Port Departure Planning And Services Completion",
         'jit1_2',
-        'LCRO',
-        vessel_position_requirement=EXCLUDED,
+        operations_event_type_codes=['CMPL'],
         event_location_requirement=REQUIRED,
+        is_cancelable=False,
     )
 
     # ATC Cargo Ops UC 71
@@ -378,7 +354,7 @@ def declare_timestamps():
         ACT,
         ['DEPA'],
         ['BRTH'],
-        [NULL_VALUE, 'OUTB'],
+        ['OUTB', NULL_VALUE],
         "Port Departure Execution",
         'jit1_0',
         event_location_requirement=REQUIRED,
@@ -510,6 +486,7 @@ FIELDS_ORDER = [
     COLUMN_ACCEPT_TS,
     COLUMN_REJECT_TS,
     'negotiationCycle',
+    'implicitVariantOf',
 ]
 
 TS_ID_COUNTER = 0
@@ -656,10 +633,11 @@ class Unconditionally(Generic[T]):
 
 class ServiceTypeInfo:
 
-    def __init__(self, name, facility_type_codes, publisher_patterns):
+    def __init__(self, name, facility_type_codes, publisher_patterns, negotiation_cycle=None):
         self.name = name
         self.facility_type_codes = [facility_type_codes] if isinstance(facility_type_codes, str) else facility_type_codes
         self.publisher_patterns = publisher_patterns
+        self.negotiation_cycle = negotiation_cycle
 
     def facility_type_codes_for(self, key):
         if isinstance(self.facility_type_codes, list):
@@ -702,8 +680,10 @@ SERVICE_TYPE_CODE2INFO = {
     # Note that the timestamp name is not always the same as the service name, so there is no automatic cross
     # check between the portcallservicetypecodes.csv file and the names used here.
     'CRGO': ServiceTypeInfo('Cargo Ops', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
-    'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES)),
+    'DCRO': ServiceTypeInfo('Cargo Ops Discharge', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES),
+                            negotiation_cycle='T-Cargo Ops'),
+    'LCRO': ServiceTypeInfo('Cargo Ops Load', 'BRTH', as_publisher_patterns(['TR'], CARRIER_ROLES),
+                            negotiation_cycle='T-Cargo Ops'),
     'LASH': ServiceTypeInfo('Lashing', 'BRTH', as_publisher_patterns(['LSH'], CARRIER_ROLES)),
     'MOOR': ServiceTypeInfo('Mooring', 'BRTH', as_publisher_patterns(['MOR'], ['ATH'])),
     'BUNK': ServiceTypeInfo('Bunkering', ['ANCH', 'BRTH'], as_publisher_patterns(['BUK'], CARRIER_ROLES)),
@@ -809,7 +789,7 @@ def xty_service_timestamps(
         vessel_position_requirement: Union[str, "GetItemProtocol[str]"] = EXCLUDED,
         operations_event_type_codes=None,
         is_cancelable: bool = True,
-        include_implicit_phase_in_name: Optional[bool] = None,
+        implicit_implies_phase: Optional[str] = None,
         is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
         negotiation_cycle: Optional[str] = None,
 ):
@@ -819,12 +799,18 @@ def xty_service_timestamps(
         else:
             operations_event_type_codes = UNCANCELABLE_SERVICE_OPERATIONS_EVENT_TYPE_CODE
 
-    if include_implicit_phase_in_name is None:
-        include_implicit_phase_in_name = len(port_call_phase_type_codes) > 1 and NULL_VALUE in port_call_phase_type_codes
+    if implicit_implies_phase is None and len(port_call_phase_type_codes) == 2 \
+            and NULL_VALUE in port_call_phase_type_codes:
+        explicit_phase = port_call_phase_type_codes[0]
+        if explicit_phase == NULL_VALUE:
+            raise ValueError("Explicit phase must come before implicit phase (NULL_VALUE)")
+        implicit_implies_phase = explicit_phase
 
     for port_call_service_type_code in port_call_service_type_codes:
         service_info = SERVICE_TYPE_CODE2INFO[port_call_service_type_code]
         _ensure_named(service_info, 'portCallServiceTypeCode', port_call_service_type_code)
+        if negotiation_cycle is None:
+            negotiation_cycle = service_info.negotiation_cycle
         for port_call_phase_type_code, operations_event_type_code in product(port_call_phase_type_codes, operations_event_type_codes):
             facility_type_code_key = (port_call_phase_type_code, operations_event_type_code)
             facility_type_codes = service_info.facility_type_codes_for(facility_type_code_key)
@@ -836,11 +822,11 @@ def xty_service_timestamps(
                 [port_call_phase_type_code],
                 port_call_part,
                 provided_in_standard,
+                implicit_implies_phase=implicit_implies_phase,
                 port_call_service_type_codes=[port_call_service_type_code],
                 include_phase_in_name=include_phase_in_name,
                 vessel_position_requirement=vessel_position_requirement,
                 event_location_requirement=event_location_requirement,
-                include_implicit_phase_in_name=include_implicit_phase_in_name,
                 include_facility_type_in_name=len(facility_type_codes) > 1,
                 negotiation_cycle=negotiation_cycle,
                 is_miles_to_destination_relevant=is_miles_to_destination_relevant,
@@ -883,6 +869,7 @@ def generate_special_timestamp(
         provided_in_standard,
         publisher_pattern,
         negotiation_cycle,  # negotiation cycle
+        NULL_VALUE,  # implicitVariantOf
         is_pattern_timestamp=False,
         is_miles_to_destination_relevant=is_miles_to_destination_relevant,
     )
@@ -934,13 +921,19 @@ def generic_xty_timestamps(
         include_facility_type_in_name: bool = False,
         event_location_requirement: Union[str, "GetItemProtocol[str]"] = EXCLUDED,
         vessel_position_requirement: Union[str, "GetItemProtocol[str]"] = EXCLUDED,
-        include_implicit_phase_in_name: Optional[bool] = None,
+        implicit_implies_phase: Optional[str] = None,
         negotiation_cycle: Optional[str] = None,
         is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
 ):
 
-    if include_implicit_phase_in_name is None:
-        include_implicit_phase_in_name = len(port_call_phase_type_codes) > 1 and NULL_VALUE in port_call_phase_type_codes
+    if implicit_implies_phase is None and len(port_call_phase_type_codes) == 2 \
+            and NULL_VALUE in port_call_phase_type_codes:
+        explicit_phase = port_call_phase_type_codes[0]
+        if explicit_phase == NULL_VALUE:
+            raise ValueError("Explicit phase must come before implicit phase (NULL_VALUE)")
+        implicit_implies_phase = explicit_phase
+
+    include_implicit_phase_in_name = True if implicit_implies_phase and implicit_implies_phase != NULL_VALUE else False
 
     if port_call_service_type_codes is None:
         # Service timestamps can easily use generate_service_timestamps instead, so we default to have this be NULL
@@ -991,6 +984,9 @@ def generic_xty_timestamps(
 
         selected_publisher_pattern = initial_publisher_pattern[timestamp_detail]
         if timestamp_detail.operations_event_type_code == 'CANC':
+            if implicit_implies_phase and timestamp_detail.port_call_phase_type_code == NULL_VALUE:
+                # Do not create implicit cancels.
+                continue
             full_name = ''.join(('Cancel ', name_stem, facility_type_name_part, phase_name_part))
             if full_name in ALL_TS:
                 # Forgive multiple cancels - it is not worth the hassle to report / deal with
@@ -1006,6 +1002,26 @@ def generic_xty_timestamps(
             full_name = ''.join((timestamp_detail.event_classifier_code[0], 'T',
                                  timestamp_detail.operations_event_type_code[0], '-',
                                  name_stem, facility_type_name_part, phase_name_part))
+
+        implicit_variant_of = NULL_VALUE
+        if implicit_implies_phase and timestamp_detail.port_call_phase_type_code == NULL_VALUE:
+            _, _, explicit_phase_name_part, _ = _determine_pattern_name_parts(
+                timestamp_detail.port_call_service_type_code,
+                implicit_implies_phase,
+                timestamp_detail.facility_type_code,
+                include_implicit_phase_in_name,
+                include_phase_in_name,
+                include_facility_type_in_name
+            )
+            explicit_full_name = ''.join((timestamp_detail.event_classifier_code[0], 'T',
+                                          timestamp_detail.operations_event_type_code[0], '-',
+                                          name_stem, facility_type_name_part, explicit_phase_name_part))
+            try:
+                explicit_ts = ALL_TS[explicit_full_name]
+            except KeyError:
+                raise ValueError(f"{explicit_full_name} was not defined (yet) but referenced by {full_name}."
+                                 f" Please ensure they are defined in the correct order")
+            implicit_variant_of = explicit_ts.id
 
         publisher_pattern = selected_publisher_pattern
         if timestamp_detail.event_classifier_code == 'REQ':
@@ -1039,6 +1055,7 @@ def generic_xty_timestamps(
             ts_version,
             publisher_pattern,
             ts_negotiation_cycle,
+            implicit_variant_of,
             # 'CANC' does not follow the pattern.
             is_pattern_timestamp=timestamp_detail.operations_event_type_code != 'CANC',
             is_miles_to_destination_relevant=ts_is_miles_to_destination_relevant,
@@ -1096,6 +1113,7 @@ def _make_timestamp(timestamp_name,
                     provided_in_standard,
                     publisher_pattern,
                     negotiation_cycle,
+                    implicit_variant_of,
                     is_pattern_timestamp=False,
                     is_miles_to_destination_relevant=False,
                     ):
@@ -1122,6 +1140,7 @@ def _make_timestamp(timestamp_name,
         NULL_VALUE,  # acceptTimestampDefinition
         NULL_VALUE,  # rejectTimestampDefinition
         negotiation_cycle,  # negotiationCycle
+        implicit_variant_of,
     ]
     global FIELDS_ORDER
     assert len(ts_fields) == len(FIELDS_ORDER)
