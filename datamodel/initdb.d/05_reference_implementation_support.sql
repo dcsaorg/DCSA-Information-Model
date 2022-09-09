@@ -573,7 +573,8 @@ CREATE VIEW dcsa_im_v3_0.jit_port_visit AS
 DROP TABLE IF EXISTS dcsa_im_v3_0.negotiation_cycle CASCADE;
 CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
      cycle_key text PRIMARY KEY,
-     cycle_name text NOT NULL UNIQUE
+     cycle_name text NOT NULL UNIQUE,
+     display_order int NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
