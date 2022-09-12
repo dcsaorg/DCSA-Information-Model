@@ -635,7 +635,7 @@ CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_status_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.port_call_status_code (
+CREATE TABLE dcsa_im_v3_0.port_call_status_type (
     port_call_status_type_code varchar(4) NOT NULL PRIMARY KEY,
     port_call_status_type_name varchar(30) NOT NULL,
     port_call_status_type_description varchar(250) NOT NULL
