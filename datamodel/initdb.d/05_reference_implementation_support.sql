@@ -669,7 +669,7 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
            -- obsolete.
            latest_omit.event_created_date_time AS omit_created_date_time,
            latest_eta_berth.vessel_draft AS vessel_draft,
-           latest_eta_berth.miles_remaining_to_destination AS miles_remaining_to_destination
+           latest_eta_berth.miles_to_destination_port AS miles_to_destination_port
            FROM dcsa_im_v3_0.jit_port_visit
       LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_jit_port_visit.port_visit_id
                  FROM dcsa_im_v3_0.operations_event
@@ -677,7 +677,7 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
                  GROUP BY port_visit_id
            ) AS latest_change ON (jit_port_visit.port_visit_id = latest_change.port_visit_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id, operations_event.vessel_draft, operations_event.miles_remaining_to_destination
+               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id, operations_event.vessel_draft, operations_event.miles_to_destination_port
                FROM dcsa_im_v3_0.operations_event
                JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                JOIN (

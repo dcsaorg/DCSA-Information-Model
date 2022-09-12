@@ -181,8 +181,10 @@ CREATE TABLE dcsa_im_v3_0.cut_off_time (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_type (
-    code varchar(4) PRIMARY KEY,
-    description varchar(100) NOT NULL
+    vessel_type_code varchar(4) PRIMARY KEY,
+    vessel_type_name varchar(100) NULL,
+    unece_concatenated_means_of_transport_code varchar(4),
+    vessel_type_description varchar(100) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel CASCADE;
@@ -194,9 +196,9 @@ CREATE TABLE dcsa_im_v3_0.vessel (
     vessel_call_sign varchar(10) NULL,
     vessel_operator_carrier_id uuid NULL REFERENCES dcsa_im_v3_0.carrier (id),
     is_dummy boolean NOT NULL default false,
-    length numeric NULL,
+    length_overall numeric NULL,
     width numeric NULL,
-    type varchar(4) NULL REFERENCES dcsa_im_v3_0.vessel_type (code),
+    vessel_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.vessel_type (vessel_type_code),
     dimension_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT dimension_unit CHECK (dimension_unit IN ('FOT','MTR'))
 );
 
@@ -632,11 +634,11 @@ CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_location_type_code);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.shipment_location (booking_id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_status_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.port_call_status_code (
-    port_call_status_code varchar(4) NOT NULL PRIMARY KEY,
-    port_call_status_name varchar(30) NOT NULL,
-    port_call_status_description varchar(250) NOT NULL
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_status_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_status_type (
+    port_call_status_type_code varchar(4) NOT NULL PRIMARY KEY,
+    port_call_status_type_name varchar(30) NOT NULL,
+    port_call_status_type_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call CASCADE;
@@ -652,7 +654,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
     import_voyage_id uuid NULL, -- references on line 800
     export_voyage_id uuid NULL, -- references on line 800
-    port_call_status_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_code (port_call_status_code),
+    port_call_status_type_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_type (port_call_status_type_code),
     port_visit_reference varchar(50) NULL
 );
 
@@ -834,7 +836,7 @@ CREATE TABLE dcsa_im_v3_0.operations_event (
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     vessel_draft real NULL,
     vessel_draft_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CONSTRAINT vessel_draft_unit CHECK (vessel_draft_unit IN ('FOT','MTR')),
-    miles_remaining_to_destination real NULL
+    miles_to_destination_port real NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.operations_event ADD PRIMARY KEY (event_id);
