@@ -787,7 +787,8 @@ CREATE TABLE dcsa_im_v3_0.message_routing_rule (
     api_url varchar(255) NOT NULL,
     login_type varchar(8) NOT NULL CHECK(login_type IN ('OIDC')),
     login_information TEXT NOT NULL,
-    vessel_imo_number varchar(255) NULL
+    vessel_imo_number varchar(255) NULL,
+    publisher_role varchar(3) NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH', 'SLU', 'SVP', 'MOR'))
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.outbox_message CASCADE;
