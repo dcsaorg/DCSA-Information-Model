@@ -162,8 +162,9 @@ def declare_timestamps():
         )
 
     # Vessel Readiness for Cargo ops UC 45
-    for (name, service_code, version) in [('Vessel Readiness for Cargo operations [JIT 1.2]', 'VRDY', 'jit1_2'),
+    for (name, service_code, version) in [('Vessel Readiness for Cargo operations', 'VRDY', 'jit1_2'),
                                           ('Vessel Readiness for Cargo operations [JIT 1.1]', 'SAFE', 'jit1_1')]:
+        variant_of = 'Vessel Readiness for Cargo operations' if version == 'jit1_1' else NULL_VALUE
         generate_special_timestamp(
             name,
             PUBLISHER_PATTERN_CA2TR,
@@ -175,6 +176,7 @@ def declare_timestamps():
             service_code,
             vessel_position_requirement=EXCLUDED,
             event_location_requirement=REQUIRED,
+            implicit_variant_of=variant_of,
         )
 
     # ATS Cargo Ops UC 46
@@ -333,8 +335,9 @@ def declare_timestamps():
     )
 
     # Vessel ready to sail UC 80
-    for (name, service_code, version) in [('Vessel Ready to sail [JIT 1.2]', 'VRDY', 'jit1_2'),
+    for (name, service_code, version) in [('Vessel Ready to sail', 'VRDY', 'jit1_2'),
                                           ('Vessel Ready to sail [JIT 1.1]', 'SAFE', 'jit1_1')]:
+        variant_of = 'Vessel Ready to sail' if version == 'jit1_1' else NULL_VALUE
         generate_special_timestamp(
             name,
             PUBLISHER_PATTERN_CA2TR,
@@ -346,6 +349,7 @@ def declare_timestamps():
             service_code,
             vessel_position_requirement=EXCLUDED,
             event_location_requirement=REQUIRED,
+            implicit_variant_of=variant_of,
         )
 
     # ATD Berth UC 82
@@ -847,6 +851,7 @@ def generate_special_timestamp(
         event_location_requirement: str = EXCLUDED,
         negotiation_cycle: str = 'Special',
         is_miles_to_destination_relevant=False,
+        implicit_variant_of : str = NULL_VALUE,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
     _ensure_known(port_call_part, VALID_PORT_CALL_PARTS, "portCallPart")
@@ -869,7 +874,7 @@ def generate_special_timestamp(
         provided_in_standard,
         publisher_pattern,
         negotiation_cycle,  # negotiation cycle
-        NULL_VALUE,  # implicitVariantOf
+        implicit_variant_of,  # implicitVariantOf
         is_pattern_timestamp=False,
         is_miles_to_destination_relevant=is_miles_to_destination_relevant,
     )
