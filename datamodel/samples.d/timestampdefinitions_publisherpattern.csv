@@ -571,15 +571,15 @@ SOSP,VSL2ATH
 Terminal Ready for vessel departure,TR2AG
 Terminal Ready for vessel departure,TR2CA
 Terminal Ready for vessel departure,TR2VSL
+Vessel Readiness for Cargo operations,AG2TR
+Vessel Readiness for Cargo operations,CA2TR
+Vessel Readiness for Cargo operations,VSL2TR
 Vessel Readiness for Cargo operations [JIT 1.1],AG2TR
 Vessel Readiness for Cargo operations [JIT 1.1],CA2TR
 Vessel Readiness for Cargo operations [JIT 1.1],VSL2TR
-Vessel Readiness for Cargo operations [JIT 1.2],AG2TR
-Vessel Readiness for Cargo operations [JIT 1.2],CA2TR
-Vessel Readiness for Cargo operations [JIT 1.2],VSL2TR
+Vessel Ready to sail,AG2TR
+Vessel Ready to sail,CA2TR
+Vessel Ready to sail,VSL2TR
 Vessel Ready to sail [JIT 1.1],AG2TR
 Vessel Ready to sail [JIT 1.1],CA2TR
 Vessel Ready to sail [JIT 1.1],VSL2TR
-Vessel Ready to sail [JIT 1.2],AG2TR
-Vessel Ready to sail [JIT 1.2],CA2TR
-Vessel Ready to sail [JIT 1.2],VSL2TR

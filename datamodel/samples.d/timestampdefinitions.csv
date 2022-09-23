@@ -101,8 +101,8 @@ ATA-PBP (<implicit>),ATA-PBP (<implicit>),ACT,ARRI,null,null,PBPL,"Pilot Boardin
 ESOP,ESOP,ACT,ARRI,INBD,null,null,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,False,OPTIONAL,True,jit1_1,null,null,Special,null
 AT All fast,AT All fast,ACT,ARRI,ALGS,FAST,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,Special,null
 Gangway Down and Safe,Gangway Down and Safe,ACT,ARRI,ALGS,GWAY,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,EXCLUDED,False,jit1_1,null,null,Special,null
-Vessel Readiness for Cargo operations [JIT 1.2],Vessel Readiness for Cargo operations [JIT 1.2],ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special,null
-Vessel Readiness for Cargo operations [JIT 1.1],Vessel Readiness for Cargo operations [JIT 1.1],ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,null
+Vessel Readiness for Cargo operations,Vessel Readiness for Cargo operations,ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special,null
+Vessel Readiness for Cargo operations [JIT 1.1],Vessel Readiness for Cargo operations [JIT 1.1],ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,Vessel Readiness for Cargo operations
 ATS-Cargo Ops,ATS-Cargo Ops,ACT,STRT,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops,null
 ATS-Cargo Ops (<implicit>),ATS-Cargo Ops (<implicit>),ACT,STRT,null,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops,ATS-Cargo Ops
 ATS-Cargo Ops Discharge,ATS-Cargo Ops Discharge,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops,null
@@ -167,8 +167,8 @@ ATC-Mooring (Outbound),ATC-Mooring (Outbound),ACT,CMPL,OUTB,MOOR,BRTH,Port Depar
 Cancel Mooring (Outbound),Cancel Mooring (Outbound),ACT,CANC,OUTB,MOOR,BRTH,OMIT Port Call Or Cancel A Service,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,T-Mooring (Outbound),null
 ATC Lashing,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,null
 Terminal Ready for vessel departure,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,null
-Vessel Ready to sail [JIT 1.2],Vessel Ready to sail [JIT 1.2],ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special,null
-Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,null
+Vessel Ready to sail,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_2,null,null,Special,null
+Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,Special,Vessel Ready to sail
 ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,null
 ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,ATD-Berth
 ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
