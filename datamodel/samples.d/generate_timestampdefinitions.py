@@ -538,7 +538,7 @@ PHASE_TYPE_CODE2NAME_STEM = {
 FACILITY_TYPE_CODE2NAME_STEM = {
     NULL_VALUE: UNNAMED,
     'BRTH': 'Berth',
-    'PBPL': 'PBPL',
+    'PBPL': 'PBP',
     'ANCH': 'Anchorage',
 }
 CARRIER_ROLES = ['CA', 'AG', 'VSL']

@@ -24,18 +24,18 @@ ATA-Berth (<implicit>),ATH2VSL
 ATA-Berth (<implicit>),CA2ATH
 ATA-Berth (<implicit>),TR2ATH
 ATA-Berth (<implicit>),VSL2ATH
-ATA-PBPL,AG2ATH
-ATA-PBPL,ATH2AG
-ATA-PBPL,ATH2CA
-ATA-PBPL,ATH2VSL
-ATA-PBPL,CA2ATH
-ATA-PBPL,VSL2ATH
-ATA-PBPL (<implicit>),AG2ATH
-ATA-PBPL (<implicit>),ATH2AG
-ATA-PBPL (<implicit>),ATH2CA
-ATA-PBPL (<implicit>),ATH2VSL
-ATA-PBPL (<implicit>),CA2ATH
-ATA-PBPL (<implicit>),VSL2ATH
+ATA-PBP,AG2ATH
+ATA-PBP,ATH2AG
+ATA-PBP,ATH2CA
+ATA-PBP,ATH2VSL
+ATA-PBP,CA2ATH
+ATA-PBP,VSL2ATH
+ATA-PBP (<implicit>),AG2ATH
+ATA-PBP (<implicit>),ATH2AG
+ATA-PBP (<implicit>),ATH2CA
+ATA-PBP (<implicit>),ATH2VSL
+ATA-PBP (<implicit>),CA2ATH
+ATA-PBP (<implicit>),VSL2ATH
 ATC Lashing,LSH2CA
 ATC-Anchorage Ops,AG2ATH
 ATC-Anchorage Ops,ATH2AG
@@ -295,12 +295,12 @@ ETA-Berth,VSL2TR
 ETA-Berth (<implicit>),AG2TR
 ETA-Berth (<implicit>),CA2TR
 ETA-Berth (<implicit>),VSL2TR
-ETA-PBPL,AG2ATH
-ETA-PBPL,CA2ATH
-ETA-PBPL,VSL2ATH
-ETA-PBPL (<implicit>),AG2ATH
-ETA-PBPL (<implicit>),CA2ATH
-ETA-PBPL (<implicit>),VSL2ATH
+ETA-PBP,AG2ATH
+ETA-PBP,CA2ATH
+ETA-PBP,VSL2ATH
+ETA-PBP (<implicit>),AG2ATH
+ETA-PBP (<implicit>),CA2ATH
+ETA-PBP (<implicit>),VSL2ATH
 ETC-Bunkering@Anchorage,BUK2AG
 ETC-Bunkering@Anchorage,BUK2CA
 ETC-Bunkering@Anchorage,BUK2VSL
@@ -392,12 +392,12 @@ PTA-Berth,VSL2TR
 PTA-Berth (<implicit>),AG2TR
 PTA-Berth (<implicit>),CA2TR
 PTA-Berth (<implicit>),VSL2TR
-PTA-PBPL,AG2ATH
-PTA-PBPL,CA2ATH
-PTA-PBPL,VSL2ATH
-PTA-PBPL (<implicit>),AG2ATH
-PTA-PBPL (<implicit>),CA2ATH
-PTA-PBPL (<implicit>),VSL2ATH
+PTA-PBP,AG2ATH
+PTA-PBP,CA2ATH
+PTA-PBP,VSL2ATH
+PTA-PBP (<implicit>),AG2ATH
+PTA-PBP (<implicit>),CA2ATH
+PTA-PBP (<implicit>),VSL2ATH
 PTC-Bunkering@Anchorage,BUK2AG
 PTC-Bunkering@Anchorage,BUK2CA
 PTC-Bunkering@Anchorage,BUK2VSL
@@ -483,12 +483,12 @@ RTA-Berth,TR2VSL
 RTA-Berth (<implicit>),TR2AG
 RTA-Berth (<implicit>),TR2CA
 RTA-Berth (<implicit>),TR2VSL
-RTA-PBPL,ATH2AG
-RTA-PBPL,ATH2CA
-RTA-PBPL,ATH2VSL
-RTA-PBPL (<implicit>),ATH2AG
-RTA-PBPL (<implicit>),ATH2CA
-RTA-PBPL (<implicit>),ATH2VSL
+RTA-PBP,ATH2AG
+RTA-PBP,ATH2CA
+RTA-PBP,ATH2VSL
+RTA-PBP (<implicit>),ATH2AG
+RTA-PBP (<implicit>),ATH2CA
+RTA-PBP (<implicit>),ATH2VSL
 RTC-Bunkering@Anchorage,AG2BUK
 RTC-Bunkering@Anchorage,CA2BUK
 RTC-Bunkering@Anchorage,VSL2BUK
