@@ -493,7 +493,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     empty_indicator_code,
     equipment_reference
 ) VALUES (
-    uuid('84db923d-2a19-4eb0-beb5-446c1ec57d34'),
+    uuid('2c645424-a125-4431-9dc4-5aff488173b7'),
     'EST',
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,

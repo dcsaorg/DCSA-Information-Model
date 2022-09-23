@@ -9,124 +9,63 @@ BEGIN;
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
 
 
--- Aggregated table containing all events
-DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
-CREATE VIEW dcsa_im_v3_0.aggregated_events AS
- SELECT transport_event.event_id,
-    'TRANSPORT' AS event_type,
-    'TC_ID' AS link_type,
-    transport_event.event_classifier_code,
-    transport_event.transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    NULL::text AS equipment_event_type_code,
-    transport_event.event_date_time,
-    transport_event.event_created_date_time,
-    transport_event.transport_call_id,
-    transport_event.delay_reason_code,
-    transport_event.change_remark,
-    NULL::text AS remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location_id,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position_id,
-    NULL::uuid as publisher_id
-   FROM dcsa_im_v3_0.transport_event
-UNION ALL
- SELECT shipment_event.event_id,
-    'SHIPMENT' AS event_type,
-    shipment_event.document_type_code AS link_type,
-    shipment_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    shipment_event.shipment_event_type_code,
-    shipment_event.document_type_code,
-    NULL::text AS equipment_event_type_code,
-    shipment_event.event_date_time,
-    shipment_event.event_created_date_time,
-    NULL::uuid AS transport_call_id,
-    NULL::text AS delay_reason_code,
-    NULL::text AS change_remark,
-    NULL::text AS remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    shipment_event.document_id AS document_id,
-    shipment_event.document_reference AS document_reference,
-    shipment_event.reason AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location_id,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position_id,
-    NULL::uuid as publisher_id
-   FROM dcsa_im_v3_0.shipment_event
-UNION ALL
- SELECT equipment_event.event_id,
-    'EQUIPMENT' AS event_type,
-    'TC_ID' AS link_type,
-    equipment_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    equipment_event.equipment_event_type_code,
-    equipment_event.event_date_time,
-    equipment_event.event_created_date_time,
-    equipment_event.transport_call_id,
-    NULL::text AS delay_reason_code,
-    NULL::text AS change_remark,
-    NULL::text AS remark,
-    equipment_event.equipment_reference,
-    equipment_event.empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location_id,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position_id,
-    NULL::uuid as publisher_id
-   FROM dcsa_im_v3_0.equipment_event
-UNION ALL
- SELECT operations_event.event_id,
-    'OPERATIONS' AS event_type,
-    'TC_ID' AS link_type,
-    operations_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    NULL::text AS equipment_event_type_code,
-    operations_event.event_date_time,
-    operations_event.event_created_date_time,
-    operations_event.transport_call_id,
-    operations_event.delay_reason_code,
-    NULL::text AS change_remark,
-    operations_event.remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    operations_event.operations_event_type_code,
-    operations_event.publisher_role,
-    operations_event.event_location_id,
-    operations_event.port_call_phase_type_code,
-    operations_event.port_call_service_type_code,
-    operations_event.facility_type_code,
-    operations_event.vessel_position_id,
-    operations_event.publisher_id
-   FROM dcsa_im_v3_0.operations_event;
+-- DDT-1221
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache_queue (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL,
+    failure_reason_type varchar(200),
+    failure_reason_message text
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL,
+    content jsonb NOT NULL,
+    event_created_date_time timestamp with time zone NOT NULL
+);
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_shipment_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'SHIPMENT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_shipment_events ON dcsa_im_v3_0.shipment_event;
+CREATE TRIGGER queue_shipment_events AFTER INSERT ON dcsa_im_v3_0.shipment_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_shipment_event();
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_transport_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'TRANSPORT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_transport_events ON dcsa_im_v3_0.transport_event;
+CREATE TRIGGER queue_transport_events AFTER INSERT ON dcsa_im_v3_0.transport_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_transport_event();
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_equipment_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'EQUIPMENT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_equipment_events ON dcsa_im_v3_0.equipment_event;
+CREATE TRIGGER queue_equipment_events AFTER INSERT ON dcsa_im_v3_0.equipment_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_equipment_event();
+
+
 
 /* View to assist with the GET /events endpoint.  It provide the following information:
  *
