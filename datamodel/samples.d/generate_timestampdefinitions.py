@@ -30,7 +30,7 @@ def declare_timestamps():
         UNCANCELABLE_ARRI_OPERATIONS_EVENT_TYPE_CODE,
         ['BRTH'],
         ['INBD', NULL_VALUE],
-        event_classifier_code_matches(ifelse(REQ_PLN_ACT, "Berth Arrival Planning",
+        event_classifier_code_matches(ifelse(EST_REQ_PLN, "Berth Arrival Planning",
                                              "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution")),
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
