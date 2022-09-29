@@ -13,13 +13,13 @@ ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache_queue (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT'))
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue_dead CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL,
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     failure_reason_type varchar(200),
     failure_reason_message text
 );
@@ -27,10 +27,12 @@ CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL,
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     content jsonb NOT NULL,
+    document_references text,
     event_created_date_time timestamp with time zone NOT NULL
 );
+CREATE INDEX ON dcsa_im_v3_0.event_cache (event_created_date_time);
 
 CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_shipment_event() RETURNS TRIGGER AS $$
     BEGIN
