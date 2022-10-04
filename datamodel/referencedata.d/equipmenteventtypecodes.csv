@@ -10,3 +10,8 @@ DROP,Drop-off, The action of delivering the container at customer location.
 INSP,Inspected,Identifies that the seal on equipment has been inspected.
 RSEA,Resealed,Identifies that the equipment has been resealed after inspection.
 RMVD,Removed,Identifies that a Seal has been removed from the equipment for inspection.
+AVPU,Pick-up,Available for Pick-up
+AVDO,Drop-off,Available for Drop-off
+CUSS,Scan,Customs Selected for Scan
+CUSI,Inspection,Customs Selected for Inspection
+CUSR,Released,Customs Released

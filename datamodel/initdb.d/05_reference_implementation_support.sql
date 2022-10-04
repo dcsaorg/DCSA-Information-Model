@@ -368,67 +368,55 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
-     subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-     callback_url text NOT NULL,
-     carrier_booking_reference varchar(35),
-     transport_document_id varchar(20),
-     transport_document_type text,
-     equipment_reference varchar(15),
-     transport_call_reference varchar(100) NULL,
-     signature_method varchar(20) NOT NULL,
-     secret bytea NOT NULL,
-     transport_document_reference text NULL,
-     carrier_service_code varchar(5) NULL,
-     carrier_voyage_number varchar(50) NULL,
-     vessel_imo_number varchar(7) NULL,
-    -- Retry state
-     retry_after timestamp with time zone NULL,
-     retry_count int DEFAULT 0 NOT NULL,
-     last_bundle_size int NULL,
-     accumulated_retry_delay bigint NULL
+    subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    callback_url text NOT NULL,
+    document_reference varchar(100) NULL,
+    equipment_reference varchar(15) NULL,
+    transport_call_reference varchar(100) NULL,
+    vessel_imo_number varchar(7) NULL,
+    carrier_export_voyage_number varchar(50) NULL,
+    universal_export_voyage_reference varchar(5) NULL,
+    carrier_service_code varchar(5) NULL,
+    universal_service_reference varchar(8) NULL,
+    un_location_code varchar(5) NULL,
+    secret text NOT NULL,
+    created_date_time timestamp with time zone NOT NULL default now()
 );
+CREATE INDEX ON dcsa_im_v3_0.event_subscription (created_date_time);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
+CREATE TABLE dcsa_im_v3_0.event_subscription_event_type (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    event_type text,
-
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     PRIMARY KEY (subscription_id, event_type)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_document_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_transport_document_type (
-    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    transport_document_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_document_type (transport_document_type_code),
-    PRIMARY KEY (subscription_id, transport_document_type_code)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_shipment_event_type (
-    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
-    PRIMARY KEY (subscription_id, shipment_event_type_code)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_transport_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_transport_event_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type (transport_event_type_code),
     PRIMARY KEY (subscription_id, transport_event_type_code)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_equipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_shipment_event_type_code (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
+    PRIMARY KEY (subscription_id, shipment_event_type_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_equipment_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type (equipment_event_type_code),
     PRIMARY KEY (subscription_id, equipment_event_type_code)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_operations_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_operations_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_document_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_document_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type (operations_event_type_code),
-    PRIMARY KEY (subscription_id, operations_event_type_code)
+    document_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.document_type (document_type_code),
+    PRIMARY KEY (subscription_id, document_type_code)
 );
 
 
