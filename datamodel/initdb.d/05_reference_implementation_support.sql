@@ -518,6 +518,12 @@ CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
      display_order int NOT NULL UNIQUE
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_part CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_part (
+    port_call_part varchar(100) PRIMARY KEY,
+    display_order int NOT NULL UNIQUE
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     timestamp_id text PRIMARY KEY,
@@ -527,7 +533,7 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
-    port_call_phase varchar(100) NULL,
+    port_call_part varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.port_call_part (port_call_part),
     event_location_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),
     is_terminal_needed boolean NOT NULL,
     vessel_position_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),

@@ -1,0 +1,11 @@
+portCallPart,displayOrder
+"Berth Arrival Planning",1
+"Services Planning",2
+"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",3
+"Port Departure Planning And Services Completion",4
+"Start Cargo Operations And Services",5
+"Port Departure Execution",6
+"Other Services - Anchorage Planning And Execution",7
+"Other Services - Shore Power Execution",8
+"Other Services - Sludge Planning And Execution",9
+"OMIT Port Call Or Cancel A Service",10
