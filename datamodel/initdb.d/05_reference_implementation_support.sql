@@ -379,7 +379,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
     carrier_service_code varchar(5) NULL,
     universal_service_reference varchar(8) NULL,
     un_location_code varchar(5) NULL,
-    secret text NOT NULL,
+    secret bytea NOT NULL,
     created_date_time timestamp with time zone NOT NULL default now()
 );
 CREATE INDEX ON dcsa_im_v3_0.event_subscription (created_date_time);
