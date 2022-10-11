@@ -2,6 +2,8 @@
 \set ON_ERROR_STOP true
 \connect dcsa_openapi
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
 
@@ -426,22 +428,56 @@ CREATE TABLE dcsa_im_v3_0.unmapped_event_queue (
     enqueued_at_date_time timestamp with time zone NOT NULL default now()
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.pending_event_queue CASCADE;
-CREATE TABLE dcsa_im_v3_0.pending_event_queue (
+DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.outgoing_event_queue (
     delivery_id uuid PRIMARY KEY default uuid_generate_v4(),
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     event_id uuid NOT NULL,
-    -- TODO: Consider moving the payload OR the state to its own table as updating state will duplicate the row
-    -- temporarily in the database (which means that the payload will cause bloat as long as it is on the
-    -- same row).
     payload TEXT NOT NULL,
     enqueued_at_date_time timestamp with time zone NOT NULL default now(),
-    -- State and status
-    last_attempt_date_time timestamp with time zone NULL,
-    last_error_message text NULL,
-    retry_count int DEFAULT 0 NOT NULL,
-
     UNIQUE (subscription_id, event_id)
+);
+
+-- Separate view to avoid entangling `EventSubscription` entity into the event processors (and thereby keeping it
+-- clear of TNT and other implementations that supports event subscriptions).
+-- Note it might be tempting to denormalize secret and callback_url into the outgoing_event_queue (thereby avoiding
+-- the need for the view), but that would require that we also update these fields when updating subscription and
+-- that would do a "reverse entanglement", where the subscription handlers need to know about this queue.
+DROP VIEW IF EXISTS dcsa_im_v3_0.outgoing_event_queue_with_metadata CASCADE;
+CREATE VIEW dcsa_im_v3_0.outgoing_event_queue_with_metadata AS
+    SELECT outgoing_event_queue.delivery_id,
+           outgoing_event_queue.subscription_id,
+           outgoing_event_queue.event_id,
+           outgoing_event_queue.enqueued_at_date_time,
+           convert_to(outgoing_event_queue.payload, 'UTF8') AS payload_bytes,
+           'sha256=' || encode(
+                hmac(
+                    convert_to(outgoing_event_queue.payload, 'UTF8'),
+                    event_subscription.secret,
+                    'sha256'
+                ),
+               'hex'
+           ) AS signature_header_value,
+           event_subscription.callback_url AS callback_url
+      FROM dcsa_im_v3_0.outgoing_event_queue
+      JOIN dcsa_im_v3_0.event_subscription USING (subscription_id);
+
+-- A rule that enables us to delete from outgoing_event_queue via the outgoing_event_queue_with_metadata
+-- view.  This simplifies the camel part as camel can now just listen on the view.
+CREATE RULE outgoing_event_queue_with_metadata_delete AS ON DELETE TO dcsa_im_v3_0.outgoing_event_queue_with_metadata DO INSTEAD(
+   DELETE FROM dcsa_im_v3_0.outgoing_event_queue WHERE delivery_id=OLD.delivery_id;
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.outgoing_event_queue_dead (
+    delivery_id uuid PRIMARY KEY,
+    event_id uuid NOT NULL,
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    payload TEXT NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL,
+    last_failed_at_date_time timestamp with time zone NOT NULL default now(),
+    failure_reason_type varchar(200),
+    failure_reason_message text
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.notification_endpoint CASCADE;
