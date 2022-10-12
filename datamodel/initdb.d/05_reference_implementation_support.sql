@@ -32,9 +32,11 @@ CREATE TABLE dcsa_im_v3_0.event_cache (
     event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     content jsonb NOT NULL,
     document_references text,
-    event_created_date_time timestamp with time zone NOT NULL
+    event_created_date_time timestamp with time zone NOT NULL,
+    event_date_time timestamp with time zone NOT NULL
 );
 CREATE INDEX ON dcsa_im_v3_0.event_cache (event_created_date_time);
+CREATE INDEX ON dcsa_im_v3_0.event_cache (event_date_time);
 
 CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_shipment_event() RETURNS TRIGGER AS $$
     BEGIN

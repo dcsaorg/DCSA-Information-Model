@@ -43,7 +43,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_reference,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id
@@ -51,7 +50,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'TC-REF-08_02-A',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567')
@@ -62,7 +60,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_reference,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id,
@@ -72,7 +69,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     '123e4567-e89b-12d3-a456-426614174000'::uuid,
     'TC-REF-08_02-B',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),

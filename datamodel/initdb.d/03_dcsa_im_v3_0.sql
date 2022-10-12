@@ -646,9 +646,7 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     transport_call_reference varchar(100) NOT NULL DEFAULT uuid_generate_v4(),
     transport_call_sequence_number integer,
-    facility_id uuid NULL REFERENCES dcsa_im_v3_0.facility (id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code),
-    other_facility varchar(50) NULL, -- Free text field used if the facility cannot be identified
     location_id uuid NULL REFERENCES dcsa_im_v3_0.location (id),
     mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport (mode_of_transport_code),
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
@@ -738,6 +736,8 @@ CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code) CONSTRAINT facility_type_code CHECK(facility_type_code IN ('BOCR','CLOC','COFS','OFFD','DEPO','INTE','POTE','RAMP')),
+    is_transshipment_move boolean NOT NULL default false,
     event_location_id uuid NULL REFERENCES dcsa_im_v3_0.location(id)
 ) INHERITS (dcsa_im_v3_0.event);
 
