@@ -1,12 +1,12 @@
 timestampID,timestampTypeName,eventClassifierCode,operationsEventTypeCode,portCallPhaseTypeCode,portCallServiceTypeCode,facilityTypeCode,portCallPart,eventLocationRequirement,isTerminalNeeded,isVesselDraftRelevant,vesselPositionRequirement,isMilesToDestinationRelevant,providedInStandard,acceptTimestampDefinition,rejectTimestampDefinition,negotiationCycle,implicitVariantOf
-ETA-Berth,ETA-Berth,EST,ARRI,INBD,null,BRTH,Berth Arrival Planning,OPTIONAL,True,False,OPTIONAL,True,jit1_1,RTA-Berth,RTA-Berth,TA-Berth,null
-ETA-Berth (<implicit>),ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,Berth Arrival Planning,OPTIONAL,True,False,OPTIONAL,True,jit1_0,RTA-Berth (<implicit>),RTA-Berth (<implicit>),TA-Berth,ETA-Berth
+ETA-Berth,ETA-Berth,EST,ARRI,INBD,null,BRTH,Berth Arrival Planning,OPTIONAL,True,True,OPTIONAL,True,jit1_1,RTA-Berth,RTA-Berth,TA-Berth,null
+ETA-Berth (<implicit>),ETA-Berth (<implicit>),EST,ARRI,null,null,BRTH,Berth Arrival Planning,OPTIONAL,True,True,OPTIONAL,True,jit1_0,RTA-Berth (<implicit>),RTA-Berth (<implicit>),TA-Berth,ETA-Berth
 RTA-Berth,RTA-Berth,REQ,ARRI,INBD,null,BRTH,Berth Arrival Planning,REQUIRED,True,False,EXCLUDED,False,jit1_1,PTA-Berth,ETA-Berth,TA-Berth,null
 RTA-Berth (<implicit>),RTA-Berth (<implicit>),REQ,ARRI,null,null,BRTH,Berth Arrival Planning,REQUIRED,True,False,EXCLUDED,False,jit1_0,PTA-Berth (<implicit>),ETA-Berth (<implicit>),TA-Berth,RTA-Berth
-PTA-Berth,PTA-Berth,PLN,ARRI,INBD,null,BRTH,Berth Arrival Planning,REQUIRED,True,False,OPTIONAL,True,jit1_1,null,null,TA-Berth,null
-PTA-Berth (<implicit>),PTA-Berth (<implicit>),PLN,ARRI,null,null,BRTH,Berth Arrival Planning,REQUIRED,True,False,OPTIONAL,True,jit1_0,null,null,TA-Berth,PTA-Berth
-ATA-Berth,ATA-Berth,ACT,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,TA-Berth,null
-ATA-Berth (<implicit>),ATA-Berth (<implicit>),ACT,ARRI,null,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,TA-Berth,ATA-Berth
+PTA-Berth,PTA-Berth,PLN,ARRI,INBD,null,BRTH,Berth Arrival Planning,REQUIRED,True,True,OPTIONAL,True,jit1_1,null,null,TA-Berth,null
+PTA-Berth (<implicit>),PTA-Berth (<implicit>),PLN,ARRI,null,null,BRTH,Berth Arrival Planning,REQUIRED,True,True,OPTIONAL,True,jit1_0,null,null,TA-Berth,PTA-Berth
+ATA-Berth,ATA-Berth,ACT,ARRI,INBD,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,True,EXCLUDED,False,jit1_1,null,null,TA-Berth,null
+ATA-Berth (<implicit>),ATA-Berth (<implicit>),ACT,ARRI,null,null,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TA-Berth,ATA-Berth
 ETS-Cargo Ops,ETS-Cargo Ops,EST,STRT,ALGS,CRGO,BRTH,Services Planning,REQUIRED,True,False,OPTIONAL,False,jit1_1,RTS-Cargo Ops,RTS-Cargo Ops,T-Cargo Ops,null
 RTS-Cargo Ops,RTS-Cargo Ops,REQ,STRT,ALGS,CRGO,BRTH,Services Planning,REQUIRED,True,False,EXCLUDED,False,jit1_1,PTS-Cargo Ops,ETS-Cargo Ops,T-Cargo Ops,null
 PTS-Cargo Ops,PTS-Cargo Ops,PLN,STRT,ALGS,CRGO,BRTH,Services Planning,REQUIRED,True,False,OPTIONAL,False,jit1_1,null,null,T-Cargo Ops,null
@@ -90,19 +90,19 @@ RTC-Bunkering@Anchorage (<implicit>),RTC-Bunkering@Anchorage (<implicit>),REQ,CM
 RTC-Bunkering@Berth (<implicit>),RTC-Bunkering@Berth (<implicit>),REQ,CMPL,null,BUNK,BRTH,Services Planning,REQUIRED,True,False,EXCLUDED,False,jit1_2,PTC-Bunkering@Berth (<implicit>),ETC-Bunkering@Berth (<implicit>),T-Bunkering,RTC-Bunkering@Berth
 PTC-Bunkering@Anchorage (<implicit>),PTC-Bunkering@Anchorage (<implicit>),PLN,CMPL,null,BUNK,ANCH,Services Planning,REQUIRED,False,False,EXCLUDED,False,jit1_2,null,null,T-Bunkering,PTC-Bunkering@Anchorage
 PTC-Bunkering@Berth (<implicit>),PTC-Bunkering@Berth (<implicit>),PLN,CMPL,null,BUNK,BRTH,Services Planning,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,T-Bunkering,PTC-Bunkering@Berth
-ETA-PBP,ETA-PBP,EST,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,RTA-PBP,RTA-PBP,TA-PBPL,null
-ETA-PBP (<implicit>),ETA-PBP (<implicit>),EST,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,RTA-PBP (<implicit>),RTA-PBP (<implicit>),TA-PBPL,ETA-PBP
+ETA-PBP,ETA-PBP,EST,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,RTA-PBP,RTA-PBP,TA-PBPL,null
+ETA-PBP (<implicit>),ETA-PBP (<implicit>),EST,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,RTA-PBP (<implicit>),RTA-PBP (<implicit>),TA-PBPL,ETA-PBP
 RTA-PBP,RTA-PBP,REQ,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,False,jit1_0,PTA-PBP,ETA-PBP,TA-PBPL,null
 RTA-PBP (<implicit>),RTA-PBP (<implicit>),REQ,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,False,jit1_0,PTA-PBP (<implicit>),ETA-PBP (<implicit>),TA-PBPL,RTA-PBP
-PTA-PBP,PTA-PBP,PLN,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL,null
-PTA-PBP (<implicit>),PTA-PBP (<implicit>),PLN,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL,PTA-PBP
-ATA-PBP,ATA-PBP,ACT,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL,null
-ATA-PBP (<implicit>),ATA-PBP (<implicit>),ACT,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,EXCLUDED,True,jit1_0,null,null,TA-PBPL,ATA-PBP
-ESOP,ESOP,ACT,ARRI,INBD,null,null,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,False,False,OPTIONAL,True,jit1_1,null,null,Special,null
+PTA-PBP,PTA-PBP,PLN,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,null,null,TA-PBPL,null
+PTA-PBP (<implicit>),PTA-PBP (<implicit>),PLN,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,null,null,TA-PBPL,PTA-PBP
+ATA-PBP,ATA-PBP,ACT,ARRI,INBD,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,null,null,TA-PBPL,null
+ATA-PBP (<implicit>),ATA-PBP (<implicit>),ACT,ARRI,null,null,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,True,EXCLUDED,True,jit1_0,null,null,TA-PBPL,ATA-PBP
+ESOP,ESOP,ACT,ARRI,INBD,null,null,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,False,True,OPTIONAL,True,jit1_1,null,null,Special,null
 AT All fast,AT All fast,ACT,ARRI,ALGS,FAST,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,False,EXCLUDED,False,jit1_1,null,null,Special,null
 Gangway Down and Safe,Gangway Down and Safe,ACT,ARRI,ALGS,GWAY,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",EXCLUDED,True,False,EXCLUDED,False,jit1_1,null,null,Special,null
-Vessel Readiness for Cargo operations,Vessel Readiness for Cargo operations,ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,Special,null
-Vessel Readiness for Cargo operations [JIT 1.1],Vessel Readiness for Cargo operations [JIT 1.1],ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,Vessel Readiness for Cargo operations
+Vessel Readiness for Cargo operations,Vessel Readiness for Cargo operations,ACT,ARRI,ALGS,VRDY,BRTH,Start Cargo Operations And Services,REQUIRED,True,True,EXCLUDED,False,jit1_2,null,null,Special,null
+Vessel Readiness for Cargo operations [JIT 1.1],Vessel Readiness for Cargo operations [JIT 1.1],ACT,ARRI,ALGS,SAFE,BRTH,Start Cargo Operations And Services,REQUIRED,True,True,EXCLUDED,False,jit1_1,null,null,Special,Vessel Readiness for Cargo operations
 ATS-Cargo Ops,ATS-Cargo Ops,ACT,STRT,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops,null
 ATS-Cargo Ops (<implicit>),ATS-Cargo Ops (<implicit>),ACT,STRT,null,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops,ATS-Cargo Ops
 ATS-Cargo Ops Discharge,ATS-Cargo Ops Discharge,ACT,STRT,ALGS,DCRO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,T-Cargo Ops,null
@@ -169,8 +169,8 @@ ATC Lashing,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Serv
 Terminal Ready for vessel departure,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,null
 Vessel Ready to sail,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,Special,null
 Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,Vessel Ready to sail
-ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,TD-Berth,null
-ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,TD-Berth,ATD-Berth
+ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,null
+ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,ATD-Berth
 ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
 ATC-Pilotage (Outbound),ATC-Pilotage (Outbound),ACT,CMPL,OUTB,PILO,null,Port Departure Execution,EXCLUDED,False,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
 ATS-Pilotage (Shifting),ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting),null
@@ -179,15 +179,15 @@ ATS-Towage (Outbound),ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,BRTH,Port Departu
 ATC-Towage (Outbound),ATC-Towage (Outbound),ACT,CMPL,OUTB,TOWG,null,Port Departure Execution,EXCLUDED,False,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound),null
 ATS-Towage (Shifting),ATS-Towage (Shifting),ACT,STRT,SHIF,TOWG,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Shifting),null
 ATC-Towage (Shifting),ATC-Towage (Shifting),ACT,CMPL,SHIF,TOWG,BRTH,Port Departure Execution,EXCLUDED,True,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Shifting),null
-SOSP,SOSP,ACT,DEPA,OUTB,null,null,Port Departure Execution,EXCLUDED,False,False,EXCLUDED,False,jit1_1,null,null,Special,null
-ETA-Anchorage,ETA-Anchorage,EST,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,RTA-Anchorage,RTA-Anchorage,T-Anchorage,null
-ETD-Anchorage,ETD-Anchorage,EST,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,RTD-Anchorage,RTD-Anchorage,T-Anchorage,null
+SOSP,SOSP,ACT,DEPA,OUTB,null,null,Port Departure Execution,EXCLUDED,False,True,EXCLUDED,False,jit1_1,null,null,Special,null
+ETA-Anchorage,ETA-Anchorage,EST,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,RTA-Anchorage,RTA-Anchorage,T-Anchorage,null
+ETD-Anchorage,ETD-Anchorage,EST,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,RTD-Anchorage,RTD-Anchorage,T-Anchorage,null
 RTA-Anchorage,RTA-Anchorage,REQ,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,EXCLUDED,False,False,OPTIONAL,False,jit1_2,PTA-Anchorage,ETA-Anchorage,T-Anchorage,null
 RTD-Anchorage,RTD-Anchorage,REQ,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,EXCLUDED,False,False,OPTIONAL,False,jit1_2,PTD-Anchorage,ETD-Anchorage,T-Anchorage,null
-PTA-Anchorage,PTA-Anchorage,PLN,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
-PTD-Anchorage,PTD-Anchorage,PLN,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
-ATA-Anchorage,ATA-Anchorage,ACT,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
-ATD-Anchorage,ATD-Anchorage,ACT,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+PTA-Anchorage,PTA-Anchorage,PLN,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+PTD-Anchorage,PTD-Anchorage,PLN,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+ATA-Anchorage,ATA-Anchorage,ACT,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+ATD-Anchorage,ATD-Anchorage,ACT,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ATS-Anchorage Ops,ATS-Anchorage Ops,ACT,STRT,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ATC-Anchorage Ops,ATC-Anchorage Ops,ACT,CMPL,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ETS-Sludge@Anchorage,ETS-Sludge@Anchorage,EST,STRT,null,SLUG,ANCH,Other Services - Sludge Planning And Execution,REQUIRED,False,False,OPTIONAL,False,jit1_2,RTS-Sludge@Anchorage,RTS-Sludge@Anchorage,T-Sludge,null
