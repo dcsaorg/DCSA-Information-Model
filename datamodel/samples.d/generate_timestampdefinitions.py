@@ -37,6 +37,7 @@ def declare_timestamps():
         event_location_requirement=event_classifier_code_matches(ifelse(REQ_PLN_ACT, REQUIRED, OPTIONAL)),
         negotiation_cycle='TA-Berth',
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse(EST_PLN, True, False)),
+        is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
     )
 
     # ETS-Cargo Ops
@@ -131,6 +132,7 @@ def declare_timestamps():
         negotiation_cycle='TA-PBPL',
         # IFS says EST, PLN *and* ACT can use MtD
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
+        is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
     )
 
     # EOSP UC 34
@@ -144,6 +146,7 @@ def declare_timestamps():
         'jit1_1',
         vessel_position_requirement=OPTIONAL,
         is_miles_to_destination_relevant=True,
+        is_vessel_draft_relevant=True,
     )
 
     # AT All fast UC 42 + Gangway Down and Safe UC 43
@@ -174,6 +177,7 @@ def declare_timestamps():
             "Start Cargo Operations And Services",
             version,
             service_code,
+            is_vessel_draft_relevant=True,
             vessel_position_requirement=EXCLUDED,
             event_location_requirement=REQUIRED,
             implicit_variant_of=variant_of,
@@ -361,6 +365,7 @@ def declare_timestamps():
         ['OUTB', NULL_VALUE],
         "Port Departure Execution",
         'jit1_0',
+        is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
         event_location_requirement=REQUIRED,
         negotiation_cycle='TD-Berth',
     )
@@ -387,6 +392,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         NULL_VALUE,
+        is_vessel_draft_relevant=True,
         vessel_position_requirement=EXCLUDED,
         event_location_requirement=EXCLUDED,
     )
@@ -401,6 +407,7 @@ def declare_timestamps():
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
         event_location_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
+        is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
         vessel_position_requirement=OPTIONAL,
         # All except REQ has MtD in the IFS (even ATD-Anchorage, which seems weird)
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
