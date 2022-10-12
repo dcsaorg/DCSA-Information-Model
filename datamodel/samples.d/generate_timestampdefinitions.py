@@ -484,6 +484,7 @@ FIELDS_ORDER = [
     'portCallPart',
     'eventLocationRequirement',
     'isTerminalNeeded',
+    'isVesselDraftRelevant',
     'vesselPositionRequirement',
     'isMilesToDestinationRelevant',
     'providedInStandard',
@@ -850,8 +851,9 @@ def generate_special_timestamp(
         vessel_position_requirement: str = EXCLUDED,
         event_location_requirement: str = EXCLUDED,
         negotiation_cycle: str = 'Special',
-        is_miles_to_destination_relevant=False,
-        implicit_variant_of : str = NULL_VALUE,
+        is_vessel_draft_relevant: bool = False,
+        is_miles_to_destination_relevant: bool = False,
+        implicit_variant_of: str = NULL_VALUE,
 ):
     _ensure_known(provided_in_standard, VALID_JIT_VERSIONS, "providedInStandard")
     _ensure_known(port_call_part, VALID_PORT_CALL_PARTS, "portCallPart")
@@ -877,6 +879,7 @@ def generate_special_timestamp(
         implicit_variant_of,  # implicitVariantOf
         is_pattern_timestamp=False,
         is_miles_to_destination_relevant=is_miles_to_destination_relevant,
+        is_vessel_draft_relevant=is_vessel_draft_relevant,
     )
 
 
@@ -929,6 +932,7 @@ def generic_xty_timestamps(
         implicit_implies_phase: Optional[str] = None,
         negotiation_cycle: Optional[str] = None,
         is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
+        is_vessel_draft_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
 ):
 
     if implicit_implies_phase is None and len(port_call_phase_type_codes) == 2 \
@@ -952,6 +956,7 @@ def generic_xty_timestamps(
 
     initial_publisher_pattern = as_condition(initial_publisher_pattern)
     is_miles_to_destination_relevant = as_condition(is_miles_to_destination_relevant)
+    is_vessel_draft_relevant = as_condition(is_vessel_draft_relevant)
 
     if negotiation_cycle is None:
         negotiation_cycle_prefix = 'T-'
@@ -1046,6 +1051,7 @@ def generic_xty_timestamps(
         ts_event_location_requirement = event_location_requirement[timestamp_detail]
         ts_vessel_position_requirement = vessel_position_requirement[timestamp_detail]
         ts_is_miles_to_destination_relevant = is_miles_to_destination_relevant[timestamp_detail]
+        ts_is_vessel_draft_relevant = is_vessel_draft_relevant[timestamp_detail]
 
         _make_timestamp(
             full_name,
@@ -1064,6 +1070,7 @@ def generic_xty_timestamps(
             # 'CANC' does not follow the pattern.
             is_pattern_timestamp=timestamp_detail.operations_event_type_code != 'CANC',
             is_miles_to_destination_relevant=ts_is_miles_to_destination_relevant,
+            is_vessel_draft_relevant=ts_is_vessel_draft_relevant,
         )
 
 
@@ -1121,6 +1128,7 @@ def _make_timestamp(timestamp_name,
                     implicit_variant_of,
                     is_pattern_timestamp=False,
                     is_miles_to_destination_relevant=False,
+                    is_vessel_draft_relevant=False,
                     ):
 
     if timestamp_name in TS_NOT_IN_STANDARD:
@@ -1139,6 +1147,7 @@ def _make_timestamp(timestamp_name,
         port_call_part,  # Port Call Part
         event_location_requirement,
         facility_type_code == 'BRTH',  # isTerminalNeeded
+        is_vessel_draft_relevant,
         vessel_position_requirement,  # vesselPositionRequirement
         is_miles_to_destination_relevant,
         provided_in_standard,  # providedInStandard
