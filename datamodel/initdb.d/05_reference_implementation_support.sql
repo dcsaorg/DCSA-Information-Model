@@ -749,4 +749,29 @@ CREATE TABLE dcsa_im_v3_0.timestamp_notification_dead (
     latest_delivery_attempted_datetime timestamp with time zone NOT NULL DEFAULT now()
 );
 
+
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_sync_state;
+CREATE VIEW dcsa_im_v3_0.event_sync_state AS
+    SELECT event_id, (CASE WHEN SUM(delivery_attempted) > 0 THEN 'ATTEMPTED_DELIVERY'
+                           WHEN SUM(delivery_attempted) = 0 THEN 'PENDING_DELIVERY'
+                           ELSE 'DELIVERY_FINISHED'
+        END) AS delivery_status
+    FROM (
+              SELECT event_id, 0 AS delivery_attempted
+                FROM dcsa_im_v3_0.unmapped_event_queue
+          UNION ALL
+              SELECT event_id, 0 AS delivery_attempted
+              FROM dcsa_im_v3_0.outgoing_event_queue
+          UNION ALL
+              SELECT event_id, 1 AS delivery_attempted
+              FROM dcsa_im_v3_0.outgoing_event_queue_dead
+          UNION ALL
+              SELECT outbox_message.id, 0 AS delivery_attempted
+                FROM dcsa_im_v3_0.outbox_message
+          UNION ALL
+              SELECT timestamp_notification_dead.id, 1 AS delivery_attempted
+                FROM dcsa_im_v3_0.timestamp_notification_dead
+         ) AS event_status
+    GROUP BY event_id;
+
 COMMIT;
