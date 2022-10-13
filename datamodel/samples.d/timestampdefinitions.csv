@@ -16,7 +16,7 @@ PTS-Cargo Ops (<implicit>),PTS-Cargo Ops (<implicit>),PLN,STRT,null,CRGO,BRTH,Se
 ETS-Pilotage (Inbound),ETS-Pilotage (Inbound),EST,STRT,INBD,PILO,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,OPTIONAL,False,jit1_1,RTS-Pilotage (Inbound),RTS-Pilotage (Inbound),T-Pilotage (Inbound),null
 RTS-Pilotage (Inbound),RTS-Pilotage (Inbound),REQ,STRT,INBD,PILO,PBPL,Services Planning,REQUIRED,False,False,EXCLUDED,False,jit1_1,PTS-Pilotage (Inbound),ETS-Pilotage (Inbound),T-Pilotage (Inbound),null
 PTS-Pilotage (Inbound),PTS-Pilotage (Inbound),PLN,STRT,INBD,PILO,PBPL,Services Planning,REQUIRED,False,False,OPTIONAL,False,jit1_1,null,null,T-Pilotage (Inbound),null
-ATS-Pilotage (Inbound),ATS-Pilotage (Inbound),ACT,STRT,INBD,PILO,PBPL,Services Planning,REQUIRED,False,False,OPTIONAL,True,jit1_1,null,null,T-Pilotage (Inbound),null
+ATS-Pilotage (Inbound),ATS-Pilotage (Inbound),ACT,STRT,INBD,PILO,PBPL,Services Planning,REQUIRED,False,True,OPTIONAL,True,jit1_1,null,null,T-Pilotage (Inbound),null
 ETC-Pilotage (Inbound),ETC-Pilotage (Inbound),EST,CMPL,INBD,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,False,OPTIONAL,False,jit1_1,RTC-Pilotage (Inbound),RTC-Pilotage (Inbound),T-Pilotage (Inbound),null
 RTC-Pilotage (Inbound),RTC-Pilotage (Inbound),REQ,CMPL,INBD,PILO,BRTH,Services Planning,REQUIRED,True,False,EXCLUDED,False,jit1_1,PTC-Pilotage (Inbound),ETC-Pilotage (Inbound),T-Pilotage (Inbound),null
 PTC-Pilotage (Inbound),PTC-Pilotage (Inbound),PLN,CMPL,INBD,PILO,BRTH,Services Planning,REQUIRED,True,False,OPTIONAL,False,jit1_1,null,null,T-Pilotage (Inbound),null
@@ -25,7 +25,7 @@ Cancel Pilotage (Inbound),Cancel Pilotage (Inbound),ACT,CANC,INBD,PILO,BRTH,OMIT
 ETS-Pilotage (<implicit>),ETS-Pilotage (<implicit>),EST,STRT,null,PILO,PBPL,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,False,False,OPTIONAL,False,jit1_0,RTS-Pilotage (<implicit>),RTS-Pilotage (<implicit>),T-Pilotage (Inbound),ETS-Pilotage (Inbound)
 RTS-Pilotage (<implicit>),RTS-Pilotage (<implicit>),REQ,STRT,null,PILO,PBPL,Services Planning,REQUIRED,False,False,EXCLUDED,False,jit1_0,PTS-Pilotage (<implicit>),ETS-Pilotage (<implicit>),T-Pilotage (Inbound),RTS-Pilotage (Inbound)
 PTS-Pilotage (<implicit>),PTS-Pilotage (<implicit>),PLN,STRT,null,PILO,PBPL,Services Planning,REQUIRED,False,False,OPTIONAL,False,jit1_0,null,null,T-Pilotage (Inbound),PTS-Pilotage (Inbound)
-ATS-Pilotage (<implicit>),ATS-Pilotage (<implicit>),ACT,STRT,null,PILO,PBPL,Services Planning,REQUIRED,False,False,OPTIONAL,True,jit1_0,null,null,T-Pilotage (Inbound),ATS-Pilotage (Inbound)
+ATS-Pilotage (<implicit>),ATS-Pilotage (<implicit>),ACT,STRT,null,PILO,PBPL,Services Planning,REQUIRED,False,True,OPTIONAL,True,jit1_0,null,null,T-Pilotage (Inbound),ATS-Pilotage (Inbound)
 ETC-Pilotage (<implicit>),ETC-Pilotage (<implicit>),EST,CMPL,null,PILO,BRTH,"Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",REQUIRED,True,False,OPTIONAL,False,jit1_0,RTC-Pilotage (<implicit>),RTC-Pilotage (<implicit>),T-Pilotage (Inbound),ETC-Pilotage (Inbound)
 RTC-Pilotage (<implicit>),RTC-Pilotage (<implicit>),REQ,CMPL,null,PILO,BRTH,Services Planning,REQUIRED,True,False,EXCLUDED,False,jit1_0,PTC-Pilotage (<implicit>),ETC-Pilotage (<implicit>),T-Pilotage (Inbound),RTC-Pilotage (Inbound)
 PTC-Pilotage (<implicit>),PTC-Pilotage (<implicit>),PLN,CMPL,null,PILO,BRTH,Services Planning,REQUIRED,True,False,OPTIONAL,False,jit1_0,null,null,T-Pilotage (Inbound),PTC-Pilotage (Inbound)
@@ -171,9 +171,9 @@ Vessel Ready to sail,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure
 Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,Vessel Ready to sail
 ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,null
 ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,ATD-Berth
-ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
+ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
 ATC-Pilotage (Outbound),ATC-Pilotage (Outbound),ACT,CMPL,OUTB,PILO,null,Port Departure Execution,EXCLUDED,False,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
-ATS-Pilotage (Shifting),ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting),null
+ATS-Pilotage (Shifting),ATS-Pilotage (Shifting),ACT,STRT,SHIF,PILO,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting),null
 ATC-Pilotage (Shifting),ATC-Pilotage (Shifting),ACT,CMPL,SHIF,PILO,BRTH,Port Departure Execution,EXCLUDED,True,False,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Shifting),null
 ATS-Towage (Outbound),ATS-Towage (Outbound),ACT,STRT,OUTB,TOWG,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound),null
 ATC-Towage (Outbound),ATC-Towage (Outbound),ACT,CMPL,OUTB,TOWG,null,Port Departure Execution,EXCLUDED,False,False,EXCLUDED,False,jit1_1,null,null,T-Towage (Outbound),null
@@ -188,8 +188,8 @@ PTA-Anchorage,PTA-Anchorage,PLN,ARRI,null,null,ANCH,Other Services - Anchorage P
 PTD-Anchorage,PTD-Anchorage,PLN,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ATA-Anchorage,ATA-Anchorage,ACT,ARRI,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ATD-Anchorage,ATD-Anchorage,ACT,DEPA,null,null,ANCH,Other Services - Anchorage Planning And Execution,OPTIONAL,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
-ATS-Anchorage Ops,ATS-Anchorage Ops,ACT,STRT,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
-ATC-Anchorage Ops,ATC-Anchorage Ops,ACT,CMPL,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,False,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+ATS-Anchorage Ops,ATS-Anchorage Ops,ACT,STRT,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
+ATC-Anchorage Ops,ATC-Anchorage Ops,ACT,CMPL,null,ANCO,ANCH,Other Services - Anchorage Planning And Execution,REQUIRED,False,True,OPTIONAL,True,jit1_2,null,null,T-Anchorage,null
 ETS-Sludge@Anchorage,ETS-Sludge@Anchorage,EST,STRT,null,SLUG,ANCH,Other Services - Sludge Planning And Execution,REQUIRED,False,False,OPTIONAL,False,jit1_2,RTS-Sludge@Anchorage,RTS-Sludge@Anchorage,T-Sludge,null
 ETS-Sludge@Berth,ETS-Sludge@Berth,EST,STRT,null,SLUG,BRTH,Other Services - Sludge Planning And Execution,REQUIRED,True,False,OPTIONAL,False,jit1_2,RTS-Sludge@Berth,RTS-Sludge@Berth,T-Sludge,null
 PTS-Sludge@Anchorage,PTS-Sludge@Anchorage,PLN,STRT,null,SLUG,ANCH,Other Services - Sludge Planning And Execution,REQUIRED,False,False,OPTIONAL,False,jit1_2,null,null,T-Sludge,null
