@@ -68,6 +68,9 @@ def declare_timestamps():
         event_location_requirement=REQUIRED,
         # The implicit one also counts as Inbound
         negotiation_cycle='T-Pilotage (Inbound)',
+        is_vessel_draft_relevant=event_classifier_and_operations_event_type_code_matches(
+            ifelse(('ACT', 'STRT'), True, False),
+        ),
         is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
             ifelse(('ACT', 'STRT'), True, False)
         )
@@ -258,7 +261,7 @@ def declare_timestamps():
         negotiation_cycle='TD-Berth',
     )
 
-    #Pilotage UC 55 - 57 + 61 - 63 + Towage UC 58 - 60 + UC 64 - 66
+    # Pilotage UC 55 - 57 + 61 - 63 + Towage UC 58 - 60 + UC 64 - 66
     xty_service_timestamps(
         EST_REQ_PLN,
         ['PILO', 'TOWG'],
@@ -370,10 +373,23 @@ def declare_timestamps():
         negotiation_cycle='TD-Berth',
     )
 
-    # ATY Pilotage / Towage UC 83 - 87
+    # ATY Pilotage UC 83
     xty_service_timestamps(
         ACT,
-        ['PILO', 'TOWG'],
+        ['PILO'],
+        ['OUTB', 'SHIF'],
+        "Port Departure Execution",
+        'jit1_1',
+        include_phase_in_name=True,
+        is_cancelable=False,
+        event_location_requirement=operations_event_type_code_matches(ifelse('STRT', REQUIRED, EXCLUDED)),
+        is_vessel_draft_relevant=operations_event_type_code_matches(ifelse('STRT', True, False)),
+    )
+
+    # ATY Towage UC 87
+    xty_service_timestamps(
+        ACT,
+        ['TOWG'],
         ['OUTB', 'SHIF'],
         "Port Departure Execution",
         'jit1_1',
@@ -420,6 +436,7 @@ def declare_timestamps():
         [NULL_VALUE],
         "Other Services - Anchorage Planning And Execution",
         'jit1_2',
+        is_vessel_draft_relevant=True,
         vessel_position_requirement=OPTIONAL,
         event_location_requirement=REQUIRED,
         is_miles_to_destination_relevant=True,
@@ -803,6 +820,7 @@ def xty_service_timestamps(
         is_cancelable: bool = True,
         implicit_implies_phase: Optional[str] = None,
         is_miles_to_destination_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
+        is_vessel_draft_relevant: Union[bool, "GetItemProtocol[bool]"] = False,
         negotiation_cycle: Optional[str] = None,
 ):
     if operations_event_type_codes is None:
@@ -842,6 +860,7 @@ def xty_service_timestamps(
                 include_facility_type_in_name=len(facility_type_codes) > 1,
                 negotiation_cycle=negotiation_cycle,
                 is_miles_to_destination_relevant=is_miles_to_destination_relevant,
+                is_vessel_draft_relevant=is_vessel_draft_relevant,
             )
 
 
