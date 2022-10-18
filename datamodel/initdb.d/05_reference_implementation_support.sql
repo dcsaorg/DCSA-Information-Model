@@ -71,7 +71,145 @@ DROP TRIGGER IF EXISTS queue_equipment_events ON dcsa_im_v3_0.equipment_event;
 CREATE TRIGGER queue_equipment_events AFTER INSERT ON dcsa_im_v3_0.equipment_event
     FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_equipment_event();
 
+/* Views to assist with finding references for GET /events endpoint.
+ * It provide the following information:
+ *
+ * It provides a link_type and a document_reference (for ShipmentEvent)
+ * or transport_call_id (for TransportCall based Events)
+ * and a utilized_transport_equipment_id (for EquipmentEvent)
+ *
+ * These provided values can be used for to find references for the specific event.
+ * Below is an example showing how to find references for a transport_call based event:
+ * FROM aggregated_events ae
+ * JOIN
+ * (SELECT transport_call_id,
+ *        reference_value,
+ *        reference_type_code
+ * FROM event_reference) er ON ae.transport_call_id = er.transport_call_id
+ *
+ * NOTE: VIEWS ARE MADE SEPARATELY BELOW THAN MERGED AS ONE VIEW
+ */
 
+/*
+* View to extract references for equipmentEvent
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.equipment_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
+  SELECT DISTINCT uuid_generate_v4() AS view_id,
+                   reference.reference_value,
+                   reference.reference_type_code,
+                   NULL::UUID AS transport_call_id,
+                   NULL::UUID AS document_id,
+                   ci.utilized_transport_equipment_id AS utilized_transport_equipment_id,
+                   'EQ_ID' AS link_type
+   FROM dcsa_im_v3_0.cargo_item AS ci
+   JOIN dcsa_im_v3_0.consignment_item AS con ON ci.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment AS shipment ON con.shipment_id = shipment.id
+   JOIN dcsa_im_v3_0.booking AS booking ON shipment.booking_id = booking.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = shipment.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = booking.id;
+
+/*
+* View to extract references for for TransportCall based event
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.transport_based_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.transport_based_event_reference AS
+  SELECT DISTINCT uuid_generate_v4() AS view_id,
+                   reference.reference_value,
+                   reference.reference_type_code,
+                   tc.id AS transport_call_id,
+                   NULL::UUID AS document_id,
+                   NULL::UUID AS utilized_transport_equipment_id,
+                   'TC_ID' AS link_type
+   FROM dcsa_im_v3_0.consignment_item AS con
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment AS shipment ON con.shipment_id = shipment.id
+   JOIN dcsa_im_v3_0.booking AS booking ON shipment.booking_id = booking.id
+   JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = shipment.id
+   JOIN
+     (SELECT DISTINCT tc.id,
+                      t.id AS transport_id
+      FROM dcsa_im_v3_0.transport_call tc
+      JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+      OR t.discharge_transport_call_id = tc.id) tc ON tc.transport_id = st.transport_id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = shipment.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = booking.id;
+
+/*
+* View to extract references for for ShipmentEvent
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.shipment_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
+  (-- For CBR document reference ShipmentEvents
+ SELECT DISTINCT uuid_generate_v4() AS view_id,
+                 reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 b.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'CBR' AS link_type
+   FROM dcsa_im_v3_0.booking b
+   JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id
+   UNION ALL
+      -- For BKG document reference ShipmentEvents
+ SELECT DISTINCT uuid_generate_v4() AS view_id,
+                 reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 s.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'BKG' AS link_type
+   FROM dcsa_im_v3_0.shipment s
+   JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id
+   UNION ALL -- For SHI document reference ShipmentEvents
+ SELECT DISTINCT uuid_generate_v4() AS view_id,
+                 reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 si.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'SHI' AS link_type
+   FROM dcsa_im_v3_0.shipping_instruction si
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment s ON s.id = con.shipment_id
+   JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id);
+
+/*
+* COMBINE references view for all event types
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.event_reference AS
+  (SELECT *
+   FROM dcsa_im_v3_0.equipment_event_reference
+   UNION ALL SELECT *
+   FROM dcsa_im_v3_0.transport_based_event_reference
+   UNION ALL SELECT *
+   FROM dcsa_im_v3_0.shipment_event_reference);
 
 /* View to assist with the GET /events endpoint.  It provide the following information:
  *
