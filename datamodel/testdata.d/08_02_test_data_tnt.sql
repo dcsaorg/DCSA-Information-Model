@@ -8,11 +8,13 @@ SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
 INSERT INTO dcsa_im_v3_0.service (
     carrier_id,
     carrier_service_code,
-    carrier_service_name
+    carrier_service_name,
+    universal_service_reference
 ) VALUES (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
      'TNT1',
-     'Service name for TNT'
+     'Service name for TNT',
+     'SR00033F'
 );
 
 
