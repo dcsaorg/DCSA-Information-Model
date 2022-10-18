@@ -96,8 +96,7 @@ CREATE TRIGGER queue_equipment_events AFTER INSERT ON dcsa_im_v3_0.equipment_eve
 DROP VIEW IF EXISTS dcsa_im_v3_0.equipment_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
-  SELECT DISTINCT uuid_generate_v4() AS view_id,
-                   reference.reference_value,
+  SELECT DISTINCT  reference.reference_value,
                    reference.reference_type_code,
                    NULL::UUID AS transport_call_id,
                    NULL::UUID AS document_id,
@@ -119,8 +118,7 @@ CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
 DROP VIEW IF EXISTS dcsa_im_v3_0.transport_based_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.transport_based_event_reference AS
-  SELECT DISTINCT uuid_generate_v4() AS view_id,
-                   reference.reference_value,
+  SELECT DISTINCT  reference.reference_value,
                    reference.reference_type_code,
                    tc.id AS transport_call_id,
                    NULL::UUID AS document_id,
@@ -149,8 +147,7 @@ DROP VIEW IF EXISTS dcsa_im_v3_0.shipment_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
   (-- For CBR document reference ShipmentEvents
- SELECT DISTINCT uuid_generate_v4() AS view_id,
-                 reference.reference_value,
+ SELECT DISTINCT reference.reference_value,
                  reference.reference_type_code,
                  NULL::UUID AS transport_call_id,
                  b.id AS document_id,
@@ -166,8 +163,7 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
    OR reference.booking_id = b.id
    UNION ALL
       -- For BKG document reference ShipmentEvents
- SELECT DISTINCT uuid_generate_v4() AS view_id,
-                 reference.reference_value,
+ SELECT DISTINCT reference.reference_value,
                  reference.reference_type_code,
                  NULL::UUID AS transport_call_id,
                  s.id AS document_id,
@@ -182,8 +178,7 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = b.id
    UNION ALL -- For SHI document reference ShipmentEvents
- SELECT DISTINCT uuid_generate_v4() AS view_id,
-                 reference.reference_value,
+ SELECT DISTINCT reference.reference_value,
                  reference.reference_type_code,
                  NULL::UUID AS transport_call_id,
                  si.id AS document_id,
@@ -204,12 +199,15 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
 DROP VIEW IF EXISTS dcsa_im_v3_0.event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.event_reference AS
+  SELECT uuid_generate_v4() AS random_id,
+                               *
+  FROM
   (SELECT *
    FROM dcsa_im_v3_0.equipment_event_reference
    UNION ALL SELECT *
    FROM dcsa_im_v3_0.transport_based_event_reference
    UNION ALL SELECT *
-   FROM dcsa_im_v3_0.shipment_event_reference);
+   FROM dcsa_im_v3_0.shipment_event_reference) AS foo;
 
 /* View to assist with the GET /events endpoint.  It provide the following information:
  *
@@ -240,10 +238,12 @@ CREATE VIEW dcsa_im_v3_0.event_reference AS
  *
  */
 DROP VIEW IF EXISTS dcsa_im_v3_0.event_document_reference CASCADE;
-CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
-            -- For Transport Call based events
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            tc.id AS transport_call_id,
+CREATE VIEW dcsa_im_v3_0.event_document_reference AS
+SELECT uuid_generate_v4() AS random_id,
+                             *
+FROM (
+        (-- For Transport Call based events
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'CBR' AS document_reference_type,
@@ -260,8 +260,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                               OR t.discharge_transport_call_id = tc.id
                          ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-          SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            tc.id AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'BKG' AS document_reference_type,
@@ -277,8 +276,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                        OR t.discharge_transport_call_id = tc.id
             ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            tc.id AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'SHI' AS document_reference_type,
@@ -295,8 +293,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                        OR t.discharge_transport_call_id = tc.id
             ) tc ON tc.transport_id = st.transport_id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            tc.id AS transport_call_id,
+            SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
                             'TRD' AS document_reference_type,
@@ -315,8 +312,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
     ) UNION ALL (
             -- For CBR related ShipmentEvents
             -- DISTINCT by definition
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             b.id AS document_id,
                             'CBR' AS link_type,
                             'CBR' AS document_reference_type,
@@ -327,8 +323,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.booking b
         UNION ALL
             -- DISTINCT. It is a 1:N relation but all the shipments will have unique CBRs
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             b.id AS document_id,
                             'CBR' AS link_type,
                             'BKG' AS document_reference_type,
@@ -339,8 +334,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.booking b
             JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
         UNION ALL
-            SELECT  DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             b.id AS document_id,
                             'CBR' AS link_type,
                             'SHI' AS document_reference_type,
@@ -353,8 +347,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
             JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = ci.shipping_instruction_id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             b.id AS document_id,
                             'CBR' AS link_type,
                             'TRD' AS document_reference_type,
@@ -369,8 +362,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
     ) UNION ALL (
             -- For BKG related ShipmentEvents
             -- DISTINCT - all the shipments are associated with exactly on booking.
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             s.id AS document_id,
                             'BKG' AS link_type,
                             'CBR' AS document_reference_type,
@@ -382,8 +374,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
         UNION ALL
             -- DISTINCT by definition
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             s.id AS document_id,
                             'BKG' AS link_type,
                             'BKG' AS document_reference_type,
@@ -393,8 +384,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                             NULL::text AS transport_document_reference
             FROM dcsa_im_v3_0.shipment s
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             s.id AS document_id,
                             'BKG' AS link_type,
                             'SHI' AS document_reference_type,
@@ -406,8 +396,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.consignment_item ci ON ci.shipment_id = s.id
             JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = ci.shipping_instruction_id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             s.id AS document_id,
                             'BKG' AS link_type,
                             'TRD' AS document_reference_type,
@@ -420,8 +409,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = ci.shipping_instruction_id
     ) UNION ALL (
             -- For SHI related ShipmentEvents
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             si.id AS document_id,
                             'SHI' AS link_type,
                             'CBR' AS document_reference_type,
@@ -434,8 +422,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
             JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             si.id AS document_id,
                             'SHI' AS link_type,
                             'BKG' AS document_reference_type,
@@ -448,8 +435,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
         UNION ALL
             -- DISTINCT by definition
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             si.id AS document_id,
                             'SHI' AS link_type,
                             'SHI' AS document_reference_type,
@@ -460,8 +446,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             FROM dcsa_im_v3_0.shipping_instruction si
         UNION ALL
             -- DISTINCT due to 1:1 relation
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             si.id AS document_id,
                             'SHI' AS link_type,
                             'TRD' AS document_reference_type,
@@ -473,8 +458,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.transport_document td ON td.shipping_instruction_id = si.id
     ) UNION ALL (
             -- For TRD related ShipmentEvents
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             td.id AS document_id,
                             'TRD' AS link_type,
                             'CBR' AS document_reference_type,
@@ -488,8 +472,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
             JOIN dcsa_im_v3_0.booking b ON s.booking_id = b.id
         UNION ALL
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT DISTINCT NULL::uuid as transport_call_id,
                             td.id AS document_id,
                             'TRD' AS link_type,
                             'BKG' AS document_reference_type,
@@ -503,8 +486,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.shipment s ON s.id = ci.shipment_id
         UNION ALL
             -- DISTINCT due to 1:1 relation
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             td.id AS document_id,
                             'TRD' AS link_type,
                             'SHI' AS document_reference_type,
@@ -516,8 +498,7 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
             JOIN dcsa_im_v3_0.shipping_instruction si ON si.id = td.shipping_instruction_id
         UNION ALL
             -- DISTINCT by definition
-            SELECT DISTINCT uuid_generate_v4() AS random_id,
-                            NULL::uuid as transport_call_id,
+            SELECT          NULL::uuid as transport_call_id,
                             td.id AS document_id,
                             'TRD' AS link_type,
                             'TRD' AS document_reference_type,
@@ -525,8 +506,8 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                             NULL::text AS carrier_booking_request_reference,
                             NULL::text AS carrier_booking_reference,
                             td.transport_document_reference AS transport_document_reference
-            FROM dcsa_im_v3_0.transport_document td
-);
+            FROM dcsa_im_v3_0.transport_document td)
+) AS foo;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
