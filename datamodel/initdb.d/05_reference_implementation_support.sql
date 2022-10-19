@@ -32,6 +32,7 @@ CREATE TABLE dcsa_im_v3_0.event_cache (
     event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     content jsonb NOT NULL,
     document_references text,
+    "references" text,
     event_created_date_time timestamp with time zone NOT NULL,
     event_date_time timestamp with time zone NOT NULL
 );
