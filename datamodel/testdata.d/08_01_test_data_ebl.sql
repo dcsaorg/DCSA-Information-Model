@@ -671,12 +671,10 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
-    number_of_copies,
-    number_of_originals,
+    number_of_copies_with_charges,
+    number_of_originals_with_charges,
     is_electronic,
     is_to_order,
-    are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies,
     created_date_time,
     updated_date_time
 ) VALUES (
@@ -688,8 +686,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-12-24',
     DATE '2021-12-31'
 );
@@ -702,12 +698,10 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
-    number_of_copies,
-    number_of_originals,
+    number_of_copies_with_charges,
+    number_of_originals_with_charges,
     is_electronic,
     is_to_order,
-    are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies,
     created_date_time,
     updated_date_time
 ) VALUES (
@@ -719,8 +713,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2022-01-24',
     DATE '2022-01-31'
 ),(
@@ -732,8 +724,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2022-02-01',
     DATE '2022-02-07'
 ),(
@@ -745,8 +735,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-02-08',
     DATE '2021-02-09'
 ),(
@@ -758,8 +746,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-02-08',
     DATE '2021-02-09'
 ),(
@@ -771,8 +757,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2022-03-01',
     DATE '2022-03-07'
 ),(
@@ -784,8 +768,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
       4,
       TRUE,
       TRUE,
-      TRUE,
-      FALSE,
       DATE '2022-03-01',
       DATE '2022-03-07'
 );
@@ -1451,12 +1433,10 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
-    number_of_copies,
-    number_of_originals,
+    number_of_copies_with_charges,
+    number_of_originals_with_charges,
     is_electronic,
     is_to_order,
-    are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies,
     created_date_time,
     updated_date_time
 ) VALUES (
@@ -1468,8 +1448,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-12-24',
     DATE '2021-12-31'
 );
@@ -1795,12 +1773,10 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
-    number_of_copies,
-    number_of_originals,
+    number_of_copies_with_charges,
+    number_of_originals_with_charges,
     is_electronic,
     is_to_order,
-    are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies,
     created_date_time,
     updated_date_time
 ) VALUES (
@@ -1812,8 +1788,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-12-24',
     DATE '2021-12-31'
 );
