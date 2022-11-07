@@ -202,7 +202,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
@@ -235,7 +234,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -269,7 +267,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
@@ -302,7 +299,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -336,7 +332,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
@@ -369,7 +364,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -760,7 +754,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
@@ -793,7 +786,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference', /* export_declaration_reference */
      true, /* is_import_license_required */
      'Import declaration reference', /* import_license_reference */
-     '2021-11-03 10:41:00.000', /* submission_datetime */
      true, /* is_ams_aci_filing_required */
      true, /* is_destination_filing_required */
      NULL, /* contract_quotation_reference */

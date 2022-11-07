@@ -119,7 +119,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -150,7 +149,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'CARRIER_BOOKING_REQUEST_REFERENCE_01',
     'RECE',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -182,7 +180,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -212,7 +209,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_02',
     'RECE',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1070,7 +1066,6 @@ VALUES (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1099,7 +1094,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_03',
     'CONF',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1130,7 +1124,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1160,7 +1153,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_04',
     'CONF',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1193,7 +1185,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1222,7 +1213,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_05',
     'CONF',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1253,7 +1243,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1283,7 +1272,6 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'CARRIER_BOOKING_REQUEST_REFERENCE_06',
     'CONF',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1456,7 +1444,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1487,7 +1474,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'a169d494-d6dd-4334-b951-512e4e16f075'::uuid,
     'KUBERNETES_IN_ACTION_01',
     'RECE',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1518,7 +1504,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     '59ede518-2224-4ecf-a0d0-4d641d365e1b'::uuid,
     'KUBERNETES_IN_ACTION_02',
     'RECE',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -1796,7 +1781,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -1827,7 +1811,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     '66802442-4702-4464-9d61-d659fdb7e33c'::uuid,
     'KUBERNETES_IN_ACTION_03',
     'CONF',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
