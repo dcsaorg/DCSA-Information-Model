@@ -562,13 +562,6 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_document_type_code (
     PRIMARY KEY (subscription_id, document_type_code)
 );
 
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.unmapped_event_queue CASCADE;
-CREATE TABLE dcsa_im_v3_0.unmapped_event_queue (
-    event_id uuid PRIMARY KEY,
-    enqueued_at_date_time timestamp with time zone NOT NULL default now()
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue CASCADE;
 CREATE TABLE dcsa_im_v3_0.outgoing_event_queue (
     delivery_id uuid PRIMARY KEY default uuid_generate_v4(),
@@ -896,9 +889,6 @@ CREATE VIEW dcsa_im_v3_0.event_sync_state AS
                            ELSE 'DELIVERY_FINISHED'
         END) AS delivery_status
     FROM (
-              SELECT event_id, 0 AS delivery_attempted
-                FROM dcsa_im_v3_0.unmapped_event_queue
-          UNION ALL
               SELECT event_id, 0 AS delivery_attempted
               FROM dcsa_im_v3_0.outgoing_event_queue
           UNION ALL
