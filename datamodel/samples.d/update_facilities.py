@@ -12,8 +12,8 @@ import pandas as pd
 SMDG_DOWNLOAD_URL = 'https://raw.githubusercontent.com/smdg-org/Terminal-Code-List/master/SMDG%20Terminal%20Code%20List.csv'
 BIC_DOWNLOAD_URL = 'https://raw.githubusercontent.com/bic-org/Facility-Code/master/sample-bic-facility-codes.csv'
 
-HEADER_FIELDS = ['Facility Name','UNLOCODE', 'Facility SMDG Code', 'Facility BIC Code']
-FIELDS_TO_KEEP = ['Terminal Facility Name', 'Facility Name','UNLOCODE', 'Terminal Code', 'Facility BIC Code']
+HEADER_FIELDS = ['Facility Name', 'UNLOCODE', 'Facility SMDG Code', 'Facility BIC Code']
+FIELDS_TO_KEEP = ['Terminal Facility Name', 'Facility Name', 'UNLOCODE', 'Terminal Code', 'Facility BIC Code']
 
 UN_LOCODE_FIELD = 'UNLOCODE'
 FILENAME = "facilities.csv"
@@ -61,16 +61,23 @@ def main():
 
     known_unlocodes = parse_known_unlocodes(output_dir)
 
-    #read SMDG and BIC facilities in and align the columns to DCSA facility entity fieldnames
+    # read SMDG and BIC facilities in and align the columns to DCSA facility entity fieldnames
     df = pd.concat(map(pd.read_csv, [SMDG_DOWNLOAD_URL, BIC_DOWNLOAD_URL]))
+    # For historical reasons, some facilities are defined in multiple UN Location codes.
+    # E.g., The terminal "HJNC" in Busan is defined for both KRPUS and KRBNP.  Therefore, we
+    # also need the UN location codes from the "Alternative UNLOCODEs" column
+    df['UNLOCODE'] = df[['UNLOCODE', 'Alternative UNLOCODEs']].fillna('')\
+        .agg(' '.join, axis='columns')\
+        .map(lambda x: x.strip().split())
+    df = df.explode('UNLOCODE')
     df = df[FIELDS_TO_KEEP]
+    # remove rows with unknown UNLOCODES from list
+    df = df[df.UNLOCODE.isin(known_unlocodes)]
     df = df.rename(columns={"Terminal Code": "Facility SMDG Code"})
-    df['Facility Name'] = df[['Terminal Facility Name', 'Facility Name']].fillna('').agg(''.join, axis=1)
+    df['Facility Name'] = df[['Terminal Facility Name', 'Facility Name']].fillna('').agg(''.join, axis='columns')
     df = df.drop(columns=['Terminal Facility Name'])
     df['Facility BIC Code'] = df['Facility BIC Code'].str[5:]
-    #remove rows with unknown UNLOCODES from list
-    df = df[df.UNLOCODE.isin(known_unlocodes)]
-    #write the facilities.csv file
+    # write the facilities.csv file
     facilities_file = os.path.join(output_dir, FILENAME)
     df.to_csv(facilities_file, index=False)
     print("Updated " + facilities_file)
