@@ -47,7 +47,7 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
-    party_name 
+    party_name
 ) VALUES (
     'c49ea2d6-3806-46c8-8490-294affc71286',
     'FDM Quality Control'
@@ -118,7 +118,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     'PRE',
     'WHAT',
     12.12,
-    123.321    
+    123.321
 );
 
 INSERT INTO dcsa_im_v3_0.carrier_clauses (
@@ -438,6 +438,27 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.commodity (
+    id,
+    booking_id,
+    commodity_type,
+    hs_code,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    export_license_issue_date,
+    export_license_expiry_date
+    ) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    (SELECT booking_id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    'Bloom',
+    '720711',
+    2000.0,
+    'LBR',
+    NULL,
+    NULL);
+
+
+
 INSERT INTO dcsa_im_v3_0.value_added_service_request (
     id,
     booking_id,
@@ -555,7 +576,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
     'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid
 );
-    
+
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
