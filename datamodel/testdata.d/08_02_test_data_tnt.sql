@@ -37,7 +37,7 @@ INSERT INTO dcsa_im_v3_0.location (
 ) VALUES (
     '06aca2f6-f1d0-48f8-ba46-9a3480adfd24',
     'Eiffel Tower',
-      '48.8585500',
+    '48.8585500',
     '2.294492036',
     'USNYC',
     null
