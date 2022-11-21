@@ -29,7 +29,6 @@ INSERT INTO dcsa_im_v3_0.voyage (
 INSERT INTO dcsa_im_v3_0.location (
     id,
     location_name,
-
     latitude,
     longitude,
     un_location_code,
