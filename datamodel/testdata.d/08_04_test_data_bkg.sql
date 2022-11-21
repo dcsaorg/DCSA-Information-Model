@@ -457,8 +457,6 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
-
-
 INSERT INTO dcsa_im_v3_0.value_added_service_request (
     id,
     booking_id,
