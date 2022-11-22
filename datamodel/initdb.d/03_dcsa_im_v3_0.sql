@@ -314,6 +314,35 @@ CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_type_code_a varchar(2) NOT NULL
 );
 
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_type (
+    reefer_type_code varchar(4) PRIMARY KEY,
+    reefer_type_name varchar(100) NOT NULL,
+    reefer_type_description varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
+CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    reefer_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
+    is_cargo_probe_1_required boolean NOT NULL,
+    is_cargo_probe_2_required boolean NOT NULL,
+    is_cargo_probe_3_required boolean NOT NULL,
+    is_cargo_probe_4_required boolean NOT NULL,
+    is_ventilation_open boolean NOT NULL,
+    is_drainholes_open boolean NOT NULL,
+    is_bulb_mode boolean NOT NULL,
+    is_gen_set_required boolean NOT NULL,
+    is_pre_cooling_required boolean NOT NULL,
+    is_cold_treatment_required boolean NOT NULL,
+    is_hot_stuffing_allowed boolean NOT NULL,
+    is_tracing_required boolean NOT NULL,
+    is_monitoring_required boolean NOT NULL,
+    product_name text(500) NULL,
+    extra_material text(500) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -514,35 +543,6 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.reefer_type (
-    reefer_type_code varchar(4) PRIMARY KEY,
-    reefer_type_name varchar(100) NOT NULL,
-    reefer_type_description varchar(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
-CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    reefer_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
-    is_cargo_probe_1_required boolean NOT NULL,
-    is_cargo_probe_2_required boolean NOT NULL,
-    is_cargo_probe_3_required boolean NOT NULL,
-    is_cargo_probe_4_required boolean NOT NULL,
-    is_ventilation_open boolean NOT NULL,
-    is_drainholes_open boolean NOT NULL,
-    is_bulb_mode boolean NOT NULL,
-    is_gen_set_required boolean NOT NULL,
-    is_pre_cooling_required boolean NOT NULL,
-    is_cold_treatment_required boolean NOT NULL,
-    is_hot_stuffing_allowed boolean NOT NULL,
-    is_tracing_required boolean NOT NULL,
-    is_monitoring_required boolean NOT NULL,
-    product_name text(500) NULL,
-    extra_material text(500) NULL
-);
-
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
 CREATE TABLE dcsa_im_v3_0.setpoint (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -555,34 +555,6 @@ CREATE TABLE dcsa_im_v3_0.setpoint (
     o2 real NULL,
     co2 real NULL,
     days_prior_to_discharge real NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_operating_mode CASCADE;
-CREATE TABLE dcsa_im_v3_0.reefer_operating_mode (
-    reefer_operating_mode_key varchar(5) PRIMARY KEY, -- FIXME
-    reefer_operating_mode_name varchar(100) NOT NULL,
-    reefer_operating_mode_description varchar(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.controlled_atmosphere_mode CASCADE;
-CREATE TABLE dcsa_im_v3_0.controlled_atmosphere_mode (
-    controlled_atmosphere_mode_key varchar(5) PRIMARY KEY, -- FIXME
-    controlled_atmosphere_mode_name varchar(100) NOT NULL,
-    controlled_atmosphere_mode_description varchar(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_efficiency_setting CASCADE;
-CREATE TABLE dcsa_im_v3_0.reefer_efficiency_setting (
-    reefer_efficiency_setting_key varchar(5) PRIMARY KEY, -- FIXME
-    reefer_efficiency_setting_name varchar(100) NOT NULL,
-    reefer_efficiency_setting_description varchar(255) NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_power_state CASCADE;
-CREATE TABLE dcsa_im_v3_0.reefer_power_state (
-     reefer_power_state_key varchar(5) PRIMARY KEY, -- FIXME
-     reefer_power_state_name varchar(100) NOT NULL,
-     reefer_power_state_description varchar(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
