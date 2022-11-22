@@ -516,30 +516,15 @@ CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.reefer_type (
-    reefer_type_code varchar(5) PRIMARY KEY, -- FIXME
+    reefer_type_code varchar(4) PRIMARY KEY,
     reefer_type_name varchar(100) NOT NULL,
     reefer_type_description varchar(255) NOT NULL
-);
-
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
-CREATE TABLE dcsa_im_v3_0.setpoint (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    active_reefer_settings_id uuid NOT NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
-    temperature varchar(10) NULL, -- FIXME
-    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
-    humidity varchar(10) NULL, -- FIXME
-    air_exchange varchar(10) NULL, -- FIXME
-    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','2K')),  -- FIXME, that 2K is hopefully wrong because it breaks enums!
-    o2 varchar(10) NULL, -- FIXME
-    co2 varchar(10) NULL, -- FIXME
-    days_prior_to_discharge int NULL -- FIXME
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    reefer_type_code NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
+    reefer_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
     is_cargo_probe_1_required boolean NOT NULL,
     is_cargo_probe_2_required boolean NOT NULL,
     is_cargo_probe_3_required boolean NOT NULL,
@@ -555,6 +540,21 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     is_monitoring_required boolean NOT NULL,
     product_name text(500) NULL,
     extra_material text(500) NULL
+);
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
+CREATE TABLE dcsa_im_v3_0.setpoint (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    active_reefer_settings_id uuid NOT NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
+    temperature real NULL,
+    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+    humidity real NULL,
+    air_exchange real NULL,
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','2K')),
+    o2 real NULL,
+    co2 real NULL,
+    days_prior_to_discharge real NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_operating_mode CASCADE;
