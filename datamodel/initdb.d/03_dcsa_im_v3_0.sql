@@ -540,15 +540,15 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 
     -- NEW FIELDS (remove / weed out in the above)
     -- FIXME: make it NOT NULL
-    refeer_type_code NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
+    reefer_type_code NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
     is_cargo_probe_1_required boolean
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_operating_mode CASCADE;
 CREATE TABLE dcsa_im_v3_0.reefer_operating_mode (
-    refeer_operating_mode_key varchar(5) PRIMARY KEY, -- FIXME
-    refeer_operating_mode_name varchar(100) NOT NULL,
-    refeer_operating_mode_description varchar(255) NOT NULL
+    reefer_operating_mode_key varchar(5) PRIMARY KEY, -- FIXME
+    reefer_operating_mode_name varchar(100) NOT NULL,
+    reefer_operating_mode_description varchar(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.controlled_atmosphere_mode CASCADE;
@@ -558,18 +558,18 @@ CREATE TABLE dcsa_im_v3_0.controlled_atmosphere_mode (
     controlled_atmosphere_mode_description varchar(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.refeer_efficiency_setting CASCADE;
-CREATE TABLE dcsa_im_v3_0.refeer_efficiency_setting (
-    refeer_efficiency_setting_key varchar(5) PRIMARY KEY, -- FIXME
-    refeer_efficiency_setting_name varchar(100) NOT NULL,
-    refeer_efficiency_setting_description varchar(255) NOT NULL
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_efficiency_setting CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_efficiency_setting (
+    reefer_efficiency_setting_key varchar(5) PRIMARY KEY, -- FIXME
+    reefer_efficiency_setting_name varchar(100) NOT NULL,
+    reefer_efficiency_setting_description varchar(255) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.refeer_power_state CASCADE;
-CREATE TABLE dcsa_im_v3_0.refeer_power_state (
-     refeer_power_state_key varchar(5) PRIMARY KEY, -- FIXME
-     refeer_power_state_name varchar(100) NOT NULL,
-     refeer_power_state_description varchar(255) NOT NULL
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_power_state CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_power_state (
+     reefer_power_state_key varchar(5) PRIMARY KEY, -- FIXME
+     reefer_power_state_name varchar(100) NOT NULL,
+     reefer_power_state_description varchar(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
