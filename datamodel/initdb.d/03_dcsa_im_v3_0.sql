@@ -506,6 +506,27 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_type (
+    reefer_type_code varchar(5) PRIMARY KEY, -- FIXME
+    reefer_type_name varchar(100) NOT NULL,
+    reefer_type_description varchar(255) NOT NULL
+);
+
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
+CREATE TABLE dcsa_im_v3_0.setpoint (
+    active_reefer_settings_id uuid PRIMARY KEY, -- FIXME
+    temperature varchar(10) NULL, -- FIXME
+    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+    humidity varchar(10) NULL, -- FIXME
+    air_exchange varchar(10) NULL, -- FIXME
+    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','2K')),  -- FIXME, that 2K is hopefully wrong because it breaks enums!
+    o2 varchar(10) NULL, -- FIXME
+    co2 varchar(10) NULL, -- FIXME
+    days_prior_to_discharge int NULL -- FIXME
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     utilized_transport_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
@@ -516,6 +537,39 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     humidity_max real NULL,
     ventilation_min real NULL,
     ventilation_max real NULL
+
+    -- NEW FIELDS (remove / weed out in the above)
+    -- FIXME: make it NOT NULL
+    refeer_type_code NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
+    is_cargo_probe_1_required boolean
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_operating_mode CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_operating_mode (
+    refeer_operating_mode_key varchar(5) PRIMARY KEY, -- FIXME
+    refeer_operating_mode_name varchar(100) NOT NULL,
+    refeer_operating_mode_description varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.controlled_atmosphere_mode CASCADE;
+CREATE TABLE dcsa_im_v3_0.controlled_atmosphere_mode (
+    controlled_atmosphere_mode_key varchar(5) PRIMARY KEY, -- FIXME
+    controlled_atmosphere_mode_name varchar(100) NOT NULL,
+    controlled_atmosphere_mode_description varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.refeer_efficiency_setting CASCADE;
+CREATE TABLE dcsa_im_v3_0.refeer_efficiency_setting (
+    refeer_efficiency_setting_key varchar(5) PRIMARY KEY, -- FIXME
+    refeer_efficiency_setting_name varchar(100) NOT NULL,
+    refeer_efficiency_setting_description varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.refeer_power_state CASCADE;
+CREATE TABLE dcsa_im_v3_0.refeer_power_state (
+     refeer_power_state_key varchar(5) PRIMARY KEY, -- FIXME
+     refeer_power_state_name varchar(100) NOT NULL,
+     refeer_power_state_description varchar(255) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
