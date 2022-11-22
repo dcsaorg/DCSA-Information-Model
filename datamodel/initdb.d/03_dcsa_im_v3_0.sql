@@ -537,19 +537,23 @@ CREATE TABLE dcsa_im_v3_0.setpoint (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
-    utilized_transport_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
-    temperature_min real NULL,
-    temperature_max real NULL,
-    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
-    humidity_min real NULL,
-    humidity_max real NULL,
-    ventilation_min real NULL,
-    ventilation_max real NULL
-
-    -- NEW FIELDS (remove / weed out in the above)
-    -- FIXME: make it NOT NULL
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     reefer_type_code NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
-    is_cargo_probe_1_required boolean
+    is_cargo_probe_1_required boolean NOT NULL,
+    is_cargo_probe_2_required boolean NOT NULL,
+    is_cargo_probe_3_required boolean NOT NULL,
+    is_cargo_probe_4_required boolean NOT NULL,
+    is_ventilation_open boolean NOT NULL,
+    is_drainholes_open boolean NOT NULL,
+    is_bulb_mode boolean NOT NULL,
+    is_gen_set_required boolean NOT NULL,
+    is_pre_cooling_required boolean NOT NULL,
+    is_cold_treatment_required boolean NOT NULL,
+    is_hot_stuffing_allowed boolean NOT NULL,
+    is_tracing_required boolean NOT NULL,
+    is_monitoring_required boolean NOT NULL,
+    product_name text(500) NULL,
+    extra_material text(500) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_operating_mode CASCADE;
@@ -593,6 +597,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (hs_code);
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (commodity_id)
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
