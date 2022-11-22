@@ -314,22 +314,24 @@ CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_type_code_a varchar(2) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
-CREATE TABLE dcsa_im_v3_0.requested_equipment (
+DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
+CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    requested_equipment_sizetype varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    requested_equipment_iso_equipment_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     requested_equipment_units integer NOT NULL,
-    confirmed_equipment_sizetype varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    confirmed_equipment_iso_equipment_code varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
-    is_shipper_owned boolean NOT NULL DEFAULT false
+    is_shipper_owned boolean NOT NULL DEFAULT false,
+    active_reefer_settings_id NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
 );
 
-CREATE INDEX ON dcsa_im_v3_0.requested_equipment (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.requested_equipment_group (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.commodity (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     commodity_type varchar(550) NOT NULL,
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
@@ -343,6 +345,12 @@ CREATE TABLE dcsa_im_v3_0.commodity (
 );
 
 CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
+CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
+    requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
+    commodity_id varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
+);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
