@@ -524,7 +524,8 @@ CREATE TABLE dcsa_im_v3_0.reefer_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
 CREATE TABLE dcsa_im_v3_0.setpoint (
-    active_reefer_settings_id uuid PRIMARY KEY, -- FIXME
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    active_reefer_settings_id uuid NOT NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
     temperature varchar(10) NULL, -- FIXME
     temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
     humidity varchar(10) NULL, -- FIXME
