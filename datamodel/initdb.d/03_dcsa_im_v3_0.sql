@@ -339,8 +339,8 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     is_hot_stuffing_allowed boolean NOT NULL,
     is_tracing_required boolean NOT NULL,
     is_monitoring_required boolean NOT NULL,
-    product_name text(500) NULL,
-    extra_material text(500) NULL
+    product_name varchar(500) NULL,
+    extra_material varchar(500) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
@@ -378,7 +378,7 @@ CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
     requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
-    commodity_id varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
+    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
@@ -563,7 +563,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     description_of_goods text NOT NULL,
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    commodity_id NOT NULL REFERENCES dcsa_im_v3_0.commodity (id)
+    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity (id)
 );
 
 -- Supporting FK constraints
