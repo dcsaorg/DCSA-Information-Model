@@ -324,7 +324,7 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     confirmed_equipment_iso_equipment_code varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
     is_shipper_owned boolean NOT NULL DEFAULT false,
-    active_reefer_settings_id NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
+    active_reefer_settings_id uuid NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.requested_equipment_group (booking_id);
