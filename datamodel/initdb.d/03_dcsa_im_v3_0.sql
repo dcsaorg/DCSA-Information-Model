@@ -584,13 +584,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.consignment_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     description_of_goods text NOT NULL,
-    hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    weight real NOT NULL,
-    volume real NULL,
-    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    commodity_id NOT NULL REFERENCES dcsa_im_v3_0.commodity (id)
 );
 
 -- Supporting FK constraints
