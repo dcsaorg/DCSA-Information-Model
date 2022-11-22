@@ -564,8 +564,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipment_id);
-CREATE INDEX ON dcsa_im_v3_0.consignment_item (hs_code);
-CREATE INDEX ON dcsa_im_v3_0.consignment_item (commodity_id)
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (commodity_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
