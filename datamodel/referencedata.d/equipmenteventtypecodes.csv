@@ -15,4 +15,4 @@ AVDO,Available for Drop-off,Identifies that shipment/ container is ready to be d
 CUSS,Customs Selected for Scan,Identifies that Customs has selected the equipment for scanning
 CUSI,Customs Selected for Inspection,Identifies that that Customs has selected the equipment for inspection
 CUSR,Customs Released,Identifies that Customs has released the equipment for either export from or import into the country.
-WAYP,Way Point Crossed,A waypoint is an intermediate point or place during transit of shipment, waypoint crossed indicates that the equipment has crossed the particular waypoint on its transit.
+WAYP,Way Point Crossed,"A waypoint is an intermediate point or place during transit of shipment, waypoint crossed indicates that the equipment has crossed the particular waypoint on its transit."
