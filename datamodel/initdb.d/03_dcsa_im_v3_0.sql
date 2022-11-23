@@ -727,10 +727,10 @@ CREATE TABLE dcsa_im_v3_0.event_classifier (
     event_classifier_description varchar(250) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event_type CASCADE;
+DROP TABLE IF EXISTS dcsa_im_v3_0.CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event_type (
     equipment_event_type_code varchar(4) PRIMARY KEY,
-    equipment_event_type_name varchar(30) NOT NULL,
+    equipment_event_type_name varchar(35) NOT NULL,
     equipment_event_type_description varchar(300) NOT NULL
 );
 
