@@ -314,22 +314,53 @@ CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_type_code_a varchar(2) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment CASCADE;
-CREATE TABLE dcsa_im_v3_0.requested_equipment (
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_type (
+    reefer_type_code varchar(4) PRIMARY KEY,
+    reefer_type_name varchar(100) NOT NULL,
+    reefer_type_description varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
+CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    reefer_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
+    is_cargo_probe_1_required boolean NOT NULL,
+    is_cargo_probe_2_required boolean NOT NULL,
+    is_cargo_probe_3_required boolean NOT NULL,
+    is_cargo_probe_4_required boolean NOT NULL,
+    is_ventilation_open boolean NOT NULL,
+    is_drainholes_open boolean NOT NULL,
+    is_bulb_mode boolean NOT NULL,
+    is_gen_set_required boolean NOT NULL,
+    is_pre_cooling_required boolean NOT NULL,
+    is_cold_treatment_required boolean NOT NULL,
+    is_hot_stuffing_allowed boolean NOT NULL,
+    is_tracing_required boolean NOT NULL,
+    is_monitoring_required boolean NOT NULL,
+    product_name varchar(500) NULL,
+    extra_material varchar(500) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
+CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    requested_equipment_sizetype varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    requested_equipment_iso_equipment_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     requested_equipment_units integer NOT NULL,
-    confirmed_equipment_sizetype varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    confirmed_equipment_iso_equipment_code varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
-    is_shipper_owned boolean NOT NULL DEFAULT false
+    is_shipper_owned boolean NOT NULL DEFAULT false,
+    active_reefer_settings_id uuid NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
 );
 
-CREATE INDEX ON dcsa_im_v3_0.requested_equipment (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.requested_equipment_group (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.commodity (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     commodity_type varchar(550) NOT NULL,
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
@@ -343,6 +374,12 @@ CREATE TABLE dcsa_im_v3_0.commodity (
 );
 
 CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
+CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
+    requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
+    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
+);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_cutoff_time CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
@@ -482,11 +519,6 @@ CREATE TABLE dcsa_im_v3_0.equipment (
 CREATE INDEX ON dcsa_im_v3_0.equipment (iso_equipment_code);
 CREATE INDEX ON dcsa_im_v3_0.equipment (equipment_reference);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_equipment CASCADE;
-CREATE TABLE dcsa_im_v3_0.requested_equipment_equipment (
-    requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment(id),
-    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment(equipment_reference)
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.package_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.package_code (
@@ -500,41 +532,40 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
-    is_shipper_owned boolean NOT NULL
+    is_shipper_owned boolean NOT NULL,
+    requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
 );
 
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
-CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
-    utilized_transport_equipment_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
-    temperature_min real NULL,
-    temperature_max real NULL,
+DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
+CREATE TABLE dcsa_im_v3_0.setpoint (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    active_reefer_settings_id uuid NOT NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
+    temperature real NULL,
     temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
-    humidity_min real NULL,
-    humidity_max real NULL,
-    ventilation_min real NULL,
-    ventilation_max real NULL
+    humidity real NULL,
+    air_exchange real NULL,
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','2K')),
+    o2 real NULL,
+    co2 real NULL,
+    days_prior_to_discharge real NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.consignment_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     description_of_goods text NOT NULL,
-    hs_code varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
-    weight real NOT NULL,
-    volume real NULL,
-    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
-    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id)
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id)
 );
 
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipment_id);
-CREATE INDEX ON dcsa_im_v3_0.consignment_item (hs_code);
+CREATE INDEX ON dcsa_im_v3_0.consignment_item (commodity_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
