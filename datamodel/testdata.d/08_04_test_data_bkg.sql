@@ -625,13 +625,13 @@ INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     'GP'
 );
 
-INSERT INTO dcsa_im_v3_0.requested_equipment (
+INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     id,
     booking_id,
     shipment_id,
-    requested_equipment_sizetype,
+    requested_equipment_iso_equipment_code,
     requested_equipment_units,
-    confirmed_equipment_sizetype,
+    confirmed_equipment_iso_equipment_code,
     confirmed_equipment_units,
     is_shipper_owned
     ) VALUES (

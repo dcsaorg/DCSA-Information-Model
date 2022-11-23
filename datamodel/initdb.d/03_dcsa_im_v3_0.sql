@@ -533,7 +533,7 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     is_shipper_owned boolean NOT NULL,
-    requested_equipment_group_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
+    requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
 );
 
 -- Supporting FK constraints
@@ -559,7 +559,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     description_of_goods text NOT NULL,
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity (id)
+    commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id)
 );
 
 -- Supporting FK constraints
