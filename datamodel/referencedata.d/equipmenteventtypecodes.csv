@@ -10,8 +10,9 @@ DROP,Drop-off, The action of delivering the container at customer location.
 INSP,Inspected,Identifies that the seal on equipment has been inspected.
 RSEA,Resealed,Identifies that the equipment has been resealed after inspection.
 RMVD,Removed,Identifies that a Seal has been removed from the equipment for inspection.
-AVPU,Pick-up,Available for Pick-up
-AVDO,Drop-off,Available for Drop-off
-CUSS,Scan,Customs Selected for Scan
-CUSI,Inspection,Customs Selected for Inspection
-CUSR,Released,Customs Released
+AVPU,Available for Pick-up,Identifies that shipment/ Container is ready to be picked up / collection at a facility.
+AVDO,Available for Drop-off,Identifies that shipment/ container is ready to be dropped off / delivered at a facility
+CUSS,Customs Selected for Scan,Identifies that Customs has selected the equipment for scanning
+CUSI,Customs Selected for Inspection,Identifies that that Customs has selected the equipment for inspection
+CUSR,Customs Released,Identifies that Customs has released the equipment for either export from or import into the country.
+WAYP,Way Point Crossed,A waypoint is an intermediate point or place during transit of shipment, waypoint crossed indicates that the equipment has crossed the particular waypoint on its transit.
