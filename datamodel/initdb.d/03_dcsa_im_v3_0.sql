@@ -628,7 +628,7 @@ CREATE TABLE dcsa_im_v3_0.seal (
     utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
     seal_number varchar(15) NOT NULL,
     seal_source_code varchar(5) NULL REFERENCES dcsa_im_v3_0.seal_source (seal_source_code),
-    seal_type_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
+    seal_type_code varchar(5) REFERENCES dcsa_im_v3_0.seal_type (seal_type_code)
 );
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.seal (utilized_transport_equipment_id);
