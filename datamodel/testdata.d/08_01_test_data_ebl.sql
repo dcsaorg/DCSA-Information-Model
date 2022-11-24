@@ -585,14 +585,10 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
-    iso_equipment_name,
-    iso_equipment_size_code,
-    iso_equipment_type_code_a
+    iso_equipment_name
 ) VALUES (
     '22G1',
-    'Twenty foot dry',
-    '22',
-    'G1'
+    'Twenty foot dry'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment (
