@@ -319,7 +319,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.reefer_type (
     reefer_type_code varchar(4) PRIMARY KEY,
     reefer_type_name varchar(100) NOT NULL,
-    reefer_type_description varchar(255) NOT NULL
+    reefer_type_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
@@ -339,6 +339,7 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     is_hot_stuffing_allowed boolean NOT NULL,
     is_tracing_required boolean NOT NULL,
     is_monitoring_required boolean NOT NULL,
+    is_high_value_cargo boolean NOT NULL,
     product_name varchar(500) NULL,
     extra_material varchar(500) NULL
 );
@@ -547,7 +548,7 @@ CREATE TABLE dcsa_im_v3_0.setpoint (
     temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
     humidity real NULL,
     air_exchange real NULL,
-    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','2K')),
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','FQH')),
     o2 real NULL,
     co2 real NULL,
     days_prior_to_discharge real NULL
