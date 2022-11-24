@@ -615,14 +615,10 @@ INSERT INTO dcsa_im_v3_0.reference (
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
-    iso_equipment_name,
-    iso_equipment_size_code,
-    iso_equipment_type_code_a
+    iso_equipment_name
 ) VALUES (
     '22GP',
-    'GENERAL PURPOSE',
-    '22',
-    'GP'
+    'GENERAL PURPOSE'
 );
 
 INSERT INTO dcsa_im_v3_0.requested_equipment_group (

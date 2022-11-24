@@ -377,38 +377,38 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
-    iso_equipment_name,
-    iso_equipment_size_code,
-    iso_equipment_type_code_a
+    iso_equipment_name
 ) VALUES (
     '22G2',
-    'Twenty foot dry 2',
-    '23',
-    'G2'
+    'Twenty foot dry 2'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment(
     equipment_reference,
     iso_equipment_code,
     tare_weight,
+    total_max_weight,
     weight_unit
 ) VALUES (
     'equipref3453',
     '22G2',
+    1424.2,
     null,
-    null
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment(
     equipment_reference,
     iso_equipment_code,
     tare_weight,
+    total_max_weight,
     weight_unit
 ) VALUES (
     'APZU4812090',
     '22G2',
+    1424.2,
     null,
-    null
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
