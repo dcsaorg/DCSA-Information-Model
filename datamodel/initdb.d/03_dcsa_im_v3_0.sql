@@ -309,9 +309,7 @@ CREATE TABLE dcsa_im_v3_0.shipment (
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code varchar(4) PRIMARY KEY,
-    iso_equipment_name varchar(35) NULL,
-    iso_equipment_size_code varchar(2) NOT NULL,
-    iso_equipment_type_code_a varchar(2) NOT NULL
+    iso_equipment_name varchar(35) NOT NULL
 );
 
 
@@ -511,10 +509,10 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment (
     equipment_reference varchar(15) PRIMARY KEY,    -- The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number and a check-digit). If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2 “Container with non-ISO identification” from SMDG.
     -- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
-    iso_equipment_code char(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
-    tare_weight real NULL,
+    iso_equipment_code char(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    tare_weight real NOT NULL,
     total_max_weight real null,
-    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)  CHECK (weight_unit IN ('KGM','LBR'))
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)  CHECK (weight_unit IN ('KGM','LBR'))
 );
 
 -- Supporting FK constraints
