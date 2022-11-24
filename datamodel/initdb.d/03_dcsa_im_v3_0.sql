@@ -513,6 +513,7 @@ CREATE TABLE dcsa_im_v3_0.equipment (
     -- Unique code for the different equipment size/type used for transporting commodities. The code is a concatenation of ISO Equipment Size Code and ISO Equipment Type Code A and follows the ISO 6346 standard.
     iso_equipment_code char(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     tare_weight real NULL,
+    total_max_weight real null,
     weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code)  CHECK (weight_unit IN ('KGM','LBR'))
 );
 
