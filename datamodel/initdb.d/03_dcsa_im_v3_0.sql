@@ -376,6 +376,8 @@ CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    commodity_requested_equipment_link varchar(100) NOT NULL,
     requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
     commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
 );
