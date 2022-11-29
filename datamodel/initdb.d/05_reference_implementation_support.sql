@@ -903,4 +903,15 @@ CREATE VIEW dcsa_im_v3_0.event_sync_state AS
          ) AS event_status
     GROUP BY event_id;
 
+
+-- simplify commodityRequestedEquipmentLink
+DROP TABLE IF EXISTS dcsa_im_v3_0.commodity_requested_equipment_link CASCADE;
+CREATE TABLE dcsa_im_v3_0.commodity_requested_equipment_link (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    commodity_requested_equipment_link varchar(100) NOT NULL
+);
+ALTER TABLE dcsa_im_v3_0.commodity ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+
+
 COMMIT;
