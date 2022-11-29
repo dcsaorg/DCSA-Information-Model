@@ -244,7 +244,7 @@ def declare_timestamps():
                                                   "Port Departure Planning And Services Completion")),
         'jit1_1',
         include_phase_in_name=False,
-        event_location_requirement=REQUIRED,
+        event_location_requirement=OPTIONAL,
         negotiation_cycle='T-Bunkering'
     )
 
