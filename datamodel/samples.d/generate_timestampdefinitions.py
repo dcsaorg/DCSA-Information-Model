@@ -257,7 +257,7 @@ def declare_timestamps():
         ['ALGS', NULL_VALUE],
         "Port Departure Planning And Services Completion",
         port_call_phase_type_code_matches(ifelse(NULL_VALUE, 'jit1_0', 'jit1_1')),
-        event_location_requirement=REQUIRED,
+        event_location_requirement=event_classifier_code_matches(ifelse(REQ_PLN_ACT, REQUIRED, OPTIONAL)),
         negotiation_cycle='TD-Berth',
     )
 
