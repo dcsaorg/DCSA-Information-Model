@@ -111,14 +111,14 @@ ATS-Cargo Ops Load,ATS-Cargo Ops Load,ACT,STRT,ALGS,LCRO,BRTH,Start Cargo Operat
 ETC-Cargo Ops,ETC-Cargo Ops,EST,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_2,RTC-Cargo Ops,RTC-Cargo Ops,T-Cargo Ops,null
 RTC-Cargo Ops,RTC-Cargo Ops,REQ,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_0,PTC-Cargo Ops,ETC-Cargo Ops,T-Cargo Ops,null
 PTC-Cargo Ops,PTC-Cargo Ops,PLN,CMPL,ALGS,CRGO,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_0,null,null,T-Cargo Ops,null
-ATS-Bunkering@Anchorage,ATS-Bunkering@Anchorage,ACT,STRT,ALGS,BUNK,ANCH,Start Cargo Operations And Services,REQUIRED,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
-ATS-Bunkering@Berth,ATS-Bunkering@Berth,ACT,STRT,ALGS,BUNK,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
-ATC-Bunkering@Anchorage,ATC-Bunkering@Anchorage,ACT,CMPL,ALGS,BUNK,ANCH,Port Departure Planning And Services Completion,REQUIRED,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
-ATC-Bunkering@Berth,ATC-Bunkering@Berth,ACT,CMPL,ALGS,BUNK,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
-ATS-Bunkering@Anchorage (<implicit>),ATS-Bunkering@Anchorage (<implicit>),ACT,STRT,null,BUNK,ANCH,Start Cargo Operations And Services,REQUIRED,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATS-Bunkering@Anchorage
-ATS-Bunkering@Berth (<implicit>),ATS-Bunkering@Berth (<implicit>),ACT,STRT,null,BUNK,BRTH,Start Cargo Operations And Services,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATS-Bunkering@Berth
-ATC-Bunkering@Anchorage (<implicit>),ATC-Bunkering@Anchorage (<implicit>),ACT,CMPL,null,BUNK,ANCH,Port Departure Planning And Services Completion,REQUIRED,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATC-Bunkering@Anchorage
-ATC-Bunkering@Berth (<implicit>),ATC-Bunkering@Berth (<implicit>),ACT,CMPL,null,BUNK,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATC-Bunkering@Berth
+ATS-Bunkering@Anchorage,ATS-Bunkering@Anchorage,ACT,STRT,ALGS,BUNK,ANCH,Start Cargo Operations And Services,OPTIONAL,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
+ATS-Bunkering@Berth,ATS-Bunkering@Berth,ACT,STRT,ALGS,BUNK,BRTH,Start Cargo Operations And Services,OPTIONAL,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
+ATC-Bunkering@Anchorage,ATC-Bunkering@Anchorage,ACT,CMPL,ALGS,BUNK,ANCH,Port Departure Planning And Services Completion,OPTIONAL,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
+ATC-Bunkering@Berth,ATC-Bunkering@Berth,ACT,CMPL,ALGS,BUNK,BRTH,Port Departure Planning And Services Completion,OPTIONAL,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,null
+ATS-Bunkering@Anchorage (<implicit>),ATS-Bunkering@Anchorage (<implicit>),ACT,STRT,null,BUNK,ANCH,Start Cargo Operations And Services,OPTIONAL,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATS-Bunkering@Anchorage
+ATS-Bunkering@Berth (<implicit>),ATS-Bunkering@Berth (<implicit>),ACT,STRT,null,BUNK,BRTH,Start Cargo Operations And Services,OPTIONAL,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATS-Bunkering@Berth
+ATC-Bunkering@Anchorage (<implicit>),ATC-Bunkering@Anchorage (<implicit>),ACT,CMPL,null,BUNK,ANCH,Port Departure Planning And Services Completion,OPTIONAL,False,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATC-Bunkering@Anchorage
+ATC-Bunkering@Berth (<implicit>),ATC-Bunkering@Berth (<implicit>),ACT,CMPL,null,BUNK,BRTH,Port Departure Planning And Services Completion,OPTIONAL,True,False,EXCLUDED,False,jit1_1,null,null,T-Bunkering,ATC-Bunkering@Berth
 ETD-Berth,ETD-Berth,EST,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,OPTIONAL,True,False,EXCLUDED,False,jit1_1,RTD-Berth,RTD-Berth,TD-Berth,null
 ETD-Berth (<implicit>),ETD-Berth (<implicit>),EST,DEPA,null,null,BRTH,Port Departure Planning And Services Completion,OPTIONAL,True,False,EXCLUDED,False,jit1_0,RTD-Berth (<implicit>),RTD-Berth (<implicit>),TD-Berth,ETD-Berth
 RTD-Berth,RTD-Berth,REQ,DEPA,ALGS,null,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,False,EXCLUDED,False,jit1_1,PTD-Berth,ETD-Berth,TD-Berth,null
