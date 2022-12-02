@@ -913,5 +913,6 @@ CREATE TABLE dcsa_im_v3_0.commodity_requested_equipment_link (
 ALTER TABLE dcsa_im_v3_0.commodity ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
 ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
 
+ALTER TABLE dcsa_im_v3_0.requested_equipment_commodity ADD commodity_requested_equipment_link varchar(100) NOT NULL;
 
 COMMIT;
