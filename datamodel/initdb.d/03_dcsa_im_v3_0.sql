@@ -548,7 +548,7 @@ CREATE TABLE dcsa_im_v3_0.setpoint (
     temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
     humidity real NULL,
     air_exchange real NULL,
-    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('MQH','FQH')),
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH')),
     o2 real NULL,
     co2 real NULL,
     days_prior_to_discharge real NULL
