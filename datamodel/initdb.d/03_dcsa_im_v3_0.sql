@@ -345,11 +345,11 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    requested_equipment_iso_equipment_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
-    requested_equipment_units integer NOT NULL,
-    confirmed_equipment_iso_equipment_code varchar(4)  NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    requested_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    requested_equipment_units integer NULL,
+    confirmed_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
     is_shipper_owned boolean NOT NULL DEFAULT false,
     active_reefer_settings_id uuid NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
