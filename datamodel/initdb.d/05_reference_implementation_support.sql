@@ -7,6 +7,23 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
 
+-- DDT-1356
+DROP TABLE IF EXISTS dcsa_im_v3_0.assigned_equipment CASCADE;
+CREATE TABLE dcsa_im_v3_0.assigned_equipment (
+    id uuid PRIMARY KEY,
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
+    requested_equipment_group_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group(id)
+);
+
+CREATE TABLE dcsa_im_v3_0.assigned_equipment_references (
+    assigned_equipment_id uuid REFERENCES dcsa_im_v3_0.assigned_equipment (id),
+    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+
+    -- A equipment can only be used once per requested_equipment_group
+    UNIQUE (assigned_equipment_id, equipment_reference)
+);
+
+
 -- DDT-1058
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
 
@@ -563,13 +580,6 @@ CREATE TABLE dcsa_im_v3_0.event_subscription_document_type_code (
     PRIMARY KEY (subscription_id, document_type_code)
 );
 
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.unmapped_event_queue CASCADE;
-CREATE TABLE dcsa_im_v3_0.unmapped_event_queue (
-    event_id uuid PRIMARY KEY,
-    enqueued_at_date_time timestamp with time zone NOT NULL default now()
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue CASCADE;
 CREATE TABLE dcsa_im_v3_0.outgoing_event_queue (
     delivery_id uuid PRIMARY KEY default uuid_generate_v4(),
@@ -743,15 +753,15 @@ DROP VIEW IF EXISTS dcsa_im_v3_0.jit_port_visit_ui_context CASCADE;
 CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
     SELECT jit_port_visit.port_visit_id,  -- port call visit
            latest_change.event_created_date_time AS latest_event_created_date_time,
-           latest_eta_berth.event_date_time AS eta_berth_date_time,
+           latest_eta_or_pta_berth.event_date_time AS best_berth_estimate_date_time,
            latest_atd_berth.event_date_time AS atd_berth_date_time,
            -- We use created for omits because it makes it easier for the UI to tell whether the OMIT is the latest
            -- timestamp (via tc.latest_event_created_date_time == tc.omit_created_date_time).
            -- The event_created_date_time timestamp is also useful for marking anything before that date time as
            -- obsolete.
            latest_omit.event_created_date_time AS omit_created_date_time,
-           latest_eta_berth.vessel_draft AS vessel_draft,
-           latest_eta_berth.miles_to_destination_port AS miles_to_destination_port
+           latest_eta_or_pta_berth.vessel_draft AS vessel_draft,
+           latest_eta_or_pta_berth.miles_to_destination_port AS miles_to_destination_port
            FROM dcsa_im_v3_0.jit_port_visit
       LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_jit_port_visit.port_visit_id
                  FROM dcsa_im_v3_0.operations_event
@@ -768,13 +778,13 @@ CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
                        JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                       WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)')
+                       WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)', 'PTA-Berth', 'PTA-Berth (<implicit>)')
                        GROUP BY port_visit_id
                    ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                   WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)')
-          ) AS latest_eta_berth ON (jit_port_visit.port_visit_id = latest_eta_berth.port_visit_id)
+                   WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)', 'PTA-Berth', 'PTA-Berth (<implicit>)')
+          ) AS latest_eta_or_pta_berth ON (jit_port_visit.port_visit_id = latest_eta_or_pta_berth.port_visit_id)
       LEFT JOIN (
                SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id
                FROM dcsa_im_v3_0.operations_event
@@ -898,9 +908,6 @@ CREATE VIEW dcsa_im_v3_0.event_sync_state AS
         END) AS delivery_status
     FROM (
               SELECT event_id, 0 AS delivery_attempted
-                FROM dcsa_im_v3_0.unmapped_event_queue
-          UNION ALL
-              SELECT event_id, 0 AS delivery_attempted
               FROM dcsa_im_v3_0.outgoing_event_queue
           UNION ALL
               SELECT event_id, 1 AS delivery_attempted
@@ -913,5 +920,17 @@ CREATE VIEW dcsa_im_v3_0.event_sync_state AS
                 FROM dcsa_im_v3_0.timestamp_notification_dead
          ) AS event_status
     GROUP BY event_id;
+
+
+-- simplify commodityRequestedEquipmentLink
+DROP TABLE IF EXISTS dcsa_im_v3_0.commodity_requested_equipment_link CASCADE;
+CREATE TABLE dcsa_im_v3_0.commodity_requested_equipment_link (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    commodity_requested_equipment_link varchar(100) NOT NULL
+);
+ALTER TABLE dcsa_im_v3_0.commodity ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+
+ALTER TABLE dcsa_im_v3_0.requested_equipment_commodity ADD commodity_requested_equipment_link varchar(100) NOT NULL;
 
 COMMIT;
