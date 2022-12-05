@@ -7,6 +7,23 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
 
+-- DDT-1356
+DROP TABLE IF EXISTS dcsa_im_v3_0.assigned_equipment CASCADE;
+CREATE TABLE dcsa_im_v3_0.assigned_equipment (
+    id uuid PRIMARY KEY,
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
+    requested_equipment_group_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group(id)
+);
+
+CREATE TABLE dcsa_im_v3_0.assigned_equipment_references (
+    assigned_equipment_id uuid REFERENCES dcsa_im_v3_0.assigned_equipment (id),
+    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+
+    -- A equipment can only be used once per requested_equipment_group
+    UNIQUE (assigned_equipment_id, equipment_reference)
+);
+
+
 -- DDT-1058
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
 
