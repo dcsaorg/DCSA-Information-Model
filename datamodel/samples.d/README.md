@@ -32,6 +32,8 @@ best-effort basis.  Corrections are welcome (via PR).
 
  * unlocationcodes.csv: Subset of https://unece.org/trade/cefact/unlocode-code-list-country-and-territory
 
+ * packagecodes.csv: Subset of a standard from UN/CEFACT Packaging Codes.
+
  * porttimezones.csv: Subset of https://github.com/marek5050/UN-Locode-with-Timezone
    - Note: This data is *not* part of the official IM.  It is only used via DCSA-UI-Support
    - Use `python3 update_porttimezones.py`to update the data set
