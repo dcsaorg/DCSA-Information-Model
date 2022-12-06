@@ -1211,7 +1211,7 @@ def _ensure_named(v, attribute_name, code):
 
 
 def usage():
-    print("Usage: python3 " + os.path.basename(sys.argv[0]) + ".py [path/to/datamodel/samples.d]")
+    print("Usage: python3 " + os.path.basename(sys.argv[0]) + ".py [path/to/datamodel/implementation-detail-data.d]")
     sys.exit(1)
 
 
@@ -1270,7 +1270,7 @@ def _process_accept_reject_links(timestamp: Timestamp, all_ts_table: Dict[str, T
                 timestamp.reject_ts = reject_ts.id
 
 
-def _load_data_and_self_check(reference_data_dir, sample_data_dir):
+def _load_data_and_self_check(reference_data_dir, implementation_detail_dir):
     VALID_OPERATIONS_EVENT_TYPE_CODES.update(
         load_data_set(
             os.path.join(reference_data_dir, 'operationseventtypecodes.csv'),
@@ -1279,7 +1279,7 @@ def _load_data_and_self_check(reference_data_dir, sample_data_dir):
 
     VALID_NEGOTIATION_CYCLE_KEYS.update(
         load_data_set(
-            os.path.join(sample_data_dir, 'negotiationcycles.csv'),
+            os.path.join(implementation_detail_dir, 'negotiationcycles.csv'),
             'cycleKey',
         ))
 
@@ -1302,15 +1302,16 @@ def main():
     if len(sys.argv) > 2:
         usage()
     if len(sys.argv) == 1:
-        sample_data_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
+        implementation_detail_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
     else:
-        sample_data_dir = sys.argv[1]
-    reference_data_dir = os.path.join(os.path.dirname(sample_data_dir), 'referencedata.d')
-    timestamp_def_filename = os.path.join(sample_data_dir, 'timestampdefinitions.csv')
-    publisher_pattern_filename = os.path.join(sample_data_dir, 'publisherpattern.csv')
-    relation_file_filename = os.path.join(sample_data_dir, 'timestampdefinitions_publisherpattern.csv')
+        implementation_detail_dir = sys.argv[1]
 
-    _load_data_and_self_check(reference_data_dir, sample_data_dir)
+    reference_data_dir = os.path.join(os.path.dirname(implementation_detail_dir), 'referencedata.d')
+    timestamp_def_filename = os.path.join(implementation_detail_dir, 'timestampdefinitions.csv')
+    publisher_pattern_filename = os.path.join(implementation_detail_dir, 'publisherpattern.csv')
+    relation_file_filename = os.path.join(implementation_detail_dir, 'timestampdefinitions_publisherpattern.csv')
+
+    _load_data_and_self_check(reference_data_dir, implementation_detail_dir)
 
     declare_timestamps()
     if not ALL_TS:

@@ -14,7 +14,7 @@ VALID_TIMEZONE = re.compile(r"^[A-Z][\w_-]+(/[A-Z][\w_-]+)+")
 
 
 def usage():
-    print("Usage: python3 " + os.path.basename(sys.argv[0]) + ".py path/to/datamodel/samples.d")
+    print("Usage: python3 " + os.path.basename(sys.argv[0]) + ".py [path/to/datamodel/implementation-detail-data.d]")
     sys.exit(1)
 
 
@@ -44,6 +44,7 @@ def main():
         output_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
     else:
         output_dir = sys.argv[1]
+    samples_dir = os.path.join(os.path.dirname(output_dir), 'samples.d')
 
     if not os.path.isdir(output_dir):
         print(output_dir + " must be an existing directory")
@@ -55,7 +56,7 @@ def main():
         print("This script requires requests (pip3 install requests or apt install python3-requests)")
         sys.exit(1)
 
-    known_unlocodes = parse_known_unlocodes(output_dir)
+    known_unlocodes = parse_known_unlocodes(samples_dir)
 
     content = requests.get(DOWNLOAD_URL).text
     if content[0] == '\ufeff':
