@@ -1,6 +1,6 @@
 cycleKey,cycleName,displayOrder
 TA-Berth,Arrival at Berth,1
-TA-PBPL,Arrival at PBP,2
+TA-PBP,Arrival at PBP,2
 T-Cargo Ops,Cargo Ops,3
 TD-Berth,Depature from Berth,4
 T-Pilotage (Inbound),Pilotage (Inbound),5
