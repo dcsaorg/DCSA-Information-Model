@@ -1,0 +1,19 @@
+cycleKey,cycleName,displayOrder
+TA-Berth,Arrival at Berth,1
+TA-PBP,Arrival at PBP,2
+T-Cargo Ops,Cargo Ops,3
+TD-Berth,Depature from Berth,4
+T-Pilotage (Inbound),Pilotage (Inbound),5
+T-Towage (Inbound),Towage (Inbound),6
+T-Pilotage (Shifting),Pilotage (Shift),7
+T-Towage (Shifting),Towage (Shift),8
+T-Pilotage (Outbound),Pilotage (Outbound),9
+T-Towage (Outbound),Towage (Outbound),10
+T-Mooring (Inbound),Mooring (Inbound),11
+T-Mooring (Outbound),Mooring (Outbound),12
+T-Bunkering,Bunkering,13
+T-Anchorage,Anchorage,14
+T-Sludge,Sludge,15
+T-Shore Power,Shore Power,16
+Special,Misc timestamps,17
+Unknown,Unknown,999

@@ -8,11 +8,13 @@ SELECT 'Start: 08_02_test_data_tnt.sql...' as progress;
 INSERT INTO dcsa_im_v3_0.service (
     carrier_id,
     carrier_service_code,
-    carrier_service_name
+    carrier_service_name,
+    universal_service_reference
 ) VALUES (
      (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'MSK'),
      'TNT1',
-     'Service name for TNT'
+     'Service name for TNT',
+     'SR00033F'
 );
 
 
@@ -24,6 +26,21 @@ INSERT INTO dcsa_im_v3_0.voyage (
      (SELECT id FROM dcsa_im_v3_0.service WHERE carrier_service_code = 'TNT1' LIMIT 1)
 );
 
+INSERT INTO dcsa_im_v3_0.location (
+    id,
+    location_name,
+    latitude,
+    longitude,
+    un_location_code,
+    facility_id
+) VALUES (
+    '06aca2f6-f1d0-48f8-ba46-9a3480adfd24',
+    'Eiffel Tower',
+    '48.8585500',
+    '2.294492036',
+    'USNYC',
+    null
+);
 
 INSERT INTO dcsa_im_v3_0.vessel (
     vessel_imo_number,
@@ -43,18 +60,18 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_reference,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     mode_of_transport_code,
-    vessel_id
+    vessel_id,
+    location_id
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'TC-REF-08_02-A',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567')
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567'),
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd24')
 );
 
 
@@ -62,22 +79,22 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_reference,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     mode_of_transport_code,
     vessel_id,
     export_voyage_id,
-    import_voyage_id
+    import_voyage_id,
+    location_id
 ) VALUES (
     '123e4567-e89b-12d3-a456-426614174000'::uuid,
     'TC-REF-08_02-B',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'USNYC' AND facility_smdg_code = 'APMT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
     (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
     (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E'),
-    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E')
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E'),
+    uuid('06aca2f6-f1d0-48f8-ba46-9a3480adfd24')
 );
 
 INSERT INTO dcsa_im_v3_0.transport (
@@ -95,7 +112,6 @@ INSERT INTO dcsa_im_v3_0.transport (
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -117,12 +133,10 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'BR1239719971',
     'PENU',
-    DATE '2020-03-07',
     'CY',
     'CFS',
     'FCL',
@@ -144,14 +158,12 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_01',
     DATE '2021-11-04'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -173,12 +185,10 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'BR1239719872',
     'PENU',
-    DATE '2020-04-15',
     'CY',
     'CFS',
     'FCL',
@@ -200,14 +210,12 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_02',
     DATE '2021-01-10'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
     document_status,
-    submission_datetime,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
@@ -229,12 +237,10 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
     updated_date_time
 ) VALUES (
     'ABC123123123',
     'RECE',
-    DATE '2020-03-10',
     'CY',
     'CFS',
     'FCL',
@@ -256,7 +262,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'CARRIER_VOYAGE_NUMBER_03',
     DATE '2021-12-16'
 );
 
@@ -372,38 +377,38 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
-    iso_equipment_name,
-    iso_equipment_size_code,
-    iso_equipment_type_code_a
+    iso_equipment_name
 ) VALUES (
     '22G2',
-    'Twenty foot dry 2',
-    '23',
-    'G2'
+    'Twenty foot dry 2'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment(
     equipment_reference,
     iso_equipment_code,
     tare_weight,
+    total_max_weight,
     weight_unit
 ) VALUES (
     'equipref3453',
     '22G2',
+    1424.2,
     null,
-    null
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.equipment(
     equipment_reference,
     iso_equipment_code,
     tare_weight,
+    total_max_weight,
     weight_unit
 ) VALUES (
     'APZU4812090',
     '22G2',
+    1424.2,
     null,
-    null
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
@@ -478,7 +483,7 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     delay_reason_code,
     change_remark
 ) VALUES (
-    uuid('84db923d-2a19-4eb0-beb5-446c1ec57d34'),
+    uuid('84db923d-2a19-4eb0-beb5-446c1ec17d34'),
     'ACT',
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
@@ -486,6 +491,15 @@ INSERT INTO dcsa_im_v3_0.transport_event (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'WEA',
     'Bad weather'
+),(
+     uuid('2968b966-ee81-46ba-af87-0c5031c64142'),
+     (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+     '2021-11-28T14:12:56+01:00'::timestamptz,
+     '2021-12-01T07:41:00+08:30'::timestamptz,
+     'DEPA',
+     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
+     'WEA',
+     'Bad weather'
 );
 
 
@@ -499,7 +513,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     empty_indicator_code,
     equipment_reference
 ) VALUES (
-    uuid('84db923d-2a19-4eb0-beb5-446c1ec57d34'),
+    uuid('2c645424-a125-4431-9dc4-5aff488173b7'),
     'EST',
     '2021-01-09T14:12:56+01:00'::timestamptz,
     '2019-11-12T07:41:00+08:30'::timestamptz,
@@ -507,6 +521,24 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'EMPTY',
     'APZU4812090'
+);
+
+INSERT INTO dcsa_im_v3_0.transport_event (
+    event_classifier_code,
+    event_date_time,
+    event_created_date_time,
+    transport_event_type_code,
+    transport_call_id,
+    delay_reason_code,
+    change_remark
+) VALUES (
+    (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
+    '2021-11-28T14:12:56+01:00'::timestamptz,
+    '2021-12-01T07:41:00+08:30'::timestamptz,
+    'ARRI',
+    '123e4567-e89b-12d3-a456-426614174000'::uuid,
+    'ANA',
+    'Authorities not available'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_event (

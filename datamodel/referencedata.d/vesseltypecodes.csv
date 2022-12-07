@@ -1,12 +1,12 @@
-code,description
-GCGO,General cargo
-CONT,Container
-RORO,RoRo
-CARC,Car carrier
-PASS,Passenger
-FERY,Ferry
-BULK,Bulk
-TANK,Tanker
-LGTK,Liquified gaz tanker
-ASSI,Assistance
-PILO,Pilot boat
+vessel_type_code,vessel_type_name,unece_concatenated_means_of_transport_code,vessel_type_description
+GECA,General Cargo,50,Vessel designed to carry general cargo
+CONT,Container,511,Vessel designed to carry containers only
+RORO,RoRo,512,Vessel with ramp designed to carry roll-on/roll-off cargo.
+CARC,Car carrier,513,Vessel designed to carry automotive vehicles
+PASS,Passenger,59,Vessel designed to carry more than 12 passengers
+FERY,Ferry,592,Vessel designed to ply regularly between two or more port
+BULK,Bulk,52,Vessel designed to carry bulk cargo
+TANK,Tanker,53,Vessel solely equipped with tanks to carry cargo
+LPGT,Liquified gaz tanker,54,Tanker designed to carry liquefied gas
+ASSI,Assistance,60,Vessel designed to give assistance such as tug
+PLOT,Pilot boat,711,Vessel designed to convey pilots to/from ships

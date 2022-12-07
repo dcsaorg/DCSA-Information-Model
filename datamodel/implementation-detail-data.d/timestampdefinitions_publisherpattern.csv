@@ -1,0 +1,585 @@
+Timestamp ID,Pattern ID
+AT All fast,AG2ATH
+AT All fast,CA2ATH
+AT All fast,VSL2ATH
+ATA-Anchorage,AG2ATH
+ATA-Anchorage,ATH2AG
+ATA-Anchorage,ATH2CA
+ATA-Anchorage,ATH2VSL
+ATA-Anchorage,CA2ATH
+ATA-Anchorage,VSL2ATH
+ATA-Berth,AG2ATH
+ATA-Berth,ATH2AG
+ATA-Berth,ATH2CA
+ATA-Berth,ATH2TR
+ATA-Berth,ATH2VSL
+ATA-Berth,CA2ATH
+ATA-Berth,TR2ATH
+ATA-Berth,VSL2ATH
+ATA-Berth (<implicit>),AG2ATH
+ATA-Berth (<implicit>),ATH2AG
+ATA-Berth (<implicit>),ATH2CA
+ATA-Berth (<implicit>),ATH2TR
+ATA-Berth (<implicit>),ATH2VSL
+ATA-Berth (<implicit>),CA2ATH
+ATA-Berth (<implicit>),TR2ATH
+ATA-Berth (<implicit>),VSL2ATH
+ATA-PBP,AG2ATH
+ATA-PBP,ATH2AG
+ATA-PBP,ATH2CA
+ATA-PBP,ATH2VSL
+ATA-PBP,CA2ATH
+ATA-PBP,VSL2ATH
+ATA-PBP (<implicit>),AG2ATH
+ATA-PBP (<implicit>),ATH2AG
+ATA-PBP (<implicit>),ATH2CA
+ATA-PBP (<implicit>),ATH2VSL
+ATA-PBP (<implicit>),CA2ATH
+ATA-PBP (<implicit>),VSL2ATH
+ATC Lashing,LSH2CA
+ATC-Anchorage Ops,AG2ATH
+ATC-Anchorage Ops,ATH2AG
+ATC-Anchorage Ops,ATH2CA
+ATC-Anchorage Ops,ATH2VSL
+ATC-Anchorage Ops,CA2ATH
+ATC-Anchorage Ops,VSL2ATH
+ATC-Bunkering@Anchorage,AG2BUK
+ATC-Bunkering@Anchorage,BUK2AG
+ATC-Bunkering@Anchorage,BUK2CA
+ATC-Bunkering@Anchorage,BUK2VSL
+ATC-Bunkering@Anchorage,CA2BUK
+ATC-Bunkering@Anchorage,VSL2BUK
+ATC-Bunkering@Anchorage (<implicit>),AG2BUK
+ATC-Bunkering@Anchorage (<implicit>),BUK2AG
+ATC-Bunkering@Anchorage (<implicit>),BUK2CA
+ATC-Bunkering@Anchorage (<implicit>),BUK2VSL
+ATC-Bunkering@Anchorage (<implicit>),CA2BUK
+ATC-Bunkering@Anchorage (<implicit>),VSL2BUK
+ATC-Bunkering@Berth,AG2BUK
+ATC-Bunkering@Berth,BUK2AG
+ATC-Bunkering@Berth,BUK2CA
+ATC-Bunkering@Berth,BUK2VSL
+ATC-Bunkering@Berth,CA2BUK
+ATC-Bunkering@Berth,VSL2BUK
+ATC-Bunkering@Berth (<implicit>),AG2BUK
+ATC-Bunkering@Berth (<implicit>),BUK2AG
+ATC-Bunkering@Berth (<implicit>),BUK2CA
+ATC-Bunkering@Berth (<implicit>),BUK2VSL
+ATC-Bunkering@Berth (<implicit>),CA2BUK
+ATC-Bunkering@Berth (<implicit>),VSL2BUK
+ATC-Cargo Ops,AG2TR
+ATC-Cargo Ops,CA2TR
+ATC-Cargo Ops,TR2AG
+ATC-Cargo Ops,TR2CA
+ATC-Cargo Ops,TR2VSL
+ATC-Cargo Ops,VSL2TR
+ATC-Cargo Ops Discharge,AG2TR
+ATC-Cargo Ops Discharge,CA2TR
+ATC-Cargo Ops Discharge,TR2AG
+ATC-Cargo Ops Discharge,TR2CA
+ATC-Cargo Ops Discharge,TR2VSL
+ATC-Cargo Ops Discharge,VSL2TR
+ATC-Cargo Ops Load,AG2TR
+ATC-Cargo Ops Load,CA2TR
+ATC-Cargo Ops Load,TR2AG
+ATC-Cargo Ops Load,TR2CA
+ATC-Cargo Ops Load,TR2VSL
+ATC-Cargo Ops Load,VSL2TR
+ATC-Mooring (<implicit>),ATH2MOR
+ATC-Mooring (<implicit>),MOR2ATH
+ATC-Mooring (Inbound),ATH2MOR
+ATC-Mooring (Inbound),MOR2ATH
+ATC-Mooring (Outbound),ATH2MOR
+ATC-Mooring (Outbound),MOR2ATH
+ATC-Pilotage (<implicit>),ATH2PLT
+ATC-Pilotage (<implicit>),PLT2ATH
+ATC-Pilotage (Inbound),ATH2PLT
+ATC-Pilotage (Inbound),PLT2ATH
+ATC-Pilotage (Outbound),ATH2PLT
+ATC-Pilotage (Outbound),PLT2ATH
+ATC-Pilotage (Shifting),ATH2PLT
+ATC-Pilotage (Shifting),PLT2ATH
+ATC-Shore Power,AG2SVP
+ATC-Shore Power,CA2SVP
+ATC-Shore Power,SVP2AG
+ATC-Shore Power,SVP2CA
+ATC-Shore Power,SVP2VSL
+ATC-Shore Power,VSL2SVP
+ATC-Sludge@Anchorage,AG2SLU
+ATC-Sludge@Anchorage,CA2SLU
+ATC-Sludge@Anchorage,SLU2AG
+ATC-Sludge@Anchorage,SLU2CA
+ATC-Sludge@Anchorage,SLU2VSL
+ATC-Sludge@Anchorage,VSL2SLU
+ATC-Sludge@Berth,AG2SLU
+ATC-Sludge@Berth,CA2SLU
+ATC-Sludge@Berth,SLU2AG
+ATC-Sludge@Berth,SLU2CA
+ATC-Sludge@Berth,SLU2VSL
+ATC-Sludge@Berth,VSL2SLU
+ATC-Towage (<implicit>),ATH2TWG
+ATC-Towage (<implicit>),TWG2ATH
+ATC-Towage (Inbound),ATH2TWG
+ATC-Towage (Inbound),TWG2ATH
+ATC-Towage (Outbound),ATH2TWG
+ATC-Towage (Outbound),TWG2ATH
+ATC-Towage (Shifting),ATH2TWG
+ATC-Towage (Shifting),TWG2ATH
+ATD-Anchorage,AG2ATH
+ATD-Anchorage,ATH2AG
+ATD-Anchorage,ATH2CA
+ATD-Anchorage,ATH2VSL
+ATD-Anchorage,CA2ATH
+ATD-Anchorage,VSL2ATH
+ATD-Berth,AG2ATH
+ATD-Berth,ATH2AG
+ATD-Berth,ATH2CA
+ATD-Berth,ATH2VSL
+ATD-Berth,CA2ATH
+ATD-Berth,VSL2ATH
+ATD-Berth (<implicit>),AG2ATH
+ATD-Berth (<implicit>),ATH2AG
+ATD-Berth (<implicit>),ATH2CA
+ATD-Berth (<implicit>),ATH2VSL
+ATD-Berth (<implicit>),CA2ATH
+ATD-Berth (<implicit>),VSL2ATH
+ATS-Anchorage Ops,AG2ATH
+ATS-Anchorage Ops,ATH2AG
+ATS-Anchorage Ops,ATH2CA
+ATS-Anchorage Ops,ATH2VSL
+ATS-Anchorage Ops,CA2ATH
+ATS-Anchorage Ops,VSL2ATH
+ATS-Bunkering@Anchorage,AG2BUK
+ATS-Bunkering@Anchorage,BUK2AG
+ATS-Bunkering@Anchorage,BUK2CA
+ATS-Bunkering@Anchorage,BUK2VSL
+ATS-Bunkering@Anchorage,CA2BUK
+ATS-Bunkering@Anchorage,VSL2BUK
+ATS-Bunkering@Anchorage (<implicit>),AG2BUK
+ATS-Bunkering@Anchorage (<implicit>),BUK2AG
+ATS-Bunkering@Anchorage (<implicit>),BUK2CA
+ATS-Bunkering@Anchorage (<implicit>),BUK2VSL
+ATS-Bunkering@Anchorage (<implicit>),CA2BUK
+ATS-Bunkering@Anchorage (<implicit>),VSL2BUK
+ATS-Bunkering@Berth,AG2BUK
+ATS-Bunkering@Berth,BUK2AG
+ATS-Bunkering@Berth,BUK2CA
+ATS-Bunkering@Berth,BUK2VSL
+ATS-Bunkering@Berth,CA2BUK
+ATS-Bunkering@Berth,VSL2BUK
+ATS-Bunkering@Berth (<implicit>),AG2BUK
+ATS-Bunkering@Berth (<implicit>),BUK2AG
+ATS-Bunkering@Berth (<implicit>),BUK2CA
+ATS-Bunkering@Berth (<implicit>),BUK2VSL
+ATS-Bunkering@Berth (<implicit>),CA2BUK
+ATS-Bunkering@Berth (<implicit>),VSL2BUK
+ATS-Cargo Ops,AG2TR
+ATS-Cargo Ops,CA2TR
+ATS-Cargo Ops,TR2AG
+ATS-Cargo Ops,TR2CA
+ATS-Cargo Ops,TR2VSL
+ATS-Cargo Ops,VSL2TR
+ATS-Cargo Ops (<implicit>),AG2TR
+ATS-Cargo Ops (<implicit>),CA2TR
+ATS-Cargo Ops (<implicit>),TR2AG
+ATS-Cargo Ops (<implicit>),TR2CA
+ATS-Cargo Ops (<implicit>),TR2VSL
+ATS-Cargo Ops (<implicit>),VSL2TR
+ATS-Cargo Ops Discharge,AG2TR
+ATS-Cargo Ops Discharge,CA2TR
+ATS-Cargo Ops Discharge,TR2AG
+ATS-Cargo Ops Discharge,TR2CA
+ATS-Cargo Ops Discharge,TR2VSL
+ATS-Cargo Ops Discharge,VSL2TR
+ATS-Cargo Ops Load,AG2TR
+ATS-Cargo Ops Load,CA2TR
+ATS-Cargo Ops Load,TR2AG
+ATS-Cargo Ops Load,TR2CA
+ATS-Cargo Ops Load,TR2VSL
+ATS-Cargo Ops Load,VSL2TR
+ATS-Mooring (<implicit>),ATH2MOR
+ATS-Mooring (<implicit>),MOR2ATH
+ATS-Mooring (Inbound),ATH2MOR
+ATS-Mooring (Inbound),MOR2ATH
+ATS-Mooring (Outbound),ATH2MOR
+ATS-Mooring (Outbound),MOR2ATH
+ATS-Pilotage (<implicit>),ATH2PLT
+ATS-Pilotage (<implicit>),PLT2ATH
+ATS-Pilotage (Inbound),ATH2PLT
+ATS-Pilotage (Inbound),PLT2ATH
+ATS-Pilotage (Outbound),ATH2PLT
+ATS-Pilotage (Outbound),PLT2ATH
+ATS-Pilotage (Shifting),ATH2PLT
+ATS-Pilotage (Shifting),PLT2ATH
+ATS-Shore Power,AG2SVP
+ATS-Shore Power,CA2SVP
+ATS-Shore Power,SVP2AG
+ATS-Shore Power,SVP2CA
+ATS-Shore Power,SVP2VSL
+ATS-Shore Power,VSL2SVP
+ATS-Sludge@Anchorage,AG2SLU
+ATS-Sludge@Anchorage,CA2SLU
+ATS-Sludge@Anchorage,SLU2AG
+ATS-Sludge@Anchorage,SLU2CA
+ATS-Sludge@Anchorage,SLU2VSL
+ATS-Sludge@Anchorage,VSL2SLU
+ATS-Sludge@Berth,AG2SLU
+ATS-Sludge@Berth,CA2SLU
+ATS-Sludge@Berth,SLU2AG
+ATS-Sludge@Berth,SLU2CA
+ATS-Sludge@Berth,SLU2VSL
+ATS-Sludge@Berth,VSL2SLU
+ATS-Towage (<implicit>),ATH2TWG
+ATS-Towage (<implicit>),TWG2ATH
+ATS-Towage (Inbound),ATH2TWG
+ATS-Towage (Inbound),TWG2ATH
+ATS-Towage (Outbound),ATH2TWG
+ATS-Towage (Outbound),TWG2ATH
+ATS-Towage (Shifting),ATH2TWG
+ATS-Towage (Shifting),TWG2ATH
+Cancel Bunkering@Anchorage,AG2BUK
+Cancel Bunkering@Anchorage,BUK2AG
+Cancel Bunkering@Anchorage,BUK2CA
+Cancel Bunkering@Anchorage,BUK2VSL
+Cancel Bunkering@Anchorage,CA2BUK
+Cancel Bunkering@Anchorage,VSL2BUK
+Cancel Bunkering@Berth,AG2BUK
+Cancel Bunkering@Berth,BUK2AG
+Cancel Bunkering@Berth,BUK2CA
+Cancel Bunkering@Berth,BUK2VSL
+Cancel Bunkering@Berth,CA2BUK
+Cancel Bunkering@Berth,VSL2BUK
+Cancel Cargo Ops,AG2TR
+Cancel Cargo Ops,CA2TR
+Cancel Cargo Ops,TR2AG
+Cancel Cargo Ops,TR2CA
+Cancel Cargo Ops,TR2VSL
+Cancel Cargo Ops,VSL2TR
+Cancel Mooring (Inbound),ATH2MOR
+Cancel Mooring (Inbound),MOR2ATH
+Cancel Mooring (Outbound),ATH2MOR
+Cancel Mooring (Outbound),MOR2ATH
+Cancel Pilotage (Inbound),ATH2PLT
+Cancel Pilotage (Inbound),PLT2ATH
+Cancel Pilotage (Outbound),ATH2PLT
+Cancel Pilotage (Outbound),PLT2ATH
+Cancel Pilotage (Shifting),ATH2PLT
+Cancel Pilotage (Shifting),PLT2ATH
+Cancel Sludge@Anchorage,AG2SLU
+Cancel Sludge@Anchorage,CA2SLU
+Cancel Sludge@Anchorage,SLU2AG
+Cancel Sludge@Anchorage,SLU2CA
+Cancel Sludge@Anchorage,SLU2VSL
+Cancel Sludge@Anchorage,VSL2SLU
+Cancel Sludge@Berth,AG2SLU
+Cancel Sludge@Berth,CA2SLU
+Cancel Sludge@Berth,SLU2AG
+Cancel Sludge@Berth,SLU2CA
+Cancel Sludge@Berth,SLU2VSL
+Cancel Sludge@Berth,VSL2SLU
+Cancel Towage (Inbound),ATH2TWG
+Cancel Towage (Inbound),TWG2ATH
+Cancel Towage (Outbound),ATH2TWG
+Cancel Towage (Outbound),TWG2ATH
+Cancel Towage (Shifting),ATH2TWG
+Cancel Towage (Shifting),TWG2ATH
+ESOP,AG2ATH
+ESOP,CA2ATH
+ESOP,VSL2ATH
+ETA-Anchorage,AG2ATH
+ETA-Anchorage,CA2ATH
+ETA-Anchorage,VSL2ATH
+ETA-Berth,AG2TR
+ETA-Berth,CA2TR
+ETA-Berth,VSL2TR
+ETA-Berth (<implicit>),AG2TR
+ETA-Berth (<implicit>),CA2TR
+ETA-Berth (<implicit>),VSL2TR
+ETA-PBP,AG2ATH
+ETA-PBP,CA2ATH
+ETA-PBP,VSL2ATH
+ETA-PBP (<implicit>),AG2ATH
+ETA-PBP (<implicit>),CA2ATH
+ETA-PBP (<implicit>),VSL2ATH
+ETC-Bunkering@Anchorage,BUK2AG
+ETC-Bunkering@Anchorage,BUK2CA
+ETC-Bunkering@Anchorage,BUK2VSL
+ETC-Bunkering@Anchorage (<implicit>),BUK2AG
+ETC-Bunkering@Anchorage (<implicit>),BUK2CA
+ETC-Bunkering@Anchorage (<implicit>),BUK2VSL
+ETC-Bunkering@Berth,BUK2AG
+ETC-Bunkering@Berth,BUK2CA
+ETC-Bunkering@Berth,BUK2VSL
+ETC-Bunkering@Berth (<implicit>),BUK2AG
+ETC-Bunkering@Berth (<implicit>),BUK2CA
+ETC-Bunkering@Berth (<implicit>),BUK2VSL
+ETC-Cargo Ops,TR2AG
+ETC-Cargo Ops,TR2CA
+ETC-Cargo Ops,TR2VSL
+ETC-Mooring (<implicit>),MOR2ATH
+ETC-Mooring (Inbound),MOR2ATH
+ETC-Mooring (Outbound),MOR2ATH
+ETC-Pilotage (<implicit>),PLT2ATH
+ETC-Pilotage (Inbound),PLT2ATH
+ETC-Pilotage (Outbound),PLT2ATH
+ETC-Pilotage (Shifting),PLT2ATH
+ETC-Sludge@Anchorage,SLU2AG
+ETC-Sludge@Anchorage,SLU2CA
+ETC-Sludge@Anchorage,SLU2VSL
+ETC-Sludge@Berth,SLU2AG
+ETC-Sludge@Berth,SLU2CA
+ETC-Sludge@Berth,SLU2VSL
+ETC-Towage (<implicit>),TWG2ATH
+ETC-Towage (Inbound),TWG2ATH
+ETC-Towage (Outbound),TWG2ATH
+ETC-Towage (Shifting),TWG2ATH
+ETD-Anchorage,AG2ATH
+ETD-Anchorage,CA2ATH
+ETD-Anchorage,VSL2ATH
+ETD-Berth,AG2ATH
+ETD-Berth,CA2ATH
+ETD-Berth,VSL2ATH
+ETD-Berth (<implicit>),AG2ATH
+ETD-Berth (<implicit>),CA2ATH
+ETD-Berth (<implicit>),VSL2ATH
+ETS-Bunkering@Anchorage,BUK2AG
+ETS-Bunkering@Anchorage,BUK2CA
+ETS-Bunkering@Anchorage,BUK2VSL
+ETS-Bunkering@Anchorage (<implicit>),BUK2AG
+ETS-Bunkering@Anchorage (<implicit>),BUK2CA
+ETS-Bunkering@Anchorage (<implicit>),BUK2VSL
+ETS-Bunkering@Berth,BUK2AG
+ETS-Bunkering@Berth,BUK2CA
+ETS-Bunkering@Berth,BUK2VSL
+ETS-Bunkering@Berth (<implicit>),BUK2AG
+ETS-Bunkering@Berth (<implicit>),BUK2CA
+ETS-Bunkering@Berth (<implicit>),BUK2VSL
+ETS-Cargo Ops,TR2AG
+ETS-Cargo Ops,TR2CA
+ETS-Cargo Ops,TR2VSL
+ETS-Cargo Ops (<implicit>),TR2AG
+ETS-Cargo Ops (<implicit>),TR2CA
+ETS-Cargo Ops (<implicit>),TR2VSL
+ETS-Mooring (<implicit>),MOR2ATH
+ETS-Mooring (Inbound),MOR2ATH
+ETS-Mooring (Outbound),MOR2ATH
+ETS-Pilotage (<implicit>),PLT2ATH
+ETS-Pilotage (Inbound),PLT2ATH
+ETS-Pilotage (Outbound),PLT2ATH
+ETS-Pilotage (Shifting),PLT2ATH
+ETS-Sludge@Anchorage,SLU2AG
+ETS-Sludge@Anchorage,SLU2CA
+ETS-Sludge@Anchorage,SLU2VSL
+ETS-Sludge@Berth,SLU2AG
+ETS-Sludge@Berth,SLU2CA
+ETS-Sludge@Berth,SLU2VSL
+ETS-Towage (<implicit>),TWG2ATH
+ETS-Towage (Inbound),TWG2ATH
+ETS-Towage (Outbound),TWG2ATH
+ETS-Towage (Shifting),TWG2ATH
+Gangway Down and Safe,AG2ATH
+Gangway Down and Safe,CA2ATH
+Gangway Down and Safe,VSL2ATH
+Omit Port Call,AG2ATH
+Omit Port Call,CA2ATH
+Omit Port Call,VSL2ATH
+PTA-Anchorage,AG2ATH
+PTA-Anchorage,CA2ATH
+PTA-Anchorage,VSL2ATH
+PTA-Berth,AG2TR
+PTA-Berth,CA2TR
+PTA-Berth,VSL2TR
+PTA-Berth (<implicit>),AG2TR
+PTA-Berth (<implicit>),CA2TR
+PTA-Berth (<implicit>),VSL2TR
+PTA-PBP,AG2ATH
+PTA-PBP,CA2ATH
+PTA-PBP,VSL2ATH
+PTA-PBP (<implicit>),AG2ATH
+PTA-PBP (<implicit>),CA2ATH
+PTA-PBP (<implicit>),VSL2ATH
+PTC-Bunkering@Anchorage,BUK2AG
+PTC-Bunkering@Anchorage,BUK2CA
+PTC-Bunkering@Anchorage,BUK2VSL
+PTC-Bunkering@Anchorage (<implicit>),BUK2AG
+PTC-Bunkering@Anchorage (<implicit>),BUK2CA
+PTC-Bunkering@Anchorage (<implicit>),BUK2VSL
+PTC-Bunkering@Berth,BUK2AG
+PTC-Bunkering@Berth,BUK2CA
+PTC-Bunkering@Berth,BUK2VSL
+PTC-Bunkering@Berth (<implicit>),BUK2AG
+PTC-Bunkering@Berth (<implicit>),BUK2CA
+PTC-Bunkering@Berth (<implicit>),BUK2VSL
+PTC-Cargo Ops,TR2AG
+PTC-Cargo Ops,TR2CA
+PTC-Cargo Ops,TR2VSL
+PTC-Mooring (<implicit>),MOR2ATH
+PTC-Mooring (Inbound),MOR2ATH
+PTC-Mooring (Outbound),MOR2ATH
+PTC-Pilotage (<implicit>),PLT2ATH
+PTC-Pilotage (Inbound),PLT2ATH
+PTC-Pilotage (Outbound),PLT2ATH
+PTC-Pilotage (Shifting),PLT2ATH
+PTC-Sludge@Anchorage,SLU2AG
+PTC-Sludge@Anchorage,SLU2CA
+PTC-Sludge@Anchorage,SLU2VSL
+PTC-Sludge@Berth,SLU2AG
+PTC-Sludge@Berth,SLU2CA
+PTC-Sludge@Berth,SLU2VSL
+PTC-Towage (<implicit>),TWG2ATH
+PTC-Towage (Inbound),TWG2ATH
+PTC-Towage (Outbound),TWG2ATH
+PTC-Towage (Shifting),TWG2ATH
+PTD-Anchorage,AG2ATH
+PTD-Anchorage,CA2ATH
+PTD-Anchorage,VSL2ATH
+PTD-Berth,AG2ATH
+PTD-Berth,CA2ATH
+PTD-Berth,VSL2ATH
+PTD-Berth (<implicit>),AG2ATH
+PTD-Berth (<implicit>),CA2ATH
+PTD-Berth (<implicit>),VSL2ATH
+PTS-Bunkering@Anchorage,BUK2AG
+PTS-Bunkering@Anchorage,BUK2CA
+PTS-Bunkering@Anchorage,BUK2VSL
+PTS-Bunkering@Anchorage (<implicit>),BUK2AG
+PTS-Bunkering@Anchorage (<implicit>),BUK2CA
+PTS-Bunkering@Anchorage (<implicit>),BUK2VSL
+PTS-Bunkering@Berth,BUK2AG
+PTS-Bunkering@Berth,BUK2CA
+PTS-Bunkering@Berth,BUK2VSL
+PTS-Bunkering@Berth (<implicit>),BUK2AG
+PTS-Bunkering@Berth (<implicit>),BUK2CA
+PTS-Bunkering@Berth (<implicit>),BUK2VSL
+PTS-Cargo Ops,TR2AG
+PTS-Cargo Ops,TR2CA
+PTS-Cargo Ops,TR2VSL
+PTS-Cargo Ops (<implicit>),TR2AG
+PTS-Cargo Ops (<implicit>),TR2CA
+PTS-Cargo Ops (<implicit>),TR2VSL
+PTS-Mooring (<implicit>),MOR2ATH
+PTS-Mooring (Inbound),MOR2ATH
+PTS-Mooring (Outbound),MOR2ATH
+PTS-Pilotage (<implicit>),PLT2ATH
+PTS-Pilotage (Inbound),PLT2ATH
+PTS-Pilotage (Outbound),PLT2ATH
+PTS-Pilotage (Shifting),PLT2ATH
+PTS-Sludge@Anchorage,SLU2AG
+PTS-Sludge@Anchorage,SLU2CA
+PTS-Sludge@Anchorage,SLU2VSL
+PTS-Sludge@Berth,SLU2AG
+PTS-Sludge@Berth,SLU2CA
+PTS-Sludge@Berth,SLU2VSL
+PTS-Towage (<implicit>),TWG2ATH
+PTS-Towage (Inbound),TWG2ATH
+PTS-Towage (Outbound),TWG2ATH
+PTS-Towage (Shifting),TWG2ATH
+RTA-Anchorage,ATH2AG
+RTA-Anchorage,ATH2CA
+RTA-Anchorage,ATH2VSL
+RTA-Berth,TR2AG
+RTA-Berth,TR2CA
+RTA-Berth,TR2VSL
+RTA-Berth (<implicit>),TR2AG
+RTA-Berth (<implicit>),TR2CA
+RTA-Berth (<implicit>),TR2VSL
+RTA-PBP,ATH2AG
+RTA-PBP,ATH2CA
+RTA-PBP,ATH2VSL
+RTA-PBP (<implicit>),ATH2AG
+RTA-PBP (<implicit>),ATH2CA
+RTA-PBP (<implicit>),ATH2VSL
+RTC-Bunkering@Anchorage,AG2BUK
+RTC-Bunkering@Anchorage,CA2BUK
+RTC-Bunkering@Anchorage,VSL2BUK
+RTC-Bunkering@Anchorage (<implicit>),AG2BUK
+RTC-Bunkering@Anchorage (<implicit>),CA2BUK
+RTC-Bunkering@Anchorage (<implicit>),VSL2BUK
+RTC-Bunkering@Berth,AG2BUK
+RTC-Bunkering@Berth,CA2BUK
+RTC-Bunkering@Berth,VSL2BUK
+RTC-Bunkering@Berth (<implicit>),AG2BUK
+RTC-Bunkering@Berth (<implicit>),CA2BUK
+RTC-Bunkering@Berth (<implicit>),VSL2BUK
+RTC-Cargo Ops,AG2TR
+RTC-Cargo Ops,CA2TR
+RTC-Cargo Ops,VSL2TR
+RTC-Mooring (<implicit>),ATH2MOR
+RTC-Mooring (Inbound),ATH2MOR
+RTC-Mooring (Outbound),ATH2MOR
+RTC-Pilotage (<implicit>),ATH2PLT
+RTC-Pilotage (Inbound),ATH2PLT
+RTC-Pilotage (Outbound),ATH2PLT
+RTC-Pilotage (Shifting),ATH2PLT
+RTC-Sludge@Anchorage,AG2SLU
+RTC-Sludge@Anchorage,CA2SLU
+RTC-Sludge@Anchorage,VSL2SLU
+RTC-Sludge@Berth,AG2SLU
+RTC-Sludge@Berth,CA2SLU
+RTC-Sludge@Berth,VSL2SLU
+RTC-Towage (<implicit>),ATH2TWG
+RTC-Towage (Inbound),ATH2TWG
+RTC-Towage (Outbound),ATH2TWG
+RTC-Towage (Shifting),ATH2TWG
+RTD-Anchorage,ATH2AG
+RTD-Anchorage,ATH2CA
+RTD-Anchorage,ATH2VSL
+RTD-Berth,ATH2AG
+RTD-Berth,ATH2CA
+RTD-Berth,ATH2VSL
+RTD-Berth (<implicit>),ATH2AG
+RTD-Berth (<implicit>),ATH2CA
+RTD-Berth (<implicit>),ATH2VSL
+RTS-Bunkering@Anchorage,AG2BUK
+RTS-Bunkering@Anchorage,CA2BUK
+RTS-Bunkering@Anchorage,VSL2BUK
+RTS-Bunkering@Anchorage (<implicit>),AG2BUK
+RTS-Bunkering@Anchorage (<implicit>),CA2BUK
+RTS-Bunkering@Anchorage (<implicit>),VSL2BUK
+RTS-Bunkering@Berth,AG2BUK
+RTS-Bunkering@Berth,CA2BUK
+RTS-Bunkering@Berth,VSL2BUK
+RTS-Bunkering@Berth (<implicit>),AG2BUK
+RTS-Bunkering@Berth (<implicit>),CA2BUK
+RTS-Bunkering@Berth (<implicit>),VSL2BUK
+RTS-Cargo Ops,AG2TR
+RTS-Cargo Ops,CA2TR
+RTS-Cargo Ops,VSL2TR
+RTS-Cargo Ops (<implicit>),AG2TR
+RTS-Cargo Ops (<implicit>),CA2TR
+RTS-Cargo Ops (<implicit>),VSL2TR
+RTS-Mooring (<implicit>),ATH2MOR
+RTS-Mooring (Inbound),ATH2MOR
+RTS-Mooring (Outbound),ATH2MOR
+RTS-Pilotage (<implicit>),ATH2PLT
+RTS-Pilotage (Inbound),ATH2PLT
+RTS-Pilotage (Outbound),ATH2PLT
+RTS-Pilotage (Shifting),ATH2PLT
+RTS-Sludge@Anchorage,AG2SLU
+RTS-Sludge@Anchorage,CA2SLU
+RTS-Sludge@Anchorage,VSL2SLU
+RTS-Sludge@Berth,AG2SLU
+RTS-Sludge@Berth,CA2SLU
+RTS-Sludge@Berth,VSL2SLU
+RTS-Towage (<implicit>),ATH2TWG
+RTS-Towage (Inbound),ATH2TWG
+RTS-Towage (Outbound),ATH2TWG
+RTS-Towage (Shifting),ATH2TWG
+SOSP,AG2ATH
+SOSP,CA2ATH
+SOSP,VSL2ATH
+Terminal Ready for vessel departure,TR2AG
+Terminal Ready for vessel departure,TR2CA
+Terminal Ready for vessel departure,TR2VSL
+Vessel Readiness for Cargo operations,AG2TR
+Vessel Readiness for Cargo operations,CA2TR
+Vessel Readiness for Cargo operations,VSL2TR
+Vessel Readiness for Cargo operations [JIT 1.1],AG2TR
+Vessel Readiness for Cargo operations [JIT 1.1],CA2TR
+Vessel Readiness for Cargo operations [JIT 1.1],VSL2TR
+Vessel Ready to sail,AG2TR
+Vessel Ready to sail,CA2TR
+Vessel Ready to sail,VSL2TR
+Vessel Ready to sail [JIT 1.1],AG2TR
+Vessel Ready to sail [JIT 1.1],CA2TR
+Vessel Ready to sail [JIT 1.1],VSL2TR
