@@ -65,7 +65,7 @@ def declare_timestamps():
         include_phase_in_name=True,
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
-        event_location_requirement=REQUIRED,
+        event_location_requirement=operations_event_type_code_matches(ifelse('CMPL', REQUIRED, OPTIONAL)),
         # The implicit one also counts as Inbound
         negotiation_cycle='T-Pilotage (Inbound)',
         is_vessel_draft_relevant=event_classifier_and_operations_event_type_code_matches(
@@ -87,7 +87,7 @@ def declare_timestamps():
         include_phase_in_name=True,
         is_cancelable=True,
         vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN_ACT, OPTIONAL, EXCLUDED)),
-        event_location_requirement=REQUIRED,
+        event_location_requirement=operations_event_type_code_matches(ifelse('CMPL', REQUIRED, OPTIONAL)),
         negotiation_cycle='T-Towage (Inbound)',
         is_miles_to_destination_relevant=event_classifier_and_operations_event_type_code_matches(
             ifelse(('ACT', 'STRT'), True, False)
@@ -271,7 +271,7 @@ def declare_timestamps():
         'jit1_1',
         include_phase_in_name=True,
         is_cancelable=True,
-        event_location_requirement=REQUIRED,
+        event_location_requirement=operations_event_type_code_matches(ifelse('CMPL', REQUIRED, OPTIONAL)),
     )
 
     # ATC Cargo Ops Load UC 70
