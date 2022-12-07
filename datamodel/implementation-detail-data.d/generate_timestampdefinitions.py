@@ -136,6 +136,7 @@ def declare_timestamps():
         # IFS says EST, PLN *and* ACT can use MtD
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
         is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
+        vessel_position_requirement=event_classifier_code_matches(ifelse(EST_PLN, OPTIONAL, EXCLUDED)),
     )
 
     # EOSP UC 34
