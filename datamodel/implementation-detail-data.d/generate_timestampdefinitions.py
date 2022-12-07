@@ -132,7 +132,7 @@ def declare_timestamps():
         "Pilot Boarding Place Arrival Planning And Execution, Berth Arrival Execution",
         'jit1_0',
         event_location_requirement=REQUIRED,
-        negotiation_cycle='TA-PBPL',
+        negotiation_cycle='TA-PBP',
         # IFS says EST, PLN *and* ACT can use MtD
         is_miles_to_destination_relevant=event_classifier_code_matches(ifelse('REQ', False, True)),
         is_vessel_draft_relevant=event_classifier_code_matches(ifelse(EST_PLN_ACT, True, False)),
