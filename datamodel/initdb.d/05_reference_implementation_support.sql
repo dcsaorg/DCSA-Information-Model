@@ -742,6 +742,11 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition_publisher_pattern (
 DROP TABLE IF EXISTS dcsa_im_v3_0.ops_event_timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
     event_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.operations_event (event_id),
+    -- No REFERENCES; we can receive messages out of order and that is ok.
+    reply_to_timestamp_id uuid NULL,
+    -- Always when we processed the timestamp (event_created_date_time /can/ be
+    -- when the origin processed it). Useful for the UI/debugging
+    timestamp_processed_date_time timestamp with time zone NOT NULL default now(),
     timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id)
 );
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
