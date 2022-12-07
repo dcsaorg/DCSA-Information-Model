@@ -688,11 +688,11 @@ PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE = {
     # Inbound (+ implicit) is PBPL -> BRTH
     ('INBD', 'STRT'): 'PBPL',
     ('INBD', 'CMPL'): 'BRTH',
-    ('INBD', 'CANC'): 'BRTH',
+    ('INBD', 'CANC'): 'PBPL',
 
     (NULL_VALUE, 'STRT'): 'PBPL',
     (NULL_VALUE, 'CMPL'): 'BRTH',
-    (NULL_VALUE, 'CANC'): 'BRTH',
+    (NULL_VALUE, 'CANC'): 'PBPL',
 
     # Shift is BRTH -> BRTH
     ('SHIF', 'STRT'): 'BRTH',
@@ -702,7 +702,7 @@ PILO_TOWAGE_FACILITY_TYPE_CODE_TABLE = {
     # Outbound is BRTH -> Nothing
     ('OUTB', 'STRT'): 'BRTH',
     ('OUTB', 'CMPL'): NULL_VALUE,
-    ('OUTB', 'CANC'): NULL_VALUE,
+    ('OUTB', 'CANC'): 'BRTH',
 }
 
 
