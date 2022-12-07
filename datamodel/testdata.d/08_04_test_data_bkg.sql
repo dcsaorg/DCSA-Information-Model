@@ -47,7 +47,7 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
-    party_name 
+    party_name
 ) VALUES (
     'c49ea2d6-3806-46c8-8490-294affc71286',
     'FDM Quality Control'
@@ -71,17 +71,17 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
 
 INSERT INTO dcsa_im_v3_0.transport_document (
     transport_document_reference,
-    place_of_issue,
+    place_of_issue_id,
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
     number_of_originals,
-    carrier,
+    carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
     created_date_time,
     updated_date_time,
-    issuingParty
+    issuing_party_id
 ) VALUES (
     'be038e58-5365',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -118,7 +118,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     'PRE',
     'WHAT',
     12.12,
-    123.321    
+    123.321
 );
 
 INSERT INTO dcsa_im_v3_0.carrier_clauses (
@@ -202,12 +202,11 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -215,10 +214,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
@@ -236,7 +234,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -248,7 +245,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      NULL,
      'AO',
      true,
-     NULL,
      NULL,
     'WTK',
     12.12,
@@ -271,12 +267,11 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -284,10 +279,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     '31629725-418b-41e1-9d10-521763c656c4'::uuid,
@@ -305,7 +299,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -317,7 +310,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      NULL,
      'AO',
      true,
-     NULL,
      NULL,
     'WTK',
     12.12,
@@ -340,12 +332,11 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -353,10 +344,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
@@ -374,7 +364,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     '2021-11-03 10:41:00.000',
      true,
      true,
      NULL,
@@ -386,7 +375,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      NULL,
      'AO',
      true,
-     NULL,
      NULL,
     'WTK',
     12.12,
@@ -450,6 +438,25 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.commodity (
+    id,
+    booking_id,
+    commodity_type,
+    hs_code,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    export_license_issue_date,
+    export_license_expiry_date
+    ) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    (SELECT booking_id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
+    'Bloom',
+    '720711',
+    2000.0,
+    'LBR',
+    NULL,
+    NULL);
+
 INSERT INTO dcsa_im_v3_0.value_added_service_request (
     id,
     booking_id,
@@ -497,7 +504,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     id,
     transport_call_reference,
     transport_call_sequence_number,
-    facility_id,
     facility_type_code,
     location_id,
     mode_of_transport_code,
@@ -508,7 +514,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
     'TC-REF-08_04-A',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     'c703277f-84ca-4816-9ccf-fad8e202d3b6'::uuid,
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
@@ -519,7 +524,6 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid,
     'TC-REF-08_04-B',
     1,
-    (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
@@ -570,7 +574,7 @@ INSERT INTO dcsa_im_v3_0.transport (
     'e7b0ae8f-b479-40d8-b3de-56c4c2474211'::uuid,
     'af0acf67-604c-4ffa-befe-77878a6a665d'::uuid
 );
-    
+
 INSERT INTO dcsa_im_v3_0.shipment_transport (
     shipment_id,
     transport_id,
@@ -611,23 +615,19 @@ INSERT INTO dcsa_im_v3_0.reference (
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
-    iso_equipment_name,
-    iso_equipment_size_code,
-    iso_equipment_type_code_a
+    iso_equipment_name
 ) VALUES (
     '22GP',
-    'GENERAL PURPOSE',
-    '22',
-    'GP'
+    'GENERAL PURPOSE'
 );
 
-INSERT INTO dcsa_im_v3_0.requested_equipment (
+INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     id,
     booking_id,
     shipment_id,
-    requested_equipment_sizetype,
+    requested_equipment_iso_equipment_code,
     requested_equipment_units,
-    confirmed_equipment_sizetype,
+    confirmed_equipment_iso_equipment_code,
     confirmed_equipment_units,
     is_shipper_owned
     ) VALUES (
@@ -769,12 +769,11 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    submission_datetime,
     is_ams_aci_filing_required,
     is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
-    invoice_payable_at,
+    invoice_payable_at_id,
     expected_departure_date,
     transport_document_type_code,
     transport_document_reference,
@@ -782,10 +781,9 @@ INSERT INTO dcsa_im_v3_0.booking (
     communication_channel_code,
     is_equipment_substitution_allowed,
     vessel_id,
-    export_voyage_number,
-    declared_value_currency,
+    declared_value_currency_code,
     declared_value,
-    place_of_issue,
+    place_of_issue_id,
     updated_date_time
 ) VALUES (
     'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
@@ -803,7 +801,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference', /* export_declaration_reference */
      true, /* is_import_license_required */
      'Import declaration reference', /* import_license_reference */
-     '2021-11-03 10:41:00.000', /* submission_datetime */
      true, /* is_ams_aci_filing_required */
      true, /* is_destination_filing_required */
      NULL, /* contract_quotation_reference */
@@ -816,7 +813,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO', /* communication_channel_code */
      true, /* is_equipment_substitution_allowed */
      NULL, /* vessel_id */
-     NULL, /* export_voyage_number */
     'WTK',  /* declared_value_currency */
     12.12, /* declared_value */
      NULL, /* place_of_issue */
@@ -844,12 +840,10 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     shipping_instruction_reference,
     document_status,
     is_shipped_onboard_type,
-    number_of_copies,
-    number_of_originals,
+    number_of_copies_with_charges,
+    number_of_originals_with_charges,
     is_electronic,
     is_to_order,
-    are_charges_displayed_on_originals,
-    are_charges_displayed_on_copies,
     created_date_time,
     updated_date_time
 ) VALUES (
@@ -861,8 +855,6 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     4,
     TRUE,
     TRUE,
-    TRUE,
-    FALSE,
     DATE '2021-12-24',
     DATE '2021-12-31'
 );

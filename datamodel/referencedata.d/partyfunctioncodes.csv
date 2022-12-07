@@ -14,9 +14,9 @@ AG,Carrier local agent,
 VSL,Vessel,"A floating, sea going structure (mother vessels and feeder vessels) with either an internal or external mode of propulsion designed for the transport of cargo and/or passengers. Ocean vessels are uniquely identified by an IMO number consisting of 7 digits, or alternatively by their AIS signal with an MMSI number"
 ATH,Port Authorities,
 PLT,Pilot,The activity of conducting a vessel within restricted waters.
-TWG,Towage provider,
-LSH,Lashing provider,
-BUK,Bunkering service provider,
+TWG,Towage service provider,The party offering the towage services.
+LSH,Lashing service provider,The party offering the lashing services.
+BUK,Bunkering service provider,The party offering the bunkering services.
 TR,Terminal,"A facility for loading, moving or discharging containers. Terminals can be both inland terminals for trucks and rail or port terminals are accessed by vessels and these can contain multiple berths."
 EBL,EBL Solution Provider,"The solution provider for managing the electronic bill of lading."
 SCO,Service contract owner,"The party signing the service contract with the carrier."
@@ -24,4 +24,4 @@ BA,Booking Agent,"Party acting as a booking office for transport and forwarding 
 HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."
 MOR, Mooring service provider, "The party offering the mooring services."
 SLU, Sludge service provider, "The party offering the Slugde services."
-SVP, Any other service provider,
+SVP, Other service provider,Any other service not covered by a more specific code.

@@ -2,131 +2,230 @@
 \set ON_ERROR_STOP true
 \connect dcsa_openapi
 
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 -- Implementation specific SQL for the reference implementation.
 BEGIN;
+
+-- DDT-1356
+DROP TABLE IF EXISTS dcsa_im_v3_0.assigned_equipment CASCADE;
+CREATE TABLE dcsa_im_v3_0.assigned_equipment (
+    id uuid PRIMARY KEY,
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
+    requested_equipment_group_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group(id)
+);
+
+CREATE TABLE dcsa_im_v3_0.assigned_equipment_references (
+    assigned_equipment_id uuid REFERENCES dcsa_im_v3_0.assigned_equipment (id),
+    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+
+    -- A equipment can only be used once per requested_equipment_group
+    UNIQUE (assigned_equipment_id, equipment_reference)
+);
+
 
 -- DDT-1058
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT NULL;
 
 
--- Aggregated table containing all events
-DROP VIEW IF EXISTS dcsa_im_v3_0.aggregated_events CASCADE;
-CREATE VIEW dcsa_im_v3_0.aggregated_events AS
- SELECT transport_event.event_id,
-    'TRANSPORT' AS event_type,
-    'TC_ID' AS link_type,
-    transport_event.event_classifier_code,
-    transport_event.transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    NULL::text AS equipment_event_type_code,
-    transport_event.event_date_time,
-    transport_event.event_created_date_time,
-    transport_event.transport_call_id,
-    transport_event.delay_reason_code,
-    transport_event.change_remark,
-    NULL::text AS remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
-   FROM dcsa_im_v3_0.transport_event
-UNION ALL
- SELECT shipment_event.event_id,
-    'SHIPMENT' AS event_type,
-    shipment_event.document_type_code AS link_type,
-    shipment_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    shipment_event.shipment_event_type_code,
-    shipment_event.document_type_code,
-    NULL::text AS equipment_event_type_code,
-    shipment_event.event_date_time,
-    shipment_event.event_created_date_time,
-    NULL::uuid AS transport_call_id,
-    NULL::text AS delay_reason_code,
-    NULL::text AS change_remark,
-    NULL::text AS remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    shipment_event.document_id AS document_id,
-    shipment_event.document_reference AS document_reference,
-    shipment_event.reason AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
-   FROM dcsa_im_v3_0.shipment_event
-UNION ALL
- SELECT equipment_event.event_id,
-    'EQUIPMENT' AS event_type,
-    'TC_ID' AS link_type,
-    equipment_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    equipment_event.equipment_event_type_code,
-    equipment_event.event_date_time,
-    equipment_event.event_created_date_time,
-    equipment_event.transport_call_id,
-    NULL::text AS delay_reason_code,
-    NULL::text AS change_remark,
-    NULL::text AS remark,
-    equipment_event.equipment_reference,
-    equipment_event.empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    NULL::text as operations_event_type_code,
-    NULL::text as publisher_role,
-    NULL::uuid as event_location,
-    NULL::text as port_call_phase_type_code,
-    NULL::text as port_call_service_type_code,
-    NULL::text as facility_type_code,
-    NULL::uuid as vessel_position,
-    NULL::uuid as publisher
-   FROM dcsa_im_v3_0.equipment_event
-UNION ALL
- SELECT operations_event.event_id,
-    'OPERATIONS' AS event_type,
-    'TC_ID' AS link_type,
-    operations_event.event_classifier_code,
-    NULL::text AS transport_event_type_code,
-    NULL::text AS shipment_event_type_code,
-    NULL::text AS document_type_code,
-    NULL::text AS equipment_event_type_code,
-    operations_event.event_date_time,
-    operations_event.event_created_date_time,
-    operations_event.transport_call_id,
-    operations_event.delay_reason_code,
-    NULL::text AS change_remark,
-    operations_event.remark,
-    NULL::text AS equipment_reference,
-    NULL::text AS empty_indicator_code,
-    NULL::uuid AS document_id,
-    NULL::text AS document_reference,
-    NULL::text AS reason,
-    operations_event.operations_event_type_code,
-    operations_event.publisher_role,
-    operations_event.event_location,
-    operations_event.port_call_phase_type_code,
-    operations_event.port_call_service_type_code,
-    operations_event.facility_type_code,
-    operations_event.vessel_position,
-    operations_event.publisher
-   FROM dcsa_im_v3_0.operations_event;
+-- DDT-1221
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache_queue (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT'))
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
+    failure_reason_type varchar(200),
+    failure_reason_message text
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_cache (
+    event_id uuid NOT NULL PRIMARY KEY,
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
+    content jsonb NOT NULL,
+    document_references text,
+    "references" text,
+    event_created_date_time timestamp with time zone NOT NULL,
+    event_date_time timestamp with time zone NOT NULL
+);
+CREATE INDEX ON dcsa_im_v3_0.event_cache (event_created_date_time);
+CREATE INDEX ON dcsa_im_v3_0.event_cache (event_date_time);
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_shipment_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'SHIPMENT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_shipment_events ON dcsa_im_v3_0.shipment_event;
+CREATE TRIGGER queue_shipment_events AFTER INSERT ON dcsa_im_v3_0.shipment_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_shipment_event();
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_transport_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'TRANSPORT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_transport_events ON dcsa_im_v3_0.transport_event;
+CREATE TRIGGER queue_transport_events AFTER INSERT ON dcsa_im_v3_0.transport_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_transport_event();
+
+CREATE OR REPLACE FUNCTION dcsa_im_v3_0.queue_equipment_event() RETURNS TRIGGER AS $$
+    BEGIN
+      INSERT INTO dcsa_im_v3_0.event_cache_queue (event_id, event_type) VALUES(NEW.event_id, 'EQUIPMENT');
+      RETURN NULL;
+    END;
+$$ LANGUAGE 'plpgsql';
+
+DROP TRIGGER IF EXISTS queue_equipment_events ON dcsa_im_v3_0.equipment_event;
+CREATE TRIGGER queue_equipment_events AFTER INSERT ON dcsa_im_v3_0.equipment_event
+    FOR EACH ROW EXECUTE PROCEDURE dcsa_im_v3_0.queue_equipment_event();
+
+/* Views to assist with finding references for GET /events endpoint.
+ * It provide the following information:
+ *
+ * It provides a link_type and a document_reference (for ShipmentEvent)
+ * or transport_call_id (for TransportCall based Events)
+ * and a utilized_transport_equipment_id (for EquipmentEvent)
+ *
+ * These provided values can be used for to find references for the specific event.
+ * Below is an example showing how to find references for a transport_call based event:
+ * FROM aggregated_events ae
+ * JOIN
+ * (SELECT transport_call_id,
+ *        reference_value,
+ *        reference_type_code
+ * FROM event_reference) er ON ae.transport_call_id = er.transport_call_id
+ *
+ * NOTE: VIEWS ARE MADE SEPARATELY BELOW THAN MERGED AS ONE VIEW
+ */
+
+/*
+* View to extract references for equipmentEvent
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.equipment_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
+  SELECT DISTINCT  reference.reference_value,
+                   reference.reference_type_code,
+                   NULL::UUID AS transport_call_id,
+                   NULL::UUID AS document_id,
+                   ci.utilized_transport_equipment_id AS utilized_transport_equipment_id,
+                   'EQ_ID' AS link_type
+   FROM dcsa_im_v3_0.cargo_item AS ci
+   JOIN dcsa_im_v3_0.consignment_item AS con ON ci.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment AS shipment ON con.shipment_id = shipment.id
+   JOIN dcsa_im_v3_0.booking AS booking ON shipment.booking_id = booking.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = shipment.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = booking.id;
+
+/*
+* View to extract references for for TransportCall based event
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.transport_based_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.transport_based_event_reference AS
+  SELECT DISTINCT  reference.reference_value,
+                   reference.reference_type_code,
+                   tc.id AS transport_call_id,
+                   NULL::UUID AS document_id,
+                   NULL::UUID AS utilized_transport_equipment_id,
+                   'TC_ID' AS link_type
+   FROM dcsa_im_v3_0.consignment_item AS con
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment AS shipment ON con.shipment_id = shipment.id
+   JOIN dcsa_im_v3_0.booking AS booking ON shipment.booking_id = booking.id
+   JOIN dcsa_im_v3_0.shipment_transport st ON st.shipment_id = shipment.id
+   JOIN
+     (SELECT DISTINCT tc.id,
+                      t.id AS transport_id
+      FROM dcsa_im_v3_0.transport_call tc
+      JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
+      OR t.discharge_transport_call_id = tc.id) tc ON tc.transport_id = st.transport_id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = shipment.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = booking.id;
+
+/*
+* View to extract references for for ShipmentEvent
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.shipment_event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
+  (-- For CBR document reference ShipmentEvents
+ SELECT DISTINCT reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 b.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'CBR' AS link_type
+   FROM dcsa_im_v3_0.booking b
+   JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id
+   UNION ALL
+      -- For BKG document reference ShipmentEvents
+ SELECT DISTINCT reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 s.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'BKG' AS link_type
+   FROM dcsa_im_v3_0.shipment s
+   JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
+   JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id
+   UNION ALL -- For SHI document reference ShipmentEvents
+ SELECT DISTINCT reference.reference_value,
+                 reference.reference_type_code,
+                 NULL::UUID AS transport_call_id,
+                 si.id AS document_id,
+                 NULL::UUID AS utilized_transport_equipment_id,
+                 'SHI' AS link_type
+   FROM dcsa_im_v3_0.shipping_instruction si
+   JOIN dcsa_im_v3_0.consignment_item con ON con.shipping_instruction_id = si.id
+   JOIN dcsa_im_v3_0.shipment s ON s.id = con.shipment_id
+   JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
+   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   OR reference.shipment_id = s.id
+   OR reference.shipping_instruction_id = si.id
+   OR reference.booking_id = b.id);
+
+/*
+* COMBINE references view for all event types
+*/
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_reference CASCADE;
+
+CREATE VIEW dcsa_im_v3_0.event_reference AS
+  SELECT uuid_generate_v4() AS random_id,
+                               *
+  FROM
+  (SELECT *
+   FROM dcsa_im_v3_0.equipment_event_reference
+   UNION ALL SELECT *
+   FROM dcsa_im_v3_0.transport_based_event_reference
+   UNION ALL SELECT *
+   FROM dcsa_im_v3_0.shipment_event_reference) AS foo;
 
 /* View to assist with the GET /events endpoint.  It provide the following information:
  *
@@ -157,8 +256,11 @@ UNION ALL
  *
  */
 DROP VIEW IF EXISTS dcsa_im_v3_0.event_document_reference CASCADE;
-CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
-            -- For Transport Call based events
+CREATE VIEW dcsa_im_v3_0.event_document_reference AS
+SELECT uuid_generate_v4() AS random_id,
+                             *
+FROM (
+        (-- For Transport Call based events
             SELECT DISTINCT tc.id AS transport_call_id,
                             null::uuid AS document_id,
                             'TC_ID' AS link_type,
@@ -422,97 +524,112 @@ CREATE VIEW dcsa_im_v3_0.event_document_reference AS (
                             NULL::text AS carrier_booking_request_reference,
                             NULL::text AS carrier_booking_reference,
                             td.transport_document_reference AS transport_document_reference
-            FROM dcsa_im_v3_0.transport_document td
-);
+            FROM dcsa_im_v3_0.transport_document td)
+) AS foo;
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_subscription (
-     subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-     callback_url text NOT NULL,
-     carrier_booking_reference varchar(35),
-     transport_document_id varchar(20),
-     transport_document_type text,
-     equipment_reference varchar(15),
-     transport_call_reference varchar(100) NULL,
-     signature_method varchar(20) NOT NULL,
-     secret bytea NOT NULL,
-     transport_document_reference text NULL,
-     carrier_service_code varchar(5) NULL,
-     carrier_voyage_number varchar(50) NULL,
-     vessel_imo_number varchar(7) NULL,
-    -- Retry state
-     retry_after timestamp with time zone NULL,
-     retry_count int DEFAULT 0 NOT NULL,
-     last_bundle_size int NULL,
-     accumulated_retry_delay bigint NULL
+    subscription_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    callback_url text NOT NULL,
+    document_reference varchar(100) NULL,
+    equipment_reference varchar(15) NULL,
+    transport_call_reference varchar(100) NULL,
+    vessel_imo_number varchar(7) NULL,
+    carrier_export_voyage_number varchar(50) NULL,
+    universal_export_voyage_reference varchar(5) NULL,
+    carrier_service_code varchar(5) NULL,
+    universal_service_reference varchar(8) NULL,
+    un_location_code varchar(5) NULL,
+    secret bytea NOT NULL,
+    created_date_time timestamp with time zone NOT NULL default now()
 );
+CREATE INDEX ON dcsa_im_v3_0.event_subscription (created_date_time);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_event_types CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_event_types (
+CREATE TABLE dcsa_im_v3_0.event_subscription_event_type (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    event_type text,
-
+    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
     PRIMARY KEY (subscription_id, event_type)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_document_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_transport_document_type (
-    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    transport_document_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_document_type (transport_document_type_code),
-    PRIMARY KEY (subscription_id, transport_document_type_code)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_shipment_event_type (
-    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
-    PRIMARY KEY (subscription_id, shipment_event_type_code)
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_transport_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_transport_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_transport_event_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     transport_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.transport_event_type (transport_event_type_code),
     PRIMARY KEY (subscription_id, transport_event_type_code)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_equipment_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_shipment_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_shipment_event_type_code (
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
+    PRIMARY KEY (subscription_id, shipment_event_type_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_equipment_event_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_equipment_event_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type (equipment_event_type_code),
     PRIMARY KEY (subscription_id, equipment_event_type_code)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_operations_event_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.event_subscription_operations_event_type (
+DROP TABLE IF EXISTS dcsa_im_v3_0.event_subscription_document_type_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.event_subscription_document_type_code (
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
-    operations_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.operations_event_type (operations_event_type_code),
-    PRIMARY KEY (subscription_id, operations_event_type_code)
+    document_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.document_type (document_type_code),
+    PRIMARY KEY (subscription_id, document_type_code)
 );
 
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.unmapped_event_queue CASCADE;
-CREATE TABLE dcsa_im_v3_0.unmapped_event_queue (
-    event_id uuid PRIMARY KEY,
-    enqueued_at_date_time timestamp with time zone NOT NULL default now()
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.pending_event_queue CASCADE;
-CREATE TABLE dcsa_im_v3_0.pending_event_queue (
+DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue CASCADE;
+CREATE TABLE dcsa_im_v3_0.outgoing_event_queue (
     delivery_id uuid PRIMARY KEY default uuid_generate_v4(),
     subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
     event_id uuid NOT NULL,
-    -- TODO: Consider moving the payload OR the state to its own table as updating state will duplicate the row
-    -- temporarily in the database (which means that the payload will cause bloat as long as it is on the
-    -- same row).
     payload TEXT NOT NULL,
     enqueued_at_date_time timestamp with time zone NOT NULL default now(),
-    -- State and status
-    last_attempt_date_time timestamp with time zone NULL,
-    last_error_message text NULL,
-    retry_count int DEFAULT 0 NOT NULL,
-
     UNIQUE (subscription_id, event_id)
+);
+
+-- Separate view to avoid entangling `EventSubscription` entity into the event processors (and thereby keeping it
+-- clear of TNT and other implementations that supports event subscriptions).
+-- Note it might be tempting to denormalize secret and callback_url into the outgoing_event_queue (thereby avoiding
+-- the need for the view), but that would require that we also update these fields when updating subscription and
+-- that would do a "reverse entanglement", where the subscription handlers need to know about this queue.
+DROP VIEW IF EXISTS dcsa_im_v3_0.outgoing_event_queue_with_metadata CASCADE;
+CREATE VIEW dcsa_im_v3_0.outgoing_event_queue_with_metadata AS
+    SELECT outgoing_event_queue.delivery_id,
+           outgoing_event_queue.subscription_id,
+           outgoing_event_queue.event_id,
+           outgoing_event_queue.enqueued_at_date_time,
+           convert_to(outgoing_event_queue.payload, 'UTF8') AS payload_bytes,
+           'sha256=' || encode(
+                hmac(
+                    convert_to(outgoing_event_queue.payload, 'UTF8'),
+                    event_subscription.secret,
+                    'sha256'
+                ),
+               'hex'
+           ) AS signature_header_value,
+           event_subscription.callback_url AS callback_url
+      FROM dcsa_im_v3_0.outgoing_event_queue
+      JOIN dcsa_im_v3_0.event_subscription USING (subscription_id);
+
+-- A rule that enables us to delete from outgoing_event_queue via the outgoing_event_queue_with_metadata
+-- view.  This simplifies the camel part as camel can now just listen on the view.
+CREATE RULE outgoing_event_queue_with_metadata_delete AS ON DELETE TO dcsa_im_v3_0.outgoing_event_queue_with_metadata DO INSTEAD(
+   DELETE FROM dcsa_im_v3_0.outgoing_event_queue WHERE delivery_id=OLD.delivery_id;
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.outgoing_event_queue_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.outgoing_event_queue_dead (
+    delivery_id uuid PRIMARY KEY,
+    event_id uuid NOT NULL,
+    subscription_id uuid NOT NULL REFERENCES dcsa_im_v3_0.event_subscription (subscription_id) ON DELETE CASCADE,
+    payload TEXT NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL,
+    last_failed_at_date_time timestamp with time zone NOT NULL default now(),
+    failure_reason_type varchar(200),
+    failure_reason_message text
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.notification_endpoint CASCADE;
@@ -539,6 +656,17 @@ CREATE TABLE dcsa_im_v3_0.pending_email_notification (
     UNIQUE (event_id, template_name)
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.pending_email_notification_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.pending_email_notification_dead (
+    id uuid PRIMARY KEY,
+    event_id uuid NOT NULL,
+    template_name text NOT NULL,
+    enqueued_at_date_time timestamp with time zone NOT NULL,
+    last_failed_at_date_time timestamp with time zone NOT NULL default now(),
+    failure_reason_type varchar(200),
+    failure_reason_message text
+);
+
 
 -- Only used by UI support to assist the UI
 DROP TABLE IF EXISTS dcsa_im_v3_0.port_timezone CASCADE;
@@ -547,10 +675,29 @@ CREATE TABLE dcsa_im_v3_0.port_timezone (
     iana_timezone text NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.transport_call_jit_port_visit CASCADE;
+CREATE TABLE dcsa_im_v3_0.transport_call_jit_port_visit (
+    port_visit_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_call(id),
+    transport_call_id uuid NOT NULL UNIQUE REFERENCES dcsa_im_v3_0.transport_call(id),
+    UNIQUE (port_visit_id, transport_call_id)
+);
+
+DROP VIEW IF EXISTS dcsa_im_v3_0.jit_port_visit CASCADE;
+CREATE VIEW dcsa_im_v3_0.jit_port_visit AS
+    SELECT port_visit_id FROM dcsa_im_v3_0.transport_call_jit_port_visit
+    WHERE port_visit_id = transport_call_id;
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.negotiation_cycle CASCADE;
 CREATE TABLE dcsa_im_v3_0.negotiation_cycle (
      cycle_key text PRIMARY KEY,
-     cycle_name text NOT NULL UNIQUE
+     cycle_name text NOT NULL UNIQUE,
+     display_order int NOT NULL UNIQUE
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.port_call_part CASCADE;
+CREATE TABLE dcsa_im_v3_0.port_call_part (
+    port_call_part varchar(100) PRIMARY KEY,
+    display_order int NOT NULL UNIQUE
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_definition CASCADE;
@@ -562,16 +709,17 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition (
     port_call_phase_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_phase_type(port_call_phase_type_code),
     port_call_service_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.port_call_service_type(port_call_service_type_code),
     facility_type_code varchar(4) NULL REFERENCES dcsa_im_v3_0.facility_type(facility_type_code),
-    port_call_phase varchar(100) NULL,
-    is_berth_location_needed boolean NOT NULL,
-    is_pbp_location_needed boolean NOT NULL,
-    is_anchorage_location_needed boolean NOT NULL,
+    port_call_part varchar(100) NOT NULL REFERENCES dcsa_im_v3_0.port_call_part (port_call_part),
+    event_location_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),
     is_terminal_needed boolean NOT NULL,
-    is_vessel_position_needed boolean NOT NULL,
+    is_vessel_draft_relevant boolean NOT NULL,
+    vessel_position_requirement varchar(10) NOT NULL CHECK (event_location_requirement IN ('EXCLUDED', 'OPTIONAL', 'REQUIRED')),
+    is_miles_to_destination_relevant boolean NOT NULL,
     provided_in_standard text NOT NULL,
     accept_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
     reject_timestamp_definition text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED,
-    negotiation_cycle varchar(50) NULL
+    negotiation_cycle varchar(50) NOT NULL REFERENCES dcsa_im_v3_0.negotiation_cycle(cycle_key) INITIALLY DEFERRED,
+    implicit_variant_of text NULL REFERENCES dcsa_im_v3_0.timestamp_definition(timestamp_id) INITIALLY DEFERRED
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.publisher_pattern CASCADE;
@@ -588,101 +736,94 @@ CREATE TABLE dcsa_im_v3_0.timestamp_definition_publisher_pattern (
     UNIQUE (timestamp_id, pattern_id)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.payload CASCADE;
-CREATE TABLE dcsa_im_v3_0.payload (
-    payload_id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    payload bytea NOT NULL,
-    created_at timestamp with time zone NOT NULL DEFAULT now()
-);
-
 -- Ideally, this would be inlined of the operations_event table as a field.  However, operations_event
 -- is an official entity and the timestamp_definition is not.  Lets not "contaminate" official IM
 -- with unofficial attributes where we can avoid it.
 DROP TABLE IF EXISTS dcsa_im_v3_0.ops_event_timestamp_definition CASCADE;
 CREATE TABLE dcsa_im_v3_0.ops_event_timestamp_definition (
     event_id uuid PRIMARY KEY REFERENCES dcsa_im_v3_0.operations_event (event_id),
-    payload_id uuid NULL REFERENCES dcsa_im_v3_0.payload(payload_id),
+    -- No REFERENCES; we can receive messages out of order and that is ok.
+    reply_to_timestamp_id uuid NULL,
+    -- Always when we processed the timestamp (event_created_date_time /can/ be
+    -- when the origin processed it). Useful for the UI/debugging
+    timestamp_processed_date_time timestamp with time zone NOT NULL default now(),
     timestamp_definition text NOT NULL REFERENCES dcsa_im_v3_0.timestamp_definition (timestamp_id)
 );
 CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (timestamp_definition);
-CREATE INDEX ON dcsa_im_v3_0.ops_event_timestamp_definition (payload_id);
-
--- Only used by UI support to assist the UI
-DROP VIEW IF EXISTS dcsa_im_v3_0.ui_timestamp_info CASCADE;
-CREATE OR REPLACE VIEW dcsa_im_v3_0.ui_timestamp_info AS
-    SELECT operations_event.event_id,
-       (CASE WHEN pending_event.retry_count IS NULL THEN 'DELIVERY_FINISHED'
-             WHEN pending_event.retry_count > 0 THEN 'ATTEMPTED_DELIVERY'
-             ELSE 'PENDING_DELIVERY'
-           END) AS event_delivery_status,
-       ops_event_timestamp_definition.timestamp_definition,
-       pending_event.enqueued_at_date_time,
-       pending_event.last_attempt_date_time,
-       pending_event.last_error_message,
-       pending_event.retry_count,
-       operations_event.transport_call_id
-        FROM dcsa_im_v3_0.operations_event
-                 LEFT JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (ops_event_timestamp_definition.event_id = operations_event.event_id)
-                 LEFT JOIN (SELECT unmapped_event_queue.event_id,
-                                   unmapped_event_queue.enqueued_at_date_time,
-                                   null AS last_attempt_date_time,
-                                   null AS last_error_message,
-                                   0 AS retry_count
-                            FROM dcsa_im_v3_0.unmapped_event_queue
-                            UNION
-                            SELECT pending_event_queue.event_id,
-                                   pending_event_queue.enqueued_at_date_time,
-                                   pending_event_queue.last_attempt_date_time,
-                                   pending_event_queue.last_error_message,
-                                   pending_event_queue.retry_count
-                            FROM dcsa_im_v3_0.pending_event_queue
-        ) AS pending_event ON (pending_event.event_id = operations_event.event_id);
-
 CREATE INDEX ON dcsa_im_v3_0.operations_event (event_created_date_time);
 CREATE INDEX ON dcsa_im_v3_0.operations_event (transport_call_id);
 
 -- Only used by UI support to assist the UI
-DROP VIEW IF EXISTS dcsa_im_v3_0.transport_call_with_timestamps CASCADE;
-CREATE OR REPLACE VIEW dcsa_im_v3_0.transport_call_with_timestamps AS
-    SELECT transport_call.*,
+DROP VIEW IF EXISTS dcsa_im_v3_0.jit_port_visit_ui_context CASCADE;
+CREATE OR REPLACE VIEW dcsa_im_v3_0.jit_port_visit_ui_context AS
+    SELECT jit_port_visit.port_visit_id,  -- port call visit
            latest_change.event_created_date_time AS latest_event_created_date_time,
-           latest_eta_berth.event_date_time AS eta_berth_date_time,
+           latest_eta_or_pta_berth.event_date_time AS best_berth_estimate_date_time,
            latest_atd_berth.event_date_time AS atd_berth_date_time,
-           latest_eta_berth.vessel_draft AS vessel_draft,
-           latest_eta_berth.miles_remaining_to_destination AS miles_remaining_to_destination
-           FROM dcsa_im_v3_0.transport_call
-      LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+           -- We use created for omits because it makes it easier for the UI to tell whether the OMIT is the latest
+           -- timestamp (via tc.latest_event_created_date_time == tc.omit_created_date_time).
+           -- The event_created_date_time timestamp is also useful for marking anything before that date time as
+           -- obsolete.
+           latest_omit.event_created_date_time AS omit_created_date_time,
+           latest_eta_or_pta_berth.vessel_draft AS vessel_draft,
+           latest_eta_or_pta_berth.miles_to_destination_port AS miles_to_destination_port
+           FROM dcsa_im_v3_0.jit_port_visit
+      LEFT JOIN (SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_jit_port_visit.port_visit_id
                  FROM dcsa_im_v3_0.operations_event
-                 GROUP BY transport_call_id
-           ) AS latest_change ON (transport_call.id = latest_change.transport_call_id)
+                 JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                 GROUP BY port_visit_id
+           ) AS latest_change ON (jit_port_visit.port_visit_id = latest_change.port_visit_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, operations_event.transport_call_id, operations_event.vessel_draft, operations_event.miles_remaining_to_destination
-               FROM dcsa_im_v3_0.operations_event JOIN (
-                   SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id, operations_event.vessel_draft, operations_event.miles_to_destination_port
+               FROM dcsa_im_v3_0.operations_event
+               JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+               JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
                        FROM dcsa_im_v3_0.operations_event
+                       JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                       WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
-                       GROUP BY transport_call_id
-                   ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                       WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)', 'PTA-Berth', 'PTA-Berth (<implicit>)')
+                       GROUP BY port_visit_id
+                   ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                   WHERE timestamp_definition.timestamp_type_name = 'ETA-Berth'
-          ) AS latest_eta_berth ON (transport_call.id = latest_eta_berth.transport_call_id)
+                   WHERE timestamp_definition.timestamp_type_name IN ('ETA-Berth', 'ETA-Berth (<implicit>)', 'PTA-Berth', 'PTA-Berth (<implicit>)')
+          ) AS latest_eta_or_pta_berth ON (jit_port_visit.port_visit_id = latest_eta_or_pta_berth.port_visit_id)
       LEFT JOIN (
-               SELECT operations_event.event_date_time, operations_event.transport_call_id
-               FROM dcsa_im_v3_0.operations_event JOIN (
-                   SELECT MAX(event_created_date_time) AS event_created_date_time, transport_call_id
+               SELECT operations_event.event_date_time, transport_call_jit_port_visit.port_visit_id
+               FROM dcsa_im_v3_0.operations_event
+               JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+               JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
                        FROM dcsa_im_v3_0.operations_event
+                       JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                       WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
-                       GROUP BY transport_call_id
-                   ) AS latest_ts ON (operations_event.transport_call_id = latest_ts.transport_call_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                       WHERE timestamp_definition.timestamp_type_name IN ('ATD-Berth', 'ATD-Berth (<implicit>)')
+                       GROUP BY port_visit_id
+                   ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
                    JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
                    JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
-                   WHERE timestamp_definition.timestamp_type_name = 'ATD-Berth'
-          ) AS latest_atd_berth ON (transport_call.id = latest_atd_berth.transport_call_id);
+                   WHERE timestamp_definition.timestamp_type_name IN ('ATD-Berth', 'ATD-Berth (<implicit>)')
+          ) AS latest_atd_berth ON (jit_port_visit.port_visit_id = latest_atd_berth.port_visit_id)
+      LEFT JOIN (
+               SELECT operations_event.event_created_date_time, transport_call_jit_port_visit.port_visit_id
+               FROM dcsa_im_v3_0.operations_event
+                        JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                        JOIN (
+                   SELECT MAX(event_created_date_time) AS event_created_date_time, port_visit_id
+                   FROM dcsa_im_v3_0.operations_event
+                            JOIN dcsa_im_v3_0.transport_call_jit_port_visit ON operations_event.transport_call_id = transport_call_jit_port_visit.transport_call_id
+                            JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
+                            JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
+                   WHERE timestamp_definition.timestamp_type_name IN ('Omit Port Call')
+                   GROUP BY port_visit_id
+               ) AS latest_ts ON (transport_call_jit_port_visit.port_visit_id = latest_ts.port_visit_id AND operations_event.event_created_date_time = latest_ts.event_created_date_time)
+                        JOIN dcsa_im_v3_0.ops_event_timestamp_definition ON (operations_event.event_id = ops_event_timestamp_definition.event_id)
+                        JOIN dcsa_im_v3_0.timestamp_definition ON (timestamp_definition.timestamp_id = ops_event_timestamp_definition.timestamp_definition)
+               WHERE timestamp_definition.timestamp_type_name IN ('Omit Port Call')
+           ) AS latest_omit ON (jit_port_visit.port_visit_id = latest_omit.port_visit_id);
 
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.ebl_solution_provider_type CASCADE;
@@ -722,7 +863,7 @@ CREATE TABLE dcsa_im_v3_0.vessel_schedule (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.vessel_schedule_terminal_visits CASCADE;
 CREATE TABLE dcsa_im_v3_0.vessel_schedule_terminal_visits (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY, -- JPA/Hibernate requires an identifiying field
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY, -- JPA/Hibernate requires an identifying field
     vessel_schedule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.vessel_schedule (id),
     actual_arrival_event_id uuid NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
     planned_arrival_event_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_event (event_id),
@@ -735,5 +876,66 @@ CREATE TABLE dcsa_im_v3_0.vessel_schedule_terminal_visits (
     created_date_time timestamp with time zone NOT NULL DEFAULT now()
 );
 
+
+-- DDT-1180 - message routing
+DROP TABLE IF EXISTS dcsa_im_v3_0.message_routing_rule CASCADE;
+CREATE TABLE dcsa_im_v3_0.message_routing_rule (
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    api_url varchar(255) NOT NULL,
+    login_type varchar(8) NOT NULL CHECK(login_type IN ('OIDC')),
+    login_information TEXT NOT NULL,
+    vessel_imo_number varchar(255) NULL,
+    publisher_role varchar(3) NULL REFERENCES dcsa_im_v3_0.party_function(party_function_code) CHECK(publisher_role IN ('CA', 'AG', 'VSL', 'ATH', 'PLT', 'TR', 'TWG', 'BUK', 'LSH', 'SLU', 'SVP', 'MOR'))
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.outbox_message CASCADE;
+CREATE TABLE dcsa_im_v3_0.outbox_message (
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    message_routing_rule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.message_routing_rule (id),
+    payload TEXT NOT NULL
+);
+CREATE INDEX ON dcsa_im_v3_0.outbox_message (message_routing_rule_id);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.timestamp_notification_dead CASCADE;
+CREATE TABLE dcsa_im_v3_0.timestamp_notification_dead (
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    message_routing_rule_id uuid NOT NULL REFERENCES dcsa_im_v3_0.message_routing_rule (id),
+    payload TEXT NOT NULL,
+    latest_delivery_attempted_datetime timestamp with time zone NOT NULL DEFAULT now()
+);
+
+
+DROP VIEW IF EXISTS dcsa_im_v3_0.event_sync_state;
+CREATE VIEW dcsa_im_v3_0.event_sync_state AS
+    SELECT event_id, (CASE WHEN SUM(delivery_attempted) > 0 THEN 'ATTEMPTED_DELIVERY'
+                           WHEN SUM(delivery_attempted) = 0 THEN 'PENDING_DELIVERY'
+                           ELSE 'DELIVERY_FINISHED'
+        END) AS delivery_status
+    FROM (
+              SELECT event_id, 0 AS delivery_attempted
+              FROM dcsa_im_v3_0.outgoing_event_queue
+          UNION ALL
+              SELECT event_id, 1 AS delivery_attempted
+              FROM dcsa_im_v3_0.outgoing_event_queue_dead
+          UNION ALL
+              SELECT outbox_message.id, 0 AS delivery_attempted
+                FROM dcsa_im_v3_0.outbox_message
+          UNION ALL
+              SELECT timestamp_notification_dead.id, 1 AS delivery_attempted
+                FROM dcsa_im_v3_0.timestamp_notification_dead
+         ) AS event_status
+    GROUP BY event_id;
+
+
+-- simplify commodityRequestedEquipmentLink
+DROP TABLE IF EXISTS dcsa_im_v3_0.commodity_requested_equipment_link CASCADE;
+CREATE TABLE dcsa_im_v3_0.commodity_requested_equipment_link (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    commodity_requested_equipment_link varchar(100) NOT NULL
+);
+ALTER TABLE dcsa_im_v3_0.commodity ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
+
+ALTER TABLE dcsa_im_v3_0.requested_equipment_commodity ADD commodity_requested_equipment_link varchar(100) NOT NULL;
 
 COMMIT;
