@@ -338,6 +338,7 @@ def declare_timestamps():
         "Port Departure Execution",
         'jit1_1',
         'SAFE',
+        negotiation_cycle="TD-Berth",
         vessel_position_requirement=EXCLUDED,
         event_location_requirement=REQUIRED,
     )
@@ -355,6 +356,7 @@ def declare_timestamps():
             "Port Departure Execution",
             version,
             service_code,
+            negotiation_cycle="TD-Berth",
             vessel_position_requirement=EXCLUDED,
             event_location_requirement=REQUIRED,
             implicit_variant_of=variant_of,

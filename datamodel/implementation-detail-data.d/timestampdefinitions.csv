@@ -166,9 +166,9 @@ PTC-Mooring (Outbound),PTC-Mooring (Outbound),PLN,CMPL,OUTB,MOOR,BRTH,Port Depar
 ATC-Mooring (Outbound),ATC-Mooring (Outbound),ACT,CMPL,OUTB,MOOR,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,T-Mooring (Outbound),null
 Cancel Mooring (Outbound),Cancel Mooring (Outbound),ACT,CANC,OUTB,MOOR,BRTH,OMIT Port Call Or Cancel A Service,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,T-Mooring (Outbound),null
 ATC Lashing,ATC Lashing,ACT,CMPL,ALGS,LASH,BRTH,Port Departure Planning And Services Completion,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,null
-Terminal Ready for vessel departure,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,null
-Vessel Ready to sail,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,Special,null
-Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,Special,Vessel Ready to sail
+Terminal Ready for vessel departure,Terminal Ready for vessel departure,ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,TD-Berth,null
+Vessel Ready to sail,Vessel Ready to sail,ACT,DEPA,ALGS,VRDY,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_2,null,null,TD-Berth,null
+Vessel Ready to sail [JIT 1.1],Vessel Ready to sail [JIT 1.1],ACT,DEPA,ALGS,SAFE,BRTH,Port Departure Execution,REQUIRED,True,False,EXCLUDED,False,jit1_1,null,null,TD-Berth,Vessel Ready to sail
 ATD-Berth,ATD-Berth,ACT,DEPA,OUTB,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,null
 ATD-Berth (<implicit>),ATD-Berth (<implicit>),ACT,DEPA,null,null,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_0,null,null,TD-Berth,ATD-Berth
 ATS-Pilotage (Outbound),ATS-Pilotage (Outbound),ACT,STRT,OUTB,PILO,BRTH,Port Departure Execution,REQUIRED,True,True,EXCLUDED,False,jit1_1,null,null,T-Pilotage (Outbound),null
