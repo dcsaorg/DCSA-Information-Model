@@ -186,6 +186,16 @@ INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719971')
 );
 
+INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
+    carrier_clause_id, 
+    shipment_id, 
+    transport_document_id
+) VALUES (
+    'b8e312ad-7b00-4026-88ad-9881242ca4f4'::uuid, 
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'), 
+    (SELECT id FROM dcsa_im_v3_0.transport_document WHERE transport_document_reference = '9b02401c-b2fb-5009')
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,

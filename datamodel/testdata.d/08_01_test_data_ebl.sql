@@ -479,7 +479,14 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
       'PRC',
       null,
       true
-  );
+  ), (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
+    uuid('561a5606-402e-11eb-b19a-0f3aa4962e3f'), 
+    2, 
+    'MNC', 
+    NULL, 
+    true
+);
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
@@ -1389,7 +1396,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
   (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
   '2021-11-28T14:12:56+01:00'::timestamptz,
   '2021-12-01T07:41:00+08:30'::timestamptz,
-  'ARRI',
+  'DEPA',
   '770b7624-403d-11eb-b44b-d3f4ad185387'::uuid,
   'WEA',
   'Bad weather'
@@ -1398,7 +1405,7 @@ INSERT INTO dcsa_im_v3_0.shipment (
     (SELECT event_classifier_code FROM dcsa_im_v3_0.event_classifier WHERE event_classifier_code = 'PLN'),
     '2021-11-28T14:12:56+01:00'::timestamptz,
     '2021-12-01T07:41:00+08:30'::timestamptz,
-    'DEPA',
+    'ARRI',
     '770b7624-403d-11eb-b44b-d3f4ad185388'::uuid,
     'WEA',
     'Bad weather'
@@ -1934,6 +1941,29 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     5000,
     '123',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+);
+
+INSERT INTO dcsa_im_v3_0.charge (
+    id, 
+    transport_document_id, 
+    shipment_id, 
+    charge_type, 
+    currency_amount, 
+    currency_code, 
+    payment_term_code, 
+    calculation_basis, 
+    unit_price, 
+    quantity
+) VALUES (
+    '4816e01a-446b-4bc0-812e-a3a447c85668', 
+    (SELECT id FROM dcsa_im_v3_0.transport_document WHERE transport_document_reference = '9b02401c-b2fb-5009'), 
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
+    'TBD', 
+    100.12, 
+    'EUR', 
+    'PRE', 
+    'WHAT', 
+    100.12, 1.0
 );
 
 ------------------ Data for ApproveTransportDocument END -----------------
