@@ -1,5 +1,5 @@
 filing_system_code,filing_system_name,filing_system_contry_code,filing_system_description
-ACI,Advance Commercial Information,CA,
-ACI,Advance Cargo Information,EG,
-AMS,Automated Manifest System,US,
-AFR,Advance Filing Rule,JP,
+ACI,Advance Commercial Information,CA,The Advanced Commercial Information (ACI) is a mandatory Canada Border Services Agency (CBSA) security protocol designed to provide advanced notice and data on the commodities and parties involved in the movement of freight.
+ACI,Advance Cargo Information,EG,The Advanced Cargo Information (ACI)  is an electronic data submission to Egyptian customs for the pre-registration of shipment information for all shipments arriving at Egyptian seaports.
+AFR,Advance Filing Rule,JP,The Advance Filing Rules (AFR) for Japan is an electronic data submission to Japan Customs that contains all relevant cargo and shipment information.
+AMS,Automated Manifest System,US,The Automated Manifest System (AMS) is an electronic information transmission system operated by U.S. Customs and Border Protection (CBP). Ocean shipments into the U.S. require an AMS filing with detailed information about the cargo as a security measure.
