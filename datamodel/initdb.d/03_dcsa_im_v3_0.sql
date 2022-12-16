@@ -426,7 +426,6 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     issue_date date NULL,
     shipped_onboard_date date NULL,
     received_for_shipment_date date NULL,
-    number_of_originals integer NULL,
     carrier_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier(id),
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     number_of_rider_pages integer NULL,
