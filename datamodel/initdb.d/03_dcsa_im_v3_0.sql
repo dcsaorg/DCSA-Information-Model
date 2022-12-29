@@ -455,6 +455,16 @@ CREATE TABLE dcsa_im_v3_0.party_function (
     party_function_description varchar(350) NOT NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
+CREATE TABLE dcsa_im_v3_0.displayed_address (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    address_line_1 varchar(35),
+    address_line_2 varchar(35),
+    address_line_3 varchar(35), 
+    address_line_4 varchar(35), 
+    address_line_5 varchar(35)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -463,7 +473,8 @@ CREATE TABLE dcsa_im_v3_0.document_party (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     party_function varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.party_function (party_function_code),
     is_to_be_notified boolean NOT NULL,
-    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id)
+    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
+    displayed_address_id uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id)
 );
 
 -- Supporting FK constraints
@@ -472,14 +483,6 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (party_function);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (booking_id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
-CREATE TABLE dcsa_im_v3_0.displayed_address (
-    document_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.document_party (id),
-    address_line_number integer NOT NULL,
-    address_line_text varchar(250) NOT NULL
-);
-CREATE INDEX ON dcsa_im_v3_0.displayed_address (document_party_id, address_line_number);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge CASCADE;
 CREATE TABLE dcsa_im_v3_0.charge (

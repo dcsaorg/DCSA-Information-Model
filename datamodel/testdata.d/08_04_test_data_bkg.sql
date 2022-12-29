@@ -693,6 +693,17 @@ INSERT INTO dcsa_im_v3_0.party_identifying_code (
     'LCL',
     'MMCU');
 
+
+INSERT INTO dcsa_im_v3_0.displayed_address (
+    id,
+    address_line_1,
+    address_line_2
+) VALUES (
+    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
+    'Gubener Str. 42',
+    'Rhinstrasse 87'
+);
+
 INSERT INTO dcsa_im_v3_0.document_party (
     id,
     party_id,
@@ -700,7 +711,8 @@ INSERT INTO dcsa_im_v3_0.document_party (
     shipment_id,
     party_function,
     is_to_be_notified,
-    booking_id
+    booking_id,
+    displayed_address_id
     ) VALUES (
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
@@ -708,24 +720,9 @@ INSERT INTO dcsa_im_v3_0.document_party (
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'DDS',
     true,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid);
-
-INSERT INTO dcsa_im_v3_0.displayed_address (
-    id,
-    document_party_id,
-    address_line_number,
-    address_line_text
-) VALUES (
-    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
-    'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
-    1,
-    'Gubener Str. 42'
-), (
-    '659013f6-cf4b-46c5-a2b5-20a173a05ce6'::uuid,
-    'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
-    2,
-    'Rhinstrasse 87'
-);
+    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
+    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid
+    );
 
 INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,

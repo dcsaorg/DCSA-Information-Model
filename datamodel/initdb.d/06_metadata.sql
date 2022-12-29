@@ -12,9 +12,6 @@ BEGIN;
 -- has a direct ID.  This change is to insert these, so the code works but they
 -- are not a part of the original data model.
 
-ALTER TABLE dcsa_im_v3_0.displayed_address
-    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
-
 ALTER TABLE dcsa_im_v3_0.shipment_location
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
