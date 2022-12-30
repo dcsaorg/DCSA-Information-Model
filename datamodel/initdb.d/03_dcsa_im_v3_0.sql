@@ -414,10 +414,10 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_to_order boolean NOT NULL,
     place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
-    displayed_name_for_place_of_receipt uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
-    displayed_name_for_port_of_load uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
-    displayed_name_for_port_of_discharge uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
-    displayed_name_for_place_of_delivery uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_place_of_receipt uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_port_of_load uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_port_of_discharge uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_place_of_delivery uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
     amendment_to_transport_document_id uuid NULL
 );
 
