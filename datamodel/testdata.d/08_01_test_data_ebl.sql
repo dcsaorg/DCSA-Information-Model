@@ -1454,6 +1454,16 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     'https://www.dcsa.org'
 );
 
+INSERT INTO dcsa_im_v3_0.displayed_address (
+    id,
+    address_line_1,
+    address_line_2
+) VALUES (
+    '8a5ccfed-f106-405b-a61f-c3a633e57ead'::uuid,
+    'Gubener Str. 42',
+    'Rhinstrasse 87'
+);
+
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     shipping_instruction_reference,
@@ -1464,7 +1474,8 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     is_electronic,
     is_to_order,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    displayed_name_for_place_of_delivery
 ) VALUES (
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     'SI_REF_9',
@@ -1475,7 +1486,8 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE,
     TRUE,
     DATE '2021-12-24',
-    DATE '2021-12-31'
+    DATE '2021-12-31',
+    '8a5ccfed-f106-405b-a61f-c3a633e57ead'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
