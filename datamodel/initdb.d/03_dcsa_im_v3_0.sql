@@ -389,6 +389,17 @@ CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
     PRIMARY KEY (shipment_id, cut_off_time_code)
 );
 
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
+CREATE TABLE dcsa_im_v3_0.displayed_address (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    address_line_1 varchar(35),
+    address_line_2 varchar(35),
+    address_line_3 varchar(35), 
+    address_line_4 varchar(35), 
+    address_line_5 varchar(35)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_instruction CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -403,10 +414,10 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     is_to_order boolean NOT NULL,
     place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     transport_document_type_code varchar(3) NULL REFERENCES dcsa_im_v3_0.transport_document_type(transport_document_type_code),
-    displayed_name_for_place_of_receipt varchar(250) NULL,
-    displayed_name_for_port_of_load varchar(250) NULL,
-    displayed_name_for_port_of_discharge varchar(250) NULL,
-    displayed_name_for_place_of_delivery varchar(250) NULL,
+    displayed_name_for_place_of_receipt uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_port_of_load uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_port_of_discharge uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
+    displayed_name_for_place_of_delivery uuid NULL NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
     amendment_to_transport_document_id uuid NULL
 );
 
@@ -455,15 +466,6 @@ CREATE TABLE dcsa_im_v3_0.party_function (
     party_function_description varchar(350) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
-CREATE TABLE dcsa_im_v3_0.displayed_address (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    address_line_1 varchar(35),
-    address_line_2 varchar(35),
-    address_line_3 varchar(35), 
-    address_line_4 varchar(35), 
-    address_line_5 varchar(35)
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.document_party CASCADE;
 CREATE TABLE dcsa_im_v3_0.document_party (
