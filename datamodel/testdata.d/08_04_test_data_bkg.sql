@@ -745,7 +745,6 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     booking_id,
     location_id,
     shipment_location_type_code,
-    displayed_name,
     event_date_time
     ) VALUES (
     'd3001e47-07e9-4bba-87a7-019d3e12f3aa'::uuid,
@@ -753,7 +752,6 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
     'POL',
-    'Hamburg',
      NULL);
 
 
