@@ -1685,44 +1685,37 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     booking_id,
     location_id,
-    shipment_location_type_code,
-    displayed_name
+    shipment_location_type_code
 ) VALUES (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
-    'PRE',
-    'HELLO!'
+    'PRE'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
-    'POL',
-    'HELLO!'
+    'POL'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
-    'POD',
-    'HELLO!'
+    'POD'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
-    'PRE',
-    'HELLO!'
+    'PRE'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
-    'POL',
-    'HELLO!'
+    'POL'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
-    'POD',
-    'HELLO!'
+    'POD'
 );
 
 INSERT INTO dcsa_im_v3_0.cargo_item (

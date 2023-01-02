@@ -658,7 +658,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     location_id uuid NOT NULL REFERENCES dcsa_im_v3_0.location (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
-    displayed_name varchar(250) NULL,
     event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
     UNIQUE (location_id, shipment_location_type_code, shipment_id)
 );
