@@ -32,13 +32,13 @@ ALTER TABLE dcsa_im_v3_0.shipment_event ADD document_reference varchar(100) NOT 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache_queue (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT'))
+    event_type varchar(32) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache_queue_dead CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
+    event_type varchar(32) NOT NULL,
     failure_reason_type varchar(200),
     failure_reason_message text
 );
@@ -46,7 +46,7 @@ CREATE TABLE dcsa_im_v3_0.event_cache_queue_dead (
 DROP TABLE IF EXISTS dcsa_im_v3_0.event_cache CASCADE;
 CREATE TABLE dcsa_im_v3_0.event_cache (
     event_id uuid NOT NULL PRIMARY KEY,
-    event_type varchar(16) NOT NULL CONSTRAINT event_type CHECK (event_type IN ('SHIPMENT','TRANSPORT', 'EQUIPMENT')),
+    event_type varchar(32) NOT NULL,
     content jsonb NOT NULL,
     document_references text,
     "references" text,
