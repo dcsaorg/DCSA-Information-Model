@@ -46,7 +46,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     facility_id,
     facility_type_code,
     mode_of_transport_code,
-    vessel_id
+    vessel_id,
+    import_voyage_id
 ) VALUES (
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
     'TC-REF-08_02-A',
@@ -54,7 +55,8 @@ INSERT INTO dcsa_im_v3_0.transport_call (
     (SELECT id FROM dcsa_im_v3_0.facility WHERE un_location_code = 'SGSIN' AND facility_smdg_code = 'PSABT'),
     'POTE',
     (SELECT mode_of_transport_code FROM dcsa_im_v3_0.mode_of_transport WHERE dcsa_transport_type = 'VESSEL'),
-    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567')
+    (SELECT id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '1234567'),
+    (SELECT id FROM dcsa_im_v3_0.voyage WHERE carrier_voyage_number = 'TNT1E')
 );
 
 

@@ -143,7 +143,7 @@ INSERT INTO dcsa_im_v3_0.voyage (
 ) VALUES (
      '3fb0b919-f38c-4198-b61f-b08c361858f7',
      '4419W',
-     'UVR01',
+     '657AS',
      'f65022f1-76e7-4cf2-8287-241cd7aed4de'
 );
 
@@ -155,7 +155,7 @@ INSERT INTO dcsa_im_v3_0.voyage (
 ) VALUES (
      '6f034c96-97e4-47c6-a140-c44e9be50609',
      '4420E',
-     'UVR02',
+     '657AN',
      'f65022f1-76e7-4cf2-8287-241cd7aed4de'
 );
 
