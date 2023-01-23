@@ -537,7 +537,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
     vessel_imo_number varchar(7) NULL,
     carrier_export_voyage_number varchar(50) NULL,
     universal_export_voyage_reference varchar(5) NULL,
-    carrier_service_code varchar(5) NULL,
+    carrier_service_code varchar(11) NULL,
     universal_service_reference varchar(8) NULL,
     un_location_code varchar(5) NULL,
     secret bytea NOT NULL,
