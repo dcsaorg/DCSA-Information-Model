@@ -437,7 +437,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
      signature_method varchar(20) NOT NULL,
      secret bytea NOT NULL,
      transport_document_reference text NULL,
-     carrier_service_code varchar(5) NULL,
+     carrier_service_code varchar(11) NULL,
      carrier_voyage_number varchar(50) NULL,
      vessel_imo_number varchar(7) NULL,
     -- Retry state
