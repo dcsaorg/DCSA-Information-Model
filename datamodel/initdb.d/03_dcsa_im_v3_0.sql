@@ -22,8 +22,8 @@ CREATE TABLE dcsa_im_v3_0.hs_code (
     hs_code_description varchar(250) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service CASCADE;
-CREATE TABLE dcsa_im_v3_0.value_added_service (
+DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.value_added_service_code (
     value_added_service_code varchar(5) PRIMARY KEY,
     value_added_service_name varchar(100) NOT NULL,
     value_added_service_description varchar(200) NOT NULL
@@ -266,7 +266,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     cargo_movement_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type_code),
     cargo_movement_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type_code),
     booking_request_datetime timestamp with time zone NOT NULL,
-    service_contract_reference varchar(30) NOT NULL,
+    service_contract_reference varchar(30) NULL,
     payment_term_code varchar(3) NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
     is_partial_load_allowed boolean NOT NULL,
     is_export_declaration_required boolean NOT NULL,
@@ -421,13 +421,13 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     amendment_to_transport_document_id uuid NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_request CASCADE;
-CREATE TABLE dcsa_im_v3_0.value_added_service_request (
+DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service CASCADE;
+CREATE TABLE dcsa_im_v3_0.value_added_service (
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
-    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service(value_added_service_code)
+    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service_code(value_added_service_code)
 );
 
-CREATE INDEX ON dcsa_im_v3_0.value_added_service_request (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.value_added_service (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
