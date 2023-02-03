@@ -313,34 +313,24 @@ CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
 );
 
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.reefer_type (
-    reefer_type_code varchar(4) PRIMARY KEY,
-    reefer_type_name varchar(100) NOT NULL,
-    reefer_type_description varchar(250) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    reefer_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.reefer_type (reefer_type_code),
-    is_cargo_probe_1_required boolean NOT NULL,
-    is_cargo_probe_2_required boolean NOT NULL,
-    is_cargo_probe_3_required boolean NOT NULL,
-    is_cargo_probe_4_required boolean NOT NULL,
-    is_ventilation_open boolean NOT NULL,
-    is_drainholes_open boolean NOT NULL,
-    is_bulb_mode boolean NOT NULL,
     is_gen_set_required boolean NOT NULL,
     is_pre_cooling_required boolean NOT NULL,
     is_cold_treatment_required boolean NOT NULL,
-    is_hot_stuffing_allowed boolean NOT NULL,
-    is_tracing_required boolean NOT NULL,
-    is_monitoring_required boolean NOT NULL,
-    is_high_value_cargo boolean NOT NULL,
-    product_name varchar(500) NULL,
-    extra_material varchar(500) NULL
+    is_ventilation_open boolean NOT NULL,
+    is_drainholes_open boolean NOT NULL,
+    is_bulb_mode boolean NOT NULL,
+    temperature_setpoint real NOT NULL,
+    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+    o2_setpoint real NULL,
+    co2_setpoint real NULL,
+    humidity_setpoint real NULL,
+    air_exchange_setpoint real NULL,
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH'))
 );
+
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
@@ -543,20 +533,6 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
 
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.setpoint CASCADE;
-CREATE TABLE dcsa_im_v3_0.setpoint (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    active_reefer_settings_id uuid NOT NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
-    temperature real NULL,
-    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
-    humidity real NULL,
-    air_exchange real NULL,
-    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH')),
-    o2 real NULL,
-    co2 real NULL,
-    days_prior_to_discharge real NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.consignment_item (
