@@ -23,7 +23,6 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.port_call_service_type from '../referencedata.d/portcallservicetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.port_call_status_type from '../referencedata.d/portcallstatuscodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.receipt_delivery_type from '../referencedata.d/receiptdeliverytypes.csv' with NULL AS E'\'\'' CSV HEADER
-\copy dcsa_im_v3_0.reefer_type from '../referencedata.d/reefertypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.reference_type from '../referencedata.d/referencetypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.seal_source from '../referencedata.d/sealsourcecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.seal_type from '../referencedata.d/sealtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
