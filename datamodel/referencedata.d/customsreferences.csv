@@ -12,6 +12,7 @@ BAN,NG,BA number
 ECI,ZA,ECI (Export cargo identifier)
 ECTN,BJ,Electronic Cargo Tracking Note (ECTN)
 URN,CG,Unique Registration Number (URN)
+URN,CD,Unique Registration Number (URN)
 PEB,ID,PEB reference number
 CTN,SN,Cargo Tracking Note (CTN)
 CTN,LR,Cargo Tracking Note (CTN)
