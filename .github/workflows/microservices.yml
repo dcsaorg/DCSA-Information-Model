@@ -1,7 +1,8 @@
 name: Database backend
 
-on: [push]
-
+on:
+  - push
+  - pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
