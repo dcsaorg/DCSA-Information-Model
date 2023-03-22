@@ -7,5 +7,5 @@ CEL,Celsius
 FAH,Fahrenheit
 FOT,Foot
 MTR,Meter
-MQH,
-FQH,
+MQH,Cubic Meter Per Hour
+FQH,Cubic Foot Per Hour
