@@ -1,10 +1,10 @@
 Carrier Name,SMDG Code,NMFTA Code
-"CMA CGM",CMA,
-"Evergreen Marine Corporation",EMC,
-"Hapag Lloyd",HLC,
-"Hyundai",HMM,
-"Maersk",MSK,
-"Mediterranean Shipping Company",MSC,
-"Ocean Network Express Pte. Ltd.",ONE,
-"Yang Ming Line",YML,
-"Zim Israel Navigation Company",ZIM,
+"CMA CGM",CMA,CMAU
+"Evergreen Marine Corporation",EMC,EGLV
+"Hapag Lloyd",HLC,HLCU
+"Hyundai",HMM,HDMU
+"Maersk",MSK,MAEU
+"Mediterranean Shipping Company",MSC,MSCU
+"Ocean Network Express Pte. Ltd.",ONE,ONEY
+"Yang Ming Line",YML,YMLU
+"Zim Israel Navigation Company",ZIM,ZIMU
