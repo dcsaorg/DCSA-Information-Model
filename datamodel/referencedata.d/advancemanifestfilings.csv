@@ -1,7 +1,7 @@
 Manifest Type Code,Country Code,Name,Description
 ACI,EG,Advance Cargo Information,
-ACI,CA,Advance Commercial Information,
-ACE,US,Automated Commercial Environment (previously called AMS),
+ACI,CA,Advance Commercial Information,"The Advanced Commercial Information (ACI) is a mandatory Canada Border Services Agency (CBSA) security protocol designed to provide advanced notice and data on the commodities and parties involved in the movement of freight."
+ACE,US,Automated Commercial Environment (previously called AMS),"The Automated Commercial Environment (ACE) is an electronic information transmission system operated by U.S. Customs and Border Protection (CBP). Ocean shipments into the U.S. require an ACE filing with detailed information about the cargo as a security measure."
 AFR,JP,Advance Filing Rule,
 CCAM,CN,China Customs Advance Manifest,
 ENS,EU,Entry Summary Declaration,
