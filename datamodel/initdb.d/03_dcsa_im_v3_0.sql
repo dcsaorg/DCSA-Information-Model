@@ -273,8 +273,6 @@ CREATE TABLE dcsa_im_v3_0.booking (
     export_declaration_reference varchar(35) NULL,
     is_import_license_required boolean NOT NULL,
     import_license_reference varchar(35) NULL,
-    is_ams_aci_filing_required boolean NULL,
-    is_destination_filing_required boolean NULL,
     contract_quotation_reference varchar(35) NULL,
     incoterms varchar(3) NULL REFERENCES dcsa_im_v3_0.incoterms(incoterms_code),
     invoice_payable_at_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
@@ -304,6 +302,29 @@ CREATE TABLE dcsa_im_v3_0.shipment (
     carrier_booking_reference varchar(35) NOT NULL UNIQUE,
     terms_and_conditions text NULL,
     confirmation_datetime timestamp with time zone NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.house_bl_performed_by CASCADE;
+CREATE TABLE dcsa_im_v3_0.house_bl_performed_by (
+    performed_by varchar(10),
+    performed_by_description varchar(250)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.advance_manifest_filing CASCADE;
+CREATE TABLE dcsa_im_v3_0.advance_manifest_filing (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    manifest_type_code varchar(10),
+    country_code char(2) NULL REFERENCES dcsa_im_v3_0.country (country_code),
+    advance_manifest_filing_name varchar(100) NULL,
+    advance_manifest_filing_description varchar(250) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_advance_manifest_filing CASCADE;
+CREATE TABLE dcsa_im_v3_0.shipment_advance_manifest_filing (
+    shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
+    advance_manifest_filing_id uuid NOT NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing(id),
+    advance_manifest_filing_house_bl_performed_by varchar(10) NULL REFERENCES dcsa_im_v3_0.house_bl_performed_by(performed_by),
+    self_filer_code varchar(100) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
