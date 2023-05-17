@@ -1552,7 +1552,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_01',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_01',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
