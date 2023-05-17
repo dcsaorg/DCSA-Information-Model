@@ -306,7 +306,7 @@ CREATE TABLE dcsa_im_v3_0.shipment (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.house_bl_performed_by CASCADE;
 CREATE TABLE dcsa_im_v3_0.house_bl_performed_by (
-    performed_by varchar(10),
+    performed_by varchar(10) PRIMARY KEY,
     performed_by_description varchar(250)
 );
 
