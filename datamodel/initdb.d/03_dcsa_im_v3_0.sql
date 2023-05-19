@@ -316,7 +316,8 @@ CREATE TABLE dcsa_im_v3_0.advance_manifest_filing (
     manifest_type_code varchar(10),
     country_code char(2) NULL REFERENCES dcsa_im_v3_0.country (country_code),
     advance_manifest_filing_name varchar(100) NULL,
-    advance_manifest_filing_description varchar(250) NULL
+    advance_manifest_filing_description varchar(250) NULL,
+    UNIQUE (manifest_type_code, country_code) -- manifest_type_code must be unique together with country_code
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_advance_manifest_filing CASCADE;
