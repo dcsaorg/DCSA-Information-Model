@@ -1253,7 +1253,9 @@ def _check_missing_related_timestamps(timestamp: Timestamp, all_ts_table: Dict[s
 
 def _process_accept_reject_links(timestamp: Timestamp, all_ts_table: Dict[str, Timestamp]):
     if timestamp.is_pattern_timestamp:
-        if timestamp.event_classifier_code == 'EST':
+        # APVCV-591: ETS and ETC timestamps should not provide responses
+        if timestamp.event_classifier_code == 'EST' \
+        and not(timestamp.timestamp_name[:3] == 'ETS' or timestamp.timestamp_name[:3] == 'ETC'):
             successor_name = 'R' + timestamp.timestamp_name[1:]
             successor_ts = all_ts_table.get(successor_name)
             if successor_ts:
