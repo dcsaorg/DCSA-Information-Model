@@ -1,0 +1,50 @@
+IMO Class Value,IMO Class Description
+1.1A,Substances and articles which have a mass explosion hazard
+1.1B,Substances and articles which have a mass explosion hazard
+1.1C,Substances and articles which have a mass explosion hazard
+1.1D,Substances and articles which have a mass explosion hazard
+1.1E,Substances and articles which have a mass explosion hazard
+1.1F,Substances and articles which have a mass explosion hazard
+1.1G,Substances and articles which have a mass explosion hazard
+1.1J,Substances and articles which have a mass explosion hazard
+1.1L,Substances and articles which have a mass explosion hazard
+1.2B,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2C,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2D,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2E,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2F,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2G,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2H,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2J,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2K,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.2L,Substances and articles which have a projection hazard but not a mass explosion hazard
+1.3C,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3F,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3G,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3H,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3J,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3K,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.3L,"Substances and articles which have a fire hazard and either a minor blast hazard or a minor projection hazard or both, but not a mass explosion hazard"
+1.4B,Substances and articles which present no significant hazard
+1.4C,Substances and articles which present no significant hazard
+1.4D,Substances and articles which present no significant hazard
+1.4E,Substances and articles which present no significant hazard
+1.4F,Substances and articles which present no significant hazard
+1.4G,Substances and articles which present no significant hazard
+1.4S,Substances and articles which present no significant hazard
+1.5D,Very insensitive substances which have a mass explosion hazard
+1.6N,Extremely insensitive articles which do not have a mass explosion hazard
+2.1,Flammable Gases
+2.2,"Nonflammable, Non-Toxic Gases"
+2.3,Poison (Toxic) Gases
+3,Flammable Liquids
+4.1,"Flammable Solids, Self-reactive substances, Solid desensitized explosives and polymerizing substances"
+4.2,Substances liable to spontaneous combustion
+4.3,"Substances which, in contact with water, emit flammable gases"
+5.1,Oxidizing Substance
+5.2,Organic Peroxides
+6.1,Toxics substances
+6.2,Infectious Substances
+7,Radioactive Material
+8,Corrosive substances
+9,Miscellaneous dangerous substances and articles
