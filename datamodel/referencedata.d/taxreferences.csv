@@ -1,30 +1,30 @@
 # TODO: 'South America' has been added as a country
 # TODO: 'Entire world' has been added as a country
-tax_reference_code,country_code,tax_reference_definition
-XXX,EG,Exporter Registration Number
-XXX,EG,Egyptian Importer VAT Number
-XXX,EG,Exporter Registration Country 
-CUIT,AR,Clave Única de Identificación Tributaria
-CUIT,UY,Clave Única de Identificación Tributaria
-NIF,MG,Numero d'Identification Fiscal
-ICE,MA,Identifiant Commun des Entreprises
-VAT,Entire world,Value Added Tax 
-TIN,SC,Tax Identification Number
-ABN,Australia,Australia Business Number
-ACN,Australia,Australian Company Number
-NIT,South America,Número de Identificación Tributaria
-CNPJ,BR,Cadastro Nacional de Pessoas Jurídicas
-NPWP,ID,Nomor Pokok Wajib Pajak
-BIR 2303,PH,Bureau of Internal Revenue Form 2303
-NTN,PK,National Tax Number
-STN,PK,Sales Tax Number
-EIN,PR,Employer Identification Number
-INN,RU,Taxpayer identification number
-RUC,South America,Registro Único de Contribuyente
-BIN,BD,Importer's Business Identification Number
-AIN,BD,Freight Forwarder's Agent Identification Number
-NIF,DZ,Numero d'Identification Fiscal
-IEC,IN,Import Export Code
-GSTIN,IN,GST Identification Number
-PAN,IN,Permanent Account Number
-TAX ID,South America,Tax payer ID
+Tax Reference Type Code,Tax Reference Country Code,Tax Reference Name,Tax Reference Description
+XXX,EG,Exporter Registration Number,
+XXX,EG,Egyptian Importer VAT Number,
+XXX,EG,Exporter Registration Country, 
+CUIT,AR,Clave Única de Identificación Tributaria,
+CUIT,UY,Clave Única de Identificación Tributaria,
+NIF,MG,Numero d'Identification Fiscal,
+ICE,MA,Identifiant Commun des Entreprises,
+VAT,Entire world,Value Added Tax,
+TIN,SC,Tax Identification Number,
+ABN,AU,Australia Business Number,
+ACN,AU,Australian Company Number,
+NIT,South America,Número de Identificación Tributaria,
+CNPJ,BR,Cadastro Nacional de Pessoas Jurídicas,
+NPWP,ID,Nomor Pokok Wajib Pajak,
+BIR 2303,PH,Bureau of Internal Revenue Form 2303,
+NTN,PK,National Tax Number,
+STN,PK,Sales Tax Number,
+EIN,PR,Employer Identification Number,
+INN,RU,Taxpayer identification number,
+RUC,South America,Registro Único de Contribuyente,
+BIN,BD,Importer's Business Identification Number,
+AIN,BD,Freight Forwarder's Agent Identification Number,
+NIF,DZ,Numero d'Identification Fiscal,
+IEC,IN,Import Export Code,
+GSTIN,IN,GST Identification Number,
+PAN,IN,Permanent Account Number,
+TAX ID,South America,Tax payer ID,
