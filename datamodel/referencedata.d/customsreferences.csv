@@ -1,28 +1,29 @@
-customs_reference_code,country_code,customs_reference_definition
-ITN,US,Internal Transaction Number (ITN)
-AES,US,Automated Export System (AES)
-PRN,CA,Proof of Report Number (PRN)
-CERS,CA,Canadian Export Reporting System (CERS)
-EPN,KR,Korean customs EP reference
-BIETC,GA,BIETC (Bordereau d’Identification Électronique de Traçabilité des Cargaisons) number
-BIETC,LR,BIETC (Bordereau d’Identification Électronique de Traçabilité des Cargaisons) number
-NXP,NG,NXP number
-FMN,NG,Form M number
-BAN,NG,BA number
-ECI,ZA,ECI (Export cargo identifier)
-ECTN,BJ,Electronic Cargo Tracking Note (ECTN)
-URN,CG,Unique Registration Number (URN)
-URN,CD,Unique Registration Number (URN)
-PEB,ID,PEB reference number
-CTN,SN,Cargo Tracking Note (CTN)
-CTN,LR,Cargo Tracking Note (CTN)
-BSC,SN,Bordereau de Suivi Cargaison (BSC)
-BSC,LR,Bordereau de Suivi Cargaison (BSC)
-ACID,EG,Advance Cargo Information Declaration (ACID) number
-XXX,CM,Customs Reference number
-XXX,BD,Shipping Bill Numbers
-XXX,KE,Export entry numbers
-XXX,UG,Export entry numbers
-XXX,DO,Customs Number
-PCIN,IN,Personal Cargo Identification Number (PCIN)
-CSN,IN,Cargo Summary Notification (CSN)
+Customs Reference Type Code,Customs Reference Country Code,Customs Reference Name,Customs Reference Description
+DUE,BR,Declaração Única de Exportação,"Type of declaration field : DU-E / format : YYBRSSSSSSSSS (from the Portuguese, “Declaração Única de Exportação”, ex : 22BR000652483)"
+ITN,US,Internal Transaction Number,
+AES,US,Automated Export System,
+PRN,CA,Proof of Report Number,
+CERS,CA,Canadian Export Reporting System,
+EPN,KR,Korean customs EP reference,
+BIETC,GA,Bordereau d’Identification Électronique de Traçabilité des Cargaisons,
+BIETC,LR,Bordereau d’Identification Électronique de Traçabilité des Cargaisons,
+NXP,NG,NXP number,
+FMN,NG,Form M number,
+BAN,NG,BA number,
+ECI,ZA,Export cargo identifier,
+ECTN,BJ,Electronic Cargo Tracking Note,
+URN,CG,Unique Registration Number,
+URN,CD,Unique Registration Number,
+PEB,ID,PEB reference number,
+CTN,SN,Cargo Tracking Note,
+CTN,LR,Cargo Tracking Note,
+BSC,SN,Bordereau de Suivi Cargaison,
+BSC,LR,Bordereau de Suivi Cargaison,
+ACID,EG,Advance Cargo Information Declaration,
+XXX,CM,Customs Reference number,
+XXX,BD,Shipping Bill Numbers,
+XXX,KE,Export entry numbers,
+XXX,UG,Export entry numbers,
+XXX,DO,Customs Number,
+PCIN,IN,Personal Cargo Identification Number,
+CSN,IN,Cargo Summary Notification,
