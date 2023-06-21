@@ -21,7 +21,7 @@ CTN,SN,Cargo Tracking Note,
 CTN,LR,Cargo Tracking Note,
 BSC,SN,Bordereau de Suivi Cargaison,
 BSC,LR,Bordereau de Suivi Cargaison,
-ACID,EG,Advance Cargo Information Declaration,
+ACID,EG,Advance Cargo Information Declaration,A 19 digits number issued by the Egyptian customs portal [Nafeza.gov.eg](https://www.nafeza.gov.eg/en/site/aci-details) uniquely identifying a shipment under the Egypt ACI system.
 XXX,CM,Customs Reference number,
 XXX,BD,Shipping Bill Numbers,
 XXX,KE,Export entry numbers,
