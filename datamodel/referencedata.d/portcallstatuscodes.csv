@@ -6,3 +6,4 @@ PHOT,Phase Out,When a vessel moves out of a service at a given port from the lat
 PHIN,Phase In,When a vessel moves into a service at a given port from the lates issues schedule with vessel partners.
 ROTC,Rotation Change,When the sequence of port calls is changed compared to the proforma.
 SLID,Sliding,When a vessel takes another position than planned in a service (i.e. due to relevant delay) resulting in one or more voyages to be cancelled or blanked.
+CUTR,Cut and Run,
