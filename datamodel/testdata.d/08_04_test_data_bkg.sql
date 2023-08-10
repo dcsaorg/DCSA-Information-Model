@@ -210,8 +210,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -242,8 +240,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -275,8 +271,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -307,8 +301,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -340,8 +332,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -372,8 +362,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -772,8 +760,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -804,8 +790,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference', /* export_declaration_reference */
      true, /* is_import_license_required */
      'Import declaration reference', /* import_license_reference */
-     true, /* is_ams_aci_filing_required */
-     true, /* is_destination_filing_required */
      NULL, /* contract_quotation_reference */
      NULL, /* incoterms */
      NULL, /* invoice_payable_at */
