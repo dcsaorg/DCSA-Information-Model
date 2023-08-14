@@ -24,3 +24,4 @@ HE,Carrier booking office (transportation office),"The carrier office responsibl
 MOR, Mooring service provider, "The party offering the mooring services."
 SLU, Sludge service provider, "The party offering the Slugde services."
 SVP, Other service provider,Any other service not covered by a more specific code.
+END,Endorsee Party,Party to whom the title to the goods is transferred by means of endorsement.

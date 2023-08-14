@@ -453,15 +453,6 @@ INSERT INTO dcsa_im_v3_0.commodity (
     NULL,
     NULL);
 
-INSERT INTO dcsa_im_v3_0.value_added_service (
-    id,
-    booking_id,
-    value_added_service_code
-    ) VALUES (
-    '1f32fee5-edcc-4a62-afe1-a97ac236f30d'::uuid,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
-    'SCON');
-
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
     booking_id,
