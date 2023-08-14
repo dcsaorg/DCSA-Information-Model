@@ -11,7 +11,7 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     cut_off_time
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
-    'AFD',
+    'EFC',
     DATE '2021-03-09'
 );
 
