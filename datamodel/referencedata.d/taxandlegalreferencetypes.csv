@@ -1,0 +1,28 @@
+Tax and Legal Reference Type Code,Tax and Legal Reference Country Code,Tax and Legal Reference Type Name
+,EG,Exporter Registration Number
+,EG,Egyptian Importer VAT Number
+,EG,Exporter Registration Country
+CUIT,AR,Clave Única de Identificación Tributaria
+CUIT,UY,Clave Única de Identificación Tributaria
+NIF,MG,Numero d'Identification Fiscal
+ICE,MA,Identifiant Commun des Entreprises
+VAT,,Value Added Tax
+TIN,SC,Tax Identification Number
+ABN,AU,Australia Business Number
+ACN,AU,Australian Company Number
+NIT,,Número de Identificación Tributaria
+CNPJ,BR,Cadastro Nacional de Pessoas Jurídicas
+NPWP,ID,Nomor Pokok Wajib Pajak
+BIR 2303,PH,Bureau of Internal Revenue Form 2303
+NTN,PK,National Tax Number
+STN,PK,Sales Tax Number
+EIN,PR,Employer Identification Number
+INN,RU,Taxpayer identification number
+RUC,,Registro Único de Contribuyente
+BIN,BD,Importer's Business Identification Number
+AIN,BD,Freight Forwarder's Agent Identification Number
+NIF,DZ,Numero d'Identification Fiscal
+IEC,IN,Import Export Code
+GSTIN,IN,GST Identification Number
+PAN,IN,Permanent Account Number
+TAX ID,,Tax payer ID
