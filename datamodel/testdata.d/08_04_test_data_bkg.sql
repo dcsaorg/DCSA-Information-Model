@@ -585,10 +585,10 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     false
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
+INSERT INTO dcsa_im_v3_0.general_reference (
     id,
-    reference_type_code,
-    reference_value,
+    general_reference_type_code,
+    general_reference_value,
     shipment_id,
     shipping_instruction_id,
     booking_id

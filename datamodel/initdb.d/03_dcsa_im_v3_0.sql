@@ -22,11 +22,11 @@ CREATE TABLE dcsa_im_v3_0.hs_code (
     hs_code_description varchar(250) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
-CREATE TABLE dcsa_im_v3_0.reference_type (
-    reference_type_code varchar(3) PRIMARY KEY,
-    reference_type_name varchar(100) NOT NULL,
-    reference_type_description varchar(400) NOT NULL
+DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.general_reference_type (
+    general_reference_type_code varchar(3) PRIMARY KEY,
+    general_reference_type_name varchar(100) NOT NULL,
+    general_reference_type_description varchar(400) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.receipt_delivery_type CASCADE;
@@ -585,18 +585,22 @@ CREATE TABLE dcsa_im_v3_0.cargo_line_item (
     UNIQUE (cargo_item_id, cargo_line_item_id)
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.reference CASCADE;
-CREATE TABLE dcsa_im_v3_0.reference (
-    reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.reference_type (reference_type_code),
-    reference_value varchar(100) NOT NULL,
+DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference CASCADE;
+CREATE TABLE dcsa_im_v3_0.general_reference (
+    general_reference_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.general_reference_type (general_reference_type_code),
+    general_reference_value varchar(100) NOT NULL,
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
-    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id)
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
+    utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
 );
 
-CREATE INDEX ON dcsa_im_v3_0.reference (booking_id);
-CREATE INDEX ON dcsa_im_v3_0.reference (consignment_item_id);
+CREATE INDEX ON dcsa_im_v3_0.general_reference (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.general_reference (booking_id);
+CREATE INDEX ON dcsa_im_v3_0.general_reference (shipping_instruction_id);
+CREATE INDEX ON dcsa_im_v3_0.general_reference (consignment_item_id);
+CREATE INDEX ON dcsa_im_v3_0.general_reference (utilized_transport_equipment_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (

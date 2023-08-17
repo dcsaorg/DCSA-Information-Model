@@ -313,9 +313,9 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-04-07T12:12:12'
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
-    reference_type_code,
-    reference_value,
+INSERT INTO dcsa_im_v3_0.general_reference (
+    general_reference_type_code,
+    general_reference_value,
     shipment_id
 ) VALUES (
     'CR',
