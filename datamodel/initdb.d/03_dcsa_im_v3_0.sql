@@ -22,13 +22,6 @@ CREATE TABLE dcsa_im_v3_0.hs_code (
     hs_code_description varchar(250) NOT NULL
 );
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service_code CASCADE;
-CREATE TABLE dcsa_im_v3_0.value_added_service_code (
-    value_added_service_code varchar(5) PRIMARY KEY,
-    value_added_service_name varchar(100) NOT NULL,
-    value_added_service_description varchar(200) NOT NULL
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.reference_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.reference_type (
     reference_type_code varchar(3) PRIMARY KEY,
@@ -432,14 +425,6 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     displayed_name_for_place_of_delivery uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
     amendment_to_transport_document_id uuid NULL
 );
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.value_added_service CASCADE;
-CREATE TABLE dcsa_im_v3_0.value_added_service (
-    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
-    value_added_service_code varchar(5) NOT NULL REFERENCES dcsa_im_v3_0.value_added_service_code(value_added_service_code)
-);
-
-CREATE INDEX ON dcsa_im_v3_0.value_added_service (booking_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
 CREATE TABLE dcsa_im_v3_0.transport_document (
