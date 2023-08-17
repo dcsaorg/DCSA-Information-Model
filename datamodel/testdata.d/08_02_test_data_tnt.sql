@@ -305,9 +305,9 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     false
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
-    reference_type_code,
-    reference_value,
+INSERT INTO dcsa_im_v3_0.general_reference (
+    general_reference_type_code,
+    general_reference_value,
     shipment_id
 ) VALUES (
     'FF',
