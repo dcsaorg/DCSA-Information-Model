@@ -30,9 +30,6 @@ ALTER TABLE dcsa_im_v3_0.reference
 ALTER TABLE dcsa_im_v3_0.party_identifying_code
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
-ALTER TABLE dcsa_im_v3_0.value_added_service
-    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
-
 -- DateTime metadata
 
 -- Metadata for Booking table to avoid having to query shipmentEvent for 
