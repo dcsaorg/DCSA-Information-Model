@@ -594,15 +594,14 @@ CREATE INDEX ON dcsa_im_v3_0.cargo_item (consignment_item_id);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (package_code);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (utilized_transport_equipment_id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_line_item CASCADE;
-CREATE TABLE dcsa_im_v3_0.cargo_line_item (
-    cargo_line_item_id text NOT NULL,
+DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_marks CASCADE;
+CREATE TABLE dcsa_im_v3_0.shipping_marks (
     cargo_item_id uuid NOT NULL REFERENCES dcsa_im_v3_0.cargo_item (id),
-    shipping_marks text NOT NULL,
+    shipping_mark varchar(500) NOT NULL,
     -- Choice of cargo_item_id as first member is deliberate as it enables the
     -- underlying index to be used for FK checks as well (without a separate index
     -- because Postgres currently always creates an INDEX for UNIQUE constraints)
-    UNIQUE (cargo_item_id, cargo_line_item_id)
+    UNIQUE (cargo_item_id, shipping_mark)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference CASCADE;
