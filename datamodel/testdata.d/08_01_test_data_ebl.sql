@@ -1106,16 +1106,14 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   uuid('aa030eb6-009b-411c-985c-527ce008b35a')
 );
 
-INSERT INTO dcsa_im_v3_0.cargo_line_item(
-    cargo_line_item_id,
+INSERT INTO dcsa_im_v3_0.shipping_marks(
      cargo_item_id,
-      shipping_marks,
-       id
+     shipping_mark,
+     id
 )
 VALUES (
-'9653b630-7847-467c-bcf7-15374dcc6ae2',
 '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
- 'shipping marks',
+ 'Made in China',
 'aab30eb6-009b-411c-985c-527ce008b35a'
 );
 
