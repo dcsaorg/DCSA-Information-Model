@@ -45,8 +45,16 @@ CREATE TABLE dcsa_im_v3_0.cargo_movement_type (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.country CASCADE;
 CREATE TABLE dcsa_im_v3_0.country (
-    country_code varchar(2) PRIMARY KEY,
+    country_code char(2) PRIMARY KEY,
     country_name varchar(75) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.tax_and_legal_reference_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference_type (
+    tax_and_legal_reference_type_code varchar(10) NOT NULL,
+    tax_and_legal_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
+    tax_and_legal_reference_type_name varchar(100) NOT NULL,
+    PRIMARY KEY (tax_and_legal_reference_type_code,tax_and_legal_country_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.un_location CASCADE;
@@ -117,6 +125,18 @@ CREATE TABLE dcsa_im_v3_0.party (
     public_key varchar(500) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id)
 );
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.tax_and_legal_reference CASCADE;
+CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference (
+    tax_and_legal_reference_type_code varchar(10) NOT NULL,
+    tax_and_legal_reference_country_code char(2) NOT NULL,
+    tax_and_legal_reference_value varchar(100) NOT NULL,
+    party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party (id),
+    FOREIGN KEY (tax_and_legal_reference_type_code, tax_and_legal_reference_country_code) REFERENCES dcsa_im_v3_0.tax_and_legal_reference_type (tax_and_legal_reference_type_code, tax_and_legal_country_code),
+    primary key (tax_and_legal_reference_type_code, tax_and_legal_reference_country_code, party_id)
+);
+
+CREATE INDEX ON dcsa_im_v3_0.tax_and_legal_reference (party_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
 CREATE TABLE dcsa_im_v3_0.party_contact_details (
