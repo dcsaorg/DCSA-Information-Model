@@ -498,6 +498,28 @@ INSERT INTO dcsa_im_v3_0.party (
      'Malwart Lyngy'
  );
 
+INSERT INTO dcsa_im_v3_0.tax_and_legal_reference (
+    tax_and_legal_reference_type_code,
+    tax_and_legal_reference_country_code,
+    tax_and_legal_reference_value,
+    party_id
+) VALUES (
+     'TAX ID',
+     'GT',
+     '1234',
+     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
+ ), (
+    'TAX ID',
+    'PE',
+    '9876',
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
+ ), (
+    'CUIT',
+    'UY',
+    'ABC',
+    '9dd9a4c4-4039-11eb-8770-0b2b19847fab'
+ );
+
  INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,
     party_id,

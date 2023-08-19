@@ -9,6 +9,7 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.cargo_movement_type from '../referencedata.d/cargomovementtypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.code_list_responsible_agency from '../referencedata.d/codelistresponsibleagencycodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.communication_channel_qualifier from '../referencedata.d/communicationchannelqualifier.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.country from '../referencedata.d/countrycodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.cut_off_time from '../referencedata.d/cutofftimecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.document_type from '../referencedata.d/documenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' with NULL AS E'\'\'' CSV HEADER
@@ -28,6 +29,7 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.seal_type from '../referencedata.d/sealtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.shipment_event_type from '../referencedata.d/shipmenteventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.shipment_location_type from '../referencedata.d/shipmentlocationtypes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.tax_and_legal_reference_type from '../referencedata.d/taxandlegalreferencetypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_document_type from '../referencedata.d/transportdocumenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_event_type from '../referencedata.d/transporteventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.transport_plan_stage_type from '../referencedata.d/transportplanstagetypes.csv' with NULL AS E'\'\'' CSV HEADER
@@ -38,7 +40,6 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 
 -- data samples
 \copy dcsa_im_v3_0.carrier (carrier_name, smdg_code, nmfta_code) from '../samples.d/carriers.csv' CSV HEADER
-\copy dcsa_im_v3_0.country from '../samples.d/countrycodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.un_location from '../samples.d/unlocationcodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.facility (facility_name, un_location_code, facility_smdg_code, facility_bic_code) from '../samples.d/facilities.csv' CSV HEADER
 \copy dcsa_im_v3_0.hs_code from '../samples.d/hscodes.csv' CSV HEADER
