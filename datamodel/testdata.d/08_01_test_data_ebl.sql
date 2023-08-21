@@ -669,6 +669,28 @@ INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     false
 );
 
+INSERT INTO dcsa_im_v3_0.customs_reference (
+    customs_reference_type_code,
+    customs_reference_country_code,
+    customs_reference_value,
+    utilized_transport_equipment_id
+) VALUES (
+     'ACID',
+     'EG',
+     'CR123',
+     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+),(
+    'BIETC',
+    'GA',
+    'Test123',
+    uuid('aa030eb6-009b-411c-985c-527ce008b35a')
+),(
+    'Customs Reference number',
+    'CM',
+    'Test987 - second number for same UTE',
+    uuid('aa030eb6-009b-411c-985c-527ce008b35a')
+);
+
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
     id,
     shipping_instruction_reference,
