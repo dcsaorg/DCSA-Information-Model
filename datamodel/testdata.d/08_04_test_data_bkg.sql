@@ -59,14 +59,14 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    document_party_id
 ) VALUES (
     'be59706b-b059-455b-bb20-aeb8d79605fe'::uuid,
     'c49ea2d6-3806-46c8-8490-294affc71286',
     'FDM',
     'info@fdm.org',
     '+31123456789',
-    'https://www.fdm.org'
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -630,16 +630,10 @@ INSERT INTO dcsa_im_v3_0.requested_equipment_group (
 INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name,
-    tax_reference_1,
-    tax_reference_2,
-    public_key,
     address_id
 ) VALUES (
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
-    'CVR-25645774',
-    'CVR-25645774',
-    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
     '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid
 );
 
@@ -649,14 +643,14 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    document_party_id
 ) VALUES (
     'c4645dd4-56a7-4c32-898f-cc86d5252248'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
     'info@h-l.org',
     '+31123456789',
-    'https://www.hapag-llyod.org'
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.party_identifying_code (
@@ -709,14 +703,14 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    document_party_id
     ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org');
+    NULL);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,

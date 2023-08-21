@@ -120,9 +120,6 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.party CASCADE;
 CREATE TABLE dcsa_im_v3_0.party (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     party_name varchar(100) NULL,
-    tax_reference_1 varchar(20) NULL,
-    tax_reference_2 varchar(20) NULL,
-    public_key varchar(500) NULL,
     address_id uuid NULL REFERENCES dcsa_im_v3_0.address (id)
 );
 
@@ -137,16 +134,6 @@ CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference (
 );
 
 CREATE INDEX ON dcsa_im_v3_0.tax_and_legal_reference (party_id);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
-CREATE TABLE dcsa_im_v3_0.party_contact_details (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id),
-    name varchar(100) NOT NULL,
-    email varchar(100) NULL,
-    phone varchar(30) NULL,
-    url varchar(100) NULL
-);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.code_list_responsible_agency CASCADE;
 CREATE TABLE dcsa_im_v3_0.code_list_responsible_agency (
@@ -502,6 +489,16 @@ CREATE INDEX ON dcsa_im_v3_0.document_party (party_function);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.document_party (booking_id);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.party_contact_details CASCADE;
+CREATE TABLE dcsa_im_v3_0.party_contact_details (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    party_id uuid NULL REFERENCES dcsa_im_v3_0.party(id),
+    name varchar(100) NOT NULL,
+    email varchar(100) NULL,
+    phone varchar(30) NULL,
+    document_party_id uuid NULL REFERENCES dcsa_im_v3_0.document_party(id)
+);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge CASCADE;
 CREATE TABLE dcsa_im_v3_0.charge (
