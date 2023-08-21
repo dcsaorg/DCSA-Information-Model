@@ -526,28 +526,28 @@ INSERT INTO dcsa_im_v3_0.tax_and_legal_reference (
     name,
     email,
     phone,
-    url
+    document_party_id
 ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589023'::uuid,
     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL
 ), (
     'b24d099e-a6f6-404e-b082-776f7f589064'::uuid,
     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL
 ), (
     'b24d099e-a6f6-404e-b082-776f7f589022'::uuid,
     '9dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.document_party (
@@ -575,6 +575,29 @@ INSERT INTO dcsa_im_v3_0.document_party (
       true,
       (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
   );
+
+INSERT INTO dcsa_im_v3_0.party_contact_details (
+    id,
+    party_id,
+    name,
+    email,
+    phone,
+    document_party_id
+) VALUES (
+    'dd42252d-c8d5-4a0e-ab93-da355992fb29'::uuid,
+    NULL,
+    'DCSA',
+    'info@dcsa.org',
+    '+31123456789',
+    (SELECT id FROM dcsa_im_v3_0.document_party WHERE party_id = '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9')
+),(
+    'ee42252d-c8d5-4a0e-ab93-da355992fb29'::uuid,
+    NULL,
+    'DCSA - second contact',
+    'info@dcsa.org',
+    '+31123456789',
+    (SELECT id FROM dcsa_im_v3_0.document_party WHERE party_id = '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9')
+);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
@@ -1474,14 +1497,14 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    document_party_id
 ) VALUES (
     '0a42252d-c8d5-4a0e-ab93-fa355992fb29'::uuid,
     '499918a2-d12d-4df6-840c-dd92357002df',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.displayed_address (
@@ -1799,14 +1822,14 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    document_party_id
 ) VALUES (
     '0ffc61f0-c74d-4a57-8d32-009a32247c29'::uuid,
     '8e463a84-0a2d-47cd-9332-51e6cb36b635',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
