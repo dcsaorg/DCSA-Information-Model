@@ -51,9 +51,9 @@ CREATE TABLE dcsa_im_v3_0.country (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.tax_and_legal_reference_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference_type (
-    tax_and_legal_reference_type_code varchar(10) NOT NULL,
+    tax_and_legal_reference_type_code varchar(50) NOT NULL,
     tax_and_legal_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
-    tax_and_legal_reference_type_name varchar(100) NOT NULL,
+    tax_and_legal_reference_type_name varchar(50) NOT NULL,
     PRIMARY KEY (tax_and_legal_reference_type_code,tax_and_legal_country_code)
 );
 
@@ -125,7 +125,7 @@ CREATE TABLE dcsa_im_v3_0.party (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.tax_and_legal_reference CASCADE;
 CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference (
-    tax_and_legal_reference_type_code varchar(10) NOT NULL,
+    tax_and_legal_reference_type_code varchar(50) NOT NULL,
     tax_and_legal_reference_country_code char(2) NOT NULL,
     tax_and_legal_reference_value varchar(100) NOT NULL,
     party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party (id),
@@ -306,27 +306,29 @@ CREATE TABLE dcsa_im_v3_0.shipment (
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.house_bl_performed_by CASCADE;
-CREATE TABLE dcsa_im_v3_0.house_bl_performed_by (
-    performed_by varchar(10) PRIMARY KEY,
-    performed_by_description varchar(250)
+CREATE TABLE dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by (
+    advance_manifest_filing_house_bl_performed_by_code varchar(10) PRIMARY KEY,
+    advance_manifest_filing_house_bl_performed_by_name varchar(50),
+    advance_manifest_filing_house_bl_performed_by_description varchar(250)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.advance_manifest_filing CASCADE;
 CREATE TABLE dcsa_im_v3_0.advance_manifest_filing (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    manifest_type_code varchar(10),
-    country_code char(2) NULL REFERENCES dcsa_im_v3_0.country (country_code),
-    advance_manifest_filing_name varchar(100) NULL,
+    advance_manifest_filing_code varchar(100) NOT NULL,
+    advance_manifest_filing_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
+    advance_manifest_filing_name varchar(100) NOT NULL,
     advance_manifest_filing_description varchar(250) NULL,
-    UNIQUE (manifest_type_code, country_code) -- manifest_type_code must be unique together with country_code
+    PRIMARY KEY (advance_manifest_filing_code,advance_manifest_filing_country_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_advance_manifest_filing CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_advance_manifest_filing (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
-    advance_manifest_filing_id uuid NOT NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing(id),
-    advance_manifest_filing_house_bl_performed_by varchar(10) NULL REFERENCES dcsa_im_v3_0.house_bl_performed_by(performed_by),
-    self_filer_code varchar(100) NULL
+    advance_manifest_filing_code varchar(100) NOT NULL,
+    advance_manifest_filing_country_code char(2) NOT NULL,
+    advance_manifest_filing_house_bl_performed_by varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by(advance_manifest_filing_house_bl_performed_by_code),
+    self_filer_code varchar(100) NULL,
+    FOREIGN KEY (advance_manifest_filing_code, advance_manifest_filing_country_code) REFERENCES dcsa_im_v3_0.advance_manifest_filing (advance_manifest_filing_code, advance_manifest_filing_country_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.iso_equipment_code CASCADE;
@@ -613,7 +615,7 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.customs_reference_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.customs_reference_type (
     customs_reference_type_code varchar(50) NOT NULL,
     customs_reference_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
-    customs_reference_type_name varchar(100) NOT NULL,
+    customs_reference_type_name varchar(50) NOT NULL,
     customs_reference_type_description varchar(400) NULL,
     PRIMARY KEY (customs_reference_type_code,customs_reference_country_code)
 );

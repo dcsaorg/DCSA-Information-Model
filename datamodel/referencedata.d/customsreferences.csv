@@ -1,5 +1,5 @@
 Customs Reference Type Code,Customs Reference Country Code,Customs Reference Name,Customs Reference Description
-DUE,BR,Declaração Única de Exportação or DU-E (translated as Single Export Declaration),"An electronic document that contains all the necessary information for export operations and serves as the basis for customs and administrative control, including the collection of statistical data on exports from Brazil."
+DUE,BR,Declaração Única de Exportação,"An electronic document that contains all the necessary information for export operations and serves as the basis for customs and administrative control, including the collection of statistical data on exports from Brazil."
 ITN,US,Internal Transaction Number,
 AES,US,Automated Export System,"The system used by persons or entities exporting goods from the United States, Puerto Rico, or the U.S. Virgin Islands to electronically declare their international exports, known as Electronic Export Information (EEI), to the Census Bureau to help compile export and trade statistics."
 AES,PR,Automated Export System,"The system used by persons or entities exporting goods from the United States, Puerto Rico, or the U.S. Virgin Islands to electronically declare their international exports, known as Electronic Export Information (EEI), to the Census Bureau to help compile export and trade statistics."
@@ -7,8 +7,8 @@ AES,VI,Automated Export System,"The system used by persons or entities exporting
 PRN,CA,Proof of Report Number,
 CERS,CA,Canadian Export Reporting System,
 EPN,KR,Korean customs EP reference,
-BIETC,GA,Bordereau d’Identification Électronique de Traçabilité des Cargaisons,
-BIETC,LR,Bordereau d’Identification Électronique de Traçabilité des Cargaisons,
+BIETC,GA,Bordereau d’Identification Électronique de Traç...,Bordereau d’Identification Électronique de Traçabilité des Cargaisons
+BIETC,LR,Bordereau d’Identification Électronique de Traç...,Bordereau d’Identification Électronique de Traçabilité des Cargaisons
 NXP,NG,NXP number,
 FMN,NG,Form M number,
 BAN,NG,BA number,
