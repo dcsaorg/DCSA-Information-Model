@@ -115,6 +115,38 @@ INSERT INTO dcsa_im_v3_0.location (
     'USNYC'
 );
 
+INSERT INTO dcsa_im_v3_0.active_reefer_settings (
+    id,
+    is_gen_set_required,
+    is_pre_cooling_required,
+    is_cold_treatment_required,
+    is_ventilation_open,
+    is_drainholes_open,
+    is_bulb_mode,
+    temperature_setpoint,
+    temperature_unit,
+    o2_setpoint,
+    co2_setpoint,
+    humidity_setpoint,
+    air_exchange_setpoint,
+    air_exchange_unit
+) VALUES (
+    '1231235e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    23.5,
+    'CEL',
+    60.34,
+    55.2,
+    40,
+    10,
+    'MQH'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
