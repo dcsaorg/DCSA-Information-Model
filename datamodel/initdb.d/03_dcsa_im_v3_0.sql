@@ -314,17 +314,17 @@ CREATE TABLE dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by (
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.advance_manifest_filing CASCADE;
 CREATE TABLE dcsa_im_v3_0.advance_manifest_filing (
-    advance_manifest_filing_code varchar(100) NOT NULL,
+    advance_manifest_filing_code varchar(50) NOT NULL,
     advance_manifest_filing_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
-    advance_manifest_filing_name varchar(100) NOT NULL,
-    advance_manifest_filing_description varchar(250) NULL,
+    advance_manifest_filing_name varchar(50) NOT NULL,
+    advance_manifest_filing_description varchar(500) NULL,
     PRIMARY KEY (advance_manifest_filing_code,advance_manifest_filing_country_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_advance_manifest_filing CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_advance_manifest_filing (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
-    advance_manifest_filing_code varchar(100) NOT NULL,
+    advance_manifest_filing_code varchar(50) NOT NULL,
     advance_manifest_filing_country_code char(2) NOT NULL,
     advance_manifest_filing_house_bl_performed_by varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by(advance_manifest_filing_house_bl_performed_by_code),
     self_filer_code varchar(100) NULL,

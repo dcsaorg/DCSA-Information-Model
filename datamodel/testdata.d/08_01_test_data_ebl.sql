@@ -270,6 +270,26 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-04-07T12:12:12'
 );
 
+INSERT INTO dcsa_im_v3_0.shipment_advance_manifest_filing (
+    shipment_id,
+    advance_manifest_filing_code,
+    advance_manifest_filing_country_code,
+    advance_manifest_filing_house_bl_performed_by,
+    self_filer_code
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872'),
+    'ACI',
+    'CA',
+    'CARRIER',
+    NULL
+),(
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872'),
+    'ACE',
+    'US',
+    'SHIPPER',
+    'SelfFilerCode123'
+);
+
 /**
  * Data used in integration tests - Do not modify - make your own data
  */
