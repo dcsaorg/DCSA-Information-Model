@@ -9,7 +9,8 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.cargo_movement_type from '../referencedata.d/cargomovementtypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.code_list_responsible_agency from '../referencedata.d/codelistresponsibleagencycodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.communication_channel_qualifier from '../referencedata.d/communicationchannelqualifier.csv' with NULL AS E'\'\'' CSV HEADER
-\copy dcsa_im_v3_0.country from '../referencedata.d/countrycodes.csv' CSV HEADER
+\copy dcsa_im_v3_0.country from '../referencedata.d/countrycodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.customs_reference_type from '../referencedata.d/customsreferences.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.cut_off_time from '../referencedata.d/cutofftimecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.document_type from '../referencedata.d/documenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' with NULL AS E'\'\'' CSV HEADER

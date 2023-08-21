@@ -621,6 +621,32 @@ CREATE INDEX ON dcsa_im_v3_0.general_reference (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.general_reference (consignment_item_id);
 CREATE INDEX ON dcsa_im_v3_0.general_reference (utilized_transport_equipment_id);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.customs_reference_type CASCADE;
+CREATE TABLE dcsa_im_v3_0.customs_reference_type (
+    customs_reference_type_code varchar(50) NOT NULL,
+    customs_reference_country_code char(2) NOT NULL REFERENCES dcsa_im_v3_0.country (country_code),
+    customs_reference_type_name varchar(100) NOT NULL,
+    customs_reference_type_description varchar(400) NULL,
+    PRIMARY KEY (customs_reference_type_code,customs_reference_country_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.customs_reference CASCADE;
+CREATE TABLE dcsa_im_v3_0.customs_reference (
+    customs_reference_type_code varchar(50) NOT NULL,
+    customs_reference_country_code char(2) NOT NULL,
+    customs_reference_value varchar(100) NOT NULL,
+    shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
+    shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
+    utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+    FOREIGN KEY (customs_reference_type_code, customs_reference_country_code) REFERENCES dcsa_im_v3_0.customs_reference_type (customs_reference_type_code, customs_reference_country_code)
+);
+
+CREATE INDEX ON dcsa_im_v3_0.customs_reference (shipment_id);
+CREATE INDEX ON dcsa_im_v3_0.customs_reference (shipping_instruction_id);
+CREATE INDEX ON dcsa_im_v3_0.customs_reference (consignment_item_id);
+CREATE INDEX ON dcsa_im_v3_0.customs_reference (utilized_transport_equipment_id);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.seal_source CASCADE;
 CREATE TABLE dcsa_im_v3_0.seal_source (
     seal_source_code varchar(5) PRIMARY KEY,
