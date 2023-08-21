@@ -197,12 +197,13 @@ INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -233,6 +234,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-11-03 02:11:00.000',
+    '2023-08-21 10:12:00.000',
     'Test',
      NULL,
      true,
@@ -258,12 +260,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -294,6 +297,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-11-03 02:11:00.000',
+    '2023-08-21 10:13:00.000',
     'Test',
      NULL,
      true,
@@ -319,12 +323,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -355,6 +360,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-12-20 02:11:00.000',
+    '2023-08-21 10:13:00.000',
     'Test',
      NULL,
      true,
@@ -732,12 +738,13 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -762,12 +769,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
     'cbrr-b83765166707812c8ff4', /* carrier_booking_request_reference */
-    'PENU', /* document_status */
+    'PENU', /* booking_status */
     'CY', /* receipt_type_at_origin */
     'CY', /* delivery_type_at_destination */
     'FCL', /* cargo_movement_type_at_origin */
     'LCL', /* cargo_movement_type_at_destination */
     '2021-11-03 02:11:00.000', /* booking_request_datetime */
+    '2023-08-21 10:14:00.000', /* booking_updated_datetime */
     'Test', /* service_contract_reference */
      NULL, /* payment_term_code */
      true, /* is_partial_load_allowed */

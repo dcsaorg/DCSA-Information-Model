@@ -260,12 +260,13 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.booking CASCADE;
 CREATE TABLE dcsa_im_v3_0.booking (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     carrier_booking_request_reference varchar(100) NOT NULL DEFAULT uuid_generate_v4()::text,
-    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code) CHECK(document_status IN ('RECE', 'PENU', 'REJE', 'CONF','PENC', 'CANC', 'DECL', 'CMPL')),
+    booking_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code) CHECK(booking_status IN ('RECE', 'PENU', 'REJE', 'CONF', 'PENC', 'CANC', 'CMPL')),
     receipt_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type_code),
     delivery_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.receipt_delivery_type(receipt_delivery_type_code),
     cargo_movement_type_at_origin varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type_code),
     cargo_movement_type_at_destination varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.cargo_movement_type(cargo_movement_type_code),
     booking_request_datetime timestamp with time zone NOT NULL,
+    booking_updated_datetime timestamp with time zone NOT NULL,
     service_contract_reference varchar(30) NULL,
     payment_term_code varchar(3) NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
     is_partial_load_allowed boolean NOT NULL,
@@ -512,16 +513,6 @@ CREATE TABLE dcsa_im_v3_0.charge (
     calculation_basis varchar(50) NOT NULL,
     unit_price real NOT NULL,
     quantity real NOT NULL
-);
-
-DROP TABLE IF EXISTS dcsa_im_v3_0.document_version CASCADE;
-CREATE TABLE dcsa_im_v3_0.document_version (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    transport_document_id uuid NOT NULL REFERENCES dcsa_im_v3_0.transport_document (id),
-    document_status varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type (shipment_event_type_code),
-    binary_copy bytea NOT NULL,
-    document_hash text NOT NULL,
-    last_modified_datetime timestamp with time zone NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment CASCADE;
