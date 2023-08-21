@@ -1,7 +1,7 @@
 Tax and Legal Reference Type Code,Tax and Legal Reference Country Code,Tax and Legal Reference Type Name
-ERN,EG,Exporter Registration Number
-EIVN,EG,Egyptian Importer VAT Number
-ERC,EG,Exporter Registration Country
+Exporter Registration Number,EG,Exporter Registration Number
+Egyptian Importer VAT Number,EG,Egyptian Importer VAT Number
+Exporter Registration Country,EG,Exporter Registration Country
 CUIT,AR,Clave Única de Identificación Tributaria
 CUIT,UY,Clave Única de Identificación Tributaria
 NIF,MG,Numero d'Identification Fiscal
