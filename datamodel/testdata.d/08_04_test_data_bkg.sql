@@ -387,7 +387,6 @@ INSERT INTO dcsa_im_v3_0.commodity(
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
@@ -396,17 +395,23 @@ INSERT INTO dcsa_im_v3_0.commodity(
     '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Hand Bags',
-    '411510',
     1200.0,
     'KGM',
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    '411510'
+);
+
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
@@ -415,17 +420,23 @@ INSERT INTO dcsa_im_v3_0.commodity (
     '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
+    '720711'
+);
+
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
@@ -434,17 +445,23 @@ INSERT INTO dcsa_im_v3_0.commodity (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
     NULL);
 
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
+    '720711'
+);
+
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
@@ -453,11 +470,36 @@ INSERT INTO dcsa_im_v3_0.commodity (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
     (SELECT booking_id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
     NULL);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '720711'
+);
+
+INSERT INTO dcsa_im_v3_0.outer_packaging (
+    id,
+    commodity_id,
+    package_code,
+    number_of_packages,
+    imo_packaging_code,
+    description,
+    cargo_item_id
+) VALUES (
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '5H',
+    3,
+    '123',
+    '3 yellow boxes of teddybears',
+    null
+);
 
 INSERT INTO dcsa_im_v3_0.shipment (
     id,

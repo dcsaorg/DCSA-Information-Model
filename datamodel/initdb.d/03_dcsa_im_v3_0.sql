@@ -360,10 +360,10 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking (id),
+    booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     requested_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
-    requested_equipment_units real NULL,
+    requested_equipment_units integer NOT NULL,
     confirmed_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
     is_shipper_owned boolean NOT NULL DEFAULT false,
@@ -377,21 +377,24 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     commodity_type varchar(550) NOT NULL,
-    hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
     cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
-    number_of_packages integer NULL,
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL
 );
 
 CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code_commodity CASCADE;
+CREATE TABLE dcsa_im_v3_0.hs_code_commodity (
+    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id),
+    hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
     commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
 );
@@ -403,7 +406,6 @@ CREATE TABLE dcsa_im_v3_0.shipment_cutoff_time (
     cut_off_time timestamp with time zone NOT NULL,
     PRIMARY KEY (shipment_id, cut_off_time_code)
 );
-
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.displayed_address CASCADE;
 CREATE TABLE dcsa_im_v3_0.displayed_address (
@@ -534,8 +536,9 @@ CREATE INDEX ON dcsa_im_v3_0.equipment (equipment_reference);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.package_code CASCADE;
 CREATE TABLE dcsa_im_v3_0.package_code (
-    package_code varchar(3) PRIMARY KEY,
-    package_code_description varchar(50) NOT NULL
+    package_code varchar(2) PRIMARY KEY,
+    package_code_name varchar(100) NOT NULL,
+    package_code_description varchar(500) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.utilized_transport_equipment CASCADE;
@@ -574,7 +577,7 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
     number_of_packages integer NOT NULL,
-    package_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
+    package_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
     utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
     package_name_on_bl varchar(50) NULL
 );
@@ -592,6 +595,17 @@ CREATE TABLE dcsa_im_v3_0.shipping_marks (
     -- underlying index to be used for FK checks as well (without a separate index
     -- because Postgres currently always creates an INDEX for UNIQUE constraints)
     UNIQUE (cargo_item_id, shipping_mark)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.outer_packaging CASCADE;
+CREATE TABLE dcsa_im_v3_0.outer_packaging (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id),
+    package_code varchar(2) NULL REFERENCES dcsa_im_v3_0.package_code(package_code),
+    number_of_packages integer NULL,
+    imo_packaging_code varchar(3) NULL,
+    description varchar(100) NULL,
+    cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference CASCADE;

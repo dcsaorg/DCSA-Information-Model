@@ -21,6 +21,7 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.facility_type from '../referencedata.d/facilitytypes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.mode_of_transport from '../referencedata.d/modeoftransportcodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.operations_event_type from '../referencedata.d/operationseventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.package_code from '../referencedata.d/packagecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.party_function from '../referencedata.d/partyfunctioncodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.payment_term_type from '../referencedata.d/paymentterms.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.port_call_phase_type from '../referencedata.d/portcallphasetypecodes.csv' with NULL AS E'\'\'' CSV HEADER
@@ -47,7 +48,6 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.facility (facility_name, un_location_code, facility_smdg_code, facility_bic_code) from '../samples.d/facilities.csv' CSV HEADER
 \copy dcsa_im_v3_0.hs_code from '../samples.d/hscodes.csv' CSV HEADER
 \copy dcsa_im_v3_0.smdg_delay_reason from '../samples.d/smdgdelayreasoncodes.csv' CSV HEADER
-\copy dcsa_im_v3_0.package_code from '../samples.d/packagecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.incoterms from '../samples.d/incotermscodes.csv' with NULL AS E'\'\'' CSV HEADER
 
 -- Implementation detail data
