@@ -390,7 +390,7 @@ INSERT INTO dcsa_im_v3_0.equipment(
     total_max_weight,
     weight_unit
 ) VALUES (
-    'equipref3453',
+    'equipre3453',
     '22G2',
     1424.2,
     null,
@@ -451,7 +451,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'LOAD',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
-    'equipref3453',
+    'equipre3453',
     'EMPTY'
 );
 
