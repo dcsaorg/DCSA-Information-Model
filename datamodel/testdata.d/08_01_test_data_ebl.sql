@@ -876,66 +876,84 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
       DATE '2022-03-07'
 );
 
-
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
-    hs_code,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Expensive Shoes',
     4000,
     'KGM'
 ), (
     '2219e859-e3b5-4e87-80b8-32e9f77cca04',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '720711',
     'Massive Yacht',
     4000,
     'KGM'
 ), (
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Air ballons',
     4000,
     'KGM'
 ), (
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 );
 
-
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    '411510'
+),(
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    '720711'
+),(
+    '2219e859-e3b5-4e87-80b8-32e9f77cca04',
+    '720711'
+), (
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    '411510'
+), (
+    '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+    '411510'
+), (
+    'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
+    '411510'
+), (
+    '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    '411510'
+), (
+    '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    '411510'
+);
 
 INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
@@ -1111,23 +1129,6 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
    null
  );
 
-INSERT INTO dcsa_im_v3_0.package_code(
-    package_code,
-    package_code_description
-) VALUES (
-    '123',
-    'test description1'
-), (
-    '234',
-    'test description2'
-), (
-    '456',
-    'test description3'
-), (
-    '789',
-    'test description4'
-);
-
 /**
  * Data used in integration tests - Do not modify - make your own data
  */
@@ -1143,49 +1144,49 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     50.0,
     'KGM',
     5000,
-    '123',
+    '1D',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     'c7104528-66d5-4d11-9b82-7af30e84d664',
     1000.0,
     'KGM',
     1,
-    '456',
+    '2C',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     23.5,
     'KGM',
     2500,
-    '789',
+    '4H',
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     99.9,
     'KGM',
     99,
-    '234',
+    '4G',
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
     99.9,
     'KGM',
     99,
-    '234',
+    '2C',
    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'cb6354c9-1ceb-452c-aed0-3cb25a04647a'),
     23.5,
     'KGM',
     2500,
-    '789',
+    '2C',
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
     23.5,
     'KGM',
     2500,
-    '789',
+    '3H',
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 );
 
@@ -1203,7 +1204,7 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   23.5,
   'KGM',
   2500,
-  '789',
+  'ZL',
   uuid('aa030eb6-009b-411c-985c-527ce008b35a')
 );
 
@@ -1528,7 +1529,6 @@ INSERT INTO dcsa_im_v3_0.commodity(
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
@@ -1537,11 +1537,18 @@ INSERT INTO dcsa_im_v3_0.commodity(
     'a5b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
     'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Hand Bags',
-    '411510',
     1200.0,
     'KGM',
     NULL,
     NULL
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    hs_code
+) VALUES (
+    'a5b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    '411510'
 );
 
 -------- ShipmentLocationRepository.findByTransportDocumentID BEGIN --------
@@ -1847,21 +1854,21 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     50.0,
     'KGM',
     5000,
-    '123',
+    '4C',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     '06c0e716-3128-4172-be09-7f82b7ec02ca'::uuid,
     50.0,
     'KGM',
     5000,
-    '123',
+    '4A',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     'cf1798fe-9447-4ea8-a4a6-9515de751d5e'::uuid,
     50.0,
     'KGM',
     5000,
-    '123',
+    '4D',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 );
 
@@ -2053,9 +2060,28 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     50.0,
     'KGM',
     5000,
-    '123',
+    'MR',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 );
+
+INSERT INTO dcsa_im_v3_0.outer_packaging (
+    id,
+    commodity_id,
+    package_code,
+    number_of_packages,
+    imo_packaging_code,
+    description,
+    cargo_item_id
+) VALUES (
+    '6843f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0'::uuid,
+    '5H',
+    3,
+    '123',
+    '3 yellow boxes of teddybears',
+    (SELECT id FROM dcsa_im_v3_0.cargo_item WHERE consignment_item_id = '5d943239-23fc-4d5c-ab70-a33a469f9e59')
+);
+
 
 INSERT INTO dcsa_im_v3_0.charge (
     id, 
