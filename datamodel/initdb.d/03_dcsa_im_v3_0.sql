@@ -544,7 +544,7 @@ CREATE TABLE dcsa_im_v3_0.package_code (
 DROP TABLE IF EXISTS dcsa_im_v3_0.utilized_transport_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    equipment_reference varchar(15) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+    equipment_reference varchar(11) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     is_shipper_owned boolean NOT NULL,
