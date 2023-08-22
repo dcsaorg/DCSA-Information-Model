@@ -458,7 +458,7 @@ ALTER TABLE dcsa_im_v3_0.shipping_instruction
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    clause_content text NOT NULL
+    clause_content varchar(5000) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_carrier_clauses CASCADE;
