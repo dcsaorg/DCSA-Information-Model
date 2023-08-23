@@ -402,9 +402,11 @@ INSERT INTO dcsa_im_v3_0.commodity(
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
+    consignment_item_id,
     hs_code
 ) VALUES (
     '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    NULL,
     '411510'
 );
 
@@ -427,9 +429,11 @@ INSERT INTO dcsa_im_v3_0.commodity (
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
+    consignment_item_id,
     hs_code
 ) VALUES (
     '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
+    NULL,
     '720711'
 );
 
@@ -452,9 +456,11 @@ INSERT INTO dcsa_im_v3_0.commodity (
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
+    consignment_item_id,
     hs_code
 ) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
+    NULL,
     '720711'
 );
 
@@ -477,9 +483,11 @@ INSERT INTO dcsa_im_v3_0.commodity (
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
+    consignment_item_id,
     hs_code
 ) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    NULL,
     '720711'
 );
 
