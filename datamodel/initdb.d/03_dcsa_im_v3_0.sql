@@ -387,12 +387,6 @@ CREATE TABLE dcsa_im_v3_0.commodity (
 
 CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code_commodity CASCADE;
-CREATE TABLE dcsa_im_v3_0.hs_code_commodity (
-    commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id),
-    hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code)
-);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
     requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
@@ -547,6 +541,9 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     equipment_reference varchar(11) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
+    cargo_gross_volume real NULL,
+    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
+    number_of_packages integer NULL,
     is_shipper_owned boolean NOT NULL,
     requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
 );
@@ -560,7 +557,11 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     description_of_goods text NOT NULL,
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id)
+    commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id),
+    weight real NULL,
+    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
+    volume real NULL,
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ'))
 );
 
 -- Supporting FK constraints
@@ -568,23 +569,26 @@ CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipping_instruction_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (shipment_id);
 CREATE INDEX ON dcsa_im_v3_0.consignment_item (commodity_id);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code_commodity CASCADE;
+CREATE TABLE dcsa_im_v3_0.hs_code_commodity (
+    hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
+    commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity(id),
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id)
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.cargo_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     consignment_item_id uuid NOT NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     weight real NOT NULL,
-    volume real NULL,
     weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
+    volume real NULL,
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
-    number_of_packages integer NOT NULL,
-    package_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.package_code (package_code),
-    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
-    package_name_on_bl varchar(50) NULL
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
 );
 
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (consignment_item_id);
-CREATE INDEX ON dcsa_im_v3_0.cargo_item (package_code);
 CREATE INDEX ON dcsa_im_v3_0.cargo_item (utilized_transport_equipment_id);
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.shipping_marks CASCADE;
@@ -724,7 +728,12 @@ CREATE TABLE dcsa_im_v3_0.transport_call (
     import_voyage_id uuid NULL, -- references on line 800
     export_voyage_id uuid NULL, -- references on line 800
     port_call_status_type_code char(4) NULL REFERENCES dcsa_im_v3_0.port_call_status_type (port_call_status_type_code),
-    port_visit_reference varchar(50) NULL
+    port_visit_reference varchar(50) NULL,
+    rail_car_name varchar(50) NULL,
+    rail_service_reference varchar(50) NULL,
+    departure_id varchar(100) NULL,
+    license_plate_number varchar(15) NULL,
+    chassis_license_plate_number varchar(15) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport CASCADE;
@@ -804,7 +813,7 @@ CREATE TABLE dcsa_im_v3_0.event (
 DROP TABLE IF EXISTS dcsa_im_v3_0.equipment_event CASCADE;
 CREATE TABLE dcsa_im_v3_0.equipment_event (
     equipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.equipment_event_type(equipment_event_type_code),
-    equipment_reference varchar(15) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
+    equipment_reference varchar(11) NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
     empty_indicator_code varchar(5) NULL REFERENCES dcsa_im_v3_0.empty_indicator(empty_indicator_code),
     transport_call_id uuid NULL REFERENCES dcsa_im_v3_0.transport_call(id),
     facility_type_code char(4) NULL REFERENCES dcsa_im_v3_0.facility_type (facility_type_code) CONSTRAINT facility_type_code CHECK(facility_type_code IN ('BOCR','CLOC','COFS','OFFD','DEPO','INTE','POTE','RAMP')),
@@ -819,7 +828,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_event (
     shipment_event_type_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.shipment_event_type(shipment_event_type_code),
     document_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.document_type(document_type_code),
     document_id uuid NOT NULL,
-    reason varchar(250) NULL
+    reason varchar(5000) NULL
 ) INHERITS (dcsa_im_v3_0.event);
 
 ALTER TABLE dcsa_im_v3_0.shipment_event ADD PRIMARY KEY (event_id),
