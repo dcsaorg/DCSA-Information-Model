@@ -308,8 +308,8 @@ CREATE TABLE dcsa_im_v3_0.shipment (
 DROP TABLE IF EXISTS dcsa_im_v3_0.house_bl_performed_by CASCADE;
 CREATE TABLE dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by (
     advance_manifest_filing_house_bl_performed_by_code varchar(10) PRIMARY KEY,
-    advance_manifest_filing_house_bl_performed_by_name varchar(50),
-    advance_manifest_filing_house_bl_performed_by_description varchar(250)
+    advance_manifest_filing_house_bl_performed_by_name varchar(50) NOT NULL,
+    advance_manifest_filing_house_bl_performed_by_description varchar(250) NOT NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.advance_manifest_filing CASCADE;
@@ -326,7 +326,7 @@ CREATE TABLE dcsa_im_v3_0.shipment_advance_manifest_filing (
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment(id),
     advance_manifest_filing_code varchar(50) NOT NULL,
     advance_manifest_filing_country_code char(2) NOT NULL,
-    advance_manifest_filing_house_bl_performed_by varchar(10) NOT NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by(advance_manifest_filing_house_bl_performed_by_code),
+    advance_manifest_filing_house_bl_performed_by varchar(10) NULL REFERENCES dcsa_im_v3_0.advance_manifest_filing_house_bl_performed_by(advance_manifest_filing_house_bl_performed_by_code),
     self_filer_code varchar(100) NULL,
     FOREIGN KEY (advance_manifest_filing_code, advance_manifest_filing_country_code) REFERENCES dcsa_im_v3_0.advance_manifest_filing (advance_manifest_filing_code, advance_manifest_filing_country_code)
 );
@@ -336,7 +336,6 @@ CREATE TABLE dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code varchar(4) PRIMARY KEY,
     iso_equipment_name varchar(35) NOT NULL
 );
-
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.active_reefer_settings CASCADE;
 CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
@@ -356,13 +355,12 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH'))
 );
 
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
 CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    requested_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
+    requested_equipment_iso_equipment_code varchar(4) NOT NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     requested_equipment_units integer NOT NULL,
     confirmed_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
@@ -377,19 +375,20 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     booking_id uuid NOT NULL REFERENCES dcsa_im_v3_0.booking(id),
     commodity_type varchar(550) NOT NULL,
-    cargo_gross_weight real NULL,
-    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
+    cargo_gross_weight real NOT NULL,
+    cargo_gross_weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
     cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
     export_license_issue_date date NULL,
-    export_license_expiry_date date NULL
+    export_license_expiry_date date NULL,
+    CONSTRAINT check_volume_unit check ( (cargo_gross_volume is null AND cargo_gross_volume_unit is null) or (cargo_gross_volume is not null AND cargo_gross_volume_unit is not null))
 );
 
 CREATE INDEX ON dcsa_im_v3_0.commodity (booking_id);
 
-DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_commodity CASCADE;
-CREATE TABLE dcsa_im_v3_0.requested_equipment_commodity (
-    requested_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
+DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group_commodity CASCADE;
+CREATE TABLE dcsa_im_v3_0.requested_equipment_group_commodity (
+    requested_equipment_group_id uuid NOT NULL REFERENCES dcsa_im_v3_0.requested_equipment_group(id),
     commodity_id uuid NOT NULL REFERENCES dcsa_im_v3_0.commodity(id)
 );
 
@@ -459,7 +458,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.shipment_carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.shipment_carrier_clauses (
     carrier_clause_id uuid NOT NULL REFERENCES dcsa_im_v3_0.carrier_clauses (id),
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
-    transport_document_id uuid NULL REFERENCES dcsa_im_v3_0.transport_document (id)
+    transport_document_id uuid NULL REFERENCES dcsa_im_v3_0.transport_document (id),
+--     At least one ID is not null
+    CONSTRAINT check_id CHECK (shipment_id is not null or transport_document_id is not null)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.party_function CASCADE;
@@ -551,6 +552,28 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
 -- Supporting FK constraints
 CREATE INDEX ON dcsa_im_v3_0.utilized_transport_equipment (equipment_reference);
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.reefer_measurement CASCADE;
+CREATE TABLE dcsa_im_v3_0.reefer_measurement (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment(id),
+    measurement_date_time timestamp with time zone NOT NULL,
+    cargo_probe_1_temperature real NULL,
+    cargo_probe_2_temperature real NULL,
+    cargo_probe_3_temperature real NULL,
+    cargo_probe_4_temperature real NULL,
+    is_connected_to_power_source boolean NULL,
+    temperature real NULL,
+    temperature_setpoint real NULL,
+    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+    relative_humidity real NULL,
+    humidity_setpoint real NULL,
+    co2_measurement real NULL,
+    co2_setpoint real NULL,
+    o2_measurement real NULL,
+    o2_setpoint real NULL,
+    ambient_temperature real NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.consignment_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
@@ -573,7 +596,9 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.hs_code_commodity CASCADE;
 CREATE TABLE dcsa_im_v3_0.hs_code_commodity (
     hs_code varchar(10) NULL REFERENCES dcsa_im_v3_0.hs_code (hs_code),
     commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity(id),
-    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id)
+    consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
+--     At least one ID is not null
+    CONSTRAINT check_id CHECK (commodity_id is not null or consignment_item_id is not null)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.cargo_item CASCADE;
@@ -620,7 +645,8 @@ CREATE TABLE dcsa_im_v3_0.general_reference (
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
-    utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
+    utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+    CONSTRAINT check_ids check ( shipment_id is not null or shipping_instruction_id is not null or booking_id is not null or consignment_item_id is not null or utilized_transport_equipment_id is not null )
 );
 
 CREATE INDEX ON dcsa_im_v3_0.general_reference (shipment_id);
