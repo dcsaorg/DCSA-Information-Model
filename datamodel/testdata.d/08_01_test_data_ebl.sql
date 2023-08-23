@@ -748,6 +748,46 @@ INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     false
 );
 
+INSERT INTO dcsa_im_v3_0.reefer_measurement (
+    id,
+    utilized_transport_equipment_id,
+    measurement_date_time,
+    cargo_probe_1_temperature,
+    cargo_probe_2_temperature,
+    cargo_probe_3_temperature,
+    cargo_probe_4_temperature,
+    is_connected_to_power_source,
+    temperature,
+    temperature_setpoint,
+    temperature_unit,
+    relative_humidity,
+    humidity_setpoint,
+    co2_measurement,
+    co2_setpoint,
+    o2_measurement,
+    o2_setpoint,
+    ambient_temperature
+) VALUES (
+    '1231235e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    '6824b6ca-f3da-4154-96f1-264886b68d53'::uuid,
+    DATE '2023-08-23T13:26:12',
+    44,
+    85,
+    78.0,
+    77,
+    TRUE,
+    24.5,
+    23.56,
+    'CEL',
+    44,
+    85,
+    78.0,
+    77,
+    56,
+    55,
+    '23.4'
+);
+
 INSERT INTO dcsa_im_v3_0.customs_reference (
     customs_reference_type_code,
     customs_reference_country_code,
@@ -1534,12 +1574,14 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'Bad weather'
 );
 
-INSERT INTO dcsa_im_v3_0.commodity(
+INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit,
+    cargo_gross_volume,
+    cargo_gross_volume_unit,
     export_license_issue_date,
     export_license_expiry_date
 ) VALUES (
@@ -1548,6 +1590,8 @@ INSERT INTO dcsa_im_v3_0.commodity(
     'Hand Bags',
     1200.0,
     'KGM',
+    500.0,
+    'MTQ',
     NULL,
     NULL
 );
