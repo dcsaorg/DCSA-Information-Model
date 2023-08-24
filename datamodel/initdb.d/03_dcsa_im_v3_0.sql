@@ -679,8 +679,8 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.inhalation_zone CASCADE;
 CREATE TABLE dcsa_im_v3_0.inhalation_zone (
     inhalation_zone_code char(1) PRIMARY KEY,
     inhalation_zone_name varchar(100) NOT NULL,
-    inhalation_zone_description_for_inhalation_toxicity varchar(300) NULL,
-    inhalation_zone_description_for_vapor_concentration_and_toxicity varchar(300) NULL
+    inhalation_zone_description_for_gases varchar(300) NULL,
+    inhalation_zone_description_for_liquids varchar(300) NULL
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.dangerous_goods CASCADE;
