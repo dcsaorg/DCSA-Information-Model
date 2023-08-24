@@ -1009,49 +1009,65 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     shipping_instruction_id,
     shipment_id,
     commodity_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '10f41e70-0cae-47cd-8eb8-4ee6f05e85c1',
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Expensive Shoes'
+    'Expensive Shoes',
+    5000,
+    'KGM'
 ), (
     'c7104528-66d5-4d11-9b82-7af30e84d664',
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Massive Yacht'
+    'Massive Yacht',
+    30000,
+    'KGM'
 ), (
     '20e8aca5-4524-4ff9-a258-96c506966388',
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'bca68f1d3b804ff88aaa1e43055432f7'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
-    'Leather Jackets'
+    'Leather Jackets',
+    500,
+    'KGM'
 ), (
     'ca4ff535-407f-41ab-a009-830ddf06bdba',
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '832deb4bd4ea4b728430b857c59bd057'),
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-    'Air ballons'
+    'Air ballons',
+    100,
+    'KGM'
 ), (
     '83ec9f50-2eab-42f7-892d-cad2d25f3b9e',
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
-    'Leather Jackets'
+    'Leather Jackets',
+    2000,
+    'KGM'
 ), (
     '824e8fed-d181-4079-b6ca-9d9069a2a738',
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '02c965382f5a41feb9f19b24b5fe2906'),
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-    'Leather Jackets'
+    'Leather Jackets',
+    900,
+    'KGM'
 ), (
     '1829548e-5938-4adc-a08e-3af55d8ccf63',
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-    'Leather Jackets'
+    'Leather Jackets',
+    750,
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -1788,22 +1804,30 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
     shipping_instruction_id,
     shipment_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    'Expensive shoes'
+    'Expensive shoes',
+    3400,
+    'LBR'
 ), (
     '06c0e716-3128-4172-be09-7f82b7ec02ca',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    'Slightly less expensive shoes'
+    'Slightly less expensive shoes',
+    4000,
+    'LBR'
 ), (
     'cf1798fe-9447-4ea8-a4a6-9515de751d5e',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'A379021B7782'),
-    'Even more expensive shoes'
+    'Even more expensive shoes',
+    4600,
+    'LBR'
 );
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
@@ -2077,12 +2101,16 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
     shipping_instruction_id,
     shipment_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '5d943239-23fc-4d5c-ab70-a33a469f9e59',
     '2c337fcc-2814-42b3-a752-f1847e74cba7',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'D659FDB7E33C'),
-    'Expensive shoes'
+    'Expensive shoes',
+    34000,
+    'LBR'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (

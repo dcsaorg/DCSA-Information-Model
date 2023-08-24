@@ -129,8 +129,7 @@ CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference (
     tax_and_legal_reference_country_code char(2) NOT NULL,
     tax_and_legal_reference_value varchar(100) NOT NULL,
     party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party (id),
-    FOREIGN KEY (tax_and_legal_reference_type_code, tax_and_legal_reference_country_code) REFERENCES dcsa_im_v3_0.tax_and_legal_reference_type (tax_and_legal_reference_type_code, tax_and_legal_country_code),
-    primary key (tax_and_legal_reference_type_code, tax_and_legal_reference_country_code, party_id)
+    FOREIGN KEY (tax_and_legal_reference_type_code, tax_and_legal_reference_country_code) REFERENCES dcsa_im_v3_0.tax_and_legal_reference_type (tax_and_legal_reference_type_code, tax_and_legal_country_code)
 );
 
 CREATE INDEX ON dcsa_im_v3_0.tax_and_legal_reference (party_id);
@@ -352,7 +351,9 @@ CREATE TABLE dcsa_im_v3_0.active_reefer_settings (
     co2_setpoint real NULL,
     humidity_setpoint real NULL,
     air_exchange_setpoint real NULL,
-    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH'))
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH')),
+--     Make sure air exchange units and setpoints are either both provided or not at all
+    CONSTRAINT check_temperature_unit CHECK ( (air_exchange_setpoint is null AND air_exchange_unit is null) or (air_exchange_setpoint is not null AND air_exchange_unit is not null))
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.requested_equipment_group CASCADE;
@@ -365,7 +366,9 @@ CREATE TABLE dcsa_im_v3_0.requested_equipment_group (
     confirmed_equipment_iso_equipment_code varchar(4) NULL REFERENCES dcsa_im_v3_0.iso_equipment_code (iso_equipment_code),
     confirmed_equipment_units integer NULL,
     is_shipper_owned boolean NOT NULL DEFAULT false,
-    active_reefer_settings_id uuid NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id)
+    active_reefer_settings_id uuid NULL REFERENCES dcsa_im_v3_0.active_reefer_settings (id),
+--     Make sure confirmed iso code and units are either both provided or not at all
+    CONSTRAINT check_temperature_unit CHECK ( (confirmed_equipment_iso_equipment_code is null AND confirmed_equipment_units is null) or (confirmed_equipment_iso_equipment_code is not null AND confirmed_equipment_units is not null))
 );
 
 CREATE INDEX ON dcsa_im_v3_0.requested_equipment_group (booking_id);
@@ -381,6 +384,7 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ', 'LTR')),
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL,
+--     Make sure volume and unit are either both provided or not at all
     CONSTRAINT check_volume_unit check ( (cargo_gross_volume is null AND cargo_gross_volume_unit is null) or (cargo_gross_volume is not null AND cargo_gross_volume_unit is not null))
 );
 
@@ -497,7 +501,9 @@ CREATE TABLE dcsa_im_v3_0.party_contact_details (
     name varchar(100) NOT NULL,
     email varchar(100) NULL,
     phone varchar(30) NULL,
-    document_party_id uuid NULL REFERENCES dcsa_im_v3_0.document_party(id)
+    document_party_id uuid NULL REFERENCES dcsa_im_v3_0.document_party(id),
+--     At least one ID is not null
+    CONSTRAINT check_id CHECK (party_id is not null or document_party_id is not null)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge CASCADE;
@@ -540,13 +546,14 @@ DROP TABLE IF EXISTS dcsa_im_v3_0.utilized_transport_equipment CASCADE;
 CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
     equipment_reference varchar(11) NOT NULL REFERENCES dcsa_im_v3_0.equipment (equipment_reference),
-    cargo_gross_weight real NULL,
-    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
+    cargo_gross_weight real NOT NULL,
+    cargo_gross_weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
     cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ', 'LTR')),
     number_of_packages integer NULL,
     is_shipper_owned boolean NOT NULL,
-    requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
+    requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id),
+    CONSTRAINT check_volume_unit check ( (cargo_gross_volume is null AND cargo_gross_volume_unit is null) or (cargo_gross_volume is not null AND cargo_gross_volume_unit is not null))
 );
 
 -- Supporting FK constraints
@@ -564,14 +571,34 @@ CREATE TABLE dcsa_im_v3_0.reefer_measurement (
     is_connected_to_power_source boolean NULL,
     temperature real NULL,
     temperature_setpoint real NULL,
-    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+    temperature_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
     relative_humidity real NULL,
     humidity_setpoint real NULL,
     co2_measurement real NULL,
     co2_setpoint real NULL,
     o2_measurement real NULL,
     o2_setpoint real NULL,
-    ambient_temperature real NULL
+    ambient_temperature real NULL,
+--     Make sure unit is provided if any temperature is provided or no unit is provided in case no temperature is provided
+    CONSTRAINT check_volume_unit check ((
+        cargo_probe_1_temperature is NULL AND
+        cargo_probe_2_temperature is NULL AND
+        cargo_probe_3_temperature is NULL AND
+        cargo_probe_4_temperature is NULL AND
+        temperature is NULL AND
+        temperature_setpoint is NULL AND
+        ambient_temperature is NULL AND
+        temperature_unit is NULL
+        ) or (
+        cargo_probe_1_temperature is NOT NULL AND
+        cargo_probe_2_temperature is NOT NULL AND
+        cargo_probe_3_temperature is NOT NULL AND
+        cargo_probe_4_temperature is NOT NULL AND
+        temperature is NOT NULL AND
+        temperature_setpoint is NOT NULL AND
+        ambient_temperature is NOT NULL AND
+        temperature_unit is NOT NULL
+        ))
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
@@ -581,10 +608,12 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
     commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id),
-    weight real NULL,
-    weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
+    weight real NOT NULL,
+    weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
     volume real NULL,
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ', 'LTR'))
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ', 'LTR')),
+--     Make sure volume and volume units are either provided or not at all
+    CONSTRAINT check_volume_unit check ( (volume is null AND volume_unit is null) or (volume is not null AND volume_unit is not null))
 );
 
 -- Supporting FK constraints
@@ -609,7 +638,9 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
     volume real NULL,
     volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ', 'LTR')),
-    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
+    utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+--     Make sure volume and volume units are either provided or not at all
+    CONSTRAINT check_volume_unit check ( (volume is null AND volume_unit is null) or (volume is not null AND volume_unit is not null))
 );
 
 -- Supporting FK constraints
@@ -735,7 +766,9 @@ CREATE TABLE dcsa_im_v3_0.dangerous_goods_limits (
     transport_emergency_temperature real NULL,
     SADT real NULL,
     SAPT real NULL,
-    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH'))
+    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH')),
+--     At least one temperature needs to be provided
+    CONSTRAINT check_temperature CHECK (flashpoint IS NOT NULL or transport_control_temperature IS NOT NULL or transport_emergency_temperature IS NOT NULL or SADT IS NOT NULL or SAPT IS NOT NULL)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference CASCADE;
@@ -747,6 +780,7 @@ CREATE TABLE dcsa_im_v3_0.general_reference (
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+--     At least one ID needs to be provided
     CONSTRAINT check_ids check ( shipment_id is not null or shipping_instruction_id is not null or booking_id is not null or consignment_item_id is not null or utilized_transport_equipment_id is not null )
 );
 
@@ -774,7 +808,9 @@ CREATE TABLE dcsa_im_v3_0.customs_reference (
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
-    FOREIGN KEY (customs_reference_type_code, customs_reference_country_code) REFERENCES dcsa_im_v3_0.customs_reference_type (customs_reference_type_code, customs_reference_country_code)
+    FOREIGN KEY (customs_reference_type_code, customs_reference_country_code) REFERENCES dcsa_im_v3_0.customs_reference_type (customs_reference_type_code, customs_reference_country_code),
+--     At least one ID needs to be provided
+    CONSTRAINT check_ids check ( shipment_id is not null or shipping_instruction_id is not null or consignment_item_id is not null or utilized_transport_equipment_id is not null )
 );
 
 CREATE INDEX ON dcsa_im_v3_0.customs_reference (shipment_id);
@@ -826,7 +862,9 @@ CREATE TABLE dcsa_im_v3_0.shipment_location (
     location_id uuid NOT NULL REFERENCES dcsa_im_v3_0.location (id),
     shipment_location_type_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.shipment_location_type (shipment_location_type_code),
     event_date_time timestamp with time zone NULL, --optional datetime indicating when the event at the location takes place
-    UNIQUE (location_id, shipment_location_type_code, shipment_id)
+    UNIQUE (location_id, shipment_location_type_code, shipment_id),
+--     At least one of shipmentID or bookingID needs to be provided
+    CONSTRAINT check_ids check (shipment_id is not null or booking_id is not null)
 );
 
 -- Supporting FK constraints
