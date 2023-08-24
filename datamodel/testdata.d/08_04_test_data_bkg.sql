@@ -509,6 +509,193 @@ INSERT INTO dcsa_im_v3_0.outer_packaging (
     null
 );
 
+INSERT INTO dcsa_im_v3_0.dangerous_goods (
+    outer_packaging_id,
+    coded_variant_list,
+    proper_shipping_name,
+    technical_name,
+    imo_class,
+    subsidiary_risk_1,
+    subsidiary_risk_2,
+    is_marine_pollutant,
+    packaging_group,
+    is_limited_quantity,
+    is_excepted_Quantity,
+    is_salvage_packagings,
+    is_empty_uncleaned_residue,
+    is_waste,
+    is_hot,
+    is_competent_authority_approval_required,
+    competent_authority_Approval,
+    ems_number,
+    end_of_holding_time,
+    fumigation_date_time,
+    is_reportable_quantity,
+    inhalation_zone,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    cargo_net_weight,
+    cargo_net_weight_unit,
+    cargo_net_explosive_content,
+    cargo_net_explosive_content_unit,
+    cargo_volume,
+    cargo_volume_unit,
+    special_certificate_number,
+    additional_container_cargo_Holding_information,
+    un_number,
+    na_number
+) VALUES (
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '1234',
+    'Test of DG with proper shipping name',
+    'Test of DG with technical name',
+    '1.2D',
+    '1.2',
+    '1.2',
+    FALSE,
+    3,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    NULL,
+    '1234567',
+    DATE '2023-09-09',
+    DATE '2023-01-01',
+    FALSE,
+    'C',
+    2000.0,
+    'LBR',
+    1800.0,
+    'LBR',
+    20.0,
+    'GRM',
+    20000.0,
+    'LTR',
+    'Test',
+    'Test',
+    'UN12',
+    NULL
+),(
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '9876',
+    'Test of DG with proper shipping name 2',
+    'Test of DG with technical name 2',
+    '8',
+    '1.1',
+    '1.5',
+    FALSE,
+    1,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    NULL,
+    '1234567',
+    DATE '2023-04-04',
+    DATE '2023-03-03',
+    FALSE,
+    'A',
+    4000.0,
+    'LBR',
+    3800.0,
+    'LBR',
+    60.0,
+    'GRM',
+    5600.0,
+    'LTR',
+    'Test 2',
+    'Test 2',
+    NULL,
+    'NA45'
+);
+
+INSERT INTO dcsa_im_v3_0.inner_packaging (
+    dangerous_goods_id,
+    quantity,
+    material,
+    description
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    5,
+    'Wood',
+    'Wood Description...'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    3,
+    'Glass',
+    'Glass Description...'
+);
+
+INSERT INTO dcsa_im_v3_0.dangerous_goods_segregation_group (
+    dangerous_goods_id,
+    segregation_group_code
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '1A'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '16'
+),(
+     (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+     '5'
+),(
+     (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+     '12'
+);
+
+INSERT INTO dcsa_im_v3_0.emergency_contact_details (
+    dangerous_goods_id,
+    contact,
+    provider,
+    phone,
+    reference_number
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    'Henrik',
+    'DCSA',
+    '+45 12312312',
+    'Emergency contact reference number 123'
+), (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    'Niels',
+    'DCSA',
+    '+45 98798798',
+    'Emergency contact reference number 987'
+);
+
+INSERT INTO dcsa_im_v3_0.dangerous_goods_limits (
+    dangerous_goods_id,
+    flashpoint,
+    transport_control_temperature,
+    transport_emergency_temperature,
+    SADT,
+    SAPT,
+    temperature_unit
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '88.5',
+    '25.0',
+    '50.5',
+    '45',
+    '48',
+    'CEL'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    '58.5',
+    '15.0',
+    '30.5',
+    '15',
+    '18',
+    'CEL'
+);
+
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
     booking_id,

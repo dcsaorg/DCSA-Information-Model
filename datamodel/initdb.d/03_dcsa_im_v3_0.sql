@@ -378,7 +378,7 @@ CREATE TABLE dcsa_im_v3_0.commodity (
     cargo_gross_weight real NOT NULL,
     cargo_gross_weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
-    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
+    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ', 'LTR')),
     export_license_issue_date date NULL,
     export_license_expiry_date date NULL,
     CONSTRAINT check_volume_unit check ( (cargo_gross_volume is null AND cargo_gross_volume_unit is null) or (cargo_gross_volume is not null AND cargo_gross_volume_unit is not null))
@@ -543,7 +543,7 @@ CREATE TABLE dcsa_im_v3_0.utilized_transport_equipment (
     cargo_gross_weight real NULL,
     cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
     cargo_gross_volume real NULL,
-    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ')),
+    cargo_gross_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_volume_unit IN ('MTQ','FTQ', 'LTR')),
     number_of_packages integer NULL,
     is_shipper_owned boolean NOT NULL,
     requested_equipment_group_id uuid NULL REFERENCES dcsa_im_v3_0.requested_equipment_group (id)
@@ -584,7 +584,7 @@ CREATE TABLE dcsa_im_v3_0.consignment_item (
     weight real NULL,
     weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
     volume real NULL,
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ'))
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ', 'LTR'))
 );
 
 -- Supporting FK constraints
@@ -608,7 +608,7 @@ CREATE TABLE dcsa_im_v3_0.cargo_item (
     weight real NOT NULL,
     weight_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (weight_unit IN ('KGM','LBR')),
     volume real NULL,
-    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ')),
+    volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (volume_unit IN ('MTQ','FTQ', 'LTR')),
     utilized_transport_equipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id)
 );
 
@@ -635,6 +635,107 @@ CREATE TABLE dcsa_im_v3_0.outer_packaging (
     imo_packaging_code varchar(3) NULL,
     description varchar(100) NULL,
     cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item(id)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.imo_class CASCADE;
+CREATE TABLE dcsa_im_v3_0.imo_class (
+    imo_class char(4) PRIMARY KEY,
+    imo_class_name varchar(200) NOT NULL,
+    imo_class_description varchar(750) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.inhalation_zone CASCADE;
+CREATE TABLE dcsa_im_v3_0.inhalation_zone (
+    inhalation_zone_code char(1) PRIMARY KEY,
+    inhalation_zone_name varchar(100) NOT NULL,
+    inhalation_zone_description_for_inhalation_toxicity varchar(300) NULL,
+    inhalation_zone_description_for_vapor_concentration_and_toxicity varchar(300) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.dangerous_goods CASCADE;
+CREATE TABLE dcsa_im_v3_0.dangerous_goods (
+    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+    outer_packaging_id uuid NOT NULL REFERENCES dcsa_im_v3_0.outer_packaging(id),
+    coded_variant_list varchar(4) NULL,
+    proper_shipping_name varchar(250) NULL,
+    technical_name varchar(250) NULL,
+    imo_class char(4) NOT NULL REFERENCES dcsa_im_v3_0.imo_class(imo_class),
+    subsidiary_risk_1 char(3) NULL,
+    subsidiary_risk_2 char(3) NULL,
+    is_marine_pollutant boolean NOT NULL,
+    packaging_group integer NULL CONSTRAINT check_packaging_group CHECK (packaging_group >= 1 AND packaging_group <= 3),
+    is_limited_quantity boolean NOT NULL,
+    is_excepted_Quantity boolean NOT NULL,
+    is_salvage_packagings boolean NOT NULL,
+    is_empty_uncleaned_residue boolean NOT NULL,
+    is_waste boolean NOT NULL,
+    is_hot boolean NOT NULL,
+    is_competent_authority_approval_required boolean NOT NULL,
+    competent_authority_Approval varchar(70) NULL,
+    ems_number varchar(7) NULL,
+    end_of_holding_time date NULL,
+    fumigation_date_time timestamp with time zone NULL,
+    is_reportable_quantity boolean NOT NULL,
+    inhalation_zone char(1) NULL REFERENCES dcsa_im_v3_0.inhalation_zone(inhalation_zone_code),
+    cargo_gross_weight real NULL,
+    cargo_gross_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_gross_weight_unit IN ('KGM','LBR')),
+    cargo_net_weight real NULL,
+    cargo_net_weight_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_net_weight_unit IN ('KGM','LBR')),
+    cargo_net_explosive_content real NULL,
+    cargo_net_explosive_content_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_net_explosive_content_unit IN ('KGM','GRM')),
+    cargo_volume real NULL,
+    cargo_volume_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (cargo_volume_unit IN ('MTQ','FTQ', 'LTR')),
+    special_certificate_number varchar(255) NULL,
+    additional_container_cargo_Holding_information varchar(255) NULL,
+    un_number varchar(4) NULL,
+    na_number varchar(4) NULL,
+--     Either UN Number or NA Number must be provided
+    CONSTRAINT check_un_na_number CHECK (un_number is not null or na_number is not null),
+--     Whenever a weight or volume is applied - the unit for it must also be applied (and vice versa)
+    CONSTRAINT check_volume_unit check ( (cargo_volume is null AND cargo_volume_unit is null) or (cargo_volume is not null AND cargo_volume_unit is not null)),
+    CONSTRAINT check_cargo_gross_weight_unit check ( (cargo_gross_weight is null AND cargo_gross_weight_unit is null) or (cargo_gross_weight is not null AND cargo_gross_weight_unit is not null)),
+    CONSTRAINT check_cargo_net_weight_unit check ( (cargo_net_weight is null AND cargo_net_weight_unit is null) or (cargo_net_weight is not null AND cargo_net_weight_unit is not null)),
+    CONSTRAINT check_cargo_net_explosive_content_unit check ( (cargo_net_explosive_content is null AND cargo_net_explosive_content_unit is null) or (cargo_net_explosive_content is not null AND cargo_net_explosive_content_unit is not null))
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.inner_packaging CASCADE;
+CREATE TABLE dcsa_im_v3_0.inner_packaging (
+    dangerous_goods_id uuid NOT NULL REFERENCES dcsa_im_v3_0.dangerous_goods(id),
+    quantity integer NOT NULL,
+    material varchar(100) NULL,
+    description varchar(100) NOT NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.segregation_group CASCADE;
+CREATE TABLE dcsa_im_v3_0.segregation_group (
+    segregation_group_code varchar(2) PRIMARY KEY,
+    segregation_group_description varchar(250) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.dangerous_goods_segregation_group CASCADE;
+CREATE TABLE dcsa_im_v3_0.dangerous_goods_segregation_group (
+    dangerous_goods_id uuid NOT NULL REFERENCES dcsa_im_v3_0.dangerous_goods(id),
+    segregation_group_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.segregation_group(segregation_group_code)
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.emergency_contact_details CASCADE;
+CREATE TABLE dcsa_im_v3_0.emergency_contact_details (
+    dangerous_goods_id uuid NOT NULL REFERENCES dcsa_im_v3_0.dangerous_goods(id),
+    contact varchar(255) NOT NULL,
+    provider varchar(255) NULL,
+    phone varchar(30) NOT NULL,
+    reference_number varchar(255) NULL
+);
+
+DROP TABLE IF EXISTS dcsa_im_v3_0.dangerous_goods_limits CASCADE;
+CREATE TABLE dcsa_im_v3_0.dangerous_goods_limits (
+    dangerous_goods_id uuid NOT NULL REFERENCES dcsa_im_v3_0.dangerous_goods(id),
+    flashpoint real NULL,
+    transport_control_temperature real NULL,
+    transport_emergency_temperature real NULL,
+    SADT real NULL,
+    SAPT real NULL,
+    temperature_unit varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (temperature_unit IN ('CEL','FAH'))
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.general_reference CASCADE;
