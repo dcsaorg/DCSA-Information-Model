@@ -14,6 +14,9 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.advance_manifest_filing from '../referencedata.d/advancemanifestfilings.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.customs_reference_type from '../referencedata.d/customsreferences.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.cut_off_time from '../referencedata.d/cutofftimecodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.imo_class from '../referencedata.d/dgimoclasses.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.inhalation_zone from '../referencedata.d/dginhalationzones.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.segregation_group from '../referencedata.d/dgsegregationgroups.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.document_type from '../referencedata.d/documenttypecodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.empty_indicator from '../referencedata.d/emptyindicatorcodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.equipment_event_type from '../referencedata.d/equipmenteventtypecodes.csv' with NULL AS E'\'\'' CSV HEADER
