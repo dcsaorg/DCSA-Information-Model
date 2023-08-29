@@ -21,7 +21,8 @@ TR,Terminal,"A facility for loading, moving or discharging containers. Terminals
 SCO,Service contract owner,"The party signing the service contract with the carrier."
 BA,Booking Agent,"Party acting as a booking office for transport and forwarding services."
 HE,Carrier booking office (transportation office),"The carrier office responsible for processing the booking."
-MOR, Mooring service provider, "The party offering the mooring services."
-SLU, Sludge service provider, "The party offering the Slugde services."
-SVP, Other service provider,Any other service not covered by a more specific code.
+MOR,Mooring service provider, "The party offering the mooring services."
+SLU,Sludge service provider, "The party offering the Slugde services."
+SVP,Other service provider,Any other service not covered by a more specific code.
 END,Endorsee Party,Party to whom the title to the goods is transferred by means of endorsement.
+SPC,VGM Responsible Party, Party responsible for the declaration of the verified gross mass of a packed container under SOLAS
