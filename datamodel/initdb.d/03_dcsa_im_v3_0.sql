@@ -449,9 +449,6 @@ CREATE TABLE dcsa_im_v3_0.transport_document (
     issuing_party_id uuid NOT NULL REFERENCES dcsa_im_v3_0.party(id)
 );
 
-ALTER TABLE dcsa_im_v3_0.shipping_instruction
-    ADD FOREIGN KEY (amendment_to_transport_document_id) REFERENCES dcsa_im_v3_0.transport_document (id);
-
 DROP TABLE IF EXISTS dcsa_im_v3_0.carrier_clauses CASCADE;
 CREATE TABLE dcsa_im_v3_0.carrier_clauses (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
