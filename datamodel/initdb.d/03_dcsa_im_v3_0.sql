@@ -432,7 +432,7 @@ CREATE TABLE dcsa_im_v3_0.shipping_instruction (
     displayed_name_for_port_of_load uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
     displayed_name_for_port_of_discharge uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
     displayed_name_for_place_of_delivery uuid NULL REFERENCES dcsa_im_v3_0.displayed_address(id),
-    amendment_to_transport_document_id uuid NULL
+    pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.transport_document CASCADE;
