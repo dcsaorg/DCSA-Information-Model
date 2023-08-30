@@ -11,6 +11,7 @@ SELECT 'Start: 07_load_data.sql...' as progress;
 \copy dcsa_im_v3_0.code_list_responsible_agency from '../referencedata.d/codelistresponsibleagencycodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.communication_channel_qualifier from '../referencedata.d/communicationchannelqualifier.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.country from '../referencedata.d/countrycodes.csv' with NULL AS E'\'\'' CSV HEADER
+\copy dcsa_im_v3_0.currency_code from '../referencedata.d/currencycodes.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.advance_manifest_filing from '../referencedata.d/advancemanifestfilings.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.customs_reference_type from '../referencedata.d/customsreferences.csv' with NULL AS E'\'\'' CSV HEADER
 \copy dcsa_im_v3_0.cut_off_time from '../referencedata.d/cutofftimecodes.csv' with NULL AS E'\'\'' CSV HEADER
