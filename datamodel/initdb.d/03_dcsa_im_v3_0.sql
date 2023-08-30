@@ -49,6 +49,12 @@ CREATE TABLE dcsa_im_v3_0.country (
     country_name varchar(75) NULL
 );
 
+DROP TABLE IF EXISTS dcsa_im_v3_0.currency_code CASCADE;
+CREATE TABLE dcsa_im_v3_0.currency_code (
+    currency_code char(3) PRIMARY KEY,
+    currency_name varchar(250) NULL
+);
+
 DROP TABLE IF EXISTS dcsa_im_v3_0.tax_and_legal_reference_type CASCADE;
 CREATE TABLE dcsa_im_v3_0.tax_and_legal_reference_type (
     tax_and_legal_reference_type_code varchar(50) NOT NULL,
@@ -285,7 +291,7 @@ CREATE TABLE dcsa_im_v3_0.booking (
     communication_channel_code varchar(2) NOT NULL REFERENCES dcsa_im_v3_0.communication_channel_qualifier(communication_channel_qualifier_code),
     is_equipment_substitution_allowed boolean NOT NULL,
     vessel_id uuid NULL REFERENCES dcsa_im_v3_0.vessel(id),
-    declared_value_currency_code varchar(3) NULL,
+    declared_value_currency_code varchar(3) NULL REFERENCES dcsa_im_v3_0.currency_code(currency_code),
     declared_value real NULL,
     place_of_issue_id uuid NULL REFERENCES dcsa_im_v3_0.location(id),
     pre_carriage_mode_of_transport_code varchar(3) NULL REFERENCES dcsa_im_v3_0.mode_of_transport(mode_of_transport_code),
@@ -510,7 +516,7 @@ CREATE TABLE dcsa_im_v3_0.charge (
     shipment_id uuid NULL REFERENCES dcsa_im_v3_0.shipment (id),
     charge_type varchar(20) NOT NULL,
     currency_amount real NOT NULL,
-    currency_code varchar(3) NOT NULL,
+    currency_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.currency_code(currency_code),
     payment_term_code varchar(3) NOT NULL REFERENCES dcsa_im_v3_0.payment_term_type(payment_term_code),
     calculation_basis varchar(50) NOT NULL,
     unit_price real NOT NULL,

@@ -112,7 +112,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'TBD',
     12.12,
-    'UMB',
+    'DKK',
     'PRE',
     'WHAT',
     12.12,
@@ -252,7 +252,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
      DATE '2021-12-01');
@@ -315,7 +315,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
      DATE '2021-12-01');
@@ -378,7 +378,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
      DATE '2021-12-01');
@@ -1030,7 +1030,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO', /* communication_channel_code */
      true, /* is_equipment_substitution_allowed */
      NULL, /* vessel_id */
-    'WTK',  /* declared_value_currency */
+    'SGD',  /* declared_value_currency */
     12.12, /* declared_value */
      NULL, /* place_of_issue */
      DATE '2021-12-01' /* updated_date_time */
