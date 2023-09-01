@@ -507,7 +507,8 @@ CREATE TABLE dcsa_im_v3_0.party_contact_details (
     booking_id uuid NULL REFERENCES dcsa_im_v3_0.booking(id),
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction(id),
 --     At least one ID is not null
-    CONSTRAINT check_id CHECK (party_id is not null or booking_id is not null or shipping_instruction_id is not null)
+    CONSTRAINT check_id CHECK (party_id is not null or booking_id is not null or shipping_instruction_id is not null),
+    CONSTRAINT check_phone_or_email CHECK (email is not null or phone is not null)
 );
 
 DROP TABLE IF EXISTS dcsa_im_v3_0.charge CASCADE;
