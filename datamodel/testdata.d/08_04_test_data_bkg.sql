@@ -59,13 +59,15 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    document_party_id
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     'be59706b-b059-455b-bb20-aeb8d79605fe'::uuid,
     'c49ea2d6-3806-46c8-8490-294affc71286',
     'FDM',
     'info@fdm.org',
     '+31123456789',
+    NULL,
     NULL
 );
 
@@ -255,7 +257,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
@@ -318,7 +321,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
@@ -381,7 +385,8 @@ INSERT INTO dcsa_im_v3_0.booking (
     'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.commodity(
     id,
@@ -391,14 +396,15 @@ INSERT INTO dcsa_im_v3_0.commodity(
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Hand Bags',
     1200.0,
     'KGM',
     NULL,
-    NULL);
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
@@ -418,14 +424,15 @@ INSERT INTO dcsa_im_v3_0.commodity (
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Bloom',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
@@ -445,14 +452,15 @@ INSERT INTO dcsa_im_v3_0.commodity (
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
     'Bloom',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
@@ -472,14 +480,15 @@ INSERT INTO dcsa_im_v3_0.commodity (
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
     (SELECT booking_id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'Bloom',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.hs_code_commodity (
     commodity_id,
@@ -704,14 +713,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     terms_and_conditions,
     confirmation_datetime,
     updated_date_time
-    ) VALUES (
+) VALUES (
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'DCR987876762',
     'TERMS AND CONDITIONS!',
     '2021-12-12 12:12:12.000',
-    DATE '2021-12-12T12:12:12');
+    DATE '2021-12-12T12:12:12'
+);
 
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
@@ -721,14 +731,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     terms_and_conditions,
     confirmation_datetime,
     updated_date_time
-    ) VALUES (
+) VALUES (
     'cb40eee5-9e24-41ee-8276-2e03aa2744ed'::uuid,
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'C501576CD94F',
     'TERMS AND CONDITIONS!',
     '2022-02-02 02:22:22.000',
-    DATE '2022-03-03T12:12:12');
+    DATE '2022-03-03T12:12:12'
+);
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
@@ -835,13 +846,14 @@ INSERT INTO dcsa_im_v3_0.general_reference (
     shipment_id,
     shipping_instruction_id,
     booking_id
-    ) VALUES (
+) VALUES (
     '48fbbce6-54f7-4e87-b9aa-525dda865962'::uuid,
     'FF',
     'test',
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     NULL,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid);
+    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid
+);
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
@@ -860,7 +872,7 @@ INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     confirmed_equipment_iso_equipment_code,
     confirmed_equipment_units,
     is_shipper_owned
-    ) VALUES (
+) VALUES (
     '1a595981-c2d9-46a9-a870-3086735b4529'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
@@ -868,7 +880,8 @@ INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     3,
     NULL,
     NULL,
-    true);
+    true
+);
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
@@ -886,13 +899,15 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    document_party_id
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     'c4645dd4-56a7-4c32-898f-cc86d5252248'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
     'info@h-l.org',
     '+31123456789',
+    NULL,
     NULL
 );
 
@@ -902,12 +917,13 @@ INSERT INTO dcsa_im_v3_0.party_identifying_code (
     party_id,
     code_list_name,
     party_code
-    ) VALUES (
+) VALUES (
     '3fce10f1-e524-49c3-ac47-4260ceccc7f6'::uuid,
     'SCAC',
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'LCL',
-    'MMCU');
+    'MMCU'
+);
 
 
 INSERT INTO dcsa_im_v3_0.displayed_address (
@@ -929,7 +945,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     is_to_be_notified,
     booking_id,
     displayed_address_id
-    ) VALUES (
+) VALUES (
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     NULL,
@@ -938,7 +954,7 @@ INSERT INTO dcsa_im_v3_0.document_party (
     true,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid
-    );
+);
 
 INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,
@@ -946,14 +962,17 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    document_party_id
-    ) VALUES (
+    booking_id,
+    shipping_instruction_id
+) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    NULL);
+    NULL,
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,
@@ -962,13 +981,14 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     location_id,
     shipment_location_type_code,
     event_date_time
-    ) VALUES (
+) VALUES (
     'd3001e47-07e9-4bba-87a7-019d3e12f3aa'::uuid,
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
     'POL',
-     NULL);
+     NULL
+ );
 
 
 /* Start: Test data for events with carrierBookingReference and carrierBookingRequestReference */
