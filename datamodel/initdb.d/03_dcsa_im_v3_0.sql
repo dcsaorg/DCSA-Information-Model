@@ -608,7 +608,7 @@ CREATE TABLE dcsa_im_v3_0.reefer_measurement (
 DROP TABLE IF EXISTS dcsa_im_v3_0.consignment_item CASCADE;
 CREATE TABLE dcsa_im_v3_0.consignment_item (
     id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    description_of_goods text NOT NULL,
+    description_of_goods varchar(5000) NOT NULL,
     shipping_instruction_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     shipment_id uuid NOT NULL REFERENCES dcsa_im_v3_0.shipment (id),
     commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id),
