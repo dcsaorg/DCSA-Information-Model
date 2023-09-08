@@ -1280,6 +1280,20 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   uuid('aa030eb6-009b-411c-985c-527ce008b35a')
 );
 
+INSERT INTO dcsa_im_v3_0.customs_reference (
+    customs_reference_type_code,
+    customs_reference_country_code,
+    customs_reference_value,
+    utilized_transport_equipment_id,
+    cargo_item_id
+) VALUES (
+    'ACID',
+    'EG',
+    'CR123',
+    NULL,
+    '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0'
+);
+
 INSERT INTO dcsa_im_v3_0.shipping_marks(
      cargo_item_id,
      shipping_mark,
