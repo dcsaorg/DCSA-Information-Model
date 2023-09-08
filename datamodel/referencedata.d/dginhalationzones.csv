@@ -1,4 +1,4 @@
-Inhalation Zone Code,Inhalation Zone Name,Inhalation Zone Description for Inhalation toxicity,Inhalation Zone Description for Vapor concentration and toxicity
+Inhalation Zone Code,Inhalation Zone Name,Inhalation Zone Description for Gases,Inhalation Zone Description for Liquids
 A,Hazard Zone A,LC50 less than or equal to 200 ppm.,V ≥500 LC50 and LC50 ≤200 mL/M3.
 B,Hazard Zone B,LC50 greater than 200 ppm and less than or equal to 1000 ppm.,"V ≥10 LC50; LC50 ≤1000 mL/m3; and the criteria for Packing Group I, Hazard Zone A are not met."
 C,Hazard Zone C,LC50 greater than 1000 ppm and less than or equal to 3000 ppm.,
