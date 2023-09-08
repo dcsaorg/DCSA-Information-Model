@@ -111,12 +111,13 @@ INSERT INTO dcsa_im_v3_0.transport (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -141,6 +142,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_01',
     'PRE',
     TRUE,
@@ -161,12 +163,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -191,6 +194,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     DATE '2020-04-15',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_02',
     'PRE',
     TRUE,
@@ -211,12 +215,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -241,6 +246,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     DATE '2020-03-10',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_03',
     'PRE',
     TRUE,
@@ -305,9 +311,9 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     false
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
-    reference_type_code,
-    reference_value,
+INSERT INTO dcsa_im_v3_0.general_reference (
+    general_reference_type_code,
+    general_reference_value,
     shipment_id
 ) VALUES (
     'FF',
@@ -384,7 +390,7 @@ INSERT INTO dcsa_im_v3_0.equipment(
     total_max_weight,
     weight_unit
 ) VALUES (
-    'equipref3453',
+    'equipre3453',
     '22G2',
     1424.2,
     null,
@@ -445,7 +451,7 @@ INSERT INTO dcsa_im_v3_0.equipment_event (
     TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),
     'LOAD',
     '8b64d20b-523b-4491-b2e5-32cfa5174eed'::uuid,
-    'equipref3453',
+    'equipre3453',
     'EMPTY'
 );
 
