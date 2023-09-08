@@ -30,16 +30,10 @@ INSERT INTO dcsa_im_v3_0.address (
 INSERT INTO  dcsa_im_v3_0.party (
     id,
     party_name,
-    tax_reference_1,
-    tax_reference_2,
-    public_key,
     address_id
 ) VALUES ( 
     'be5bc290-7bac-48bb-a211-f3fa5a3ab3ae',
     'Asseco Denmark',
-    'CVR-25645774',
-    'CVR-25645774',
-    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
     uuid('8791f557-fe69-42c9-a420-f39f09dd6207')
 );
 

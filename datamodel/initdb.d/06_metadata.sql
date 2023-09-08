@@ -12,13 +12,10 @@ BEGIN;
 -- has a direct ID.  This change is to insert these, so the code works but they
 -- are not a part of the original data model.
 
-ALTER TABLE dcsa_im_v3_0.displayed_address
-    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
-
 ALTER TABLE dcsa_im_v3_0.shipment_location
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
-ALTER TABLE dcsa_im_v3_0.cargo_line_item
+ALTER TABLE dcsa_im_v3_0.shipping_marks
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
 ALTER TABLE dcsa_im_v3_0.shipment_transport
@@ -27,13 +24,10 @@ ALTER TABLE dcsa_im_v3_0.shipment_transport
 ALTER TABLE dcsa_im_v3_0.seal
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
-ALTER TABLE dcsa_im_v3_0.reference
+ALTER TABLE dcsa_im_v3_0.general_reference
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
 ALTER TABLE dcsa_im_v3_0.party_identifying_code
-    ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
-
-ALTER TABLE dcsa_im_v3_0.value_added_service_request
     ADD COLUMN IF NOT EXISTS id uuid DEFAULT uuid_generate_v4() PRIMARY KEY;
 
 -- DateTime metadata

@@ -11,7 +11,7 @@ INSERT INTO dcsa_im_v3_0.shipment_cutoff_time (
     cut_off_time
 ) VALUES (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
-    'AFD',
+    'EFC',
     DATE '2021-03-09'
 );
 
@@ -59,14 +59,16 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     'be59706b-b059-455b-bb20-aeb8d79605fe'::uuid,
     'c49ea2d6-3806-46c8-8490-294affc71286',
     'FDM',
     'info@fdm.org',
     '+31123456789',
-    'https://www.fdm.org'
+    NULL,
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -75,7 +77,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
-    number_of_originals,
     carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
@@ -88,7 +89,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     DATE '2020-11-25',
     DATE '2020-12-24',
     DATE '2020-12-31',
-    12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '01670315-a51f-4a11-b947-ce8e245128eb'::uuid,
     12,
@@ -114,7 +114,7 @@ INSERT INTO dcsa_im_v3_0.charge (
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'TBD',
     12.12,
-    'UMB',
+    'DKK',
     'PRE',
     'WHAT',
     12.12,
@@ -199,12 +199,13 @@ INSERT INTO dcsa_im_v3_0.shipment_carrier_clauses (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -212,8 +213,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -237,6 +236,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-11-03 02:11:00.000',
+    '2023-08-21 10:12:00.000',
     'Test',
      NULL,
      true,
@@ -244,8 +244,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -256,20 +254,22 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -277,8 +277,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -302,6 +300,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-11-03 02:11:00.000',
+    '2023-08-21 10:13:00.000',
     'Test',
      NULL,
      true,
@@ -309,8 +308,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -321,20 +318,22 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -342,8 +341,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -367,6 +364,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'LCL',
     '2021-12-20 02:11:00.000',
+    '2023-08-21 10:13:00.000',
     'Test',
      NULL,
      true,
@@ -374,8 +372,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference',
      true,
      'Import declaration reference',
-     true,
-     true,
      NULL,
      NULL,
      'c703277f-84ca-4816-9ccf-fad8e202d3b6',
@@ -386,95 +382,328 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO',
      true,
      NULL,
-    'WTK',
+    'SGD',
     12.12,
      NULL,
-     DATE '2021-12-01');
+     DATE '2021-12-01'
+ );
 
 INSERT INTO dcsa_im_v3_0.commodity(
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Hand Bags',
-    '411510',
     1200.0,
     'KGM',
     NULL,
-    NULL);
+    NULL
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    '85b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    NULL,
+    '411510'
+);
 
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    '54c9b7fb-b641-4ccc-b1be-70a63fac17d6'::uuid,
+    NULL,
+    '720711'
+);
 
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a9'::uuid,
+    NULL,
+    '720711'
+);
 
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
     export_license_issue_date,
     export_license_expiry_date
-    ) VALUES (
+) VALUES (
     'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
     (SELECT booking_id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'ABC123123123'),
     'Bloom',
-    '720711',
     2000.0,
     'LBR',
     NULL,
-    NULL);
+    NULL
+);
 
-INSERT INTO dcsa_im_v3_0.value_added_service_request (
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    NULL,
+    '720711'
+);
+
+INSERT INTO dcsa_im_v3_0.outer_packaging (
     id,
-    booking_id,
-    value_added_service_code
-    ) VALUES (
-    '1f32fee5-edcc-4a62-afe1-a97ac236f30d'::uuid,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
-    'SCON');
+    commodity_id,
+    package_code,
+    number_of_packages,
+    imo_packaging_code,
+    description,
+    cargo_item_id
+) VALUES (
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    'bf93f6fb-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '5H',
+    3,
+    '123',
+    '3 yellow boxes of teddybears',
+    null
+);
+
+INSERT INTO dcsa_im_v3_0.dangerous_goods (
+    outer_packaging_id,
+    coded_variant_list,
+    proper_shipping_name,
+    technical_name,
+    imo_class,
+    subsidiary_risk_1,
+    subsidiary_risk_2,
+    is_marine_pollutant,
+    packaging_group,
+    is_limited_quantity,
+    is_excepted_quantity,
+    is_salvage_packagings,
+    is_empty_uncleaned_residue,
+    is_waste,
+    is_hot,
+    is_competent_authority_approval_required,
+    competent_authority_approval,
+    ems_number,
+    end_of_holding_time,
+    fumigation_date_time,
+    is_reportable_quantity,
+    inhalation_zone,
+    cargo_gross_weight,
+    cargo_gross_weight_unit,
+    cargo_net_weight,
+    cargo_net_weight_unit,
+    cargo_net_explosive_content,
+    cargo_net_explosive_content_unit,
+    cargo_volume,
+    cargo_volume_unit,
+    special_certificate_number,
+    additional_container_cargo_holding_information,
+    un_number,
+    na_number
+) VALUES (
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '1234',
+    'Test of DG with proper shipping name',
+    'Test of DG with technical name',
+    '1.2D',
+    '1.2',
+    '1.2',
+    FALSE,
+    3,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    NULL,
+    '1234567',
+    DATE '2023-09-09',
+    DATE '2023-01-01',
+    FALSE,
+    'C',
+    2000.0,
+    'LBR',
+    1800.0,
+    'LBR',
+    20.0,
+    'GRM',
+    20000.0,
+    'LTR',
+    'Test',
+    'Test',
+    'UN12',
+    NULL
+),(
+    '6663f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '9876',
+    'Test of DG with proper shipping name 2',
+    'Test of DG with technical name 2',
+    '8',
+    '1.1',
+    '1.5',
+    FALSE,
+    1,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    NULL,
+    '1234567',
+    DATE '2023-04-04',
+    DATE '2023-03-03',
+    FALSE,
+    'A',
+    4000.0,
+    'LBR',
+    3800.0,
+    'LBR',
+    60.0,
+    'GRM',
+    5600.0,
+    'LTR',
+    'Test 2',
+    'Test 2',
+    NULL,
+    'NA45'
+);
+
+INSERT INTO dcsa_im_v3_0.inner_packaging (
+    dangerous_goods_id,
+    quantity,
+    material,
+    description
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    5,
+    'Wood',
+    'Wood Description...'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    3,
+    'Glass',
+    'Glass Description...'
+);
+
+INSERT INTO dcsa_im_v3_0.dangerous_goods_segregation_group (
+    dangerous_goods_id,
+    segregation_group_code
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '1A'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '16'
+),(
+     (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+     '5'
+),(
+     (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+     '12'
+);
+
+INSERT INTO dcsa_im_v3_0.emergency_contact_details (
+    dangerous_goods_id,
+    contact,
+    provider,
+    phone,
+    reference_number
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    'Henrik',
+    'DCSA',
+    '+45 12312312',
+    'Emergency contact reference number 123'
+), (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    'Niels',
+    'DCSA',
+    '+45 98798798',
+    'Emergency contact reference number 987'
+);
+
+INSERT INTO dcsa_im_v3_0.dangerous_goods_limits (
+    dangerous_goods_id,
+    flashpoint,
+    transport_control_temperature,
+    transport_emergency_temperature,
+    SADT,
+    SAPT,
+    temperature_unit
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE un_number = 'UN12'),
+    '88.5',
+    '25.0',
+    '50.5',
+    '45',
+    '48',
+    'CEL'
+),(
+    (SELECT id FROM dcsa_im_v3_0.dangerous_goods WHERE na_number = 'NA45'),
+    '58.5',
+    '15.0',
+    '30.5',
+    '15',
+    '18',
+    'CEL'
+);
 
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
@@ -484,14 +713,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     terms_and_conditions,
     confirmation_datetime,
     updated_date_time
-    ) VALUES (
+) VALUES (
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'DCR987876762',
     'TERMS AND CONDITIONS!',
     '2021-12-12 12:12:12.000',
-    DATE '2021-12-12T12:12:12');
+    DATE '2021-12-12T12:12:12'
+);
 
 INSERT INTO dcsa_im_v3_0.shipment (
     id,
@@ -501,14 +731,15 @@ INSERT INTO dcsa_im_v3_0.shipment (
     terms_and_conditions,
     confirmation_datetime,
     updated_date_time
-    ) VALUES (
+) VALUES (
     'cb40eee5-9e24-41ee-8276-2e03aa2744ed'::uuid,
     '8b78219e-d049-4c68-8d9e-f40bf9a85140'::uuid,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'C501576CD94F',
     'TERMS AND CONDITIONS!',
     '2022-02-02 02:22:22.000',
-    DATE '2022-03-03T12:12:12');
+    DATE '2022-03-03T12:12:12'
+);
 
 INSERT INTO dcsa_im_v3_0.transport_call (
     id,
@@ -608,20 +839,21 @@ INSERT INTO dcsa_im_v3_0.shipment_transport (
     false
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
+INSERT INTO dcsa_im_v3_0.general_reference (
     id,
-    reference_type_code,
-    reference_value,
+    general_reference_type_code,
+    general_reference_value,
     shipment_id,
     shipping_instruction_id,
     booking_id
-    ) VALUES (
+) VALUES (
     '48fbbce6-54f7-4e87-b9aa-525dda865962'::uuid,
     'FF',
     'test',
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     NULL,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid);
+    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid
+);
 
 INSERT INTO dcsa_im_v3_0.iso_equipment_code (
     iso_equipment_code,
@@ -640,7 +872,7 @@ INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     confirmed_equipment_iso_equipment_code,
     confirmed_equipment_units,
     is_shipper_owned
-    ) VALUES (
+) VALUES (
     '1a595981-c2d9-46a9-a870-3086735b4529'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
@@ -648,21 +880,16 @@ INSERT INTO dcsa_im_v3_0.requested_equipment_group (
     3,
     NULL,
     NULL,
-    true);
+    true
+);
 
 INSERT INTO dcsa_im_v3_0.party (
     id,
     party_name,
-    tax_reference_1,
-    tax_reference_2,
-    public_key,
     address_id
 ) VALUES (
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
-    'CVR-25645774',
-    'CVR-25645774',
-    'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW',
     '8fecc6d0-2a78-401d-948a-b9753f6b53d5'::uuid
 );
 
@@ -672,14 +899,16 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     'c4645dd4-56a7-4c32-898f-cc86d5252248'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'Hapag Lloyd',
     'info@h-l.org',
     '+31123456789',
-    'https://www.hapag-llyod.org'
+    NULL,
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.party_identifying_code (
@@ -688,12 +917,24 @@ INSERT INTO dcsa_im_v3_0.party_identifying_code (
     party_id,
     code_list_name,
     party_code
-    ) VALUES (
+) VALUES (
     '3fce10f1-e524-49c3-ac47-4260ceccc7f6'::uuid,
     'SCAC',
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'LCL',
-    'MMCU');
+    'MMCU'
+);
+
+
+INSERT INTO dcsa_im_v3_0.displayed_address (
+    id,
+    address_line_1,
+    address_line_2
+) VALUES (
+    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
+    'Gubener Str. 42',
+    'Rhinstrasse 87'
+);
 
 INSERT INTO dcsa_im_v3_0.document_party (
     id,
@@ -702,31 +943,17 @@ INSERT INTO dcsa_im_v3_0.document_party (
     shipment_id,
     party_function,
     is_to_be_notified,
-    booking_id
-    ) VALUES (
+    booking_id,
+    displayed_address_id
+) VALUES (
     'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     NULL,
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'DDS',
     true,
-    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid);
-
-INSERT INTO dcsa_im_v3_0.displayed_address (
-    id,
-    document_party_id,
-    address_line_number,
-    address_line_text
-) VALUES (
-    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid,
-    'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
-    1,
-    'Gubener Str. 42'
-), (
-    '659013f6-cf4b-46c5-a2b5-20a173a05ce6'::uuid,
-    'c678ce03-3859-4db3-a23f-d7c3f998fd0a'::uuid,
-    2,
-    'Rhinstrasse 87'
+    'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
+    '207e0ee4-9750-4b41-8fe2-ca65b1e11c2c'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.party_contact_details (
@@ -735,14 +962,17 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
-    ) VALUES (
+    booking_id,
+    shipping_instruction_id
+) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589061'::uuid,
     '7bf6f428-58f0-4347-9ce8-d6be2f5d5745',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org');
+    NULL,
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     id,
@@ -750,28 +980,28 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     booking_id,
     location_id,
     shipment_location_type_code,
-    displayed_name,
     event_date_time
-    ) VALUES (
+) VALUES (
     'd3001e47-07e9-4bba-87a7-019d3e12f3aa'::uuid,
     '6e4035d9-3200-43ee-a7ea-6d8108c5f0c8'::uuid,
     'a521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'c703277f-84ca-4816-9ccf-fad8e202d3b6',
     'POL',
-    'Hamburg',
-     NULL);
+     NULL
+ );
 
 
 /* Start: Test data for events with carrierBookingReference and carrierBookingRequestReference */
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -779,8 +1009,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_ams_aci_filing_required,
-    is_destination_filing_required,
     contract_quotation_reference,
     incoterms,
     invoice_payable_at_id,
@@ -798,12 +1026,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 ) VALUES (
     'b8376516-0c1c-4b6f-b51f-6707812c8ff4'::uuid, /* id */
     'cbrr-b83765166707812c8ff4', /* carrier_booking_request_reference */
-    'PENU', /* document_status */
+    'PENU', /* booking_status */
     'CY', /* receipt_type_at_origin */
     'CY', /* delivery_type_at_destination */
     'FCL', /* cargo_movement_type_at_origin */
     'LCL', /* cargo_movement_type_at_destination */
     '2021-11-03 02:11:00.000', /* booking_request_datetime */
+    '2023-08-21 10:14:00.000', /* booking_updated_datetime */
     'Test', /* service_contract_reference */
      NULL, /* payment_term_code */
      true, /* is_partial_load_allowed */
@@ -811,8 +1040,6 @@ INSERT INTO dcsa_im_v3_0.booking (
      'Export declaration reference', /* export_declaration_reference */
      true, /* is_import_license_required */
      'Import declaration reference', /* import_license_reference */
-     true, /* is_ams_aci_filing_required */
-     true, /* is_destination_filing_required */
      NULL, /* contract_quotation_reference */
      NULL, /* incoterms */
      NULL, /* invoice_payable_at */
@@ -823,7 +1050,7 @@ INSERT INTO dcsa_im_v3_0.booking (
      'AO', /* communication_channel_code */
      true, /* is_equipment_substitution_allowed */
      NULL, /* vessel_id */
-    'WTK',  /* declared_value_currency */
+    'SGD',  /* declared_value_currency */
     12.12, /* declared_value */
      NULL, /* place_of_issue */
      DATE '2021-12-01' /* updated_date_time */

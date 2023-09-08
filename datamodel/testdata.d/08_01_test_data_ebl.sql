@@ -115,15 +115,48 @@ INSERT INTO dcsa_im_v3_0.location (
     'USNYC'
 );
 
+INSERT INTO dcsa_im_v3_0.active_reefer_settings (
+    id,
+    is_gen_set_required,
+    is_pre_cooling_required,
+    is_cold_treatment_required,
+    is_ventilation_open,
+    is_drainholes_open,
+    is_bulb_mode,
+    temperature_setpoint,
+    temperature_unit,
+    o2_setpoint,
+    co2_setpoint,
+    humidity_setpoint,
+    air_exchange_setpoint,
+    air_exchange_unit
+) VALUES (
+    '1231235e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    FALSE,
+    23.5,
+    'CEL',
+    60.34,
+    55.2,
+    40,
+    10,
+    'MQH'
+);
+
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -131,7 +164,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     expected_departure_date,
     transport_document_type_code,
@@ -154,6 +186,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_01',
     'PRE',
     TRUE,
@@ -161,7 +194,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_01',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_01',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -170,7 +202,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09',
@@ -179,12 +211,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -192,7 +225,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     invoice_payable_at_id,
     expected_departure_date,
@@ -214,6 +246,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_02',
     'PRE',
     TRUE,
@@ -221,7 +254,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_02',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_02',
-    TRUE,
     'FCA',
     '84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d',
     DATE '2020-03-07',
@@ -231,7 +263,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
@@ -268,6 +300,26 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'TERMS AND CONDITIONS!',
     DATE '2020-03-07T12:12:12',
     DATE '2020-04-07T12:12:12'
+);
+
+INSERT INTO dcsa_im_v3_0.shipment_advance_manifest_filing (
+    shipment_id,
+    advance_manifest_filing_code,
+    advance_manifest_filing_country_code,
+    advance_manifest_filing_house_bl_performed_by,
+    self_filer_code
+) VALUES (
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872'),
+    'ACI',
+    'CA',
+    'CARRIER',
+    NULL
+),(
+    (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872'),
+    'ACE',
+    'US',
+    'SHIPPER',
+    'SelfFilerCode123'
 );
 
 /**
@@ -317,9 +369,9 @@ INSERT INTO dcsa_im_v3_0.shipment (
     DATE '2020-04-07T12:12:12'
 );
 
-INSERT INTO dcsa_im_v3_0.reference (
-    reference_type_code,
-    reference_value,
+INSERT INTO dcsa_im_v3_0.general_reference (
+    general_reference_type_code,
+    general_reference_value,
     shipment_id
 ) VALUES (
     'CR',
@@ -502,34 +554,60 @@ INSERT INTO dcsa_im_v3_0.party (
      'Malwart Lyngy'
  );
 
+INSERT INTO dcsa_im_v3_0.tax_and_legal_reference (
+    tax_and_legal_reference_type_code,
+    tax_and_legal_reference_country_code,
+    tax_and_legal_reference_value,
+    party_id
+) VALUES (
+     'TAX ID',
+     'GT',
+     '1234',
+     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
+ ), (
+    'TAX ID',
+    'PE',
+    '9876',
+    '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9'
+ ), (
+    'CUIT',
+    'UY',
+    'ABC',
+    '9dd9a4c4-4039-11eb-8770-0b2b19847fab'
+ );
+
  INSERT INTO dcsa_im_v3_0.party_contact_details (
     id,
     party_id,
     name,
     email,
     phone,
-    url
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     'b24d099e-a6f6-404e-b082-776f7f589023'::uuid,
     '4e448f26-4035-11eb-a49d-7f9eb9bc8dd9',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL,
+    NULL
 ), (
     'b24d099e-a6f6-404e-b082-776f7f589064'::uuid,
     '8dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL,
+    NULL
 ), (
     'b24d099e-a6f6-404e-b082-776f7f589022'::uuid,
     '9dd9a4c4-4039-11eb-8770-0b2b19847fab',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL,
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.document_party (
@@ -557,6 +635,32 @@ INSERT INTO dcsa_im_v3_0.document_party (
       true,
       (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'CARRIER_BOOKING_REQUEST_REFERENCE_01')
   );
+
+INSERT INTO dcsa_im_v3_0.party_contact_details (
+    id,
+    party_id,
+    name,
+    email,
+    phone,
+    booking_id,
+    shipping_instruction_id
+) VALUES (
+    'dd42252d-c8d5-4a0e-ab93-da355992fb29'::uuid,
+    NULL,
+    'DCSA',
+    'info@dcsa.org',
+    '+31123456789',
+    'b521dbdb-a12b-48f5-b489-8594349731bf',
+    NULL
+),(
+    'ee42252d-c8d5-4a0e-ab93-da355992fb29'::uuid,
+    NULL,
+    'DCSA - second contact',
+    'info@dcsa.org',
+    '+31123456789',
+    'b521dbdb-a12b-48f5-b489-8594349731bf',
+    NULL
+);
 
 INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
@@ -649,6 +753,68 @@ INSERT INTO dcsa_im_v3_0.utilized_transport_equipment (
     4000,
     'KGM',
     false
+);
+
+INSERT INTO dcsa_im_v3_0.reefer_measurement (
+    id,
+    utilized_transport_equipment_id,
+    measurement_date_time,
+    cargo_probe_1_temperature,
+    cargo_probe_2_temperature,
+    cargo_probe_3_temperature,
+    cargo_probe_4_temperature,
+    is_connected_to_power_source,
+    temperature,
+    temperature_setpoint,
+    temperature_unit,
+    relative_humidity,
+    humidity_setpoint,
+    co2_measurement,
+    co2_setpoint,
+    o2_measurement,
+    o2_setpoint,
+    ambient_temperature
+) VALUES (
+    '1231235e-4043-11eb-9c0b-7b4196cf71fa'::uuid,
+    '6824b6ca-f3da-4154-96f1-264886b68d53'::uuid,
+    DATE '2023-08-23T13:26:12',
+    44,
+    85,
+    78.0,
+    77,
+    TRUE,
+    24.5,
+    23.56,
+    'CEL',
+    44,
+    85,
+    78.0,
+    77,
+    56,
+    55,
+    '23.4'
+);
+
+INSERT INTO dcsa_im_v3_0.customs_reference (
+    customs_reference_type_code,
+    customs_reference_country_code,
+    customs_reference_value,
+    utilized_transport_equipment_id
+) VALUES (
+     'ACID',
+     'EG',
+     'CR123',
+     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
+),(
+    'BIETC',
+    'GA',
+    'Test123',
+    uuid('aa030eb6-009b-411c-985c-527ce008b35a')
+),(
+    'Customs Reference number',
+    'CM',
+    'Test987 - second number for same UTE',
+    uuid('aa030eb6-009b-411c-985c-527ce008b35a')
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
@@ -757,115 +923,158 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
       DATE '2022-03-07'
 );
 
-
 INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
-    hs_code,
     commodity_type,
     cargo_gross_weight,
     cargo_gross_weight_unit
 ) VALUES (
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Expensive Shoes',
     4000,
     'KGM'
 ), (
     '2219e859-e3b5-4e87-80b8-32e9f77cca04',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '720711',
     'Massive Yacht',
     4000,
     'KGM'
 ), (
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Air ballons',
     4000,
     'KGM'
 ), (
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 ), (
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT booking.id FROM dcsa_im_v3_0.booking JOIN dcsa_im_v3_0.shipment ON booking.id=shipment.booking_id WHERE carrier_booking_reference = 'BR1239719871'),
-    '411510',
     'Leather Jackets',
     4000,
     'KGM'
 );
 
-
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    NULL,
+    '411510'
+),(
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
+    NULL,
+    '720711'
+),(
+    '2219e859-e3b5-4e87-80b8-32e9f77cca04',
+    NULL,
+    '720711'
+), (
+    '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
+    NULL,
+    '411510'
+), (
+    '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
+    NULL,
+    '411510'
+), (
+    'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
+    NULL,
+    '411510'
+), (
+    '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    NULL,
+    '411510'
+), (
+    '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
+    NULL,
+    '411510'
+);
 
 INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
     shipping_instruction_id,
     shipment_id,
     commodity_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '10f41e70-0cae-47cd-8eb8-4ee6f05e85c1',
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Expensive Shoes'
+    'Expensive Shoes',
+    5000,
+    'KGM'
 ), (
     'c7104528-66d5-4d11-9b82-7af30e84d664',
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871'),
     '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
-    'Massive Yacht'
+    'Massive Yacht',
+    30000,
+    'KGM'
 ), (
     '20e8aca5-4524-4ff9-a258-96c506966388',
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'bca68f1d3b804ff88aaa1e43055432f7'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85',
-    'Leather Jackets'
+    'Leather Jackets',
+    500,
+    'KGM'
 ), (
     'ca4ff535-407f-41ab-a009-830ddf06bdba',
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '832deb4bd4ea4b728430b857c59bd057'),
     '770f11e5-aae2-4ae4-b27e-0c689ed2e333',
-    'Air ballons'
+    'Air ballons',
+    100,
+    'KGM'
 ), (
     '83ec9f50-2eab-42f7-892d-cad2d25f3b9e',
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '994f0c2b590347ab86ad34cd1ffba505'),
     'cb6354c9-1ceb-452c-aed0-3cb25a04647a',
-    'Leather Jackets'
+    'Leather Jackets',
+    2000,
+    'KGM'
 ), (
     '824e8fed-d181-4079-b6ca-9d9069a2a738',
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = '02c965382f5a41feb9f19b24b5fe2906'),
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-    'Leather Jackets'
+    'Leather Jackets',
+    900,
+    'KGM'
 ), (
     '1829548e-5938-4adc-a08e-3af55d8ccf63',
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'AR1239719871'),
     '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d',
-    'Leather Jackets'
+    'Leather Jackets',
+    750,
+    'KGM'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -874,7 +1083,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
-    number_of_originals,
     carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
@@ -887,7 +1095,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     DATE '2020-11-25',
     DATE '2020-12-24',
     DATE '2020-12-31',
-    12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '877ce0f8-3126-45f5-b22e-2d1d27d42d85'::uuid,
     12,
@@ -900,7 +1107,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     DATE '2020-11-25',
     DATE '2020-12-24',
     DATE '2020-12-31',
-    12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
     12,
@@ -913,7 +1119,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
    DATE '2020-11-25',
    DATE '2020-12-24',
    DATE '2020-12-31',
-   12,
    (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
    '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'::uuid,
    12,
@@ -996,23 +1201,6 @@ INSERT INTO dcsa_im_v3_0.shipment_event (
    null
  );
 
-INSERT INTO dcsa_im_v3_0.package_code(
-    package_code,
-    package_code_description
-) VALUES (
-    '123',
-    'test description1'
-), (
-    '234',
-    'test description2'
-), (
-    '456',
-    'test description3'
-), (
-    '789',
-    'test description4'
-);
-
 /**
  * Data used in integration tests - Do not modify - make your own data
  */
@@ -1020,57 +1208,57 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     consignment_item_id,
     weight,
     weight_unit,
-    number_of_packages,
-    package_code,
+    volume,
+    volume_unit,
     utilized_transport_equipment_id
 ) VALUES (
     '10f41e70-0cae-47cd-8eb8-4ee6f05e85c1',
     50.0,
     'KGM',
     5000,
-    '123',
+    'MTQ',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     'c7104528-66d5-4d11-9b82-7af30e84d664',
     1000.0,
     'KGM',
-    1,
-    '456',
+    NULL,
+    NULL,
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     23.5,
     'KGM',
     2500,
-    '789',
+    'FTQ',
     uuid('56812ad8-5d0b-4cbc-afca-e97f2f3c89de')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '877ce0f8-3126-45f5-b22e-2d1d27d42d85'),
     99.9,
     'KGM',
-    99,
-    '234',
+    NULL,
+    NULL,
     uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '770f11e5-aae2-4ae4-b27e-0c689ed2e333'),
     99.9,
     'KGM',
-    99,
-    '234',
+    NULL,
+    NULL,
    uuid('44068608-da9b-4039-b074-d9ac27ddbfbf')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = 'cb6354c9-1ceb-452c-aed0-3cb25a04647a'),
     23.5,
     'KGM',
-    2500,
-    '789',
+    NULL,
+    NULL,
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 ), (
     (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '8fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
     23.5,
     'KGM',
     2500,
-    '789',
+    'FTQ',
     uuid('ca030eb6-009b-411c-985c-527ce008b35a')
 );
 
@@ -1079,40 +1267,39 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
   consignment_item_id,
   weight,
   weight_unit,
-  number_of_packages,
-  package_code,
+  volume,
+  volume_unit,
   utilized_transport_equipment_id
   ) VALUES (
   '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
   (SELECT id FROM dcsa_im_v3_0.consignment_item WHERE shipping_instruction_id = '9fbb78cc-e7c6-4e17-9a23-24dc3ad0378d'),
   23.5,
   'KGM',
-  2500,
-  '789',
+  25,
+  'MTQ',
   uuid('aa030eb6-009b-411c-985c-527ce008b35a')
 );
 
-INSERT INTO dcsa_im_v3_0.cargo_line_item(
-    cargo_line_item_id,
+INSERT INTO dcsa_im_v3_0.shipping_marks(
      cargo_item_id,
-      shipping_marks,
-       id
+     shipping_mark,
+     id
 )
 VALUES (
-'9653b630-7847-467c-bcf7-15374dcc6ae2',
 '2d5965a5-9e2f-4c78-b8cb-fbb7095e13a0',
- 'shipping marks',
+ 'Made in China',
 'aab30eb6-009b-411c-985c-527ce008b35a'
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1120,7 +1307,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     expected_departure_date,
     transport_document_type_code,
@@ -1141,6 +1327,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_03',
     'PRE',
     TRUE,
@@ -1148,7 +1335,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_03',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_03',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -1157,7 +1343,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09'
@@ -1165,12 +1351,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1178,7 +1365,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     invoice_payable_at_id,
     expected_departure_date,
@@ -1200,6 +1386,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_04',
     'PRE',
     TRUE,
@@ -1207,7 +1394,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_04',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_04',
-    TRUE,
     'FCA',
     '84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d',
     DATE '2020-03-07',
@@ -1217,7 +1403,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
@@ -1226,12 +1412,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1239,7 +1426,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     expected_departure_date,
     transport_document_type_code,
@@ -1260,6 +1446,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_05',
     'PRE',
     TRUE,
@@ -1267,7 +1454,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_05',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_05',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -1276,7 +1462,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09'
@@ -1284,12 +1470,13 @@ INSERT INTO dcsa_im_v3_0.booking (
 
 INSERT INTO dcsa_im_v3_0.booking (
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1297,7 +1484,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     invoice_payable_at_id,
     expected_departure_date,
@@ -1319,6 +1505,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_06',
     'PRE',
     TRUE,
@@ -1326,7 +1513,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_06',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_06',
-    TRUE,
     'FCA',
     '84bfcf2e-403b-11eb-bc4a-1fc4aa7d879d',
     DATE '2020-03-07',
@@ -1336,7 +1522,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     '01670315-a51f-4a11-b947-ce8e245128eb',
     DATE '2021-12-16'
@@ -1411,24 +1597,36 @@ INSERT INTO dcsa_im_v3_0.shipment (
     'Bad weather'
 );
 
-INSERT INTO dcsa_im_v3_0.commodity(
+INSERT INTO dcsa_im_v3_0.commodity (
     id,
     booking_id,
     commodity_type,
-    hs_code,
     cargo_gross_weight,
     cargo_gross_weight_unit,
+    cargo_gross_volume,
+    cargo_gross_volume_unit,
     export_license_issue_date,
     export_license_expiry_date
 ) VALUES (
     'a5b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
     'b521dbdb-a12b-48f5-b489-8594349731bf'::uuid,
     'Hand Bags',
-    '411510',
     1200.0,
     'KGM',
+    500.0,
+    'MTQ',
     NULL,
     NULL
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    'a5b681bf-68a0-4f90-8cc6-79bf77d3b2a1'::uuid,
+    NULL,
+    '411510'
 );
 
 -------- ShipmentLocationRepository.findByTransportDocumentID BEGIN --------
@@ -1448,14 +1646,26 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     '0a42252d-c8d5-4a0e-ab93-fa355992fb29'::uuid,
     '499918a2-d12d-4df6-840c-dd92357002df',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL,
+    NULL
+);
+
+INSERT INTO dcsa_im_v3_0.displayed_address (
+    id,
+    address_line_1,
+    address_line_2
+) VALUES (
+    '8a5ccfed-f106-405b-a61f-c3a633e57ead'::uuid,
+    'Gubener Str. 42',
+    'Rhinstrasse 87'
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
@@ -1468,7 +1678,8 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     is_electronic,
     is_to_order,
     created_date_time,
-    updated_date_time
+    updated_date_time,
+    displayed_name_for_place_of_delivery
 ) VALUES (
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     'SI_REF_9',
@@ -1479,18 +1690,20 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
     TRUE,
     TRUE,
     DATE '2021-12-24',
-    DATE '2021-12-31'
+    DATE '2021-12-31',
+    '8a5ccfed-f106-405b-a61f-c3a633e57ead'::uuid
 );
 
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1498,7 +1711,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     expected_departure_date,
     transport_document_type_code,
@@ -1521,6 +1733,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_01',
     'PRE',
     TRUE,
@@ -1528,7 +1741,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_01',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_01',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -1537,7 +1749,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09',
@@ -1551,6 +1763,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_01',
     'PRE',
     TRUE,
@@ -1558,7 +1771,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_01',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_01',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -1567,7 +1779,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09',
@@ -1601,22 +1813,40 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
     shipping_instruction_id,
     shipment_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    'Expensive shoes'
+    'Expensive shoes',
+    3400,
+    'LBR'
 ), (
     '06c0e716-3128-4172-be09-7f82b7ec02ca',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'E379021B7782'),
-    'Slightly less expensive shoes'
+    'Slightly less expensive shoes',
+    4000,
+    'LBR'
 ), (
     'cf1798fe-9447-4ea8-a4a6-9515de751d5e',
     'a1c7b95d-3004-40a5-bae1-e379021b7782',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'A379021B7782'),
-    'Even more expensive shoes'
+    'Even more expensive shoes',
+    4600,
+    'LBR'
+);
+
+INSERT INTO dcsa_im_v3_0.hs_code_commodity (
+    commodity_id,
+    consignment_item_id,
+    hs_code
+) VALUES (
+    NULL,
+    '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f',
+    '720711'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -1626,7 +1856,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
-    number_of_originals,
     carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
@@ -1640,7 +1869,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     DATE '2020-11-25',
     DATE '2020-12-24',
     DATE '2020-12-31',
-    12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     'a1c7b95d-3004-40a5-bae1-e379021b7782'::uuid,
     12,
@@ -1679,73 +1907,66 @@ INSERT INTO dcsa_im_v3_0.shipment_location (
     shipment_id,
     booking_id,
     location_id,
-    shipment_location_type_code,
-    displayed_name
+    shipment_location_type_code
 ) VALUES (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
-    'PRE',
-    'HELLO!'
+    'PRE'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
-    'POL',
-    'HELLO!'
+    'POL'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_01'),
     uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
-    'POD',
-    'HELLO!'
+    'POD'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('b4454ae5-dcd4-4955-8080-1f986aa5c6c3'),
-    'PRE',
-    'HELLO!'
+    'PRE'
 ),  (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('1d09e9e9-dba3-4de1-8ef8-3ab6d32dbb40'),
-    'POL',
-    'HELLO!'
+    'POL'
 ), (
     null,
     (SELECT id FROM dcsa_im_v3_0.booking WHERE carrier_booking_request_reference = 'KUBERNETES_IN_ACTION_02'),
     uuid('ea9af21d-8471-47ac-aa59-e949ea74b08e'),
-    'POD',
-    'HELLO!'
+    'POD'
 );
 
 INSERT INTO dcsa_im_v3_0.cargo_item (
     consignment_item_id,
     weight,
     weight_unit,
-    number_of_packages,
-    package_code,
+    volume,
+    volume_unit,
     utilized_transport_equipment_id
 ) VALUES (
     '0e98eef4-6ebd-47eb-bd6e-d3878b341b7f'::uuid,
     50.0,
     'KGM',
-    5000,
-    '123',
+    500,
+    'FTQ',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     '06c0e716-3128-4172-be09-7f82b7ec02ca'::uuid,
     50.0,
     'KGM',
-    5000,
-    '123',
+    500,
+    'FTQ',
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 ), (
     'cf1798fe-9447-4ea8-a4a6-9515de751d5e'::uuid,
     50.0,
     'KGM',
-    5000,
-    '123',
+    NULL,
+    NULL,
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 );
 
@@ -1773,14 +1994,16 @@ INSERT INTO dcsa_im_v3_0.party_contact_details (
     name,
     email,
     phone,
-    url
+    booking_id,
+    shipping_instruction_id
 ) VALUES (
     '0ffc61f0-c74d-4a57-8d32-009a32247c29'::uuid,
     '8e463a84-0a2d-47cd-9332-51e6cb36b635',
     'DCSA',
     'info@dcsa.org',
     '+31123456789',
-    'https://www.dcsa.org'
+    NULL,
+    NULL
 );
 
 INSERT INTO dcsa_im_v3_0.shipping_instruction (
@@ -1810,12 +2033,13 @@ INSERT INTO dcsa_im_v3_0.shipping_instruction (
 INSERT INTO dcsa_im_v3_0.booking (
     id,
     carrier_booking_request_reference,
-    document_status,
+    booking_status,
     receipt_type_at_origin,
     delivery_type_at_destination,
     cargo_movement_type_at_origin,
     cargo_movement_type_at_destination,
     booking_request_datetime,
+    booking_updated_datetime,
     service_contract_reference,
     payment_term_code,
     is_partial_load_allowed,
@@ -1823,7 +2047,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     export_declaration_reference,
     is_import_license_required,
     import_license_reference,
-    is_destination_filing_required,
     incoterms,
     expected_departure_date,
     transport_document_type_code,
@@ -1846,6 +2069,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'FCL',
     'BB',
     DATE '2020-03-07',
+    DATE '2023-08-21',
     'SERVICE_CONTRACT_REFERENCE_01',
     'PRE',
     TRUE,
@@ -1853,7 +2077,6 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EXPORT_DECLARATION_REFERENCE_01',
     FALSE,
     'IMPORT_LICENSE_REFERENCE_01',
-    TRUE,
     'FCA',
     DATE '2020-03-07',
     'SWB',
@@ -1862,7 +2085,7 @@ INSERT INTO dcsa_im_v3_0.booking (
     'EI',
     FALSE,
     (SELECT vessel.id FROM dcsa_im_v3_0.vessel WHERE vessel_imo_number = '9321483'),
-    'WTK',
+    'SGD',
     12.12,
     NULL,
     DATE '2021-12-09',
@@ -1889,12 +2112,16 @@ INSERT INTO dcsa_im_v3_0.consignment_item (
     id,
     shipping_instruction_id,
     shipment_id,
-    description_of_goods
+    description_of_goods,
+    weight,
+    weight_unit
 ) VALUES (
     '5d943239-23fc-4d5c-ab70-a33a469f9e59',
     '2c337fcc-2814-42b3-a752-f1847e74cba7',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'D659FDB7E33C'),
-    'Expensive shoes'
+    'Expensive shoes',
+    34000,
+    'LBR'
 );
 
 INSERT INTO dcsa_im_v3_0.transport_document (
@@ -1904,7 +2131,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     issue_date,
     shipped_onboard_date,
     received_for_shipment_date,
-    number_of_originals,
     carrier_id,
     shipping_instruction_id,
     number_of_rider_pages,
@@ -1918,7 +2144,6 @@ INSERT INTO dcsa_im_v3_0.transport_document (
     DATE '2022-05-16',
     DATE '2022-05-15',
     DATE '2022-05-14',
-    12,
     (SELECT id FROM dcsa_im_v3_0.carrier WHERE smdg_code = 'HLC'),
     '2c337fcc-2814-42b3-a752-f1847e74cba7'::uuid,
     12,
@@ -1931,17 +2156,36 @@ INSERT INTO dcsa_im_v3_0.cargo_item (
     consignment_item_id,
     weight,
     weight_unit,
-    number_of_packages,
-    package_code,
+    volume,
+    volume_unit,
     utilized_transport_equipment_id
 ) VALUES (
     '5d943239-23fc-4d5c-ab70-a33a469f9e59'::uuid,
     50.0,
     'KGM',
-    5000,
-    '123',
+    null,
+    null,
     uuid('6824b6ca-f3da-4154-96f1-264886b68d53')
 );
+
+INSERT INTO dcsa_im_v3_0.outer_packaging (
+    id,
+    commodity_id,
+    package_code,
+    number_of_packages,
+    imo_packaging_code,
+    description,
+    cargo_item_id
+) VALUES (
+    '6843f33b-98b8-4268-a4dc-23a40eab95a8'::uuid,
+    '9d5965a5-9e2f-4c78-b8cb-fbb7095e13a0'::uuid,
+    '5H',
+    3,
+    '123',
+    '3 yellow boxes of teddybears',
+    (SELECT id FROM dcsa_im_v3_0.cargo_item WHERE consignment_item_id = '5d943239-23fc-4d5c-ab70-a33a469f9e59')
+);
+
 
 INSERT INTO dcsa_im_v3_0.charge (
     id, 

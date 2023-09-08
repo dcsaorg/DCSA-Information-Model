@@ -114,8 +114,8 @@ CREATE TRIGGER queue_equipment_events AFTER INSERT ON dcsa_im_v3_0.equipment_eve
 DROP VIEW IF EXISTS dcsa_im_v3_0.equipment_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
-  SELECT DISTINCT  reference.reference_value,
-                   reference.reference_type_code,
+  SELECT DISTINCT  reference.general_reference_value,
+                   reference.general_reference_type_code,
                    NULL::UUID AS transport_call_id,
                    NULL::UUID AS document_id,
                    ci.utilized_transport_equipment_id AS utilized_transport_equipment_id,
@@ -125,7 +125,7 @@ CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
    JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
    JOIN dcsa_im_v3_0.shipment AS shipment ON con.shipment_id = shipment.id
    JOIN dcsa_im_v3_0.booking AS booking ON shipment.booking_id = booking.id
-   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.general_reference AS reference ON reference.consignment_item_id = con.id
    OR reference.shipment_id = shipment.id
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = booking.id;
@@ -136,8 +136,8 @@ CREATE VIEW dcsa_im_v3_0.equipment_event_reference AS
 DROP VIEW IF EXISTS dcsa_im_v3_0.transport_based_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.transport_based_event_reference AS
-  SELECT DISTINCT  reference.reference_value,
-                   reference.reference_type_code,
+  SELECT DISTINCT  reference.general_reference_value,
+                   reference.general_reference_type_code,
                    tc.id AS transport_call_id,
                    NULL::UUID AS document_id,
                    NULL::UUID AS utilized_transport_equipment_id,
@@ -153,7 +153,7 @@ CREATE VIEW dcsa_im_v3_0.transport_based_event_reference AS
       FROM dcsa_im_v3_0.transport_call tc
       JOIN dcsa_im_v3_0.transport t ON t.load_transport_call_id = tc.id
       OR t.discharge_transport_call_id = tc.id) tc ON tc.transport_id = st.transport_id
-   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.general_reference AS reference ON reference.consignment_item_id = con.id
    OR reference.shipment_id = shipment.id
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = booking.id;
@@ -165,8 +165,8 @@ DROP VIEW IF EXISTS dcsa_im_v3_0.shipment_event_reference CASCADE;
 
 CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
   (-- For CBR document reference ShipmentEvents
- SELECT DISTINCT reference.reference_value,
-                 reference.reference_type_code,
+ SELECT DISTINCT reference.general_reference_value,
+                 reference.general_reference_type_code,
                  NULL::UUID AS transport_call_id,
                  b.id AS document_id,
                  NULL::UUID AS utilized_transport_equipment_id,
@@ -175,14 +175,14 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
    JOIN dcsa_im_v3_0.shipment s ON b.id = s.booking_id
    JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
    JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
-   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.general_reference AS reference ON reference.consignment_item_id = con.id
    OR reference.shipment_id = s.id
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = b.id
    UNION ALL
       -- For BKG document reference ShipmentEvents
- SELECT DISTINCT reference.reference_value,
-                 reference.reference_type_code,
+ SELECT DISTINCT reference.general_reference_value,
+                 reference.general_reference_type_code,
                  NULL::UUID AS transport_call_id,
                  s.id AS document_id,
                  NULL::UUID AS utilized_transport_equipment_id,
@@ -191,13 +191,13 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
    JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
    JOIN dcsa_im_v3_0.consignment_item con ON con.shipment_id = s.id
    JOIN dcsa_im_v3_0.shipping_instruction AS si ON con.shipping_instruction_id = si.id
-   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.general_reference AS reference ON reference.consignment_item_id = con.id
    OR reference.shipment_id = s.id
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = b.id
    UNION ALL -- For SHI document reference ShipmentEvents
- SELECT DISTINCT reference.reference_value,
-                 reference.reference_type_code,
+ SELECT DISTINCT reference.general_reference_value,
+                 reference.general_reference_type_code,
                  NULL::UUID AS transport_call_id,
                  si.id AS document_id,
                  NULL::UUID AS utilized_transport_equipment_id,
@@ -206,7 +206,7 @@ CREATE VIEW dcsa_im_v3_0.shipment_event_reference AS
    JOIN dcsa_im_v3_0.consignment_item con ON con.shipping_instruction_id = si.id
    JOIN dcsa_im_v3_0.shipment s ON s.id = con.shipment_id
    JOIN dcsa_im_v3_0.booking b ON b.id = s.booking_id
-   JOIN dcsa_im_v3_0.reference AS reference ON reference.consignment_item_id = con.id
+   JOIN dcsa_im_v3_0.general_reference AS reference ON reference.consignment_item_id = con.id
    OR reference.shipment_id = s.id
    OR reference.shipping_instruction_id = si.id
    OR reference.booking_id = b.id);
@@ -537,7 +537,7 @@ CREATE TABLE dcsa_im_v3_0.event_subscription (
     vessel_imo_number varchar(7) NULL,
     carrier_export_voyage_number varchar(50) NULL,
     universal_export_voyage_reference varchar(5) NULL,
-    carrier_service_code varchar(5) NULL,
+    carrier_service_code varchar(11) NULL,
     universal_service_reference varchar(8) NULL,
     un_location_code varchar(5) NULL,
     secret bytea NOT NULL,
@@ -927,15 +927,8 @@ CREATE VIEW dcsa_im_v3_0.event_sync_state AS
     GROUP BY event_id;
 
 
--- simplify commodityRequestedEquipmentLink
-DROP TABLE IF EXISTS dcsa_im_v3_0.commodity_requested_equipment_link CASCADE;
-CREATE TABLE dcsa_im_v3_0.commodity_requested_equipment_link (
-    id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-    commodity_requested_equipment_link varchar(100) NOT NULL
-);
-ALTER TABLE dcsa_im_v3_0.commodity ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
-ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_requested_equipment_link_id uuid NULL REFERENCES dcsa_im_v3_0.commodity_requested_equipment_link(id);
-
-ALTER TABLE dcsa_im_v3_0.requested_equipment_commodity ADD commodity_requested_equipment_link varchar(100) NOT NULL;
+-- DDT-1353 - remodel-equipment<->commodity link
+ALTER TABLE dcsa_im_v3_0.requested_equipment_group ADD commodity_id uuid NULL REFERENCES dcsa_im_v3_0.commodity (id);
+CREATE INDEX ON dcsa_im_v3_0.requested_equipment_group (commodity_id);
 
 COMMIT;
