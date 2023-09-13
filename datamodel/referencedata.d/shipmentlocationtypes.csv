@@ -3,7 +3,7 @@ PRE,Place of Receipt,"The location where the cargo is handed over by the shipper
 POL,Port of Loading,"The location where the cargo is loaded onto a first sea-going vessel for water transportation."
 POD,Port of Discharge,"The location where the cargo is discharged from the last sea-going vessel."
 PDE,Place of Delivery,"The location where the cargo is handed over to the consignee, or his agent, by the shipping line and where responsibility of the shipping line ceases."
-PCF,Pre-carriage From,
+PCF,Pre-carriage From,"The start location of the inland movement that takes place prior to the container(s) being delivered to the place of receipt/port of loading for account and risk of merchant (merchant haulage)."
 OIR,Onward In-land Routing,"The location where the cargo is transported from port of discharge to consignee location on consignee's responsibility (merchant haulage)."
 DRL,Depot release location,
 ORI,Origin of goods,
