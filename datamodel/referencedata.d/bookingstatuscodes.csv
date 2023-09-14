@@ -1,0 +1,10 @@
+booking_status_code,booking_status_description
+RECEIVED,"Indicates that the booking is received by the carrier"
+PENDING UPDATE,"Indicates that the carrier requested a booking update from the shipper which is not received yet"
+PENDING UPDATES CONFIRMATION,"Indicates that the shipper requested a booking update which is not confirmed yet"
+PENDING AMENDMENTS APPROVAL,"Indicates that the shipper requested an update to the confirmed booking which is not approved yet"
+CONFIRMED,"Indicates that the booking is confirmed"
+REJECTED,"Indicates that the booking has been rejected by the carrier"
+DECLINED,"Indicates that the confirmed booking has been declined by the carrier"
+CANCELLED,"Indicates that the booking has been cancelled by the shipper"
+COMPLETED,"Indicates that the booking is complete and no more changes/amendments can be requested"
