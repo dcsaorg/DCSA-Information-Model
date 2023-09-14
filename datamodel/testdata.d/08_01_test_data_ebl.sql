@@ -378,7 +378,7 @@ INSERT INTO dcsa_im_v3_0.general_reference (
     'AB-123743CR',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
 ), (
-    'PO',
+    'SPO',
     'PO0027',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'BR1239719871')
 ), (
@@ -386,7 +386,7 @@ INSERT INTO dcsa_im_v3_0.general_reference (
     'BC-346267CR',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
 ), (
-    'PO',
+    'SPO',
     'PO0028',
     (SELECT id FROM dcsa_im_v3_0.shipment WHERE carrier_booking_reference = 'CR1239719872')
 );
