@@ -1,0 +1,17 @@
+ebl_status_code,ebl_status_description
+RECEIVED,Indicates that the Shipping Instruction is received by the carrier
+PENDING UPDATE,Indicates that the carrier requested a Shipping Instruction update from the shipper which is not received yet
+INITIAL DRAFT,Indicates that the Draft Transport Document has been published by the carrier and is now awaiting approval from the shipper
+PENDING CHANGES APPROVAL,Indicates that the shipper requested changes to the initial Draft Transport Document which are not approved yet
+DRAFT,Indicates that a Draft Transport Document is being returned to the shipper for approval after changes or amendments have been processed by the carrier (accepted or rejected)
+PENDING AMENDMENTS APPROVAL,Indicates that the shipper requested amendments to the Draft Transport Document or the Issued Transport Document which are not approved yet
+APPROVED,Indicates that a Draft Transport Document is approved by the shipper
+AUTO-APPROVED,Indicates that a Draft Transport Document is automatically approved by the carrier on behalf of the shipper
+ISSUED,Indicates that a Transport Document is issued by the carrier
+AMENDMENTS APPROVED,Indicates that the requested amendments to the Transport Document are approved by the carrier
+PENDING SURRENDER FOR AMENDMENTS,Indicates that the shipper/consignee has requested to surrender the Transport Document for amendments
+PENDING SURRENDER FOR DELIVERY,Indicates that the consignee has requested to surrender the Transport Document for delivery
+SURRENDERED FOR AMENDMENTS,Indicates that the Transport Document is surrenderedfor amendments
+SURRENDERED FOR DELIVERY,Indicates that the Transport Document is surrenderedfor delivery
+VOIDED,Indicates that the Transport Document is voided
+REJECTED,Indicates that the requested amendments to the Issued Transport Document or the request to surrender the Transport Document for amendments has been rejected by the carrier
