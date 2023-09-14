@@ -813,9 +813,10 @@ CREATE TABLE dcsa_im_v3_0.customs_reference (
     shipping_instruction_id uuid NULL REFERENCES dcsa_im_v3_0.shipping_instruction (id),
     consignment_item_id uuid NULL REFERENCES dcsa_im_v3_0.consignment_item(id),
     utilized_transport_equipment_id uuid NULL REFERENCES dcsa_im_v3_0.utilized_transport_equipment (id),
+    cargo_item_id uuid NULL REFERENCES dcsa_im_v3_0.cargo_item (id),
     FOREIGN KEY (customs_reference_type_code, customs_reference_country_code) REFERENCES dcsa_im_v3_0.customs_reference_type (customs_reference_type_code, customs_reference_country_code),
---     At least one ID needs to be provided
-    CONSTRAINT check_ids check ( shipment_id is not null or shipping_instruction_id is not null or consignment_item_id is not null or utilized_transport_equipment_id is not null )
+    --     At least one ID needs to be provided
+    CONSTRAINT check_ids check ( shipment_id is not null or shipping_instruction_id is not null or consignment_item_id is not null or utilized_transport_equipment_id is not null or cargo_item_id is not null )
 );
 
 CREATE INDEX ON dcsa_im_v3_0.customs_reference (shipment_id);
