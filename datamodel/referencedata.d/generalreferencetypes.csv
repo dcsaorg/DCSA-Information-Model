@@ -9,4 +9,3 @@ ECR,Empty container release reference,Unique identifier to enable release of the
 CSI,Customer shipment ID,Unique Shipment ID for the booking in the Shipper or Forwarder system. Used to identify the booking along with the Booking party.
 BPR,Booking party reference number,A unique identifier provided by a booking party in the booking request.
 BID,Booking Request ID,The associated booking request ID provided by the shipper.
-EQ,Equipment Reference,Reference to the equipment that is associated with document.
