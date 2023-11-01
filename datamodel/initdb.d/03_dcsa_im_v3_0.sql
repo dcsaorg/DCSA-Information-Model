@@ -584,6 +584,24 @@ CREATE TABLE dcsa_im_v3_0.reefer_measurement (
     o2_measurement real NULL,
     o2_setpoint real NULL,
     ambient_temperature real NULL,
+    air_exchange real NULL,
+    air_exchange_unit varchar(3) NULL REFERENCES dcsa_im_v3_0.unit_of_measure(unit_of_measure_code) CHECK (air_exchange_unit IN ('MQH','FQH')),
+    current_phase_a real NULL,
+    current_phase_b real NULL,
+    current_phase_c real NULL,
+    discharge_pressure real NULL,
+    discharge_temperature real NULL,
+    evaporator_temperature real NULL,
+    line_frequency real NULL,
+    line_voltage real NULL,
+    return_probe_1_temperature real NULL,
+    return_probe_2_temperature real NULL,
+    return_temperature real NULL,
+    suction_pressure real NULL,
+    suction_temperature real NULL,
+    supply_sensor_1_temperature real NULL,
+    supply_sensor_2_temperature real NULL,
+    supply_temperature real NULL
 --     Make sure unit is provided if any temperature is provided or no unit is provided in case no temperature is provided
     CONSTRAINT check_volume_unit check ((
         cargo_probe_1_temperature is NULL AND
