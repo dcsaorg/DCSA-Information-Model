@@ -1,4 +1,3 @@
 Cargo Movement Type Code,Cargo Movement Type Name,Cargo Movement Type Description
 FCL,Full Container Load,The shipper/ consignee or its agent or subcontractor is responsible for stuffing or stripping the cargo into or out of the container and bears every responsibility and liability in such respect.
 LCL,Less than Container Load,The carrier or its agent or subcontractor is responsible for stuffing or stripping the cargo into or out of the container and bears every responsibility and liability in such respect.
-BB,Break bulk,Indicates that the carrier has received the cargo which is not containerised.
