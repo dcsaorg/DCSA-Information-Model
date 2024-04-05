@@ -12,7 +12,16 @@ NCBH,399,NCBH,NCB Hazcheck
 FMC,163,FMC,Federal Maritme Commission
 CBSA,,CBSA,Canada Border Services Agency
 DCSA,,Digitial Container Shipping Association,Maintainer of the EBL Solution provider list
-W3C,,"World Wide Web Consortium","Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity."
-GLEIF,,"Global Legal Entity Identifier Foundation","Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes."
-EPI,,"EBL platform Identifier", "The eBLPlatformIdentifier is a combination of the transferee user identification on the local platform and the platform. Formatted similar to an email address"
+W3C,,World Wide Web Consortium,Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity.
+GLEIF,,Global Legal Entity Identifier Foundation,Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes.
+WAVE,,Wave BL,eBL Solution Provider
+CARX,,CargoX,eBL Solution Provider
+IDT,,ICE Digital Trade,eBL Solution Provider
+ESSD,,EssDocs,eBL Solution Provider
+BOLE,,Bolero,eBL Solution Provider
+EDOX,,EdoxOnline,eBL Solution Provider
+IQAX,,IQAX,eBL Solution Provider
+SECR,,Secro,eBL Solution Provider
+TRGO,,TradeGo,eBL Solution Provider
+ETEU,,eTEU,eBL Solution Provider
 ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
