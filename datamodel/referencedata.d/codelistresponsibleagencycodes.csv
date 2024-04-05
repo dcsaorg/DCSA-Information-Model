@@ -8,11 +8,11 @@ SCAC,182,"US, Standard Carrier Alpha Code (Motor)",Organisation maintaining the 
 ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
 ITU,296,ITU,International Telecommunication Union
 SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
-EXIS,399,EXIS,Exis Technologies Ltd.
-FMC,163,FMC,Federal Maritime Commission
+NCBH,399,NCBH,NCB Hazcheck
+FMC,163,FMC,Federal Maritme Commission
 CBSA,,CBSA,Canada Border Services Agency
-ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
 DCSA,,Digitial Container Shipping Association,Maintainer of the EBL Solution provider list
-LEI,,"Legal Entity Identifier","Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes."
+W3C,,"World Wide Web Consortium","Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity."
+GLEIF,,"Global Legal Entity Identifier Foundation","Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes."
 EPI,,"EBL platform Identifier", "The eBLPlatformIdentifier is a combination of the transferee user identification on the local platform and the platform. Formatted similar to an email address"
-DID,,"Decentralized Identifier","Decentralized identifiers (DIDs) are a new type of identifier that enables verifiable, decentralized digital identity."
+ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
