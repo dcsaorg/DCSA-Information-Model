@@ -1,3 +1,11 @@
+Deprecated
+--------------------------
+Prior to 2024 this repository was used to define the DCSA Information Model. During this period, the Information Model was represented as a PostgreSQL database schema with, for some tables, associated data.
+
+This repository has now been deprecated. It is provided as an archive and for alignment with DCSA standards created during this period.
+
+The DCSA Information Model is now maintained using other approaches, and can be obtained from the [DCSA website](https://dcsa.org)
+
 The DCSA Information Model
 ==========================
 The DCSA Information Model has been created to organise and catalogue the information being generated or consumed in connection with the processes described in the DCSA Industry Blueprint. The information model is also used as a collective term to describe all products that model data needed to meet the interface requirements. The information model includes a diagrammatic representation of selected data entities and their relationships with one another.
