@@ -1,19 +1,4 @@
 dcsa_code,code_list_responsible_agency_code,code_list_responsible_agency_name,code_list_responsible_agency_description
-ISO,5,ISO,International Organization for Standardization
-UNECE,6,UN/ECE,United Nations Economic Commission for Europe
-LLOYD,11,LR,Lloyd's register of shipping
-BIC,20,BIC (Bureau International des Containeurs),The container industry's international organisation responsible for the issuance of container-related codes
-IMO,54,IMO (incl. IMDG),International Maritime Organisation
-SCAC,182,"US, Standard Carrier Alpha Code (Motor)",Organisation maintaining the SCAC lists and transportation operating in North America
-ITIGG,274,ITIGG,International Transport Implementation Guidelines Group
-ITU,296,ITU,International Telecommunication Union
-SMDG,306,SMDG (Ship-planning Message Design Group),User Group for Shipping Lines and Container Terminals
-NCBH,399,NCBH,NCB Hazcheck
-FMC,163,FMC,Federal Maritme Commission
-CBSA,,CBSA,Canada Border Services Agency
-DCSA,,Digitial Container Shipping Association,Maintainer of the EBL Solution provider list
-W3C,,World Wide Web Consortium,Decentralized identifiers are a type of identifier that enables verifiable decentralized digital identity.
-GLEIF,,Global Legal Entity Identifier Foundation,Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes.
 WAVE,,Wave BL,eBL Solution Provider
 CARX,,CargoX,eBL Solution Provider
 IDT,,ICE Digital Trade,eBL Solution Provider
@@ -24,4 +9,10 @@ IQAX,,IQAX,eBL Solution Provider
 SECR,,Secro,eBL Solution Provider
 TRGO,,TradeGo,eBL Solution Provider
 ETEU,,eTEU,eBL Solution Provider
+WISE,,WiseTech,Solution Provider https://www.wisetechglobal.com/
+GLEIF,,Global Legal Entity Identifier Foundation,Legal Entity Identifier. An identifying number of an Individual or entity used for tax purposes.
+W3C,,World Wide Web Consortium,Decentralized identifiers are a type of identifier that enables verifiable decentralized digital identity.
+DNB,,Dun and Bradstreet,Provider of business data and analytcs https://www.dnb.com/
+FMC,163,FMC,Federal Maritme Commission
+DCSA,,Digitial Container Shipping Association,Standardisation body for the container shipping industry
 ZZZ,zzz,Mutually defined,A code assigned within a code list to be used on an interim basis and as defined among trading partners until a precise code can be assigned to the code list
