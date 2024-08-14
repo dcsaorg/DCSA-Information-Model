@@ -10,7 +10,8 @@ NI,Notify party,Party to be notified of arrival of goods.
 DDR,"Consignor's freight forwarder",Identification of freight forwarder giving services to the consignor (shipper).
 DDS,"Consignee's freight forwarder",Identification of freight forwarder giving services to the consignee.
 CA,Carrier operations,"The activity of discharging, shifting, loading, and lashing containers (both full and empty) as well as other cargo from/to a vessel during port stay. Normally quantified with a move-count and a number of moves per hour."
-AG,Carrier local agent,
+AG,Agent, Party authorized to act on behalf of another party
+CG, Carrier Local Agent, Party authorized to act for or on behalf of carrier
 VSL,Vessel,"A floating, sea going structure (mother vessels and feeder vessels) with either an internal or external mode of propulsion designed for the transport of cargo and/or passengers. Ocean vessels are uniquely identified by an IMO number consisting of 7 digits, or alternatively by their AIS signal with an MMSI number"
 ATH,Port Authorities,
 PLT,Pilot,The activity of conducting a vessel within restricted waters.
