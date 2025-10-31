@@ -1,0 +1,1290 @@
+---
+openapi: "3.0.3"
+info:
+  title: "DCSA Track and Trace API"
+  description: |
+    # DCSA Track and Trace API
+
+    This is the OpenAPI specification of the **DCSA Track and Trace** standard.
+
+    This API allows the transfer of structured track and trace Events from an  Event Producer to an Event Consumer.
+
+    Each Event Producer implements the `GET /events` endpoint, which can be called by the authorized Event Consumers to retrieve relevant available Events.
+
+    Each Event Consumer implements the `POST /events` endpoint, which can be called by Event Producers call to send relevant Events as they become available.
+
+    The registration of Event Consumers with Event Producers is out of scope.
+
+    The authentication and authorization in both directions between Event Producers and Event Consumers is out of scope.
+
+    ### Work in progress ⚠️
+
+    The DCSA Track and Trace standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+  contact:
+    name: "Digital Container Shipping Association (DCSA)"
+    url: "https://dcsa.org"
+    email: "info@dcsa.org"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "3.0.0"
+tags:
+- name: "Event Producer Endpoints"
+  description: "Endpoints implemented by the Event Producers"
+- name: "Event Consumer Endpoints"
+  description: "Endpoints implemented by the Event Consumers"
+paths:
+  /events:
+    get:
+      tags:
+      - "Event Producer Endpoints"
+      summary: "Retrieves a list of events"
+      description: |
+        Retrieves the list of Events matching the criteria provided as query parameters.
+
+        If no Events match the criteria provided as query parameters, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of Events in the response message is unspecified.
+
+        The Event Producer is expected to additionally filter the Events based on the authorization and registration profile of the authenticated Event Consumer calling this endpoint. Authorization, registration and any such additional filtering are out of scope in this standard.
+
+        ## Event filtering
+
+        Every Event Producer must support the following combinations of query parameter filters:
+        * `carrierBookingReference`
+        * `carrierBookingReference`, `equipmentReference`
+        * `transportDocumentReference`
+        * `transportDocumentReference`, `equipmentReference`
+        * `equipmentReference`
+
+        Every Event Producer must support combining any of the query parameter filters above with a list of `eventTypes`. By default, events of all `eventTypes` are expected to be returned if available and supported.
+
+        Every Event Producer must support combining any of the query parameter filters above with all of these additional filters:
+        * `eventUpdatedDateTimeMin`
+        * `eventUpdatedDateTimeMax`
+        * `eventUpdatedDateTimeMin`, `eventUpdatedDateTimeMax`
+
+        Each Event Producer can separately also decide to have default relative date ranges and only return Events having an `eventUpdatedDateTime` within those ranges.
+
+        When receiving requests containing an unsupported query parameter, an Event Producer can choose to either ignore the query parameter (if possible) or to reject the request with an HTTP 400.
+
+        ## Pagination
+
+        Response pagination uses a mechanism based on the `limit` and `cursor` query parameters and on the `Next-Page-Cursor` response header.
+
+        ### Optional support
+
+        Each Event Producer can decide whether to support the pagination of results, or to only allow limiting the response size using filtering query parameters.
+
+        If the Event Producer does not provide pagination support, it can choose to either reject with an HTTP 400 any request containing the `limit` or `cursor` query parameters, or to handle the request normally while silently ignoring the pagination query parameters.
+
+        ### Enabling pagination
+
+        The Event Consumer can use the `limit` query parameter to specify a maximum number of Events that should be included in the response.
+
+        The Event Producer can separately choose (and document on their copy of the published API specification) its own limit to the number of Events that it would include in responses.
+
+        The effective page size limit is the minimum between the `limit` query parameter (if specified) and the Event Producer's own maximum page size configuration setting.
+
+        ### Retrieving results pages
+
+        If based on filtering the response would include more Events than this effective page size limit, the Event Producer only adds Events to the response up to this effective page size limit, setting in the response the `Next-Page-Cursor` to a value that it can accept as the value of the `cursor` query parameter in a subsequent request and use it to return the next page of results.
+
+        The Event Consumer reads the value of the `Next-Page-Cursor` response header and sets it as the value of the `cursor` query parameter in its next request.
+
+        The Event Consumer **must** keep alongside the `cursor` all the original query parameters from the request that retrieved the first page, in order to allow either a stateful or a stateless implementation of the pagination mechanism by the Event Producer.
+
+        The effect of changing any of the original query parameters in subsequent pagination requests is unspecified and may result in the rejection of the request by the Event Producer with an HTTP 4xx response.
+
+        The effect of attempting to use a cursor more than once (for example to "go back" to previous pages) is unspecified and may result in the rejection of the request by the Event Producer with an HTTP 4xx response. (This is by design a backend-to-backend API, not intended for use directly from frontend applications and therefore not directly supporting a typical full set of web frontend pagination actions.)
+
+        When responding with the last page of results, the Event Producer no longer includes a `Next-Page-Cursor` response header. The last page of results may be empty, for example in the case of a stateless pagination implementation by the Event Producer.
+      operationId: "get-events"
+      parameters:
+      - name: "carrierBookingReference"
+        in: "query"
+        description: "Reference of the booking for which to return the associated events"
+        schema:
+          type: "string"
+        example: "ABC709951"
+      - name: "transportDocumentReference"
+        in: "query"
+        description: "Reference of the transport document for which to return the associated events"
+        schema:
+          type: "string"
+        example: "HHL71800000"
+      - name: "equipmentReference"
+        in: "query"
+        description: "Reference of the equipment for which to return the associated events"
+        schema:
+          type: "string"
+        example: "APZU4812090"
+      - name: "eventTypes"
+        in: "query"
+        description: "Retrieve only events whose `eventType` is in this list"
+        explode: false
+        schema:
+          type: "array"
+          items:
+            type: "string"
+        example: "EQUIPMENT,IOT,REEFER"
+      - name: "eventUpdatedDateTimeMin"
+        in: "query"
+        description: "Retrieve events with an `eventUpdatedDateTime` at or after this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "eventUpdatedDateTimeMax"
+        in: "query"
+        description: "Retrieve events with an `eventUpdatedDateTime` at or before this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of events to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "3.0.0"
+      responses:
+        "200":
+          description: "List of events matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEventsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEventsError"
+    post:
+      tags:
+      - "Event Consumer Endpoints"
+      summary: "Sends a list of events"
+      description: |
+        Used by an Event Producer to send T&T Events to a registered Event Consumer.
+
+        The subscription mechanism and the management of Event Consumer profiles, including any filtering or page limits similar with the GET endpoint, are out of scope in this standard.
+      operationId: "post-events"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "3.0.0"
+      requestBody:
+        description: "List of events"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostEventsRequest"
+        required: true
+      responses:
+        "200":
+          description: "Events response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostEventsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostEventsError"
+components:
+  schemas:
+    ActiveReeferParameters:
+      type: "object"
+      properties:
+        temperatureValue:
+          type: "number"
+          description: "Internal temperature value expressed in `temperatureUnit`"
+          format: "float"
+          example: -15
+        temperatureUnit:
+          type: "string"
+          description: |
+            Unit in which the `temperatureValue` and `ambientTemperatureValue` are expressed:
+            - `CEL` (Celsius)
+            - `FAH` (Fahrenheit)
+          example: "CEL"
+        ambientTemperatureValue:
+          type: "number"
+          description: "Ambient temperature value expressed in `temperatureUnit`"
+          format: "float"
+          example: -15
+        o2Percentage:
+          type: "number"
+          description: "O<sub>2</sub> percentage"
+          format: "float"
+          example: 25
+        co2Percentage:
+          type: "number"
+          description: "CO<sub>2</sub> percentage"
+          format: "float"
+          example: 25
+        humidityPercentage:
+          type: "number"
+          description: "Humidity percentage"
+          format: "float"
+          example: 50
+        airExchangeValue:
+          type: "number"
+          description: "Air exchange rate expressed in `airExchangeUnit`"
+          format: "float"
+          example: 15.4
+        airExchangeUnit:
+          type: "string"
+          description: |
+            Unit in which the `airExchangeValue` is expressed:
+            - `MQH` (Cubic metre per hour)
+            - `FQH` (Cubic foot per hour)
+          example: "MQH"
+        isVentilationOpen:
+          type: "boolean"
+          description: "Flag indicating whether the ventilation orifice is open"
+          example: true
+        isDrainholesOpen:
+          type: "boolean"
+          description: "Flag indicating whether drainholes are open"
+          example: true
+        isBulbMode:
+          type: "boolean"
+          description: "Flag indicating whether bulb mode is active"
+          example: true
+        isColdTreatmentRequired:
+          type: "boolean"
+          description: |
+            Flag indicating whether cargo cold treatment is required prior to loading at origin,
+            or during transit but prior arrival at POD.
+          example: true
+        isControlledAtmosphereRequired:
+          type: "boolean"
+          description: "Flag indicating whether controlled atmosphere is required"
+          example: true
+      description: |
+        Parameters of a Reefer equipment, usable as setpoint or as measured values.
+    Address:
+      type: "object"
+      properties:
+        street:
+          maxLength: 70
+          type: "string"
+          description: "The name of the street."
+          example: "Ruijggoordweg"
+        streetNumber:
+          maxLength: 50
+          type: "string"
+          description: "The number of the street."
+          example: "100"
+        floor:
+          maxLength: 50
+          type: "string"
+          description: "The floor of the street number."
+          example: "N/A"
+        postCode:
+          maxLength: 10
+          type: "string"
+          description: "The post code of the address."
+          example: "1047 HM"
+        POBox:
+          maxLength: 20
+          type: "string"
+          description: "A numbered box at a post office where a person or business can have mail or parcels delivered."
+          example: "123"
+        city:
+          maxLength: 35
+          type: "string"
+          description: "The name of the city."
+          example: "Amsterdam"
+        stateRegion:
+          maxLength: 65
+          type: "string"
+          description: "The name of the state/region."
+          example: "North Holland"
+        countryCode:
+          maxLength: 2
+          type: "string"
+          description: "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+          example: "NL"
+      description: "An object for storing address-related information."
+    ClassifiedDateTime:
+      type: "object"
+      properties:
+        value:
+          maxLength: 30
+          type: "string"
+          description: |
+            Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        classifier:
+          maxLength: 10
+          type: "string"
+          description: |-
+            Classifier denoting whether an event is planned, estimated or actual
+            - `PLN` - Planned
+            - `EST` - Estimated
+            - `ACT` - Actual
+          example: "EST"
+      description: "Date and time classified as planned, estimated or actual"
+    DocumentReference:
+      type: "object"
+      properties:
+        typeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of a document reference
+            - `AMF` - Advance Manifest Filing (of any subtype)
+            - `ARN` - Arrival Notice
+            - `BKG` - Booking
+            - `CAS` - Cargo Survey
+            - `CBR` - Carrier Booking Request
+            - `CEA` - Certificate of Analysis
+            - `CEO` - Certificate of Origin
+            - `CQU` - Contract Quotation
+            - `CRO` - Container Release Order
+            - `CUC` - Customs Clearance
+            - `DEI` - Delivery Instructions
+            - `DEO` - Delivery Order
+            - `DGD` - Dangerous Goods Declaration
+            - `FCE` - Fumigation Certificate
+            - `HCE` - Health Certificate
+            - `ICE` - Inspection Certificate
+            - `INV` - Invoice
+            - `OOG` - Out of Gauge
+            - `PCE` - Phytosanitary Certificate
+            - `PFD` - Proof of Delivery
+            - `SHI` - Shipping Instruction
+            - `TRD` - Transport Document
+            - `TRO` - Transport Order
+            - `VCE` - Veterinary Certificate
+            - `VGM` - Verified Gross Mass
+          example: "BKG"
+        reference:
+          maxLength: 100
+          type: "string"
+          description: "Reference identifying the document"
+          example: "123e4567e89b"
+      description: "Referenced document"
+    DocumentReferenceReplacement:
+      type: "object"
+      properties:
+        oldReferences:
+          type: "array"
+          description: |
+            References of the documents replaced by those with the `newReferences`.
+          items:
+            $ref: "#/components/schemas/DocumentReference"
+        newReferences:
+          type: "array"
+          description: |
+            References of the documents replacing those with the `oldReferences`.
+          items:
+            $ref: "#/components/schemas/DocumentReference"
+      description: |
+        Object used to indicate that one or more documents were replaced by one or more other documents.
+
+        Used in scenarios including booking split / combine or transport document void / reissue.
+    EquipmentDetails:
+      type: "object"
+      properties:
+        equipmentReference:
+          maxLength: 11
+          type: "string"
+          description: |
+            The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+            According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+            (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+            If a container does not comply with ISO 6346, it is suggested to follow
+            [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+            from SMDG.
+          example: "APZU4812090"
+        ISOEquipmentCode:
+          maxLength: 4
+          type: "string"
+          description: |
+            Unique code identifying the equipment size and type used to transport commodities.
+            The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
+            following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.
+          example: "22GP"
+        emptyIndicatorCode:
+          type: "string"
+          description: |-
+            Code to denote whether the equipment is empty or laden.
+            - `EMPTY` - Empty
+            - `LADEN` - Laden
+          example: "LADEN"
+        movementType:
+          type: "string"
+          description: |-
+            Code used to denote the type of movement
+            - `IMPORT` - Import movement
+            - `EXPORT` - Export movement
+            - `TRANSSHIPMENT` - Transshipment movement
+          example: "EXPORT"
+        seals:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Seal"
+      description: "Equipment-specific details"
+    Event:
+      type: "object"
+      properties:
+        eventRouting:
+          description: |
+            Routing of an event from the originating party, via forwarding parties, to the destination party.
+          allOf:
+          - $ref: "#/components/schemas/EventRouting"
+        eventID:
+          maxLength: 500
+          type: "string"
+          description: |
+            ID of the event, unique among all the events published by a T&T Event Producer.
+
+            An event overrides any other event that has the same `eventID` and an earlier `eventUpdatedDateTime`.
+
+            Each event is uniquely identified within each T&T 3.x standard ecosystem of connected implementers
+            by a composite key including:
+            - `eventRouting.originatingParty.partyCode`
+            - `eventRouting.originatingParty.codeListProvider`
+            - `eventRouting.originatingParty.codeListName`
+            - `eventID`
+          example: "event-HHL71800000-APZU4812090-IoT-DRO-2025-01-23T01:23:45Z"
+        isRetracted:
+          type: "boolean"
+          description: |
+            Flag indicating that the event is retracted.
+
+            The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
+
+            If this flag is set, any event data other than the `eventID` is irrelevant (if present).
+        eventDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the real-world event has occurred or will occur."
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        eventUpdatedDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the technical event was last updated."
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        eventLocation:
+          description: "The location of the event."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        shipmentLocationType:
+          type: "string"
+          description: |-
+            Code used to denote the type of a shipment location
+            - `FCD` - Full container drop-off location
+            - `IEL` - Container intermediate export stop-off location
+            - `OIR` - Onward Inland Routing
+            - `ORI` - Origin of goods
+            - `PCF` - Pre-carriage From
+            - `PDE` - Place of Delivery
+            - `POD` - Port of Discharge
+            - `POL` - Port of Loading
+            - `PRE` - Place of Receipt
+            - `PTP` - Prohibited transshipment port
+            - `RTP` - Requested transshipment port
+          example: "PRE"
+        documentReferences:
+          type: "array"
+          description: "List of document references related to this event"
+          items:
+            $ref: "#/components/schemas/DocumentReference"
+        documentReferenceReplacements:
+          type: "array"
+          description: "List of document replacements related to this event"
+          items:
+            $ref: "#/components/schemas/DocumentReferenceReplacement"
+        shipmentReferences:
+          type: "array"
+          description: "List of shipment references related to this event"
+          items:
+            $ref: "#/components/schemas/ShipmentReference"
+        shipmentReferenceReplacements:
+          type: "array"
+          description: "List of shipment reference replacements related to this event"
+          items:
+            $ref: "#/components/schemas/ShipmentReferenceReplacement"
+        eventClassification:
+          description: "Type, subtype and classifier of an event"
+          allOf:
+          - $ref: "#/components/schemas/EventClassification"
+        shipmentDetails:
+          description: "Shipment-specific details"
+          allOf:
+          - $ref: "#/components/schemas/ShipmentDetails"
+        transportDetails:
+          description: "Transport-specific details"
+          allOf:
+          - $ref: "#/components/schemas/TransportDetails"
+        equipmentDetails:
+          description: "Equipment-specific details"
+          allOf:
+          - $ref: "#/components/schemas/EquipmentDetails"
+        iotDetails:
+          description: "IoT-specific details"
+          allOf:
+          - $ref: "#/components/schemas/IotDetails"
+        reeferDetails:
+          description: "Reefer-specific details"
+          allOf:
+          - $ref: "#/components/schemas/ReeferDetails"
+      description: "Track and Trace event"
+    EventClassification:
+      type: "object"
+      properties:
+        eventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of an event
+            - `SHIPMENT` - Shipment event
+            - `TRANSPORT` - Transport event
+            - `EQUIPMENT` - Equipment event
+            - `IOT` - IoT event
+            - `REEFER` - Reefer event
+          example: "EQUIPMENT"
+        eventClassifierCode:
+          maxLength: 10
+          type: "string"
+          description: |-
+            Classifier denoting whether an event is planned, estimated or actual
+            - `PLN` - Planned
+            - `EST` - Estimated
+            - `ACT` - Actual
+          example: "EST"
+        shipmentEventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of a shipment event
+            - `AMCF` - Amendment Confirmed
+            - `AMCN` - Amendment Cancelled
+            - `AMDC` - Amendment Declined
+            - `AMPR` - Amendment In Progress
+            - `AMRE` - Amendment Received
+            - `APPR` - Approved
+            - `CACF` - Cancellation Confirmed
+            - `CADC` - Cancellation Declined
+            - `CARE` - Cancellation Received
+            - `CMPL` - Completed
+            - `CONF` - Confirmed
+            - `DECL` - Declined
+            - `DRFT` - Drafted
+            - `HOLD` - On Hold
+            - `ISSU` - Issued
+            - `PENA` - Pending Approval
+            - `PENM` - Pending Amendment
+            - `PENU` - Pending Update
+            - `PSAM` - Pending Surrender for Amendment
+            - `PSDL` - Pending Surrender for Delivery
+            - `RECE` - Received
+            - `REJE` - Rejected
+            - `RELS` - Released
+            - `REQS` - Requested
+            - `SUAM` - Surrendered for Amendment
+            - `SUBM` - Submitted
+            - `SUDL` - Surrendered for Delivery
+            - `SURR` - Surrendered
+            - `UPCF` - Update Confirmed
+            - `UPCN` - Update Cancelled
+            - `UPDC` - Update Declined
+            - `UPDT` - Update In Progress
+            - `UPRE` - Update Received
+            - `VOID` - Voided
+          example: "APPR"
+        transportEventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of a transport event
+            - `ARRI` - Arrived
+            - `DEPA` - Departed
+          example: "ARRI"
+        equipmentEventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of an equipment event
+            - `AVDO` - Available for Drop-off
+            - `AVPU` - Available for Pick-up
+            - `CROS` - Crossed
+            - `CUSI` - Customs Selected for Inspection
+            - `CUSR` - Customs Released
+            - `CUSS` - Customs Selected for Scan
+            - `DISC` - Discharged
+            - `DROP` - Drop-off
+            - `GTIN` - Gated in
+            - `GTOT` - Gated out
+            - `INSP` - Inspected
+            - `LOAD` - Loaded
+            - `PICK` - Pick-up
+            - `RMVD` - Removed
+            - `RSEA` - Resealed
+            - `STRP` - Stripped
+            - `STUF` - Stuffed
+          example: "LOAD"
+        iotEventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of an IoT event
+            - `DETC` - Detected
+          example: "DETC"
+        reeferEventTypeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of a reefer event
+            - `MEAS` - Measured
+            - `ADJU` - Adjusted
+          example: "MEAS"
+      description: "Type, subtype and classifier of an event"
+    EventRouting:
+      type: "object"
+      properties:
+        originatingParty:
+          description: |
+            The initial party with which the event originated.
+          allOf:
+          - $ref: "#/components/schemas/Party"
+        forwardingParties:
+          type: "array"
+          description: |
+            Ordered list of parties forwarding the event between the originating and destination party.
+          items:
+            $ref: "#/components/schemas/Party"
+        destinationParty:
+          description: |
+            The final party intended as destination of the event.
+          allOf:
+          - $ref: "#/components/schemas/Party"
+      description: |
+        Routing of an event from the originating party, via forwarding parties, to the destination party.
+    Facility:
+      type: "object"
+      properties:
+        facilityCode:
+          maxLength: 6
+          type: "string"
+          description: |
+            Code identifying a specific facility, as defined by the `facilityCodeListProvider`.
+          example: "ADT"
+        facilityCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            Code list provider (each with its relevant code list) defining the `facilityCode`:
+            - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+            - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))
+          example: "SMDG"
+      description: |
+        Facility identified by a code as defined by a code list provider.
+    FeedbackElement:
+      type: "object"
+      properties:
+        severity:
+          maxLength: 50
+          type: "string"
+          description: |-
+            Code denoting the severity of a `FeedbackElement`
+
+            - `ERROR` - Error that fully or partially prevents the correct processing of the request
+            - `WARN` - Warning about the request being processed in a potentially unexpected way
+            - `INFO` - Informational message about how the request is processed
+          example: "ERROR"
+        message:
+          maxLength: 5000
+          type: "string"
+          description: |
+            Human readable feedback message that can be programmatically relayed to a user of the event publishing organization
+          example: "The facility SMDG code does not match the location UN/LOCODE"
+        propertyPath:
+          maxLength: 1000
+          type: "string"
+          description: |
+            [JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
+            about which the feedback is provided (if applicable)
+          example: "$.events[2].location"
+      description: |
+        An individual piece of feedback (potentially out of several) providing information on how an API request is processed
+    GeoCoordinate:
+      type: "object"
+      properties:
+        latitude:
+          maxLength: 10
+          type: "string"
+          description: |
+            Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
+          example: "48.85855"
+        longitude:
+          maxLength: 11
+          type: "string"
+          description: |
+            Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
+          example: "2.294492036"
+      description: "An object used to express a location using `latitude` and `longitude`."
+    GetEventsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why the request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `GET Events` request
+    GetEventsResponse:
+      type: "object"
+      properties:
+        events:
+          type: "array"
+          description: |
+            The list of events matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/Event"
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `GET Events` request
+    IotDetails:
+      type: "object"
+      properties:
+        iotEventCode:
+          type: "string"
+          description: |-
+            Code used to denote the specific IoT event that has occurred
+            - `DRO` - Door opened
+            - `LOC` - Location update
+          example: "DRO"
+      description: "IoT-specific details"
+    Location:
+      type: "object"
+      properties:
+        locationName:
+          maxLength: 100
+          type: "string"
+          description: "The name of the location."
+          example: "Port of Amsterdam"
+        facilityTypeCode:
+          maxLength: 10
+          type: "string"
+          description: |-
+            Code identifying a specific type of facility
+
+            - `BORD` - Border
+            - `CLOC` - Customer location
+            - `COFS` - Container freight station
+            - `OFFD` - Off-dock storage
+            - `DEPO` - Depot
+            - `INTE` - Inland terminal
+            - `POTE` - Port terminal
+            - `RAMP` - Ramp
+            - `WAYP` - Waypoint
+          example: "RAMP"
+        address:
+          description: "Location address"
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        UNLocationCode:
+          maxLength: 5
+          type: "string"
+          description: |
+            The UN Location code specifying where the place is located. The pattern used must be
+
+            - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+            - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+            More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)
+          example: "NLAMS"
+        facility:
+          description: |
+            Facility identified by a code as defined by a code list provider.
+          allOf:
+          - $ref: "#/components/schemas/Facility"
+        geoCoordinate:
+          description: "An object used to express a location using `latitude` and `longitude`."
+          allOf:
+          - $ref: "#/components/schemas/GeoCoordinate"
+      description: "Location information"
+    Party:
+      type: "object"
+      properties:
+        partyCode:
+          maxLength: 150
+          type: "string"
+          description: |
+            Code identifying the party as per the `codeListProvider` and `codeListName`.
+          example: "MSK"
+        codeListProvider:
+          maxLength: 100
+          type: "string"
+          description: |
+            Code of the provider of a list of codes identifying a party, including but not limited to:
+            - `SMDG` (Ship Message Design Group)
+            - `ZZZ` (Mutually defined)
+
+            or any other code as defined in the
+            [DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).
+          example: "W3C"
+        codeListName:
+          maxLength: 100
+          type: "string"
+          description: |
+            Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+            - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+            - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+            - `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`
+          example: "DID"
+        partyFunction:
+          maxLength: 3
+          type: "string"
+          description: |
+            Code identifying the function of the party, as defined in
+            [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
+            or a subsequent revision.
+          example: "CA"
+      description: "Identification of a container shipping party"
+    PostEventsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+
+            When sent in response to a request that contains an array of events,
+            the order of the `feedbackElements` is not related to the list of request events.
+            Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `POST Events` request.
+
+        If some of the events in the request were successfully processed,
+        a regular `PostEventsResponse` is expected to be used instead,
+        with `feedbackElements` indicating which events were not processed and why.
+    PostEventsRequest:
+      type: "object"
+      properties:
+        events:
+          type: "array"
+          description: "List of events."
+          items:
+            $ref: "#/components/schemas/Event"
+      description: "API message containing a list of events."
+    PostEventsResponse:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed.
+
+            There can be zero, one or more feedback elements per event in the request.
+            The order of `feedbackElements` is not related to the order of events in the request.
+            Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `POST Events` request
+    RailTransport:
+      type: "object"
+      properties:
+        railCarReference:
+          maxLength: 50
+          type: "string"
+          description: |
+            Reference of the rail car on which the equipment is transported.
+        railServiceReference:
+          maxLength: 50
+          type: "string"
+          description: |
+            Reference of the rail service on which the equipment is transported.
+        departureID:
+          maxLength: 100
+          type: "string"
+          description: |
+            Unique identifying number or code that is assigned to a specific departure of a rail.
+            (Also known as a departure reference number.)
+      description: "Rail transport information"
+    ReeferDetails:
+      type: "object"
+      properties:
+        setpointParameters:
+          description: "Setpoint active reefer parameters"
+          allOf:
+          - $ref: "#/components/schemas/ActiveReeferParameters"
+        measuredParameters:
+          description: "Measured active reefer parameters"
+          allOf:
+          - $ref: "#/components/schemas/ActiveReeferParameters"
+      description: "Reefer-specific details"
+    Seal:
+      type: "object"
+      properties:
+        number:
+          maxLength: 15
+          type: "string"
+          description: "Identifies a seal affixed to the container."
+          example: "VET123"
+        source:
+          type: "string"
+          description: |
+            The source of the seal, namely who has affixed the seal.
+            - `CAR` (Carrier)
+            - `SHI` (Shipper)
+            - `PHY` (Phytosanitary)
+            - `VET` (Veterinary)
+            - `CUS` (Customs)
+
+            In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
+            both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
+          example: "CUS"
+        type:
+          type: "string"
+          description: |
+            The type of seal.
+            - `KLP` (Keyless padlock)
+            - `BLT` (Bolt)
+            - `WIR` (Wire)
+          example: "WIR"
+      description: |
+        Seal-related information associated with the shipment equipment.
+        A seal is put on a shipment equipment once it is loaded.
+        This seal is meant to stay on until the shipment equipment reaches its final destination.
+    ServiceCodeOrReference:
+      type: "object"
+      properties:
+        carrierServiceCode:
+          type: "string"
+          description: "Carrier-specific identifier of a service."
+          example: "FE1"
+        universalServiceReference:
+          maxLength: 8
+          type: "string"
+          description: |
+            Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
+
+            DCSA generates and distributes batches of Universal Service References (USRs)
+            to member and non-member carriers upon request, for their own use or for their alliances and VSAs.
+
+            A carrier can use each of its assigned USRs either in agreement with its partners for a service under a VSA or Alliance,
+            or independently for one of its own non-VSA, non-Alliance services.
+
+            Every Universal Service Reference is an 8-character string with the following format:
+             * the prefix "SR"
+             * 5 digits
+             * 1 uppercase English letter (A-Z).
+          example: "SR12345A"
+      description: "Carrier service code and/or universal service reference"
+    ShipmentDetails:
+      type: "object"
+      properties:
+        documentReference:
+          description: "Referenced document"
+          allOf:
+          - $ref: "#/components/schemas/DocumentReference"
+        reason:
+          type: "string"
+          description: "The reason this event was sent"
+        priceCalculationDate:
+          type: "string"
+          description: |
+            Date taken in consideration for the tariff applicability, that differs depending on the trade.
+            It can vary per carrier.
+          format: "date"
+          example: "2025-01-23"
+      description: "Shipment-specific details"
+    ShipmentReference:
+      type: "object"
+      properties:
+        typeCode:
+          type: "string"
+          description: |-
+            Code used to denote the type of a shipment reference
+            - `AAO` - Consignee’s Reference
+            - `AES` - Automated Export System
+            - `BID` - Booking Request ID
+            - `BPR` - Booking party reference number
+            - `CER` - Canadian Export Reporting System
+            - `CR` - Customer’s Reference
+            - `CSI` - Customer shipment ID
+            - `DUE` - Declaração Única de Exportação
+            - `ECR` - Empty container release reference
+            - `EQ` - Equipment Reference
+            - `FF` - Freight Forwarder’s Reference
+            - `PO` - Purchase Order Reference
+            - `RUC` - Registro Único del Contribuyente
+            - `SI` - Shipper’s Reference
+          example: "FF"
+        reference:
+          maxLength: 100
+          type: "string"
+          description: "The actual reference value"
+          example: "123e4567e89b"
+      description: |
+        References provided by the shipper or freight forwarder at the time of booking or at the time of providing shipping instructions.
+        Carriers share it back when providing track and trace event updates, some are also printed on the B/L.
+        Customers can use these references to track shipments in their internal systems.
+
+        In addition to the References provided by the shipper or freight forwarder,
+        the carrier can provide an extra type called `EQ` which is a reference to an Equipment.
+    ShipmentReferenceReplacement:
+      type: "object"
+      properties:
+        oldReferences:
+          type: "array"
+          description: |
+            References of the shipment elements or equipments replaced by those with the `newReferences`.
+          items:
+            $ref: "#/components/schemas/ShipmentReference"
+        newReferences:
+          type: "array"
+          description: |
+            References of the shipment elements or equipments replacing those with the `oldReferences`.
+          items:
+            $ref: "#/components/schemas/ShipmentReference"
+      description: |
+        Object used to indicate that one or more shipment elements were replaced by one or more other elements.
+
+        Used in scenarios including the replacement of shipment references or equipments.
+    TransportCall:
+      type: "object"
+      properties:
+        transportCallReference:
+          type: "string"
+          description: |
+            Carrier-defined reference of a `TransportCall`.
+
+            If the mode of transport is Vessel and the facility is a Port or Terminal,
+            this reference should be considered a terminal call reference.
+        transportCallSequenceNumber:
+          type: "integer"
+          description: |
+            Transport operator's key that uniquely identifies each individual transport call.
+            This key is essential to distinguish between two separate calls at the same location within one voyage.
+          format: "int32"
+        modeOfTransport:
+          maxLength: 50
+          type: "string"
+          description: |-
+            The mode of transport as defined by DCSA
+            - `VESSEL` - Vessel
+            - `RAIL` - Rail
+            - `TRUCK` - Truck
+            - `BARGE` - Barge
+            - `MULTIMODAL` - Multimodal
+          example: "VESSEL"
+        portVisitReference:
+          type: "string"
+          description: |
+            The unique reference that can be used to link different `transportCallReferences` to the same port visit.
+            The reference is provided by the port to uniquely identify a port call.
+        serviceCodeOrReference:
+          description: "Carrier service code and/or universal service reference"
+          allOf:
+          - $ref: "#/components/schemas/ServiceCodeOrReference"
+        exportVoyageNumberOrReference:
+          description: "Export voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        importVoyageNumberOrReference:
+          description: "Import voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        vesselTransport:
+          description: "Vessel or barge transport information"
+          allOf:
+          - $ref: "#/components/schemas/VesselTransport"
+        railTransport:
+          description: "Rail transport information"
+          allOf:
+          - $ref: "#/components/schemas/RailTransport"
+        truckTransport:
+          description: "Truck transport information"
+          allOf:
+          - $ref: "#/components/schemas/TruckTransport"
+      description: "Transport call information"
+    TransportDetails:
+      type: "object"
+      properties:
+        delayReasonCodes:
+          type: "array"
+          description: "Codes identifying the reasons for a delay"
+          items:
+            maxLength: 3
+            type: "string"
+            description: |
+              Code identifying the reason for a delay,
+              [as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
+            example: "STR"
+        changeRemark:
+          maxLength: 250
+          type: "string"
+          description: |
+            Free text information provided by the vessel operator regarding the reasons for the change in schedule
+            and/or plans to mitigate schedule slippage.
+          example: "Bad weather"
+        transportCall:
+          description: "Transport call information"
+          allOf:
+          - $ref: "#/components/schemas/TransportCall"
+      description: "Transport-specific details"
+    TruckTransport:
+      type: "object"
+      properties:
+        tractorDetails:
+          description: |
+            The license plate and VIN of the tractor of the truck used to transport the equipment.
+          allOf:
+          - $ref: "#/components/schemas/VehicleDetails"
+        trailerDetails:
+          description: |
+            The license plate and VIN of the trailer of the truck on which the equipment is transported,
+            if the trailer is separate from the truck trailer and has its own details.
+          allOf:
+          - $ref: "#/components/schemas/VehicleDetails"
+      description: "Truck transport information"
+    VehicleDetails:
+      type: "object"
+      properties:
+        licensePlate:
+          maxLength: 15
+          type: "string"
+          description: |
+            A license plate is a tag that is attached to a vehicle and displays a unique number or code assigned to the vehicle.
+            The format, design, and issuing authority for license plates vary by country, state, and province.
+        vehicleIdentificationNumber:
+          maxLength: 15
+          type: "string"
+          description: |
+            A chassis number is a unique identifying number or code assigned to the chassis of a vehicle.
+            It may also be referred to as a "vehicle identification number" (VIN), "chassis number" or "frame number".
+      description: "Details of a vehicle, typically of the tractor or of each trailer of a truck"
+    VesselTransport:
+      type: "object"
+      properties:
+        vesselIMONumber:
+          maxLength: 8
+          type: "string"
+          description: |
+            The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
+            The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.
+          example: "9321483"
+        vesselName:
+          maxLength: 50
+          type: "string"
+          description: "Vessel name"
+          example: "King of the Seas"
+        vesselFlag:
+          maxLength: 2
+          type: "string"
+          description: |
+            The national flag of the country under which a vessel is registered,
+            indicated by the 2-character code defined in
+            [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).
+          example: "NL"
+        vesselCallSign:
+          maxLength: 10
+          type: "string"
+          description: |
+            A unique alphanumeric identity that belongs to the vessel
+            and is assigned by the International Telecommunication Union (ITU).
+            It consists of a three-letter alphanumeric prefix that indicates nationality,
+            followed by one to four characters to identify the individual vessel.
+          example: "NCVV"
+        operatorCarrierCode:
+          maxLength: 10
+          type: "string"
+          description: |
+            The carrier who is in charge of the vessel operation based on `operatorCarrierCodeListProvider`
+          example: "MAEU"
+        operatorCarrierCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            The code list provider used for the `operatorCarrierCode` (SMDG or NMFTA)
+          example: "SMDG"
+      description: "Vessel or barge transport information"
+    VoyageNumberOrReference:
+      type: "object"
+      properties:
+        carrierVoyageNumber:
+          type: "string"
+          description: "Carrier-specific identifier of the voyage"
+          example: "2103S"
+        universalVoyageReference:
+          maxLength: 5
+          type: "string"
+          description: |
+            Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+            Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+            either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+            Every Universal Voyage Reference is a 5-character string with the following format:
+             * the last 2 digits of the year
+             * 2 alphanumeric characters for the sequence number of the voyage
+             * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).
+          example: "2301W"
+      description: "Carrier voyage number and/or universal voyage reference"
+  headers:
+    API-Version:
+      description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+      schema:
+        type: "string"
+        example: "3.0.0"
+    Next-Page-Cursor:
+      description: "A cursor value pointing to the next page of results in a paginated GET response."
+      schema:
+        type: "string"
+        example: "ExampleNextPageCursor"

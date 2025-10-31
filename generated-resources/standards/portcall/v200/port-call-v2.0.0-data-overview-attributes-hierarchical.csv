@@ -1,0 +1,420 @@
+Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Event,,,,,,,,
+"Event / eventID",eventID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the event",
+"Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
+"Event / isFYI",isFYI,boolean,,,,false,"Flag indicating that this event is primarily meant for another party - but is sent as a FYI (for your information).",
+"Event / movesForecasts",movesForecasts,"MovesForecast list",,,,,"The moves forecasts of a port call service with `portCallServiceTypeCode='MOVES'`",
+"Event / movesForecasts / carrierCode",carrierCode,string,,maxLength=4,,MAEU,"SMDG or SCAC code of the carrier for which the moves forecast is provided.
+
+If left unspecified, this is the aggregated moves forecast is for all the VSA partner carriers on the vessel
+for which a dedicated moves forecast was not provided.",
+"Event / movesForecasts / carrierCodeListProvider",carrierCodeListProvider,string,,maxLength=5,,SMDG,"The code list provider defining the `carrierCode`:
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+"Event / movesForecasts / dischargeUnits",dischargeUnits,"ContainerCountByTypeAndSize",,,,,"The number of container to discharge.",
+"Event / movesForecasts / dischargeUnits / emptyUnits",emptyUnits,ContainerCountBySize,,,,,"The number of empty containers.",
+"Event / movesForecasts / dischargeUnits / emptyUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / dischargeUnits / emptyUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / dischargeUnits / emptyUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / dischargeUnits / emptyUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / dischargeUnits / ladenUnits",ladenUnits,ContainerCountBySize,,,,,"The number of laden containers.",
+"Event / movesForecasts / dischargeUnits / ladenUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / dischargeUnits / ladenUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / dischargeUnits / ladenUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / dischargeUnits / ladenUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / dischargeUnits / outOfGaugeUnits",outOfGaugeUnits,ContainerCountBySize,,,,,"The number of out-of-gauge containers.",
+"Event / movesForecasts / dischargeUnits / outOfGaugeUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / dischargeUnits / outOfGaugeUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / dischargeUnits / outOfGaugeUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / dischargeUnits / outOfGaugeUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / dischargeUnits / pluggedReeferUnits",pluggedReeferUnits,ContainerCountBySize,,,,,"The number of plugged reefer containers.",
+"Event / movesForecasts / dischargeUnits / pluggedReeferUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / dischargeUnits / pluggedReeferUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / dischargeUnits / pluggedReeferUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / dischargeUnits / pluggedReeferUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / dischargeUnits / totalUnits",totalUnits,ContainerCountBySize,,,,,"The total number of containers (relevant only if specific numbers for each container type are not provided).",
+"Event / movesForecasts / dischargeUnits / totalUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / dischargeUnits / totalUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / dischargeUnits / totalUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / dischargeUnits / totalUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / loadUnits",loadUnits,"ContainerCountByTypeAndSize",,,,,"The number of container to load.",
+"Event / movesForecasts / loadUnits / emptyUnits",emptyUnits,ContainerCountBySize,,,,,"The number of empty containers.",
+"Event / movesForecasts / loadUnits / emptyUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / loadUnits / emptyUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / loadUnits / emptyUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / loadUnits / emptyUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / loadUnits / ladenUnits",ladenUnits,ContainerCountBySize,,,,,"The number of laden containers.",
+"Event / movesForecasts / loadUnits / ladenUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / loadUnits / ladenUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / loadUnits / ladenUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / loadUnits / ladenUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / loadUnits / outOfGaugeUnits",outOfGaugeUnits,ContainerCountBySize,,,,,"The number of out-of-gauge containers.",
+"Event / movesForecasts / loadUnits / outOfGaugeUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / loadUnits / outOfGaugeUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / loadUnits / outOfGaugeUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / loadUnits / outOfGaugeUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / loadUnits / pluggedReeferUnits",pluggedReeferUnits,ContainerCountBySize,,,,,"The number of plugged reefer containers.",
+"Event / movesForecasts / loadUnits / pluggedReeferUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / loadUnits / pluggedReeferUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / loadUnits / pluggedReeferUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / loadUnits / pluggedReeferUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / loadUnits / totalUnits",totalUnits,ContainerCountBySize,,,,,"The total number of containers (relevant only if specific numbers for each container type are not provided).",
+"Event / movesForecasts / loadUnits / totalUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / loadUnits / totalUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / loadUnits / totalUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / loadUnits / totalUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / movesForecasts / restowUnits",restowUnits,ContainerCountBySize,,,,,"The number of container to restow.",
+"Event / movesForecasts / restowUnits / size20Units",size20Units,integer,,,,123,"The number of 20-foot containers.",
+"Event / movesForecasts / restowUnits / size40Units",size40Units,integer,,,,123,"The number of 40-foot containers.",
+"Event / movesForecasts / restowUnits / size45Units",size45Units,integer,,,,123,"The number of 45-foot containers.",
+"Event / movesForecasts / restowUnits / totalUnits",totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+"Event / portCall",portCall,PortCall,,,,,"Port call information",
+"Event / portCall / isOmitted",isOmitted,boolean,,,,false,"Flag indicating whether the port call is omitted by the carrier.",
+"Event / portCall / portCallID",portCallID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the port call",
+"Event / portCall / portVisitReference",portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different terminal calls to the same port visit.
+The reference is provided by the port to uniquely identify a port call.",
+"Event / portCall / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"Event / portCallService",portCallService,PortCallService,,,,,"Port call service information",
+"Event / portCallService / facilityTypeCode",facilityTypeCode,string,,maxLength=4,,BRTH,"Code identifying a specific type of facility involved in a port call service:
+- `PBPL` (Pilot boarding place)
+- `BRTH` (Berth)
+- `ANCH` (Anchorage Location)
+
+The `PBPL` facility type is relevant for port call services with the following `portCallServiceTypeCode`:
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `PILOT_BOARDING_PLACE` (Pilot Boarding Place)
+
+The `BRTH` facility type is relevant for port call services with the following `portCallServiceTypeCode`:
+- `BERTH` (Berth)
+- `CARGO_OPERATIONS` (Cargo operations)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `BUNKERING` (Bunkering)
+- `SLUDGE` (Sludge)
+- `ALL_FAST` (All Fast)
+- `GANGWAY_DOWN_AND_SECURE` (Gangway down and secure)
+- `VESSEL_READY_FOR_CARGO_OPERATIONS` (Vessel Ready for cargo operations)
+- `VESSEL_READY_TO_SAIL` (Vessel Ready to sail)
+- `DISCHARGE_CARGO_OPERATIONS` (Discharge cargo operations)
+- `LOADING_CARGO_OPERATIONS` (Loading cargo operations)
+- `LASHING` (Lashing)
+- `SAFETY` (Safety)
+- `ANCHORAGE_OPERATIONS` (Anchorage Operations)
+- `SHORE_POWER` (ShorePower)
+
+The `ANCH` facility type is relevant for port call services with the following `portCallServiceTypeCode`:
+- `ANCHORAGE` (Anchorage)
+- `ANCHORAGE_OPERATIONS` (Anchorage Operations)",
+"Event / portCallService / isCanceled",isCanceled,boolean,,,,false,"Flag indicating that this port call service is canceled by the service provider.",
+"Event / portCallService / isDeclined",isDeclined,boolean,,,,false,"Flag indicating that this port call service is declined by the service consumer.",
+"Event / portCallService / portCallID",portCallID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the port call service",
+"Event / portCallService / portCallPhaseTypeCode",portCallPhaseTypeCode,string,,maxLength=4,,ALGS,"The general direction of the vessel during this port call service:
+- `INBD` (Inbound)
+- `ALGS` (Alongside)
+- `SHIF` (Shifting)
+- `OUTB` (Outbound)
+
+The direction `INBD` should be used with one of these `portCallServiceTypeCode` values:
+- `BERTH` (Berth)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `PILOT_BOARDING_PLACE` (Pilot Boarding Place)
+- `SEA_PASSAGE` (Sea Passage)
+
+The direction `ALGS` should be used with one of these `portCallServiceTypeCode` values:
+- `BERTH` (Berth)
+- `BUNKERING` (Bunkering)
+- `CARGO_OPERATIONS` (Cargo operations)
+- `ALL_FAST` (All Fast)
+- `GANGWAY_DOWN_AND_SECURE` (Gangway down and secure)
+- `VESSEL_READY_FOR_CARGO_OPERATIONS` (Vessel Ready for cargo operations)
+- `VESSEL_READY_TO_SAIL` (Vessel Ready to sail)
+- `DISCHARGE_CARGO_OPERATIONS` (Discharge cargo operations)
+- `LOADING_CARGO_OPERATIONS` (Loading cargo operations)
+- `LASHING` (Lashing)
+- `SAFETY` (Safety)
+- `SHORE_POWER` (ShorePower)
+
+The direction `SHIF` should be used with one of these `portCallServiceTypeCode` values:
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+
+The direction `OUTB` should be used with one of these `portCallServiceTypeCode` values:
+- `BERTH` (Berth)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `SEA_PASSAGE` (Sea Passage)
+
+The `portCallPhaseTypeCode` is not applicable for these `portCallServiceTypeCode` values:
+- `ANCHORAGE` (Anchorage)
+- `SLUDGE` (Sludge)
+- `ANCHORAGE_OPERATIONS` (Anchorage Operations)
+- `MOVES` (Moves)",
+"Event / portCallService / portCallServiceEventTypeCode","portCallServiceEventTypeCode",string,,maxLength=4,,STRT,"The code to identify the type of event that is related to the port call service:
+- `STRT` (Started)
+- `CMPL` (Completed)
+- `ARRI` (Arrived)
+- `DEPA` (Departed)
+
+Services with these `portCallServiceTypeCode` values only have `portCallServiceEventTypeCode` the values `STRT` or `CMPL`:
+- `CARGO_OPERATIONS` (Cargo operations)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `BUNKERING` (Bunkering)
+- `ANCHORAGE` (Anchorage)
+- `SLUDGE` (Sludge)
+- `SEA_PASSAGE` (Sea Passage)
+- `DISCHARGE_CARGO_OPERATIONS` (Discharge cargo operations)
+- `LOADING_CARGO_OPERATIONS` (Loading cargo operations)
+- `LASHING` (Lashing)
+- `ANCHORAGE_OPERATIONS` (Anchorage Operations)
+- `SHORE_POWER` (ShorePower)
+
+Services with these `portCallServiceTypeCode` values only have the `portCallServiceEventTypeCode` value `ARRI`:
+- `PILOT_BOARDING_PLACE` (Pilot Boarding Place)
+- `ALL_FAST` (All Fast)
+- `GANGWAY_DOWN_AND_SECURE` (Gangway down and secure)
+- `VESSEL_READY_FOR_CARGO_OPERATIONS` (Vessel Ready for cargo operations)
+- `VESSEL_READY_TO_SAIL` (Vessel Ready to sail)
+- `MOVES` (Moves)
+
+Services with  `portCallServiceTypeCode='SAFETY'` (Safety) only have the `portCallServiceEventTypeCode` value `DEPA`.
+
+Services with `portCallServiceTypeCode='BERTH'` (Berth) only have the `portCallServiceEventTypeCode` values `ARRI` or `DEPA`.",
+"Event / portCallService / portCallServiceTypeCode",portCallServiceTypeCode,string,,maxLength=50,,BERTH,"The type of the port call service, with the value from one of the service lists below.
+
+These port call services are negotiable through an ""ERP"" pattern including an ""A"":
+- `BERTH` (Berth)
+- `CARGO_OPERATIONS` (Cargo operations)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `BUNKERING` (Bunkering)
+- `PILOT_BOARDING_PLACE` (Pilot Boarding Place)
+- `ANCHORAGE` (Anchorage)
+- `SLUDGE` (Sludge)
+
+These port call services only an ""A"" timestamp without an ""ERP"" pattern:
+- `SEA_PASSAGE` (Sea Passage)
+- `ALL_FAST` (All Fast)
+- `GANGWAY_DOWN_AND_SECURE` (Gangway down and secure)
+- `VESSEL_READY_FOR_CARGO_OPERATIONS` (Vessel Ready for cargo operations)
+- `VESSEL_READY_TO_SAIL` (Vessel Ready to sail)
+- `DISCHARGE_CARGO_OPERATIONS` (Discharge cargo operations)
+- `LOADING_CARGO_OPERATIONS` (Loading cargo operations)
+- `LASHING` (Lashing)
+- `SAFETY` (Safety)
+- `ANCHORAGE_OPERATIONS` (Anchorage Operations)
+- `SHORE_POWER` (ShorePower)
+
+This port call service has neither an ""A"" timestamp nor an ""ERP"" pattern:
+- `MOVES` (Moves)",
+"Event / portCallService / serviceLocation",serviceLocation,Location,,,,,"The location at which the port call service is provided",
+"Event / portCallService / serviceLocation / address",address,Address,,,,,"Location address",
+"Event / portCallService / serviceLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"Event / portCallService / serviceLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"Event / portCallService / serviceLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"Event / portCallService / serviceLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"Event / portCallService / serviceLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"Event / portCallService / serviceLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"Event / portCallService / serviceLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"Event / portCallService / serviceLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"Event / portCallService / serviceLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"Event / portCallService / serviceLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"Event / portCallService / serviceLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"Event / portCallService / serviceLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"Event / portCallService / serviceLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
+"Event / portCallService / serviceLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+"Event / portCallService / serviceLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"Event / portCallService / serviceLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"Event / portCallService / serviceLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"Event / replyToEventID",replyToEventID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","ID of an earlier event to which this event is a reply.
+
+Used when sending a timestamp as a reply to another timestamp as part of
+[the ""ERP"" pattern defined by the IMO](https://wwwcdn.imo.org/localresources/en/OurWork/Facilitation/FAL%20related%20nonmandatory%20documents/FAL.5-Circ.52.pdf).",
+"Event / terminalCall",terminalCall,TerminalCall,,,,,"Terminal call information",
+"Event / terminalCall / carrierServiceName",carrierServiceName,string,,maxLength=50,,"Great Lion Service","The carrier-specific name of the service for which the schedule details are published.",
+"Event / terminalCall / exportVoyageNumberOrReference","exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
+"Event / terminalCall / exportVoyageNumberOrReference / carrierVoyageNumber",carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+"Event / terminalCall / exportVoyageNumberOrReference / universalVoyageReference",universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"Event / terminalCall / importVoyageNumberOrReference","importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
+"Event / terminalCall / importVoyageNumberOrReference / carrierVoyageNumber",carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+"Event / terminalCall / importVoyageNumberOrReference / universalVoyageReference",universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"Event / terminalCall / isOmitted",isOmitted,boolean,,,,false,"Flag indicating whether the terminal call is omitted by the carrier.",
+"Event / terminalCall / sequenceNumber",sequenceNumber,integer,,,,2,"Sequential number assigned to each terminal call within a port call,
+indicating the order in which the terminal calls are scheduled to occur.
+This number helps differentiate multiple terminal visits in the same port call.",
+"Event / terminalCall / serviceCodeOrReference",serviceCodeOrReference,ServiceCodeOrReference,,,,,"Carrier service code and/or universal service reference",
+"Event / terminalCall / serviceCodeOrReference / carrierServiceCode",carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service.",
+"Event / terminalCall / serviceCodeOrReference / universalServiceReference","universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
+
+DCSA generates and distributes batches of Universal Service References (USRs)
+to member and non-member carriers upon request, for their own use or for their alliances and VSAs.
+
+A carrier can use each of its assigned USRs either in agreement with its partners for a service under a VSA or Alliance,
+or independently for one of its own non-VSA, non-Alliance services.
+
+Every Universal Service Reference is an 8-character string with the following format:
+ * the prefix ""SR""
+ * 5 digits
+ * 1 uppercase English letter (A-Z).",
+"Event / terminalCall / terminalCallID",terminalCallID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the terminal call",
+"Event / terminalCall / terminalCallReference",terminalCallReference,string,,maxLength=100,,15063401,"The unique reference of a terminal call, provided by the vessel operator.
+
+This corresponds to the property `transportCallReference` from the DCSA Operational Vessel Schedules (OVS) 3.0 standard.",
+"Event / timestamp",timestamp,Timestamp,,,,,"Timestamp and associated metadata of a port call service,
+exchanged between the service provider and service consumer as part of
+[the ""ERP"" pattern defined by the IMO](https://wwwcdn.imo.org/localresources/en/OurWork/Facilitation/FAL%20related%20nonmandatory%20documents/FAL.5-Circ.52.pdf).",
+"Event / timestamp / classifierCode",classifierCode,string,,maxLength=3,,EST,"Code identifying the type of this timestamp within the context of
+[the ""ERP"" pattern defined by the IMO](https://wwwcdn.imo.org/localresources/en/OurWork/Facilitation/FAL%20related%20nonmandatory%20documents/FAL.5-Circ.52.pdf):
+- `ACT` (Actual)
+- `EST` (Estimated)
+- `PLN` (Planned)
+- `REQ` (Requested)
+
+Timestamps of type `EST`, `PLN` and `ACT` are sent by the service provider to the service consumer.
+
+Timestamps of type `REQ` are sent by the service consumer to the service provider.
+
+Timestamps of type `ACT` are relevant in port call services of every type except for `MOVES`.
+
+Timestamps of type `EST`, `REQ` and `PLN` are relevant in port call services of these types:
+- `BERTH` (Berth)
+- `CARGO_OPERATIONS` (Cargo operations)
+- `PILOTAGE` (Pilotage)
+- `TOWAGE` (Towage)
+- `MOORING` (Mooring)
+- `BUNKERING` (Bunkering)
+- `PILOT_BOARDING_PLACE` (Pilot Boarding Place)
+- `ANCHORAGE` (Anchorage)
+- `SLUDGE` (Sludge)",
+"Event / timestamp / delayReasonCodes",delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
+Item description:
+Code identifying the reason for a delay,
+[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
+",
+"Event / timestamp / remark",remark,string,,maxLength=500,,"Port closed due to strike","Free text used to provide any relevant additional information.",
+"Event / timestamp / serviceDateTime",serviceDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the service was provided or is expected to be provided.",
+"Event / vessel",vessel,Vessel,,,,,"Vessel information relevant for a port call service",
+"Event / vessel / aftDraft",aftDraft,number,,,,37,"The vertical distance between the waterline and the bottom of the hull (keel) at the stern (after part) of the vessel.
+The depth to which the after part of the ship is immersed in water.",
+"Event / vessel / airDraft",airDraft,number,,,,55.0,"The vertical distance from the surface of the water to the highest point of mast or aerial.",
+"Event / vessel / draft",draft,number,,,,12.5,"The vertical distance between the waterline and the bottom of the hull (keel) of a ship.
+The depth to which a ship is immersed in water.",
+"Event / vessel / draftUnit",draftUnit,string,,maxLength=3,,MTR,"The unit of measure in which the draft values are expressed:
+- `MTR` (Meter)
+- `FOT` (Foot)
+
+If values are specified in feet (`FOT`) then the decimal part means a fraction of a foot and **not** as a number of inches.
+E.g. 120.5 feet means 120 and a half foot (which would be 120'6"").",
+"Event / vessel / forwardDraft",forwardDraft,number,,,,35,"The vertical distance between the waterline and the bottom of the hull (keel) at the bow (forward part) of the vessel.
+The depth to which the forward part of the ship is immersed in water.",
+"Event / vessel / lengthOverall",lengthOverall,number,,,,245.45,"The maximum length of the vessel's hull measured parallel to the waterline (""length overall"").",
+"Event / vessel / milesToDestinationPort",milesToDestinationPort,number,,,,245.45,"Remaining distance reported by the vessel to the berth in the next destination port, expressed in nautical miles.",
+"Event / vessel / vesselCallSign",vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU).
+It consists of a three-letter alphanumeric prefix that indicates nationality, followed by one to four characters
+to identify the individual vessel.",
+"Event / vessel / vesselIMONumber",vesselIMONumber,string,,maxLength=8,,9321483,"The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
+The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.",
+"Event / vessel / vesselMMSINumber",vesselMMSINumber,string,,maxLength=9,,278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC),
+automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
+"Event / vessel / vesselName",vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
+"Event / vessel / vesselPosition",vesselPosition,Location,,,,,"Current location of the vessel",
+"Event / vessel / vesselPosition / address",address,Address,,,,,"Location address",
+"Event / vessel / vesselPosition / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"Event / vessel / vesselPosition / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"Event / vessel / vesselPosition / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"Event / vessel / vesselPosition / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"Event / vessel / vesselPosition / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"Event / vessel / vesselPosition / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"Event / vessel / vesselPosition / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"Event / vessel / vesselPosition / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"Event / vessel / vesselPosition / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"Event / vessel / vesselPosition / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"Event / vessel / vesselPosition / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"Event / vessel / vesselPosition / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"Event / vessel / vesselPosition / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
+"Event / vessel / vesselPosition / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+"Event / vessel / vesselPosition / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"Event / vessel / vesselPosition / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"Event / vessel / vesselPosition / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"Event / vessel / vesselSizeUnit",vesselSizeUnit,string,,maxLength=3,,MTR,"The unit of measure in which the vessel length and width are expressed:
+- `MTR` (Meter)
+- `FOT` (Foot)
+
+If values are specified in feet (`FOT`) then the decimal part means a fraction of a foot and **not** as a number of inches.
+E.g. 120.5 feet means 120 and a half foot (which would be 120'6"").",
+"Event / vessel / vesselTypeCode",vesselTypeCode,string,,maxLength=4,,CONT,"Categorization of ocean-going vessels distinguished by the main cargo the vessel carries:
+- `GCGO` (General cargo)
+- `CONT` (Container)
+- `RORO` (RoRo)
+- `CARC` (Car carrier)
+- `PASS` (Passenger)
+- `FERY` (Ferry)
+- `BULK` (Bulk)
+- `TANK` (Tanker)
+- `LGTK` (Liquefied gas tanker)
+- `ASSI` (Assistance)
+- `PILO` (Pilot boat)",
+"Event / vessel / width",width,number,,,,37.33,"Overall width of the ship measured at the widest point of the nominal waterline.",

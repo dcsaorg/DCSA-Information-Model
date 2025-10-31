@@ -1,0 +1,8 @@
+target/
+/.idea/
+/.vscode/
+
+### Temporary DCSA generated resources ###
+/generated-resources/standards/**/*.xlsx
+/generated-resources/standards/ebl/v300/*.csv
+/generated-resources/standards/ebl/v300/*.yaml

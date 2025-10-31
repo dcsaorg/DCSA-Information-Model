@@ -1,0 +1,875 @@
+---
+openapi: "3.0.3"
+info:
+  title: "DCSA Verified Gross Mass API"
+  description: |
+    # DCSA Verified Gross Mass (VGM) API
+
+    This is the OpenAPI specification of the **DCSA Verified Gross Mass (VGM)** standard.
+
+    This API allows the transfer of structured VGM declarations from a VGM Producer to a VGM Consumer.
+
+    Each VGM Producer implements the `GET /vgm-declarations` endpoint, which can be called by the authorized VGM Consumers to retrieve relevant available VGM declarations.
+
+    Each VGM Consumer implements the `POST /vgm-declarations` endpoint, which can be called by VGM Producers call to send relevant VGM declarations as they become available or are updated.
+
+    The registration of VGM Consumers with VGM Producers is out of scope.
+
+    The authentication and authorization in both directions between VGM Producers and VGM Consumers is out of scope.
+
+    ### Work in progress ⚠️
+
+    The DCSA Verified Gross Mass (VGM) standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+  contact:
+    name: "Digital Container Shipping Association (DCSA)"
+    url: "https://dcsa.org"
+    email: "info@dcsa.org"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "1.0.0"
+tags:
+- name: "VGM Producer Endpoints"
+  description: "Endpoints implemented by the VGM Producers"
+- name: "VGM Consumer Endpoints"
+  description: "Endpoints implemented by the VGM Consumers"
+paths:
+  /vgm-declarations:
+    get:
+      tags:
+      - "VGM Producer Endpoints"
+      summary: "Retrieves a list of VGM declarations"
+      description: |
+        Retrieves the list of VGM declarations matching the criteria provided as query parameters.
+
+        If no VGM declarations match the criteria provided as query parameters, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of VGM declarations in the response message is unspecified.
+
+        The VGM Producer is expected to additionally filter the VGM declarations based on the authorization and registration profile of the authenticated VGM Consumer calling this endpoint. Authorization, registration and any such additional filtering are out of scope in this standard.
+
+        ## VGM filtering
+
+        Every VGM Producer must support the following combinations of query parameter filters:
+        * `carrierBookingReference`
+        * `carrierBookingReference`, `equipmentReference`
+        * `transportDocumentReference`
+        * `transportDocumentReference`, `equipmentReference`
+
+        Every VGM Producer must support combining any of the query parameter filters above with all of these additional filters:
+        * `declarationDateTimeMin`
+        * `declarationDateTimeMax`
+        * `declarationDateTimeMin`, `declarationDateTimeMax`
+
+        Each VGM Producer can separately also decide to have default relative date ranges and only return VGM declarations having a `declarationDateTime` within those ranges.
+
+        When receiving requests containing an unsupported query parameter, a VGM Producer can choose to either ignore the query parameter (if possible) or to reject the request with an HTTP 400.
+
+        ## Pagination
+
+        Response pagination uses a mechanism based on the `limit` and `cursor` query parameters and on the `Next-Page-Cursor` response header.
+
+        ### Optional support
+
+        Each VGM Producer can decide whether to support the pagination of results, or to only allow limiting the response size using filtering query parameters.
+
+        If the VGM Producer does not provide pagination support, it can choose to either reject with an HTTP 400 any request containing the `limit` or `cursor` query parameters, or to handle the request normally while silently ignoring the pagination query parameters.
+
+        ### Enabling pagination
+
+        The VGM Consumer can use the `limit` query parameter to specify a maximum number of VGM declarations that should be included in the response.
+
+        The VGM Producer can separately choose (and document on their copy of the published API specification) its own limit to the number of VGM declarations that it would include in responses.
+
+        The effective page size limit is the minimum between the `limit` query parameter (if specified) and the VGM Producer's own maximum page size configuration setting.
+
+        ### Retrieving results pages
+
+        If based on filtering the response would include more VGM declarations than this effective page size limit, the VGM Producer only adds VGM declarations to the response up to this effective page size limit, setting in the response the `Next-Page-Cursor` to a value that it can accept as the value of the `cursor` query parameter in a subsequent request and use it to return the next page of results.
+
+        The VGM Consumer reads the value of the `Next-Page-Cursor` response header and sets it as the value of the `cursor` query parameter in its next request.
+
+        The VGM Consumer **must** keep alongside the `cursor` all the original query parameters from the request that retrieved the first page, in order to allow either a stateful or a stateless implementation of the pagination mechanism by the VGM Producer.
+
+        The effect of changing any of the original query parameters in subsequent pagination requests is unspecified and may result in the rejection of the request by the VGM Producer with an HTTP 4xx response.
+
+        The effect of attempting to use a cursor more than once (for example to "go back" to previous pages) is unspecified and may result in the rejection of the request by the VGM Producer with an HTTP 4xx response. (This is by design a backend-to-backend API, not intended for use directly from frontend applications and therefore not directly supporting a typical full set of web frontend pagination actions.)
+
+        When responding with the last page of results, the VGM Producer no longer includes a `Next-Page-Cursor` response header. The last page of results may be empty, for example in the case of a stateless pagination implementation by the VGM Producer.
+      operationId: "get-vgm-declarations"
+      parameters:
+      - name: "carrierBookingReference"
+        in: "query"
+        description: "Reference of the booking for which to return the associated VGM declarations"
+        schema:
+          type: "string"
+        example: "ABC709951"
+      - name: "transportDocumentReference"
+        in: "query"
+        description: "Reference of the transport document for which to return the associated VGM declarations"
+        schema:
+          type: "string"
+        example: "HHL71800000"
+      - name: "equipmentReference"
+        in: "query"
+        description: "Reference of the equipment for which to return the associated VGM declarations"
+        schema:
+          type: "string"
+        example: "APZU4812090"
+      - name: "declarationDateTimeMin"
+        in: "query"
+        description: "Retrieve VGM declarations with a `declarationDateTime` at or after this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "declarationDateTimeMax"
+        in: "query"
+        description: "Retrieve VGM declarations with a `declarationDateTime` at or before this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of VGM declarations to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      responses:
+        "200":
+          description: "List of VGM declarations matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetVGMDeclarationsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetVGMDeclarationsError"
+    post:
+      tags:
+      - "VGM Consumer Endpoints"
+      summary: "Sends a list of VGM declarations"
+      description: |
+        Used by a VGM Producer to send VGM declarations to a registered VGM Consumer.
+
+        The subscription mechanism and the management of VGM Consumer profiles, including any filtering or page limits similar with the GET endpoint, are out of scope in this standard.
+      operationId: "post-vgm-declarations"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      requestBody:
+        description: "List of VGM declarations"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostVGMDeclarationsRequest"
+        required: true
+      responses:
+        "200":
+          description: "VGM declarations response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostVGMDeclarationsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostVGMDeclarationsError"
+components:
+  schemas:
+    Address:
+      type: "object"
+      properties:
+        street:
+          maxLength: 70
+          type: "string"
+          description: "The name of the street."
+          example: "Ruijggoordweg"
+        streetNumber:
+          maxLength: 50
+          type: "string"
+          description: "The number of the street."
+          example: "100"
+        floor:
+          maxLength: 50
+          type: "string"
+          description: "The floor of the street number."
+          example: "N/A"
+        postCode:
+          maxLength: 10
+          type: "string"
+          description: "The post code of the address."
+          example: "1047 HM"
+        POBox:
+          maxLength: 20
+          type: "string"
+          description: "A numbered box at a post office where a person or business can have mail or parcels delivered."
+          example: "123"
+        city:
+          maxLength: 35
+          type: "string"
+          description: "The name of the city."
+          example: "Amsterdam"
+        stateRegion:
+          maxLength: 65
+          type: "string"
+          description: "The name of the state/region."
+          example: "North Holland"
+        countryCode:
+          maxLength: 2
+          type: "string"
+          description: "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+          example: "NL"
+      description: "An object for storing address-related information."
+    ContactDetails:
+      type: "object"
+      properties:
+        name:
+          maxLength: 255
+          type: "string"
+          description: "Contact name"
+          example: "Jane Doe"
+        phone:
+          maxLength: 30
+          type: "string"
+          description: |
+            Contact phone number, including an international phone number format
+            as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+          example: "+14155552671"
+        email:
+          maxLength: 255
+          type: "string"
+          description: "Contact email address"
+          example: "jane.doe@example.com"
+      description: "The contact details of a person."
+    EquipmentDetails:
+      type: "object"
+      properties:
+        equipmentReference:
+          maxLength: 11
+          type: "string"
+          description: |
+            The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+            According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+            (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+            If a container does not comply with ISO 6346, it is suggested to follow
+            [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+            from SMDG.
+          example: "APZU4812090"
+        ISOEquipmentCode:
+          maxLength: 4
+          type: "string"
+          description: |
+            Unique code identifying the equipment size and type used to transport commodities.
+            The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
+            following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.
+          example: "22GP"
+        isShipperOwned:
+          type: "boolean"
+          description: "Indicates whether the container is owned by the shipper (SOC)"
+        seals:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/Seal"
+        cargoGrossWeight:
+          description: |
+            Gross weight of the cargo item including packaging being carried in the container.
+            Excludes the tare weight of the container.
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        tareWeight:
+          description: "The tare weight of the container"
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+      description: "VGM declaration details specific to the equipment"
+    Facility:
+      type: "object"
+      properties:
+        facilityCode:
+          maxLength: 6
+          type: "string"
+          description: |
+            Code identifying a specific facility, as defined by the `facilityCodeListProvider`.
+          example: "ADT"
+        facilityCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            Code list provider (each with its relevant code list) defining the `facilityCode`:
+            - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+            - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))
+          example: "SMDG"
+      description: |
+        Facility identified by a code as defined by a code list provider.
+    FeedbackElement:
+      type: "object"
+      properties:
+        severity:
+          maxLength: 50
+          type: "string"
+          description: |-
+            Code denoting the severity of a `FeedbackElement`
+
+            - `ERROR` - Error that fully or partially prevents the correct processing of the request
+            - `WARN` - Warning about the request being processed in a potentially unexpected way
+            - `INFO` - Informational message about how the request is processed
+          example: "ERROR"
+        message:
+          maxLength: 5000
+          type: "string"
+          description: |
+            Human readable feedback message that can be programmatically relayed to a user of the VGM publishing organization
+          example: "The facility SMDG code does not match the location UN/LOCODE"
+        propertyPath:
+          maxLength: 1000
+          type: "string"
+          description: |
+            [JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
+            about which the feedback is provided (if applicable)
+          example: "$.VGMDeclarations[2].location"
+      description: |
+        An individual piece of feedback (potentially out of several) providing information on how an API request is processed
+    GeoCoordinate:
+      type: "object"
+      properties:
+        latitude:
+          maxLength: 10
+          type: "string"
+          description: |
+            Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
+          example: "48.85855"
+        longitude:
+          maxLength: 11
+          type: "string"
+          description: |
+            Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
+          example: "2.294492036"
+      description: "An object used to express a location using `latitude` and `longitude`."
+    GetVGMDeclarationsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why the request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `GET VGM declarations` request
+    GetVGMDeclarationsResponse:
+      type: "object"
+      properties:
+        VGMDeclarations:
+          type: "array"
+          description: |
+            The list of VGM declarations matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/VGMDeclaration"
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `GET VGM declarations` request
+    Location:
+      type: "object"
+      properties:
+        locationName:
+          maxLength: 100
+          type: "string"
+          description: "The name of the location."
+          example: "Port of Amsterdam"
+        facilityTypeCode:
+          maxLength: 10
+          type: "string"
+          description: |-
+            Code identifying a specific type of facility
+
+            - `BORD` - Border
+            - `CLOC` - Customer location
+            - `COFS` - Container freight station
+            - `OFFD` - Off-dock storage
+            - `DEPO` - Depot
+            - `INTE` - Inland terminal
+            - `POTE` - Port terminal
+            - `RAMP` - Ramp
+            - `WAYP` - Waypoint
+          example: "RAMP"
+        address:
+          description: "Location address"
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        UNLocationCode:
+          maxLength: 5
+          type: "string"
+          description: |
+            The UN Location code specifying where the place is located. The pattern used must be
+
+            - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+            - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+            More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)
+          example: "NLAMS"
+        facility:
+          description: |
+            Facility identified by a code as defined by a code list provider.
+          allOf:
+          - $ref: "#/components/schemas/Facility"
+        geoCoordinate:
+          description: "An object used to express a location using `latitude` and `longitude`."
+          allOf:
+          - $ref: "#/components/schemas/GeoCoordinate"
+      description: "Location information"
+    OtherReference:
+      type: "object"
+      properties:
+        typeCode:
+          type: "string"
+          description: |-
+            Code qualifying a reference.
+
+            In addition to the codes listed here, any other code as defined in
+            [UN/EDIFACT 16A 1153](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred1153.htm)
+            or a subsequent revision may also be used.
+
+            - `AOW` - Transportation Control Number (TCN)
+            - `SI` - Shipper's identifying number for shipment (SID)
+            - `SQ` - Equipment sequence number
+            - `VOR` - Transport equipment gross mass verification order reference
+          example: "SI"
+        reference:
+          maxLength: 100
+          type: "string"
+          description: "The actual reference value"
+          example: "A456C"
+      description: "Other reference"
+    Party:
+      type: "object"
+      properties:
+        partyCode:
+          maxLength: 150
+          type: "string"
+          description: |
+            Code identifying the party as per the `codeListProvider` and `codeListName`.
+          example: "MSK"
+        codeListProvider:
+          maxLength: 100
+          type: "string"
+          description: |
+            Code of the provider of a list of codes identifying a party, including but not limited to:
+            - `SMDG` (Ship Message Design Group)
+            - `ZZZ` (Mutually defined)
+
+            or any other code as defined in the
+            [DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).
+          example: "W3C"
+        codeListName:
+          maxLength: 100
+          type: "string"
+          description: |
+            Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+            - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+            - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+            - `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`
+          example: "DID"
+        partyFunction:
+          maxLength: 3
+          type: "string"
+          description: |
+            Code identifying the function of the party, as defined in
+            [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
+            or a subsequent revision.
+          example: "CA"
+      description: "Identification of a container shipping party"
+    PartyDetails:
+      type: "object"
+      properties:
+        partyName:
+          maxLength: 70
+          type: "string"
+          description: "Party name"
+          example: "Acme Inc."
+        party:
+          description: "Identification of a container shipping party"
+          allOf:
+          - $ref: "#/components/schemas/Party"
+        address:
+          description: "An object for storing address-related information."
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        contactDetails:
+          description: "The contact details of a person."
+          allOf:
+          - $ref: "#/components/schemas/ContactDetails"
+      description: "Details of a party involved in the VGM declaration"
+    PostVGMDeclarationsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+
+            When sent in response to a request that contains an array of VGM declarations,
+            the order of the `feedbackElements` is not related to the list of request VGM declarations.
+            Instead, the relevant request VGM declaration is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `POST VGM declarations` request.
+
+        If some of the VGM declarations in the request were successfully processed,
+        a regular `PostVGMDeclarationsResponse` is expected to be used instead,
+        with `feedbackElements` indicating which VGM declarations were not processed and why.
+    PostVGMDeclarationsRequest:
+      type: "object"
+      properties:
+        VGMDeclarations:
+          type: "array"
+          description: "List of VGM declarations."
+          items:
+            $ref: "#/components/schemas/VGMDeclaration"
+      description: "API message containing a list of VGM declarations."
+    PostVGMDeclarationsResponse:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed.
+
+            There can be zero, one or more feedback elements per event in the request.
+            The order of `feedbackElements` is not related to the order of VGM declarations in the request.
+            Instead, the relevant request VGM declaration is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `POST VGM declarations` request
+    RoutingDetails:
+      type: "object"
+      properties:
+        originatingParty:
+          description: |
+            The initial party with which the VGM declaration originated.
+          allOf:
+          - $ref: "#/components/schemas/Party"
+        forwardingParties:
+          type: "array"
+          description: |
+            Ordered list of parties forwarding the VGM declaration between the originating and destination party.
+          items:
+            $ref: "#/components/schemas/Party"
+        destinationParty:
+          description: |
+            The final party intended as destination of the VGM declaration.
+          allOf:
+          - $ref: "#/components/schemas/Party"
+      description: |
+        Technical routing of a VGM declaration from the originating party, via forwarding parties, to the destination party.
+    Seal:
+      type: "object"
+      properties:
+        number:
+          maxLength: 15
+          type: "string"
+          description: "Identifies a seal affixed to the container."
+          example: "VET123"
+        source:
+          type: "string"
+          description: |
+            The source of the seal, namely who has affixed the seal.
+            - `CAR` (Carrier)
+            - `SHI` (Shipper)
+            - `PHY` (Phytosanitary)
+            - `VET` (Veterinary)
+            - `CUS` (Customs)
+
+            In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
+            both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
+          example: "CUS"
+        type:
+          type: "string"
+          description: |
+            The type of seal.
+            - `KLP` (Keyless padlock)
+            - `BLT` (Bolt)
+            - `WIR` (Wire)
+          example: "WIR"
+      description: |
+        Seal-related information associated with the shipment equipment.
+        A seal is put on a shipment equipment once it is loaded.
+        This seal is meant to stay on until the shipment equipment reaches its final destination.
+    ShipmentDetails:
+      type: "object"
+      properties:
+        carrierBookingReference:
+          maxLength: 35
+          type: "string"
+          description: "The reference of the booking for which this VGM declaration was created"
+          example: "ABC709951"
+        transportDocumentReference:
+          maxLength: 20
+          type: "string"
+          description: "The reference of the transport document for which this VGM declaration was created"
+          example: "HHL71800000"
+        otherReferences:
+          type: "array"
+          description: |
+            List of additional references related to the VGM declaration,
+            excluding the Carrier Booking Reference and the Transport Document Reference
+          items:
+            $ref: "#/components/schemas/OtherReference"
+      description: "VGM declaration details specific to the shipment"
+    VGM:
+      type: "object"
+      properties:
+        weight:
+          description: "The gross mass (weight) of the transport equipment"
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        method:
+          type: "string"
+          description: |-
+            Method used to determine the VGM
+            - `SM1` - SOLAS verification method 1  (Scaled)
+            - `SM2` - SOLAS verification method 2 (Calculated)
+          example: "SM1"
+        dateTime:
+          maxLength: 30
+          type: "string"
+          description: "Date and time when a gross mass (weight) of a packed container was obtained"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        location:
+          description: "The location where the packed container was weighed to determine the Verified Gross Mass (VGM)."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        certificationReference:
+          maxLength: 70
+          type: "string"
+          description: "Reference number or identifier for the certificate issued by the weighing party (or a certified weighing facility)."
+          example: "W42-23110812"
+        certificationDateTime:
+          maxLength: 30
+          type: "string"
+          description: "Date and time when the VGM certificate has been issued."
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+      description: |
+        Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6
+    VGMDeclaration:
+      type: "object"
+      properties:
+        routingDetails:
+          description: |
+            Technical routing of a VGM declaration from the originating party, via forwarding parties, to the destination party.
+          allOf:
+          - $ref: "#/components/schemas/RoutingDetails"
+        declarationReference:
+          maxLength: 500
+          type: "string"
+          description: "Reference of the VGM declaration"
+          example: "VGM-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
+        isRetracted:
+          type: "boolean"
+          description: |
+            Flag indicating that the `VGMDeclaration` with this `declarationReference` is retracted.
+
+            The data in all previously transmitted VGM declarations with the same `declarationReference` must be discarded or ignored.
+
+            If this flag is set, any data in this `VGMDeclaration` object other than the `declarationReference` is irrelevant (if present).
+        declarationDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the VGM declaration was last updated"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        VGM:
+          description: |
+            Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6
+          allOf:
+          - $ref: "#/components/schemas/VGM"
+        equipmentDetails:
+          description: "VGM declaration details specific to the equipment"
+          allOf:
+          - $ref: "#/components/schemas/EquipmentDetails"
+        shipmentDetails:
+          description: "VGM declaration details specific to the shipment"
+          allOf:
+          - $ref: "#/components/schemas/ShipmentDetails"
+        vesselVoyageDetails:
+          description: "VGM declaration details specific to the vessel voyage"
+          allOf:
+          - $ref: "#/components/schemas/VesselVoyageDetails"
+        responsibleParty:
+          description: "Party responsible for the VGM declaration."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+        authorizedParty:
+          description: "Party authorized to act on behalf of the `responsibleParty`."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+        authorizedPersonSignatory:
+          maxLength: 255
+          type: "string"
+          description: "Authorized person signatory"
+          example: "Jane Doe"
+        weighingParty:
+          description: "Legally accepted party designated to perform the weighing."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+        submittingParty:
+          description: "Party that submits the VGM declaration."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+        orderedByParty:
+          description: "Party that orders the weighing at the terminal or weighing station."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+        holdingParty:
+          description: "Information reference agency holding the VGM declaration."
+          allOf:
+          - $ref: "#/components/schemas/PartyDetails"
+      description: |
+        VGM declaration for one piece of equipment, including the actual VGM and the relevant associated details
+    VesselVoyageDetails:
+      type: "object"
+      properties:
+        carrierCode:
+          maxLength: 4
+          type: "string"
+          description: |
+            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
+            [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the issuing carrier of the Arrival Notice.
+
+            `carrierCodeListProvider` defines which list the `carrierCode` is based upon.
+          example: "MMCU"
+        carrierCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            The code list provider for the `carrierCode`. Possible values are:
+            - `SMDG` (Ship Message Design Group)
+            - `NMFTA` (National Motor Freight Traffic Association)
+          example: "NMFTA"
+        exportVoyageNumberOrReference:
+          description: "Export voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        importVoyageNumberOrReference:
+          description: "Import voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        portOfLoading:
+          description: "The location where the cargo is loaded onto a first sea-going vessel for water transportation."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        portOfDischarge:
+          description: "The location where the cargo is discharged from the last sea-going vessel."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        vesselName:
+          maxLength: 50
+          type: "string"
+          description: "Vessel name"
+          example: "King of the Seas"
+      description: "VGM declaration details specific to the vessel voyage"
+    VoyageNumberOrReference:
+      type: "object"
+      properties:
+        carrierVoyageNumber:
+          type: "string"
+          description: "Carrier-specific identifier of the voyage"
+          example: "2103S"
+        universalVoyageReference:
+          maxLength: 5
+          type: "string"
+          description: |
+            Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+            Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+            either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+            Every Universal Voyage Reference is a 5-character string with the following format:
+             * the last 2 digits of the year
+             * 2 alphanumeric characters for the sequence number of the voyage
+             * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).
+          example: "2301W"
+      description: "Carrier voyage number and/or universal voyage reference"
+    Weight:
+      type: "object"
+      properties:
+        value:
+          type: "number"
+          description: "Weight value expressed in the measurement `unit`"
+          format: "float"
+          example: 2.4
+        unit:
+          maxLength: 10
+          type: "string"
+          description: |
+            Measurement unit in which the weight `value` is expressed:
+            - `KGM` (Kilograms)
+            - `LBR` (Pounds)
+          example: "KGM"
+      description: "Weight value and measurement unit"
+  headers:
+    API-Version:
+      description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+      schema:
+        type: "string"
+        example: "1.0.0"
+    Next-Page-Cursor:
+      description: "A cursor value pointing to the next page of results in a paginated GET response."
+      schema:
+        type: "string"
+        example: "ExampleNextPageCursor"

@@ -1,0 +1,379 @@
+Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+ActiveReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
+- `MQH` (Cubic metre per hour)
+- `FQH` (Cubic foot per hour)",
+ActiveReeferParameters,airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
+ActiveReeferParameters,ambientTemperatureValue,number,,,,-15,"Ambient temperature value expressed in `temperatureUnit`",
+ActiveReeferParameters,co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
+ActiveReeferParameters,humidityPercentage,number,,,,50,"Humidity percentage",
+ActiveReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
+ActiveReeferParameters,isColdTreatmentRequired,boolean,,,,true,"Flag indicating whether cargo cold treatment is required prior to loading at origin,
+or during transit but prior arrival at POD.",
+ActiveReeferParameters,"isControlledAtmosphereRequired",boolean,,,,true,"Flag indicating whether controlled atmosphere is required",
+ActiveReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
+ActiveReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
+ActiveReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
+ActiveReeferParameters,temperatureUnit,string,,,,CEL,"Unit in which the `temperatureValue` and `ambientTemperatureValue` are expressed:
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)",
+ActiveReeferParameters,temperatureValue,number,,,,-15,"Internal temperature value expressed in `temperatureUnit`",
+Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
+ClassifiedDateTime,classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+ClassifiedDateTime,value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
+DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
+DocumentReference,typeCode,string,,,,BKG,"Code used to denote the type of a document reference
+- `AMF` - Advance Manifest Filing (of any subtype)
+- `ARN` - Arrival Notice
+- `BKG` - Booking
+- `CAS` - Cargo Survey
+- `CBR` - Carrier Booking Request
+- `CEA` - Certificate of Analysis
+- `CEO` - Certificate of Origin
+- `CQU` - Contract Quotation
+- `CRO` - Container Release Order
+- `CUC` - Customs Clearance
+- `DEI` - Delivery Instructions
+- `DEO` - Delivery Order
+- `DGD` - Dangerous Goods Declaration
+- `FCE` - Fumigation Certificate
+- `HCE` - Health Certificate
+- `ICE` - Inspection Certificate
+- `INV` - Invoice
+- `OOG` - Out of Gauge
+- `PCE` - Phytosanitary Certificate
+- `PFD` - Proof of Delivery
+- `SHI` - Shipping Instruction
+- `TRD` - Transport Document
+- `TRO` - Transport Order
+- `VCE` - Veterinary Certificate
+- `VGM` - Verified Gross Mass",
+"DocumentReferenceReplacement",newReferences,"DocumentReference list",,,,,"References of the documents replacing those with the `oldReferences`.",
+"DocumentReferenceReplacement",oldReferences,"DocumentReference list",,,,,"References of the documents replaced by those with the `newReferences`.",
+EquipmentDetails,emptyIndicatorCode,string,,,,LADEN,"Code to denote whether the equipment is empty or laden.
+- `EMPTY` - Empty
+- `LADEN` - Laden",
+EquipmentDetails,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+(composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with ISO 6346, it is suggested to follow
+[Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+from SMDG.",
+EquipmentDetails,ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code identifying the equipment size and type used to transport commodities.
+The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
+EquipmentDetails,movementType,string,,,,EXPORT,"Code used to denote the type of movement
+- `IMPORT` - Import movement
+- `EXPORT` - Export movement
+- `TRANSSHIPMENT` - Transshipment movement",
+EquipmentDetails,seals,"Seal list",,,,,,
+Event,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
+Event,documentReferences,"DocumentReference list",,,,,"List of document references related to this event",
+Event,equipmentDetails,EquipmentDetails,,,,,"Equipment-specific details",
+Event,eventClassification,EventClassification,,,,,"Type, subtype and classifier of an event",
+Event,eventDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the real-world event has occurred or will occur.",
+Event,eventID,string,,maxLength=500,,"event-HHL71800000-APZU4812090-IoT-DRO-2025-01-23T01:23:45Z","ID of the event, unique among all the events published by a T&T Event Producer.
+
+An event overrides any other event that has the same `eventID` and an earlier `eventUpdatedDateTime`.
+
+Each event is uniquely identified within each T&T 3.x standard ecosystem of connected implementers
+by a composite key including:
+- `eventRouting.originatingParty.partyCode`
+- `eventRouting.originatingParty.codeListProvider`
+- `eventRouting.originatingParty.codeListName`
+- `eventID`",
+Event,eventLocation,Location,,,,,"The location of the event.",
+Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party, via forwarding parties, to the destination party.",
+Event,eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
+Event,iotDetails,IotDetails,,,,,"IoT-specific details",
+Event,isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
+
+The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
+
+If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
+Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
+Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
+Event,shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
+- `FCD` - Full container drop-off location
+- `IEL` - Container intermediate export stop-off location
+- `OIR` - Onward Inland Routing
+- `ORI` - Origin of goods
+- `PCF` - Pre-carriage From
+- `PDE` - Place of Delivery
+- `POD` - Port of Discharge
+- `POL` - Port of Loading
+- `PRE` - Place of Receipt
+- `PTP` - Prohibited transshipment port
+- `RTP` - Requested transshipment port",
+Event,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
+Event,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
+Event,transportDetails,TransportDetails,,,,,"Transport-specific details",
+EventClassification,equipmentEventTypeCode,string,,,,LOAD,"Code used to denote the type of an equipment event
+- `AVDO` - Available for Drop-off
+- `AVPU` - Available for Pick-up
+- `CROS` - Crossed
+- `CUSI` - Customs Selected for Inspection
+- `CUSR` - Customs Released
+- `CUSS` - Customs Selected for Scan
+- `DISC` - Discharged
+- `DROP` - Drop-off
+- `GTIN` - Gated in
+- `GTOT` - Gated out
+- `INSP` - Inspected
+- `LOAD` - Loaded
+- `PICK` - Pick-up
+- `RMVD` - Removed
+- `RSEA` - Resealed
+- `STRP` - Stripped
+- `STUF` - Stuffed",
+EventClassification,eventClassifierCode,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+EventClassification,eventTypeCode,string,,,,EQUIPMENT,"Code used to denote the type of an event
+- `SHIPMENT` - Shipment event
+- `TRANSPORT` - Transport event
+- `EQUIPMENT` - Equipment event
+- `IOT` - IoT event
+- `REEFER` - Reefer event",
+EventClassification,iotEventTypeCode,string,,,,DETC,"Code used to denote the type of an IoT event
+- `DETC` - Detected",
+EventClassification,reeferEventTypeCode,string,,,,MEAS,"Code used to denote the type of a reefer event
+- `MEAS` - Measured
+- `ADJU` - Adjusted",
+EventClassification,shipmentEventTypeCode,string,,,,APPR,"Code used to denote the type of a shipment event
+- `AMCF` - Amendment Confirmed
+- `AMCN` - Amendment Cancelled
+- `AMDC` - Amendment Declined
+- `AMPR` - Amendment In Progress
+- `AMRE` - Amendment Received
+- `APPR` - Approved
+- `CACF` - Cancellation Confirmed
+- `CADC` - Cancellation Declined
+- `CARE` - Cancellation Received
+- `CMPL` - Completed
+- `CONF` - Confirmed
+- `DECL` - Declined
+- `DRFT` - Drafted
+- `HOLD` - On Hold
+- `ISSU` - Issued
+- `PENA` - Pending Approval
+- `PENM` - Pending Amendment
+- `PENU` - Pending Update
+- `PSAM` - Pending Surrender for Amendment
+- `PSDL` - Pending Surrender for Delivery
+- `RECE` - Received
+- `REJE` - Rejected
+- `RELS` - Released
+- `REQS` - Requested
+- `SUAM` - Surrendered for Amendment
+- `SUBM` - Submitted
+- `SUDL` - Surrendered for Delivery
+- `SURR` - Surrendered
+- `UPCF` - Update Confirmed
+- `UPCN` - Update Cancelled
+- `UPDC` - Update Declined
+- `UPDT` - Update In Progress
+- `UPRE` - Update Received
+- `VOID` - Voided",
+EventClassification,transportEventTypeCode,string,,,,ARRI,"Code used to denote the type of a transport event
+- `ARRI` - Arrived
+- `DEPA` - Departed",
+EventRouting,destinationParty,Party,,,,,"The final party intended as destination of the event.",
+EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party.",
+EventRouting,originatingParty,Party,,,,,"The initial party with which the event originated.",
+Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed to a user of the event publishing organization",
+FeedbackElement,propertyPath,string,,maxLength=1000,,"$.events[2].location","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
+about which the feedback is provided (if applicable)",
+FeedbackElement,severity,string,,maxLength=50,,ERROR,"Code denoting the severity of a `FeedbackElement`
+
+- `ERROR` - Error that fully or partially prevents the correct processing of the request
+- `WARN` - Warning about the request being processed in a potentially unexpected way
+- `INFO` - Informational message about how the request is processed",
+GeoCoordinate,latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
+GeoCoordinate,longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+GetEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why the request could not be processed.
+
+At least one feedback element of severity `ERROR` is expected.
+Lower severity feedback elements may also be included.",
+GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
+GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
+IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
+- `DRO` - Door opened
+- `LOC` - Location update",
+Location,address,Address,,,,,"Location address",
+Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
+Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+Location,UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+Party,codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+Party,codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
+- `SMDG` (Ship Message Design Group)
+- `ZZZ` (Mutually defined)
+
+or any other code as defined in the
+[DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).",
+Party,partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
+Party,partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
+[UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
+or a subsequent revision.",
+PostEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why request could not be processed.
+
+At least one feedback element of severity `ERROR` is expected.
+Lower severity feedback elements may also be included.
+
+When sent in response to a request that contains an array of events,
+the order of the `feedbackElements` is not related to the list of request events.
+Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
+PostEventsRequest,events,"Event list",,,,,"List of events.",
+PostEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed.
+
+There can be zero, one or more feedback elements per event in the request.
+The order of `feedbackElements` is not related to the order of events in the request.
+Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
+RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or code that is assigned to a specific departure of a rail.
+(Also known as a departure reference number.)",
+RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",
+RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported.",
+ReeferDetails,measuredParameters,ActiveReeferParameters,,,,,"Measured active reefer parameters",
+ReeferDetails,setpointParameters,ActiveReeferParameters,,,,,"Setpoint active reefer parameters",
+Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+- `CAR` (Carrier)
+- `SHI` (Shipper)
+- `PHY` (Phytosanitary)
+- `VET` (Veterinary)
+- `CUS` (Customs)
+
+In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
+both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
+Seal,type,string,,,,WIR,"The type of seal.
+- `KLP` (Keyless padlock)
+- `BLT` (Bolt)
+- `WIR` (Wire)",
+ServiceCodeOrReference,carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service.",
+ServiceCodeOrReference,"universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
+
+DCSA generates and distributes batches of Universal Service References (USRs)
+to member and non-member carriers upon request, for their own use or for their alliances and VSAs.
+
+A carrier can use each of its assigned USRs either in agreement with its partners for a service under a VSA or Alliance,
+or independently for one of its own non-VSA, non-Alliance services.
+
+Every Universal Service Reference is an 8-character string with the following format:
+ * the prefix ""SR""
+ * 5 digits
+ * 1 uppercase English letter (A-Z).",
+ShipmentDetails,documentReference,DocumentReference,,,,,"Referenced document",
+ShipmentDetails,priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
+It can vary per carrier.",
+ShipmentDetails,reason,string,,,,,"The reason this event was sent",
+ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
+ShipmentReference,typeCode,string,,,,FF,"Code used to denote the type of a shipment reference
+- `AAO` - Consignee’s Reference
+- `AES` - Automated Export System
+- `BID` - Booking Request ID
+- `BPR` - Booking party reference number
+- `CER` - Canadian Export Reporting System
+- `CR` - Customer’s Reference
+- `CSI` - Customer shipment ID
+- `DUE` - Declaração Única de Exportação
+- `ECR` - Empty container release reference
+- `EQ` - Equipment Reference
+- `FF` - Freight Forwarder’s Reference
+- `PO` - Purchase Order Reference
+- `RUC` - Registro Único del Contribuyente
+- `SI` - Shipper’s Reference",
+"ShipmentReferenceReplacement",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`.",
+"ShipmentReferenceReplacement",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`.",
+TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
+TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
+TransportCall,modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA
+- `VESSEL` - Vessel
+- `RAIL` - Rail
+- `TRUCK` - Truck
+- `BARGE` - Barge
+- `MULTIMODAL` - Multimodal",
+TransportCall,portVisitReference,string,,,,,"The unique reference that can be used to link different `transportCallReferences` to the same port visit.
+The reference is provided by the port to uniquely identify a port call.",
+TransportCall,railTransport,RailTransport,,,,,"Rail transport information",
+TransportCall,serviceCodeOrReference,ServiceCodeOrReference,,,,,"Carrier service code and/or universal service reference",
+TransportCall,transportCallReference,string,,,,,"Carrier-defined reference of a `TransportCall`.
+
+If the mode of transport is Vessel and the facility is a Port or Terminal,
+this reference should be considered a terminal call reference.",
+TransportCall,"transportCallSequenceNumber",integer,,,,,"Transport operator's key that uniquely identifies each individual transport call.
+This key is essential to distinguish between two separate calls at the same location within one voyage.",
+TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information",
+TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information",
+TransportDetails,changeRemark,string,,maxLength=250,,"Bad weather","Free text information provided by the vessel operator regarding the reasons for the change in schedule
+and/or plans to mitigate schedule slippage.",
+TransportDetails,delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
+Item description:
+Code identifying the reason for a delay,
+[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
+",
+TransportDetails,transportCall,TransportCall,,,,,"Transport call information",
+TruckTransport,tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment.",
+TruckTransport,trailerDetails,VehicleDetails,,,,,"The license plate and VIN of the trailer of the truck on which the equipment is transported,
+if the trailer is separate from the truck trailer and has its own details.",
+VehicleDetails,licensePlate,string,,maxLength=15,,,"A license plate is a tag that is attached to a vehicle and displays a unique number or code assigned to the vehicle.
+The format, design, and issuing authority for license plates vary by country, state, and province.",
+VehicleDetails,"vehicleIdentificationNumber",string,,maxLength=15,,,"A chassis number is a unique identifying number or code assigned to the chassis of a vehicle.
+It may also be referred to as a ""vehicle identification number"" (VIN), ""chassis number"" or ""frame number"".",
+VesselTransport,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on `operatorCarrierCodeListProvider`",
+VesselTransport,"operatorCarrierCodeListProvider",string,,maxLength=10,,SMDG,"The code list provider used for the `operatorCarrierCode` (SMDG or NMFTA)",
+VesselTransport,vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel
+and is assigned by the International Telecommunication Union (ITU).
+It consists of a three-letter alphanumeric prefix that indicates nationality,
+followed by one to four characters to identify the individual vessel.",
+VesselTransport,vesselFlag,string,,maxLength=2,,NL,"The national flag of the country under which a vessel is registered,
+indicated by the 2-character code defined in
+[ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).",
+VesselTransport,vesselIMONumber,string,,maxLength=8,,9321483,"The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
+The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.",
+VesselTransport,vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
+VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",

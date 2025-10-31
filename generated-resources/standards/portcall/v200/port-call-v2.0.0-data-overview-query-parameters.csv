@@ -1,0 +1,24 @@
+Name,Type,Description,Example
+UNLocationCode,string,"UN location code.",NLAMS
+portVisitReference,string,"Port visit reference.",NLAMS1234589
+carrierServiceName,string,"Carrier-specific service name.","Great Lion Service"
+carrierServiceCode,string,"Carrier-specific service code.",FE1
+"universalServiceReference",string,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.",SR12345A
+terminalCallReference,string,"The terminal call reference for which to retrieve available events.",15063401
+"carrierImportVoyageNumber",string,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",1234N
+"universalImportVoyageReference",string,"Unique identifier of the import voyage within the service, assigned by carriers as specified by DCSA.",2301W
+"carrierExportVoyageNumber",string,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",1234N
+"universalExportVoyageReference",string,"Unique identifier of the export voyage within the service, assigned by carriers as specified by DCSA.",2301W
+portCallServiceTypeCode,string,"Port call service type.",BERTH
+vesselIMONumber,string,"Vessel IMO number.",12345678
+vesselName,string,"Vessel name.","King of the Seas"
+vesselMMSINumber,string,"Vessel MMSI number.",278111222
+portCallID,string,"Unique identifier of a port call","0342254a-5927-4856-b9c9-aa12e7c00563"
+terminalCallID,string,"Unique identifier of a terminal call","0342254a-5927-4856-b9c9-aa12e7c00563"
+portCallServiceID,string,"Unique identifier of a port call service","0342254a-5927-4856-b9c9-aa12e7c00563"
+timestampID,string,"Unique identifier of a timestamp","0342254a-5927-4856-b9c9-aa12e7c00563"
+classifierCode,string,"Classifier code (EST / REQ / PLN / ACT)",ACT
+eventTimestampMin,string,"Retrieve events with a timestamp at or after this date-time",2025-01-23T01:23:45Z
+eventTimestampMax,string,"Retrieve events with a timestamp at or before this date-time",2025-01-23T01:23:45Z
+limit,integer,"Maximum number of events to include in each page of the response.",10
+cursor,string,"Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page.",ExampleNextPageCursor

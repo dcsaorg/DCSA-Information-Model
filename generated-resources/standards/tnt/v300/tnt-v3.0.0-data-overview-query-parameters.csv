@@ -1,0 +1,9 @@
+Name,Type,Description,Example
+carrierBookingReference,string,"Reference of the booking for which to return the associated events",ABC709951
+"transportDocumentReference",string,"Reference of the transport document for which to return the associated events",HHL71800000
+equipmentReference,string,"Reference of the equipment for which to return the associated events",APZU4812090
+eventTypes,array,"Retrieve only events whose `eventType` is in this list","EQUIPMENT,IOT,REEFER"
+eventUpdatedDateTimeMin,string,"Retrieve events with an `eventUpdatedDateTime` at or after this timestamp",2025-01-23T01:23:45Z
+eventUpdatedDateTimeMax,string,"Retrieve events with an `eventUpdatedDateTime` at or before this timestamp",2025-01-23T01:23:45Z
+limit,integer,"Maximum number of events to include in each page of the response.",10
+cursor,string,"Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page.",ExampleNextPageCursor
