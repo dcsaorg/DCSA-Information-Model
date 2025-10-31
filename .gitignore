@@ -1,6 +1,14 @@
+### Java ###
 target/
-/.idea/
-/.vscode/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VS Code ###
+.vscode/
 
 ### Temporary DCSA generated resources ###
 /generated-resources/standards/**/*.xlsx
