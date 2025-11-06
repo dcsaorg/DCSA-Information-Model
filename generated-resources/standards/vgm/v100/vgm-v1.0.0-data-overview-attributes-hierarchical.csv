@@ -35,7 +35,7 @@ or a subsequent revision.",
 "VGMDeclaration / declarationDateTime",declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the VGM declaration was last updated",
 "VGMDeclaration / declarationReference",declarationReference,string,,maxLength=500,,"VGM-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the VGM declaration",
 "VGMDeclaration / equipmentDetails",equipmentDetails,EquipmentDetails,,,,,"VGM declaration details specific to the equipment",
-"VGMDeclaration / equipmentDetails / cargoGrossWeight",cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
+"VGMDeclaration / equipmentDetails / cargoGrossWeight",cargoGrossWeight,Weight,,,,,"Gross weight of the cargo including packaging being carried in the container.
 Excludes the tare weight of the container.",
 "VGMDeclaration / equipmentDetails / cargoGrossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)

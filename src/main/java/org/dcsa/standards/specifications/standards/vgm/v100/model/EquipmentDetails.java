@@ -26,7 +26,7 @@ public class EquipmentDetails {
   @Schema(
       description =
 """
-Gross weight of the cargo item including packaging being carried in the container.
+Gross weight of the cargo including packaging being carried in the container.
 Excludes the tare weight of the container.
 """)
   private Weight cargoGrossWeight;

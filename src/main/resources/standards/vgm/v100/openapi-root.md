@@ -14,4 +14,4 @@ The authentication and authorization in both directions between VGM Producers an
 
 ### Work in progress ⚠️
 
-The DCSA Verified Gross Mass (VGM) standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+The DCSA Verified Gross Mass (VGM) standard, including this API, is currently being reviewed and is **not** ready for general adoption yet.

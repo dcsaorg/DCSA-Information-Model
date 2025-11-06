@@ -11,7 +11,7 @@ ContactDetails,email,string,,maxLength=255,,jane.doe@example.com,"Contact email 
 ContactDetails,name,string,,maxLength=255,,"Jane Doe","Contact name",
 ContactDetails,phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
 as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
-EquipmentDetails,cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
+EquipmentDetails,cargoGrossWeight,Weight,,,,,"Gross weight of the cargo including packaging being carried in the container.
 Excludes the tare weight of the container.",
 EquipmentDetails,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 

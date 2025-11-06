@@ -78,7 +78,8 @@ public class VGMStandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("Verified Gross Mass", "1.0.0-20251024-design", "", "", 4);
+    return new LegendMetadata(
+        "Verified Gross Mass", "1.0.0-20251107-alpha", "VGM", "1.0.0-20251024-design", 4);
   }
 
   @Override
@@ -128,13 +129,12 @@ public class VGMStandardSpecification extends StandardSpecification {
             Collectors.toMap(
                 Map.Entry::getKey,
                 entry ->
-                    System.currentTimeMillis() > 0
-                        ? List.of()
-                        : // TODO remove after first snapshot
-                        DataOverviewSheet.importFromString(
-                            SpecificationToolkit.readRemoteFile(
-                                "https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/TODO/specifications/generated-resources/standards/vgm/v100/vgm-v1.0.0-data-overview-%s.csv"
-                                    .formatted(entry.getValue())))));
+                    DataOverviewSheet.importFromString(
+                        SpecificationToolkit.readRemoteFile(
+                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/"
+                                    + "176f6544ac7393d9a4a7d923e41af4d4e1293ed6"
+                                    + "/specifications/generated-resources/standards/vgm/v100/vgm-v1.0.0-data-overview-%s.csv")
+                                .formatted(entry.getValue())))));
   }
 
   @Override
