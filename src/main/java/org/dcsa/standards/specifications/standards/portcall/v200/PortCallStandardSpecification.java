@@ -124,8 +124,7 @@ public class PortCallStandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(
-        "Port Call", "2.0.0-20251024-design", "", "", 3);
+    return new LegendMetadata("Port Call", "2.0.0-20251107-beta", "PC", "2.0.0-20251024-beta", 3);
   }
 
   @Override
@@ -173,12 +172,12 @@ public class PortCallStandardSpecification extends StandardSpecification {
             Collectors.toMap(
                 Map.Entry::getKey,
                 entry ->
-                    System.currentTimeMillis() > 0 // TODO remove for the second snapshot
-                        ? List.of()
-                        : DataOverviewSheet.importFromString(
-                            SpecificationToolkit.readRemoteFile(
-                                "https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/TBD/specifications/generated-resources/standards/portcall/v200/port-call-v2.0.0-data-overview-%s.csv"
-                                    .formatted(entry.getValue())))));
+                    DataOverviewSheet.importFromString(
+                        SpecificationToolkit.readRemoteFile(
+                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/"
+                                    + "56ad981144f46c88ed04769f3292bd7ee4876c38"
+                                    + "/specifications/generated-resources/standards/portcall/v200/port-call-v2.0.0-data-overview-%s.csv")
+                                .formatted(entry.getValue())))));
   }
 
   @Override

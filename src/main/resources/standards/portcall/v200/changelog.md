@@ -1,5 +1,10 @@
 # Port Call v2.0.0 Changelog
 
+## Snapshot v2.0.0-20251107-beta
+
+Updated the descriptions of the universal voyage and service reference query parameters. (SD-2613)
+
+
 ## Snapshot v2.0.0-20251024-beta
 
 Removed all references (except below in this changelog) to the old standard name ("Just in Time") and acronym ("JIT"). (SD-2489)
