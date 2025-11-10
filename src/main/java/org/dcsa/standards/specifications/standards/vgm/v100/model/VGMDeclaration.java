@@ -35,14 +35,14 @@ If this flag is set, any data in this `VGMDeclaration` object other than the `de
   @Schema(description = "The date and time when the VGM declaration was last updated")
   private FormattedDateTime declarationDateTime;
 
-  @Schema(name = "VGM")
-  private VGM vgm;
-
   @Schema() private EquipmentDetails equipmentDetails;
 
   @Schema() private ShipmentDetails shipmentDetails;
 
   @Schema() private VesselVoyageDetails vesselVoyageDetails;
+
+  @Schema(name = "VGM")
+  private VGM vgm;
 
   @Schema(description = "Party responsible for the VGM declaration.")
   private PartyDetails responsibleParty;

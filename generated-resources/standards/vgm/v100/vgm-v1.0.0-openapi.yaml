@@ -734,11 +734,6 @@ components:
           description: "The date and time when the VGM declaration was last updated"
           format: "date-time"
           example: "2025-01-23T01:23:45Z"
-        VGM:
-          description: |
-            Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6
-          allOf:
-          - $ref: "#/components/schemas/VGM"
         equipmentDetails:
           description: "VGM declaration details specific to the equipment"
           allOf:
@@ -751,6 +746,11 @@ components:
           description: "VGM declaration details specific to the vessel voyage"
           allOf:
           - $ref: "#/components/schemas/VesselVoyageDetails"
+        VGM:
+          description: |
+            Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6
+          allOf:
+          - $ref: "#/components/schemas/VGM"
         responsibleParty:
           description: "Party responsible for the VGM declaration."
           allOf:

@@ -6,6 +6,8 @@ Updated the list of mandatory vs. optional GET query parameter filters. (SD-2642
 
 Updated the description and example of the `authorizedPersonSignatory` attribute. (SD-2638)
 
+In the `VGMDeclaration` object, the `VGM` attribute is now between the details and the parties attributes. (SD-2639)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 
