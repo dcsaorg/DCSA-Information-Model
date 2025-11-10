@@ -368,7 +368,7 @@ components:
           description: |
             [JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
             about which the feedback is provided (if applicable)
-          example: "$.VGMDeclarations[2].location"
+          example: "$.VGMDeclarations[2].VGM.location"
       description: |
         An individual piece of feedback (potentially out of several) providing information on how an API request is processed
     GeoCoordinate:

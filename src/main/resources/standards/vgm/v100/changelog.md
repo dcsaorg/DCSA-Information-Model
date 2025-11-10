@@ -8,6 +8,8 @@ Updated the description and example of the `authorizedPersonSignatory` attribute
 
 In the `VGMDeclaration` object, the `VGM` attribute is now between the details and the parties attributes. (SD-2639)
 
+In the `FeedbackElement` object, corrected the example of attribute `propertyPath`. (SD-2645)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 
