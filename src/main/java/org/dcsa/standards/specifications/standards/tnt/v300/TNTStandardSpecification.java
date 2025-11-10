@@ -150,7 +150,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
                                     + "0fdd496a598b89a578c6d75af0c3c9655c0b1577"
-                                    + "/specifications/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
+                                    + "/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
 
