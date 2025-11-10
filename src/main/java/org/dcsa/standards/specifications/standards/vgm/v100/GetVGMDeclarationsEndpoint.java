@@ -62,19 +62,22 @@ public class GetVGMDeclarationsEndpoint extends QueryParametersFilterEndpoint {
 
   @Override
   public Map<Boolean, List<List<Parameter>>> getRequiredAndOptionalFilters() {
+    List<List<Parameter>> mandatoryFilterLists =
+        List.of(
+            List.of(carrierBookingReference),
+            List.of(carrierBookingReference, equipmentReference),
+            List.of(transportDocumentReference),
+            List.of(transportDocumentReference, equipmentReference),
+            List.of(equipmentReference));
     return Map.ofEntries(
+        Map.entry(Boolean.TRUE, mandatoryFilterLists),
         Map.entry(
-            Boolean.TRUE,
+            Boolean.FALSE,
             allCombinationsOf(
-                List.of(
-                    List.of(carrierBookingReference),
-                    List.of(carrierBookingReference, equipmentReference),
-                    List.of(transportDocumentReference),
-                    List.of(transportDocumentReference, equipmentReference)),
+                mandatoryFilterLists,
                 List.of(
                     List.of(declarationDateTimeMin),
                     List.of(declarationDateTimeMax),
-                    List.of(declarationDateTimeMin, declarationDateTimeMax)))),
-        Map.entry(Boolean.FALSE, List.of()));
+                    List.of(declarationDateTimeMin, declarationDateTimeMax)))));
   }
 }

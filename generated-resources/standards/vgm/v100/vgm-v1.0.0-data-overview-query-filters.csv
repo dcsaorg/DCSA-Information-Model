@@ -1,13 +1,21 @@
 FilterParameters,Required
-"carrierBookingReference, declarationDateTimeMin",yes
-"carrierBookingReference, declarationDateTimeMax",yes
-"carrierBookingReference, declarationDateTimeMin, declarationDateTimeMax",yes
-"carrierBookingReference, equipmentReference, declarationDateTimeMin",yes
-"carrierBookingReference, equipmentReference, declarationDateTimeMax",yes
-"carrierBookingReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",yes
-"transportDocumentReference, declarationDateTimeMin",yes
-"transportDocumentReference, declarationDateTimeMax",yes
-"transportDocumentReference, declarationDateTimeMin, declarationDateTimeMax",yes
-"transportDocumentReference, equipmentReference, declarationDateTimeMin",yes
-"transportDocumentReference, equipmentReference, declarationDateTimeMax",yes
-"transportDocumentReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",yes
+carrierBookingReference,yes
+"carrierBookingReference, equipmentReference",yes
+"transportDocumentReference",yes
+"transportDocumentReference, equipmentReference",yes
+equipmentReference,yes
+"carrierBookingReference, declarationDateTimeMin",
+"carrierBookingReference, equipmentReference, declarationDateTimeMin",
+"transportDocumentReference, declarationDateTimeMin",
+"transportDocumentReference, equipmentReference, declarationDateTimeMin",
+"equipmentReference, declarationDateTimeMin",
+"carrierBookingReference, declarationDateTimeMax",
+"carrierBookingReference, equipmentReference, declarationDateTimeMax",
+"transportDocumentReference, declarationDateTimeMax",
+"transportDocumentReference, equipmentReference, declarationDateTimeMax",
+"equipmentReference, declarationDateTimeMax",
+"carrierBookingReference, declarationDateTimeMin, declarationDateTimeMax",
+"carrierBookingReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"transportDocumentReference, declarationDateTimeMin, declarationDateTimeMax",
+"transportDocumentReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"equipmentReference, declarationDateTimeMin, declarationDateTimeMax",

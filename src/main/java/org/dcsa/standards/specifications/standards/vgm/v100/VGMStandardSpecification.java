@@ -79,7 +79,7 @@ public class VGMStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Verified Gross Mass", "1.0.0-20251107-alpha", "VGM", "1.0.0-20251024-design", 4);
+        "Verified Gross Mass", "1.0.0-20251114-beta", "VGM", "1.0.0-20251107-alpha", 4);
   }
 
   @Override
@@ -131,9 +131,9 @@ public class VGMStandardSpecification extends StandardSpecification {
                 entry ->
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/"
-                                    + "176f6544ac7393d9a4a7d923e41af4d4e1293ed6"
-                                    + "/specifications/generated-resources/standards/vgm/v100/vgm-v1.0.0-data-overview-%s.csv")
+                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
+                                    + "af0f9e9fd0aa30df6a5fcda04ef258290ba87a0c"
+                                    + "/generated-resources/standards/vgm/v100/vgm-v1.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
 

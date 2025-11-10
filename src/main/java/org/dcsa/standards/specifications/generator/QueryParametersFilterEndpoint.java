@@ -16,12 +16,11 @@ public abstract class QueryParametersFilterEndpoint {
 
   protected static List<List<Parameter>> allCombinationsOf(
       List<List<Parameter>> leftListList, List<List<Parameter>> rightListList) {
-    return leftListList.stream()
+    return rightListList.stream()
         .flatMap(
-            leftList ->
-                rightListList.stream()
-                    .map(
-                        rightList -> Stream.concat(leftList.stream(), rightList.stream()).toList()))
+            rightList ->
+                leftListList.stream()
+                    .map(leftList -> Stream.concat(leftList.stream(), rightList.stream()).toList()))
         .toList();
   }
 

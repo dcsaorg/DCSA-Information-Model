@@ -13,6 +13,7 @@ Every VGM Producer must support the following combinations of query parameter fi
 * `carrierBookingReference`, `equipmentReference`
 * `transportDocumentReference`
 * `transportDocumentReference`, `equipmentReference`
+* `equipmentReference`
 
 Every VGM Producer must support combining any of the query parameter filters above with all of these additional filters:
 * `declarationDateTimeMin`
