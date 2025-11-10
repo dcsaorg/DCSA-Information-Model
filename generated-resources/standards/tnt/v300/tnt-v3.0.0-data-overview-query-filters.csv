@@ -1,41 +1,41 @@
 FilterParameters,Required
 carrierBookingReference,yes
-"carrierBookingReference, eventUpdatedDateTimeMin",yes
-"carrierBookingReference, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, eventTypes",yes
-"carrierBookingReference, eventTypes, eventUpdatedDateTimeMin",yes
-"carrierBookingReference, eventTypes, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
 "carrierBookingReference, equipmentReference",yes
-"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMin",yes
-"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, equipmentReference, eventTypes",yes
-"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin",yes
-"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMax",yes
-"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
 "transportDocumentReference",yes
-"transportDocumentReference, eventUpdatedDateTimeMin",yes
-"transportDocumentReference, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, eventTypes",yes
-"transportDocumentReference, eventTypes, eventUpdatedDateTimeMin",yes
-"transportDocumentReference, eventTypes, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
 "transportDocumentReference, equipmentReference",yes
-"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMin",yes
-"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, equipmentReference, eventTypes",yes
-"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin",yes
-"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMax",yes
-"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
 equipmentReference,yes
-"equipmentReference, eventUpdatedDateTimeMin",yes
-"equipmentReference, eventUpdatedDateTimeMax",yes
-"equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, eventTypes",yes
+"carrierBookingReference, equipmentReference, eventTypes",yes
+"transportDocumentReference, eventTypes",yes
+"transportDocumentReference, equipmentReference, eventTypes",yes
 "equipmentReference, eventTypes",yes
+"carrierBookingReference, eventUpdatedDateTimeMin",yes
+"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMin",yes
+"transportDocumentReference, eventUpdatedDateTimeMin",yes
+"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMin",yes
+"equipmentReference, eventUpdatedDateTimeMin",yes
+"carrierBookingReference, eventTypes, eventUpdatedDateTimeMin",yes
+"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin",yes
+"transportDocumentReference, eventTypes, eventUpdatedDateTimeMin",yes
+"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin",yes
 "equipmentReference, eventTypes, eventUpdatedDateTimeMin",yes
+"carrierBookingReference, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMax",yes
+"equipmentReference, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, eventTypes, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, eventTypes, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMax",yes
 "equipmentReference, eventTypes, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"equipmentReference, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"carrierBookingReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
+"transportDocumentReference, equipmentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes
 "equipmentReference, eventTypes, eventUpdatedDateTimeMin, eventUpdatedDateTimeMax",yes

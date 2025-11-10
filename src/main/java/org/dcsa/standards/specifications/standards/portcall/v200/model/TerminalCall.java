@@ -2,9 +2,9 @@ package org.dcsa.standards.specifications.standards.portcall.v200.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v100.model.VoyageNumberOrReference;
-import org.dcsa.standards.specifications.standards.core.v100.types.UniversallyUniqueID;
+import org.dcsa.standards.specifications.standards.core.v101.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.core.v101.types.UniversallyUniqueID;
 
 @Data
 @Schema(description = "Terminal call information")

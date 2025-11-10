@@ -375,18 +375,16 @@ components:
       type: "object"
       properties:
         latitude:
-          maxLength: 10
+          maxLength: 20
           type: "string"
-          description: |
-            Geographic coordinate that specifies the north–south position of a point on the Earth's surface.
-          example: "48.85855"
+          description: "Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+          example: "33.629152"
         longitude:
-          maxLength: 11
+          maxLength: 20
           type: "string"
-          description: |
-            Geographic coordinate that specifies the east–west position of a point on the Earth's surface.
-          example: "2.294492036"
-      description: "An object used to express a location using `latitude` and `longitude`."
+          description: "Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+          example: "-118.587187"
+      description: "An object used to express a location using its geographic coordinates."
     GetVGMDeclarationsError:
       type: "object"
       properties:
@@ -463,7 +461,7 @@ components:
           allOf:
           - $ref: "#/components/schemas/Facility"
         geoCoordinate:
-          description: "An object used to express a location using `latitude` and `longitude`."
+          description: "An object used to express a location using its geographic coordinates."
           allOf:
           - $ref: "#/components/schemas/GeoCoordinate"
       description: "Location information"

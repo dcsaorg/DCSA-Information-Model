@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.an.v100.types;
+package org.dcsa.standards.specifications.standards.core.v101.types;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

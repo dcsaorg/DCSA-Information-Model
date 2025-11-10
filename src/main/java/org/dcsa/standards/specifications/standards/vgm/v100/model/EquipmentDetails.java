@@ -2,10 +2,10 @@ package org.dcsa.standards.specifications.standards.vgm.v100.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.model.Weight;
-import org.dcsa.standards.specifications.standards.core.v100.types.EquipmentReference;
-import org.dcsa.standards.specifications.standards.core.v100.types.IsoEquipmentCode;
-import org.dcsa.standards.specifications.standards.core.v100.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
+import org.dcsa.standards.specifications.standards.core.v101.types.EquipmentReference;
+import org.dcsa.standards.specifications.standards.core.v101.types.IsoEquipmentCode;
+import org.dcsa.standards.specifications.standards.core.v101.model.Seal;
 
 import java.util.List;
 

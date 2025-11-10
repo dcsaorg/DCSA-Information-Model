@@ -16,42 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.dcsa.standards.specifications.generator.SpecificationToolkit;
-import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v100.model.ActiveReeferParameters;
-import org.dcsa.standards.specifications.standards.core.v100.model.Address;
-import org.dcsa.standards.specifications.standards.core.v100.model.ClassifiedDateTime;
-import org.dcsa.standards.specifications.standards.core.v100.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v100.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v100.model.Location;
-import org.dcsa.standards.specifications.standards.core.v100.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v100.model.VoyageNumberOrReference;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.FeedbackElement;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsError;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsResponse;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsError;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsRequest;
-import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsResponse;
-import org.dcsa.standards.specifications.standards.core.v100.model.DocumentReference;
-import org.dcsa.standards.specifications.standards.core.v100.model.DocumentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.EquipmentDetails;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.Event;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.EventClassification;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.EventRouting;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.IotDetails;
-import org.dcsa.standards.specifications.standards.core.v100.model.Party;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.RailTransport;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.ReeferDetails;
-import org.dcsa.standards.specifications.standards.core.v100.model.Seal;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.ShipmentDetails;
-import org.dcsa.standards.specifications.standards.core.v100.model.ShipmentReference;
-import org.dcsa.standards.specifications.standards.core.v100.model.ShipmentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportCall;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportDetails;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.TruckTransport;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.VehicleDetails;
-import org.dcsa.standards.specifications.standards.tnt.v300.model.VesselTransport;
 import org.dcsa.standards.specifications.dataoverview.AttributesHierarchicalSheet;
 import org.dcsa.standards.specifications.dataoverview.AttributesNormalizedSheet;
 import org.dcsa.standards.specifications.dataoverview.DataOverviewSheet;
@@ -59,6 +23,41 @@ import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
 import org.dcsa.standards.specifications.dataoverview.QueryFiltersSheet;
 import org.dcsa.standards.specifications.dataoverview.QueryParametersSheet;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
+import org.dcsa.standards.specifications.generator.SpecificationToolkit;
+import org.dcsa.standards.specifications.generator.StandardSpecification;
+import org.dcsa.standards.specifications.standards.core.v101.model.ActiveReeferParameters;
+import org.dcsa.standards.specifications.standards.core.v101.model.Address;
+import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDateTime;
+import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v101.model.Party;
+import org.dcsa.standards.specifications.standards.core.v101.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v101.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v101.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.FeedbackElement;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsError;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsResponse;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsError;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsRequest;
+import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsResponse;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.EquipmentDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.Event;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.EventClassification;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.EventRouting;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.IotDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.RailTransport;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.ReeferDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.ShipmentDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportCall;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.TruckTransport;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.VehicleDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.VesselTransport;
 
 public class TNTStandardSpecification extends StandardSpecification {
 
@@ -87,7 +86,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20251107-design", "TNT", "3.0.0-20250926-design", 4);
+        "Track and Trace", "3.0.0-20251121-design", "TNT", "3.0.0-20251107-design", 4);
   }
 
   @Override
@@ -149,8 +148,8 @@ public class TNTStandardSpecification extends StandardSpecification {
                 entry ->
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/"
-                                    + "e83485c750798f3e086b5b393dd1effdf56d5185"
+                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
+                                    + "0fdd496a598b89a578c6d75af0c3c9655c0b1577"
                                     + "/specifications/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }

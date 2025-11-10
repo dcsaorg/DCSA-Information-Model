@@ -64,7 +64,7 @@ import org.dcsa.standards.specifications.standards.an.v100.model.TaxLegalReferen
 import org.dcsa.standards.specifications.standards.an.v100.model.Transport;
 import org.dcsa.standards.specifications.standards.an.v100.model.UtilizedTransportEquipment;
 import org.dcsa.standards.specifications.standards.an.v100.model.VesselVoyage;
-import org.dcsa.standards.specifications.standards.an.v100.types.CountryCode;
+import org.dcsa.standards.specifications.standards.core.v100.types.CountryCode;
 import org.dcsa.standards.specifications.standards.core.v100.types.EquipmentReference;
 import org.dcsa.standards.specifications.standards.core.v100.model.Address;
 import org.dcsa.standards.specifications.standards.core.v100.model.Facility;
@@ -117,7 +117,7 @@ public class ANStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Arrival Notice", "1.0.0-20251107-beta", "AN", "1.0.0-20251010-beta", 4);
+        "Arrival Notice", "1.0.0-20251121-beta", "AN", "1.0.0-20251107-beta", 4);
   }
 
   @Override
@@ -207,9 +207,9 @@ public class ANStandardSpecification extends StandardSpecification {
                 entry ->
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/" +
-                              "4bcf4f8ca7d67719b0e77a30f96d4a96b4253003" +
-                              "/specifications/generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv")
+                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/" +
+                              "db86454af300a5df090f37a057eb64d5d2633a7f" +
+                              "/generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
 

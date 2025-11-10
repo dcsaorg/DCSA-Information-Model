@@ -2,6 +2,11 @@
 
 ## Snapshot v3.0.0-20251107-design
 
+Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2643)
+
+
+## Snapshot v3.0.0-20251107-design
+
 Added the missing `EquipmentEventTypeCode` values. (SD-2514)
 
 Added more `ShipmentEventTypeCode` values. (SD-290)

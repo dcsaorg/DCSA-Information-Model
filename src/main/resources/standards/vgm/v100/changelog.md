@@ -10,6 +10,8 @@ In the `VGMDeclaration` object, the `VGM` attribute is now between the details a
 
 In the `FeedbackElement` object, corrected the example of attribute `propertyPath`. (SD-2645)
 
+Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2644)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 

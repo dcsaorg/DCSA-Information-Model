@@ -2,8 +2,8 @@ package org.dcsa.standards.specifications.standards.portcall.v200.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.types.UNLocationCode;
-import org.dcsa.standards.specifications.standards.core.v100.types.UniversallyUniqueID;
+import org.dcsa.standards.specifications.standards.core.v101.types.UNLocationCode;
+import org.dcsa.standards.specifications.standards.core.v101.types.UniversallyUniqueID;
 
 @Data
 @Schema(description = "Port call information")

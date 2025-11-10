@@ -325,9 +325,9 @@ Every Universal Voyage Reference is a 5-character string with the following form
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"VGMDeclaration / vesselVoyageDetails / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -361,9 +361,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"VGMDeclaration / vesselVoyageDetails / portOfLoading / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -402,9 +402,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"VGMDeclaration / VGM / location / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"VGMDeclaration / VGM / location / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"VGMDeclaration / VGM / location / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"VGMDeclaration / VGM / location / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"VGMDeclaration / VGM / location / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"VGMDeclaration / VGM / location / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "VGMDeclaration / VGM / location / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "VGMDeclaration / VGM / location / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 

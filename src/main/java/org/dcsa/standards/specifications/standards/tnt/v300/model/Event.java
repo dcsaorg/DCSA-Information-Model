@@ -3,8 +3,12 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.model.*;
-import org.dcsa.standards.specifications.standards.core.v100.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentLocationTypeCode;
 
 @Data

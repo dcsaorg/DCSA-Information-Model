@@ -21,12 +21,12 @@ import java.util.stream.Stream;
 
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v100.model.Address;
-import org.dcsa.standards.specifications.standards.core.v100.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v100.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v100.model.Location;
-import org.dcsa.standards.specifications.standards.core.v100.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v100.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.Address;
+import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v101.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.VoyageNumberOrReference;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.FeedbackElement;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.GetEventsError;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.GetEventsResponse;
@@ -124,7 +124,7 @@ public class PortCallStandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("Port Call", "2.0.0-20251107-beta", "PC", "2.0.0-20251024-beta", 3);
+    return new LegendMetadata("Port Call", "2.0.0-20251121-beta", "PC", "2.0.0-20251107-beta", 3);
   }
 
   @Override
@@ -174,9 +174,9 @@ public class PortCallStandardSpecification extends StandardSpecification {
                 entry ->
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/Conformance-Gateway/"
-                                    + "56ad981144f46c88ed04769f3292bd7ee4876c38"
-                                    + "/specifications/generated-resources/standards/portcall/v200/port-call-v2.0.0-data-overview-%s.csv")
+                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
+                                    + "db86454af300a5df090f37a057eb64d5d2633a7f"
+                                    + "/generated-resources/standards/portcall/v200/port-call-v2.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
 

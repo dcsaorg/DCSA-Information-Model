@@ -1,5 +1,10 @@
 # Port Call v2.0.0 Changelog
 
+## Snapshot v2.0.0-20251121-beta
+
+Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2647)
+
+
 ## Snapshot v2.0.0-20251107-beta
 
 Updated the descriptions of the universal voyage and service reference query parameters. (SD-2613)

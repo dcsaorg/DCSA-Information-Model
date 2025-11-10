@@ -246,9 +246,9 @@ This port call service has neither an ""A"" timestamp nor an ""ERP"" pattern:
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"Event / portCallService / serviceLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"Event / portCallService / serviceLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"Event / portCallService / serviceLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"Event / portCallService / serviceLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"Event / portCallService / serviceLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"Event / portCallService / serviceLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "Event / portCallService / serviceLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "Event / portCallService / serviceLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -389,9 +389,9 @@ automatic identification systems (AIS) and certain other equipment to uniquely i
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"Event / vessel / vesselPosition / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"Event / vessel / vesselPosition / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"Event / vessel / vesselPosition / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"Event / vessel / vesselPosition / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"Event / vessel / vesselPosition / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"Event / vessel / vesselPosition / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "Event / vessel / vesselPosition / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "Event / vessel / vesselPosition / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
