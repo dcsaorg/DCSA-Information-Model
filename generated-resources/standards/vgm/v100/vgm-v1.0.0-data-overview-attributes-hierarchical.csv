@@ -31,7 +31,12 @@ or any other code as defined in the
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
 or a subsequent revision.",
 "VGMDeclaration / authorizedParty / partyName",partyName,string,,maxLength=70,,"Acme Inc.","Party name",
-"VGMDeclaration / authorizedPersonSignatory","authorizedPersonSignatory",string,,maxLength=255,,"Jane Doe","Authorized person signatory",
+"VGMDeclaration / authorizedPersonSignatory","authorizedPersonSignatory",string,,maxLength=255,,"JANE DOE","Upper case name of the person authorized to sign the declaration.
+
+According to SOLAS 6.2:
+""Irrespective of its form, the document declaring the verified gross mass of the packed container
+should be signed by a person duly authorised by the shipper. The signature may be an electronic signature
+or may be replaced by the name in capitals of the person authorised to sign it.""",
 "VGMDeclaration / declarationDateTime",declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the VGM declaration was last updated",
 "VGMDeclaration / declarationReference",declarationReference,string,,maxLength=500,,"VGM-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the VGM declaration",
 "VGMDeclaration / equipmentDetails",equipmentDetails,EquipmentDetails,,,,,"VGM declaration details specific to the equipment",

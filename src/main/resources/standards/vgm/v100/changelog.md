@@ -4,6 +4,8 @@
 
 Updated the list of mandatory vs. optional GET query parameter filters. (SD-2642)
 
+Updated the description and example of the `authorizedPersonSignatory` attribute. (SD-2638)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 

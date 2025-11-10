@@ -13,8 +13,7 @@ VGM declaration for one piece of equipment, including the actual VGM and the rel
 """)
 public class VGMDeclaration {
 
-  @Schema()
-  private RoutingDetails routingDetails;
+  @Schema() private RoutingDetails routingDetails;
 
   @Schema(
       maxLength = 500,
@@ -51,7 +50,18 @@ If this flag is set, any data in this `VGMDeclaration` object other than the `de
   @Schema(description = "Party authorized to act on behalf of the `responsibleParty`.")
   private PartyDetails authorizedParty;
 
-  @Schema(maxLength = 255, example = "Jane Doe", description = "Authorized person signatory")
+  @Schema(
+      maxLength = 255,
+      example = "JANE DOE",
+      description =
+"""
+Upper case name of the person authorized to sign the declaration.
+
+According to SOLAS 6.2:
+"Irrespective of its form, the document declaring the verified gross mass of the packed container
+should be signed by a person duly authorised by the shipper. The signature may be an electronic signature
+or may be replaced by the name in capitals of the person authorised to sign it."
+""")
   private String authorizedPersonSignatory;
 
   @Schema(description = "Legally accepted party designated to perform the weighing.")
