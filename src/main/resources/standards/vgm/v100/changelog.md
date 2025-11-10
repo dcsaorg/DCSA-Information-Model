@@ -12,6 +12,8 @@ In the `FeedbackElement` object, corrected the example of attribute `propertyPat
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2644)
 
+In the `VesselVoyageDetails` object, updated the description of attribute `carrierCode`. (SD-2646)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 

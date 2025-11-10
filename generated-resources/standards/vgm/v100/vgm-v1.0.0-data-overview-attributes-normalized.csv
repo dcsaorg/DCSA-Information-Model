@@ -133,9 +133,9 @@ ShipmentDetails,otherReferences,"OtherReference list",,,,,"List of additional re
 excluding the Carrier Booking Reference and the Transport Document Reference",
 ShipmentDetails,"transportDocumentReference",string,,maxLength=20,,HHL71800000,"The reference of the transport document for which this VGM declaration was created",
 VesselVoyageDetails,carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
-[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the issuing carrier of the Arrival Notice.
+[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
-`carrierCodeListProvider` defines which list the `carrierCode` is based upon.",
+The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.",
 VesselVoyageDetails,carrierCodeListProvider,string,,maxLength=10,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
 - `SMDG` (Ship Message Design Group)
 - `NMFTA` (National Motor Freight Traffic Association)",

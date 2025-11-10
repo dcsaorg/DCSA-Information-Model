@@ -13,9 +13,9 @@ public class VesselVoyageDetails {
       description =
 """
 The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
-[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the issuing carrier of the Arrival Notice.
+[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
-`carrierCodeListProvider` defines which list the `carrierCode` is based upon.
+The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.
 """,
       example = "MMCU",
       maxLength = 4)
