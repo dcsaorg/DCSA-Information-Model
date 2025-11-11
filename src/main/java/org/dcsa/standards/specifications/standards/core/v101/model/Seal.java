@@ -6,9 +6,7 @@ import lombok.Data;
 @Schema(
   description =
 """
-Seal-related information associated with the shipment equipment.
-A seal is put on a shipment equipment once it is loaded.
-This seal is meant to stay on until the shipment equipment reaches its final destination.
+Seal-related information associated with the equipment.
 """)
 @Data
 public class Seal {
