@@ -4,6 +4,8 @@
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2643)
 
+Added `Seal` placement and new source values. (SD-2655)
+
 
 ## Snapshot v3.0.0-20251107-design
 

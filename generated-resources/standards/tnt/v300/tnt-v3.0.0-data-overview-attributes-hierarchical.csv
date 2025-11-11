@@ -106,12 +106,18 @@ following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
 - `TRANSSHIPMENT` - Transshipment movement",
 "Event / equipmentDetails / seals",seals,"Seal list",,,,,,
 "Event / equipmentDetails / seals / number",number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+"Event / equipmentDetails / seals / placement",placement,string,,,,DOOR,"Placement of the seal.
+- `DOOR` (Door)
+- `VENT` (Vent)",
 "Event / equipmentDetails / seals / source",source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
-- `SHI` (Shipper)
-- `PHY` (Phytosanitary)
-- `VET` (Veterinary)
+- `CNS` (Consolidator)
+- `CST` (Customer)
 - `CUS` (Customs)
+- `PHY` (Phytosanitary)
+- `SHI` (Shipper)
+- `TER` (Terminal)
+- `VET` (Veterinary)
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",

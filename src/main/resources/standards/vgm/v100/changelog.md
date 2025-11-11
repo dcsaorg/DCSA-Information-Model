@@ -14,6 +14,8 @@ Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expecte
 
 In the `VesselVoyageDetails` object, updated the description of attribute `carrierCode`. (SD-2646)
 
+Added `Seal` placement and new source values. (SD-2655)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 

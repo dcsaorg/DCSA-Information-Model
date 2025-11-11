@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Schema(
-    description =
+  description =
 """
 Seal-related information associated with the shipment equipment.
 A seal is put on a shipment equipment once it is loaded.
@@ -14,25 +14,28 @@ This seal is meant to stay on until the shipment equipment reaches its final des
 public class Seal {
 
   @Schema(
-      description = "Identifies a seal affixed to the container.",
-      example = "VET123",
-      maxLength = 15)
+    description = "Identifies a seal affixed to the container.",
+    example = "VET123",
+    maxLength = 15)
   protected String number;
 
   @Schema(
-      description =
+    description =
 """
 The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
-- `SHI` (Shipper)
-- `PHY` (Phytosanitary)
-- `VET` (Veterinary)
+- `CNS` (Consolidator)
+- `CST` (Customer)
 - `CUS` (Customs)
+- `PHY` (Phytosanitary)
+- `SHI` (Shipper)
+- `TER` (Terminal)
+- `VET` (Veterinary)
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
 """,
-      example = "CUS")
+    example = "CUS")
   protected String source;
 
   @Schema(
@@ -45,4 +48,15 @@ The type of seal.
 """,
     example = "WIR")
   protected String type;
+
+  @Schema(
+    description =
+"""
+Placement of the seal.
+- `DOOR` (Door)
+- `VENT` (Vent)
+""",
+    defaultValue = "DOOR",
+    example = "DOOR")
+  protected String placement;
 }
