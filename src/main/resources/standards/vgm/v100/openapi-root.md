@@ -6,7 +6,7 @@ This API allows the transfer of structured VGM declarations from a VGM Producer 
 
 Each VGM Producer implements the `GET /vgm-declarations` endpoint, which can be called by the authorized VGM Consumers to retrieve relevant available VGM declarations.
 
-Each VGM Consumer implements the `POST /vgm-declarations` endpoint, which can be called by VGM Producers call to send relevant VGM declarations as they become available or are updated.
+Each VGM Consumer implements the `POST /vgm-declarations` endpoint, which can be called by VGM Producers to send relevant VGM declarations as they become available or are updated.
 
 The registration of VGM Consumers with VGM Producers is out of scope.
 
