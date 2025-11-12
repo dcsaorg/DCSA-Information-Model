@@ -16,6 +16,8 @@ In the `VesselVoyageDetails` object, updated the description of attribute `carri
 
 Added `Seal` placement and new source values. (SD-2655)
 
+Clarified in object `VesselVoyageDetails` the definition of attribute `vesselName`. (SD-2624)
+
 
 ## Snapshot v1.0.0-20251107-alpha
 

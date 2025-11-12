@@ -1,6 +1,6 @@
 # Track and Trace v3.0.0 Changelog
 
-## Snapshot v3.0.0-20251121-design
+## Snapshot v3.0.0-20251121-alpha
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2643)
 

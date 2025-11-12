@@ -834,7 +834,7 @@ components:
         vesselName:
           maxLength: 50
           type: "string"
-          description: "Vessel name"
+          description: "Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded."
           example: "King of the Seas"
       description: "VGM declaration details specific to the vessel voyage"
     VoyageNumberOrReference:

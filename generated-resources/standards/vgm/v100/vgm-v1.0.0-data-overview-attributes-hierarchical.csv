@@ -377,7 +377,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-"VGMDeclaration / vesselVoyageDetails / vesselName",vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
+"VGMDeclaration / vesselVoyageDetails / vesselName",vesselName,string,,maxLength=50,,"King of the Seas","Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded.",
 "VGMDeclaration / VGM",VGM,VGM,,,,,"Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6",
 "VGMDeclaration / VGM / certificationDateTime",certificationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date and time when the VGM certificate has been issued.",
 "VGMDeclaration / VGM / certificationReference",certificationReference,string,,maxLength=70,,W42-23110812,"Reference number or identifier for the certificate issued by the weighing party (or a certified weighing facility).",
