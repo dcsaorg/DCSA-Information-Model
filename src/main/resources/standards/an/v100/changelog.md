@@ -6,6 +6,8 @@ Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expecte
 
 Increased in type `ConsignmentItem`, in attribute `HSCodes`, the `maxLength` of each list item to 12. (SD-2674)
 
+Increased in type `NationalCommodityCode`, in attribute `values`, the `maxLength` of each list item to 16. (SD-2674)
+
 
 ## Snapshot v1.0.0-20251107-beta
 

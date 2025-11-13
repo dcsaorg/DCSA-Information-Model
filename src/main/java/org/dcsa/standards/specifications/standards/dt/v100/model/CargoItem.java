@@ -63,9 +63,6 @@ Net volume of the cargo item, calculated by multiplying the width, height, and l
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Packaging information for this cargo item.")
   protected OuterPackaging outerPackaging;
 
-  @Schema(description = "A list of `National Commodity Codes` that apply to this `cargoItem`")
-  protected List<NationalCommodityCode> nationalCommodityCodes;
-
   @Schema(description = "A list of `Customs references`")
   protected List<CustomsReference> customsReferences;
 }

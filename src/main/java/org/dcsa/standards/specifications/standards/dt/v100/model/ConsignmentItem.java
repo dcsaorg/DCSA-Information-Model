@@ -27,9 +27,6 @@ A plain language description that is precise enough for Customs services to be a
   @ArraySchema(maxItems = 150)
   protected List<DescriptionOfGoodsLine> descriptionOfGoods;
 
-  @Schema(description = "A list of `National Commodity Codes` that apply to this `commodity`")
-  protected List<NationalCommodityCode> nationalCommodityCodes;
-
   @Schema(
       description =
 """

@@ -819,16 +819,16 @@ components:
           description: "Packaging information for this cargo item."
           allOf:
           - $ref: "#/components/schemas/OuterPackaging"
-        nationalCommodityCodes:
-          type: "array"
-          description: "A list of `National Commodity Codes` that apply to this `cargoItem`"
-          items:
-            $ref: "#/components/schemas/NationalCommodityCode"
         customsReferences:
           type: "array"
           description: "A list of `Customs references`"
           items:
             $ref: "#/components/schemas/CustomsReference"
+        nationalCommodityCodes:
+          type: "array"
+          description: "A list of `National Commodity Codes` that apply to this `cargoItem`"
+          items:
+            $ref: "#/components/schemas/NationalCommodityCode"
         position:
           type: "integer"
           description: |
@@ -981,11 +981,6 @@ components:
             type: "string"
             description: "A line describing the cargo"
             example: "blue shoes size 47"
-        nationalCommodityCodes:
-          type: "array"
-          description: "A list of `National Commodity Codes` that apply to this `commodity`"
-          items:
-            $ref: "#/components/schemas/NationalCommodityCode"
         shippingMarks:
           maxItems: 50
           type: "array"
@@ -1020,6 +1015,11 @@ components:
           description: "A list of `Customs references`"
           items:
             $ref: "#/components/schemas/CustomsReference"
+        nationalCommodityCodes:
+          type: "array"
+          description: "A list of `National Commodity Codes` that apply to this `commodity`"
+          items:
+            $ref: "#/components/schemas/NationalCommodityCode"
         HSCodes:
           type: "array"
           description: |
@@ -1899,7 +1899,7 @@ components:
           type: "array"
           description: "A list of `national commodity codes` values."
           items:
-            maxLength: 10
+            maxLength: 16
             type: "string"
             description: "The value of the `National Commodity Code`"
             example: "1515"

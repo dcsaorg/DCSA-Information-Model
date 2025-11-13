@@ -1,10 +1,7 @@
 package org.dcsa.standards.specifications.standards.dt.v100.model;
 
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.types.NationalCommodityCodeValue;
 
 @Schema(description = NationalCommodityCode.CLASS_SCHEMA_DESCRIPTION)
 @Data
@@ -40,10 +37,4 @@ The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso
       maxLength = 2,
       pattern = "^[A-Z]{2}$")
   private String countryCode;
-
-  @Schema(
-      requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "A list of `national commodity codes` values.")
-  @ArraySchema(minItems = 1)
-  private List<NationalCommodityCodeValue> values;
 }

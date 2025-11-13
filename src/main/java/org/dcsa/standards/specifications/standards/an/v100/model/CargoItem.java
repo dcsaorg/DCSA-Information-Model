@@ -24,6 +24,9 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 public class CargoItem
     extends org.dcsa.standards.specifications.standards.dt.v100.model.CargoItem {
 
+  @Schema(description = "A list of `National Commodity Codes` that apply to this `cargoItem`")
+  protected List<NationalCommodityCode> nationalCommodityCodes;
+
   @Schema(
       type = "integer",
       format = "int32",

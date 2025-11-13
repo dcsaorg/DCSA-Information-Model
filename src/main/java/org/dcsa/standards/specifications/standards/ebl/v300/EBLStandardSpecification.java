@@ -28,7 +28,6 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.IdentifyingCode
 import org.dcsa.standards.specifications.standards.dt.v100.model.ImportLicense;
 import org.dcsa.standards.specifications.standards.dt.v100.model.InnerPackaging;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Limits;
-import org.dcsa.standards.specifications.standards.dt.v100.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.dt.v100.model.OuterPackaging;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
@@ -52,6 +51,7 @@ import org.dcsa.standards.specifications.standards.ebl.v300.model.Equipment;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.GrossWeight;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.InvoicePayableAt;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.IssuingParty;
+import org.dcsa.standards.specifications.standards.ebl.v300.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.NetExplosiveContent;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.NetVolume;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.NetWeight;

@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Schema(
     description =
         org.dcsa.standards.specifications.standards.dt.v100.model.CargoItem
@@ -18,6 +20,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 public class CargoItem
     extends org.dcsa.standards.specifications.standards.dt.v100.model.CargoItem {
+
+  @Schema(description = "A list of `National Commodity Codes` that apply to this `cargoItem`")
+  protected List<NationalCommodityCode> nationalCommodityCodes;
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Gross weight of the cargo.")
   protected CargoGrossWeight cargoGrossWeight;

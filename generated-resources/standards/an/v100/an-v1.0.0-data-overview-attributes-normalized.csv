@@ -507,7 +507,7 @@ NationalCommodityCode,type,string,,maxLength=10,,NCM,"The national commodity cla
 - `TARIC` (Integrated Tariff of the European Communities)
 - `CN` (Combined Nomenclature)
 - `CUS` (Customs Union and Statistics)",
-NationalCommodityCode,values,"string list",,maxLength=10,,,"A list of `national commodity codes` values.
+NationalCommodityCode,values,"string list",,maxLength=16,,,"A list of `national commodity codes` values.
 Item description:
 The value of the `National Commodity Code`",
 OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`",

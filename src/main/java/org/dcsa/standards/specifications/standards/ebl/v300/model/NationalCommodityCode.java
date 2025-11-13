@@ -1,5 +1,6 @@
-package org.dcsa.standards.specifications.standards.an.v100.model;
+package org.dcsa.standards.specifications.standards.ebl.v300.model;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -7,8 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
-import org.dcsa.standards.specifications.standards.an.v100.types.NationalCommodityCodeValue;
+import org.dcsa.standards.specifications.standards.ebl.v300.types.NationalCommodityCodeValue;
 
 @Schema(
     description =
@@ -19,10 +19,11 @@ import org.dcsa.standards.specifications.standards.an.v100.types.NationalCommodi
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
-@ClearSchemaConstraints
 public class NationalCommodityCode
     extends org.dcsa.standards.specifications.standards.dt.v100.model.NationalCommodityCode {
-
-  @Schema(description = "A list of `national commodity codes` values.")
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "A list of `national commodity codes` values.")
+  @ArraySchema(minItems = 1)
   private List<NationalCommodityCodeValue> values;
 }

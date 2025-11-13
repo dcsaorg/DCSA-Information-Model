@@ -22,6 +22,9 @@ import org.dcsa.standards.specifications.standards.ebl.v300.types.HSCode;
 public class ConsignmentItem
     extends org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem {
 
+  @Schema(description = "A list of `National Commodity Codes` that apply to this `commodity`")
+  protected List<NationalCommodityCode> nationalCommodityCodes;
+
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
       name = "HSCodes",
