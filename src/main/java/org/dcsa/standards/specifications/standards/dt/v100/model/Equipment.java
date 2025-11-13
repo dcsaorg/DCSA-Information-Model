@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.dt.v100.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.model.Weight;
+import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
 
 @Schema(description = Equipment.CLASS_SCHEMA_DESCRIPTION)
 @Data
