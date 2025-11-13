@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Charge;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ExportLicense;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ImportLicense;

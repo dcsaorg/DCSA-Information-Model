@@ -981,20 +981,6 @@ components:
             type: "string"
             description: "A line describing the cargo"
             example: "blue shoes size 47"
-        HSCodes:
-          type: "array"
-          description: |
-            A list of `HS Codes` that apply to this `consignmentItem`.
-            HS codes are used by customs to classify the product being shipped.
-            The code must be at least 6 and at most 10 digits.
-          items:
-            maxLength: 10
-            type: "string"
-            description: |
-              Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
-
-              More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-            example: "851713"
         nationalCommodityCodes:
           type: "array"
           description: "A list of `National Commodity Codes` that apply to this `commodity`"
@@ -1034,6 +1020,20 @@ components:
           description: "A list of `Customs references`"
           items:
             $ref: "#/components/schemas/CustomsReference"
+        HSCodes:
+          type: "array"
+          description: |
+            A list of `HS Codes` that apply to this `consignmentItem`.
+            HS codes are used by customs to classify the product being shipped.
+          items:
+            maxLength: 12
+            type: "string"
+            description: |
+              Used by customs to classify the product being shipped.
+              The type of HS code depends on country and customs requirements.
+
+              More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
+            example: "851713"
       description: "Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers by referencing multiple `CargoItems`."
     CustomsClearance:
       type: "object"

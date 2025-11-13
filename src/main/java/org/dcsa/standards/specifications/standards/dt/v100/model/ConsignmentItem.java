@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DescriptionOfGoodsLine;
-import org.dcsa.standards.specifications.standards.dt.v100.types.HSCode;
 import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
 
 @Schema(description = ConsignmentItem.CLASS_SCHEMA_DESCRIPTION)
@@ -27,10 +26,6 @@ A plain language description that is precise enough for Customs services to be a
 """)
   @ArraySchema(maxItems = 150)
   protected List<DescriptionOfGoodsLine> descriptionOfGoods;
-
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, name = "HSCodes", description = "A list of `HS Codes` that apply to this `consignmentItem`")
-  @ArraySchema(minItems = 1)
-  protected List<HSCode> hsCodes;
 
   @Schema(description = "A list of `National Commodity Codes` that apply to this `commodity`")
   protected List<NationalCommodityCode> nationalCommodityCodes;

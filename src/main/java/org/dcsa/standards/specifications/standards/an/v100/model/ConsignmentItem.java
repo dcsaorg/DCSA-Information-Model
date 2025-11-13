@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import org.dcsa.standards.specifications.standards.an.v100.types.HSCode;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DescriptionOfGoodsLine;
-import org.dcsa.standards.specifications.standards.dt.v100.types.HSCode;
 import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
 import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
@@ -40,7 +40,6 @@ A plain language description that is precise enough for Customs services to be a
 """
 A list of `HS Codes` that apply to this `consignmentItem`.
 HS codes are used by customs to classify the product being shipped.
-The code must be at least 6 and at most 10 digits.
 """)
   @ArraySchema(minItems = 1)
   protected List<HSCode> hsCodes;

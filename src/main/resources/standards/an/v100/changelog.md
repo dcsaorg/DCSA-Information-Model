@@ -4,6 +4,8 @@
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2673)
 
+Increased in type `ConsignmentItem`, in attribute `HSCodes`, the `maxLength` of each list item to 12. (SD-2674)
+
 
 ## Snapshot v1.0.0-20251107-beta
 

@@ -19,7 +19,6 @@ import org.dcsa.standards.specifications.generator.StandardSpecification;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ActiveReeferSettings;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Charge;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.EmergencyContactDetails;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ExportLicense;
@@ -45,6 +44,7 @@ import org.dcsa.standards.specifications.standards.ebl.v300.model.CargoNetWeight
 import org.dcsa.standards.specifications.standards.ebl.v300.model.CarriersAgentAtDestination;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.City;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.Consignee;
+import org.dcsa.standards.specifications.standards.ebl.v300.model.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.DangerousGoods;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.DocumentParties;
 import org.dcsa.standards.specifications.standards.ebl.v300.model.Endorsee;
