@@ -70,9 +70,9 @@ to a vessel rate of exchange or a daily rate of exchange.",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -160,9 +160,9 @@ to a vessel rate of exchange or a daily rate of exchange.",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -419,9 +419,9 @@ The identifying details of a package or the actual markings that appear on the p
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / customsClearance / customsClearancePoint / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / customsClearance / customsClearancePoint / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -616,9 +616,9 @@ Unique number allocated by the Ocean Transport Intermediary (OTI) to the House B
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / pickupInformation / pickupLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / pickupInformation / pickupLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -678,9 +678,9 @@ and all required freight payments have been received by the carrier.",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / returnInformation / returnLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / returnInformation / returnLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -718,9 +718,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / borderCrossingLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / borderCrossingLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -791,9 +791,9 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / legs / dischargeLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / legs / dischargeLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -827,9 +827,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / legs / loadLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / legs / loadLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / legs / loadLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -928,9 +928,9 @@ by the shipping line and where responsibility of the shipping line ceases.",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / placeOfDelivery / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / placeOfDelivery / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -972,9 +972,9 @@ This indicates the point at which the shipping line takes on responsibility for 
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / placeOfReceipt / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / placeOfReceipt / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / placeOfReceipt / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1008,9 +1008,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / portOfDischarge / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / portOfDischarge / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1051,9 +1051,9 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / transport / portOfLoading / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / transport / portOfLoading / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / transport / portOfLoading / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / transport / portOfLoading / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / transport / portOfLoading / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1156,9 +1156,9 @@ to a vessel rate of exchange or a daily rate of exchange.",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1220,9 +1220,9 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1270,9 +1270,9 @@ If the pickup number is incorrect, the trucker will have his pickup request deni
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1343,9 +1343,9 @@ responsibility of the shipping line ceases",
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNoticeNotification / placeOfDelivery / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNoticeNotification / placeOfDelivery / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -1386,9 +1386,9 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 - `POTE` - Port terminal
 - `RAMP` - Ramp
 - `WAYP` - Waypoint",
-"ArrivalNoticeNotification / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using `latitude` and `longitude`.",
-"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=10,,48.85855,"Geographic coordinate that specifies the north–south position of a point on the Earth's surface.",
-"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=11,,2.294492036,"Geographic coordinate that specifies the east–west position of a point on the Earth's surface.",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 "ArrivalNoticeNotification / portOfDischarge / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 "ArrivalNoticeNotification / portOfDischarge / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 

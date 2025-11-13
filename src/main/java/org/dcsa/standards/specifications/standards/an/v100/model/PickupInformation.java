@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.an.v100.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.model.Location;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
 
 @Data
 @Schema(description = "Consolidates the information required to pick up the container.")

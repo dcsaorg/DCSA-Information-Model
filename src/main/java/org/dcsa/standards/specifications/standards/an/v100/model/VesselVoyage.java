@@ -2,10 +2,10 @@ package org.dcsa.standards.specifications.standards.an.v100.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v100.types.CountryCode;
-import org.dcsa.standards.specifications.standards.core.v100.types.UniversalServiceReference;
-import org.dcsa.standards.specifications.standards.core.v100.types.UniversalVoyageReference;
-import org.dcsa.standards.specifications.standards.core.v100.types.VesselIMONumber;
+import org.dcsa.standards.specifications.standards.core.v101.types.CountryCode;
+import org.dcsa.standards.specifications.standards.core.v101.types.UniversalServiceReference;
+import org.dcsa.standards.specifications.standards.core.v101.types.UniversalVoyageReference;
+import org.dcsa.standards.specifications.standards.core.v101.types.VesselIMONumber;
 
 @Data
 @Schema(description = "Vessel and voyage details of a transport leg")

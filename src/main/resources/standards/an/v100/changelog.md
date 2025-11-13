@@ -1,5 +1,10 @@
 # Arrival Notice v1.0.0 Changelog
 
+## Snapshot v1.0.0-20251121-beta
+
+Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2673)
+
+
 ## Snapshot v1.0.0-20251107-beta
 
 Updated the descriptions of `UniversalServiceReference` and `UniversalVoyageReference` attributes. (SD-2598)
