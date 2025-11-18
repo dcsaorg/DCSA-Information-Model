@@ -13,6 +13,7 @@
   <bpmn:process id="Process_112capa" isExecutable="true">
     <bpmn:task id="Activity_1sg6llc" name="UC5 Confirm booking request">
       <bpmn:incoming>Flow_1rvjlxk</bpmn:incoming>
+      <bpmn:incoming>Flow_0t09ael</bpmn:incoming>
       <bpmn:outgoing>Flow_0aoubxh</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_08zjg7j">
         <bpmn:targetRef>DataObjectReference_173d112</bpmn:targetRef>
@@ -29,6 +30,7 @@
       <bpmn:incoming>Flow_0aoubxh</bpmn:incoming>
       <bpmn:outgoing>Flow_09dutbt</bpmn:outgoing>
       <bpmn:outgoing>Flow_1pjlbxv</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0t09ael</bpmn:outgoing>
     </bpmn:parallelGateway>
     <bpmn:exclusiveGateway id="Gateway_0hj8e26" name="Carrier needs booking amendment?">
       <bpmn:incoming>Flow_09dutbt</bpmn:incoming>
@@ -115,6 +117,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_0hlz5sb" name="Booking Status = COMPLETED" dataObjectRef="DataObject_1n9c267" />
     <bpmn:dataObject id="DataObject_1n9c267" />
     <bpmn:sequenceFlow id="Flow_0b6n5yf" sourceRef="Activity_12p88v3" targetRef="Event_117iyg4" />
+    <bpmn:sequenceFlow id="Flow_0t09ael" sourceRef="Gateway_00xknac" targetRef="Activity_1sg6llc" />
   </bpmn:process>
   <bpmn:process id="Process_03xuylf" isExecutable="false">
     <bpmn:intermediateCatchEvent id="Event_1p0ko3w" name="Carrier Booking Reference">
@@ -409,6 +412,13 @@
       <bpmndi:BPMNEdge id="Flow_0b6n5yf_di" bpmnElement="Flow_0b6n5yf">
         <di:waypoint x="1870" y="280" />
         <di:waypoint x="1952" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t09ael_di" bpmnElement="Flow_0t09ael">
+        <di:waypoint x="490" y="305" />
+        <di:waypoint x="490" y="370" />
+        <di:waypoint x="260" y="370" />
+        <di:waypoint x="260" y="280" />
+        <di:waypoint x="300" y="280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_06w0nv1" bpmnElement="Participant_1ucs290" isHorizontal="true">
         <dc:Bounds x="129" y="680" width="1891" height="520" />
