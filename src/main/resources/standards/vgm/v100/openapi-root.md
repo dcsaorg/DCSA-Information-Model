@@ -11,7 +11,3 @@ Each VGM Consumer implements the `POST /vgm-declarations` endpoint, which can be
 The registration of VGM Consumers with VGM Producers is out of scope.
 
 The authentication and authorization in both directions between VGM Producers and VGM Consumers is out of scope.
-
-### Work in progress ⚠️
-
-The DCSA Verified Gross Mass (VGM) standard, including this API, is currently being reviewed and is **not** ready for general adoption yet.
