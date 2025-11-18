@@ -109,7 +109,7 @@
         <bpmn:targetRef>DataObjectReference_0hlz5sb</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:task>
-    <bpmn:endEvent id="Event_117iyg4">
+    <bpmn:endEvent id="Event_117iyg4" name="Booking completed">
       <bpmn:incoming>Flow_0b6n5yf</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:dataObjectReference id="DataObjectReference_0hlz5sb" name="Booking Status = COMPLETED" dataObjectRef="DataObject_1n9c267" />
@@ -181,10 +181,10 @@
       <bpmn:outgoing>Flow_0yefi67</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_17509a6" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:endEvent id="Event_1k5rlvl">
+    <bpmn:sequenceFlow id="Flow_0yefi67" sourceRef="Event_1oj8k0w" targetRef="Event_1k5rlvl" />
+    <bpmn:endEvent id="Event_1k5rlvl" name="Booking completed">
       <bpmn:incoming>Flow_0yefi67</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0yefi67" sourceRef="Event_1oj8k0w" targetRef="Event_1k5rlvl" />
   </bpmn:process>
   <bpmn:message id="Message_3tr7q4u" name="Message_POST_ANs_response">
     <bpmn:extensionElements>
@@ -310,6 +310,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_117iyg4_di" bpmnElement="Event_117iyg4">
         <dc:Bounds x="1952" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1945" y="305" width="51" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_0hlz5sb_di" bpmnElement="DataObjectReference_0hlz5sb" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="1802" y="145" width="36" height="50" />
@@ -446,7 +449,10 @@
         <dc:Bounds x="1802" y="992" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1k5rlvl_di" bpmnElement="Event_1k5rlvl">
-        <dc:Bounds x="1892" y="992" width="36" height="36" />
+        <dc:Bounds x="1922" y="992" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1915" y="1035" width="51" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1uzj0w1_di" bpmnElement="Flow_1uzj0w1">
         <di:waypoint x="368" y="1010" />
@@ -515,7 +521,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0yefi67_di" bpmnElement="Flow_0yefi67">
         <di:waypoint x="1838" y="1010" />
-        <di:waypoint x="1892" y="1010" />
+        <di:waypoint x="1922" y="1010" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_08zjg7j_di" bpmnElement="DataOutputAssociation_08zjg7j">
         <di:waypoint x="350" y="240" />
