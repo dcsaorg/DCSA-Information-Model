@@ -73,6 +73,9 @@
     <bpmn:intermediateCatchEvent id="Event_1llzfpr">
       <bpmn:incoming>Flow_1ietbm2</bpmn:incoming>
       <bpmn:outgoing>Flow_12u2x28</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0dt57p2">
+        <bpmn:targetRef>DataObjectReference_0s4hquh</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
       <bpmn:messageEventDefinition id="MessageEventDefinition_11yyr52" messageRef="Message_3i0oft6" />
     </bpmn:intermediateCatchEvent>
     <bpmn:task id="Activity_145xzg5" name="UC2 Request update to booking request">
@@ -82,11 +85,6 @@
         <bpmn:targetRef>DataObjectReference_05rlcvy</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:task>
-    <bpmn:exclusiveGateway id="Gateway_1kodmql" name="Booking request valid?">
-      <bpmn:incoming>Flow_12u2x28</bpmn:incoming>
-      <bpmn:outgoing>Flow_0z2u9jb</bpmn:outgoing>
-      <bpmn:outgoing>Flow_0txbpku</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:dataObjectReference id="DataObjectReference_1wt9243" name="Booking Status = RECEIVED" dataObjectRef="DataObject_1ln1sjj" />
     <bpmn:dataObject id="DataObject_1ln1sjj" />
     <bpmn:dataObjectReference id="DataObjectReference_05rlcvy" name="Booking Status = PENDING UPDATE" dataObjectRef="DataObject_168sq8m" />
@@ -104,6 +102,13 @@
       <bpmn:incoming>Flow_1jjbmju</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1jjbmju" sourceRef="Activity_1sg6llc" targetRef="Event_04frdqr" />
+    <bpmn:exclusiveGateway id="Gateway_1kodmql" name="Booking request valid?">
+      <bpmn:incoming>Flow_12u2x28</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z2u9jb</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0txbpku</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:dataObjectReference id="DataObjectReference_0s4hquh" name="Booking Status = UPDATE RECEIVED" dataObjectRef="DataObject_1a1zewb" />
+    <bpmn:dataObject id="DataObject_1a1zewb" />
   </bpmn:process>
   <bpmn:process id="Process_03xuylf" isExecutable="false">
     <bpmn:sequenceFlow id="Flow_0qitrbj" name="No" sourceRef="Gateway_1xpgjil" targetRef="Event_1p0ko3w">
@@ -266,12 +271,6 @@
         <dc:Bounds x="1220" y="320" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1kodmql_di" bpmnElement="Gateway_1kodmql" isMarkerVisible="true">
-        <dc:Bounds x="1425" y="435" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1485" y="446.5" width="80" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_1wt9243_di" bpmnElement="DataObjectReference_1wt9243" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="702" y="135" width="36" height="50" />
         <bpmndi:BPMNLabel>
@@ -298,6 +297,18 @@
         <dc:Bounds x="1772" y="252" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="1766" y="295" width="49" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1kodmql_di" bpmnElement="Gateway_1kodmql" isMarkerVisible="true">
+        <dc:Bounds x="1535" y="435" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1595" y="447" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0s4hquh_di" bpmnElement="DataObjectReference_0s4hquh" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="1432" y="135" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1412" y="85" width="75" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_18ylb5o_di" bpmnElement="Flow_18ylb5o">
@@ -335,7 +346,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0txbpku_di" bpmnElement="Flow_0txbpku">
-        <di:waypoint x="1425" y="460" />
+        <di:waypoint x="1535" y="460" />
         <di:waypoint x="1030" y="460" />
         <di:waypoint x="1030" y="270" />
         <di:waypoint x="1075" y="270" />
@@ -352,16 +363,17 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0z2u9jb_di" bpmnElement="Flow_0z2u9jb">
-        <di:waypoint x="1450" y="435" />
-        <di:waypoint x="1450" y="360" />
+        <di:waypoint x="1560" y="435" />
+        <di:waypoint x="1560" y="360" />
         <di:waypoint x="1320" y="360" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1384" y="369" width="15" height="14" />
+          <dc:Bounds x="1445" y="369" width="15" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12u2x28_di" bpmnElement="Flow_12u2x28">
-        <di:waypoint x="1450" y="552" />
-        <di:waypoint x="1450" y="485" />
+        <di:waypoint x="1468" y="570" />
+        <di:waypoint x="1560" y="570" />
+        <di:waypoint x="1560" y="485" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1fi2mam_di" bpmnElement="Flow_1fi2mam">
         <di:waypoint x="770" y="270" />
@@ -542,6 +554,10 @@
       <bpmndi:BPMNEdge id="Flow_0odqijj_di" bpmnElement="Flow_0odqijj">
         <di:waypoint x="1450" y="790" />
         <di:waypoint x="1450" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0dt57p2_di" bpmnElement="DataOutputAssociation_0dt57p2">
+        <di:waypoint x="1450" y="552" />
+        <di:waypoint x="1452" y="185" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
