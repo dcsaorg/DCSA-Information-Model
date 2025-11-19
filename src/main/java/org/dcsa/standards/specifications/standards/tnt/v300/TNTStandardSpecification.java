@@ -86,7 +86,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20251121-design", "TNT", "3.0.0-20251107-design", 4);
+        "Track and Trace", "3.0.0-20251121-alpha", "TNT", "3.0.0-20251107-design", 4);
   }
 
   @Override
