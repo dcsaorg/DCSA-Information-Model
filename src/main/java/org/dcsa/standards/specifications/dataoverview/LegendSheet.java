@@ -292,8 +292,9 @@ The following sheets are available in this Data Overview, each with the columns 
                         using the coloring convention described the 'Color codes' section below.
                         """),
                     Map.entry("Name", "Name of the query parameter"),
-                    Map.entry("Query parameters", "Type of the query parameter"),
-                    Map.entry("Query filters", "Description of the query parameter"))
+                    Map.entry("Type", "Type of the query parameter"),
+                    Map.entry("Description", "Description of the query parameter"),
+                    Map.entry("Example", "Example of the query parameter"))
                 .map(
                     entry ->
                         new RowInfo(
