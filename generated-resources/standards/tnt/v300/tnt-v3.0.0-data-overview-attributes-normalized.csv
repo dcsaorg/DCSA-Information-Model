@@ -1,22 +1,4 @@
 Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-ActiveReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
-- `MQH` (Cubic metre per hour)
-- `FQH` (Cubic foot per hour)",
-ActiveReeferParameters,airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
-ActiveReeferParameters,ambientTemperatureValue,number,,,,-15,"Ambient temperature value expressed in `temperatureUnit`",
-ActiveReeferParameters,co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
-ActiveReeferParameters,humidityPercentage,number,,,,50,"Humidity percentage",
-ActiveReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
-ActiveReeferParameters,isColdTreatmentRequired,boolean,,,,true,"Flag indicating whether cargo cold treatment is required prior to loading at origin,
-or during transit but prior arrival at POD.",
-ActiveReeferParameters,"isControlledAtmosphereRequired",boolean,,,,true,"Flag indicating whether controlled atmosphere is required",
-ActiveReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
-ActiveReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
-ActiveReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
-ActiveReeferParameters,temperatureUnit,string,,,,CEL,"Unit in which the `temperatureValue` and `ambientTemperatureValue` are expressed:
-- `CEL` (Celsius)
-- `FAH` (Fahrenheit)",
-ActiveReeferParameters,temperatureValue,number,,,,-15,"Internal temperature value expressed in `temperatureUnit`",
 Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -269,8 +251,27 @@ RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or 
 (Also known as a departure reference number.)",
 RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",
 RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported.",
-ReeferDetails,measuredParameters,ActiveReeferParameters,,,,,"Measured active reefer parameters",
-ReeferDetails,setpointParameters,ActiveReeferParameters,,,,,"Setpoint active reefer parameters",
+ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
+ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
+ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
+ReeferDetails,setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
+ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
+ReeferDetails,temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)",
+ReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
+- `MQH` (Cubic metre per hour)
+- `FQH` (Cubic foot per hour)",
+ReeferParameters,airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
+ReeferParameters,co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
+ReeferParameters,humidityPercentage,number,,,,50,"Humidity percentage",
+ReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
+ReeferParameters,isColdTreatmentRequired,boolean,,,,true,"Flag indicating whether cargo cold treatment is required prior to loading at origin,
+or during transit but prior arrival at POD.",
+ReeferParameters,"isControlledAtmosphereRequired",boolean,,,,true,"Flag indicating whether controlled atmosphere is required",
+ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
+ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
+ReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
 Seal,placement,string,,,,DOOR,"Placement of the seal.
 - `DOOR` (Door)
@@ -326,6 +327,14 @@ ShipmentReference,typeCode,string,,,,FF,"Code used to denote the type of a shipm
 - `SI` - Shipper’s Reference",
 "ShipmentReferenceReplacement",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`.",
 "ShipmentReferenceReplacement",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`.",
+"TemperatureProbeMeasurement",COAProbeUDMKey,string,,,,P20,"COA UDM reefer probe key:
+- `P19` (USDA probe 1)
+- `P20` (USDA probe 2)
+- `P21` (USDA probe 3)
+- `P22` (Cargo probe)",
+"TemperatureProbeMeasurement",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `temperatureUnit`",
+"TemperatureProbeMeasurement",probeLabel,string,,,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
+"TemperatureProbeMeasurement",USDAProbeNumber,integer,,,,2,"USDA reefer probe number (1-3)",
 TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
 TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
 TransportCall,modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA

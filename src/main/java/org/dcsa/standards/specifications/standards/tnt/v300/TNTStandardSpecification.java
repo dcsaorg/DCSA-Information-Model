@@ -25,7 +25,6 @@ import org.dcsa.standards.specifications.dataoverview.QueryParametersSheet;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v101.model.ActiveReeferParameters;
 import org.dcsa.standards.specifications.standards.core.v101.model.Address;
 import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDateTime;
 import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReference;
@@ -52,7 +51,9 @@ import org.dcsa.standards.specifications.standards.tnt.v300.model.EventRouting;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.IotDetails;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.RailTransport;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.ReeferDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.ReeferParameters;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.ShipmentDetails;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.TemperatureProbeMeasurement;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportCall;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.TransportDetails;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.TruckTransport;
@@ -92,7 +93,6 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected Stream<Class<?>> modelClassesStream() {
     return Stream.of(
-        ActiveReeferParameters.class,
         Address.class,
         ClassifiedDateTime.class,
         DocumentReference.class,
@@ -114,11 +114,13 @@ public class TNTStandardSpecification extends StandardSpecification {
         PostEventsResponse.class,
         RailTransport.class,
         ReeferDetails.class,
+        ReeferParameters.class,
         Seal.class,
         ServiceCodeOrReference.class,
         ShipmentDetails.class,
         ShipmentReference.class,
         ShipmentReferenceReplacement.class,
+        TemperatureProbeMeasurement.class,
         TransportCall.class,
         TransportDetails.class,
         TruckTransport.class,

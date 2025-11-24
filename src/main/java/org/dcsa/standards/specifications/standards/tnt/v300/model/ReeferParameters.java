@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.core.v101.model;
+package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -6,32 +6,10 @@ import lombok.Data;
 @Schema(
     description =
 """
-Parameters of a Reefer equipment, usable as setpoint or as measured values.
+Non-temperature parameters of a reefer that can be used both as setpoint and as measured values.
 """)
 @Data
-public class ActiveReeferParameters {
-
-  @Schema(
-      description = "Internal temperature value expressed in `temperatureUnit`",
-      example = "-15",
-      format = "float")
-  protected Double temperatureValue;
-
-  @Schema(
-      description =
-"""
-Unit in which the `temperatureValue` and `ambientTemperatureValue` are expressed:
-- `CEL` (Celsius)
-- `FAH` (Fahrenheit)
-""",
-      example = "CEL")
-  protected String temperatureUnit;
-
-  @Schema(
-      description = "Ambient temperature value expressed in `temperatureUnit`",
-      example = "-15",
-      format = "float")
-  protected Double ambientTemperatureValue;
+public class ReeferParameters {
 
   @Schema(description = "O<sub>2</sub> percentage", example = "25", format = "float")
   protected Double o2Percentage;
