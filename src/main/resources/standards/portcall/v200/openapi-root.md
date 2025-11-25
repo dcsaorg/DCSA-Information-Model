@@ -16,7 +16,3 @@ The event subscribers implement the `POST /events` endpoint, which can be called
 The registration of event subscribers with event publishers is out of scope.
 
 The authentication and authorization in both directions between event publishers and subscribers is out of scope.
-
-### Work in progress ⚠️
-
-The DCSA Port Call standard, including this API, is currently in beta validation and is **not** ready for general adoption yet.
