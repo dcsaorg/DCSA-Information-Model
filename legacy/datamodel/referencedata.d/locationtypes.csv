@@ -1,7 +1,0 @@
-Location Interface Code,Location Interface Name,Location Interface Description
-UNLO,UN Location Location,Interface supporting a location defined by a UN Location Code
-FACI,Facility Location,Interface supporting a location defined by a Facility Code
-FACS,Facility SMDG Location,Interface supporting a location defined by a Facility Code using SMDG
-ADDR,Address Location,Interface supporting a location defined by an Address
-CITY,City Location,"Interface supporting a location defined by a City, State and Country"
-GEOL,Geographical Location,Interface supporting a location defined by Lattitude and Longitude

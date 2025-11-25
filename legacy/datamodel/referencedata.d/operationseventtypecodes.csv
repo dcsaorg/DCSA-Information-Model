@@ -1,7 +1,0 @@
-operations_event_type_code,operations_event_type_name,operations_event_type_description
-ARRI,Arrived,
-DEPA,Departed,
-STRT,Started,
-CMPL,Completed,
-CANC,Cancelled,
-OMIT,Omitted,
