@@ -1,7 +1,0 @@
-Carrier Clause Code,Carrier Clause Name,Carrier Clause Description
-CARGO_CARGOSPECIFICS,Cargo/Cargo specifics,"Shipper declares that.... [requested scenario (e.g. cargo origin, cargo packing etc.)]. The Carrier accepts no responsibility or liability whatsoever in respect of this declaration and the Merchant hereby undertakes to fully hold harmless the Carrier for any and all consequences arising out of/related to this declaration"
-VESSELCONVEYANCE_COUNTRYSPECIFIC,Vessel conveyance/Country Specific,
-CARGO_RETURNOFEMPTYCONTAINER,Cargo/Return of Empty Container,
-CARGO_CARGOVALUE,Cargo/Cargo value,
-CARGO_REEFERTEMPERATURE,Cargo/Reefer temperature,
-CARGO_CONFLICTINGTEMPERATURES_MIXEDLOADS,Cargo/Conflicting temperatures / Mixed loads,
