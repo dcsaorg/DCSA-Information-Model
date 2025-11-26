@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_07e3891" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
-  <bpmn:collaboration id="Collaboration_0gkvb95">
+  <bpmn:collaboration id="SR_RRRDV">
     <bpmn:participant id="Participant_1ngmn53" name="Carrier" processRef="Process_0k3fk8h" />
     <bpmn:participant id="Participant_1w6q8zd" name="Consignee" processRef="Process_03rusv2" />
     <bpmn:messageFlow id="Flow_0flo2pq" sourceRef="Activity_1fku071" targetRef="Event_1mwci23" />
@@ -132,7 +132,7 @@
     </bpmn:extensionElements>
   </bpmn:message>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0gkvb95">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="SR_RRRDV">
       <bpmndi:BPMNShape id="Participant_1ngmn53_di" bpmnElement="Participant_1ngmn53" isHorizontal="true">
         <dc:Bounds x="129" y="80" width="1481" height="430" />
         <bpmndi:BPMNLabel />
@@ -335,13 +335,13 @@
         <di:waypoint x="330" y="660" />
         <di:waypoint x="330" y="438" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0im2y3i_di" bpmnElement="Flow_0im2y3i">
-        <di:waypoint x="1190" y="570" />
-        <di:waypoint x="1190" y="460" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0m00w9m_di" bpmnElement="Flow_0m00w9m">
         <di:waypoint x="1150" y="460" />
         <di:waypoint x="1150" y="570" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0im2y3i_di" bpmnElement="Flow_0im2y3i">
+        <di:waypoint x="1190" y="570" />
+        <di:waypoint x="1190" y="460" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
