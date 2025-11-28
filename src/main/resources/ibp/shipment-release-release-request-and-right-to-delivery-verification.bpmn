@@ -60,7 +60,7 @@
       <bpmn:incoming>Flow_0fqby08</bpmn:incoming>
       <bpmn:outgoing>Flow_1avne59</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="Event_1pe8ots" name="Clearances and holds management">
+    <bpmn:endEvent id="Event_1pe8ots" name="Pre-release clearances">
       <bpmn:incoming>Flow_1avne59</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_05msrpz" sourceRef="Event_1mwci23" targetRef="Activity_0q7jrih" />
@@ -107,7 +107,7 @@
       <bpmn:outgoing>Flow_0flblpv</bpmn:outgoing>
       <bpmn:outgoing>Flow_1hr4wtz</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_11065ks" name="Clearances and holds management">
+    <bpmn:endEvent id="Event_11065ks" name="Pre-release clearances">
       <bpmn:incoming>Flow_1jqk5hv</bpmn:incoming>
       <bpmn:incoming>Flow_0flblpv</bpmn:incoming>
     </bpmn:endEvent>
@@ -188,7 +188,7 @@
       <bpmndi:BPMNShape id="Event_1pe8ots_di" bpmnElement="Event_1pe8ots">
         <dc:Bounds x="1482" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1461" y="305" width="78" height="40" />
+          <dc:Bounds x="1471" y="305" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_05msrpz_di" bpmnElement="Flow_05msrpz">
@@ -299,7 +299,7 @@
       <bpmndi:BPMNShape id="Event_11065ks_di" bpmnElement="Event_11065ks">
         <dc:Bounds x="1372" y="682" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1351" y="725" width="78" height="40" />
+          <dc:Bounds x="1361" y="725" width="58" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1hr4wtz_di" bpmnElement="Flow_1hr4wtz">
