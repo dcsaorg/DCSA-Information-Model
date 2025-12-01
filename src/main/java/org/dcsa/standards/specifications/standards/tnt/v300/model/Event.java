@@ -1,15 +1,9 @@
 package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReferenceReplacement;
 import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReferenceReplacement;
 import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentLocationTypeCode;
 
 @Data
 @Schema(description = "Track and Trace event")
@@ -54,20 +48,6 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 
   @Schema(description = "The location of the event.")
   private Location eventLocation;
-
-  @Schema() private ShipmentLocationTypeCode shipmentLocationType;
-
-  @Schema(description = "List of document references related to this event")
-  private List<DocumentReference> documentReferences;
-
-  @Schema(description = "List of document replacements related to this event")
-  private List<DocumentReferenceReplacement> documentReferenceReplacements;
-
-  @Schema(description = "List of shipment references related to this event")
-  private List<ShipmentReference> shipmentReferences;
-
-  @Schema(description = "List of shipment reference replacements related to this event")
-  private List<ShipmentReferenceReplacement> shipmentReferenceReplacements;
 
   @Schema() private EventClassification eventClassification;
 

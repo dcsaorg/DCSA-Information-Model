@@ -60,8 +60,6 @@ EquipmentDetails,movementType,string,,,,EXPORT,"Code used to denote the type of 
 - `EXPORT` - Export movement
 - `TRANSSHIPMENT` - Transshipment movement",
 EquipmentDetails,seals,"Seal list",,,,,,
-Event,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
-Event,documentReferences,"DocumentReference list",,,,,"List of document references related to this event",
 Event,equipmentDetails,EquipmentDetails,,,,,"Equipment-specific details",
 Event,eventClassification,EventClassification,,,,,"Type, subtype and classifier of an event",
 Event,eventDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the real-world event has occurred or will occur.",
@@ -86,20 +84,6 @@ The data in this and all previously transmitted events with the same `eventID` m
 If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
 Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
 Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
-Event,shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
-- `FCD` - Full container drop-off location
-- `IEL` - Container intermediate export stop-off location
-- `OIR` - Onward Inland Routing
-- `ORI` - Origin of goods
-- `PCF` - Pre-carriage From
-- `PDE` - Place of Delivery
-- `POD` - Port of Discharge
-- `POL` - Port of Loading
-- `PRE` - Place of Receipt
-- `PTP` - Prohibited transshipment port
-- `RTP` - Requested transshipment port",
-Event,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
-Event,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
 Event,transportDetails,TransportDetails,,,,,"Transport-specific details",
 EventClassification,equipmentEventTypeCode,string,,,,LOAD,"Code used to denote the type of an equipment event
 - `AVDO` - Available for Drop-off
@@ -305,10 +289,26 @@ Every Universal Service Reference is an 8-character string with the following fo
  * the prefix ""SR""
  * 5 digits
  * 1 uppercase English letter (A-Z).",
-ShipmentDetails,documentReference,DocumentReference,,,,,"Referenced document",
+ShipmentDetails,"additionalDocumentReferences","DocumentReference list",,,,,"List of additional document references related to this event",
+ShipmentDetails,documentReference,DocumentReference,,,,,"Primary document reference associated with this event",
+ShipmentDetails,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
 ShipmentDetails,priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
 It can vary per carrier.",
 ShipmentDetails,reason,string,,,,,"The reason this event was sent",
+ShipmentDetails,shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
+- `FCD` - Full container drop-off location
+- `IEL` - Container intermediate export stop-off location
+- `OIR` - Onward Inland Routing
+- `ORI` - Origin of goods
+- `PCF` - Pre-carriage From
+- `PDE` - Place of Delivery
+- `POD` - Port of Discharge
+- `POL` - Port of Loading
+- `PRE` - Place of Receipt
+- `PTP` - Prohibited transshipment port
+- `RTP` - Requested transshipment port",
+ShipmentDetails,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
+ShipmentDetails,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
 ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
 ShipmentReference,typeCode,string,,,,FF,"Code used to denote the type of a shipment reference
 - `AAO` - Consignee’s Reference

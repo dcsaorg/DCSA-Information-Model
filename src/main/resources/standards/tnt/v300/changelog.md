@@ -1,5 +1,12 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20251205-alpha
+
+Moved all shipment-related attributes from the `Event` root into the `ShipmentDetails`. (SD-2718)
+
+Added support for USDA / COA UDM reefer cargo probe temperatures. (SD-2483)
+
+
 ## Snapshot v3.0.0-20251121-alpha
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2643)

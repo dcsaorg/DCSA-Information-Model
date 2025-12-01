@@ -441,42 +441,6 @@ components:
           description: "The location of the event."
           allOf:
           - $ref: "#/components/schemas/Location"
-        shipmentLocationType:
-          type: "string"
-          description: |-
-            Code used to denote the type of a shipment location
-            - `FCD` - Full container drop-off location
-            - `IEL` - Container intermediate export stop-off location
-            - `OIR` - Onward Inland Routing
-            - `ORI` - Origin of goods
-            - `PCF` - Pre-carriage From
-            - `PDE` - Place of Delivery
-            - `POD` - Port of Discharge
-            - `POL` - Port of Loading
-            - `PRE` - Place of Receipt
-            - `PTP` - Prohibited transshipment port
-            - `RTP` - Requested transshipment port
-          example: "PRE"
-        documentReferences:
-          type: "array"
-          description: "List of document references related to this event"
-          items:
-            $ref: "#/components/schemas/DocumentReference"
-        documentReferenceReplacements:
-          type: "array"
-          description: "List of document replacements related to this event"
-          items:
-            $ref: "#/components/schemas/DocumentReferenceReplacement"
-        shipmentReferences:
-          type: "array"
-          description: "List of shipment references related to this event"
-          items:
-            $ref: "#/components/schemas/ShipmentReference"
-        shipmentReferenceReplacements:
-          type: "array"
-          description: "List of shipment reference replacements related to this event"
-          items:
-            $ref: "#/components/schemas/ShipmentReferenceReplacement"
         eventClassification:
           description: "Type, subtype and classifier of an event"
           allOf:
@@ -1042,9 +1006,45 @@ components:
       type: "object"
       properties:
         documentReference:
-          description: "Referenced document"
+          description: "Primary document reference associated with this event"
           allOf:
           - $ref: "#/components/schemas/DocumentReference"
+        additionalDocumentReferences:
+          type: "array"
+          description: "List of additional document references related to this event"
+          items:
+            $ref: "#/components/schemas/DocumentReference"
+        documentReferenceReplacements:
+          type: "array"
+          description: "List of document replacements related to this event"
+          items:
+            $ref: "#/components/schemas/DocumentReferenceReplacement"
+        shipmentReferences:
+          type: "array"
+          description: "List of shipment references related to this event"
+          items:
+            $ref: "#/components/schemas/ShipmentReference"
+        shipmentReferenceReplacements:
+          type: "array"
+          description: "List of shipment reference replacements related to this event"
+          items:
+            $ref: "#/components/schemas/ShipmentReferenceReplacement"
+        shipmentLocationType:
+          type: "string"
+          description: |-
+            Code used to denote the type of a shipment location
+            - `FCD` - Full container drop-off location
+            - `IEL` - Container intermediate export stop-off location
+            - `OIR` - Onward Inland Routing
+            - `ORI` - Origin of goods
+            - `PCF` - Pre-carriage From
+            - `PDE` - Place of Delivery
+            - `POD` - Port of Discharge
+            - `POL` - Port of Loading
+            - `PRE` - Place of Receipt
+            - `PTP` - Prohibited transshipment port
+            - `RTP` - Requested transshipment port
+          example: "PRE"
         reason:
           type: "string"
           description: "The reason this event was sent"
