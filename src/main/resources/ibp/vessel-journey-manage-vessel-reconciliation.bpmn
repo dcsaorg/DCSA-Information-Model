@@ -47,7 +47,7 @@
     </bpmn:task>
     <bpmn:endEvent id="Event_1t0byrk" name="Manage vessel reconciliation deviations">
       <bpmn:incoming>Flow_03xvwvk</bpmn:incoming>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0o9zhcn" />
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0o9zhcn" errorRef="Error_0w512ws" />
     </bpmn:endEvent>
     <bpmn:endEvent id="Event_0zujz75" name="Load / discharge confirmation sent">
       <bpmn:incoming>Flow_1nm5ihv</bpmn:incoming>
@@ -75,6 +75,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_0vua6xw" name="Load / discharge confirmation" dataObjectRef="DataObject_1nshu59" />
     <bpmn:dataObject id="DataObject_1nshu59" />
   </bpmn:process>
+  <bpmn:error id="Error_0w512ws" name="Error_3i7l7i8" errorCode="Error_3i7l7i8" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0gto442">
       <bpmndi:BPMNShape id="Participant_0tijw5q_di" bpmnElement="Participant_0tijw5q" isHorizontal="true">
