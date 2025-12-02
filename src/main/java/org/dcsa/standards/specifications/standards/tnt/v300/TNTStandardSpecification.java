@@ -87,7 +87,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20251121-alpha", "TNT", "3.0.0-20251107-design", 4);
+        "Track and Trace", "3.0.0-20251205-alpha", "TNT", "3.0.0-20251121-alpha", 4);
   }
 
   @Override
@@ -151,7 +151,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "0fdd496a598b89a578c6d75af0c3c9655c0b1577"
+                                    + "2b71ea4967857a549c355b0c33c2ea44bd080679"
                                     + "/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
@@ -160,8 +160,43 @@ public class TNTStandardSpecification extends StandardSpecification {
   protected Map<Class<? extends DataOverviewSheet>, Map<String, String>>
       getChangedPrimaryKeyByOldPrimaryKeyBySheetClass() {
     return Map.ofEntries(
-        Map.entry(AttributesHierarchicalSheet.class, Map.ofEntries()),
-        Map.entry(AttributesNormalizedSheet.class, Map.ofEntries()),
+        Map.entry(
+            AttributesHierarchicalSheet.class,
+            Map.ofEntries(
+                Map.entry(
+                    "Event / documentReferences",
+                    "Event / shipmentDetails / additionalDocumentReferences"),
+                Map.entry(
+                    "Event / documentReferenceReplacements",
+                    "Event / shipmentDetails / documentReferenceReplacements"),
+                Map.entry(
+                    "Event / reeferDetails / measuredParameters / ambientTemperatureValue",
+                    "Event / reeferDetails / ambientMeasuredTemperature"),
+                Map.entry(
+                    "Event / reeferDetails / setpointParameters / temperatureValue",
+                    "Event / reeferDetails / internalSetpointTemperature"),
+                Map.entry(
+                    "Event / shipmentLocationType",
+                    "Event / shipmentDetails / shipmentLocationType"),
+                Map.entry(
+                    "Event / shipmentReferenceReplacements",
+                    "Event / shipmentDetails / shipmentReferenceReplacements"),
+                Map.entry(
+                    "Event / shipmentReferences", "Event / shipmentDetails / shipmentReferences"))),
+        Map.entry(
+            AttributesNormalizedSheet.class,
+            Map.ofEntries(
+                Map.entry("ActiveReeferParameters", "ReeferParameters"),
+                Map.entry(
+                    "Event,documentReferenceReplacements",
+                    "ShipmentDetails,documentReferenceReplacements"),
+                Map.entry(
+                    "Event,documentReferences", "ShipmentDetails,additionalDocumentReferences"),
+                Map.entry("Event,shipmentLocationType", "ShipmentDetails,shipmentLocationType"),
+                Map.entry(
+                    "Event,shipmentReferenceReplacements",
+                    "ShipmentDetails,shipmentReferenceReplacements"),
+                Map.entry("Event,shipmentReferences", "ShipmentDetails,shipmentReferences"))),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }
