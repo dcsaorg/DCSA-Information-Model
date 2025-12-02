@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0m2f5qs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:collaboration id="EJ_ME">
+    <bpmn:participant id="Participant_07gjv5j" name="Carrier" processRef="Process_0nzgsis" />
+    <bpmn:participant id="Participant_1y59teh" name="Inputs / Outputs" processRef="Process_1e5i1hk" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0nzgsis" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Equipment monitoring required">
+      <bpmn:outgoing>Flow_058uuvw</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Activity_1se8n7f" name="Generate equipment status data">
+      <bpmn:incoming>Flow_058uuvw</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i1wx1a</bpmn:outgoing>
+      <bpmn:property id="Property_190dqoo" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0xmywum">
+        <bpmn:sourceRef>DataObjectReference_1nmtavr</bpmn:sourceRef>
+        <bpmn:targetRef>Property_190dqoo</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:task>
+    <bpmn:task id="Activity_0vajeuk" name="Report equipment status">
+      <bpmn:incoming>Flow_0i1wx1a</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ksc9iq</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0nnvjew">
+        <bpmn:targetRef>DataObjectReference_0fgv6iw</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_1mdduko" name="Equipment monitoring concluded">
+      <bpmn:incoming>Flow_1ksc9iq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_058uuvw" sourceRef="StartEvent_1" targetRef="Activity_1se8n7f" />
+    <bpmn:sequenceFlow id="Flow_0i1wx1a" sourceRef="Activity_1se8n7f" targetRef="Activity_0vajeuk" />
+    <bpmn:sequenceFlow id="Flow_1ksc9iq" sourceRef="Activity_0vajeuk" targetRef="Event_1mdduko" />
+  </bpmn:process>
+  <bpmn:process id="Process_1e5i1hk" isExecutable="false">
+    <bpmn:dataObjectReference id="DataObjectReference_1nmtavr" name="Equipment status" dataObjectRef="DataObject_0q3s32j" />
+    <bpmn:dataObject id="DataObject_0q3s32j" />
+    <bpmn:dataObjectReference id="DataObjectReference_0fgv6iw" name="Equipment status report" dataObjectRef="DataObject_0dc4pdo" />
+    <bpmn:dataObject id="DataObject_0dc4pdo" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="EJ_ME">
+      <bpmndi:BPMNShape id="Participant_07gjv5j_di" bpmnElement="Participant_07gjv5j" isHorizontal="true">
+        <dc:Bounds x="129" y="120" width="600" height="209" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="202" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="194" y="245" width="53" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1se8n7f_di" bpmnElement="Activity_1se8n7f">
+        <dc:Bounds x="290" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vajeuk_di" bpmnElement="Activity_0vajeuk">
+        <dc:Bounds x="450" y="180" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mdduko_di" bpmnElement="Event_1mdduko">
+        <dc:Bounds x="612" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="604" y="245" width="53" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_058uuvw_di" bpmnElement="Flow_058uuvw">
+        <di:waypoint x="238" y="220" />
+        <di:waypoint x="290" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0i1wx1a_di" bpmnElement="Flow_0i1wx1a">
+        <di:waypoint x="390" y="220" />
+        <di:waypoint x="450" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ksc9iq_di" bpmnElement="Flow_1ksc9iq">
+        <di:waypoint x="550" y="220" />
+        <di:waypoint x="612" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_1y59teh_di" bpmnElement="Participant_1y59teh" isHorizontal="true">
+        <dc:Bounds x="129" y="330" width="600" height="170" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_1nmtavr_di" bpmnElement="DataObjectReference_1nmtavr">
+        <dc:Bounds x="322" y="385" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="297" y="442" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DataObjectReference_0fgv6iw_di" bpmnElement="DataObjectReference_0fgv6iw">
+        <dc:Bounds x="482" y="385" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="457" y="442" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0xmywum_di" bpmnElement="DataInputAssociation_0xmywum">
+        <di:waypoint x="340" y="385" />
+        <di:waypoint x="340" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0nnvjew_di" bpmnElement="DataOutputAssociation_0nnvjew">
+        <di:waypoint x="500" y="260" />
+        <di:waypoint x="498" y="385" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
