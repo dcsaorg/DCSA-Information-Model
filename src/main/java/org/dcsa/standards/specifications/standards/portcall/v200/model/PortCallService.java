@@ -10,7 +10,7 @@ import org.dcsa.standards.specifications.standards.core.v101.types.UniversallyUn
 public class PortCallService {
 
   @Schema(description = "Universal unique identifier of the port call service")
-  private UniversallyUniqueID portCallID;
+  private UniversallyUniqueID portCallServiceID;
 
   @Schema(
       maxLength = 50,

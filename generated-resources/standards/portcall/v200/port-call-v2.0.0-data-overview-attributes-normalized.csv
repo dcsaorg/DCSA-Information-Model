@@ -126,7 +126,6 @@ The `ANCH` facility type is relevant for port call services with the following `
 - `ANCHORAGE_OPERATIONS` (Anchorage Operations)",
 PortCallService,isCanceled,boolean,,,,false,"Flag indicating that this port call service is canceled by the service provider.",
 PortCallService,isDeclined,boolean,,,,false,"Flag indicating that this port call service is declined by the service consumer.",
-PortCallService,portCallID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the port call service",
 PortCallService,portCallPhaseTypeCode,string,,maxLength=4,,ALGS,"The general direction of the vessel during this port call service:
 - `INBD` (Inbound)
 - `ALGS` (Alongside)
@@ -204,6 +203,7 @@ Services with these `portCallServiceTypeCode` values only have the `portCallServ
 Services with  `portCallServiceTypeCode='SAFETY'` (Safety) only have the `portCallServiceEventTypeCode` value `DEPA`.
 
 Services with `portCallServiceTypeCode='BERTH'` (Berth) only have the `portCallServiceEventTypeCode` values `ARRI` or `DEPA`.",
+PortCallService,portCallServiceID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universal unique identifier of the port call service",
 PortCallService,portCallServiceTypeCode,string,,maxLength=50,,BERTH,"The type of the port call service, with the value from one of the service lists below.
 
 These port call services are negotiable through an ""ERP"" pattern including an ""A"":

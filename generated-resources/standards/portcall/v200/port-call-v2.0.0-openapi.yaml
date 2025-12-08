@@ -743,7 +743,7 @@ components:
     PortCallService:
       type: "object"
       properties:
-        portCallID:
+        portCallServiceID:
           type: "string"
           description: "Universal unique identifier of the port call service"
           format: "uuid"
