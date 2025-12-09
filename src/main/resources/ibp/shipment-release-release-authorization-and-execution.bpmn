@@ -2,7 +2,7 @@
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0b79zgq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
   <bpmn:collaboration id="SR_RAE">
     <bpmn:participant id="Participant_0vzr4c2" name="Carrier" processRef="Process_15vphpe" />
-    <bpmn:participant id="Participant_05r4par" name="Consignee" processRef="Process_0p8udab" />
+    <bpmn:participant id="Participant_05r4par" name="Consignee / On behalf of consignee" processRef="Process_0p8udab" />
     <bpmn:participant id="Participant_1r07n2w" name="Customs" processRef="Process_14wl8bk" />
     <bpmn:participant id="Participant_0y3irxg" name="Haulier" processRef="Process_0gzqz0p" />
     <bpmn:participant id="Participant_0xxp4w3" name="Terminal" processRef="Process_08fhm9f" />
@@ -528,13 +528,13 @@
         <di:waypoint x="1220" y="320" />
         <di:waypoint x="1220" y="682" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_13ekypm_di" bpmnElement="Flow_13ekypm">
-        <di:waypoint x="1280" y="320" />
-        <di:waypoint x="1280" y="782" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_16sky8r_di" bpmnElement="Flow_16sky8r">
         <di:waypoint x="1420" y="320" />
         <di:waypoint x="1420" y="882" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13ekypm_di" bpmnElement="Flow_13ekypm">
+        <di:waypoint x="1280" y="320" />
+        <di:waypoint x="1280" y="782" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0lmjopl_di" bpmnElement="Flow_0lmjopl">
         <di:waypoint x="1590" y="320" />
