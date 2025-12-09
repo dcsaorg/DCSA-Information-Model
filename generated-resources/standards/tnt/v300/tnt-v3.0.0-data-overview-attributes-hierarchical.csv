@@ -208,6 +208,7 @@ or a subsequent revision.",
 "Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
 "Event / iotDetails",iotDetails,IotDetails,,,,,"IoT-specific details",
 "Event / iotDetails / iotEventCode",iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
+- `DRC` - Door closed
 - `DRO` - Door opened
 - `LOC` - Location update",
 "Event / isRetracted",isRetracted,boolean,,,,,"Flag indicating that the event is retracted.

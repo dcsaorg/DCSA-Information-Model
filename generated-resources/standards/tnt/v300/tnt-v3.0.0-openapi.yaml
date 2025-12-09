@@ -690,6 +690,7 @@ components:
           type: "string"
           description: |-
             Code used to denote the specific IoT event that has occurred
+            - `DRC` - Door closed
             - `DRO` - Door opened
             - `LOC` - Location update
           example: "DRO"

@@ -13,6 +13,7 @@ import lombok.Getter;
     description = "Code used to denote the specific IoT event that has occurred")
 @AllArgsConstructor
 public enum IotEventCode implements EnumBase {
+  DRC("Door closed"),
   DRO("Door opened"),
   LOC("Location update");
 

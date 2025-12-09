@@ -180,6 +180,7 @@ Lower severity feedback elements may also be included.",
 GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
 GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
+- `DRC` - Door closed
 - `DRO` - Door opened
 - `LOC` - Location update",
 Location,address,Address,,,,,"Location address",
