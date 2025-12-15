@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1afzhdk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
+  <bpmn:collaboration id="CJ_PO">
+    <bpmn:participant id="Participant_1qs65xa" name="Shipment Journey" processRef="Process_0hfvhg7" />
+    <bpmn:participant id="Participant_1udmf1j" name="Cargo Movement" processRef="Process_16n5s4f" />
+    <bpmn:participant id="Participant_03uttx9" name="Equipment Journey" processRef="Process_0kllbog" />
+    <bpmn:participant id="Participant_1yitogs" name="Vessel Journey" processRef="Process_1jm529a" />
+    <bpmn:participant id="Participant_1yr5hel" name="Exception handling" processRef="Process_0xefn5q" />
+    <bpmn:group id="Group_1ewmlgr" categoryValueRef="CategoryValue_1vykm4w" />
+    <bpmn:group id="Group_1yc18f2" categoryValueRef="CategoryValue_1l0jp5x" />
+    <bpmn:group id="Group_05mqkil" categoryValueRef="CategoryValue_13cfulw" />
+    <bpmn:group id="Group_05v2inh" categoryValueRef="CategoryValue_0x5tzcc" />
+    <bpmn:group id="Group_069185z" categoryValueRef="CategoryValue_1tnbh5g" />
+    <bpmn:group id="Group_1xsissq" categoryValueRef="CategoryValue_1bisaqa" />
+    <bpmn:group id="Group_08irz9q" categoryValueRef="CategoryValue_1cyftq2" />
+    <bpmn:group id="Group_1mm6ndn" categoryValueRef="CategoryValue_0iduxlt" />
+    <bpmn:group id="Group_09ed40o" categoryValueRef="CategoryValue_0cu2lgi" />
+    <bpmn:group id="Group_1ujicby" categoryValueRef="CategoryValue_0bftmv9" />
+    <bpmn:group id="Group_1nn0m3c" categoryValueRef="CategoryValue_1c6sblu" />
+    <bpmn:group id="Group_1cqrpde" categoryValueRef="CategoryValue_0b7fnag" />
+    <bpmn:group id="Group_1rzrxgi" categoryValueRef="CategoryValue_1r2uoh4" />
+    <bpmn:group id="Group_1qlcshi" categoryValueRef="CategoryValue_1f4dnhh" />
+    <bpmn:group id="Group_1gu4okz" categoryValueRef="CategoryValue_0civ3ve" />
+    <bpmn:group id="Group_13zkceh" categoryValueRef="CategoryValue_1xmlsfy" />
+    <bpmn:group id="Group_0unhobv" categoryValueRef="CategoryValue_1x8amj2" />
+    <bpmn:group id="Group_0nsxga3" categoryValueRef="CategoryValue_0qjdi8f" />
+    <bpmn:group id="Group_0z9so42" categoryValueRef="CategoryValue_1g33ltb" />
+    <bpmn:group id="Group_1oov0yn" categoryValueRef="CategoryValue_1ko2lgm" />
+    <bpmn:group id="Group_0z8lzkl" categoryValueRef="CategoryValue_02pi1b6" />
+    <bpmn:group id="Group_1gugcgd" categoryValueRef="CategoryValue_0w781bh" />
+    <bpmn:group id="Group_1q7ygb7" categoryValueRef="CategoryValue_1kktxdb" />
+    <bpmn:group id="Group_1n52di1" categoryValueRef="CategoryValue_0g1n5ij" />
+    <bpmn:group id="Group_0vrqvyq" categoryValueRef="CategoryValue_1akzt0q" />
+    <bpmn:group id="Group_0octa1l" categoryValueRef="CategoryValue_14ubrn2" />
+    <bpmn:group id="Group_0qye4sf" categoryValueRef="CategoryValue_05g7rar" />
+    <bpmn:group id="Group_1e8a9ju" categoryValueRef="CategoryValue_0ihmf6p" />
+    <bpmn:group id="Group_0i7gjl0" categoryValueRef="CategoryValue_1qzn3tg" />
+    <bpmn:group id="Group_1quuabu" categoryValueRef="CategoryValue_1302rlg" />
+    <bpmn:group id="Group_1xj1q91" categoryValueRef="CategoryValue_0zf4vkm" />
+    <bpmn:group id="Group_0nat8o8" categoryValueRef="CategoryValue_0i2dxli" />
+    <bpmn:group id="Group_1lfq6qe" categoryValueRef="CategoryValue_00xjrbv" />
+    <bpmn:group id="Group_1tz0vjn" categoryValueRef="CategoryValue_1t06auo" />
+    <bpmn:group id="Group_0rj16wg" categoryValueRef="CategoryValue_1abgnfo" />
+    <bpmn:group id="Group_009ixsi" categoryValueRef="CategoryValue_0zdg86x" />
+    <bpmn:group id="Group_09vra7j" categoryValueRef="CategoryValue_0k4578h" />
+    <bpmn:group id="Group_0xd9tvt" categoryValueRef="CategoryValue_00pk4u1" />
+    <bpmn:group id="Group_0u68k1n" categoryValueRef="CategoryValue_0n1aysu" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0hfvhg7" isExecutable="false">
+    <bpmn:startEvent id="Event_10bhpca" name="Booking" />
+    <bpmn:endEvent id="Event_0kwuqd5" name="Payment" />
+  </bpmn:process>
+  <bpmn:category id="Category_0beki6w">
+    <bpmn:categoryValue id="CategoryValue_1vykm4w" value="Register booking request" />
+  </bpmn:category>
+  <bpmn:category id="Category_1hc96jv">
+    <bpmn:categoryValue id="CategoryValue_1l0jp5x" value="Validate, plan, confirm booking request" />
+  </bpmn:category>
+  <bpmn:process id="Process_16n5s4f" isExecutable="true" />
+  <bpmn:category id="Category_05ekv0h">
+    <bpmn:categoryValue id="CategoryValue_13cfulw" value="PRE-SHIPPING" />
+  </bpmn:category>
+  <bpmn:category id="Category_03f3lsw">
+    <bpmn:categoryValue id="CategoryValue_0x5tzcc" value="Dangerous Goods booking pre-validation" />
+  </bpmn:category>
+  <bpmn:category id="Category_00uxosd">
+    <bpmn:categoryValue id="CategoryValue_1tnbh5g" value="Amend booking" />
+  </bpmn:category>
+  <bpmn:category id="Category_06ka66u">
+    <bpmn:categoryValue id="CategoryValue_1bisaqa" value="Prepare Bill of Lading" />
+  </bpmn:category>
+  <bpmn:category id="Category_0q47pla">
+    <bpmn:categoryValue id="CategoryValue_1cyftq2" value="Amendments prior to issuance" />
+  </bpmn:category>
+  <bpmn:process id="Process_0kllbog" isExecutable="false">
+    <bpmn:startEvent id="Event_02o9q8b" name="Pickup" />
+    <bpmn:endEvent id="Event_1tl7dtt" name="Return" />
+  </bpmn:process>
+  <bpmn:category id="Category_1qvml1v">
+    <bpmn:categoryValue id="CategoryValue_0iduxlt" value="Nominate depot and empty equipment" />
+  </bpmn:category>
+  <bpmn:category id="Category_0te9ed6">
+    <bpmn:categoryValue id="CategoryValue_0cu2lgi" value="Submit VGM" />
+  </bpmn:category>
+  <bpmn:category id="Category_01mlit1">
+    <bpmn:categoryValue id="CategoryValue_0bftmv9" value="LINER OPERATION" />
+  </bpmn:category>
+  <bpmn:category id="Category_081bqc9">
+    <bpmn:categoryValue id="CategoryValue_1c6sblu" value="Prepare carrier haulage work order" />
+  </bpmn:category>
+  <bpmn:category id="Category_1q6noh1">
+    <bpmn:categoryValue id="CategoryValue_0b7fnag" value="Monitor equipment" />
+  </bpmn:category>
+  <bpmn:process id="Process_1jm529a" isExecutable="false">
+    <bpmn:startEvent id="Event_1ry9jue" name="Departure" />
+    <bpmn:endEvent id="Event_1w4cylu" name="Arrival" />
+  </bpmn:process>
+  <bpmn:category id="Category_1wwsa4h">
+    <bpmn:categoryValue id="CategoryValue_1r2uoh4" value="Commercial schedules" />
+  </bpmn:category>
+  <bpmn:category id="Category_01z70ay">
+    <bpmn:categoryValue id="CategoryValue_1f4dnhh" value="Long term schedule" />
+  </bpmn:category>
+  <bpmn:category id="Category_1v7nqqh">
+    <bpmn:categoryValue id="CategoryValue_0civ3ve" value="Intraregional and feeder services schedule" />
+  </bpmn:category>
+  <bpmn:category id="Category_0u5iw0k">
+    <bpmn:categoryValue id="CategoryValue_1xmlsfy" value="Weekly berth planning" />
+  </bpmn:category>
+  <bpmn:process id="Process_0xefn5q" isExecutable="false" />
+  <bpmn:category id="Category_0v8nj1g">
+    <bpmn:categoryValue id="CategoryValue_1x8amj2" value="Manage carrier booking change" />
+  </bpmn:category>
+  <bpmn:category id="Category_1l9tomh">
+    <bpmn:categoryValue id="CategoryValue_0qjdi8f" value="Manage vessel reconciliation deviations" />
+  </bpmn:category>
+  <bpmn:category id="Category_0h5wjer">
+    <bpmn:categoryValue id="CategoryValue_1g33ltb" value="Amendments after issuance" />
+  </bpmn:category>
+  <bpmn:category id="Category_1t6r06m">
+    <bpmn:categoryValue id="CategoryValue_1ko2lgm" value="Issue Bill of Lading" />
+  </bpmn:category>
+  <bpmn:category id="Category_0zp3596">
+    <bpmn:categoryValue id="CategoryValue_02pi1b6" value="Issue Arrival Notice" />
+  </bpmn:category>
+  <bpmn:category id="Category_06j0ybh">
+    <bpmn:categoryValue id="CategoryValue_0w781bh" value="Manage cargo release and shipment closing" />
+  </bpmn:category>
+  <bpmn:category id="Category_0vip9b7">
+    <bpmn:categoryValue id="CategoryValue_1kktxdb" value="Port Call nautical services" />
+  </bpmn:category>
+  <bpmn:category id="Category_12t9t4f">
+    <bpmn:categoryValue id="CategoryValue_0g1n5ij" value="Port Call process" />
+  </bpmn:category>
+  <bpmn:category id="Category_1vivuyq">
+    <bpmn:categoryValue id="CategoryValue_1akzt0q" value="Prepare vessel load list" />
+  </bpmn:category>
+  <bpmn:category id="Category_02u6vbp">
+    <bpmn:categoryValue id="CategoryValue_14ubrn2" value="Coastal schedule" />
+  </bpmn:category>
+  <bpmn:category id="Category_05vgrez">
+    <bpmn:categoryValue id="CategoryValue_05g7rar" value="Assign empty drop-off" />
+  </bpmn:category>
+  <bpmn:category id="Category_1qkudhm">
+    <bpmn:categoryValue id="CategoryValue_0ihmf6p" value="POST-SHIPPING" />
+  </bpmn:category>
+  <bpmn:category id="Category_0s9ft9t">
+    <bpmn:categoryValue id="CategoryValue_1qzn3tg" value="Manage stowage plan and instructions" />
+  </bpmn:category>
+  <bpmn:category id="Category_11h9989">
+    <bpmn:categoryValue id="CategoryValue_1302rlg" value="Submit customs manifest" />
+  </bpmn:category>
+  <bpmn:category id="Category_02se9fu">
+    <bpmn:categoryValue id="CategoryValue_0zf4vkm" value="Port Call services" />
+  </bpmn:category>
+  <bpmn:category id="Category_1106oi9">
+    <bpmn:categoryValue id="CategoryValue_0i2dxli" value="Manage vessel reconciliation" />
+  </bpmn:category>
+  <bpmn:category id="Category_0mdva04">
+    <bpmn:categoryValue id="CategoryValue_00xjrbv" value="Return empty equipment" />
+  </bpmn:category>
+  <bpmn:category id="Category_1oge16g">
+    <bpmn:categoryValue id="CategoryValue_1t06auo" value="Issuance manifest corrector" />
+  </bpmn:category>
+  <bpmn:category id="Category_1o7k287">
+    <bpmn:categoryValue id="CategoryValue_1abgnfo" value="Cancel existing work order" />
+  </bpmn:category>
+  <bpmn:category id="Category_0kc2rxo">
+    <bpmn:categoryValue id="CategoryValue_0zdg86x" value="Manage seals removal" />
+  </bpmn:category>
+  <bpmn:category id="Category_0qik7oa">
+    <bpmn:categoryValue id="CategoryValue_0k4578h" value="Manage asset malfunctions" />
+  </bpmn:category>
+  <bpmn:category id="Category_0pdok34">
+    <bpmn:categoryValue id="CategoryValue_00pk4u1" value="Manage cargo surveys" />
+  </bpmn:category>
+  <bpmn:category id="Category_1lx28tv">
+    <bpmn:categoryValue id="CategoryValue_0n1aysu" value="Manage reuse allocation" />
+  </bpmn:category>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="CJ_PO">
+      <bpmndi:BPMNShape id="Participant_1qs65xa_di" bpmnElement="Participant_1qs65xa" isHorizontal="true">
+        <dc:Bounds x="160" y="190" width="1670" height="200" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10bhpca_di" bpmnElement="Event_10bhpca">
+        <dc:Bounds x="212" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="210" y="315" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0kwuqd5_di" bpmnElement="Event_0kwuqd5">
+        <dc:Bounds x="1772" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1768" y="315" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1udmf1j_di" bpmnElement="Participant_1udmf1j" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1670" height="110" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_03uttx9_di" bpmnElement="Participant_03uttx9" isHorizontal="true">
+        <dc:Bounds x="160" y="390" width="1670" height="200" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02o9q8b_di" bpmnElement="Event_02o9q8b">
+        <dc:Bounds x="212" y="472" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="213" y="515" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tl7dtt_di" bpmnElement="Event_1tl7dtt">
+        <dc:Bounds x="1772" y="472" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1773" y="515" width="34" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1yitogs_di" bpmnElement="Participant_1yitogs" isHorizontal="true">
+        <dc:Bounds x="160" y="590" width="1670" height="260" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ry9jue_di" bpmnElement="Event_1ry9jue">
+        <dc:Bounds x="212" y="702" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="745" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1w4cylu_di" bpmnElement="Event_1w4cylu">
+        <dc:Bounds x="1772" y="712" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1775" y="755" width="31" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1yr5hel_di" bpmnElement="Participant_1yr5hel" isHorizontal="true">
+        <dc:Bounds x="160" y="850" width="1670" height="140" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_1ewmlgr_di" bpmnElement="Group_1ewmlgr">
+        <dc:Bounds x="285" y="205" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="331" y="212" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_1yc18f2_di" bpmnElement="Group_1yc18f2">
+        <dc:Bounds x="323" y="265" width="174" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="371" y="272" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_05mqkil_di" bpmnElement="Group_05mqkil">
+        <dc:Bounds x="287" y="110" width="473" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="485" y="117" width="79" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_05v2inh_di" bpmnElement="Group_05v2inh" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="365" y="325" width="170" height="50" />
+        <bpmndi:BPMNLabel color:color="#0d4372">
+          <dc:Bounds x="405" y="332" width="90" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_069185z_di" bpmnElement="Group_069185z" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="482" y="205" width="175" height="50" />
+        <bpmndi:BPMNLabel color:color="#0d4372">
+          <dc:Bounds x="532" y="212" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Group_1xsissq_di" bpmnElement="Group_1xsissq">
+        <dc:Bounds x="542" y="265" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="594" y="272" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1mfeqnp" bpmnElement="Group_08irz9q" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="679" y="205" width="182" height="50" />
+        <bpmndi:BPMNLabel color:color="#0d4372">
+          <dc:Bounds x="730" y="212" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_121qg98" bpmnElement="Group_1mm6ndn">
+        <dc:Bounds x="482" y="405" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="531" y="412" width="78" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_07a4n26" bpmnElement="Group_09ed40o">
+        <dc:Bounds x="682" y="405" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="739" y="412" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1oz8ko8" bpmnElement="Group_1ujicby">
+        <dc:Bounds x="782" y="110" width="458" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="979" y="117" width="65" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1uqo9dm" bpmnElement="Group_1nn0m3c">
+        <dc:Bounds x="482" y="465" width="856" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="879" y="472" width="75" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1km9hvg" bpmnElement="Group_1cqrpde">
+        <dc:Bounds x="482" y="525" width="1256" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1094" y="532" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0teo231" bpmnElement="Group_1rzrxgi" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="285" y="605" width="175" height="50" />
+        <bpmndi:BPMNLabel color:color="#0d4372">
+          <dc:Bounds x="343" y="612" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1jzpypr" bpmnElement="Group_1qlcshi">
+        <dc:Bounds x="285" y="665" width="372" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="447" y="672" width="50" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1sfj8nr" bpmnElement="Group_1gu4okz">
+        <dc:Bounds x="286" y="725" width="1452" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="982" y="732" width="83" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0x94m1d" bpmnElement="Group_13zkceh">
+        <dc:Bounds x="286" y="785" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="342" y="792" width="64" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1jvonah" bpmnElement="Group_0unhobv" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="286" y="865" width="294" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="395" y="872" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1v9uwlh" bpmnElement="Group_0nsxga3" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="286" y="925" width="294" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="398" y="932" width="74" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0p56mta" bpmnElement="Group_0z9so42" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
+        <dc:Bounds x="919" y="205" width="182" height="50" />
+        <bpmndi:BPMNLabel color:color="#0d4372">
+          <dc:Bounds x="976" y="212" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_00rahms" bpmnElement="Group_1oov0yn">
+        <dc:Bounds x="782" y="265" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="841" y="272" width="58" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0e3drpk" bpmnElement="Group_0z8lzkl">
+        <dc:Bounds x="1163" y="205" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1221" y="212" width="60" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1obiiaj" bpmnElement="Group_1gugcgd">
+        <dc:Bounds x="1360" y="265" width="378" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1509" y="272" width="82" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_18nowx8" bpmnElement="Group_1q7ygb7">
+        <dc:Bounds x="483" y="785" width="277" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="580" y="792" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1lg3npn" bpmnElement="Group_1n52di1">
+        <dc:Bounds x="782" y="785" width="458" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="970" y="792" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1d9cr35" bpmnElement="Group_0vrqvyq">
+        <dc:Bounds x="783" y="605" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="834" y="612" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ao2ntc" bpmnElement="Group_0octa1l">
+        <dc:Bounds x="683" y="665" width="1055" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1176" y="672" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0dtd8hm" bpmnElement="Group_0qye4sf">
+        <dc:Bounds x="1163" y="405" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1219" y="412" width="66" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1sc7pb0" bpmnElement="Group_1e8a9ju">
+        <dc:Bounds x="1258" y="110" width="480" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1455" y="117" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0gefqdx" bpmnElement="Group_0i7gjl0">
+        <dc:Bounds x="973" y="605" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1019" y="612" width="85" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_00dcrbh" bpmnElement="Group_1quuabu">
+        <dc:Bounds x="1163" y="605" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1212" y="612" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1gy8g0v" bpmnElement="Group_1xj1q91">
+        <dc:Bounds x="1261" y="785" width="477" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1458" y="792" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ru4xwd" bpmnElement="Group_0nat8o8">
+        <dc:Bounds x="1363" y="605" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1415" y="612" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1bem7qy" bpmnElement="Group_1lfq6qe">
+        <dc:Bounds x="1563" y="405" width="175" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619" y="412" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1pwdabe" bpmnElement="Group_009ixsi" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1442" y="865" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="1557" y="872" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_04x0k9l" bpmnElement="Group_1tz0vjn" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="672" y="865" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="777" y="872" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_108qlbp" bpmnElement="Group_0rj16wg" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1063" y="865" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="1175" y="872" width="75" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1x6i4vj" bpmnElement="Group_09vra7j" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="672" y="925" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="787" y="932" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_11en7do" bpmnElement="Group_0xd9tvt" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1063" y="925" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="1177" y="932" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0g2wkpp" bpmnElement="Group_0u68k1n" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
+        <dc:Bounds x="1442" y="925" width="296" height="50" />
+        <bpmndi:BPMNLabel color:color="#831311">
+          <dc:Bounds x="1556" y="932" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
