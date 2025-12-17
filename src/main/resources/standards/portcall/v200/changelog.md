@@ -1,5 +1,12 @@
 # Port Call v2.0.0 Changelog
 
+## Release v2.0.0
+
+Added in object `Address` attribute `addressLines`. (SD-2758)
+
+Added in object `Facility` attribute `facilityName`. (SD-2759)
+
+
 ## Snapshot v2.0.0-20251121-beta
 
 Clarified that `GeoCoordinate` attributes `latitude` and `longitude` are expected to be in ISO 6709 decimal degrees. (SD-2647)

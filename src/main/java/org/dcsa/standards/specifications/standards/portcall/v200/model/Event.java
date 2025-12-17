@@ -3,8 +3,8 @@ package org.dcsa.standards.specifications.standards.portcall.v200.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
-import org.dcsa.standards.specifications.standards.core.v101.types.UniversallyUniqueID;
+import org.dcsa.standards.specifications.standards.core.v102.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v102.types.UniversallyUniqueID;
 
 @Data
 @Schema(

@@ -21,12 +21,12 @@ import java.util.stream.Stream;
 
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v101.model.Address;
-import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.core.v102.model.Address;
+import org.dcsa.standards.specifications.standards.core.v102.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v102.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v102.model.Location;
+import org.dcsa.standards.specifications.standards.core.v102.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v102.model.VoyageNumberOrReference;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.FeedbackElement;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.GetEventsError;
 import org.dcsa.standards.specifications.standards.portcall.v200.messages.GetEventsResponse;

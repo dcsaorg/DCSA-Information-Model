@@ -2,9 +2,9 @@ package org.dcsa.standards.specifications.standards.portcall.v200.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.types.VesselIMONumber;
-import org.dcsa.standards.specifications.standards.core.v101.types.VesselMMSINumber;
+import org.dcsa.standards.specifications.standards.core.v102.model.Location;
+import org.dcsa.standards.specifications.standards.core.v102.types.VesselIMONumber;
+import org.dcsa.standards.specifications.standards.core.v102.types.VesselMMSINumber;
 
 @Data
 @Schema(description = "Vessel information relevant for a port call service")

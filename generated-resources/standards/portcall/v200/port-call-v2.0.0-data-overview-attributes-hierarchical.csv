@@ -222,6 +222,10 @@ This port call service has neither an ""A"" timestamp nor an ""ERP"" pattern:
 - `MOVES` (Moves)",
 "Event / portCallService / serviceLocation",serviceLocation,Location,,,,,"The location at which the port call service is provided",
 "Event / portCallService / serviceLocation / address",address,Address,,,,,"Location address",
+"Event / portCallService / serviceLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "Event / portCallService / serviceLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "Event / portCallService / serviceLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "Event / portCallService / serviceLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -235,6 +239,7 @@ This port call service has neither an ""A"" timestamp nor an ""ERP"" pattern:
 "Event / portCallService / serviceLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"Event / portCallService / serviceLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "Event / portCallService / serviceLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -365,6 +370,10 @@ automatic identification systems (AIS) and certain other equipment to uniquely i
 "Event / vessel / vesselName",vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
 "Event / vessel / vesselPosition",vesselPosition,Location,,,,,"Current location of the vessel",
 "Event / vessel / vesselPosition / address",address,Address,,,,,"Location address",
+"Event / vessel / vesselPosition / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "Event / vessel / vesselPosition / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "Event / vessel / vesselPosition / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "Event / vessel / vesselPosition / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -378,6 +387,7 @@ automatic identification systems (AIS) and certain other equipment to uniquely i
 "Event / vessel / vesselPosition / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"Event / vessel / vesselPosition / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "Event / vessel / vesselPosition / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
