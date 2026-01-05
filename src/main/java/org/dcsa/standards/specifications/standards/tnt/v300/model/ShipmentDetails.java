@@ -3,11 +3,11 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.DocumentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.ShipmentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDate;
+import org.dcsa.standards.specifications.standards.core.v103.model.DocumentReference;
+import org.dcsa.standards.specifications.standards.core.v103.model.DocumentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v103.model.ShipmentReference;
+import org.dcsa.standards.specifications.standards.core.v103.model.ShipmentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v103.types.FormattedDate;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentLocationTypeCode;
 
 @Schema(description = "Shipment-specific details")

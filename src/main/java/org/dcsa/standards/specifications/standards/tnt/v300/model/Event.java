@@ -2,8 +2,8 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.types.FormattedDateTime;
 
 @Data
 @Schema(description = "Track and Trace event")

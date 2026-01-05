@@ -2,8 +2,8 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.types.CountryCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.VesselIMONumber;
+import org.dcsa.standards.specifications.standards.core.v103.types.CountryCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.VesselIMONumber;
 
 @Schema(description = "Vessel or barge transport information")
 @Data

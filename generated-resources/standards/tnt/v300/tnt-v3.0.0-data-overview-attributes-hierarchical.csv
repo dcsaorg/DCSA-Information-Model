@@ -126,6 +126,10 @@ by a composite key including:
 - `eventID`",
 "Event / eventLocation",eventLocation,Location,,,,,"The location of the event.",
 "Event / eventLocation / address",address,Address,,,,,"Location address",
+"Event / eventLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "Event / eventLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "Event / eventLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "Event / eventLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -139,6 +143,7 @@ by a composite key including:
 "Event / eventLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"Event / eventLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "Event / eventLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border

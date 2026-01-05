@@ -4,6 +4,10 @@
 
 Added back the `ShipmentEventTypeCode` value `CANC` (Cancelled). (SD-2752)
 
+Added to object `Address` attribute `addressLines`. (SD-2764)
+
+Added to object `Facility` attribute `facilityName`. (SD-2756)
+
 
 ## Snapshot v3.0.0-20251205-alpha
 

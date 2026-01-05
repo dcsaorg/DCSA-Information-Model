@@ -271,6 +271,15 @@ components:
           type: "string"
           description: "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
           example: "NL"
+        addressLines:
+          maxItems: 5
+          type: "array"
+          description: "Unstructured address lines, used as a fallback when structured address fields are unavailable."
+          items:
+            maxLength: 250
+            type: "string"
+            description: "One line of an unstructured `Address`."
+            example: "123 Example Rd"
       description: "An object for storing address-related information."
     ClassifiedDateTime:
       type: "object"
@@ -595,6 +604,11 @@ components:
     Facility:
       type: "object"
       properties:
+        facilityName:
+          maxLength: 100
+          type: "string"
+          description: "The name of the facility."
+          example: "Building 123"
         facilityCode:
           maxLength: 6
           type: "string"

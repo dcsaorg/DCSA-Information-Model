@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.types.EventClassifierCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.EventClassifierCode;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.EquipmentEventTypeCode;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.EventTypeCode;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEventTypeCode;
