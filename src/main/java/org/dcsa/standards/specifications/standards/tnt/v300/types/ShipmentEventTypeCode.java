@@ -21,6 +21,7 @@ public enum ShipmentEventTypeCode implements EnumBase {
   APPR("Approved"),
   CACF("Cancellation Confirmed"),
   CADC("Cancellation Declined"),
+  CANC("Cancelled"),
   CARE("Cancellation Received"),
   CMPL("Completed"),
   CONF("Confirmed"),

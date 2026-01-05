@@ -1,5 +1,10 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260116-alpha
+
+Added back the `ShipmentEventTypeCode` value `CANC` (Cancelled). (SD-2752)
+
+
 ## Snapshot v3.0.0-20251205-alpha
 
 Moved all shipment-related attributes from the `Event` root into the `ShipmentDetails`. (SD-2718)

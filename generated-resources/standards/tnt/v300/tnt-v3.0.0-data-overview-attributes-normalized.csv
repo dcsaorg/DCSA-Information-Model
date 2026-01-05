@@ -127,6 +127,7 @@ EventClassification,shipmentEventTypeCode,string,,,,APPR,"Code used to denote th
 - `APPR` - Approved
 - `CACF` - Cancellation Confirmed
 - `CADC` - Cancellation Declined
+- `CANC` - Cancelled
 - `CARE` - Cancellation Received
 - `CMPL` - Completed
 - `CONF` - Confirmed

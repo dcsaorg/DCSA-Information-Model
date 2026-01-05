@@ -83,6 +83,7 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 - `APPR` - Approved
 - `CACF` - Cancellation Confirmed
 - `CADC` - Cancellation Declined
+- `CANC` - Cancelled
 - `CARE` - Cancellation Received
 - `CMPL` - Completed
 - `CONF` - Confirmed
