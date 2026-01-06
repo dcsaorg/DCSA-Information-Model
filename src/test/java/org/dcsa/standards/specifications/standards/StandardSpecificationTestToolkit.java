@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards;
 
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.ComposedSchema;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Assertions;
 public enum StandardSpecificationTestToolkit {
   ; // no instances
 
-  static void verifyTypeExport(
+  public static void verifyTypeExport(
       String typeName, String yamlFilePath, StandardSpecification standardSpecification) {
     Map<String, Schema<?>> originalSchemas =
         SpecificationToolkit.parameterizeStringRawSchemaMap(

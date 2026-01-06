@@ -1,10 +1,10 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards.vgm.v100;
 
-import org.dcsa.standards.specifications.standards.vgm.v100.VGMStandardSpecification;
+import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.dcsa.standards.specifications.standards.vgm.v100.model.VGMDeclaration;
 import org.junit.jupiter.api.Test;
 
-class VGMStandardSpecificationTest {
+class VGM100StandardSpecificationTest {
   @Test
   void testVGMStandardSpecification() {
     VGMStandardSpecification vgmStandardSpecification = new VGMStandardSpecification();

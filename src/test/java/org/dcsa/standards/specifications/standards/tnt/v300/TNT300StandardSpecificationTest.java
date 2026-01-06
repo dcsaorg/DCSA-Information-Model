@@ -1,10 +1,10 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards.tnt.v300;
 
-import org.dcsa.standards.specifications.standards.tnt.v300.TNTStandardSpecification;
+import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.Event;
 import org.junit.jupiter.api.Test;
 
-class TNTStandardSpecificationTest {
+class TNT300StandardSpecificationTest {
   @Test
   void testTNTStandardSpecification() {
     TNTStandardSpecification tntStandardSpecification = new TNTStandardSpecification();

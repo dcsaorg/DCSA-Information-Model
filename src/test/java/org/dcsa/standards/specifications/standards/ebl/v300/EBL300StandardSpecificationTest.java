@@ -1,11 +1,11 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards.ebl.v300;
 
 import lombok.extern.slf4j.Slf4j;
-import org.dcsa.standards.specifications.standards.ebl.v300.EBLStandardSpecification;
+import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-class EBLStandardSpecificationTest {
+class EBL300StandardSpecificationTest {
   @Test
   void testEBLStandardSpecification() {
     EBLStandardSpecification eblStandardSpecification = new EBLStandardSpecification();

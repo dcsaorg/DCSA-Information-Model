@@ -1,0 +1,36 @@
+Name,Type,Description,Example
+"transportDocumentReferences",array,"Reference(s) of the transport document(s) for which to return the associated arrival notices","HHL71800000,HHL71800001"
+equipmentReferences,array,"Reference(s) of the equipment for which to return the associated arrival notices","APZU4812090,APZU4812091"
+portOfDischarge,string,"UN location of the port of discharge for which to retrieve available arrival notices",NLRTM
+vesselIMONumber,string,"IMO number of the vessel for which to retrieve available arrival notices",9321483
+vesselName,string,"Name of the vessel for which to retrieve available arrival notices","King of the Seas"
+"carrierImportVoyageNumber",string,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",2208N
+"universalImportVoyageReference",string,"Unique identifier of the import voyage within the service, assigned by carriers as specified by DCSA.",2301W
+carrierServiceCode,string,"The carrier specific code of the service for which the schedule details are published.",FE1
+"universalServiceReference",string,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.",SR12345A
+"portOfDischargeArrivalDateMin",string,"Retrieve arrival notices with a date of arrival of the vessel at the Port of Discharge on or after this date",2025-01-22
+"portOfDischargeArrivalDateMax",string,"Retrieve arrival notices with a date of arrival of the vessel at the Port of Discharge on or before this date",2025-01-23
+includeVisualization,boolean,"Optional flag indicating whether the PDF `arrivalNoticeVisualization` should be included in each returned arrival notice.
+
+The publisher makes the final decision on whether to include PDF visualizations in the response (for some or for all
+the arrival notices), based on a variety of factors including:
+- whether it has implemented support for including PDF visualizations
+- the API consumer (role, registration profile, business relationship)
+- the type and availability status of the returned arrival notices.
+
+However, to support a future transition to fully automated processing of arrival notices by receivers,
+the publisher should **not** include the PDF visualization if this parameter is set to `false`.",true
+removeCharges,boolean,"Optional flag indicating whether the publisher should remove the charges from the PDF visualization
+of every returned arrival notice, and for consistency, also from the structured response data.
+
+This flag allows arrival notice receivers to retrieve, for the purpose of forwarding to third parties,
+versions of the arrival notice PDF visualizations in which the charges are removed,
+if they would be normally received with charges included based on the role of the arrival notice recipient.
+
+This flag is **not** expected to perform any filtering on the list of arrival notices included in the response.
+However, if the removal of charges (from the arrival notices that have them) results in a list of arrival notices
+in which some become exact duplicates, publishers may choose to remove duplicates from the response.
+
+The default value is `false`, which leaves unchanged the presence or absence of charges in each returned arrival notice.",true
+limit,integer,"Maximum number of arrival notices to include in each page of the response.",10
+cursor,string,"Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page.",ExampleNextPageCursor

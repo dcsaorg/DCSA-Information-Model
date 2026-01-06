@@ -1,10 +1,10 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards.portcall.v200;
 
-import org.dcsa.standards.specifications.standards.portcall.v200.PortCallStandardSpecification;
+import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.dcsa.standards.specifications.standards.portcall.v200.model.Event;
 import org.junit.jupiter.api.Test;
 
-class PortCallStandardSpecificationTest {
+class PortCall200StandardSpecificationTest {
   @Test
   void testPortCallStandardSpecification() {
     PortCallStandardSpecification portCallStandardSpecificationStandardSpecification = new PortCallStandardSpecification();

@@ -1,9 +1,9 @@
-package org.dcsa.standards.specifications;
+package org.dcsa.standards.specifications.standards.an.v100;
 
-import org.dcsa.standards.specifications.standards.an.v100.ANStandardSpecification;
+import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.junit.jupiter.api.Test;
 
-class ANStandardSpecificationTest {
+class AN100StandardSpecificationTest {
   @Test
   void testANStandardSpecification() {
     ANStandardSpecification anStandardSpecification = new ANStandardSpecification();

@@ -1,0 +1,1440 @@
+Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+ArrivalNotice,,,,,,,,
+"ArrivalNotice / additionalInformation",additionalInformation,string,,maxLength=5000,,"Valid port entry pass required for drivers. Ensure vehicle registration is pre-submitted to port security.","Free text field to provide additional required information for the consignee to prepare for the shipment arrival,
+e.g. additional required documents to prepare and present for shipment release - country specific.",
+"ArrivalNotice / arrivalNoticeVisualization","arrivalNoticeVisualization",EmbeddedDocument,,,,,"Visualization of an arrival notice, as an embedded document",
+"ArrivalNotice / arrivalNoticeVisualization / content",content,string,,,,RXhhbXBsZSBBTiBjb250ZW50,"Base64 representation of the binary document content",
+"ArrivalNotice / arrivalNoticeVisualization / contentType",contentType,string,,maxLength=255,,application/msword,"Content type of document",
+"ArrivalNotice / arrivalNoticeVisualization / name",name,string,,maxLength=255,,"20250123 AN XYZ01234.docx","Document name",
+"ArrivalNotice / cargoMovementTypeAtDestination","cargoMovementTypeAtDestination",string,,maxLength=3,,FCL,"Refers to the shipment term at the **unloading** of the cargo out of the container. Possible values are:
+
+- `FCL` (Full Container Load)
+- `LCL` (Less than Container Load)",
+"ArrivalNotice / carrierClauses",carrierClauses,"string list",,maxLength=20000,,,"Additional clauses for a specific shipment added by the carrier to the Bill of Lading, subject to local rules / guidelines or certain mandatory information required to be shared with the customer.
+Item description:
+The content of the clause.",
+"ArrivalNotice / carrierCode",carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
+[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the issuing carrier of the Arrival Notice.
+
+`carrierCodeListProvider` defines which list the `carrierCode` is based upon.",
+"ArrivalNotice / carrierCodeListProvider",carrierCodeListProvider,string,,maxLength=10,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+"ArrivalNotice / carrierContactInformation","carrierContactInformation","PartyContactDetail list",,,,,"The party to contact for any inquiries related to this Arrival Notice.",
+"ArrivalNotice / carrierContactInformation / email",email,string,,maxLength=255,,jane.doe@example.com,"Contact email address",
+"ArrivalNotice / carrierContactInformation / name",name,string,,maxLength=255,,"Jane Doe","Contact name",
+"ArrivalNotice / carrierContactInformation / phone",phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ArrivalNotice / charges",charges,"Charge list",,,,,"A list of `Charges`",
+"ArrivalNotice / charges / calculationBasis",calculationBasis,string,,maxLength=50,,"Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
+"ArrivalNotice / charges / carrierRateOfExchange",carrierRateOfExchange,string,,maxLength=50,,"1.00 Euro = 1.17801 US Dollars","The quotation of the relative value of a currency unit against the unit of another currency
+in the foreign exchange market applicable to this charge item.
+The currency exchange specified here refers to the exchange rate between the payment currency
+and the charge currency, in an unspecified order.
+
+The Carrier Rate of Exchange applicability is defined based on the local jurisdiction.
+If not provided, the customer should refer to the ROE available on the carrier website
+or the ROE defined by the competent customs authority, as per local practice.
+
+The publisher must clearly indicate in its API documentation whether the specified rate corresponds
+to a vessel rate of exchange or a daily rate of exchange.",
+"ArrivalNotice / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
+"ArrivalNotice / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
+"ArrivalNotice / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
+"ArrivalNotice / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
+"ArrivalNotice / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / charges / paymentLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / charges / paymentLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / charges / paymentLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / charges / paymentLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / charges / paymentLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / charges / paymentLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / charges / paymentLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / charges / paymentTermCode",paymentTermCode,string,,maxLength=10,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ArrivalNotice / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / consignmentItems",consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`",
+"ArrivalNotice / consignmentItems / cargoItems",cargoItems,"CargoItem list",,,,,"A list of all `cargoItems`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume",cargoGrossVolume,Volume,,,,,"Gross volume of the cargo item, calculated by multiplying the width, height, and length of the packaged cargo.",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)
+- `LTR` (Litre)",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
+Excludes the tare weight of the container.",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,Volume,,,,,"Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)
+- `LTR` (Litre)",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,Weight,,,,,"Net weight of the cargo item, excluding packaging and excluding the tare weight of the container.",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / charges",charges,"Charge list",,,,,"A list of `Charges`",
+"ArrivalNotice / consignmentItems / cargoItems / charges / calculationBasis",calculationBasis,string,,maxLength=50,,"Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / carrierRateOfExchange",carrierRateOfExchange,string,,maxLength=50,,"1.00 Euro = 1.17801 US Dollars","The quotation of the relative value of a currency unit against the unit of another currency
+in the foreign exchange market applicable to this charge item.
+The currency exchange specified here refers to the exchange rate between the payment currency
+and the charge currency, in an unspecified order.
+
+The Carrier Rate of Exchange applicability is defined based on the local jurisdiction.
+If not provided, the customer should refer to the ROE available on the carrier website
+or the ROE defined by the competent customs authority, as per local practice.
+
+The publisher must clearly indicate in its API documentation whether the specified rate corresponds
+to a vessel rate of exchange or a daily rate of exchange.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
+"ArrivalNotice / consignmentItems / cargoItems / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
+"ArrivalNotice / consignmentItems / cargoItems / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / consignmentItems / cargoItems / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentTermCode",paymentTermCode,string,,maxLength=10,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ArrivalNotice / consignmentItems / cargoItems / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / consignmentItems / cargoItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ArrivalNotice / consignmentItems / cargoItems / customsReferences / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / consignmentItems / cargoItems / customsReferences / type",type,string,,maxLength=50,,CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ArrivalNotice / consignmentItems / cargoItems / customsReferences / values",values,"string list",,maxLength=35,,,"
+Item description:
+The value of the `customsReference`",
+"ArrivalNotice / consignmentItems / cargoItems / equipmentReference",equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
+"ArrivalNotice / consignmentItems / cargoItems / exportLicense",exportLicense,ExportLicense,,,,,"Export license applicable to this cargo item.",
+"ArrivalNotice / consignmentItems / cargoItems / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
+"ArrivalNotice / consignmentItems / cargoItems / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ArrivalNotice / consignmentItems / cargoItems / exportLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License`.",
+"ArrivalNotice / consignmentItems / cargoItems / exportLicense / reference",reference,string,,maxLength=35,,EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+"ArrivalNotice / consignmentItems / cargoItems / importLicense",importLicense,ImportLicense,,,,,"Import license applicable to this cargo item.",
+"ArrivalNotice / consignmentItems / cargoItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
+"ArrivalNotice / consignmentItems / cargoItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ArrivalNotice / consignmentItems / cargoItems / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
+"ArrivalNotice / consignmentItems / cargoItems / importLicense / reference",reference,string,,maxLength=35,,EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+"ArrivalNotice / consignmentItems / cargoItems / nationalCommodityCodes",nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `cargoItem`",
+"ArrivalNotice / consignmentItems / cargoItems / nationalCommodityCodes / countryCode",countryCode,string,,maxLength=2,,BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / consignmentItems / cargoItems / nationalCommodityCodes / type",type,string,,maxLength=10,,NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` ( Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ArrivalNotice / consignmentItems / cargoItems / nationalCommodityCodes / values",values,"string list",,maxLength=16,,,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging",outerPackaging,OuterPackaging,,,,,"Packaging information for this cargo item.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods",dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / codedVariantList",codedVariantList,string,,maxLength=4,,2200,"Four-character code supplied by Exis Technologies that assists to remove ambiguities when identifying a variant within a single UN number or NA number that may occur when two companies exchange DG information.
+
+Character | Valid Characters | Description
+:--------:|------------------|------------
+1| 0, 1, 2, 3|The packing group. Code 0 indicates there is no packing group
+2|0 to 9 and A to Z|A sequence letter for the PSN, or 0 if there were no alternative PSNs
+3 and 4|0 to 9 and A to Z|Two sequence letters for other information, for the cases where the variant is required because of different in subrisks, packing instruction etc.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / competentAuthorityApproval","competentAuthorityApproval",string,,maxLength=70,,"{Name and reference...}","Name and reference number of the competent authority providing the approval.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / emergencyContactDetails",emergencyContactDetails,EmergencyContactDetails,,,,,"24 hr emergency contact details",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / emergencyContactDetails / contact",contact,string,,maxLength=255,,"Jane Doe","Name of the contact person during an emergency.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / emergencyContactDetails / phone",phone,string,,maxLength=30,,"+14155552671","Phone number for the contact, including an international phone number format
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / emergencyContactDetails / provider",provider,string,,maxLength=255,,"ACME Inc","Name of the third party vendor providing emergency support",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / emergencyContactDetails / referenceNumber",referenceNumber,string,,maxLength=255,,12234,"Contract reference for the emergency support provided by an external third party vendor.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / EMSNumber",EMSNumber,string,,maxLength=7,,"F-A S-Q","The emergency schedule identified in the IMO EmS Guide – Emergency Response Procedures for Ships Carrying Dangerous Goods. Comprises 2 values; 1 for spillage and 1 for fire. Possible values spillage: S-A to S-Z. Possible values fire: F-A to F-Z.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / endOfHoldingTime",endOfHoldingTime,"string(date)",,,,2021-09-03,"Date by when the refrigerated liquid needs to be delivered.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / fumigationDateTime",fumigationDateTime,"string(date-time)",,,,2024-09-04T09:41Z,"Date & time when the container was fumigated",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight",grossWeight,Weight,,,,,"Total weight of the goods carried, including packaging.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / IMOClass",IMOClass,string,,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
+
+- `1.1A` (Substances and articles which have a mass explosion hazard)
+- `1.6N` (Extremely insensitive articles which do not have a mass explosion hazard)
+- `2.1` (Flammable gases)
+- `8` (Corrosive substances)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / inhalationZone",inhalationZone,string,,maxLength=1,,A,"The zone classification of the toxicity of the inhalant. Possible values are:
+
+- `A` (Hazard Zone A) can be assigned to specific gases and liquids
+- `B` (Hazard Zone B) can be assigned to specific gases and liquids
+- `C` (Hazard Zone C) can **only** be assigned to specific gases
+- `D` (Hazard Zone D) can **only** be assigned to specific gases",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings",innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / description",description,string,,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / material",material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,integer,,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isCompetentAuthorityApprovalRequired","isCompetentAuthorityApprovalRequired",boolean,,,,false,"Indicates if the cargo require approval from authorities",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isEmptyUncleanedResidue",isEmptyUncleanedResidue,boolean,,,,false,"Indicates if the cargo is residue.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isExceptedQuantity",isExceptedQuantity,boolean,,,,false,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isHot",isHot,boolean,,,,false,"Indicates if high temperature cargo is shipped.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isLimitedQuantity",isLimitedQuantity,boolean,,,,false,"Indicates if the dangerous goods can be transported as limited quantity in accordance with Chapter 3.4 of the IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isMarinePollutant",isMarinePollutant,boolean,,,,false,"Indicates if the goods belong to the classification of Marine Pollutant.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isReportableQuantity",isReportableQuantity,boolean,,,,false,"Indicates if a container of hazardous material is at the reportable quantity level. If `true`, a report to the relevant authority must be made in case of spill.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isSalvagePackings",isSalvagePackings,boolean,,,,false,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isWaste",isWaste,boolean,,,,false,"Indicates if waste is being shipped",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits",limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SADT",SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SAPT",SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / temperatureUnit",temperatureUnit,string,,maxLength=10,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
+
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / NANumber",NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume",netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)
+- `LTR` (Litre)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight",netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / packingGroup",packingGroup,integer,,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / properShippingName",properShippingName,string,,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / segregationGroups",segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
+Item description:
+Grouping of Dangerous Goods having certain similar chemical properties. Possible values are:
+
+- `1` (Acids)
+- `2` (Ammonium Compounds)
+- `3` (Bromates)
+- `4` (Chlorates)
+- `5` (Chlorites)
+- `6` (Cyanides)
+- `7` (Heavy metals and their salts)
+- `8` (Hypochlorites)
+- `9` (Lead and its compounds)
+- `10` (Liquid halogenated hydrocarbons)
+- `11` (Mercury and mercury compounds)
+- `12` (Nitrites and their mixtures)
+- `13` (Perchlorates)
+- `14` (Permanganates)
+- `15` (Powdered metals)
+- `16` (Peroxides),
+- `17` (Azides)
+- `18` (Alkalis)
+",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk1",subsidiaryRisk1,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk2",subsidiaryRisk2,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / technicalName",technicalName,string,,maxLength=250,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / UNNumber",UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / description",description,string,,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / IMOPackagingCode",IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,,maxLength=2,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / woodDeclaration",woodDeclaration,string,,maxLength=30,,TREATED_AND_CERTIFIED,"Property to clearly indicate if the products, packaging and any other items are made of wood. Possible values include:
+- `NOT_APPLICABLE` (if no wood or any other wood product such as packaging and supports are being shipped)
+- `NOT_TREATED_AND_NOT_CERTIFIED` (if the wood or wooden materials have not been treated nor fumigated and do not include a certificate)
+- `PROCESSED` (if the wood or wooden materials are entirely made of processed wood, such as plywood, particle board, sliver plates of wood and wood laminate sheets produced using glue, heat, pressure or a combination of these)
+- `TREATED_AND_CERTIFIED` (if the wood or wooden materials have been treated and/or fumigated and include a certificate)",
+"ArrivalNotice / consignmentItems / cargoItems / position",position,integer,,,,12,"The order in which the carrier submitted the pre-announcement to the customs authority (which may vary by country) is,
+in some cases, the same order the consignee must follow for the final customs release.",
+"ArrivalNotice / consignmentItems / carrierBookingReference",carrierBookingReference,string,,maxLength=35,,ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
+"ArrivalNotice / consignmentItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ArrivalNotice / consignmentItems / customsReferences / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / consignmentItems / customsReferences / type",type,string,,maxLength=50,,CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ArrivalNotice / consignmentItems / customsReferences / values",values,"string list",,maxLength=35,,,"
+Item description:
+The value of the `customsReference`",
+"ArrivalNotice / consignmentItems / descriptionOfGoods",descriptionOfGoods,"string list",,maxLength=35,,,"A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+Item description:
+A line describing the cargo",
+"ArrivalNotice / consignmentItems / exportLicense",exportLicense,ExportLicense,,,,,"Export license for the consignment item.",
+"ArrivalNotice / consignmentItems / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
+"ArrivalNotice / consignmentItems / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ArrivalNotice / consignmentItems / exportLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License`.",
+"ArrivalNotice / consignmentItems / exportLicense / reference",reference,string,,maxLength=35,,EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+"ArrivalNotice / consignmentItems / HSCodes",HSCodes,"string list",,maxLength=12,,,"A list of `HS Codes` that apply to this `consignmentItem`.
+HS codes are used by customs to classify the product being shipped.
+Item description:
+Used by customs to classify the product being shipped.
+The type of HS code depends on country and customs requirements.
+
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
+",
+"ArrivalNotice / consignmentItems / importLicense",importLicense,ImportLicense,,,,,"Import license for the consignment item.",
+"ArrivalNotice / consignmentItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
+"ArrivalNotice / consignmentItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ArrivalNotice / consignmentItems / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
+"ArrivalNotice / consignmentItems / importLicense / reference",reference,string,,maxLength=35,,EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+"ArrivalNotice / consignmentItems / nationalCommodityCodes",nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `commodity`",
+"ArrivalNotice / consignmentItems / nationalCommodityCodes / countryCode",countryCode,string,,maxLength=2,,BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / consignmentItems / nationalCommodityCodes / type",type,string,,maxLength=10,,NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` ( Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ArrivalNotice / consignmentItems / nationalCommodityCodes / values",values,"string list",,maxLength=16,,,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+"ArrivalNotice / consignmentItems / references",references,"ReferenceConsignmentItem list",,,,,"A list of `References`",
+"ArrivalNotice / consignmentItems / references / type",type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CR` (Customer’s Reference)
+- `AKG` (Vehicle Identification Number)
+- `SPO` (Shipper's Purchase Order)
+- `CPO` (Consignee's Purchase Order)",
+"ArrivalNotice / consignmentItems / references / values",values,"string list",,maxLength=35,,,"List of `referenceValues` for a given `referenceType`.
+Item description:
+The value of the reference.",
+"ArrivalNotice / consignmentItems / shippingMarks",shippingMarks,"string list",,"maxItems=50
+maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentItem`
+Item description:
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
+",
+"ArrivalNotice / customsClearance",customsClearance,CustomsClearance,,,,,"Customs clearance information",
+"ArrivalNotice / customsClearance / customsClearancePoint",customsClearancePoint,Location,,,,,"The location where customs clearance occurs.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address",address,Address,,,,,"Location address",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / customsClearance / customsClearancePoint / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / customsClearance / customsClearancePoint / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / customsClearance / customsClearancePoint / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / customsClearance / customsClearancePoint / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / customsClearance / customsClearancePoint / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / customsClearance / customsClearancePoint / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / customsClearance / customsClearancePoint / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / customsClearance / customsImportDeclarationProcedure","customsImportDeclarationProcedure",string,,maxLength=1000,,,"Instructions on the administrative processes for submitting import customs declarations to the local agency.",
+"ArrivalNotice / customsClearance / immediateTransportationEntry","immediateTransportationEntry","ImmediateTransportationEntry",,,,,"An Immediate Transportation (IT) entry is a U.S. Customs and Border Protection (CBP) mechanism
+that allows imported cargo to be moved from the first port of arrival in the U.S.
+to another port or bonded facility without being physically cleared by CBP at the first port.",
+"ArrivalNotice / customsClearance / immediateTransportationEntry / FIRMSCode",FIRMSCode,string,,maxLength=4,,B456,"The Facilities Information and Resources Management System (FIRMS) code is a unique four-digit alpha-numeric identifier
+assigned by U.S. Customs and Border Protection (CBP) to facilities in the U.S. where imported goods are held or processed,
+such as Container Freight Stations (CFS), bonded warehouses, intermodal rail ramps or temporary storage facilities near ports.
+It tells CBP and freight systems where the cargo is physically located.",
+"ArrivalNotice / customsClearance / immediateTransportationEntry / ITDate",ITDate,"string(date)",,,,2025-01-23,"The date the in-bond movement began, i.e., when the Immediate Transportation (IT) entry was filed and accepted
+by U.S. Customs and Border Protection (CBP).",
+"ArrivalNotice / customsClearance / immediateTransportationEntry / ITNumber",ITNumber,string,,maxLength=100,,V4914303071,"The reference number of the bonded movement under a U.S. Customs and Border Protection (CBP) Immediate Transportation (IT) entry,
+often assigned by the carrier or customs broker. It allows goods to be moved under bond from the Port of Discharge
+to another inland port or bonded facility without paying duties at the first port. The IT number is used
+for tracking the movement and verifying arrival at the inland port or bonded facility.",
+"ArrivalNotice / customsClearance / manifestReferenceNumber",manifestReferenceNumber,string,,maxLength=35,,24NDMUA430I,"Manifest reference number for manifest declaration and customs clearance in Korea.",
+"ArrivalNotice / customsClearance / masterSequenceNumber",masterSequenceNumber,string,,maxLength=35,,23,"A unique sequential number assigned by the shipping line to each Master Bill of Lading issued under a specific voyage of
+a particular vessel. Customers use this Master Sequence Number (MSN) as a reference when declaring all related House B/Ls.",
+"ArrivalNotice / deliveryTypeAtDestination","deliveryTypeAtDestination",string,,maxLength=3,,CY,"Indicates the type of service offered at `Destination`. The options are:
+
+- `CY` (Container yard (incl. rail ramp))
+- `SD` (Store Door)
+- `CFS` (Container Freight Station)",
+"ArrivalNotice / documentParties",documentParties,"DocumentParty list",,,,,"Document parties.
+
+Note that while parties can generally appear in any order, including `N1` (First Notify Party)
+and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
+as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.",
+"ArrivalNotice / documentParties / address",address,Address,,,,,"Party  address",
+"ArrivalNotice / documentParties / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / documentParties / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / documentParties / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / documentParties / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / documentParties / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / documentParties / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / documentParties / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / documentParties / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / documentParties / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"List of codes identifying the party",
+"ArrivalNotice / documentParties / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ArrivalNotice / documentParties / identifyingCodes / codeListProvider",codeListProvider,string,,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ArrivalNotice / documentParties / identifyingCodes / partyCode",partyCode,string,,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ArrivalNotice / documentParties / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"Party contact details",
+"ArrivalNotice / documentParties / partyContactDetails / email",email,string,,maxLength=255,,jane.doe@example.com,"Contact email address",
+"ArrivalNotice / documentParties / partyContactDetails / name",name,string,,maxLength=255,,"Jane Doe","Contact name",
+"ArrivalNotice / documentParties / partyContactDetails / phone",phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ArrivalNotice / documentParties / partyFunction",partyFunction,string,,maxLength=3,,N1,"Specifies the role of the party in a given context. Possible values are:
+
+- `OS` (Shipper)
+- `CN` (Consignee)
+- `END` (Endorsee)
+- `RW` (Issuing Party)
+- `CG` (Carrier's Agent at Destination)
+- `N1` (First Notify Party)
+- `N2` (Second Notify Party)
+- `NI` (Other Notify Party)
+- `SCO` (Service Contract Owner)
+- `DDR` (Consignor's freight forwarder)
+- `DDS` (Consignee's freight forwarder)
+- `COW` (Invoice payer on behalf of the consignor (shipper))
+- `COX` (Invoice payer on behalf of the consignee)
+- `CS` (Consolidator)
+- `MF` (Manufacturer)
+- `WH` (Warehouse Keeper)",
+"ArrivalNotice / documentParties / partyName",partyName,string,,maxLength=70,,"Acme Inc.","Party name",
+"ArrivalNotice / documentParties / purchaseOrderReferences",purchaseOrderReferences,"string list",,maxLength=35,,,"A list of `Purchase Order Reference`s linked to the document party.
+Item description:
+Purchase order reference",
+"ArrivalNotice / documentParties / reference",reference,string,,maxLength=35,,REF1234,"A reference linked to the document party.",
+"ArrivalNotice / documentParties / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"List of tax or legal references relevant to the party",
+"ArrivalNotice / documentParties / taxLegalReferences / countryCode",countryCode,string,,maxLength=2,,IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / documentParties / taxLegalReferences / type",type,string,,maxLength=50,,PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ArrivalNotice / documentParties / taxLegalReferences / value",value,string,,maxLength=35,,AAAAA0000A,"The value of the `taxLegalReference`",
+"ArrivalNotice / freeTimes",freeTimes,"FreeTime list",,,,,"List of free time conditions applicable to this shipment at destination",
+"ArrivalNotice / freeTimes / calculationBasis",calculationBasis,string,,maxLength=1000,,"Calculated as...","Description of the conditions under which this free time item applies.
+It can include references to the carrier website or individual charges as per service contract/agreement.",
+"ArrivalNotice / freeTimes / duration",duration,integer,,,,5,"The duration expressed in `timeUnit`s for which this free time item applies.",
+"ArrivalNotice / freeTimes / equipmentReferences",equipmentReferences,"string list",,maxLength=11,,,"References of the equipments for which this free time applies
+Item description:
+The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+(composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with ISO 6346, it is suggested to follow
+[Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+from SMDG.
+",
+"ArrivalNotice / freeTimes / ISOEquipmentCodes",ISOEquipmentCodes,"string list",,maxLength=4,,,"Equipment type codes for which this free time applies
+Item description:
+Unique code identifying the equipment size and type used to transport commodities.
+The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.
+",
+"ArrivalNotice / freeTimes / lastFreeDate",lastFreeDate,ClassifiedDate,,,,,"The final date when the container(s) can be collected without incurring charges.",
+"ArrivalNotice / freeTimes / lastFreeDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / freeTimes / lastFreeDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / freeTimes / lastFreeDateTime",lastFreeDateTime,ClassifiedDateTime,,,,,"The final date and time when the container(s) can be collected without incurring charges.",
+"ArrivalNotice / freeTimes / lastFreeDateTime / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / freeTimes / lastFreeDateTime / value",value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
+"ArrivalNotice / freeTimes / timeUnit",timeUnit,string,,maxLength=3,,WD,"Code identifying the unit in which free time is expressed
+- `CD` - Calendar days
+- `WD` - Working days
+- `HR` - Hours",
+"ArrivalNotice / freeTimes / typeCodes",typeCodes,"string list",,maxLength=10,,,"One or more types applicable to this free time condition.
+Item description:
+Code used to denote the type of free time.
+- `DEM` - Demurrage
+- `DET` - Detention (in certain regions, particularly in the US, this is commonly referred to as 'Per Diem')
+- `STO` - Storage",
+"ArrivalNotice / freightPaymentStatus",freightPaymentStatus,string,,maxLength=50,,FULLY_PAID,"Payment status of the collect freight charges.
+
+- `ZERO_PAID` - Zero Paid
+- `PARTIALLY_PAID` - Partially Paid
+- `FULLY_PAID` - Fully Paid
+- `OVERPAID` - Overpaid",
+"ArrivalNotice / houseBillOfLadingReferences","houseBillOfLadingReferences","string list",,maxLength=20,,,"List of House Bill of Lading references
+Item description:
+Unique number allocated by the Ocean Transport Intermediary (OTI) to the House Bill of Lading.
+",
+"ArrivalNotice / isElectronic",isElectronic,boolean,,,,true,"An indicator whether the transport document is electronically transferred.",
+"ArrivalNotice / issueDateTime",issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued.",
+"ArrivalNotice / paymentRemittance",paymentRemittance,PaymentRemittance,,,,,"Bank account information provided by the carrier for customers to make payments of the outstanding charges",
+"ArrivalNotice / paymentRemittance / accountNumber",accountNumber,string,,maxLength=40,,NL99ABNA0123456789,"Bank account number for receiving payment",
+"ArrivalNotice / paymentRemittance / bankName",bankName,string,,maxLength=100,,"Example Bank","Name of the carrier's bank where payment should be sent",
+"ArrivalNotice / paymentRemittance / beneficiary",beneficiary,string,,maxLength=100,,"Example Carrier","Legal name of the payment recipient (carrier)",
+"ArrivalNotice / paymentRemittance / remittanceEmail",remittanceEmail,string,,maxLength=100,,carrier@example.com,"Email address where proof of payment remittance should be sent",
+"ArrivalNotice / paymentRemittance / SWIFTCode",SWIFTCode,string,,maxLength=11,,ABNANL2A,"SWIFT/BIC code for international wire transfers",
+"ArrivalNotice / pickupInformation",pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",
+"ArrivalNotice / pickupInformation / pickupLocation",pickupLocation,Location,,,,,"The equipment handling facility where container is to be picked up by the consignee or the appointed logistics partner.",
+"ArrivalNotice / pickupInformation / pickupLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / pickupInformation / pickupLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / pickupInformation / pickupLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / pickupInformation / pickupLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / pickupInformation / pickupLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / pickupInformation / pickupLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / pickupInformation / pickupLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / pickupInformation / pickupLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / pickupInformation / pickupLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / pickupInformation / pickupLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / pickupInformation / pickupNumber",pickupNumber,string,,maxLength=50,,780379,"A pickup number is a generated number assigned to each import container individually.
+A trucker picking up a container must present the correct pickup number.
+If the pickup number is incorrect, the trucker will have his pickup request denied.",
+"ArrivalNotice / references",references,"Reference list",,,,,"References used by the customer or carrier to identify or track the shipment.",
+"ArrivalNotice / references / type",type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CA` (Carrier’s Reference)
+- `CR` (Customer’s Reference)
+- `AKG` (Vehicle Identification Number)
+- `CPR` (Canadian Pacific Railway System)
+- `CNR` (Canadian National Railway Unit)
+- `VBN` (V-Bond Number)",
+"ArrivalNotice / references / value",value,string,,maxLength=35,,HHL00103004,"The value of the reference.",
+"ArrivalNotice / releaseInformation",releaseInformation,ReleaseInformation,,,,,"Compiles the information relevant to shipment release.",
+"ArrivalNotice / releaseInformation / carrierInformationForCargoRelease","carrierInformationForCargoRelease","PartyContactDetail list",,,,,"The party to contact in relation to the cargo release (e.g. a shipping agency other than the POD carrier agency).",
+"ArrivalNotice / releaseInformation / carrierInformationForCargoRelease / email",email,string,,maxLength=255,,jane.doe@example.com,"Contact email address",
+"ArrivalNotice / releaseInformation / carrierInformationForCargoRelease / name",name,string,,maxLength=255,,"Jane Doe","Contact name",
+"ArrivalNotice / releaseInformation / carrierInformationForCargoRelease / phone",phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ArrivalNotice / releaseInformation / freightReleaseDate",freightReleaseDate,"string(date)",,,,2025-01-23,"Date when the customer has provided the payment and the relevant documents.",
+"ArrivalNotice / releaseInformation / isCustomsReleased",isCustomsReleased,boolean,,,,false,"Indicates whether the shipment has been cleared by customs.",
+"ArrivalNotice / releaseInformation / isFreightReleased",isFreightReleased,boolean,,,,false,"Indicates whether the shipment has been ""freight released"", meaning the B/L has been surrendered
+and all required freight payments have been received by the carrier.",
+"ArrivalNotice / releaseInformation / isOBLReceived",isOBLReceived,boolean,,,,false,"Indicates that the Original Bill of Lading (OBL) has been surrendered to the carrier.",
+"ArrivalNotice / releaseInformation / isReleasedByEmail",isReleasedByEmail,boolean,,,,false,"Indicates whether the shipment has been released via email.",
+"ArrivalNotice / returnInformation",returnInformation,ReturnInformation,,,,,"Groups the information regarding empty-equipment return.",
+"ArrivalNotice / returnInformation / returnInstructions",returnInstructions,string,,maxLength=5000,,"Please place the container...","Instructions for returning the empty equipment.",
+"ArrivalNotice / returnInformation / returnLocation",returnLocation,Location,,,,,"The equipment handling facility where container is to be returned by the consignee or the appointed logistics partner.",
+"ArrivalNotice / returnInformation / returnLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / returnInformation / returnLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / returnInformation / returnLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / returnInformation / returnLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / returnInformation / returnLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / returnInformation / returnLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / returnInformation / returnLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / returnInformation / returnLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / returnInformation / returnLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / returnInformation / returnLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / returnInformation / returnLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / returnInformation / returnLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / returnInformation / returnLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / returnInformation / returnLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / returnInformation / returnLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / returnInformation / turnInReference",turnInReference,string,,maxLength=50,,HLCSTD45,"Code or reference required when returning equipment to the depot.",
+"ArrivalNotice / serviceContractReference",serviceContractReference,string,,maxLength=30,,HHL51800000,"Reference number for agreement between shipper and carrier, which optionally includes a certain minimum quantity commitment (usually referred as “MQC”) of cargo that the shipper commits to over a fixed period, and the carrier commits to a certain rate or rate schedule.",
+"ArrivalNotice / termsAndConditions",termsAndConditions,string,,maxLength=50000,,,"Carrier terms and conditions for the Arrival Notice.",
+"ArrivalNotice / transport",transport,Transport,,,,,"Transport details relevant to the arrival notice.",
+"ArrivalNotice / transport / borderCrossingLocation",borderCrossingLocation,Location,,,,,"The inland location where the cargo is intended to cross an international border.",
+"ArrivalNotice / transport / borderCrossingLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / borderCrossingLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / borderCrossingLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / borderCrossingLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / borderCrossingLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / borderCrossingLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / borderCrossingLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / borderCrossingLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / borderCrossingLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / borderCrossingLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / borderCrossingLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / borderCrossingLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / borderCrossingLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / borderCrossingLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / borderCrossingLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / borderCrossingLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / departureDate",departureDate,ClassifiedDate,,,,,"The date of departure from the location where the cargo is handed over by the shipper, or his agent,
+to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.",
+"ArrivalNotice / transport / departureDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / departureDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / generalOrderDateTime",generalOrderDateTime,ClassifiedDateTime,,,,,"The date and time when the shipment will be placed under General Order status
+(shipment is transferred to a bonded warehouse, and additional fees or penalties may apply).",
+"ArrivalNotice / transport / generalOrderDateTime / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / generalOrderDateTime / value",value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
+"ArrivalNotice / transport / inlandArrivalDate",inlandArrivalDate,ClassifiedDate,,,,,"The date when the container reaches its inland destination (e.g., a warehouse or rail terminal).",
+"ArrivalNotice / transport / inlandArrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / inlandArrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / legs",legs,"Leg list",,,,,"Full or partial information, considered relevant in this context, on some or all `Legs` of the `Transport`",
+"ArrivalNotice / transport / legs / arrivalDate",arrivalDate,ClassifiedDate,,,,,"The arrival date at the discharge location for this specific leg of the transport plan.",
+"ArrivalNotice / transport / legs / arrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / legs / arrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / legs / departureDate",departureDate,ClassifiedDate,,,,,"The departure date from the load location for this specific leg of the transport plan.",
+"ArrivalNotice / transport / legs / departureDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / legs / departureDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / legs / dischargeLocation",dischargeLocation,Location,,,,,"The location where the cargo is discharged for this specific leg of the transport plan.",
+"ArrivalNotice / transport / legs / dischargeLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / legs / dischargeLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / legs / dischargeLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / legs / dischargeLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / legs / dischargeLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / legs / dischargeLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / legs / dischargeLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / legs / dischargeLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / dischargeLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / dischargeLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / legs / dischargeLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / legs / loadLocation",loadLocation,Location,,,,,"The location where the cargo is loaded for this specific leg of the transport plan.",
+"ArrivalNotice / transport / legs / loadLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / legs / loadLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / legs / loadLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / legs / loadLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / legs / loadLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / legs / loadLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / legs / loadLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / legs / loadLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / legs / loadLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / legs / loadLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / legs / loadLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / legs / loadLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / legs / loadLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / loadLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / legs / loadLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / legs / loadLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / legs / modeOfTransport",modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA
+- `VESSEL` - Vessel
+- `RAIL` - Rail
+- `TRUCK` - Truck
+- `BARGE` - Barge
+- `MULTIMODAL` - Multimodal",
+"ArrivalNotice / transport / legs / transportPlanStage",transportPlanStage,string,,maxLength=10,,MNC,"A specific stage of transport
+- `PRC` - Pre-Carriage Transport
+- `MNC` - Main Carriage Transport
+- `ONC` - On-Carriage Transport",
+"ArrivalNotice / transport / legs / transportPlanStageSequenceNumber","transportPlanStageSequenceNumber",integer,,,,5,"Sequence number of the transport plan stage",
+"ArrivalNotice / transport / legs / vesselVoyage",vesselVoyage,VesselVoyage,,,,,"Vessel and voyage details of a transport leg",
+"ArrivalNotice / transport / legs / vesselVoyage / callReferenceNumber",callReferenceNumber,string,,maxLength=100,,NLRTM25002178,"A registration number assigned by customs to the vessel before its arrival at Port of Discharge.
+It can be used for customs clearance purposes in specific countries (e.g. NL, UK).",
+"ArrivalNotice / transport / legs / vesselVoyage / carrierExportVoyageNumber","carrierExportVoyageNumber",string,,maxLength=50,,2208N,"Carrier-specific identifier of the export voyage",
+"ArrivalNotice / transport / legs / vesselVoyage / carrierImportVoyageNumber","carrierImportVoyageNumber",string,,maxLength=50,,2208N,"Carrier-specific identifier of the import voyage",
+"ArrivalNotice / transport / legs / vesselVoyage / carrierServiceCode",carrierServiceCode,string,,maxLength=11,,FE1,"The carrier-specific code of the service for which the schedule details are published",
+"ArrivalNotice / transport / legs / vesselVoyage / universalExportVoyageReference","universalExportVoyageReference",string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"ArrivalNotice / transport / legs / vesselVoyage / universalImportVoyageReference","universalImportVoyageReference",string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"ArrivalNotice / transport / legs / vesselVoyage / universalServiceReference","universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
+
+DCSA generates and distributes batches of Universal Service References (USRs)
+to member and non-member carriers upon request, for their own use or for their alliances and VSAs.
+
+A carrier can use each of its assigned USRs either in agreement with its partners for a service under a VSA or Alliance,
+or independently for one of its own non-VSA, non-Alliance services.
+
+Every Universal Service Reference is an 8-character string with the following format:
+ * the prefix ""SR""
+ * 5 digits
+ * 1 uppercase English letter (A-Z).",
+"ArrivalNotice / transport / legs / vesselVoyage / vesselCallSign",vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel
+and is assigned by the International Telecommunication Union (ITU).
+It consists of a three-letter alphanumeric prefix that indicates nationality,
+followed by one to four characters to identify the individual vessel.",
+"ArrivalNotice / transport / legs / vesselVoyage / vesselFlag",vesselFlag,string,,maxLength=2,,NL,"The national flag of the country under which a vessel is registered,
+indicated by the 2-character code defined in
+[ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).",
+"ArrivalNotice / transport / legs / vesselVoyage / vesselIMONumber",vesselIMONumber,string,,maxLength=8,,9321483,"The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
+The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.",
+"ArrivalNotice / transport / legs / vesselVoyage / vesselName",vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
+"ArrivalNotice / transport / onBoardDate",onBoardDate,ClassifiedDate,,,,,"The date when the container was loaded onto the vessel at the port of origin.",
+"ArrivalNotice / transport / onBoardDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / onBoardDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / placeOfDelivery",placeOfDelivery,Location,,,,,"The location where the cargo is handed over to the consignee, or his agent,
+by the shipping line and where responsibility of the shipping line ceases.",
+"ArrivalNotice / transport / placeOfDelivery / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / placeOfDelivery / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / placeOfDelivery / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / placeOfDelivery / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / placeOfDelivery / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / placeOfDelivery / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / placeOfDelivery / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / placeOfDelivery / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / placeOfDelivery / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / placeOfDelivery / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / placeOfDelivery / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / placeOfDelivery / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / placeOfDelivery / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfDelivery / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / placeOfDelivery / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / placeOfDeliveryArrivalDate","placeOfDeliveryArrivalDate",ClassifiedDate,,,,,"The date of arrival of the shipment at Place of Delivery.",
+"ArrivalNotice / transport / placeOfDeliveryArrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / placeOfDeliveryArrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / placeOfReceipt",placeOfReceipt,Location,,,,,"The location where the cargo is handed over by the shipper, or his agent, to the shipping line.
+This indicates the point at which the shipping line takes on responsibility for carriage of the container.",
+"ArrivalNotice / transport / placeOfReceipt / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / placeOfReceipt / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / placeOfReceipt / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / placeOfReceipt / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / placeOfReceipt / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / placeOfReceipt / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / placeOfReceipt / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / placeOfReceipt / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / placeOfReceipt / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / placeOfReceipt / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / placeOfReceipt / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / placeOfReceipt / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / placeOfReceipt / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfReceipt / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / placeOfReceipt / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / placeOfReceipt / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / portOfDischarge",portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel.",
+"ArrivalNotice / transport / portOfDischarge / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / portOfDischarge / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / portOfDischarge / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / portOfDischarge / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / portOfDischarge / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / portOfDischarge / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / portOfDischarge / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / portOfDischarge / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / portOfDischarge / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / portOfDischarge / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / portOfDischarge / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / portOfDischarge / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / portOfDischarge / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfDischarge / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / portOfDischarge / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / portOfDischargeArrivalDate","portOfDischargeArrivalDate",ClassifiedDate,,,,,"The date of arrival of the vessel at the Port of Discharge.",
+"ArrivalNotice / transport / portOfDischargeArrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / portOfDischargeArrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transport / portOfLoading",portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation.",
+"ArrivalNotice / transport / portOfLoading / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / portOfLoading / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / transport / portOfLoading / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / transport / portOfLoading / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / transport / portOfLoading / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / transport / portOfLoading / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / transport / portOfLoading / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / transport / portOfLoading / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / transport / portOfLoading / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / transport / portOfLoading / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / transport / portOfLoading / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / transport / portOfLoading / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / portOfLoading / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfLoading / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / transport / portOfLoading / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / transport / portOfLoading / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / transport / receivedForShipmentDate",receivedForShipmentDate,ClassifiedDate,,,,,"The date on which the carrier takes possession of all containers under the bill of lading.
+For carrier haulage, this is when the carrier collects the last container at the place of receipt.
+For merchant haulage, this is when the last container is physically handed over to the terminal.",
+"ArrivalNotice / transport / receivedForShipmentDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNotice / transport / receivedForShipmentDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNotice / transportDocumentReference","transportDocumentReference",string,yes,maxLength=20,,HHL71800000,"A unique number allocated by the shipping line to the transport document and the main number used for the tracking of the status of the shipment.",
+"ArrivalNotice / transportDocumentTypeCode","transportDocumentTypeCode",string,,maxLength=10,,SWB,"Specifies the type of the transport document
+- `BOL` (Bill of Lading)
+- `SWB` (Sea Waybill)",
+"ArrivalNotice / typeLabel",typeLabel,string,,maxLength=1000,,"English, consignee, USD","Free-format identifier used to specify a certain type of arrival notice,
+for example ""English, consignee, USD"" or ""No charges, French"".
+
+Each publisher can choose their own criteria by which they categorize arrival notices,
+as well as the format of this property. However, for each arrival notice publisher
+the format must be consistent and predictable, in order to allow receivers
+to programmatically determine whether each received arrival notice overrides
+an earlier version of the arrival notice ""of the same type"" for the same transport document.
+
+An arrival notice (including all its versions) is uniquely identified by the combination
+of the `transportDocumentReference` and this `typeLabel`. Each version of an arrival notice
+is uniquely identified by the combination of the `transportDocumentReference`, this `typeLabel`
+and the `issueDateTime`.
+
+Among the versions of arrival notices of the same type issued for the same transport document,
+a version with a newer `issueDateTime` overrides a version with an older `issueDateTime`,
+regardless of the `versionLabel` (which is a high-level label with business semantics
+and may or may not change between timestamped versions).",
+"ArrivalNotice / utilizedTransportEquipments","utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used.",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings",activeReeferSettings,ActiveReeferSettings,,,,,"Active reefer settings applied to this equipment.",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / airExchangeSetpoint",airExchangeSetpoint,number,,,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / airExchangeUnit",airExchangeUnit,string,,maxLength=10,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
+- `MQH` (Cubic metre per hour)
+- `FQH` (Cubic foot per hour)",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / co2Setpoint",co2Setpoint,number,,,,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / humiditySetpoint",humiditySetpoint,number,,,,95.6,"The percentage of the controlled atmosphere humidity target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isBulbMode",isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isColdTreatmentRequired",isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isControlledAtmosphereRequired","isControlledAtmosphereRequired",boolean,,,,true,"Indicator of whether cargo requires Controlled Atmosphere.",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Is drain holes open on the container",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isVentilationOpen",isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / o2Setpoint",o2Setpoint,number,,,,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / temperatureSetpoint",temperatureSetpoint,number,,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / temperatureUnit",temperatureUnit,string,,maxLength=10,,CEL,"The unit for temperature in Celsius or Fahrenheit
+
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)",
+"ArrivalNotice / utilizedTransportEquipments / charges",charges,"Charge list",,,,,"A list of `Charges`",
+"ArrivalNotice / utilizedTransportEquipments / charges / calculationBasis",calculationBasis,string,,maxLength=50,,"Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
+"ArrivalNotice / utilizedTransportEquipments / charges / carrierRateOfExchange",carrierRateOfExchange,string,,maxLength=50,,"1.00 Euro = 1.17801 US Dollars","The quotation of the relative value of a currency unit against the unit of another currency
+in the foreign exchange market applicable to this charge item.
+The currency exchange specified here refers to the exchange rate between the payment currency
+and the charge currency, in an unspecified order.
+
+The Carrier Rate of Exchange applicability is defined based on the local jurisdiction.
+If not provided, the customer should refer to the ROE available on the carrier website
+or the ROE defined by the competent customs authority, as per local practice.
+
+The publisher must clearly indicate in its API documentation whether the specified rate corresponds
+to a vessel rate of exchange or a daily rate of exchange.",
+"ArrivalNotice / utilizedTransportEquipments / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
+"ArrivalNotice / utilizedTransportEquipments / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
+"ArrivalNotice / utilizedTransportEquipments / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / utilizedTransportEquipments / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / utilizedTransportEquipments / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentTermCode",paymentTermCode,string,,maxLength=10,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ArrivalNotice / utilizedTransportEquipments / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / utilizedTransportEquipments / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / utilizedTransportEquipments / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ArrivalNotice / utilizedTransportEquipments / customsReferences / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / utilizedTransportEquipments / customsReferences / type",type,string,,maxLength=50,,CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ArrivalNotice / utilizedTransportEquipments / customsReferences / values",values,"string list",,maxLength=35,,,"
+Item description:
+The value of the `customsReference`",
+"ArrivalNotice / utilizedTransportEquipments / equipment",equipment,Equipment,,,,,"The container or transport equipment used.",
+"ArrivalNotice / utilizedTransportEquipments / equipment / equipmentReference",equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
+"ArrivalNotice / utilizedTransportEquipments / equipment / ISOEquipmentCode",ISOEquipmentCode,string,,maxLength=4,,22G1,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
+"ArrivalNotice / utilizedTransportEquipments / equipment / tareWeight",tareWeight,Weight,,,,,"The tare weight of the container.",
+"ArrivalNotice / utilizedTransportEquipments / equipment / tareWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+"ArrivalNotice / utilizedTransportEquipments / equipment / tareWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / utilizedTransportEquipments / isNonOperatingReefer",isNonOperatingReefer,boolean,,,,false,"If the equipment is a Reefer Container then setting this attribute will indicate that the container should be treated as a `DRY` container.",
+"ArrivalNotice / utilizedTransportEquipments / isShipperOwned",isShipperOwned,boolean,,,,true,"Indicates whether the container is shipper owned (SOC).",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation",pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation",pickupLocation,Location,,,,,"The equipment handling facility where container is to be picked up by the consignee or the appointed logistics partner.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupNumber",pickupNumber,string,,maxLength=50,,780379,"A pickup number is a generated number assigned to each import container individually.
+A trucker picking up a container must present the correct pickup number.
+If the pickup number is incorrect, the trucker will have his pickup request denied.",
+"ArrivalNotice / utilizedTransportEquipments / references",references,"Reference list",,,,,"A list of `References`",
+"ArrivalNotice / utilizedTransportEquipments / references / type",type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CA` (Carrier’s Reference)
+- `CR` (Customer’s Reference)
+- `AKG` (Vehicle Identification Number)
+- `CPR` (Canadian Pacific Railway System)
+- `CNR` (Canadian National Railway Unit)
+- `VBN` (V-Bond Number)",
+"ArrivalNotice / utilizedTransportEquipments / references / value",value,string,,maxLength=35,,HHL00103004,"The value of the reference.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation",returnInformation,ReturnInformation,,,,,"Groups the information regarding empty-equipment return.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnInstructions",returnInstructions,string,,maxLength=5000,,"Please place the container...","Instructions for returning the empty equipment.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation",returnLocation,Location,,,,,"The equipment handling facility where container is to be returned by the consignee or the appointed logistics partner.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / turnInReference",turnInReference,string,,maxLength=50,,HLCSTD45,"Code or reference required when returning equipment to the depot.",
+"ArrivalNotice / utilizedTransportEquipments / seals",seals,"Seal list",,,,,"A list of `Seals`",
+"ArrivalNotice / utilizedTransportEquipments / seals / number",number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+"ArrivalNotice / utilizedTransportEquipments / seals / source",source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
+- `CAR` (Carrier)
+- `SHI` (Shipper)
+- `PHY` (Phytosanitary)
+- `VET` (Veterinary)
+- `CUS` (Customs)
+
+In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
+both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
+"ArrivalNotice / utilizedTransportEquipments / shippingMarks",shippingMarks,"string list",,"maxItems=50
+maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
+Item description:
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
+",
+"ArrivalNotice / versionLabel",versionLabel,string,,maxLength=1000,,Warning,"Free text used to indicate a certain version of an arrival notice of a certain type,
+for example ""Warning"", ""Updated"", ""Second"", ""Third"" etc.
+
+This is a high-level label with business semantics that does not influence the technical versioning
+of arrival notices of the same `typeLabel` issued for the same `transportDocumentReference`,
+which relies on the `issueDateTime` instead.",
+"ArrivalNoticeNotification",,,,,,,,
+"ArrivalNoticeNotification / equipmentReferences",equipmentReferences,"string list",,maxLength=11,,,"References of the equipments for which this arrival notice was created
+Item description:
+The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+(composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with ISO 6346, it is suggested to follow
+[Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+from SMDG.
+",
+"ArrivalNoticeNotification / issueDateTime",issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued.",
+"ArrivalNoticeNotification / placeOfDelivery",placeOfDelivery,Location,,,,,"The location where the cargo is handed over by the shipping line to the consignee or its agent and where the
+responsibility of the shipping line ceases",
+"ArrivalNoticeNotification / placeOfDelivery / address",address,Address,,,,,"Location address",
+"ArrivalNoticeNotification / placeOfDelivery / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNoticeNotification / placeOfDelivery / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNoticeNotification / placeOfDelivery / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNoticeNotification / placeOfDelivery / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNoticeNotification / placeOfDelivery / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNoticeNotification / placeOfDelivery / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNoticeNotification / placeOfDelivery / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNoticeNotification / placeOfDelivery / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNoticeNotification / placeOfDelivery / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNoticeNotification / placeOfDelivery / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNoticeNotification / placeOfDelivery / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNoticeNotification / placeOfDelivery / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / placeOfDelivery / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / placeOfDelivery / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNoticeNotification / placeOfDelivery / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNoticeNotification / placeOfDeliveryArrivalDate","placeOfDeliveryArrivalDate",ClassifiedDate,,,,,"The date of arrival of the shipment at Place of Delivery.",
+"ArrivalNoticeNotification / placeOfDeliveryArrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNoticeNotification / placeOfDeliveryArrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNoticeNotification / portOfDischarge",portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel",
+"ArrivalNoticeNotification / portOfDischarge / address",address,Address,,,,,"Location address",
+"ArrivalNoticeNotification / portOfDischarge / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNoticeNotification / portOfDischarge / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNoticeNotification / portOfDischarge / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNoticeNotification / portOfDischarge / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNoticeNotification / portOfDischarge / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNoticeNotification / portOfDischarge / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNoticeNotification / portOfDischarge / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNoticeNotification / portOfDischarge / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNoticeNotification / portOfDischarge / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNoticeNotification / portOfDischarge / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNoticeNotification / portOfDischarge / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNoticeNotification / portOfDischarge / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / portOfDischarge / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNoticeNotification / portOfDischarge / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNoticeNotification / portOfDischarge / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ArrivalNoticeNotification / portOfDischargeArrivalDate","portOfDischargeArrivalDate",ClassifiedDate,,,,,"The date of arrival of the vessel at the Port of Discharge.",
+"ArrivalNoticeNotification / portOfDischargeArrivalDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
+- `PLN` - Planned
+- `EST` - Estimated
+- `ACT` - Actual",
+"ArrivalNoticeNotification / portOfDischargeArrivalDate / value",value,"string(date)",,,,2025-01-23,"String representation of a date in yyyy-MM-dd format.
+Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
+"ArrivalNoticeNotification / transportDocumentReference","transportDocumentReference",string,yes,maxLength=20,,HHL71800000,"The reference of the transport document for which this arrival notice was created",
+"ArrivalNoticeNotification / typeLabel",typeLabel,string,,maxLength=1000,,"English, consignee, USD","Free-format identifier used to specify a certain type of arrival notice,
+for example ""English, consignee, USD"" or ""No charges, French"".
+
+Each publisher can choose their own criteria by which they categorize arrival notices,
+as well as the format of this property. However, for each arrival notice publisher
+the format must be consistent and predictable, in order to allow receivers
+to programmatically determine whether each received arrival notice overrides
+an earlier version of the arrival notice ""of the same type"" for the same transport document.
+
+An arrival notice (including all its versions) is uniquely identified by the combination
+of the `transportDocumentReference` and this `typeLabel`. Each version of an arrival notice
+is uniquely identified by the combination of the `transportDocumentReference`, this `typeLabel`
+and the `issueDateTime`.
+
+Among the versions of arrival notices of the same type issued for the same transport document,
+a version with a newer `issueDateTime` overrides a version with an older `issueDateTime`,
+regardless of the `versionLabel` (which is a high-level label with business semantics
+and may or may not change between timestamped versions).",
+"ArrivalNoticeNotification / versionLabel",versionLabel,string,,maxLength=1000,,Warning,"Free text used to indicate a certain version of an arrival notice of a certain type,
+for example ""Warning"", ""Updated"", ""Second"", ""Third"" etc.
+
+This is a high-level label with business semantics that does not influence the technical versioning
+of arrival notices of the same `typeLabel` issued for the same `transportDocumentReference`,
+which relies on the `issueDateTime` instead.",
+FeedbackElement,,,,,,,,
+"FeedbackElement / message",message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed
+to a user of the arrival notice publishing organization",
+"FeedbackElement / propertyPath",propertyPath,string,,maxLength=1000,,"$.arrivalNotices[2].pickupInformation.pickupLocation","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
+about which the feedback is provided (if applicable)",
+"FeedbackElement / severity",severity,string,,maxLength=50,,ERROR,"Code denoting the severity of a `FeedbackElement`
+
+- `ERROR` - Error that fully or partially prevents the correct processing of the request
+- `WARN` - Warning about the request being processed in a potentially unexpected way
+- `INFO` - Informational message about how the request is processed",
