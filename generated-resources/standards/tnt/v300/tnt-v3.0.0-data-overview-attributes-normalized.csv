@@ -264,10 +264,10 @@ ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drain
 ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 ReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
-Seal,placement,string,,,,DOOR,"Placement of the seal.
+Seal,placement,string,,maxLength=10,,DOOR,"Placement of the seal.
 - `DOOR` (Door)
 - `VENT` (Vent)",
-Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+Seal,source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
 - `CNS` (Consolidator)
 - `CST` (Customer)
@@ -279,7 +279,7 @@ Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the se
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
-Seal,type,string,,,,WIR,"The type of seal.
+Seal,type,string,,maxLength=10,,WIR,"The type of seal.
 - `KLP` (Keyless padlock)
 - `BLT` (Bolt)
 - `WIR` (Wire)",

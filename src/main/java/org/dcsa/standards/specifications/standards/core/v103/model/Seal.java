@@ -33,7 +33,8 @@ The source of the seal, namely who has affixed the seal.
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
 """,
-    example = "CUS")
+    example = "CUS",
+    maxLength = 10)
   protected String source;
 
   @Schema(
@@ -44,7 +45,8 @@ The type of seal.
 - `BLT` (Bolt)
 - `WIR` (Wire)
 """,
-    example = "WIR")
+    example = "WIR",
+    maxLength = 10)
   protected String type;
 
   @Schema(
@@ -55,6 +57,7 @@ Placement of the seal.
 - `VENT` (Vent)
 """,
     defaultValue = "DOOR",
-    example = "DOOR")
+    example = "DOOR",
+    maxLength = 10)
   protected String placement;
 }

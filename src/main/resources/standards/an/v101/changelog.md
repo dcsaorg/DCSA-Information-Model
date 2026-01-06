@@ -8,6 +8,8 @@ Added in type `Facility` attribute `facilityName`. (SD-2754)
 
 Added in type `Address` attribute `addressLines`. (SD-2765)
 
+Added in type `Seal` attributes `type`, `placement` and additional values for attribute `sources`. (SD-2767)
+
 
 # Arrival Notice v1.0.0 Changelog
 

@@ -62,7 +62,6 @@ import org.dcsa.standards.specifications.standards.an.v101.model.Reference;
 import org.dcsa.standards.specifications.standards.an.v101.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.an.v101.model.ReleaseInformation;
 import org.dcsa.standards.specifications.standards.an.v101.model.ReturnInformation;
-import org.dcsa.standards.specifications.standards.an.v101.model.Seal;
 import org.dcsa.standards.specifications.standards.an.v101.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.an.v101.model.Transport;
 import org.dcsa.standards.specifications.standards.an.v101.model.UtilizedTransportEquipment;
@@ -75,6 +74,7 @@ import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDat
 import org.dcsa.standards.specifications.standards.core.v103.model.Facility;
 import org.dcsa.standards.specifications.standards.core.v103.model.GeoCoordinate;
 import org.dcsa.standards.specifications.standards.core.v103.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.model.Seal;
 import org.dcsa.standards.specifications.standards.core.v103.model.Weight;
 import org.dcsa.standards.specifications.standards.core.v103.types.CountryCode;
 import org.dcsa.standards.specifications.standards.core.v103.types.EquipmentReference;

@@ -960,6 +960,7 @@ components:
           description: "Identifies a seal affixed to the container."
           example: "VET123"
         source:
+          maxLength: 10
           type: "string"
           description: |
             The source of the seal, namely who has affixed the seal.
@@ -976,6 +977,7 @@ components:
             both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
           example: "CUS"
         type:
+          maxLength: 10
           type: "string"
           description: |
             The type of seal.
@@ -984,6 +986,7 @@ components:
             - `WIR` (Wire)
           example: "WIR"
         placement:
+          maxLength: 10
           type: "string"
           description: |
             Placement of the seal.

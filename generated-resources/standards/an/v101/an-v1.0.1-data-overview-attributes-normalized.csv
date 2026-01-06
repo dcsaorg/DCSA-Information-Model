@@ -581,15 +581,25 @@ ReturnInformation,returnInstructions,string,,maxLength=5000,,"Please place the c
 ReturnInformation,returnLocation,Location,,,,,"The equipment handling facility where container is to be returned by the consignee or the appointed logistics partner.",
 ReturnInformation,turnInReference,string,,maxLength=50,,HLCSTD45,"Code or reference required when returning equipment to the depot.",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+Seal,placement,string,,maxLength=10,,DOOR,"Placement of the seal.
+- `DOOR` (Door)
+- `VENT` (Vent)",
 Seal,source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
-- `SHI` (Shipper)
-- `PHY` (Phytosanitary)
-- `VET` (Veterinary)
+- `CNS` (Consolidator)
+- `CST` (Customer)
 - `CUS` (Customs)
+- `PHY` (Phytosanitary)
+- `SHI` (Shipper)
+- `TER` (Terminal)
+- `VET` (Veterinary)
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
+Seal,type,string,,maxLength=10,,WIR,"The type of seal.
+- `KLP` (Keyless padlock)
+- `BLT` (Bolt)
+- `WIR` (Wire)",
 TaxLegalReference,countryCode,string,,maxLength=2,,IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 TaxLegalReference,type,string,,maxLength=50,,PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
 TaxLegalReference,value,string,,maxLength=35,,AAAAA0000A,"The value of the `taxLegalReference`",
