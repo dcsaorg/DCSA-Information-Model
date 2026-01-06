@@ -7,6 +7,7 @@ import org.dcsa.standards.specifications.standards.an.v101.types.CarrierClause;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreightPaymentStatus;
 import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
 import org.dcsa.standards.specifications.standards.core.v101.types.HouseBillOfLadingReference;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
 
 @Schema(description = "Full content of an Arrival Notice document.")
 @Data
@@ -129,6 +130,10 @@ e.g. additional required documents to prepare and present for shipment release -
       example = "SWB",
       maxLength = 10)
   private String transportDocumentTypeCode;
+
+  @Schema(
+      description = "The location where the original transport document (Bill of Lading) is issued")
+  private Location placeOfBLIssue;
 
   @Schema(
       description = "An indicator whether the transport document is electronically transferred.",

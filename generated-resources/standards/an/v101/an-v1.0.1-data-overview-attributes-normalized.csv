@@ -70,6 +70,7 @@ ArrivalNotice,isElectronic,boolean,,,,true,"An indicator whether the transport d
 ArrivalNotice,issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued.",
 ArrivalNotice,paymentRemittance,PaymentRemittance,,,,,"Bank account information provided by the carrier for customers to make payments of the outstanding charges",
 ArrivalNotice,pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",
+ArrivalNotice,placeOfBLIssue,Location,,,,,"The location where the original transport document (Bill of Lading) is issued",
 ArrivalNotice,references,"Reference list",,,,,"References used by the customer or carrier to identify or track the shipment.",
 ArrivalNotice,releaseInformation,ReleaseInformation,,,,,"Compiles the information relevant to shipment release.",
 ArrivalNotice,returnInformation,ReturnInformation,,,,,"Groups the information regarding empty-equipment return.",

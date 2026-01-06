@@ -1,5 +1,9 @@
 # Arrival Notice v1.0.1 Changelog
 
+## Snapshot v1.0.1-20260116
+
+Added in type `ArrivalNotice` attribute `placeOfBLIssue`. (SD-2748)
+
 
 # Arrival Notice v1.0.0 Changelog
 

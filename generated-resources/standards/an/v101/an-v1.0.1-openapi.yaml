@@ -584,6 +584,10 @@ components:
             - `BOL` (Bill of Lading)
             - `SWB` (Sea Waybill)
           example: "SWB"
+        placeOfBLIssue:
+          description: "The location where the original transport document (Bill of Lading) is issued"
+          allOf:
+          - $ref: "#/components/schemas/Location"
         isElectronic:
           type: "boolean"
           description: "An indicator whether the transport document is electronically transferred."

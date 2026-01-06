@@ -629,6 +629,42 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ArrivalNotice / pickupInformation / pickupNumber",pickupNumber,string,,maxLength=50,,780379,"A pickup number is a generated number assigned to each import container individually.
 A trucker picking up a container must present the correct pickup number.
 If the pickup number is incorrect, the trucker will have his pickup request denied.",
+"ArrivalNotice / placeOfBLIssue",placeOfBLIssue,Location,,,,,"The location where the original transport document (Bill of Lading) is issued",
+"ArrivalNotice / placeOfBLIssue / address",address,Address,,,,,"Location address",
+"ArrivalNotice / placeOfBLIssue / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+"ArrivalNotice / placeOfBLIssue / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+"ArrivalNotice / placeOfBLIssue / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+"ArrivalNotice / placeOfBLIssue / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ArrivalNotice / placeOfBLIssue / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ArrivalNotice / placeOfBLIssue / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ArrivalNotice / placeOfBLIssue / address / street",street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ArrivalNotice / placeOfBLIssue / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ArrivalNotice / placeOfBLIssue / facility",facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+"ArrivalNotice / placeOfBLIssue / facility / facilityCode",facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+"ArrivalNotice / placeOfBLIssue / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / placeOfBLIssue / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+"ArrivalNotice / placeOfBLIssue / geoCoordinate",geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+"ArrivalNotice / placeOfBLIssue / geoCoordinate / latitude",latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / placeOfBLIssue / geoCoordinate / longitude",longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+"ArrivalNotice / placeOfBLIssue / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ArrivalNotice / placeOfBLIssue / UNLocationCode",UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 "ArrivalNotice / references",references,"Reference list",,,,,"References used by the customer or carrier to identify or track the shipment.",
 "ArrivalNotice / references / type",type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
 - `CA` (Carrier’s Reference)
