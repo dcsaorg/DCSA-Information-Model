@@ -8,7 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 import org.dcsa.standards.specifications.standards.an.v101.types.CurrencyCode;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
 
 @Schema(
     description =

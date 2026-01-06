@@ -69,19 +69,19 @@ import org.dcsa.standards.specifications.standards.an.v101.model.UtilizedTranspo
 import org.dcsa.standards.specifications.standards.an.v101.model.VesselVoyage;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTimeUnitCode;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTypeCode;
-import org.dcsa.standards.specifications.standards.core.v101.model.Address;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDate;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDateTime;
-import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
-import org.dcsa.standards.specifications.standards.core.v101.types.CountryCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.EquipmentReference;
-import org.dcsa.standards.specifications.standards.core.v101.types.IsoEquipmentCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.ModeOfTransportCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.UniversalVoyageReference;
-import org.dcsa.standards.specifications.standards.core.v101.types.VesselIMONumber;
+import org.dcsa.standards.specifications.standards.core.v103.model.Address;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDate;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v103.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.model.Weight;
+import org.dcsa.standards.specifications.standards.core.v103.types.CountryCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.EquipmentReference;
+import org.dcsa.standards.specifications.standards.core.v103.types.IsoEquipmentCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.ModeOfTransportCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.UniversalVoyageReference;
+import org.dcsa.standards.specifications.standards.core.v103.types.VesselIMONumber;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 
 public class ANStandardSpecification extends StandardSpecification {

@@ -5,10 +5,10 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTimeUnitCode;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTypeCode;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDate;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDateTime;
-import org.dcsa.standards.specifications.standards.core.v101.types.EquipmentReference;
-import org.dcsa.standards.specifications.standards.core.v101.types.IsoEquipmentCode;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDate;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.types.EquipmentReference;
+import org.dcsa.standards.specifications.standards.core.v103.types.IsoEquipmentCode;
 
 @Data
 @Schema(description = "Free time condition applicable to this shipment at destination.")

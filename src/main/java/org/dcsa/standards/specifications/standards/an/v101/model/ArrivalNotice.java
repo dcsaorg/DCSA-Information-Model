@@ -5,9 +5,9 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.an.v101.types.CarrierClause;
 import org.dcsa.standards.specifications.standards.an.v101.types.FreightPaymentStatus;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
-import org.dcsa.standards.specifications.standards.core.v101.types.HouseBillOfLadingReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.types.HouseBillOfLadingReference;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
 
 @Schema(description = "Full content of an Arrival Notice document.")
 @Data

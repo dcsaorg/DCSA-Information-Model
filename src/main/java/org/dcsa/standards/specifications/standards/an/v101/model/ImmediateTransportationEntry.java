@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.an.v101.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDate;
+import org.dcsa.standards.specifications.standards.core.v103.types.FormattedDate;
 
 @Data
 @Schema(

@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.an.v101.types.PurchaseOrderReference;
-import org.dcsa.standards.specifications.standards.core.v101.model.Address;
+import org.dcsa.standards.specifications.standards.core.v103.model.Address;
 
 @Data
 @Schema(description = "Document party")

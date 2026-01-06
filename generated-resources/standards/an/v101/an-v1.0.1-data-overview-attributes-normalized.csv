@@ -16,6 +16,10 @@ ActiveReeferSettings,temperatureUnit,string,,maxLength=10,,CEL,"The unit for tem
 
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
+Address,addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -357,6 +361,7 @@ Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific faci
 Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed
 to a user of the arrival notice publishing organization",
 FeedbackElement,propertyPath,string,,maxLength=1000,,"$.arrivalNotices[2].pickupInformation.pickupLocation","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property

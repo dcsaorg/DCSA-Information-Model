@@ -4,6 +4,10 @@
 
 Added in type `ArrivalNotice` attribute `placeOfBLIssue`. (SD-2748)
 
+Added in type `Facility` attribute `facilityName`. (SD-2754)
+
+Added in type `Address` attribute `addressLines`. (SD-2765)
+
 
 # Arrival Notice v1.0.0 Changelog
 

@@ -3,9 +3,9 @@ package org.dcsa.standards.specifications.standards.an.v101.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.an.v101.types.TransportPlanStageCode;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDate;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
-import org.dcsa.standards.specifications.standards.core.v101.types.ModeOfTransportCode;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDate;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.types.ModeOfTransportCode;
 
 @Data
 @Schema(description = "Details of one specific leg of the transport plan")

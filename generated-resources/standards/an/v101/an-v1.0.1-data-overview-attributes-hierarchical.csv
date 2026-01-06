@@ -46,6 +46,10 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
 "ArrivalNotice / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / charges / paymentLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -59,6 +63,7 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / charges / paymentLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -136,6 +141,10 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -149,6 +158,7 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -395,6 +405,10 @@ The identifying details of a package or the actual markings that appear on the p
 "ArrivalNotice / customsClearance",customsClearance,CustomsClearance,,,,,"Customs clearance information",
 "ArrivalNotice / customsClearance / customsClearancePoint",customsClearancePoint,Location,,,,,"The location where customs clearance occurs.",
 "ArrivalNotice / customsClearance / customsClearancePoint / address",address,Address,,,,,"Location address",
+"ArrivalNotice / customsClearance / customsClearancePoint / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / customsClearance / customsClearancePoint / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / customsClearance / customsClearancePoint / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / customsClearance / customsClearancePoint / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -408,6 +422,7 @@ The identifying details of a package or the actual markings that appear on the p
 "ArrivalNotice / customsClearance / customsClearancePoint / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / customsClearance / customsClearancePoint / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / customsClearance / customsClearancePoint / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -457,6 +472,10 @@ Note that while parties can generally appear in any order, including `N1` (First
 and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
 as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.",
 "ArrivalNotice / documentParties / address",address,Address,,,,,"Party  address",
+"ArrivalNotice / documentParties / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / documentParties / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / documentParties / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / documentParties / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -592,6 +611,10 @@ Unique number allocated by the Ocean Transport Intermediary (OTI) to the House B
 "ArrivalNotice / pickupInformation",pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",
 "ArrivalNotice / pickupInformation / pickupLocation",pickupLocation,Location,,,,,"The equipment handling facility where container is to be picked up by the consignee or the appointed logistics partner.",
 "ArrivalNotice / pickupInformation / pickupLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / pickupInformation / pickupLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / pickupInformation / pickupLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / pickupInformation / pickupLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / pickupInformation / pickupLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -605,6 +628,7 @@ Unique number allocated by the Ocean Transport Intermediary (OTI) to the House B
 "ArrivalNotice / pickupInformation / pickupLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / pickupInformation / pickupLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / pickupInformation / pickupLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -631,6 +655,10 @@ A trucker picking up a container must present the correct pickup number.
 If the pickup number is incorrect, the trucker will have his pickup request denied.",
 "ArrivalNotice / placeOfBLIssue",placeOfBLIssue,Location,,,,,"The location where the original transport document (Bill of Lading) is issued",
 "ArrivalNotice / placeOfBLIssue / address",address,Address,,,,,"Location address",
+"ArrivalNotice / placeOfBLIssue / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / placeOfBLIssue / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / placeOfBLIssue / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / placeOfBLIssue / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -644,6 +672,7 @@ If the pickup number is incorrect, the trucker will have his pickup request deni
 "ArrivalNotice / placeOfBLIssue / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / placeOfBLIssue / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / placeOfBLIssue / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -690,6 +719,10 @@ and all required freight payments have been received by the carrier.",
 "ArrivalNotice / returnInformation / returnInstructions",returnInstructions,string,,maxLength=5000,,"Please place the container...","Instructions for returning the empty equipment.",
 "ArrivalNotice / returnInformation / returnLocation",returnLocation,Location,,,,,"The equipment handling facility where container is to be returned by the consignee or the appointed logistics partner.",
 "ArrivalNotice / returnInformation / returnLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / returnInformation / returnLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / returnInformation / returnLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / returnInformation / returnLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / returnInformation / returnLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -703,6 +736,7 @@ and all required freight payments have been received by the carrier.",
 "ArrivalNotice / returnInformation / returnLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / returnInformation / returnLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / returnInformation / returnLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -730,6 +764,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ArrivalNotice / transport",transport,Transport,,,,,"Transport details relevant to the arrival notice.",
 "ArrivalNotice / transport / borderCrossingLocation",borderCrossingLocation,Location,,,,,"The inland location where the cargo is intended to cross an international border.",
 "ArrivalNotice / transport / borderCrossingLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / borderCrossingLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / borderCrossingLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / borderCrossingLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / borderCrossingLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -743,6 +781,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ArrivalNotice / transport / borderCrossingLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / borderCrossingLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / borderCrossingLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -803,6 +842,10 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
 "ArrivalNotice / transport / legs / dischargeLocation",dischargeLocation,Location,,,,,"The location where the cargo is discharged for this specific leg of the transport plan.",
 "ArrivalNotice / transport / legs / dischargeLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / legs / dischargeLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / legs / dischargeLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / legs / dischargeLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / legs / dischargeLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -816,6 +859,7 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 "ArrivalNotice / transport / legs / dischargeLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / legs / dischargeLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / legs / dischargeLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -839,6 +883,10 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 "ArrivalNotice / transport / legs / loadLocation",loadLocation,Location,,,,,"The location where the cargo is loaded for this specific leg of the transport plan.",
 "ArrivalNotice / transport / legs / loadLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / legs / loadLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / legs / loadLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / legs / loadLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / legs / loadLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -852,6 +900,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ArrivalNotice / transport / legs / loadLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / legs / loadLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / legs / loadLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -940,6 +989,10 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 "ArrivalNotice / transport / placeOfDelivery",placeOfDelivery,Location,,,,,"The location where the cargo is handed over to the consignee, or his agent,
 by the shipping line and where responsibility of the shipping line ceases.",
 "ArrivalNotice / transport / placeOfDelivery / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / placeOfDelivery / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / placeOfDelivery / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / placeOfDelivery / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / placeOfDelivery / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -953,6 +1006,7 @@ by the shipping line and where responsibility of the shipping line ceases.",
 "ArrivalNotice / transport / placeOfDelivery / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / placeOfDelivery / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / placeOfDelivery / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -984,6 +1038,10 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 "ArrivalNotice / transport / placeOfReceipt",placeOfReceipt,Location,,,,,"The location where the cargo is handed over by the shipper, or his agent, to the shipping line.
 This indicates the point at which the shipping line takes on responsibility for carriage of the container.",
 "ArrivalNotice / transport / placeOfReceipt / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / placeOfReceipt / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / placeOfReceipt / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / placeOfReceipt / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / placeOfReceipt / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -997,6 +1055,7 @@ This indicates the point at which the shipping line takes on responsibility for 
 "ArrivalNotice / transport / placeOfReceipt / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / placeOfReceipt / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / placeOfReceipt / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1020,6 +1079,10 @@ This indicates the point at which the shipping line takes on responsibility for 
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 "ArrivalNotice / transport / portOfDischarge",portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel.",
 "ArrivalNotice / transport / portOfDischarge / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / portOfDischarge / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / portOfDischarge / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / portOfDischarge / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / portOfDischarge / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1033,6 +1096,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ArrivalNotice / transport / portOfDischarge / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / portOfDischarge / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / portOfDischarge / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1063,6 +1127,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
 "ArrivalNotice / transport / portOfLoading",portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation.",
 "ArrivalNotice / transport / portOfLoading / address",address,Address,,,,,"Location address",
+"ArrivalNotice / transport / portOfLoading / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / transport / portOfLoading / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / transport / portOfLoading / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / transport / portOfLoading / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1076,6 +1144,7 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 "ArrivalNotice / transport / portOfLoading / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / transport / portOfLoading / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / transport / portOfLoading / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1168,6 +1237,10 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation",paymentLocation,Location,,,,,"Payment location",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1181,6 +1254,7 @@ to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1232,6 +1306,10 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation",pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation",pickupLocation,Location,,,,,"The equipment handling facility where container is to be picked up by the consignee or the appointed logistics partner.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1245,6 +1323,7 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation / pickupLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1282,6 +1361,10 @@ If the pickup number is incorrect, the trucker will have his pickup request deni
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnInstructions",returnInstructions,string,,maxLength=5000,,"Please place the container...","Instructions for returning the empty equipment.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation",returnLocation,Location,,,,,"The equipment handling facility where container is to be returned by the consignee or the appointed logistics partner.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address",address,Address,,,,,"Location address",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1295,6 +1378,7 @@ If the pickup number is incorrect, the trucker will have his pickup request deni
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNotice / utilizedTransportEquipments / returnInformation / returnLocation / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1355,6 +1439,10 @@ from SMDG.
 "ArrivalNoticeNotification / placeOfDelivery",placeOfDelivery,Location,,,,,"The location where the cargo is handed over by the shipping line to the consignee or its agent and where the
 responsibility of the shipping line ceases",
 "ArrivalNoticeNotification / placeOfDelivery / address",address,Address,,,,,"Location address",
+"ArrivalNoticeNotification / placeOfDelivery / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNoticeNotification / placeOfDelivery / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNoticeNotification / placeOfDelivery / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNoticeNotification / placeOfDelivery / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1368,6 +1456,7 @@ responsibility of the shipping line ceases",
 "ArrivalNoticeNotification / placeOfDelivery / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNoticeNotification / placeOfDelivery / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNoticeNotification / placeOfDelivery / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -1398,6 +1487,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 Unless otherwise specified, it is a local date in the time zone of the implicitly associated event location.",
 "ArrivalNoticeNotification / portOfDischarge",portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel",
 "ArrivalNoticeNotification / portOfDischarge / address",address,Address,,,,,"Location address",
+"ArrivalNoticeNotification / portOfDischarge / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "ArrivalNoticeNotification / portOfDischarge / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "ArrivalNoticeNotification / portOfDischarge / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNoticeNotification / portOfDischarge / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -1411,6 +1504,7 @@ Unless otherwise specified, it is a local date in the time zone of the implicitl
 "ArrivalNoticeNotification / portOfDischarge / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"ArrivalNoticeNotification / portOfDischarge / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "ArrivalNoticeNotification / portOfDischarge / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
