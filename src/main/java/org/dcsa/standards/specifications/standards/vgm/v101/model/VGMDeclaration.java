@@ -1,0 +1,78 @@
+package org.dcsa.standards.specifications.standards.vgm.v101.model;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import org.dcsa.standards.specifications.standards.core.v101.model.PartyDetails;
+import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
+
+@Data
+@Schema(
+    description =
+"""
+VGM declaration for one piece of equipment, including the actual VGM and the relevant associated details
+""")
+public class VGMDeclaration {
+
+  @Schema() private RoutingDetails routingDetails;
+
+  @Schema(
+      maxLength = 500,
+      example = "VGM-HHL71800000-APZU4812090-2025-01-23T01:23:45Z",
+      description = "Reference of the VGM declaration")
+  private String declarationReference;
+
+  @Schema(
+      description =
+"""
+Flag indicating that the `VGMDeclaration` with this `declarationReference` is retracted.
+
+The data in all previously transmitted VGM declarations with the same `declarationReference` must be discarded or ignored.
+
+If this flag is set, any data in this `VGMDeclaration` object other than the `declarationReference` is irrelevant (if present).
+""")
+  private Boolean isRetracted;
+
+  @Schema(description = "The date and time when the VGM declaration was last updated")
+  private FormattedDateTime declarationDateTime;
+
+  @Schema() private EquipmentDetails equipmentDetails;
+
+  @Schema() private ShipmentDetails shipmentDetails;
+
+  @Schema() private VesselVoyageDetails vesselVoyageDetails;
+
+  @Schema(name = "VGM")
+  private VGM vgm;
+
+  @Schema(description = "Party responsible for the VGM declaration.")
+  private PartyDetails responsibleParty;
+
+  @Schema(description = "Party authorized to act on behalf of the `responsibleParty`.")
+  private PartyDetails authorizedParty;
+
+  @Schema(
+      maxLength = 255,
+      example = "JANE DOE",
+      description =
+"""
+Upper case name of the person authorized to sign the declaration.
+
+According to SOLAS 6.2:
+"Irrespective of its form, the document declaring the verified gross mass of the packed container
+should be signed by a person duly authorised by the shipper. The signature may be an electronic signature
+or may be replaced by the name in capitals of the person authorised to sign it."
+""")
+  private String authorizedPersonSignatory;
+
+  @Schema(description = "Legally accepted party designated to perform the weighing.")
+  private PartyDetails weighingParty;
+
+  @Schema(description = "Party that submits the VGM declaration.")
+  private PartyDetails submittingParty;
+
+  @Schema(description = "Party that orders the weighing at the terminal or weighing station.")
+  private PartyDetails orderedByParty;
+
+  @Schema(description = "Information reference agency holding the VGM declaration.")
+  private PartyDetails holdingParty;
+}

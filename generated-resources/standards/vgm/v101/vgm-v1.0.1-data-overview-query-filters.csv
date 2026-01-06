@@ -1,0 +1,21 @@
+FilterParameters,Required
+carrierBookingReference,yes
+"carrierBookingReference, equipmentReference",yes
+"transportDocumentReference",yes
+"transportDocumentReference, equipmentReference",yes
+equipmentReference,yes
+"carrierBookingReference, declarationDateTimeMin",
+"carrierBookingReference, equipmentReference, declarationDateTimeMin",
+"transportDocumentReference, declarationDateTimeMin",
+"transportDocumentReference, equipmentReference, declarationDateTimeMin",
+"equipmentReference, declarationDateTimeMin",
+"carrierBookingReference, declarationDateTimeMax",
+"carrierBookingReference, equipmentReference, declarationDateTimeMax",
+"transportDocumentReference, declarationDateTimeMax",
+"transportDocumentReference, equipmentReference, declarationDateTimeMax",
+"equipmentReference, declarationDateTimeMax",
+"carrierBookingReference, declarationDateTimeMin, declarationDateTimeMax",
+"carrierBookingReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"transportDocumentReference, declarationDateTimeMin, declarationDateTimeMax",
+"transportDocumentReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"equipmentReference, declarationDateTimeMin, declarationDateTimeMax",

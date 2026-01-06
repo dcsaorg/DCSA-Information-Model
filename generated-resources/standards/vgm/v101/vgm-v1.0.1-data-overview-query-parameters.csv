@@ -1,0 +1,8 @@
+Name,Type,Description,Example
+carrierBookingReference,string,"Reference of the booking for which to return the associated VGM declarations",ABC709951
+"transportDocumentReference",string,"Reference of the transport document for which to return the associated VGM declarations",HHL71800000
+equipmentReference,string,"Reference of the equipment for which to return the associated VGM declarations",APZU4812090
+declarationDateTimeMin,string,"Retrieve VGM declarations with a `declarationDateTime` at or after this timestamp",2025-01-23T01:23:45Z
+declarationDateTimeMax,string,"Retrieve VGM declarations with a `declarationDateTime` at or before this timestamp",2025-01-23T01:23:45Z
+limit,integer,"Maximum number of VGM declarations to include in each page of the response.",10
+cursor,string,"Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page.",ExampleNextPageCursor

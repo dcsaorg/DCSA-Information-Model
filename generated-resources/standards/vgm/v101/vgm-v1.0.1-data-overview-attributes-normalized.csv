@@ -1,0 +1,198 @@
+Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
+Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
+Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
+Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
+ContactDetails,email,string,,maxLength=255,,jane.doe@example.com,"Contact email address",
+ContactDetails,name,string,,maxLength=255,,"Jane Doe","Contact name",
+ContactDetails,phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+EquipmentDetails,cargoGrossWeight,Weight,,,,,"Gross weight of the cargo including packaging being carried in the container.
+Excludes the tare weight of the container.",
+EquipmentDetails,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
+(composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with ISO 6346, it is suggested to follow
+[Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
+from SMDG.",
+EquipmentDetails,ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code identifying the equipment size and type used to transport commodities.
+The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
+EquipmentDetails,isShipperOwned,boolean,,,,,"Indicates whether the container is owned by the shipper (SOC)",
+EquipmentDetails,seals,"Seal list",,,,,,
+EquipmentDetails,tareWeight,Weight,,,,,"The tare weight of the container",
+Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
+- `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed to a user of the VGM publishing organization",
+FeedbackElement,propertyPath,string,,maxLength=1000,,"$.VGMDeclarations[2].VGM.location","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
+about which the feedback is provided (if applicable)",
+FeedbackElement,severity,string,,maxLength=50,,ERROR,"Code denoting the severity of a `FeedbackElement`
+
+- `ERROR` - Error that fully or partially prevents the correct processing of the request
+- `WARN` - Warning about the request being processed in a potentially unexpected way
+- `INFO` - Informational message about how the request is processed",
+GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+GetVGMDeclarationsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why the request could not be processed.
+
+At least one feedback element of severity `ERROR` is expected.
+Lower severity feedback elements may also be included.",
+"GetVGMDeclarationsResponse",feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
+"GetVGMDeclarationsResponse",VGMDeclarations,"VGMDeclaration list",,,,,"The list of VGM declarations matching the filter specified by the request query parameters",
+Location,address,Address,,,,,"Location address",
+Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
+
+- `BORD` - Border
+- `CLOC` - Customer location
+- `COFS` - Container freight station
+- `OFFD` - Off-dock storage
+- `DEPO` - Depot
+- `INTE` - Inland terminal
+- `POTE` - Port terminal
+- `RAMP` - Ramp
+- `WAYP` - Waypoint",
+Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
+Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+Location,UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+OtherReference,reference,string,,maxLength=100,,A456C,"The actual reference value",
+OtherReference,typeCode,string,,,,SI,"Code qualifying a reference.
+
+In addition to the codes listed here, any other code as defined in
+[UN/EDIFACT 16A 1153](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred1153.htm)
+or a subsequent revision may also be used.
+
+- `AOW` - Transportation Control Number (TCN)
+- `SI` - Shipper's identifying number for shipment (SID)
+- `SQ` - Equipment sequence number
+- `VOR` - Transport equipment gross mass verification order reference",
+Party,codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+Party,codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
+- `SMDG` (Ship Message Design Group)
+- `ZZZ` (Mutually defined)
+
+or any other code as defined in the
+[DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).",
+Party,partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
+Party,partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
+[UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
+or a subsequent revision.",
+PartyDetails,address,Address,,,,,"An object for storing address-related information.",
+PartyDetails,contactDetails,ContactDetails,,,,,"The contact details of a person.",
+PartyDetails,party,Party,,,,,"Identification of a container shipping party",
+PartyDetails,partyName,string,,maxLength=70,,"Acme Inc.","Party name",
+PostVGMDeclarationsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why request could not be processed.
+
+At least one feedback element of severity `ERROR` is expected.
+Lower severity feedback elements may also be included.
+
+When sent in response to a request that contains an array of VGM declarations,
+the order of the `feedbackElements` is not related to the list of request VGM declarations.
+Instead, the relevant request VGM declaration is indicated by the `propertyPath` of each `FeedbackElement`.",
+"PostVGMDeclarationsRequest",VGMDeclarations,"VGMDeclaration list",,,,,"List of VGM declarations.",
+"PostVGMDeclarationsResponse",feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed.
+
+There can be zero, one or more feedback elements per event in the request.
+The order of `feedbackElements` is not related to the order of VGM declarations in the request.
+Instead, the relevant request VGM declaration is indicated by the `propertyPath` of each `FeedbackElement`.",
+RoutingDetails,destinationParty,Party,,,,,"The final party intended as destination of the VGM declaration.",
+RoutingDetails,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the VGM declaration between the originating and destination party.",
+RoutingDetails,originatingParty,Party,,,,,"The initial party with which the VGM declaration originated.",
+Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+Seal,placement,string,,,,DOOR,"Placement of the seal.
+- `DOOR` (Door)
+- `VENT` (Vent)",
+Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+- `CAR` (Carrier)
+- `CNS` (Consolidator)
+- `CST` (Customer)
+- `CUS` (Customs)
+- `PHY` (Phytosanitary)
+- `SHI` (Shipper)
+- `TER` (Terminal)
+- `VET` (Veterinary)
+
+In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
+both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
+Seal,type,string,,,,WIR,"The type of seal.
+- `KLP` (Keyless padlock)
+- `BLT` (Bolt)
+- `WIR` (Wire)",
+ShipmentDetails,carrierBookingReference,string,,maxLength=35,,ABC709951,"The reference of the booking for which this VGM declaration was created",
+ShipmentDetails,otherReferences,"OtherReference list",,,,,"List of additional references related to the VGM declaration,
+excluding the Carrier Booking Reference and the Transport Document Reference",
+ShipmentDetails,"transportDocumentReference",string,,maxLength=20,,HHL71800000,"The reference of the transport document for which this VGM declaration was created",
+VesselVoyageDetails,carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
+[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
+
+The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.",
+VesselVoyageDetails,carrierCodeListProvider,string,,maxLength=10,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+VesselVoyageDetails,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
+VesselVoyageDetails,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
+VesselVoyageDetails,portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel.",
+VesselVoyageDetails,portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation.",
+VesselVoyageDetails,vesselName,string,,maxLength=50,,"King of the Seas","Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded.",
+VGM,certificationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date and time when the VGM certificate has been issued.",
+VGM,certificationReference,string,,maxLength=70,,W42-23110812,"Reference number or identifier for the certificate issued by the weighing party (or a certified weighing facility).",
+VGM,dateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date and time when a gross mass (weight) of a packed container was obtained",
+VGM,location,Location,,,,,"The location where the packed container was weighed to determine the Verified Gross Mass (VGM).",
+VGM,method,string,,,,SM1,"Method used to determine the VGM
+- `SM1` - SOLAS verification method 1  (Scaled)
+- `SM2` - SOLAS verification method 2 (Calculated)",
+VGM,weight,Weight,,,,,"The gross mass (weight) of the transport equipment",
+VGMDeclaration,authorizedParty,PartyDetails,,,,,"Party authorized to act on behalf of the `responsibleParty`.",
+VGMDeclaration,"authorizedPersonSignatory",string,,maxLength=255,,"JANE DOE","Upper case name of the person authorized to sign the declaration.
+
+According to SOLAS 6.2:
+""Irrespective of its form, the document declaring the verified gross mass of the packed container
+should be signed by a person duly authorised by the shipper. The signature may be an electronic signature
+or may be replaced by the name in capitals of the person authorised to sign it.""",
+VGMDeclaration,declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the VGM declaration was last updated",
+VGMDeclaration,declarationReference,string,,maxLength=500,,"VGM-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the VGM declaration",
+VGMDeclaration,equipmentDetails,EquipmentDetails,,,,,"VGM declaration details specific to the equipment",
+VGMDeclaration,holdingParty,PartyDetails,,,,,"Information reference agency holding the VGM declaration.",
+VGMDeclaration,isRetracted,boolean,,,,,"Flag indicating that the `VGMDeclaration` with this `declarationReference` is retracted.
+
+The data in all previously transmitted VGM declarations with the same `declarationReference` must be discarded or ignored.
+
+If this flag is set, any data in this `VGMDeclaration` object other than the `declarationReference` is irrelevant (if present).",
+VGMDeclaration,orderedByParty,PartyDetails,,,,,"Party that orders the weighing at the terminal or weighing station.",
+VGMDeclaration,responsibleParty,PartyDetails,,,,,"Party responsible for the VGM declaration.",
+VGMDeclaration,routingDetails,RoutingDetails,,,,,"Technical routing of a VGM declaration from the originating party, via forwarding parties, to the destination party.",
+VGMDeclaration,shipmentDetails,ShipmentDetails,,,,,"VGM declaration details specific to the shipment",
+VGMDeclaration,submittingParty,PartyDetails,,,,,"Party that submits the VGM declaration.",
+VGMDeclaration,vesselVoyageDetails,VesselVoyageDetails,,,,,"VGM declaration details specific to the vessel voyage",
+VGMDeclaration,VGM,VGM,,,,,"Verified Gross Mass of one piece of equipment, according to SOLAS Chapter VI, Regulation 2, paragraphs 4-6",
+VGMDeclaration,weighingParty,PartyDetails,,,,,"Legally accepted party designated to perform the weighing.",
+VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+Every Universal Voyage Reference is a 5-character string with the following format:
+ * the last 2 digits of the year
+ * 2 alphanumeric characters for the sequence number of the voyage
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+Weight,unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+Weight,value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
