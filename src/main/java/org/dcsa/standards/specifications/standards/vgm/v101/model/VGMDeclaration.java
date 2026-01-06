@@ -2,8 +2,8 @@ package org.dcsa.standards.specifications.standards.vgm.v101.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v101.model.PartyDetails;
-import org.dcsa.standards.specifications.standards.core.v101.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.model.PartyDetails;
+import org.dcsa.standards.specifications.standards.core.v103.types.FormattedDateTime;
 
 @Data
 @Schema(

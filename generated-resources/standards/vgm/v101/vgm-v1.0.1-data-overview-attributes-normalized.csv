@@ -1,4 +1,8 @@
 Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Address,addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -31,6 +35,7 @@ Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific faci
 Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed to a user of the VGM publishing organization",
 FeedbackElement,propertyPath,string,,maxLength=1000,,"$.VGMDeclarations[2].VGM.location","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
 about which the feedback is provided (if applicable)",
@@ -115,10 +120,10 @@ RoutingDetails,destinationParty,Party,,,,,"The final party intended as destinati
 RoutingDetails,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the VGM declaration between the originating and destination party.",
 RoutingDetails,originatingParty,Party,,,,,"The initial party with which the VGM declaration originated.",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
-Seal,placement,string,,,,DOOR,"Placement of the seal.
+Seal,placement,string,,maxLength=10,,DOOR,"Placement of the seal.
 - `DOOR` (Door)
 - `VENT` (Vent)",
-Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+Seal,source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
 - `CNS` (Consolidator)
 - `CST` (Customer)
@@ -130,7 +135,7 @@ Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the se
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
-Seal,type,string,,,,WIR,"The type of seal.
+Seal,type,string,,maxLength=10,,WIR,"The type of seal.
 - `KLP` (Keyless padlock)
 - `BLT` (Bolt)
 - `WIR` (Wire)",

@@ -1,5 +1,11 @@
 # Verified Gross Mass (VGM) v1.0.1 Changelog
 
+## Snapshot v1.0.1-20260116
+
+Added in type `Facility` attribute `facilityName`. (SD-2755)
+
+Added in type `Address` attribute `addressLines`. (SD-2766)
+
 
 # Verified Gross Mass (VGM) v1.0.0 Changelog
 

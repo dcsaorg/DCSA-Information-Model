@@ -10,7 +10,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.core.v101.model.Weight
+        org.dcsa.standards.specifications.standards.core.v103.model.Weight
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -18,7 +18,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
-public class Weight extends org.dcsa.standards.specifications.standards.core.v101.model.Weight {
+public class Weight extends org.dcsa.standards.specifications.standards.core.v103.model.Weight {
 
   @Schema(
       description =

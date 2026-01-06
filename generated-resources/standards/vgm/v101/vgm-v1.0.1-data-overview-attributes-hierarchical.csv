@@ -2,6 +2,10 @@ Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
 VGMDeclaration,,,,,,,,
 "VGMDeclaration / authorizedParty",authorizedParty,PartyDetails,,,,,"Party authorized to act on behalf of the `responsibleParty`.",
 "VGMDeclaration / authorizedParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / authorizedParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / authorizedParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / authorizedParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / authorizedParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -60,10 +64,10 @@ following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
 "VGMDeclaration / equipmentDetails / isShipperOwned",isShipperOwned,boolean,,,,,"Indicates whether the container is owned by the shipper (SOC)",
 "VGMDeclaration / equipmentDetails / seals",seals,"Seal list",,,,,,
 "VGMDeclaration / equipmentDetails / seals / number",number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
-"VGMDeclaration / equipmentDetails / seals / placement",placement,string,,,,DOOR,"Placement of the seal.
+"VGMDeclaration / equipmentDetails / seals / placement",placement,string,,maxLength=10,,DOOR,"Placement of the seal.
 - `DOOR` (Door)
 - `VENT` (Vent)",
-"VGMDeclaration / equipmentDetails / seals / source",source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+"VGMDeclaration / equipmentDetails / seals / source",source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
 - `CAR` (Carrier)
 - `CNS` (Consolidator)
 - `CST` (Customer)
@@ -75,7 +79,7 @@ following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
 both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
-"VGMDeclaration / equipmentDetails / seals / type",type,string,,,,WIR,"The type of seal.
+"VGMDeclaration / equipmentDetails / seals / type",type,string,,maxLength=10,,WIR,"The type of seal.
 - `KLP` (Keyless padlock)
 - `BLT` (Bolt)
 - `WIR` (Wire)",
@@ -86,6 +90,10 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 "VGMDeclaration / equipmentDetails / tareWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
 "VGMDeclaration / holdingParty",holdingParty,PartyDetails,,,,,"Information reference agency holding the VGM declaration.",
 "VGMDeclaration / holdingParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / holdingParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / holdingParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / holdingParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / holdingParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -122,6 +130,10 @@ The data in all previously transmitted VGM declarations with the same `declarati
 If this flag is set, any data in this `VGMDeclaration` object other than the `declarationReference` is irrelevant (if present).",
 "VGMDeclaration / orderedByParty",orderedByParty,PartyDetails,,,,,"Party that orders the weighing at the terminal or weighing station.",
 "VGMDeclaration / orderedByParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / orderedByParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / orderedByParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / orderedByParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / orderedByParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -153,6 +165,10 @@ or a subsequent revision.",
 "VGMDeclaration / orderedByParty / partyName",partyName,string,,maxLength=70,,"Acme Inc.","Party name",
 "VGMDeclaration / responsibleParty",responsibleParty,PartyDetails,,,,,"Party responsible for the VGM declaration.",
 "VGMDeclaration / responsibleParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / responsibleParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / responsibleParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / responsibleParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / responsibleParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -246,6 +262,10 @@ or a subsequent revision may also be used.
 "VGMDeclaration / shipmentDetails / transportDocumentReference","transportDocumentReference",string,,maxLength=20,,HHL71800000,"The reference of the transport document for which this VGM declaration was created",
 "VGMDeclaration / submittingParty",submittingParty,PartyDetails,,,,,"Party that submits the VGM declaration.",
 "VGMDeclaration / submittingParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / submittingParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / submittingParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / submittingParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / submittingParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -307,6 +327,10 @@ Every Universal Voyage Reference is a 5-character string with the following form
  * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge",portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / address",address,Address,,,,,"Location address",
+"VGMDeclaration / vesselVoyageDetails / portOfDischarge / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -320,6 +344,7 @@ Every Universal Voyage Reference is a 5-character string with the following form
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"VGMDeclaration / vesselVoyageDetails / portOfDischarge / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "VGMDeclaration / vesselVoyageDetails / portOfDischarge / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -343,6 +368,10 @@ Every Universal Voyage Reference is a 5-character string with the following form
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading",portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / address",address,Address,,,,,"Location address",
+"VGMDeclaration / vesselVoyageDetails / portOfLoading / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -356,6 +385,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"VGMDeclaration / vesselVoyageDetails / portOfLoading / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "VGMDeclaration / vesselVoyageDetails / portOfLoading / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -384,6 +414,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "VGMDeclaration / VGM / dateTime",dateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date and time when a gross mass (weight) of a packed container was obtained",
 "VGMDeclaration / VGM / location",location,Location,,,,,"The location where the packed container was weighed to determine the Verified Gross Mass (VGM).",
 "VGMDeclaration / VGM / location / address",address,Address,,,,,"Location address",
+"VGMDeclaration / VGM / location / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / VGM / location / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / VGM / location / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / VGM / location / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
@@ -397,6 +431,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "VGMDeclaration / VGM / location / facility / facilityCodeListProvider",facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+"VGMDeclaration / VGM / location / facility / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
 "VGMDeclaration / VGM / location / facilityTypeCode",facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
 
 - `BORD` - Border
@@ -428,6 +463,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "VGMDeclaration / VGM / weight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
 "VGMDeclaration / weighingParty",weighingParty,PartyDetails,,,,,"Legally accepted party designated to perform the weighing.",
 "VGMDeclaration / weighingParty / address",address,Address,,,,,"An object for storing address-related information.",
+"VGMDeclaration / weighingParty / address / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
 "VGMDeclaration / weighingParty / address / city",city,string,,maxLength=35,,Amsterdam,"The name of the city.",
 "VGMDeclaration / weighingParty / address / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "VGMDeclaration / weighingParty / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the street number.",
