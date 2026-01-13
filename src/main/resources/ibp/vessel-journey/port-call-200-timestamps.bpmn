@@ -27,7 +27,7 @@
       <bpmn:outgoing>Flow_1ts3z7z</bpmn:outgoing>
       <bpmn:outgoing>Flow_0wx5iww</bpmn:outgoing>
     </bpmn:eventBasedGateway>
-    <bpmn:intermediateCatchEvent id="Event_0p0uma1">
+    <bpmn:intermediateCatchEvent id="Event_0p0uma1" name="Estimated timestamp status check">
       <bpmn:incoming>Flow_0wx5iww</bpmn:incoming>
       <bpmn:outgoing>Flow_1i3qiz1</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0rnmx4s">
@@ -53,7 +53,7 @@
       <bpmn:outgoing>Flow_00hgs5g</bpmn:outgoing>
       <bpmn:outgoing>Flow_1qu3j18</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="Event_0kcig9v">
+    <bpmn:startEvent id="Event_0kcig9v" name="Port Call service start">
       <bpmn:outgoing>Flow_0pqqk0j</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:exclusiveGateway id="Gateway_0nfkag6" name="E/R timestamps supported for service?">
@@ -61,7 +61,7 @@
       <bpmn:outgoing>Flow_11yegq7</bpmn:outgoing>
       <bpmn:outgoing>Flow_0hd33xn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:intermediateCatchEvent id="Event_1niayl2">
+    <bpmn:intermediateCatchEvent id="Event_1niayl2" name="Service provision status check">
       <bpmn:incoming>Flow_0wwgzcu</bpmn:incoming>
       <bpmn:incoming>Flow_0gx2zj9</bpmn:incoming>
       <bpmn:incoming>Flow_0hd33xn</bpmn:incoming>
@@ -79,7 +79,7 @@
       <bpmn:incoming>Flow_0pnnphb</bpmn:incoming>
       <bpmn:outgoing>Flow_0nlbqtc</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="Event_03qswoa">
+    <bpmn:endEvent id="Event_03qswoa" name="Port Call service end">
       <bpmn:incoming>Flow_0nlbqtc</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0plmeju" name="Yes" sourceRef="Gateway_0bvudzs" targetRef="Activity_0axkth5">
@@ -140,7 +140,7 @@
       <bpmn:outgoing>Flow_1uyiyr9</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0j3sb9i" messageRef="Message_1m59a10" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:intermediateCatchEvent id="Event_05z49tl">
+    <bpmn:intermediateCatchEvent id="Event_05z49tl" name="Requested timestamp status check">
       <bpmn:incoming>Flow_13jbqxo</bpmn:incoming>
       <bpmn:outgoing>Flow_0aykg39</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_0h8ay5y">
@@ -156,7 +156,7 @@
       <bpmn:incoming>Flow_1uyiyr9</bpmn:incoming>
       <bpmn:outgoing>Flow_0ebbpqs</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_1daxd3a">
+    <bpmn:endEvent id="Event_1daxd3a" name="Port Call service end">
       <bpmn:incoming>Flow_1nigqr0</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:intermediateCatchEvent id="Event_1ep1c0d" name="Actual timestamp">
@@ -181,7 +181,7 @@
     <bpmn:sequenceFlow id="Flow_0aykg39" sourceRef="Event_05z49tl" targetRef="Gateway_1w2nuss" />
     <bpmn:sequenceFlow id="Flow_09ezxv5" sourceRef="Gateway_1j1z2xi" targetRef="Event_1ep1c0d" />
     <bpmn:sequenceFlow id="Flow_1nigqr0" sourceRef="Event_1ep1c0d" targetRef="Event_1daxd3a" />
-    <bpmn:startEvent id="Event_0uzc1bx">
+    <bpmn:startEvent id="Event_0uzc1bx" name="Port Call service start">
       <bpmn:outgoing>Flow_1gevdoj</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_1gevdoj" sourceRef="Event_0uzc1bx" targetRef="Gateway_1j1z2xi" />
@@ -266,7 +266,7 @@
       <bpmndi:BPMNShape id="Event_0c14d9i_di" bpmnElement="Event_0p0uma1">
         <dc:Bounds x="822" y="322" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="514" y="262" width="72" height="40" />
+          <dc:Bounds x="799" y="270" width="83" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0bvudzs_di" bpmnElement="Gateway_0bvudzs" isMarkerVisible="true">
@@ -293,6 +293,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0kcig9v_di" bpmnElement="Event_0kcig9v">
         <dc:Bounds x="222" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="200" y="475" width="81" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0nfkag6_di" bpmnElement="Gateway_0nfkag6" isMarkerVisible="true">
         <dc:Bounds x="325" y="425" width="50" height="50" />
@@ -302,6 +305,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0zm6vnm_di" bpmnElement="Event_1niayl2">
         <dc:Bounds x="1542" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1518" y="475" width="84" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1jp6314_di" bpmnElement="Gateway_1jp6314" isMarkerVisible="true">
         <dc:Bounds x="1635" y="425" width="50" height="50" />
@@ -315,6 +321,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03qswoa_di" bpmnElement="Event_03qswoa">
         <dc:Bounds x="1922" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1900" y="475" width="81" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0plmeju_di" bpmnElement="Flow_0plmeju">
         <di:waypoint x="705" y="340" />
@@ -456,6 +465,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_05z49tl_di" bpmnElement="Event_05z49tl">
         <dc:Bounds x="1162" y="822" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1139" y="865" width="83" height="40" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1w2nuss_di" bpmnElement="Gateway_1w2nuss" isMarkerVisible="true">
         <dc:Bounds x="1045" y="815" width="50" height="50" />
@@ -471,6 +483,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1daxd3a_di" bpmnElement="Event_1daxd3a">
         <dc:Bounds x="1922" y="712" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1900" y="755" width="81" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_067776i_di" bpmnElement="Event_1ep1c0d" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="1782" y="712" width="36" height="36" />
@@ -480,6 +495,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0uzc1bx_di" bpmnElement="Event_0uzc1bx">
         <dc:Bounds x="322" y="712" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="300" y="755" width="81" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1uxg6k0_di" bpmnElement="Event_0nxgo44" bioc:stroke="#0d4372" bioc:fill="#bbdefb" color:background-color="#bbdefb" color:border-color="#0d4372">
         <dc:Bounds x="602" y="712" width="36" height="36" />

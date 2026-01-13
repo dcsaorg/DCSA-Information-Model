@@ -11,7 +11,7 @@
       <bpmn:incoming>Flow_00ch57o</bpmn:incoming>
       <bpmn:outgoing>Flow_0cpvbh3</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:endEvent id="Event_03qswoa">
+    <bpmn:endEvent id="Event_03qswoa" name="Port Call terminal service end">
       <bpmn:incoming>Flow_1pgs5wi</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:exclusiveGateway id="Gateway_0h2yt84" name="After load / discharge cutoff?">
@@ -19,7 +19,7 @@
       <bpmn:outgoing>Flow_1pgs5wi</bpmn:outgoing>
       <bpmn:outgoing>Flow_1xb0jf7</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:intermediateCatchEvent id="Event_0nvnj80">
+    <bpmn:intermediateCatchEvent id="Event_0nvnj80" name="Move forecasts status check">
       <bpmn:incoming>Flow_0cpvbh3</bpmn:incoming>
       <bpmn:incoming>Flow_1nm5ws3</bpmn:incoming>
       <bpmn:outgoing>Flow_07phio0</bpmn:outgoing>
@@ -32,7 +32,7 @@
       <bpmn:outgoing>Flow_00ch57o</bpmn:outgoing>
       <bpmn:outgoing>Flow_1nm5ws3</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:startEvent id="Event_0kcig9v">
+    <bpmn:startEvent id="Event_0kcig9v" name="Port Call terminal service start">
       <bpmn:outgoing>Flow_0oa3vik</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="Flow_0oa3vik" sourceRef="Event_0kcig9v" targetRef="Activity_0axkth5" />
@@ -57,10 +57,10 @@
       <bpmn:outgoing>Flow_0cox7qu</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_127ipvn" messageRef="Message_3kva33u" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:startEvent id="Event_0uzc1bx">
+    <bpmn:startEvent id="Event_0uzc1bx" name="Port Call terminal service start">
       <bpmn:outgoing>Flow_19w3mvv</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:endEvent id="Event_1daxd3a">
+    <bpmn:endEvent id="Event_1daxd3a" name="Port Call terminal service end">
       <bpmn:incoming>Flow_0cox7qu</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_19w3mvv" sourceRef="Event_0uzc1bx" targetRef="Event_0nxgo44" />
@@ -125,6 +125,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_03qswoa_di" bpmnElement="Event_03qswoa">
         <dc:Bounds x="882" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="858" y="345" width="85" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0h2yt84_di" bpmnElement="Gateway_0h2yt84" isMarkerVisible="true">
         <dc:Bounds x="745" y="295" width="50" height="50" />
@@ -134,6 +137,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0w5jr4p_di" bpmnElement="Event_0nvnj80">
         <dc:Bounds x="622" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="602" y="345" width="76" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_0fzh9v1_di" bpmnElement="Gateway_0fzh9v1" isMarkerVisible="true">
         <dc:Bounds x="545" y="175" width="50" height="50" />
@@ -143,6 +149,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0kcig9v_di" bpmnElement="Event_0kcig9v">
         <dc:Bounds x="232" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="208" y="345" width="85" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0oa3vik_di" bpmnElement="Flow_0oa3vik">
         <di:waypoint x="268" y="320" />
@@ -200,9 +209,15 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0uzc1bx_di" bpmnElement="Event_0uzc1bx">
         <dc:Bounds x="282" y="582" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="258" y="625" width="85" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1daxd3a_di" bpmnElement="Event_1daxd3a">
         <dc:Bounds x="602" y="582" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="578" y="625" width="85" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_19w3mvv_di" bpmnElement="Flow_19w3mvv">
         <di:waypoint x="318" y="600" />
