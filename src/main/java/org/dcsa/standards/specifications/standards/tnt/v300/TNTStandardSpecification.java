@@ -87,7 +87,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20251219-alpha", "TNT", "3.0.0-20251205-alpha", 4);
+        "Track and Trace", "3.0.0-20251205-alpha", "TNT", "3.0.0-20260116-alpha", 4);
   }
 
   @Override
@@ -204,7 +204,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                                     Collectors.toMap(
                                         Map.Entry::getKey,
                                         Map.Entry::getValue,
-                                        (a, b) -> b,
+                                        (_, b) -> b,
                                         LinkedHashMap::new)))
                         .content(
                             new Content()
