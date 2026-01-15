@@ -21,6 +21,6 @@ class PortCall200StandardSpecificationTest {
 
     Assertions.assertEquals(
         "FCC6877230D6F99CA26DDF82FF2004D4C88B44D644C82C86843234267BF00BCD",
-        StandardSpecificationTestToolkit.getFileHash(yamlFilePath).toUpperCase());
+        StandardSpecificationTestToolkit.getFileHash(yamlFilePath));
   }
 }

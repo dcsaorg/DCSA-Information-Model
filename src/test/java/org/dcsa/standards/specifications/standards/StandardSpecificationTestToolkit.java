@@ -28,9 +28,13 @@ public enum StandardSpecificationTestToolkit {
 
   @SneakyThrows
   public static String getFileHash(String filePath) {
-    return HexFormat.of()
-        .formatHex(
-            MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(filePath))));
+    Path path = Path.of(filePath);
+    String hash =
+        HexFormat.of()
+            .formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(path)))
+            .toUpperCase();
+    log.info("The hash of '{}' is '{}'", path.getFileName(), hash);
+    return hash;
   }
 
   public static void verifyTypeExport(

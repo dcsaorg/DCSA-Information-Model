@@ -18,6 +18,6 @@ class AN100StandardSpecificationTest {
 
     Assertions.assertEquals(
         "8EAA104134F85536B97C689C5D555C2684DE3A6FF7BE3AAE0EB502C143A1063A",
-        StandardSpecificationTestToolkit.getFileHash(yamlFilePath).toUpperCase());
+        StandardSpecificationTestToolkit.getFileHash(yamlFilePath));
   }
 }

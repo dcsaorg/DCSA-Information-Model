@@ -17,6 +17,6 @@ class VGM100StandardSpecificationTest {
 
     Assertions.assertEquals(
         "D805AF293C04C5CBD9DDD3A264D10A0864020B633A130835A3EB0334473AE30B",
-        StandardSpecificationTestToolkit.getFileHash(yamlFilePath).toUpperCase());
+        StandardSpecificationTestToolkit.getFileHash(yamlFilePath));
   }
 }
