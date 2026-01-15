@@ -4,12 +4,19 @@ import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.ComposedSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.parser.OpenAPIV3Parser;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.HexFormat;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
@@ -18,6 +25,13 @@ import org.junit.jupiter.api.Assertions;
 @Slf4j
 public enum StandardSpecificationTestToolkit {
   ; // no instances
+
+  @SneakyThrows
+  public static String getFileHash(String filePath) {
+    return HexFormat.of()
+        .formatHex(
+            MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(Path.of(filePath))));
+  }
 
   public static void verifyTypeExport(
       String typeName, String yamlFilePath, StandardSpecification standardSpecification) {
