@@ -12,5 +12,5 @@ target/
 
 ### Temporary DCSA generated resources ###
 /generated-resources/standards/**/*.xlsx
-/generated-resources/standards/ebl/v300/*.csv
-/generated-resources/standards/ebl/v300/*.yaml
+/generated-resources/standards/ebl/v30*/*.csv
+/generated-resources/standards/ebl/v30*/*.yaml

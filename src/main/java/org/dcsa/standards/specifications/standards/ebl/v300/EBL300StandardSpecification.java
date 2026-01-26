@@ -75,11 +75,14 @@ import org.dcsa.standards.specifications.dataoverview.DataOverviewSheet;
 import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 
-public class EBLStandardSpecification extends StandardSpecification {
+/**
+ * eBL 300 standard specification created for the exclusive purpose of creating an initial eBL300-AN1100 mapping.
+ */
+public class EBL300StandardSpecification extends StandardSpecification {
 
   private final GetTransportDocumentEndpoint getTransportDocumentEndpoint;
 
-  public EBLStandardSpecification() {
+  public EBL300StandardSpecification() {
     super("Bill of Lading", "3.0.0", "ebl", "ebl");
 
     openAPI.path(
