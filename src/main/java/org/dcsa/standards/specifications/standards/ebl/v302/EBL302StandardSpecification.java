@@ -35,47 +35,83 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.ReferenceConsig
 import org.dcsa.standards.specifications.standards.dt.v100.model.Seal;
 import org.dcsa.standards.specifications.standards.dt.v100.model.UtilizedTransportEquipment;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.AdvanceManifestFiling;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.Buyer;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.BuyerHBL;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoGrossVolume;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoGrossWeight;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoItem;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoItemHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoItemShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoNetVolume;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CargoNetWeight;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CarriersAgentAtDestination;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.City;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Consignee;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ConsigneeHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ConsigneeShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ConsignmentItem;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ConsignmentItemHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ConsignmentItemShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.DangerousGoods;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.DestinationChargesPaymentTerm;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.DocumentParties;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.DocumentPartiesHouseBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.DocumentPartiesShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Endorsee;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.EndorseeShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Equipment;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ExportLicenseShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Feedback;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.GeoCoordinate;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.GrossWeight;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.HouseBillOfLading;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ImportLicenseShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.InvoicePayableAt;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.InvoicePayableAtShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.IssueToParty;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.IssuingParty;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NetExplosiveContent;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NetVolume;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NetWeight;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NotifyParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.NotifyPartyHBL;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.OnBehalfOfConsignee;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.OnBehalfOfShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.OnwardInlandRouting;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.OriginChargesPaymentTerm;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.OtherDocumentParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.OtherDocumentPartyHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.OtherDocumentPartyShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.OuterPackagingHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.OuterPackagingShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Party;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PartyAddress;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.PartyContactDetailHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.PartyContactDetailWithPattern;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.PartyHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfAcceptance;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfDelivery;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfFinalDelivery;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfIssue;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfReceipt;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PortOfDischarge;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PortOfLoading;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.Seller;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.SellerHBL;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Shipper;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ShipperHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructionsRequestor;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TareWeight;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.Transports;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.UtilizedTransportEquipmentHBL;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.UtilizedTransportEquipmentShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.VesselVoyage;
 
 /** eBL 302 standard specification created for maintaining and exporting a new-style IM and DO. */
@@ -84,7 +120,7 @@ public class EBL302StandardSpecification extends StandardSpecification {
   private final GetTransportDocumentEndpoint getTransportDocumentEndpoint;
 
   public EBL302StandardSpecification() {
-    super("Bill of Lading", "3.0.2", "ebl", "ebl");
+    super("Bill of Lading (SI+TD)", "3.0.2", "ebl", "ebl");
 
     openAPI.path(
         "/v3/transport-documents/{transportDocumentReference}",
@@ -103,31 +139,49 @@ public class EBL302StandardSpecification extends StandardSpecification {
     return Stream.of(
         ActiveReeferSettings.class,
         Address.class,
+        AdvanceManifestFiling.class,
+        Buyer.class,
+        BuyerHBL.class,
         CargoGrossVolume.class,
         CargoGrossWeight.class,
         CargoItem.class,
+        CargoItemHBL.class,
+        CargoItemShipper.class,
         CargoNetVolume.class,
         CargoNetWeight.class,
         CarriersAgentAtDestination.class,
         Charge.class,
         City.class,
         Consignee.class,
+        ConsigneeHBL.class,
+        ConsigneeShipper.class,
         ConsignmentItem.class,
+        ConsignmentItemHBL.class,
+        ConsignmentItemShipper.class,
         CustomsReference.class,
         DangerousGoods.class,
+        DestinationChargesPaymentTerm.class,
         DocumentParties.class,
+        DocumentPartiesHouseBL.class,
+        DocumentPartiesShippingInstructions.class,
         EmergencyContactDetails.class,
         Endorsee.class,
+        EndorseeShipper.class,
         Equipment.class,
         ExportLicense.class,
+        ExportLicenseShipper.class,
         Facility.class,
         Feedback.class,
         GeoCoordinate.class,
         GrossWeight.class,
+        HouseBillOfLading.class,
         IdentifyingCode.class,
         ImportLicense.class,
+        ImportLicenseShipper.class,
         InnerPackaging.class,
         InvoicePayableAt.class,
+        InvoicePayableAtShippingInstructions.class,
+        IssueToParty.class,
         IssuingParty.class,
         Limits.class,
         NationalCommodityCode.class,
@@ -135,15 +189,26 @@ public class EBL302StandardSpecification extends StandardSpecification {
         NetVolume.class,
         NetWeight.class,
         NotifyParty.class,
+        NotifyPartyHBL.class,
         OnBehalfOfConsignee.class,
         OnBehalfOfShipper.class,
         OnwardInlandRouting.class,
+        OriginChargesPaymentTerm.class,
         OtherDocumentParty.class,
+        OtherDocumentPartyHBL.class,
+        OtherDocumentPartyShippingInstructions.class,
         OuterPackaging.class,
+        OuterPackagingHBL.class,
+        OuterPackagingShipper.class,
         Party.class,
         PartyAddress.class,
         PartyContactDetail.class,
+        PartyContactDetailHBL.class,
+        PartyContactDetailWithPattern.class,
+        PartyHBL.class,
+        PlaceOfAcceptance.class,
         PlaceOfDelivery.class,
+        PlaceOfFinalDelivery.class,
         PlaceOfIssue.class,
         PlaceOfReceipt.class,
         PortOfDischarge.class,
@@ -151,18 +216,26 @@ public class EBL302StandardSpecification extends StandardSpecification {
         Reference.class,
         ReferenceConsignmentItem.class,
         Seal.class,
+        Seller.class,
+        SellerHBL.class,
         Shipper.class,
+        ShipperHBL.class,
+        ShippingInstructions.class,
+        ShippingInstructionsRequestor.class,
         TareWeight.class,
         TaxLegalReference.class,
         TransportDocument.class,
         Transports.class,
         UtilizedTransportEquipment.class,
+        UtilizedTransportEquipmentHBL.class,
+        UtilizedTransportEquipmentShipper.class,
         VesselVoyage.class);
   }
 
   @Override
   protected List<String> getRootTypeNames() {
-    return List.of(TransportDocument.class.getSimpleName());
+    return List.of(
+        ShippingInstructions.class.getSimpleName(), TransportDocument.class.getSimpleName());
   }
 
   @Override

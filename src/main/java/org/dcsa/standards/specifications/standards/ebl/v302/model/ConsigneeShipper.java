@@ -1,0 +1,79 @@
+package org.dcsa.standards.specifications.standards.ebl.v302.model;
+
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
+import lombok.Data;
+import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
+
+@Schema(
+    description =
+"""
+The party to which goods are consigned in the `Master Bill of Lading`.
+
+**Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""",
+    title = "Consignee (Shipper provided)")
+@Data
+public class ConsigneeShipper {
+
+  @Schema(
+      description = "Name of the party.",
+      example = "IKEA Denmark",
+      pattern = "^\\S(?:.*\\S)?$",
+      maxLength = 70)
+  private String partyName;
+
+  @Schema(
+      description =
+"""
+Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)
+""",
+      example = "NATURAL_PERSON",
+      pattern = "^\\S(?:.*\\S)?$",
+      maxLength = 50)
+  private String typeOfPerson;
+
+  @Schema
+  private PartyAddress address;
+
+  @Schema(
+      description =
+"""
+The address of the party to be displayed on the `Transport Document`. The displayed address may be used to match the address provided in the `Letter of Credit`.
+
+**Conditions:** If provided:
+  - the displayed address must be included in the `Transport Document`.
+  - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+  - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
+  - the order of the items in this array **MUST** be preserved as by the provider of the API.
+""")
+  @ArraySchema(
+      maxItems = 6,
+      schema = @Schema(description = "A single address line", example = "Strawinskylaan 4117", maxLength = 35))
+  private List<String> displayedAddress;
+
+  @Schema(description = "**Condition:** Either the `address` or a party `identifyingCode` must be provided.")
+  private List<IdentifyingCode> identifyingCodes;
+
+  @Schema(description = "A list of `Tax References` for a `Party`")
+  private List<TaxLegalReference> taxLegalReferences;
+
+  @Schema(description = "A list of contact details")
+  private List<PartyContactDetail> partyContactDetails;
+
+  @Schema(
+      description = "A reference linked to the `Consignee`.",
+      example = "HHL007",
+      pattern = "^\\S(?:.*\\S)?$",
+      maxLength = 35)
+  private String reference;
+
+  @Schema(description = "A list of `Purchase Order Reference`s linked to the `Consignee`.")
+  private List<String> purchaseOrderReferences;
+}
