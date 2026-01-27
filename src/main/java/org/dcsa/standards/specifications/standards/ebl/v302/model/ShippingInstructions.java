@@ -7,6 +7,8 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
 import org.dcsa.standards.specifications.standards.ebl.v302.types.DisplayedName;
+import org.dcsa.standards.specifications.standards.ebl.v302.types.RequestedCarrierCertificate;
+import org.dcsa.standards.specifications.standards.ebl.v302.types.RequestedCarrierClause;
 
 @Schema(
     description = "The `Shipping Instructions` as provided by the Shipper.",
@@ -73,13 +75,14 @@ An indicator of whether freight and ancillary fees for the main transport are pr
       allowableValues = {"PRE", "COL"})
   private String freightPaymentTermCode;
 
-  @Schema
-  private OriginChargesPaymentTerm originChargesPaymentTerm;
+  @Schema private OriginChargesPaymentTerm originChargesPaymentTerm;
 
-  @Schema
-  private DestinationChargesPaymentTerm destinationChargesPaymentTerm;
+  @Schema private DestinationChargesPaymentTerm destinationChargesPaymentTerm;
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "An indicator whether the transport document is electronically transferred.", example = "true")
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "An indicator whether the transport document is electronically transferred.",
+      example = "true")
   private Boolean isElectronic;
 
   @Schema(
@@ -212,11 +215,9 @@ The code list provider for the `carrierCode`. Possible values are:
       allowableValues = {"SMDG", "NMFTA"})
   private String carrierCodeListProvider;
 
-  @Schema
-  private PlaceOfIssue placeOfIssue;
+  @Schema private PlaceOfIssue placeOfIssue;
 
-  @Schema
-  private InvoicePayableAtShippingInstructions invoicePayableAt;
+  @Schema private InvoicePayableAtShippingInstructions invoicePayableAt;
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
@@ -236,7 +237,8 @@ The code list provider for the `carrierCode`. Possible values are:
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
+      description =
+          "Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
       example = "true")
   private Boolean isCargoDeliveredInICS2Zone;
 
@@ -246,15 +248,14 @@ The code list provider for the `carrierCode`. Possible values are:
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "A list of `Utilized Transport Equipments` describing the equipment being used.")
+      description =
+          "A list of `Utilized Transport Equipments` describing the equipment being used.")
   @ArraySchema(minItems = 1)
   private List<UtilizedTransportEquipmentShipper> utilizedTransportEquipments;
 
-  @Schema
-  private ExportLicenseShipper exportLicense;
+  @Schema private ExportLicenseShipper exportLicense;
 
-  @Schema
-  private ImportLicenseShipper importLicense;
+  @Schema private ImportLicenseShipper importLicense;
 
   @Schema(description = "A list of `References`")
   private List<Reference> references;
@@ -279,66 +280,15 @@ Indicates whether one or more `House Bill of Lading(s)` have been issued.
   @Schema(description = "A list of `House Bill of Ladings` specified by the Shipper.")
   private List<HouseBillOfLading> houseBillOfLadings;
 
-  @ArraySchema(
-      schema =
-          @Schema(
-              description =
-"""
-Name of the certificate. Detailed information about carrier certificates can be found [here](https://dcsa.org/wp-content/uploads/2023/12/28-12-2023_Carrier-Certificates-shipment-voyage-particulars-and-vessel-particulars.pdf). Possible values are:
-- `SHIPMENT_VOYAGE_PARTICULARS_1` (Shipment-Voyage Particulars 1)
-- `SHIPMENT_VOYAGE_PARTICULARS_2` (Shipment-Voyage Particulars 2)
-- `SHIPMENT_VOYAGE_PARTICULARS_3` (Shipment-Voyage Particulars 3)
-- `SHIPMENT_VOYAGE_PARTICULARS_4` (Shipment-Voyage Particulars 4)
-- `SHIPMENT_VOYAGE_PARTICULARS_5` (Shipment-Voyage Particulars 5)
-- `SHIPMENT_VOYAGE_PARTICULARS_6` (Shipment-Voyage Particulars 6)
-- `SHIPMENT_VOYAGE_PARTICULARS_7` (Shipment-Voyage Particulars 7)
-- `VESSEL_PARTICULARS_1` (Vessel Particulars 1)
-- `VESSEL_PARTICULARS_2` (Vessel Particulars 2)
-- `VESSEL_PARTICULARS_3` (Vessel Particulars 3)
-- `VESSEL_PARTICULARS_4` (Vessel Particulars 4)
-- `VESSEL_PARTICULARS_5` (Vessel Particulars 5)
-- `VESSEL_PARTICULARS_6` (Vessel Particulars 6)
-- `VESSEL_PARTICULARS_7` (Vessel Particulars 7)
-- `VESSEL_PARTICULARS_8` (Vessel Particulars 8)
-- `VESSEL_PARTICULARS_9` (Vessel Particulars 9)
-- `VESSEL_PARTICULARS_10` (Vessel Particulars 10)
-- `VESSEL_PARTICULARS_11` (Vessel Particulars 11)
-- `VESSEL_PARTICULARS_12` (Vessel Particulars 12)
-- `VESSEL_PARTICULARS_13` (Vessel Particulars 13)
-- `VESSEL_PARTICULARS_14` (Vessel Particulars 14)
-- `VESSEL_PARTICULARS_15` (Vessel Particulars 15)
-- `VESSEL_PARTICULARS_16` (Vessel Particulars 16)
-- `VESSEL_PARTICULARS_17` (Vessel Particulars 17)
-- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)
-""",
-              example = "VESSEL_PARTICULARS_1",
-              maxLength = 100))
   @Schema(
       description =
           "Certificate(s) requested by the Shipper for the Carrier to include as part of the shipment documentation pack")
-  private List<String> requestedCarrierCertificates;
+  private List<RequestedCarrierCertificate> requestedCarrierCertificates;
 
-  @ArraySchema(
-      schema =
-          @Schema(
-              description =
-"""
-A clause to request from the carrier. Detailed information about the carrier clauses can be found [here](https://dcsa-website.cdn.prismic.io/dcsa-website/ZvaCMbVsGrYSwERk_202409StandardisedClausesBL-Final.pdf). Possible values are:
-- `CARGO_CARGOSPECIFICS` (Cargo/Cargo specifics)
-- `VESSELCONVEYANCE_COUNTRYSPECIFIC` (Vessel conveyance/Country Specific)
-- `CARGO_RETURNOFEMPTYCONTAINER` (Cargo/Return of Empty Container)
-- `CARGO_CARGOVALUE` (Cargo/Cargo value)
-- `CARGO_REEFERTEMPERATURE` (Cargo/Reefer temperature)
-- `CARGO_CONFLICTINGTEMPERATURES_MIXEDLOADS` (Cargo/Conflicting temperatures/Mixed loads)
-- `SHIPPERSLOADSTOWWEIGHTANDCOUNT` (Shipper's Load, Stow, Weight and Count)
-- `INTRANSITCLAUSE` (In transit clause)
-""",
-              example = "CARGO_CARGOSPECIFICS",
-              maxLength = 100))
   @Schema(
       description =
           "Clauses requested by the Shipper for the Carrier to include in the `Transport Document` `Carrier clauses`")
-  private List<String> requestedCarrierClauses;
+  private List<RequestedCarrierClause> requestedCarrierClauses;
 
   @Schema(
       description =
@@ -351,5 +301,3 @@ Feedback that can be provided includes, but is not limited to:
 """)
   private List<Feedback> feedbacks;
 }
-
-

@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Assertions;
 public enum StandardSpecificationTestToolkit {
   ; // no instances
 
+  public static final boolean FAIL_ON_FIRST_WRONG_VALUE = System.currentTimeMillis() > 0;
+
   @SneakyThrows
   public static String getFileHash(String filePath) {
     Path path = Path.of(filePath);
@@ -190,7 +192,7 @@ WRONG VALUE:
           expected,
           actual);
     }
-    if (System.currentTimeMillis() > 0) {
+    if (FAIL_ON_FIRST_WRONG_VALUE) {
       Assertions.assertEquals(expected, actual, "Wrong value for: " + property);
     }
   }

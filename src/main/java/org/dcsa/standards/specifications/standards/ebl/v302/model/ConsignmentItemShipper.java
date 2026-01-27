@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.dt.v100.types.DescriptionOfGoodsLine;
+import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
+import org.dcsa.standards.specifications.standards.ebl.v302.types.HSCode;
 
 @Schema(
     description =
@@ -38,34 +41,15 @@ A plain language description that is precise enough for Customs services to be a
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 """)
-  @ArraySchema(
-      maxItems = 150,
-      schema =
-          @Schema(
-              description = "A line describing the cargo",
-              example = "blue shoes size 47",
-              pattern = "^\\S(?:.*\\S)?$",
-              maxLength = 35))
-  private List<String> descriptionOfGoods;
+  @ArraySchema(maxItems = 150)
+  private List<DescriptionOfGoodsLine> descriptionOfGoods;
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
+      name = "HSCodes",
       description = "A list of `HS Codes` that apply to this `consignmentItem`")
-  @ArraySchema(
-      minItems = 1,
-      schema =
-          @Schema(
-              description =
-"""
-Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
-
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-""",
-              example = "851713",
-              pattern = "^\\d{6,10}$",
-              minLength = 6,
-              maxLength = 10))
-  private List<String> HSCodes;
+  @ArraySchema(minItems = 1)
+  private List<HSCode> hsCodes;
 
   @Schema(description = "A list of `National Commodity Codes` that apply to this `commodity`")
   private List<NationalCommodityCode> nationalCommodityCodes;
@@ -77,25 +61,16 @@ A list of the `ShippingMarks` applicable to this `consignmentItem`
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 """)
-  @ArraySchema(
-      maxItems = 50,
-      schema =
-          @Schema(
-              description =
-                  "The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.",
-              example = "Made in China",
-              maxLength = 35))
-  private List<String> shippingMarks;
+  @ArraySchema(maxItems = 50)
+  private List<ShippingMark> shippingMarks;
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "A list of all `cargoItems`")
   @ArraySchema(minItems = 1)
   private List<CargoItemShipper> cargoItems;
 
-  @Schema
-  private ExportLicenseShipper exportLicense;
+  @Schema private ExportLicenseShipper exportLicense;
 
-  @Schema
-  private ImportLicenseShipper importLicense;
+  @Schema private ImportLicenseShipper importLicense;
 
   @Schema(description = "A list of `References`")
   private List<ReferenceConsignmentItem> references;

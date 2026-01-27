@@ -16,6 +16,7 @@ public class InvoicePayableAtShippingInstructions {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
+      name = "UNLocationCode",
       description =
 """
 The UN Location code specifying where the place is located. The pattern used must be
@@ -29,5 +30,5 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
       pattern = "^[A-Z]{2}[A-Z2-9]{3}$",
       minLength = 5,
       maxLength = 5)
-  private String UNLocationCode;
+  private String unLocationCode;
 }

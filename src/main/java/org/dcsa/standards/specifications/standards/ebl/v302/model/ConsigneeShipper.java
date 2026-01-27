@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
+import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
+import org.dcsa.standards.specifications.standards.ebl.v302.types.ConsigneePurchaseOrderReference;
 
 @Schema(
     description =
@@ -20,6 +22,7 @@ The party to which goods are consigned in the `Master Bill of Lading`.
 public class ConsigneeShipper {
 
   @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
       description = "Name of the party.",
       example = "IKEA Denmark",
       pattern = "^\\S(?:.*\\S)?$",
@@ -39,8 +42,7 @@ Can be one of the following values as per the Union Customs Code art. 5(4):
       maxLength = 50)
   private String typeOfPerson;
 
-  @Schema
-  private PartyAddress address;
+  @Schema private PartyAddress address;
 
   @Schema(
       description =
@@ -53,12 +55,12 @@ The address of the party to be displayed on the `Transport Document`. The displa
   - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
   - the order of the items in this array **MUST** be preserved as by the provider of the API.
 """)
-  @ArraySchema(
-      maxItems = 6,
-      schema = @Schema(description = "A single address line", example = "Strawinskylaan 4117", maxLength = 35))
-  private List<String> displayedAddress;
+  @ArraySchema(maxItems = 6)
+  private List<DisplayedAddressLine> displayedAddress;
 
-  @Schema(description = "**Condition:** Either the `address` or a party `identifyingCode` must be provided.")
+  @Schema(
+      description =
+          "**Condition:** Either the `address` or a party `identifyingCode` must be provided.")
   private List<IdentifyingCode> identifyingCodes;
 
   @Schema(description = "A list of `Tax References` for a `Party`")
@@ -75,5 +77,5 @@ The address of the party to be displayed on the `Transport Document`. The displa
   private String reference;
 
   @Schema(description = "A list of `Purchase Order Reference`s linked to the `Consignee`.")
-  private List<String> purchaseOrderReferences;
+  private List<ConsigneePurchaseOrderReference> purchaseOrderReferences;
 }

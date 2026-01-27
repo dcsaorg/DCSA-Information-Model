@@ -12,7 +12,7 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.Seal;
 @Data
 public class UtilizedTransportEquipmentHBL {
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "A list of `Seals`")
+  @Schema(description = "A list of `Seals`")
   @ArraySchema(minItems = 1)
   private List<Seal> seals;
 
@@ -51,10 +51,11 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
+      name = "ISOEquipmentCode",
       description =
           "Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
       example = "22G1",
       pattern = "^\\S(?:.*\\S)?$",
       maxLength = 4)
-  private String ISOEquipmentCode;
+  private String isoEquipmentCode;
 }

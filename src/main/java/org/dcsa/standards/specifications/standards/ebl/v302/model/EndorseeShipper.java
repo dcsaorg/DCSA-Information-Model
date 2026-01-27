@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
+import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 
 @Schema(
     description =
@@ -44,7 +45,7 @@ The address of the party to be displayed on the `Transport Document`. The displa
   @ArraySchema(
       maxItems = 6,
       schema = @Schema(description = "A single address line", example = "Strawinskylaan 4117", maxLength = 35))
-  private List<String> displayedAddress;
+  private List<DisplayedAddressLine> displayedAddress;
 
   @Schema(description = "**Condition:** Either the `address` or a party `identifyingCode` must be provided.")
   private List<IdentifyingCode> identifyingCodes;

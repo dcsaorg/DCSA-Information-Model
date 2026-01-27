@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
+import org.dcsa.standards.specifications.standards.ebl.v302.types.RoutingOfConsignmentCountryCode;
 
 @Schema(
     description =
@@ -28,11 +29,9 @@ public class HouseBillOfLading {
       example = "false")
   private Boolean isToOrder;
 
-  @Schema
-  private PlaceOfAcceptance placeOfAcceptance;
+  @Schema private PlaceOfAcceptance placeOfAcceptance;
 
-  @Schema
-  private PlaceOfFinalDelivery placeOfFinalDelivery;
+  @Schema private PlaceOfFinalDelivery placeOfFinalDelivery;
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
@@ -56,7 +55,8 @@ Method used for the payment of freight charges. It can be one of the following v
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
+      description =
+          "Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
       example = "true")
   private Boolean isCargoDeliveredInICS2Zone;
 
@@ -70,17 +70,8 @@ Identification in a chronological order of the countries through which the goods
 
 **Condition:** If provided - the first country in the list must be the country of `Place of Acceptance`; the last country in the list must be the country of `Place of Final Delivery`.
 """)
-  @ArraySchema(
-      minItems = 1,
-      schema =
-          @Schema(
-              description =
-                  "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-              example = "NL",
-              pattern = "^[A-Z]{2}$",
-              minLength = 2,
-              maxLength = 2))
-  private List<String> routingOfConsignmentCountries;
+  @ArraySchema(minItems = 1)
+  private List<RoutingOfConsignmentCountryCode> routingOfConsignmentCountries;
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
