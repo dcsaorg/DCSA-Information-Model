@@ -119,8 +119,8 @@ public class EBL302StandardSpecification extends StandardSpecification {
 
   private final GetTransportDocumentEndpoint getTransportDocumentEndpoint;
 
-  public EBL302StandardSpecification() {
-    super("Bill of Lading (SI+TD)", "3.0.2", "ebl", "ebl");
+  public EBL302StandardSpecification(String moduleName, String modulePrefix) {
+    super("Bill of Lading - " + moduleName, "3.0.2", "ebl", "ebl-" + modulePrefix);
 
     openAPI.path(
         "/v3/transport-documents/{transportDocumentReference}",
@@ -131,7 +131,7 @@ public class EBL302StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("Bill of Lading", "3.0.2", "", "", 2);
+    return new LegendMetadata(standardName, standardVersion, "", "", 2);
   }
 
   @Override

@@ -44,7 +44,8 @@ public abstract class StandardSpecification {
       "Every API request and response must contain the `API-Version` header,"
           + " set to the full version of the implemented DCSA standard.";
 
-  private final String standardVersion;
+  protected final String standardName;
+  protected final String standardVersion;
   private final String resourcesDirName;
   private final String generatedFilesPrefix;
 
@@ -57,6 +58,7 @@ public abstract class StandardSpecification {
       String standardVersion,
       String resourcesDirName,
       String generatedFilesPrefix) {
+    this.standardName = standardName;
     this.standardVersion = standardVersion;
     this.resourcesDirName = resourcesDirName;
     this.generatedFilesPrefix = generatedFilesPrefix;
@@ -215,6 +217,6 @@ public abstract class StandardSpecification {
                 Map.entry(headerName, new Header().$ref(COMPONENTS_HEADERS_REF_PATH + headerName)))
         .collect(
             Collectors.toMap(
-                Map.Entry::getKey, Map.Entry::getValue, (a, b) -> b, LinkedHashMap::new));
+                Map.Entry::getKey, Map.Entry::getValue, (_, b) -> b, LinkedHashMap::new));
   }
 }
