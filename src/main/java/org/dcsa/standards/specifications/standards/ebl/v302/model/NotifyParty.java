@@ -7,9 +7,11 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 
-@Schema(description = "The person or party to be notified when a shipment arrives at its destination.")
+@Schema(description = NotifyParty.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class NotifyParty {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "The person or party to be notified when a shipment arrives at its destination.";
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the party.", example = "IKEA Denmark", maxLength = 70, pattern = "^\\S(?:.*\\S)?$")
   private String partyName;

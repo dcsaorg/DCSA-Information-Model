@@ -5,9 +5,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 
-@Schema(description = "All `Parties` with associated roles.")
+@Schema(description = DocumentParties.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class DocumentParties {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "All `Parties` with associated roles.";
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "The Shipper party.")
   private Shipper shipper;

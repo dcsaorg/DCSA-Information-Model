@@ -8,9 +8,11 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDet
 import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 import org.dcsa.standards.specifications.standards.ebl.v302.types.PurchaseOrderReference;
 
-@Schema(description = "Party by whom or in whose name a contract of carriage by sea has been concluded. May also be the party who delivers the goods to the carrier.")
+@Schema(description = Shipper.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class Shipper {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Party by whom or in whose name a contract of carriage by sea has been concluded. May also be the party who delivers the goods to the carrier.";
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the party.", example = "IKEA Denmark", maxLength = 70, pattern = "^\\S(?:.*\\S)?$")
   private String partyName;

@@ -6,23 +6,31 @@ import org.junit.jupiter.api.Test;
 
 @Slf4j
 class EBL302StandardSpecificationTest {
-  /**
-   * Checks the LLM-imported information model against the original OpenAPI specs.
-   */
+  /** Checks the LLM-imported information model against the original OpenAPI specs. */
   @Test
   void testEBLStandardSpecification() {
-    EBLSI302StandardSpecification eblSi302StandardSpecification = new EBLSI302StandardSpecification();
+    EBLSI302StandardSpecification eblSi302StandardSpecification =
+        new EBLSI302StandardSpecification();
     StandardSpecificationTestToolkit.verifyTypeExport(
         "ShippingInstructions",
         "./src/main/resources/standards/ebl/v302/EBL_v3.0.2.yaml",
         eblSi302StandardSpecification);
     eblSi302StandardSpecification.generateArtifacts();
 
-    EBLTD302StandardSpecification eblTd302StandardSpecification = new EBLTD302StandardSpecification();
+    EBLTD302StandardSpecification eblTd302StandardSpecification =
+        new EBLTD302StandardSpecification();
     StandardSpecificationTestToolkit.verifyTypeExport(
         "TransportDocument",
         "./src/main/resources/standards/ebl/v302/EBL_v3.0.2.yaml",
         eblTd302StandardSpecification);
     eblTd302StandardSpecification.generateArtifacts();
+
+    EBLISS302StandardSpecification eblIss302StandardSpecification =
+        new EBLISS302StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        "IssuanceRequest",
+        "./src/main/resources/standards/ebl/v302/EBL_ISS_v3.0.2.yaml",
+        eblIss302StandardSpecification);
+    eblIss302StandardSpecification.generateArtifacts();
   }
 }

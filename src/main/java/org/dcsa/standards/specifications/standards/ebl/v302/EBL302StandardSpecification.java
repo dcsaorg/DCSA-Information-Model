@@ -71,6 +71,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.IdentifyingCod
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ImportLicenseShipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.InvoicePayableAt;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.InvoicePayableAtShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.IssuanceRequest;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.IssueToParty;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.IssuingParty;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.NationalCommodityCode;
@@ -106,6 +107,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.Shipper;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ShipperHBL;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructionsRequestor;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.SupportingDocument;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TareWeight;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument;
@@ -181,6 +183,7 @@ public class EBL302StandardSpecification extends StandardSpecification {
         InnerPackaging.class,
         InvoicePayableAt.class,
         InvoicePayableAtShippingInstructions.class,
+        IssuanceRequest.class,
         IssueToParty.class,
         IssuingParty.class,
         Limits.class,
@@ -222,6 +225,7 @@ public class EBL302StandardSpecification extends StandardSpecification {
         ShipperHBL.class,
         ShippingInstructions.class,
         ShippingInstructionsRequestor.class,
+        SupportingDocument.class,
         TareWeight.class,
         TaxLegalReference.class,
         TransportDocument.class,

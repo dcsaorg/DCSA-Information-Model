@@ -6,10 +6,12 @@ import java.util.List;
 import lombok.Data;
 
 @Schema(
-    description = "The party that receives **possession** of the original Bill of Lading upon issuance.",
+    description = IssueToParty.CLASS_SCHEMA_DESCRIPTION,
     title = "Issue To Party")
 @Data
 public class IssueToParty {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "The party that receives **possession** of the original Bill of Lading upon issuance.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

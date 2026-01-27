@@ -13,9 +13,11 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.UtilizedTranspo
 import org.dcsa.standards.specifications.standards.ebl.v302.types.CarrierClause;
 import org.dcsa.standards.specifications.standards.ebl.v302.types.DisplayedName;
 
-@Schema(description = "The document that governs the terms of carriage between shipper and carrier for maritime transportation. Two distinct types of transport documents exist:\n- Bill of Lading\n- Sea Waybill.")
+@Schema(description = TransportDocument.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class TransportDocument {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "The document that governs the terms of carriage between shipper and carrier for maritime transportation. Two distinct types of transport documents exist:\n- Bill of Lading\n- Sea Waybill.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
@@ -355,7 +357,10 @@ The number of additional pages required to contain the goods description on a tr
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
   private InvoicePayableAt invoicePayableAt;
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "The contact details of the person(s) to contact in relation to the **Transport Document** (changes, notifications etc.)")
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+          "The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)")
   @ArraySchema(minItems = 1)
   private List<PartyContactDetail> partyContactDetails;
 
@@ -381,15 +386,4 @@ The number of additional pages required to contain the goods description on a tr
 
   @Schema(description = "A list of `Customs references`")
   private List<CustomsReference> customsReferences;
-
-  @Schema(
-      description =
-"""
-Feedback that can be provided includes, but is not limited to:
-- unsupported properties
-- changed values
-- removed properties
-- general information
-""")
-  private List<Feedback> feedbacks;
 }

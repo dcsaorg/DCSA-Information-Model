@@ -6,9 +6,11 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 
-@Schema(description = "Refers to a company or a legal entity. Either `address` or an `identifyingCode` must be provided.")
+@Schema(description = Party.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class Party {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Refers to a company or a legal entity. Either `address` or an `identifyingCode` must be provided.";
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the party.", example = "Asseco Denmark", maxLength = 70, pattern = "^\\S(?:.*\\S)?$")
   private String partyName;
