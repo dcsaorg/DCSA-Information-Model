@@ -3,7 +3,7 @@ package org.dcsa.standards.specifications.standards.ebl.v302;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_iss.TransportDocument;
 
 public class EBLTD302StandardSpecification extends EBL302StandardSpecification {
 
@@ -19,7 +19,7 @@ public class EBLTD302StandardSpecification extends EBL302StandardSpecification {
             .filter(
                 modelClass ->
                     !modelClass.equals(
-                        org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument
+                        TransportDocument
                             .class)),
         Stream.of(
             org.dcsa.standards.specifications.standards.ebl.v302.model_td.TransportDocument.class));

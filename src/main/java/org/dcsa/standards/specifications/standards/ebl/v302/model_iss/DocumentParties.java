@@ -13,7 +13,7 @@ import java.util.List;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.DocumentParties
+        org.dcsa.standards.specifications.standards.ebl.v302.model_td.DocumentParties
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -21,7 +21,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class DocumentParties
-    extends org.dcsa.standards.specifications.standards.ebl.v302.model.DocumentParties {
+    extends org.dcsa.standards.specifications.standards.ebl.v302.model_td.DocumentParties {
 
   @Schema(
       description =

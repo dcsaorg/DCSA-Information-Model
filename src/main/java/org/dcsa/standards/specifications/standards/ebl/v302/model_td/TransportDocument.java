@@ -14,7 +14,7 @@ import java.util.List;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument
+        org.dcsa.standards.specifications.standards.ebl.v302.model_iss.TransportDocument
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -22,7 +22,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class TransportDocument
-    extends org.dcsa.standards.specifications.standards.ebl.v302.model.TransportDocument {
+    extends org.dcsa.standards.specifications.standards.ebl.v302.model_iss.TransportDocument {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

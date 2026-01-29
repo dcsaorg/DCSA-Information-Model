@@ -2,7 +2,8 @@ package org.dcsa.standards.specifications.standards.ebl.v302;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.IssuanceRequest;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_iss.IssuanceRequest;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_td.DocumentParties;
 
 public class EBLISS302StandardSpecification extends EBL302StandardSpecification {
 
@@ -24,8 +25,7 @@ public class EBLISS302StandardSpecification extends EBL302StandardSpecification 
                             org.dcsa.standards.specifications.standards.ebl.v302.model
                                 .DangerousGoods.class)
                         && !modelClass.equals(
-                            org.dcsa.standards.specifications.standards.ebl.v302.model
-                                .DocumentParties.class)
+                            DocumentParties.class)
                         && !modelClass.equals(
                             org.dcsa.standards.specifications.standards.ebl.v302.model
                                 .IdentifyingCode.class)

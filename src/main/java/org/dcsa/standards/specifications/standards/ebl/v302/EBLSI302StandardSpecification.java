@@ -1,7 +1,7 @@
 package org.dcsa.standards.specifications.standards.ebl.v302;
 
 import java.util.List;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_si.ShippingInstructions;
 
 public class EBLSI302StandardSpecification extends EBL302StandardSpecification {
 
