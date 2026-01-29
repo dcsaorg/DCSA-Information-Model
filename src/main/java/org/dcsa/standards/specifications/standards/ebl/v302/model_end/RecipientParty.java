@@ -1,8 +1,10 @@
-package org.dcsa.standards.specifications.standards.ebl.v302.model;
+package org.dcsa.standards.specifications.standards.ebl.v302.model_end;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.TaxLegalReference;
+
 import java.util.List;
 
 @Schema(description = RecipientParty.CLASS_SCHEMA_DESCRIPTION, title = "Recipient Party")

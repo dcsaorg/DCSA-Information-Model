@@ -6,11 +6,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.RecipientParty;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.EndorsementChainLink
+        org.dcsa.standards.specifications.standards.ebl.v302.model_end.EndorsementChainLink
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -18,7 +17,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.RecipientParty
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class EndorsementChainLink
-    extends org.dcsa.standards.specifications.standards.ebl.v302.model.EndorsementChainLink {
+    extends org.dcsa.standards.specifications.standards.ebl.v302.model_end.EndorsementChainLink {
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
   private RecipientParty recipient;

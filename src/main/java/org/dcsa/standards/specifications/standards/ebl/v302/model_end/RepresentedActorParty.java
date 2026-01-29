@@ -1,14 +1,15 @@
-package org.dcsa.standards.specifications.standards.ebl.v302.model;
+package org.dcsa.standards.specifications.standards.ebl.v302.model_end;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
 import java.util.List;
 
 @Schema(
-    description = "The party on whose behalf the action was directed.",
+    description = "The party on whose behalf the action was performed.",
     title = "Represented Party")
 @Data
-public class RepresentedRecipientParty {
+public class RepresentedActorParty {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

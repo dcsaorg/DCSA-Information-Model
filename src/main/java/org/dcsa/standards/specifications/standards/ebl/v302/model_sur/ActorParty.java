@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.ActorParty
+        org.dcsa.standards.specifications.standards.ebl.v302.model_end.ActorParty
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class ActorParty
-    extends org.dcsa.standards.specifications.standards.ebl.v302.model.ActorParty {
+    extends org.dcsa.standards.specifications.standards.ebl.v302.model_end.ActorParty {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

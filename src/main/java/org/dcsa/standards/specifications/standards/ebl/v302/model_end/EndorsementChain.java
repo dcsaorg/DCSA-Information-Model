@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.ebl.v302.model;
+package org.dcsa.standards.specifications.standards.ebl.v302.model_end;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

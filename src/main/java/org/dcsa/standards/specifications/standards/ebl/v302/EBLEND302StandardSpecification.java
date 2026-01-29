@@ -2,14 +2,14 @@ package org.dcsa.standards.specifications.standards.ebl.v302;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.ActorParty;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.EndorsementChain;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.EndorsementChainLink;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.RecipientParty;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.RepresentedActorParty;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.RepresentedRecipientParty;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.ActorParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.EndorsementChain;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.EndorsementChainLink;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_end.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.RecipientParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.RepresentedActorParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_end.RepresentedRecipientParty;
 
 public class EBLEND302StandardSpecification extends EBL302StandardSpecification {
 

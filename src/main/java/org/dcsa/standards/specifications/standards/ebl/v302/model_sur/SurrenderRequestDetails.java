@@ -1,7 +1,8 @@
-package org.dcsa.standards.specifications.standards.ebl.v302.model;
+package org.dcsa.standards.specifications.standards.ebl.v302.model_sur;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+
 import java.util.List;
 
 @Schema(
