@@ -5,9 +5,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import java.util.List;
 
-@Schema(description = "Refers to a company or a legal entity.", title = "Actor Party")
+@Schema(description = ActorParty.CLASS_SCHEMA_DESCRIPTION, title = "Actor Party")
 @Data
 public class ActorParty {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Refers to a company or a legal entity.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

@@ -3,9 +3,11 @@ package org.dcsa.standards.specifications.standards.ebl.v302.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Entry in the endorsement chain.", title = "Endorsement Chain Link")
+@Schema(description = EndorsementChainLink.CLASS_SCHEMA_DESCRIPTION, title = "Endorsement Chain Link")
 @Data
 public class EndorsementChainLink {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Entry in the endorsement chain.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

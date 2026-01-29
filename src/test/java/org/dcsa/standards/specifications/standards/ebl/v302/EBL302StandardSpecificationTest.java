@@ -5,6 +5,7 @@ import org.dcsa.standards.specifications.standards.StandardSpecificationTestTool
 import org.dcsa.standards.specifications.standards.ebl.v302.model.EndorsementChain;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.IssuanceRequest;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.ShippingInstructions;
+import org.dcsa.standards.specifications.standards.ebl.v302.model.SurrenderRequestDetails;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.TransportDocument;
 import org.junit.jupiter.api.Test;
 
@@ -44,5 +45,13 @@ class EBL302StandardSpecificationTest {
         "./src/main/resources/standards/ebl/v302/EBL_END_v3.0.2.yaml",
         eblEnd302StandardSpecification);
     eblEnd302StandardSpecification.generateArtifacts();
+
+    EBLSUR302StandardSpecification eblSur302StandardSpecification =
+        new EBLSUR302StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        SurrenderRequestDetails.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v302/EBL_SUR_v3.0.2.yaml",
+        eblSur302StandardSpecification);
+    eblSur302StandardSpecification.generateArtifacts();
   }
 }
