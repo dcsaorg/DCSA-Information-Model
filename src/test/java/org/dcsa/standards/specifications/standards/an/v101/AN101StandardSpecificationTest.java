@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class AN101StandardSpecificationTest {
   @Test
   void testANStandardSpecification() {
-    org.dcsa.standards.specifications.standards.an.v101.ANStandardSpecification anStandardSpecification = new ANStandardSpecification();
+    AN101StandardSpecification anStandardSpecification = new AN101StandardSpecification();
     anStandardSpecification.generateArtifacts();
 
     StandardSpecificationTestToolkit.verifyTypeExport(

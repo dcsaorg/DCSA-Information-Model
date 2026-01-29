@@ -9,7 +9,7 @@ class AN100StandardSpecificationTest {
   @SneakyThrows
   @Test
   void testANStandardSpecification() {
-    ANStandardSpecification anStandardSpecification = new ANStandardSpecification();
+    AN100StandardSpecification anStandardSpecification = new AN100StandardSpecification();
     anStandardSpecification.generateArtifacts();
 
     String yamlFilePath = "./generated-resources/standards/an/v100/an-v1.0.0-openapi.yaml";

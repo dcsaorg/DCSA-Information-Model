@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.an.v100;
+package org.dcsa.standards.specifications.standards.an.v101;
 
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
@@ -25,74 +25,74 @@ import org.dcsa.standards.specifications.dataoverview.QueryParametersSheet;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.an.v100.messages.FeedbackElement;
-import org.dcsa.standards.specifications.standards.an.v100.messages.GetArrivalNoticesError;
-import org.dcsa.standards.specifications.standards.an.v100.messages.GetArrivalNoticesResponse;
-import org.dcsa.standards.specifications.standards.an.v100.messages.PostArrivalNoticeNotificationsRequest;
-import org.dcsa.standards.specifications.standards.an.v100.messages.PostArrivalNoticesError;
-import org.dcsa.standards.specifications.standards.an.v100.messages.PostArrivalNoticesRequest;
-import org.dcsa.standards.specifications.standards.an.v100.messages.PostArrivalNoticesResponse;
-import org.dcsa.standards.specifications.standards.an.v100.model.ActiveReeferSettings;
-import org.dcsa.standards.specifications.standards.an.v100.model.ArrivalNotice;
-import org.dcsa.standards.specifications.standards.an.v100.model.ArrivalNoticeNotification;
-import org.dcsa.standards.specifications.standards.an.v100.model.CargoItem;
-import org.dcsa.standards.specifications.standards.an.v100.model.Charge;
-import org.dcsa.standards.specifications.standards.an.v100.model.ConsignmentItem;
-import org.dcsa.standards.specifications.standards.an.v100.model.CustomsClearance;
-import org.dcsa.standards.specifications.standards.an.v100.model.CustomsReference;
-import org.dcsa.standards.specifications.standards.an.v100.model.DangerousGoods;
-import org.dcsa.standards.specifications.standards.an.v100.model.DocumentParty;
-import org.dcsa.standards.specifications.standards.an.v100.model.EmbeddedDocument;
-import org.dcsa.standards.specifications.standards.an.v100.model.EmergencyContactDetails;
-import org.dcsa.standards.specifications.standards.an.v100.model.Equipment;
-import org.dcsa.standards.specifications.standards.an.v100.model.ExportLicense;
-import org.dcsa.standards.specifications.standards.an.v100.model.FreeTime;
-import org.dcsa.standards.specifications.standards.an.v100.model.IdentifyingCode;
-import org.dcsa.standards.specifications.standards.an.v100.model.ImmediateTransportationEntry;
-import org.dcsa.standards.specifications.standards.an.v100.model.ImportLicense;
-import org.dcsa.standards.specifications.standards.an.v100.model.InnerPackaging;
-import org.dcsa.standards.specifications.standards.an.v100.model.Leg;
-import org.dcsa.standards.specifications.standards.an.v100.model.Limits;
-import org.dcsa.standards.specifications.standards.an.v100.model.NationalCommodityCode;
-import org.dcsa.standards.specifications.standards.an.v100.model.OuterPackaging;
-import org.dcsa.standards.specifications.standards.an.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.an.v100.model.PaymentRemittance;
-import org.dcsa.standards.specifications.standards.an.v100.model.PickupInformation;
-import org.dcsa.standards.specifications.standards.an.v100.model.Reference;
-import org.dcsa.standards.specifications.standards.an.v100.model.ReferenceConsignmentItem;
-import org.dcsa.standards.specifications.standards.an.v100.model.ReleaseInformation;
-import org.dcsa.standards.specifications.standards.an.v100.model.ReturnInformation;
-import org.dcsa.standards.specifications.standards.an.v100.model.Seal;
-import org.dcsa.standards.specifications.standards.an.v100.model.TaxLegalReference;
-import org.dcsa.standards.specifications.standards.an.v100.model.Transport;
-import org.dcsa.standards.specifications.standards.an.v100.model.UtilizedTransportEquipment;
-import org.dcsa.standards.specifications.standards.an.v100.model.VesselVoyage;
-import org.dcsa.standards.specifications.standards.an.v100.types.FreeTimeTimeUnitCode;
-import org.dcsa.standards.specifications.standards.an.v100.types.FreeTimeTypeCode;
-import org.dcsa.standards.specifications.standards.core.v101.model.Address;
-import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
-import org.dcsa.standards.specifications.standards.core.v101.types.CountryCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.EquipmentReference;
-import org.dcsa.standards.specifications.standards.core.v101.types.IsoEquipmentCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.ModeOfTransportCode;
-import org.dcsa.standards.specifications.standards.core.v101.types.UniversalVoyageReference;
-import org.dcsa.standards.specifications.standards.core.v101.types.VesselIMONumber;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDate;
-import org.dcsa.standards.specifications.standards.core.v101.model.ClassifiedDateTime;
-import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.an.v101.messages.FeedbackElement;
+import org.dcsa.standards.specifications.standards.an.v101.messages.GetArrivalNoticesError;
+import org.dcsa.standards.specifications.standards.an.v101.messages.GetArrivalNoticesResponse;
+import org.dcsa.standards.specifications.standards.an.v101.messages.PostArrivalNoticeNotificationsRequest;
+import org.dcsa.standards.specifications.standards.an.v101.messages.PostArrivalNoticesError;
+import org.dcsa.standards.specifications.standards.an.v101.messages.PostArrivalNoticesRequest;
+import org.dcsa.standards.specifications.standards.an.v101.messages.PostArrivalNoticesResponse;
+import org.dcsa.standards.specifications.standards.an.v101.model.ActiveReeferSettings;
+import org.dcsa.standards.specifications.standards.an.v101.model.ArrivalNotice;
+import org.dcsa.standards.specifications.standards.an.v101.model.ArrivalNoticeNotification;
+import org.dcsa.standards.specifications.standards.an.v101.model.CargoItem;
+import org.dcsa.standards.specifications.standards.an.v101.model.Charge;
+import org.dcsa.standards.specifications.standards.an.v101.model.ConsignmentItem;
+import org.dcsa.standards.specifications.standards.an.v101.model.CustomsClearance;
+import org.dcsa.standards.specifications.standards.an.v101.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.an.v101.model.DangerousGoods;
+import org.dcsa.standards.specifications.standards.an.v101.model.DocumentParty;
+import org.dcsa.standards.specifications.standards.an.v101.model.EmbeddedDocument;
+import org.dcsa.standards.specifications.standards.an.v101.model.EmergencyContactDetails;
+import org.dcsa.standards.specifications.standards.an.v101.model.Equipment;
+import org.dcsa.standards.specifications.standards.an.v101.model.ExportLicense;
+import org.dcsa.standards.specifications.standards.an.v101.model.FreeTime;
+import org.dcsa.standards.specifications.standards.an.v101.model.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.an.v101.model.ImmediateTransportationEntry;
+import org.dcsa.standards.specifications.standards.an.v101.model.ImportLicense;
+import org.dcsa.standards.specifications.standards.an.v101.model.InnerPackaging;
+import org.dcsa.standards.specifications.standards.an.v101.model.Leg;
+import org.dcsa.standards.specifications.standards.an.v101.model.Limits;
+import org.dcsa.standards.specifications.standards.an.v101.model.NationalCommodityCode;
+import org.dcsa.standards.specifications.standards.an.v101.model.OuterPackaging;
+import org.dcsa.standards.specifications.standards.an.v101.model.PartyContactDetail;
+import org.dcsa.standards.specifications.standards.an.v101.model.PaymentRemittance;
+import org.dcsa.standards.specifications.standards.an.v101.model.PickupInformation;
+import org.dcsa.standards.specifications.standards.an.v101.model.Reference;
+import org.dcsa.standards.specifications.standards.an.v101.model.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.an.v101.model.ReleaseInformation;
+import org.dcsa.standards.specifications.standards.an.v101.model.ReturnInformation;
+import org.dcsa.standards.specifications.standards.an.v101.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.an.v101.model.Transport;
+import org.dcsa.standards.specifications.standards.an.v101.model.UtilizedTransportEquipment;
+import org.dcsa.standards.specifications.standards.an.v101.model.VesselVoyage;
+import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTimeUnitCode;
+import org.dcsa.standards.specifications.standards.an.v101.types.FreeTimeTypeCode;
+import org.dcsa.standards.specifications.standards.core.v103.model.Address;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDate;
+import org.dcsa.standards.specifications.standards.core.v103.model.ClassifiedDateTime;
+import org.dcsa.standards.specifications.standards.core.v103.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v103.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v103.model.Location;
+import org.dcsa.standards.specifications.standards.core.v103.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v103.model.Weight;
+import org.dcsa.standards.specifications.standards.core.v103.types.CountryCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.EquipmentReference;
+import org.dcsa.standards.specifications.standards.core.v103.types.IsoEquipmentCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.ModeOfTransportCode;
+import org.dcsa.standards.specifications.standards.core.v103.types.UniversalVoyageReference;
+import org.dcsa.standards.specifications.standards.core.v103.types.VesselIMONumber;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 
-public class ANStandardSpecification extends StandardSpecification {
+public class AN101StandardSpecification extends StandardSpecification {
 
   public static final String TAG_ARRIVAL_NOTICE_PUBLISHERS = "AN Publisher Endpoints";
   public static final String TAG_ARRIVAL_NOTICE_SUBSCRIBERS = "AN Subscriber Endpoints";
 
   private final GetArrivalNoticesEndpoint getArrivalNoticesEndpoint;
 
-  public ANStandardSpecification() {
-    super("Arrival Notice", "1.0.0", "an", "an");
+  public AN101StandardSpecification() {
+    super("Arrival Notice", "1.0.1", "an", "an");
 
     openAPI.addTagsItem(
         new Tag()
@@ -116,7 +116,7 @@ public class ANStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Arrival Notice", "1.0.0-20251121-beta", "AN", "1.0.0-20251107-beta", 4);
+        "Arrival Notice", "1.0.1", "AN", "1.0.0", 4);
   }
 
   @Override
@@ -207,7 +207,7 @@ public class ANStandardSpecification extends StandardSpecification {
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/" +
-                              "db86454af300a5df090f37a057eb64d5d2633a7f" +
+                              "c1fd6e8fc737796301d6c77369e96109a3a60973" +
                               "/generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
@@ -260,7 +260,7 @@ public class ANStandardSpecification extends StandardSpecification {
                                     Collectors.toMap(
                                         Map.Entry::getKey,
                                         Map.Entry::getValue,
-                                        (a, b) -> b,
+                                        (_, b) -> b,
                                         LinkedHashMap::new)))
                         .content(
                             new Content()

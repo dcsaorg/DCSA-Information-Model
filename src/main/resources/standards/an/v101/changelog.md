@@ -1,7 +1,5 @@
 # Arrival Notice v1.0.1 Changelog
 
-## Snapshot v1.0.1-20260116
-
 Added in type `ArrivalNotice` attribute `placeOfBLIssue`. (SD-2748)
 
 Added in type `Facility` attribute `facilityName`. (SD-2754)
