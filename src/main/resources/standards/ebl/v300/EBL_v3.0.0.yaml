@@ -1,6 +1,9 @@
 openapi: 3.0.3
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: 'https://virtserver.swaggerhub.com/dcsaorg/DCSA_EBL/3.0.0'
 info:
-  version: 3.0.1
+  version: 3.0.0
   title: DCSA Shipping Instructions and Transport Document API
   description: |
     <h1>DCSA OpenAPI specification for the Shipping Instructions and Transport Document process</h1>
@@ -44,7 +47,7 @@ info:
     This API follows the guidelines defined in version 2.0 of the API Design & Implementation Principles which can be found on the [DCSA Developer Portal](https://developer.dcsa.org/api_design)
 
     ### Changelog and GitHub
-    For a changelog, please click [here](https://github.com/dcsaorg/DCSA-OpenAPI/tree/master/ebl/v3#v301). If you have any questions, feel free to [Contact Us](https://dcsa.org/get-involved/contact-us).
+    For a changelog, please click [here](https://github.com/dcsaorg/DCSA-OpenAPI/tree/master/ebl/v3#v300). If you have any questions, feel free to [Contact Us](https://dcsa.org/get-involved/contact-us).
 
     API specification issued by [DCSA.org](https://dcsa.org/).
   license:
@@ -740,7 +743,7 @@ paths:
                   summary: |
                     Updated Shipping Instructions with DG cargo
                   description: |
-                    A `Shipping Instructions` with `Environmentally hazardous substance, liquid, N.O.S (Propiconazole)` which is transported in steel Jerrycans.
+                    A `Shipping Instructions` with `Environmentally hazardous substance, liquid, N.O.S (Propiconazole)` which is transported in steel Jerricans.
 
                     The `Shipping Instructions` has already been applied an update which has been confirmed by the provider (`updatedShippingInstructions='UPDATE_CONFIRMED'`). The `Shipping Instructions` is now waiting for the provider to `DRAFT` a `Transport Document`.
 
@@ -784,7 +787,7 @@ paths:
                               unit: KGM
                             outerPackaging:
                               numberOfPackages: 400
-                              description: 'Jerrycan, steel'
+                              description: 'Jerrican, steel'
                     utilizedTransportEquipments:
                       - isShipperOwned: false
                         seals:
@@ -1439,7 +1442,7 @@ paths:
                   summary: |
                     Issued Transport Document with DG (Dangerous Goods) cargo
                   description: |
-                    An `ISSUED` Transport Document by the provider containing DG (Dangerous Goods). The cargo is `Environmentally hazardous substance, liquid, N.O.S (Propiconazole)` which is transported in steel Jerrycans.
+                    An `ISSUED` Transport Document by the provider containing DG (Dangerous Goods). The cargo is `Environmentally hazardous substance, liquid, N.O.S (Propiconazole)` which is transported in steel Jerricans.
                   value:
                     transportDocumentReference: 4AD3FA470BB541B980CE
                     shippingInstructionsReference: b36484d0-1115-43c2-93e4-a378823a8386
@@ -1538,7 +1541,7 @@ paths:
                             outerPackaging:
                               numberOfPackages: 400
                               imoPackagingCode: 3A1
-                              description: 'Jerrycan, steel'
+                              description: 'Jerrican, steel'
                               dangerousGoods:
                                 - UNNumber: '3082'
                                   properShippingName: 'Environmentally hazardous substance, liquid, N.O.S'
@@ -2605,7 +2608,7 @@ components:
     API-Version:
       schema:
         type: string
-        example: 3.0.1
+        example: 3.0.0
       description: |
         SemVer used to indicate the version of the contract (API version) returned.
   parameters:
@@ -2822,7 +2825,7 @@ components:
           pattern: ^\S(?:.*\S)?$
           maxLength: 20
           description: |
-            A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.
+            A unique number allocated by the shipping line to the transport document and the main number used for the tracking of the status of the shipment.
 
             **Condition:** `shippingInstructionsReference` and/or `transportDocumentReference` is required to provide
           example: HHL71800000
@@ -2967,14 +2970,14 @@ components:
           description: |
             The status of the `Transport Document`. Possible values are:
 
-            - `DRAFT` (the Transport Document is currently a Draft)
-            - `APPROVED` (the Transport Document has been Approved by consumer)
-            - `ISSUED` (the Transport Document has been Issued by provider)
-            - `PENDING_SURRENDER_FOR_AMENDMENT` (the Transport Document has a pending Surrender for Amendment)
-            - `SURRENDER_FOR_AMENDMENT` (the Transport Document is Surrendered for Amendment)
+            - `DRAFT` (Transport Document is Drafted)
+            - `APPROVED` (Transport Document has been Approved by consumer)
+            - `ISSUED` (Transport Document has been Issued by provider)
+            - `PENDING_SURRENDER_FOR_AMENDMENT` (Transport Document is Pending for Surrender for an Amendment)
+            - `SURRENDER_FOR_AMENDMENT` (Transport Document Surrendered for an Amendment)
             - `VOID` (the Transport Document has been Voided)
-            - `PENDING_SURRENDER_FOR_DELIVERY` (the Transport Document has a pending Surrender for Delivery)
-            - `SURRENDER_FOR_DELIVERY` (the Transport Document is Surrendered for Delivery)
+            - `PENDING_SURRENDER_FOR_DELIVERY` (Transport Document pending surrender for Delivery)
+            - `SURRENDER_FOR_DELIVERY` (Transport Document surrendered for Delivery)
           example: DRAFT
         shippingInstructionsReference:
           type: string
@@ -2988,7 +2991,7 @@ components:
           pattern: ^\S(?:.*\S)?$
           maxLength: 20
           description: |
-            A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.
+            A unique number allocated by the shipping line to the transport document and the main number used for the tracking of the status of the shipment.
           example: HHL71800000
         feedbacks:
           type: array
@@ -3034,13 +3037,6 @@ components:
         The `Shipping Instructions` is an enrichment to the original booking shared by the Shipper to the Carrier. The information given by the Shipper through the `Shipping Instructions` is the information required to create a `Draft Transport Document`.
       title: Create Shipping Instructions
       properties:
-        transportDocumentReference:
-          type: string
-          pattern: ^\S(?:.*\S)?$
-          maxLength: 20
-          description: |
-            A unique number allocated by the shipping line, for the shipper to indicate which `transportDocumentReference` should be linked with this `Shipping Instructions`.
-          example: HHL71800000
         transportDocumentTypeCode:
           type: string
           description: |
@@ -3183,23 +3179,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        carrierCode:
-          type: string
-          pattern: ^\S+$
-          maxLength: 4
-          description: |
-            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier the `Shipping Instructions` is intended for. `carrierCodeListProvider` defines which list the `carrierCode` is based upon.
-          example: MMCU
-        carrierCodeListProvider:
-          type: string
-          description: |
-            The code list provider for the `carrierCode`. Possible values are:
-            - `SMDG` (Ship Message Design Group)
-            - `NMFTA` (National Motor Freight Traffic Association)
-          enum:
-            - SMDG
-            - NMFTA
-          example: NMFTA
         placeOfIssue:
           $ref: '#/components/schemas/PlaceOfIssue'
         invoicePayableAt:
@@ -3208,7 +3187,7 @@ components:
           type: array
           minItems: 1
           description: |
-            The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
+            The contact details of the person(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
           items:
             $ref: '#/components/schemas/PartyContactDetail'
         isCarriersAgentAtDestinationRequired:
@@ -3350,13 +3329,6 @@ components:
           description: |
             The identifier for a `Shipping Instructions` provided by the carrier for system purposes.
           example: e0559d83-00e2-438e-afd9-fdd610c1a008
-        transportDocumentReference:
-          type: string
-          pattern: ^\S(?:.*\S)?$
-          maxLength: 20
-          description: |
-            A unique number allocated by the shipping line, for the shipper to indicate which `transportDocumentReference` should be linked with this `Shipping Instructions`.
-          example: HHL71800000
         transportDocumentTypeCode:
           type: string
           description: |
@@ -3499,23 +3471,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        carrierCode:
-          type: string
-          pattern: ^\S+$
-          maxLength: 4
-          description: |
-            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier the `Shipping Instructions` is intended for. `carrierCodeListProvider` defines which list the `carrierCode` is based upon.
-          example: MMCU
-        carrierCodeListProvider:
-          type: string
-          description: |
-            The code list provider for the `carrierCode`. Possible values are:
-            - `SMDG` (Ship Message Design Group)
-            - `NMFTA` (National Motor Freight Traffic Association)
-          enum:
-            - SMDG
-            - NMFTA
-          example: NMFTA
         placeOfIssue:
           $ref: '#/components/schemas/PlaceOfIssue'
         invoicePayableAt:
@@ -3524,7 +3479,7 @@ components:
           type: array
           minItems: 1
           description: |
-            The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
+            The contact details of the person(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
           items:
             $ref: '#/components/schemas/PartyContactDetail'
         isCarriersAgentAtDestinationRequired:
@@ -3672,7 +3627,7 @@ components:
           pattern: ^\S(?:.*\S)?$
           maxLength: 20
           description: |
-            A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.
+            A unique number allocated by the shipping line to the transport document and the main number used for the tracking of the status of the shipment.
           example: HHL71800000
         shippingInstructionsStatus:
           type: string
@@ -3835,23 +3790,6 @@ components:
             description: |
               A line of the address to be displayed on the transport document.
             example: 'Strawinskylaan 4117'
-        carrierCode:
-          type: string
-          pattern: ^\S+$
-          maxLength: 4
-          description: |
-            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier the `Shipping Instructions` is intended for. `carrierCodeListProvider` defines which list the `carrierCode` is based upon.
-          example: MMCU
-        carrierCodeListProvider:
-          type: string
-          description: |
-            The code list provider for the `carrierCode`. Possible values are:
-            - `SMDG` (Ship Message Design Group)
-            - `NMFTA` (National Motor Freight Traffic Association)
-          enum:
-            - SMDG
-            - NMFTA
-          example: NMFTA
         placeOfIssue:
           $ref: '#/components/schemas/PlaceOfIssue'
         invoicePayableAt:
@@ -3860,7 +3798,7 @@ components:
           type: array
           minItems: 1
           description: |
-            The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
+            The contact details of the person(s) to contact in relation to the **Transport Document** (changes, notifications etc.)
           items:
             $ref: '#/components/schemas/PartyContactDetail'
         isCarriersAgentAtDestinationRequired:
@@ -4108,7 +4046,7 @@ components:
           example: 4426d965-0dd8-4005-8c63-dc68b01c4962
         errorDateTime:
           description: |
-            The DateTime corresponding to the error occurring.
+            The DateTime corresponding to the error occurring. Must be formatted using [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.
           type: string
           format: date-time
           example: '2024-09-04T09:41:00Z'
@@ -4294,6 +4232,7 @@ components:
             The definition of the code depends on the `facilityCodeListProvider`. As code list providers maintain multiple codeLists the following codeList is used:
             - `SMDG` (the codeList used is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/))
             - `BIC` (the codeList used is the [BIC Facility Codes](https://www.bic-code.org/facility-codes/))
+          nullable: false
           example: ADT
         facilityCodeListProvider:
           type: string
@@ -4339,31 +4278,7 @@ components:
       type: object
       title: Other Document Party
       description: |
-        A list of document parties that can be optionally provided in the `Transport Document`.
-      properties:
-        party:
-          $ref: '#/components/schemas/Party'
-        partyFunction:
-          type: string
-          maxLength: 3
-          description: |
-            Specifies the role of the party in a given context. Possible values are:
-
-            - `SCO` (Service Contract Owner)
-            - `DDR` (Consignor's freight forwarder)
-            - `DDS` (Consignee's freight forwarder)
-            - `COW` (Invoice payer on behalf of the consignor (shipper))
-            - `COX` (Invoice payer on behalf of the consignee)
-          example: DDS
-      required:
-        - party
-        - partyFunction
-
-    OtherDocumentPartyShippingInstructions:
-      type: object
-      title: Other Document Party (Shipping Instructions)
-      description: |
-        A list of document parties that can be optionally provided in the `Shipping Instructions`.
+        A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.
       properties:
         party:
           $ref: '#/components/schemas/Party'
@@ -4390,7 +4305,7 @@ components:
       type: object
       title: Other Document Party (House B/L)
       description: |
-        A list of document parties that can be optionally provided in the `House B/L`.
+        A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.
       properties:
         party:
           $ref: '#/components/schemas/PartyHBL'
@@ -4514,7 +4429,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -4644,7 +4559,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -4729,7 +4644,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -4849,7 +4764,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -4906,7 +4821,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -4994,10 +4909,6 @@ components:
             - `ETEU` (eTEU)
             - `TRAC` (Enigio trace:original)
             - `BRIT` (BRITC eBL)
-            - `COVA` (Covantis)
-            - `ETIT` (e-title)
-            - `KTNE` (KTNET)
-            - `CRED` (Credore)
 
             **Condition:** Only applicable when `isElectronic=true` and `transportDocumentTypeCode=BOL`. The property **MUST** be absent for paper B/Ls (`isElectronic=false`)
           example: BOLE
@@ -5051,7 +4962,7 @@ components:
 
             **Conditions:** If provided:
               - the displayed address must be included in the `Transport Document`.
-              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+              - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters
               - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
               - the order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
@@ -5142,7 +5053,7 @@ components:
       description: |
         The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.
+        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.
       properties:
         partyName:
           type: string
@@ -5189,7 +5100,7 @@ components:
       description: |
         The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.
+        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.
       properties:
         partyName:
           type: string
@@ -5236,7 +5147,7 @@ components:
       description: |
         The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.
+        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.
       properties:
         partyName:
           type: string
@@ -5283,7 +5194,7 @@ components:
       description: |
         The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.
+        **Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.
       properties:
         partyName:
           type: string
@@ -5444,35 +5355,6 @@ components:
       required:
         - partyName
         - address
-
-    ShippingInstructionsRequestor:
-      type: object
-      title: Shipping Instructions Requestor
-      description: |
-        The requestor of whoever submits the `Shipping Instructions`.
-        **Condition:** Either the `address` or a party `identifyingCode` must be provided.
-      properties:
-        partyName:
-          type: string
-          pattern: ^\S(?:.*\S)?$
-          maxLength: 70
-          description: |
-            Name of the party.
-          example: Asseco Denmark
-        address:
-          $ref: '#/components/schemas/PartyAddress'
-        identifyingCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentifyingCode'
-        partyContactDetails:
-          type: array
-          description: |
-            A list of contact details
-          items:
-            $ref: '#/components/schemas/PartyContactDetail'
-      required:
-        - partyName
 
     PartyContactDetail:
       type: object
@@ -5639,10 +5521,6 @@ components:
             - `ETEU` (eTEU)
             - `TRAC` (Enigio trace:original)
             - `BRIT` (BRITC eBL)
-            - `COVA` (Covantis)
-            - `ETIT` (e-title)
-            - `KTNE` (KTNET)
-            - `CRED` (Credore)
             - `GSBN` (Global Shipping Business Network)
             - `WISE` (WiseTech)
             - `GLEIF` (Global Legal Entity Identifier Foundation)
@@ -7674,7 +7552,7 @@ components:
           pattern: ^\S(?:.*\S)?$
           maxLength: 20
           description: |
-            A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.
+            A unique number allocated by the shipping line to the transport document and the main number used for the tracking of the status of the shipment.
           example: HHL71800000
         transportDocumentSubReference:
           type: string
@@ -7695,14 +7573,14 @@ components:
           maxLength: 50
           description: |
             The status of the `Transport Document`. Possible values are:
-            - `DRAFT` (the Transport Document is currently a Draft)
-            - `APPROVED` (the Transport Document has been Approved by consumer)
-            - `ISSUED` (the Transport Document has been Issued by provider)
-            - `PENDING_SURRENDER_FOR_AMENDMENT` (the Transport Document has a pending Surrender for Amendment)
-            - `SURRENDERED_FOR_AMENDMENT` (the Transport Document is Surrendered for Amendment)
-            - `PENDING_SURRENDER_FOR_DELIVERY` (the Transport Document has a pending Surrender for Delivery)
-            - `SURRENDERED_FOR_DELIVERY` (the Transport Document is Surrendered for Delivery)
-            - `VOIDED` (the Transport Document has been Voided)
+            - DRAFT
+            - APPROVED
+            - ISSUED
+            - PENDING_SURRENDER_FOR_AMENDMENT
+            - SURRENDERED_FOR_AMENDMENT
+            - PENDING_SURRENDER_FOR_DELIVERY
+            - SURRENDERED_FOR_DELIVERY
+            - VOIDED
           example: DRAFT
         transportDocumentTypeCode:
           type: string
@@ -8662,13 +8540,11 @@ components:
               - The order of the items in this array **MUST** be preserved as by the provider of the API.
           items:
             $ref: '#/components/schemas/NotifyParty'
-        shippingInstructionsRequestor:
-          $ref: '#/components/schemas/ShippingInstructionsRequestor'
         other:
           type: array
           description: A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.
           items:
-            $ref: '#/components/schemas/OtherDocumentPartyShippingInstructions'
+            $ref: '#/components/schemas/OtherDocumentParty'
       required:
         - shipper
 

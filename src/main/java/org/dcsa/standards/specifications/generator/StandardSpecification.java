@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -145,6 +146,16 @@ public abstract class StandardSpecification {
   protected abstract LegendMetadata getLegendMetadata();
 
   protected abstract Stream<Class<?>> modelClassesStream();
+
+  protected static Stream<Class<?>> modelClassesStreamWithReplacementClasses(
+      Stream<Class<?>> originalClasses, Set<Class<?>> replacementClasses) {
+    Set<String> replacedClassNames =
+        replacementClasses.stream().map(Class::getSimpleName).collect(Collectors.toSet());
+    return Stream.concat(
+        originalClasses.filter(
+            modelClass -> !replacedClassNames.contains(modelClass.getSimpleName())),
+        replacementClasses.stream());
+  }
 
   protected abstract List<String> getRootTypeNames();
 

@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.GeoCoordinate
+        org.dcsa.standards.specifications.standards.ebl.v3.model.GeoCoordinate
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class GeoCoordinate
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.GeoCoordinate {
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model.GeoCoordinate {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

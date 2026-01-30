@@ -2,14 +2,13 @@ package org.dcsa.standards.specifications.standards.ebl.v302.model_iss;
 
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.NotifyParty;
-
-import java.util.List;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.NotifyParty;
 
 @Schema(
     description =

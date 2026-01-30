@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.IdentifyingCode
+        org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class IdentifyingCode
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.IdentifyingCode {
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

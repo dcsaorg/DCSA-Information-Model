@@ -7,17 +7,17 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.Shipper.CLASS_SCHEMA_DESCRIPTION)
+        org.dcsa.standards.specifications.standards.ebl.v301.model.Shipper.CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class Shipper extends org.dcsa.standards.specifications.standards.ebl.v302.model.Shipper {
+public class Shipper extends org.dcsa.standards.specifications.standards.ebl.v301.model.Shipper {
 
   @Schema private List<IdentifyingCode> identifyingCodes;
 }

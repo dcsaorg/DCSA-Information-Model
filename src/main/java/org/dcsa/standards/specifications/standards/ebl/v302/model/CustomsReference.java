@@ -28,8 +28,8 @@ The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso
 **Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.
 """,
       example = "NL",
+      pattern = "^[A-Z]{2}$",
       minLength = 2,
-      maxLength = 2,
-      pattern = "^[A-Z]{2}$")
+      maxLength = 2)
   private String countryCode;
 }

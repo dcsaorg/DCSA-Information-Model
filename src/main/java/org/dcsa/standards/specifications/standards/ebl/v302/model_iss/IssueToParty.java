@@ -9,13 +9,13 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.IssueToParty.CLASS_SCHEMA_DESCRIPTION)
+        org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssueToParty.CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class IssueToParty extends org.dcsa.standards.specifications.standards.ebl.v302.model.IssueToParty {
+public class IssueToParty extends org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssueToParty {
 
   @Schema(
     requiredMode = Schema.RequiredMode.REQUIRED,

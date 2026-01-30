@@ -1,23 +1,27 @@
 package org.dcsa.standards.specifications.standards.ebl.v302.model_td;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
-import org.dcsa.standards.specifications.standards.ebl.v302.model.Party;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Schema(
     description =
-        "A document party optionally provided in the Shipping Instructions or Transport Document, with a specified role.")
-@Data
-public class OtherDocumentParty {
+        org.dcsa.standards.specifications.standards.ebl.v3.model_td.OtherDocumentParty
+            .CLASS_SCHEMA_DESCRIPTION)
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode(callSuper = true)
+public class OtherDocumentParty
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model_td.OtherDocumentParty {
 
   @Schema(
-      requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "The party involved in the document.")
-  private Party party;
-
-  @Schema(
-      requiredMode = Schema.RequiredMode.REQUIRED,
-      description =
+    requiredMode = Schema.RequiredMode.REQUIRED,
+    description =
 """
 Specifies the role of the party in a given context. Possible values are:
 
@@ -27,7 +31,7 @@ Specifies the role of the party in a given context. Possible values are:
 - `COW` (Invoice payer on behalf of the consignor (shipper))
 - `COX` (Invoice payer on behalf of the consignee)
 """,
-      example = "DDS",
-      maxLength = 3)
+    example = "DDS",
+    maxLength = 3)
   private String partyFunction;
 }

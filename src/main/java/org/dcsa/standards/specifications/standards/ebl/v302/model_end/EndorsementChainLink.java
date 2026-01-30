@@ -1,25 +1,28 @@
 package org.dcsa.standards.specifications.standards.ebl.v302.model_end;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Schema(description = EndorsementChainLink.CLASS_SCHEMA_DESCRIPTION, title = "Endorsement Chain Link")
-@Data
-public class EndorsementChainLink {
-
-  public static final String CLASS_SCHEMA_DESCRIPTION = "Entry in the endorsement chain.";
-
-  @Schema(
-      requiredMode = Schema.RequiredMode.REQUIRED,
-      description = "Date time when the action occurred.",
-      example = "2024-09-04T09:41:00Z",
-      format = "date-time")
-  private String actionDateTime;
+@Schema(
+    description =
+        org.dcsa.standards.specifications.standards.ebl.v3.model_end.EndorsementChainLink
+            .CLASS_SCHEMA_DESCRIPTION)
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode(callSuper = true)
+public class EndorsementChainLink
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model_end.EndorsementChainLink {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,
       description =
-          """
+"""
 The action performed by the actor. This should be one of:
 - `ISSUE` (The actor issued the document to the recipient, who is the first possessor of the eBL, as designated by the `Issue to Party`)
 - `ENDORSE` (The actor endorsed the document to the recipient)
@@ -36,11 +39,6 @@ Not all actions are applicable to all surrender requests. The combination and or
       example = "ISSUE",
       maxLength = 50)
   private String actionCode;
-
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
-  private ActorParty actor;
-
-  @Schema private RecipientParty recipient;
 
   @Schema(
       description =
