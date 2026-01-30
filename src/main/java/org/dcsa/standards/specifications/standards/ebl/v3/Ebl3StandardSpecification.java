@@ -119,10 +119,13 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_td.VesselVoyage;
 /** eBL 3.x standard specification created for maintaining and exporting a new-style IM and DO. */
 public class Ebl3StandardSpecification extends StandardSpecification {
 
+  protected final String modulePrefix;
+
   private final GetTransportDocumentEndpoint getTransportDocumentEndpoint;
 
   public Ebl3StandardSpecification(String moduleName, String modulePrefix, String versionNumber) {
     super("Bill of Lading - " + moduleName, versionNumber, "ebl", "ebl-" + modulePrefix);
+    this.modulePrefix = modulePrefix;
 
     openAPI.path(
         "/v3/transport-documents/{transportDocumentReference}",

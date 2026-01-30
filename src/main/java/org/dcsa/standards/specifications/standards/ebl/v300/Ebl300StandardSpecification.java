@@ -7,4 +7,9 @@ public class Ebl300StandardSpecification extends Ebl3StandardSpecification {
   public Ebl300StandardSpecification(String moduleName, String modulePrefix) {
     super(moduleName, modulePrefix, "3.0.0");
   }
+
+  protected Ebl300StandardSpecification(
+    String moduleName, String modulePrefix, String versionNumber) {
+    super(moduleName, modulePrefix, versionNumber);
+  }
 }

@@ -2,6 +2,7 @@ package org.dcsa.standards.specifications.standards.ebl.v302;
 
 import java.util.Set;
 import java.util.stream.Stream;
+import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
 import org.dcsa.standards.specifications.standards.ebl.v301.Ebl301StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v301.model.NotifyParty;
 import org.dcsa.standards.specifications.standards.ebl.v301.model.Shipper;
@@ -19,6 +20,16 @@ public class Ebl302StandardSpecification extends Ebl301StandardSpecification {
 
   public Ebl302StandardSpecification(String moduleName, String modulePrefix) {
     super(moduleName, modulePrefix, "3.0.2");
+  }
+
+  @Override
+  protected LegendMetadata getLegendMetadata() {
+    return new LegendMetadata(standardName, standardVersion, "eBL", "3.0.1", 2);
+  }
+
+  protected String getBaselineCsvFilePath(String sheetName) {
+    return "./generated-resources/standards/ebl/v301/ebl-%s-v3.0.1-data-overview-%s.csv"
+        .formatted(modulePrefix, sheetName);
   }
 
   @Override
