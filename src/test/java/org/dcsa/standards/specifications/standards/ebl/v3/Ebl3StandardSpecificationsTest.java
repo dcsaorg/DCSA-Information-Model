@@ -11,7 +11,10 @@ import org.dcsa.standards.specifications.standards.ebl.v300.EblIss300StandardSpe
 import org.dcsa.standards.specifications.standards.ebl.v300.EblSi300StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v300.EblSur300StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v300.EblTd300StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v301.EblIss301StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v301.EblSi301StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v301.EblSur301StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v301.EblTd301StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblEnd302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblIss302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblSi302StandardSpecification;
@@ -26,7 +29,7 @@ class Ebl3StandardSpecificationsTest {
   void testEbl3StandardSpecifications() {
     // in this order, for correct diff calculation
     buildAndCheckV300();
-    // TODO buildAndCheckV301();
+    buildAndCheckV301();
     buildAndCheckV302();
   }
 
@@ -73,29 +76,29 @@ class Ebl3StandardSpecificationsTest {
         eblSi301StandardSpecification);
     eblSi301StandardSpecification.generateArtifacts();
 
-    //    EblTd301StandardSpecification eblTd301StandardSpecification =
-    //        new EblTd301StandardSpecification();
-    //    StandardSpecificationTestToolkit.verifyTypeExport(
-    //        TransportDocument.class.getSimpleName(),
-    //        "./src/main/resources/standards/ebl/v301/EBL_v3.0.1.yaml",
-    //        eblTd301StandardSpecification);
-    //    eblTd301StandardSpecification.generateArtifacts();
-    //
-    //    EblIss301StandardSpecification eblIss301StandardSpecification =
-    //        new EblIss301StandardSpecification();
-    //    StandardSpecificationTestToolkit.verifyTypeExport(
-    //        IssuanceRequest.class.getSimpleName(),
-    //        "./src/main/resources/standards/ebl/v301/EBL_ISS_v3.0.1.yaml",
-    //        eblIss301StandardSpecification);
-    //    eblIss301StandardSpecification.generateArtifacts();
-    //
-    //    EblSur301StandardSpecification eblSur301StandardSpecification =
-    //        new EblSur301StandardSpecification();
-    //    StandardSpecificationTestToolkit.verifyTypeExport(
-    //        SurrenderRequestDetails.class.getSimpleName(),
-    //        "./src/main/resources/standards/ebl/v301/EBL_SUR_v3.0.1.yaml",
-    //        eblSur301StandardSpecification);
-    //    eblSur301StandardSpecification.generateArtifacts();
+    EblTd301StandardSpecification eblTd301StandardSpecification =
+        new EblTd301StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        TransportDocument.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v301/EBL_v3.0.1.yaml",
+        eblTd301StandardSpecification);
+    eblTd301StandardSpecification.generateArtifacts();
+
+    EblIss301StandardSpecification eblIss301StandardSpecification =
+        new EblIss301StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        IssuanceRequest.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v301/EBL_ISS_v3.0.1.yaml",
+        eblIss301StandardSpecification);
+    eblIss301StandardSpecification.generateArtifacts();
+
+    EblSur301StandardSpecification eblSur301StandardSpecification =
+        new EblSur301StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        SurrenderRequestDetails.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v301/EBL_SUR_v3.0.1.yaml",
+        eblSur301StandardSpecification);
+    eblSur301StandardSpecification.generateArtifacts();
   }
 
   private static void buildAndCheckV302() {
