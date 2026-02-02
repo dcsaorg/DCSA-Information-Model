@@ -5,11 +5,13 @@ import lombok.Data;
 
 @Schema(
     description =
-"""
-References provided by the shipper or freight forwarder at the time of Booking or Shipping Instructions. Carriers share them back during Track & Trace and they may appear on the Bill of Lading.
-""")
+      Reference.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class Reference {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = """
+References provided by the shipper or freight forwarder at the time of Booking or Shipping Instructions. Carriers share them back during Track & Trace and they may appear on the Bill of Lading.
+""";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

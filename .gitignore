@@ -14,3 +14,5 @@ target/
 /generated-resources/standards/**/*.xlsx
 /generated-resources/standards/ebl/v30*/*.csv
 /generated-resources/standards/ebl/v30*/*.yaml
+/generated-resources/standards/booking/v20*/*.csv
+/generated-resources/standards/booking/v20*/*.yaml

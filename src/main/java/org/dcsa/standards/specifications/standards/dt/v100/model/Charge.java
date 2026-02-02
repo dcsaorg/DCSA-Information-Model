@@ -3,9 +3,12 @@ package org.dcsa.standards.specifications.standards.dt.v100.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Addresses the monetary value of freight and other service charges for a `Booking`.")
+@Schema(description = Charge.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class Charge {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Addresses the monetary value of freight and other service charges for a `Booking`.";
+
   protected static final String PAYMENT_TERM_CODE_DESCRIPTION =
 """
 An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).

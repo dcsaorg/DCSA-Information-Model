@@ -5,9 +5,11 @@ import lombok.Data;
 
 @Schema(
     description =
-        "`Import License` requirements.\n\nCondition: Included if the property is provided in the `Shipping Instructions.`")
+      ImportLicense.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class ImportLicense {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "`Import License` requirements.\n\nCondition: Included if the property is provided in the `Shipping Instructions.`";
 
   @Schema(
       description =
