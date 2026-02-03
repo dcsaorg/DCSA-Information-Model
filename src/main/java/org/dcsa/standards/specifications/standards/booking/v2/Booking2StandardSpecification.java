@@ -8,6 +8,9 @@ import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,10 +95,13 @@ import org.dcsa.standards.specifications.standards.booking.v2.model.Vessel;
  */
 public class Booking2StandardSpecification extends StandardSpecification {
 
+  protected final String baselineVersion;
+
   private final GetBookingEndpoint getBookingEndpoint;
 
-  public Booking2StandardSpecification(String versionNumber) {
+  public Booking2StandardSpecification(String versionNumber, String baselineVersion) {
     super("Booking", versionNumber, "booking", "booking");
+    this.baselineVersion = baselineVersion;
 
     openAPI.path(
         "/v2/bookings/{carierBookingReference}", new PathItem().get(operationBookingGet()));
@@ -105,7 +111,7 @@ public class Booking2StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(standardName, standardVersion, "", "", 2);
+    return new LegendMetadata(standardName, standardVersion, baselineVersion.isEmpty() ? "" : "Booking", baselineVersion, 2);
   }
 
   @Override
@@ -186,15 +192,30 @@ public class Booking2StandardSpecification extends StandardSpecification {
     return List.of(Booking.class.getSimpleName());
   }
 
+  protected String getBaselineCsvFilePath(String sheetName) {
+    return "./generated-resources/standards/booking/v%s/booking-v%s-data-overview-%s.csv"
+      .formatted(baselineVersion.replaceAll("\\.", ""), baselineVersion, sheetName);
+  }
+
   @Override
   protected Map<Class<? extends DataOverviewSheet>, List<List<String>>>
-      getOldDataValuesBySheetClass() {
+  getOldDataValuesBySheetClass() {
+    // there's typically more than one entry in this map
     return Map.ofEntries(
-            Map.entry(AttributesHierarchicalSheet.class, "attributes-hierarchical"),
-            Map.entry(AttributesNormalizedSheet.class, "attributes-normalized"))
-        .entrySet()
-        .stream()
-        .collect(Collectors.toMap(Map.Entry::getKey, _ -> List.of()));
+        Map.entry(AttributesHierarchicalSheet.class, "attributes-hierarchical"),
+        Map.entry(AttributesNormalizedSheet.class, "attributes-normalized"))
+      .entrySet()
+      .stream()
+      .filter(entry -> Files.isRegularFile(Path.of(getBaselineCsvFilePath(entry.getValue()))))
+      .collect(
+        Collectors.toMap(
+          Map.Entry::getKey,
+          entry ->
+            DataOverviewSheet.importFromString(
+                SpecificationToolkit.readLocalFile(
+                  getBaselineCsvFilePath(entry.getValue())))
+              .stream()
+              .toList()));
   }
 
   @Override

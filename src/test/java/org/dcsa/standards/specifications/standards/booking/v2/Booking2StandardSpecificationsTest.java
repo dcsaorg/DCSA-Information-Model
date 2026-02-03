@@ -5,6 +5,7 @@ import org.dcsa.standards.specifications.standards.StandardSpecificationTestTool
 import org.dcsa.standards.specifications.standards.booking.v2.model.Booking;
 import org.dcsa.standards.specifications.standards.booking.v200.Booking200StandardSpecification;
 import org.dcsa.standards.specifications.standards.booking.v201.Booking201StandardSpecification;
+import org.dcsa.standards.specifications.standards.booking.v202.Booking202StandardSpecification;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -15,6 +16,7 @@ class Booking2StandardSpecificationsTest {
     // in this order, for correct diff calculation
     buildAndCheckV200();
     buildAndCheckV201();
+    buildAndCheckV202();
   }
 
   private static void buildAndCheckV200() {
@@ -35,5 +37,15 @@ class Booking2StandardSpecificationsTest {
         "./src/main/resources/standards/booking/v201/booking_v2.0.1.yaml",
         booking201StandardSpecification);
     booking201StandardSpecification.generateArtifacts();
+  }
+
+  private static void buildAndCheckV202() {
+    Booking202StandardSpecification booking202StandardSpecification =
+        new Booking202StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        Booking.class.getSimpleName(),
+        "./src/main/resources/standards/booking/v202/booking_v2.0.2.yaml",
+        booking202StandardSpecification);
+    booking202StandardSpecification.generateArtifacts();
   }
 }
