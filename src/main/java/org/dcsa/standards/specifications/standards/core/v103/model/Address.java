@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v102.types.AddressLine;
+import org.dcsa.standards.specifications.standards.core.v103.types.AddressLine;
 
 @Schema(description = "An object for storing address-related information.")
 @Data

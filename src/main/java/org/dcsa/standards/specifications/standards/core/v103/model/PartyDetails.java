@@ -2,7 +2,6 @@ package org.dcsa.standards.specifications.standards.core.v103.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v102.model.Address;
 
 @Schema(description = "Details of a party involved in the VGM declaration")
 @Data
