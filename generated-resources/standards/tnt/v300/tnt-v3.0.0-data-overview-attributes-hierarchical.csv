@@ -239,7 +239,7 @@ or during transit but prior arrival at POD.",
 "Event / reeferDetails / measuredParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / measuredParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 "Event / reeferDetails / measuredParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
-"Event / reeferDetails / powerStatus",powerStatus,string,,,,POWER_ON,"Code indicating the power status of a reefer container
+"Event / reeferDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of a reefer container
 - `INACTIVE` - The reefer container is inactive (not operational / not commissioned). Power availability is not assumed and refrigeration is not running.
 - `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
 - `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.

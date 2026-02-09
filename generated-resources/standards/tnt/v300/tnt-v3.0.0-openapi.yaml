@@ -867,6 +867,7 @@ components:
       type: "object"
       properties:
         powerStatus:
+          maxLength: 20
           type: "string"
           description: |-
             Code indicating the power status of a reefer container

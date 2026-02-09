@@ -8,6 +8,7 @@ import org.dcsa.standards.specifications.generator.EnumBase;
 @Getter
 @Schema(
     type = "string",
+    maxLength = 20,
     example = "POWER_ON",
     description = "Code indicating the power status of a reefer container")
 @AllArgsConstructor
