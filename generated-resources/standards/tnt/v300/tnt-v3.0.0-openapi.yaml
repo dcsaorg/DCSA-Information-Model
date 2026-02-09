@@ -281,6 +281,35 @@ components:
             description: "One line of an unstructured `Address`."
             example: "123 Example Rd"
       description: "An object for storing address-related information."
+    AirTemperatureMeasurement:
+      type: "object"
+      properties:
+        temperatureValue:
+          type: "number"
+          description: "Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`."
+          format: "float"
+          example: -12.3
+        sensorReadings:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AirTemperatureSensorReading"
+      description: |
+        Air temperature measurement for a reefer container, supporting a logical / primary value and optional physical sensor readings.
+    AirTemperatureSensorReading:
+      type: "object"
+      properties:
+        temperatureValue:
+          type: "number"
+          description: "Sensor temperature expressed in `ReeferDetails.temperatureUnit`."
+          format: "float"
+          example: -12.3
+        sensorLabel:
+          maxLength: 100
+          type: "string"
+          description: |
+            Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).
+          example: "P16"
+      description: "Physical reading from one air temperature sensor of a reefer container"
     ClassifiedDateTime:
       type: "object"
       properties:
@@ -893,6 +922,14 @@ components:
           description: "Measurements collected from each temperature probe"
           items:
             $ref: "#/components/schemas/TemperatureProbeMeasurement"
+        supplyAirTemperatureMeasurement:
+          description: "Supply air temperature measurement"
+          allOf:
+          - $ref: "#/components/schemas/AirTemperatureMeasurement"
+        returnAirTemperatureMeasurement:
+          description: "Return air temperature measurements"
+          allOf:
+          - $ref: "#/components/schemas/AirTemperatureMeasurement"
         ambientMeasuredTemperature:
           type: "number"
           description: "Ambient measured temperature value expressed in `temperatureUnit`"
@@ -1143,7 +1180,7 @@ components:
       properties:
         measuredTemperatureValue:
           type: "number"
-          description: "Temperature measured by the probe, expressed in `temperatureUnit`"
+          description: "Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`"
           format: "float"
           example: -12.3
         USDAProbeNumber:
@@ -1161,6 +1198,7 @@ components:
             - `P22` (Cargo probe)
           example: "P20"
         probeLabel:
+          maxLength: 100
           type: "string"
           description: "Label identifying the probe other than through a USDA number or COA UDM key"
           example: "Pulp probe B"

@@ -8,7 +8,7 @@ import lombok.Data;
 public class TemperatureProbeMeasurement {
 
   @Schema(
-      description = "Temperature measured by the probe, expressed in `temperatureUnit`",
+      description = "Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
       example = "-12.3",
       format = "float")
   protected Double measuredTemperatureValue;
@@ -31,6 +31,7 @@ COA UDM reefer probe key:
 
   @Schema(
       example = "Pulp probe B",
-      description = "Label identifying the probe other than through a USDA number or COA UDM key")
+      description = "Label identifying the probe other than through a USDA number or COA UDM key",
+      maxLength = 100)
   private String probeLabel;
 }

@@ -244,6 +244,11 @@ or during transit but prior arrival at POD.",
 - `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
 - `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
 - `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.",
+"Event / reeferDetails / returnAirTemperatureMeasurement","returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements",
+"Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings",sensorReadings,"AirTemperatureSensorReading list",,,,,,
+"Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / sensorLabel",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
+"Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / returnAirTemperatureMeasurement / temperatureValue",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "Event / reeferDetails / setpointParameters",setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
 "Event / reeferDetails / setpointParameters / airExchangeUnit",airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
@@ -258,14 +263,19 @@ or during transit but prior arrival at POD.",
 "Event / reeferDetails / setpointParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / setpointParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 "Event / reeferDetails / setpointParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
+"Event / reeferDetails / supplyAirTemperatureMeasurement","supplyAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Supply air temperature measurement",
+"Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings",sensorReadings,"AirTemperatureSensorReading list",,,,,,
+"Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings / sensorLabel",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
+"Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / supplyAirTemperatureMeasurement / temperatureValue",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "Event / reeferDetails / temperatureProbeMeasurements","temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
 "Event / reeferDetails / temperatureProbeMeasurements / COAProbeUDMKey",COAProbeUDMKey,string,,,,P20,"COA UDM reefer probe key:
 - `P19` (USDA probe 1)
 - `P20` (USDA probe 2)
 - `P21` (USDA probe 3)
 - `P22` (Cargo probe)",
-"Event / reeferDetails / temperatureProbeMeasurements / measuredTemperatureValue",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `temperatureUnit`",
-"Event / reeferDetails / temperatureProbeMeasurements / probeLabel",probeLabel,string,,,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
+"Event / reeferDetails / temperatureProbeMeasurements / measuredTemperatureValue",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
+"Event / reeferDetails / temperatureProbeMeasurements / probeLabel",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
 "Event / reeferDetails / temperatureProbeMeasurements / USDAProbeNumber",USDAProbeNumber,integer,,,,2,"USDA reefer probe number (1-3)",
 "Event / reeferDetails / temperatureUnit",temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)

@@ -30,6 +30,12 @@ Unit in which all temperature values are expressed:
   @Schema(description = "Measurements collected from each temperature probe")
   private List<TemperatureProbeMeasurement> temperatureProbeMeasurements;
 
+  @Schema(description = "Supply air temperature measurement")
+  private AirTemperatureMeasurement supplyAirTemperatureMeasurement;
+
+  @Schema(description = "Return air temperature measurements")
+  private AirTemperatureMeasurement returnAirTemperatureMeasurement;
+
   @Schema(
       description = "Ambient measured temperature value expressed in `temperatureUnit`",
       example = "-15",

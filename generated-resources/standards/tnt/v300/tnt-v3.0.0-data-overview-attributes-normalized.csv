@@ -11,6 +11,10 @@ Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address."
 Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
 Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
 Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"AirTemperatureMeasurement",sensorReadings,"AirTemperatureSensorReading list",,,,,,
+"AirTemperatureMeasurement",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
+"AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
+"AirTemperatureSensorReading",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
 ClassifiedDateTime,classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
 - `PLN` - Planned
 - `EST` - Estimated
@@ -250,7 +254,9 @@ ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the po
 - `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
 - `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
 - `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.",
+ReeferDetails,"returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements",
 ReeferDetails,setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
+ReeferDetails,"supplyAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Supply air temperature measurement",
 ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
 ReeferDetails,temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)
@@ -344,8 +350,8 @@ ShipmentReference,typeCode,string,,,,FF,"Code used to denote the type of a shipm
 - `P20` (USDA probe 2)
 - `P21` (USDA probe 3)
 - `P22` (Cargo probe)",
-"TemperatureProbeMeasurement",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `temperatureUnit`",
-"TemperatureProbeMeasurement",probeLabel,string,,,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
+"TemperatureProbeMeasurement",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
+"TemperatureProbeMeasurement",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
 "TemperatureProbeMeasurement",USDAProbeNumber,integer,,,,2,"USDA reefer probe number (1-3)",
 TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
 TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",

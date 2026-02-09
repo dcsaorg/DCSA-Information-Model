@@ -44,6 +44,8 @@ import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsRe
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsError;
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsRequest;
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsResponse;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.AirTemperatureMeasurement;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.AirTemperatureSensorReading;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.EquipmentDetails;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.Event;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.EventClassification;
@@ -94,6 +96,8 @@ public class TNTStandardSpecification extends StandardSpecification {
   protected Stream<Class<?>> modelClassesStream() {
     return Stream.of(
         Address.class,
+        AirTemperatureMeasurement.class,
+        AirTemperatureSensorReading.class,
         ClassifiedDateTime.class,
         DocumentReference.class,
         DocumentReferenceReplacement.class,
