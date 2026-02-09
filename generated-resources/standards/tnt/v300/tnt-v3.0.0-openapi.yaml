@@ -874,7 +874,7 @@ components:
             - `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
             - `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
             - `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.
-          example: "MEAS"
+          example: "POWER_ON"
         temperatureUnit:
           type: "string"
           description: |
