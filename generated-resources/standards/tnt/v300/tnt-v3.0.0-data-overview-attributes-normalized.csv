@@ -245,6 +245,11 @@ RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail
 ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
+ReeferDetails,powerStatus,string,,,,MEAS,"Code indicating the power status of a reefer container
+- `INACTIVE` - The reefer container is inactive (not operational / not commissioned). Power availability is not assumed and refrigeration is not running.
+- `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
+- `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
+- `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.",
 ReeferDetails,setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
 ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
 ReeferDetails,temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:

@@ -4,6 +4,8 @@
 
 Added to object `VesselTransport` attribute `MMSINumber`. (SD-2851)
 
+Added to object `ReeferDetails` attribute `powerStatus`. (SD-2821)
+
 
 ## Snapshot v3.0.0-20260116-alpha
 
