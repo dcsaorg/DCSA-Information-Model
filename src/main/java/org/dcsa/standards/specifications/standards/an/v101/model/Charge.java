@@ -19,7 +19,7 @@ import org.dcsa.standards.specifications.standards.core.v103.model.Location;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
-public class Charge extends org.dcsa.standards.specifications.standards.dt.v100.model.Charge {
+public class Charge extends org.dcsa.standards.specifications.standards.dt.v101.model.Charge {
 
   @Schema() protected CurrencyCode paymentCurrency;
 

@@ -10,7 +10,7 @@ Reference used by the customer or carrier to identify or track the shipment.
 """)
 @ClearSchemaConstraints
 public class Reference
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.Reference {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.Reference {
 
   @Schema(
       description =

@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
-import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
+import org.dcsa.standards.specifications.standards.dt.v101.types.ShippingMark;
 
 @Schema(
     description =
@@ -23,7 +23,7 @@ Specifies the container (equipment) information, possible ActiveReeferSettings, 
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class UtilizedTransportEquipment
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.UtilizedTransportEquipment {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.UtilizedTransportEquipment {
 
   @Schema(
       description =

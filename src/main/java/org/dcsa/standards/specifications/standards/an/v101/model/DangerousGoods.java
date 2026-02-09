@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
-import org.dcsa.standards.specifications.standards.dt.v100.types.SegregationGroup;
+import org.dcsa.standards.specifications.standards.dt.v101.types.SegregationGroup;
 
 @Schema(
     description =
@@ -22,7 +22,7 @@ Specification for Dangerous Goods. Provide one of UNNumber or NANumber. Based on
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class DangerousGoods
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.DangerousGoods {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.DangerousGoods {
 
   @Schema(
     name = "IMOClass",

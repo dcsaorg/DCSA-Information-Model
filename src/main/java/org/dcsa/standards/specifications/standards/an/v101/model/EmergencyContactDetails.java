@@ -5,11 +5,11 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.EmergencyContactDetails
+        org.dcsa.standards.specifications.standards.dt.v101.model.EmergencyContactDetails
             .CLASS_SCHEMA_DESCRIPTION)
 @ClearSchemaConstraints
 public class EmergencyContactDetails
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.EmergencyContactDetails {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.EmergencyContactDetails {
   @Schema(
       description = "Name of the contact person during an emergency.",
       example = "Jane Doe",

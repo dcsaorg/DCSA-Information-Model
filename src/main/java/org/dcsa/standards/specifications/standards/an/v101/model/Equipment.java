@@ -5,8 +5,8 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.Equipment
+        org.dcsa.standards.specifications.standards.dt.v101.model.Equipment
             .CLASS_SCHEMA_DESCRIPTION)
 @ClearSchemaConstraints
 public class Equipment
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.Equipment {}
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.Equipment {}

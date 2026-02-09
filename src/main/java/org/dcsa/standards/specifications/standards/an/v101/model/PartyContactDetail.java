@@ -11,7 +11,7 @@ Provide either phone and/or email along with the name; both may be provided.
 """)
 @ClearSchemaConstraints
 public class PartyContactDetail
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.PartyContactDetail {
 
   @Schema(description = "Contact name", example = "Jane Doe", maxLength = 255)
   protected String name;

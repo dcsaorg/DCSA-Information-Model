@@ -10,7 +10,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.OuterPackaging
+        org.dcsa.standards.specifications.standards.dt.v101.model.OuterPackaging
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class OuterPackaging
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.OuterPackaging {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.OuterPackaging {
 
   @Schema(
       description =

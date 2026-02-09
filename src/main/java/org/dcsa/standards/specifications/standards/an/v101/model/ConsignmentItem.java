@@ -10,12 +10,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 import org.dcsa.standards.specifications.standards.an.v101.types.HSCode;
-import org.dcsa.standards.specifications.standards.dt.v100.types.DescriptionOfGoodsLine;
-import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
+import org.dcsa.standards.specifications.standards.dt.v101.types.DescriptionOfGoodsLine;
+import org.dcsa.standards.specifications.standards.dt.v101.types.ShippingMark;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem
+        org.dcsa.standards.specifications.standards.dt.v101.model.ConsignmentItem
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -24,7 +24,7 @@ import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class ConsignmentItem
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.ConsignmentItem {
 
   @Schema(
       description =

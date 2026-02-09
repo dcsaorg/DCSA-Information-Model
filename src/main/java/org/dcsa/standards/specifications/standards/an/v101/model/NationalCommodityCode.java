@@ -12,7 +12,7 @@ import org.dcsa.standards.specifications.standards.an.v101.types.NationalCommodi
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.NationalCommodityCode
+        org.dcsa.standards.specifications.standards.dt.v101.model.NationalCommodityCode
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -21,7 +21,7 @@ import org.dcsa.standards.specifications.standards.an.v101.types.NationalCommodi
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class NationalCommodityCode
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.NationalCommodityCode {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.NationalCommodityCode {
 
   @Schema(description = "A list of `national commodity codes` values.")
   private List<NationalCommodityCodeValue> values;

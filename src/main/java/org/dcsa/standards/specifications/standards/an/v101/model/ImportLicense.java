@@ -6,4 +6,4 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 @Schema(description = "`Import License` requirements.")
 @ClearSchemaConstraints
 public class ImportLicense
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.ImportLicense {}
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.ImportLicense {}

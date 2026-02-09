@@ -10,7 +10,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.ActiveReeferSettings
+        org.dcsa.standards.specifications.standards.dt.v101.model.ActiveReeferSettings
             .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
 public class ActiveReeferSettings
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.ActiveReeferSettings {
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.ActiveReeferSettings {
 
   @Schema(
       description =

@@ -10,14 +10,14 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.Seal.CLASS_SCHEMA_DESCRIPTION)
+        org.dcsa.standards.specifications.standards.dt.v101.model.Seal.CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @ClearSchemaConstraints
-public class Seal extends org.dcsa.standards.specifications.standards.dt.v100.model.Seal {
+public class Seal extends org.dcsa.standards.specifications.standards.dt.v101.model.Seal {
 
   @Schema(
       description =

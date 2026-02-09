@@ -5,8 +5,8 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference
+        org.dcsa.standards.specifications.standards.dt.v101.model.TaxLegalReference
             .CLASS_SCHEMA_DESCRIPTION)
 @ClearSchemaConstraints
 public class TaxLegalReference
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference {}
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.TaxLegalReference {}

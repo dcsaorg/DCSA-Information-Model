@@ -82,7 +82,7 @@ import org.dcsa.standards.specifications.standards.core.v103.types.IsoEquipmentC
 import org.dcsa.standards.specifications.standards.core.v103.types.ModeOfTransportCode;
 import org.dcsa.standards.specifications.standards.core.v103.types.UniversalVoyageReference;
 import org.dcsa.standards.specifications.standards.core.v103.types.VesselIMONumber;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
+import org.dcsa.standards.specifications.standards.dt.v101.model.Volume;
 
 public class AN101StandardSpecification extends StandardSpecification {
 

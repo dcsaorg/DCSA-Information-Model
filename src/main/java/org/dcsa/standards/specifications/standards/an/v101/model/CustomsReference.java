@@ -5,8 +5,8 @@ import org.dcsa.standards.specifications.generator.ClearSchemaConstraints;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference
+        org.dcsa.standards.specifications.standards.dt.v101.model.CustomsReference
             .CLASS_SCHEMA_DESCRIPTION)
 @ClearSchemaConstraints
 public class CustomsReference
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference {}
+    extends org.dcsa.standards.specifications.standards.dt.v101.model.CustomsReference {}
