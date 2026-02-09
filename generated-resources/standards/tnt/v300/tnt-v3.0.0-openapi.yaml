@@ -1278,6 +1278,13 @@ components:
             The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
             The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.
           example: "9321483"
+        vesselMMSINumber:
+          maxLength: 9
+          type: "string"
+          description: |
+            Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC),
+            automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.
+          example: "278111222"
         vesselName:
           maxLength: 50
           type: "string"

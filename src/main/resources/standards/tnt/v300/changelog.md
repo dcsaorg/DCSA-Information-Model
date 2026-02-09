@@ -1,5 +1,10 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260213-alpha
+
+Added to object `VesselTransport` attribute `MMSINumber`. (SD-2851)
+
+
 ## Snapshot v3.0.0-20260116-alpha
 
 Added back the `ShipmentEventTypeCode` value `CANC` (Cancelled). (SD-2752)

@@ -388,6 +388,8 @@ indicated by the 2-character code defined in
 [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).",
 VesselTransport,vesselIMONumber,string,,maxLength=8,,9321483,"The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
 The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.",
+VesselTransport,vesselMMSINumber,string,,maxLength=9,,278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC),
+automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
 VesselTransport,vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
 VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
 VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.

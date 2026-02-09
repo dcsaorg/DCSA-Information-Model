@@ -4,12 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.core.v103.types.CountryCode;
 import org.dcsa.standards.specifications.standards.core.v103.types.VesselIMONumber;
+import org.dcsa.standards.specifications.standards.core.v103.types.VesselMMSINumber;
 
 @Schema(description = "Vessel or barge transport information")
 @Data
 public class VesselTransport {
 
   @Schema() private VesselIMONumber vesselIMONumber;
+
+  @Schema() private VesselMMSINumber vesselMMSINumber;
 
   @Schema(maxLength = 50, example = "King of the Seas", description = "Vessel name")
   private String vesselName;
