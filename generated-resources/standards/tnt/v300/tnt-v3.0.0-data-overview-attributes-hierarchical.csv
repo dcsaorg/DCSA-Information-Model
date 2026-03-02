@@ -15,10 +15,6 @@ from SMDG.",
 "Event / equipmentDetails / ISOEquipmentCode",ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code identifying the equipment size and type used to transport commodities.
 The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
 following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
-"Event / equipmentDetails / movementType",movementType,string,,,,EXPORT,"Code used to denote the type of movement
-- `IMPORT` - Import movement
-- `EXPORT` - Export movement
-- `TRANSSHIPMENT` - Transshipment movement",
 "Event / equipmentDetails / seals",seals,"Seal list",,,,,,
 "Event / equipmentDetails / seals / number",number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
 "Event / equipmentDetails / seals / placement",placement,string,,maxLength=10,,DOOR,"Placement of the seal.
@@ -40,6 +36,10 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 - `KLP` (Keyless padlock)
 - `BLT` (Bolt)
 - `WIR` (Wire)",
+"Event / equipmentDetails / transportPhase",transportPhase,string,,,,EXPORT,"The phase of the transport lifecycle in which the event occurs
+- `EXPORT` - Considered active until the vessel departs the Port of Loading
+- `IMPORT` - Considered to start when the vessel arrives at the Port of Discharge; may remain active until the empty container is returned after stripping
+- `TRANSSHIPMENT` - Any intermediate arrival/departure or load/discharge that the carrier chooses to classify as such",
 "Event / eventClassification",eventClassification,EventClassification,,,,,"Type, subtype and classifier of an event",
 "Event / eventClassification / equipmentEventTypeCode",equipmentEventTypeCode,string,,,,LOAD,"Code used to denote the type of an equipment event
 - `AVDO` - Available for Drop-off

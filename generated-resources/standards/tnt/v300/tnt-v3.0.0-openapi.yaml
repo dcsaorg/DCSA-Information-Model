@@ -419,13 +419,13 @@ components:
             - `EMPTY` - Empty
             - `LADEN` - Laden
           example: "LADEN"
-        movementType:
+        transportPhase:
           type: "string"
           description: |-
-            Code used to denote the type of movement
-            - `IMPORT` - Import movement
-            - `EXPORT` - Export movement
-            - `TRANSSHIPMENT` - Transshipment movement
+            The phase of the transport lifecycle in which the event occurs
+            - `EXPORT` - Considered active until the vessel departs the Port of Loading
+            - `IMPORT` - Considered to start when the vessel arrives at the Port of Discharge; may remain active until the empty container is returned after stripping
+            - `TRANSSHIPMENT` - Any intermediate arrival/departure or load/discharge that the carrier chooses to classify as such
           example: "EXPORT"
         seals:
           type: "array"
