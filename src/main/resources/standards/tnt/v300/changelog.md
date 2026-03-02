@@ -8,6 +8,8 @@ Renamed in object `EquipmentDetails` attribute `movementType` to `transportPhase
 
 Added in object `TransportCall` attribute `transportCallSequenceNumberMax`. (SD-2853)
 
+Clearer IoT event codes, now including motion start & stop and breadcrumbs. (SD-2746)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

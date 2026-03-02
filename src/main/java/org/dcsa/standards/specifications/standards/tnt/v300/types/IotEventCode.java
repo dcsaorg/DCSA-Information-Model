@@ -13,11 +13,14 @@ import lombok.Getter;
     description = "Code used to denote the specific IoT event that has occurred")
 @AllArgsConstructor
 public enum IotEventCode implements EnumBase {
-  DRC("Door closed"),
-  DRO("Door opened"),
-  GEO_IN("Geofence entry"),
-  GEO_OUT("Geofence exit"),
-  LOC("Location update");
+  BREADCRUMB("Continuous geolocation update"),
+  DOOR_CLOSED("Door closed"),
+  DOOR_OPENED("Door opened"),
+  GEOFENCE_ENTRY("Geofenced area entry"),
+  GEOFENCE_EXIT("Geofenced area exit"),
+  LOCATION_REACHED("Meaningful location reached"),
+  MOTION_START("Motion start"),
+  MOTION_STOP("Motion stop");
 
   private final String valueDescription;
 }

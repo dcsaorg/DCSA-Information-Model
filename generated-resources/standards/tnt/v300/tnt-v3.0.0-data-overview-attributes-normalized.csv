@@ -190,11 +190,14 @@ Lower severity feedback elements may also be included.",
 GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
 GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
-- `DRC` - Door closed
-- `DRO` - Door opened
-- `GEO_IN` - Geofence entry
-- `GEO_OUT` - Geofence exit
-- `LOC` - Location update",
+- `BREADCRUMB` - Continuous geolocation update
+- `DOOR_CLOSED` - Door closed
+- `DOOR_OPENED` - Door opened
+- `GEOFENCE_ENTRY` - Geofenced area entry
+- `GEOFENCE_EXIT` - Geofenced area exit
+- `LOCATION_REACHED` - Meaningful location reached
+- `MOTION_START` - Motion start
+- `MOTION_STOP` - Motion stop",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
 Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
