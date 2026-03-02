@@ -216,6 +216,8 @@ or a subsequent revision.",
 "Event / iotDetails / iotEventCode",iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
 - `DRC` - Door closed
 - `DRO` - Door opened
+- `GEO_IN` - Geofence entry
+- `GEO_OUT` - Geofence exit
 - `LOC` - Location update",
 "Event / isRetracted",isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
 

@@ -192,6 +192,8 @@ GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of 
 IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
 - `DRC` - Door closed
 - `DRO` - Door opened
+- `GEO_IN` - Geofence entry
+- `GEO_OUT` - Geofence exit
 - `LOC` - Location update",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",

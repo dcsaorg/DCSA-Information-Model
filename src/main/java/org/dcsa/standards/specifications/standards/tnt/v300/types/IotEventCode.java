@@ -15,6 +15,8 @@ import lombok.Getter;
 public enum IotEventCode implements EnumBase {
   DRC("Door closed"),
   DRO("Door opened"),
+  GEO_IN("Geofence entry"),
+  GEO_OUT("Geofence exit"),
   LOC("Location update");
 
   private final String valueDescription;

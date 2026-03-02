@@ -1,5 +1,10 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260313-alpha
+
+Added IoT event subtypes for geofence entry and exit. (SD-2744)
+
+
 ## Snapshot v3.0.0-20260213-alpha
 
 Added to object `VesselTransport` attribute `MMSINumber`. (SD-2851)
