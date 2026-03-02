@@ -373,6 +373,7 @@ If the mode of transport is Vessel and the facility is a Port or Terminal,
 this reference should be considered a terminal call reference.",
 TransportCall,"transportCallSequenceNumber",integer,,,,,"Transport operator's key that uniquely identifies each individual transport call.
 This key is essential to distinguish between two separate calls at the same location within one voyage.",
+TransportCall,"transportCallSequenceNumberMax",integer,,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
 TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information",
 TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information",
 TransportDetails,changeRemark,string,,maxLength=250,,"Bad weather","Free text information provided by the vessel operator regarding the reasons for the change in schedule

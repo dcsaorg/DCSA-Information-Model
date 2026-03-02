@@ -28,6 +28,13 @@ This key is essential to distinguish between two separate calls at the same loca
 """)
   private Integer transportCallSequenceNumber;
 
+  @Schema(
+    description =
+"""
+The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.
+""")
+  private Integer transportCallSequenceNumberMax;
+
   @Schema() private ModeOfTransportCode modeOfTransport;
 
   @Schema(

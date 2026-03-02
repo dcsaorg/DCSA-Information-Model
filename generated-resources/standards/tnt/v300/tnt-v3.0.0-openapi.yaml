@@ -1221,6 +1221,11 @@ components:
             Transport operator's key that uniquely identifies each individual transport call.
             This key is essential to distinguish between two separate calls at the same location within one voyage.
           format: "int32"
+        transportCallSequenceNumberMax:
+          type: "integer"
+          description: |
+            The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.
+          format: "int32"
         modeOfTransport:
           maxLength: 50
           type: "string"

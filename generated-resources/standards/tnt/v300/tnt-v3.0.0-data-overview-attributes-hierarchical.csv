@@ -527,6 +527,7 @@ If the mode of transport is Vessel and the facility is a Port or Terminal,
 this reference should be considered a terminal call reference.",
 "Event / transportDetails / transportCall / transportCallSequenceNumber","transportCallSequenceNumber",integer,,,,,"Transport operator's key that uniquely identifies each individual transport call.
 This key is essential to distinguish between two separate calls at the same location within one voyage.",
+"Event / transportDetails / transportCall / transportCallSequenceNumberMax","transportCallSequenceNumberMax",integer,,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
 "Event / transportDetails / transportCall / truckTransport",truckTransport,TruckTransport,,,,,"Truck transport information",
 "Event / transportDetails / transportCall / truckTransport / tractorDetails",tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment.",
 "Event / transportDetails / transportCall / truckTransport / tractorDetails / licensePlate",licensePlate,string,,maxLength=15,,,"A license plate is a tag that is attached to a vehicle and displays a unique number or code assigned to the vehicle.

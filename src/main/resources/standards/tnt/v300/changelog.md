@@ -6,6 +6,8 @@ Added IoT event subtypes for geofence entry and exit. (SD-2744)
 
 Renamed in object `EquipmentDetails` attribute `movementType` to `transportPhase`. (SD-2775)
 
+Added in object `TransportCall` attribute `transportCallSequenceNumberMax`. (SD-2853)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 
