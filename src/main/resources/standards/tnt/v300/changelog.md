@@ -10,6 +10,8 @@ Added in object `TransportCall` attribute `transportCallSequenceNumberMax`. (SD-
 
 Clearer IoT event codes, now including motion start & stop and breadcrumbs. (SD-2746)
 
+Clarified the optional character of the datetime GET endpoint query parameters. (SD-2888)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

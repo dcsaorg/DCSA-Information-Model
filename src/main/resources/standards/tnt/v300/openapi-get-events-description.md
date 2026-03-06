@@ -8,6 +8,8 @@ The Event Producer is expected to additionally filter the Events based on the au
 
 ## Event filtering
 
+### Required base filter combinations
+
 Every Event Producer must support the following combinations of query parameter filters:
 * `carrierBookingReference`
 * `carrierBookingReference`, `equipmentReference`
@@ -15,14 +17,22 @@ Every Event Producer must support the following combinations of query parameter 
 * `transportDocumentReference`, `equipmentReference`
 * `equipmentReference`
 
-Every Event Producer must support combining any of the query parameter filters above with a list of `eventTypes`. By default, events of all `eventTypes` are expected to be returned if available and supported.
+### Optional additional filters
 
-Every Event Producer must support combining any of the query parameter filters above with all of these additional filters:
+Every Event Producer must support combining any of the base filter combinations above with a list of `eventTypes`. The `eventTypes` query parameter is optional. By default, events of all `eventTypes` are expected to be returned if available and supported.
+
+Every Event Producer must support combining any of the base filter combinations above with the following optional date filtering query parameters:
 * `eventUpdatedDateTimeMin`
 * `eventUpdatedDateTimeMax`
 * `eventUpdatedDateTimeMin`, `eventUpdatedDateTimeMax`
 
-Each Event Producer can separately also decide to have default relative date ranges and only return Events having an `eventUpdatedDateTime` within those ranges.
+The query parameters `eventUpdatedDateTimeMin` and `eventUpdatedDateTimeMax` are optional. However, if provided in a request, Event Producers must support and correctly apply them in combination with any of the base filter combinations listed above.
+
+### Default time window behavior
+
+Each Event Producer may optionally decide to implement a default relative date range and only return Events having an `eventUpdatedDateTime` within that range when no date filters are provided in the request. This behavior is implementation-specific and should be documented by the Event Producer.
+
+### Unsupported query parameters
 
 When receiving requests containing an unsupported query parameter, an Event Producer can choose to either ignore the query parameter (if possible) or to reject the request with an HTTP 400.
 
