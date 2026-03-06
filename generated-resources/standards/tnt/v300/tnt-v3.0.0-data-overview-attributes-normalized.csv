@@ -121,8 +121,10 @@ EventClassification,eventTypeCode,string,,,,EQUIPMENT,"Code used to denote the t
 - `EQUIPMENT` - Equipment event
 - `IOT` - IoT event
 - `REEFER` - Reefer event",
-EventClassification,iotEventTypeCode,string,,,,DETC,"Code used to denote the type of an IoT event
-- `DETC` - Detected",
+EventClassification,iotEventTypeCode,string,,,,TELEMETRY,"Code used to denote the type of an IoT event
+- `PAIRING` - The IoT device is being paired with the equipment
+- `TELEMETRY` - The IoT device is emitting telemetry data
+- `UNPAIRING` - The IoT device is being unpaired from the equipment",
 EventClassification,reeferEventTypeCode,string,,,,MEAS,"Code used to denote the type of a reefer event
 - `MEAS` - Measured
 - `ADJU` - Adjusted",
@@ -189,6 +191,11 @@ At least one feedback element of severity `ERROR` is expected.
 Lower severity feedback elements may also be included.",
 GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
 GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
+IotDetails,"iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
+- `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
+- `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
+- `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
+- `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
 IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
 - `BREADCRUMB` - Continuous geolocation update
 - `DOOR_CLOSED` - Door closed

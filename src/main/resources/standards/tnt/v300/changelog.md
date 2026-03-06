@@ -12,6 +12,8 @@ Clearer IoT event codes, now including motion start & stop and breadcrumbs. (SD-
 
 Clarified the optional character of the datetime GET endpoint query parameters. (SD-2888)
 
+Added IoT pairing / unpairing events and IoT equipment technology type. (SD-2784)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

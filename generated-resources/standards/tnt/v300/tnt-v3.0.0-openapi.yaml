@@ -617,8 +617,10 @@ components:
           type: "string"
           description: |-
             Code used to denote the type of an IoT event
-            - `DETC` - Detected
-          example: "DETC"
+            - `PAIRING` - The IoT device is being paired with the equipment
+            - `TELEMETRY` - The IoT device is emitting telemetry data
+            - `UNPAIRING` - The IoT device is being unpaired from the equipment
+          example: "TELEMETRY"
         reeferEventTypeCode:
           type: "string"
           description: |-
@@ -761,6 +763,15 @@ components:
             - `MOTION_START` - Motion start
             - `MOTION_STOP` - Motion stop
           example: "DRO"
+        iotEquipmentTechnologyCode:
+          type: "string"
+          description: |-
+            Code used to indicate the type of IoT technology used by a piece of equipment
+            - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
+            - `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
+            - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
+            - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.
+          example: "SMART_CONTAINER"
       description: "IoT-specific details"
     Location:
       type: "object"

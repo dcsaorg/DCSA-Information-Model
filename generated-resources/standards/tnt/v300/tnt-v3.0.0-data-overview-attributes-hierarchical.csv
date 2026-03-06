@@ -69,8 +69,10 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 - `EQUIPMENT` - Equipment event
 - `IOT` - IoT event
 - `REEFER` - Reefer event",
-"Event / eventClassification / iotEventTypeCode",iotEventTypeCode,string,,,,DETC,"Code used to denote the type of an IoT event
-- `DETC` - Detected",
+"Event / eventClassification / iotEventTypeCode",iotEventTypeCode,string,,,,TELEMETRY,"Code used to denote the type of an IoT event
+- `PAIRING` - The IoT device is being paired with the equipment
+- `TELEMETRY` - The IoT device is emitting telemetry data
+- `UNPAIRING` - The IoT device is being unpaired from the equipment",
 "Event / eventClassification / reeferEventTypeCode",reeferEventTypeCode,string,,,,MEAS,"Code used to denote the type of a reefer event
 - `MEAS` - Measured
 - `ADJU` - Adjusted",
@@ -213,6 +215,11 @@ or any other code as defined in the
 or a subsequent revision.",
 "Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
 "Event / iotDetails",iotDetails,IotDetails,,,,,"IoT-specific details",
+"Event / iotDetails / iotEquipmentTechnologyCode","iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
+- `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
+- `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
+- `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
+- `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
 "Event / iotDetails / iotEventCode",iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
 - `BREADCRUMB` - Continuous geolocation update
 - `DOOR_CLOSED` - Door closed
