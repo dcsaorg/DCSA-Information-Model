@@ -14,6 +14,8 @@ Clarified the optional character of the datetime GET endpoint query parameters. 
 
 Added IoT pairing / unpairing events and IoT equipment technology type. (SD-2784)
 
+Added IoT device brand, model, power status. (SD-2882)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

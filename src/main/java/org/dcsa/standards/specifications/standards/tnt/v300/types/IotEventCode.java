@@ -14,6 +14,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum IotEventCode implements EnumBase {
   BREADCRUMB("Continuous geolocation update"),
+  DEVICE_STATUS("IoT device status update (pairing/unpairing, power status)"),
   DOOR_CLOSED("Door closed"),
   DOOR_OPENED("Door opened"),
   GEOFENCE_ENTRY("Geofenced area entry"),

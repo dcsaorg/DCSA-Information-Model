@@ -755,6 +755,7 @@ components:
           description: |-
             Code used to denote the specific IoT event that has occurred
             - `BREADCRUMB` - Continuous geolocation update
+            - `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
             - `DOOR_CLOSED` - Door closed
             - `DOOR_OPENED` - Door opened
             - `GEOFENCE_ENTRY` - Geofenced area entry
@@ -772,6 +773,24 @@ components:
             - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
             - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.
           example: "SMART_CONTAINER"
+        powerStatus:
+          maxLength: 20
+          type: "string"
+          description: |-
+            Code indicating the power status of an IoT device or reefer container
+            - `INACTIVE` - The device is inactive (not operational / not commissioned).
+            - `POWER_OFF` - The device is connected to a power source but switched off.
+            - `POWER_ON` - The device is connected to a power source and powered on.
+            - `UNKNOWN` - The power status of the device could not be determined.
+          example: "POWER_ON"
+        deviceVendor:
+          maxLength: 100
+          type: "string"
+          description: "Brand name of the IoT device"
+        deviceModel:
+          maxLength: 100
+          type: "string"
+          description: "Model name of the IoT device"
       description: "IoT-specific details"
     Location:
       type: "object"
@@ -933,11 +952,11 @@ components:
           maxLength: 20
           type: "string"
           description: |-
-            Code indicating the power status of a reefer container
-            - `INACTIVE` - The reefer container is inactive (not operational / not commissioned). Power availability is not assumed and refrigeration is not running.
-            - `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
-            - `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
-            - `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.
+            Code indicating the power status of an IoT device or reefer container
+            - `INACTIVE` - The device is inactive (not operational / not commissioned).
+            - `POWER_OFF` - The device is connected to a power source but switched off.
+            - `POWER_ON` - The device is connected to a power source and powered on.
+            - `UNKNOWN` - The power status of the device could not be determined.
           example: "POWER_ON"
         temperatureUnit:
           type: "string"

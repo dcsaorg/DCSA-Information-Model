@@ -215,6 +215,8 @@ or any other code as defined in the
 or a subsequent revision.",
 "Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
 "Event / iotDetails",iotDetails,IotDetails,,,,,"IoT-specific details",
+"Event / iotDetails / deviceModel",deviceModel,string,,maxLength=100,,,"Model name of the IoT device",
+"Event / iotDetails / deviceVendor",deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
 "Event / iotDetails / iotEquipmentTechnologyCode","iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
 - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
 - `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
@@ -222,6 +224,7 @@ or a subsequent revision.",
 - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
 "Event / iotDetails / iotEventCode",iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
 - `BREADCRUMB` - Continuous geolocation update
+- `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
 - `DOOR_CLOSED` - Door closed
 - `DOOR_OPENED` - Door opened
 - `GEOFENCE_ENTRY` - Geofenced area entry
@@ -229,6 +232,11 @@ or a subsequent revision.",
 - `LOCATION_REACHED` - Meaningful location reached
 - `MOTION_START` - Motion start
 - `MOTION_STOP` - Motion stop",
+"Event / iotDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
+- `INACTIVE` - The device is inactive (not operational / not commissioned).
+- `POWER_OFF` - The device is connected to a power source but switched off.
+- `POWER_ON` - The device is connected to a power source and powered on.
+- `UNKNOWN` - The power status of the device could not be determined.",
 "Event / isRetracted",isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
 
 The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
@@ -251,11 +259,11 @@ or during transit but prior arrival at POD.",
 "Event / reeferDetails / measuredParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / measuredParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 "Event / reeferDetails / measuredParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
-"Event / reeferDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of a reefer container
-- `INACTIVE` - The reefer container is inactive (not operational / not commissioned). Power availability is not assumed and refrigeration is not running.
-- `POWER_OFF` - The reefer container is connected to a power source but switched off. Refrigeration is not running.
-- `POWER_ON` - The reefer container is connected to a power source and powered on. Refrigeration is running.
-- `UNKNOWN` - The power state of the reefer container cannot be determined from the available data.",
+"Event / reeferDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
+- `INACTIVE` - The device is inactive (not operational / not commissioned).
+- `POWER_OFF` - The device is connected to a power source but switched off.
+- `POWER_ON` - The device is connected to a power source and powered on.
+- `UNKNOWN` - The power status of the device could not be determined.",
 "Event / reeferDetails / returnAirTemperatureMeasurement","returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements",
 "Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings",sensorReadings,"AirTemperatureSensorReading list",,,,,,
 "Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / sensorLabel",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
