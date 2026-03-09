@@ -2,7 +2,7 @@
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1pspjuw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.15.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.2.0">
   <bpmn:collaboration id="Booking_200_BookingRequest">
     <bpmn:participant id="Participant_0i1hgob" name="Carrier" processRef="Process_112capa" />
-    <bpmn:participant id="Participant_1ucs290" name="Shipper" processRef="Process_03xuylf" />
+    <bpmn:participant id="Participant_1ucs290" name="Shipper (or Booking agent)" processRef="Process_03xuylf" />
     <bpmn:messageFlow id="Flow_114poak" sourceRef="Activity_1q4aonj" targetRef="Event_0dm46dx" />
     <bpmn:messageFlow id="Flow_0kfj5pg" sourceRef="Activity_0ysrqnp" targetRef="Event_15ens92" />
     <bpmn:messageFlow id="Flow_1uwszsi" sourceRef="Activity_0zeme9g" targetRef="Event_10pppmd" />
@@ -520,6 +520,10 @@
         <di:waypoint x="720" y="230" />
         <di:waypoint x="719" y="185" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0dt57p2_di" bpmnElement="DataOutputAssociation_0dt57p2">
+        <di:waypoint x="1450" y="552" />
+        <di:waypoint x="1452" y="185" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_03cv2vy_di" bpmnElement="DataOutputAssociation_03cv2vy">
         <di:waypoint x="1270" y="320" />
         <di:waypoint x="1272" y="185" />
@@ -554,10 +558,6 @@
       <bpmndi:BPMNEdge id="Flow_0odqijj_di" bpmnElement="Flow_0odqijj">
         <di:waypoint x="1450" y="790" />
         <di:waypoint x="1450" y="590" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0dt57p2_di" bpmnElement="DataOutputAssociation_0dt57p2">
-        <di:waypoint x="1450" y="552" />
-        <di:waypoint x="1452" y="185" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

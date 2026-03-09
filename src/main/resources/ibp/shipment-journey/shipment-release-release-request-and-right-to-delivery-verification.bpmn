@@ -14,7 +14,7 @@
       <bpmn:outgoing>Flow_05msrpz</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1ys745c" messageRef="Message_2qb458b" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:task id="Activity_0yfqte1" name="Receive Sea Waybill">
+    <bpmn:task id="Activity_0yfqte1" name="Confirm Sea Waybill availability">
       <bpmn:incoming>Flow_0tza1mi</bpmn:incoming>
       <bpmn:outgoing>Flow_01r2gd7</bpmn:outgoing>
     </bpmn:task>

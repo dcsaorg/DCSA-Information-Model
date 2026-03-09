@@ -80,7 +80,7 @@
       <bpmn:outgoing>Flow_029pfwv</bpmn:outgoing>
       <bpmn:outgoing>Flow_15v0y9y</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="Gateway_0gsych0" name="Is the BL released?">
+    <bpmn:exclusiveGateway id="Gateway_0gsych0" name="Is BL issued?">
       <bpmn:incoming>Flow_15v0y9y</bpmn:incoming>
       <bpmn:outgoing>Flow_1wqwxqy</bpmn:outgoing>
       <bpmn:outgoing>Flow_0znu1yp</bpmn:outgoing>
@@ -266,7 +266,7 @@
       <bpmndi:BPMNShape id="Gateway_1hcbxkn_di" bpmnElement="Gateway_1hcbxkn" isMarkerVisible="true">
         <dc:Bounds x="1495" y="305" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1555" y="310" width="82" height="40" />
+          <dc:Bounds x="1539" y="320" width="82" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0b6doj3_di" bpmnElement="Activity_0b6doj3">
@@ -282,7 +282,7 @@
       <bpmndi:BPMNShape id="Gateway_0gsych0_di" bpmnElement="Gateway_0gsych0" isMarkerVisible="true">
         <dc:Bounds x="1715" y="305" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1655.5" y="316" width="49" height="27" />
+          <dc:Bounds x="1657" y="303" width="66" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0vtppa3_di" bpmnElement="Event_0vtppa3">
