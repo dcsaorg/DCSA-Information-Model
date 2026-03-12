@@ -224,7 +224,7 @@ or a subsequent revision.",
 - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
 - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
 "Event / iotDetails / iotEventCode",iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
-- `BREADCRUMB` - Continuous geolocation update
+- `BREADCRUMB` - Periodic geolocation update
 - `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
 - `DOOR_CLOSED` - Door closed
 - `DOOR_OPENED` - Door opened

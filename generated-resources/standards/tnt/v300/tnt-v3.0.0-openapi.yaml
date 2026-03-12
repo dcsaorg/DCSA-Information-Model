@@ -759,7 +759,7 @@ components:
           type: "string"
           description: |-
             Code used to denote the specific IoT event that has occurred
-            - `BREADCRUMB` - Continuous geolocation update
+            - `BREADCRUMB` - Periodic geolocation update
             - `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
             - `DOOR_CLOSED` - Door closed
             - `DOOR_OPENED` - Door opened

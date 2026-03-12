@@ -13,7 +13,7 @@ import lombok.Getter;
     description = "Code used to denote the specific IoT event that has occurred")
 @AllArgsConstructor
 public enum IotEventCode implements EnumBase {
-  BREADCRUMB("Continuous geolocation update"),
+  BREADCRUMB("Periodic geolocation update"),
   DEVICE_STATUS("IoT device status update (pairing/unpairing, power status)"),
   DOOR_CLOSED("Door closed"),
   DOOR_OPENED("Door opened"),
