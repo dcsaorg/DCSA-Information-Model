@@ -200,7 +200,7 @@ IotDetails,"iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to 
 - `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
 - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
 - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
-IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT event that has occurred
+IotDetails,iotEventCode,string,,,,DOOR_OPENED,"Code used to denote the specific IoT event that has occurred
 - `BREADCRUMB` - Periodic geolocation update
 - `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
 - `DOOR_CLOSED` - Door closed

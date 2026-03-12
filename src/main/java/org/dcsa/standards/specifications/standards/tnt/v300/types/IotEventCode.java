@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 @Schema(
     type = "string",
-    example = "DRO",
+    example = "DOOR_OPENED",
     description = "Code used to denote the specific IoT event that has occurred")
 @AllArgsConstructor
 public enum IotEventCode implements EnumBase {

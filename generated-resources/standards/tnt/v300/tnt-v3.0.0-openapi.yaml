@@ -767,7 +767,7 @@ components:
             - `GEOFENCE_EXIT` - Geofenced area exit
             - `MOTION_START` - Motion start
             - `MOTION_STOP` - Motion stop
-          example: "DRO"
+          example: "DOOR_OPENED"
         iotEquipmentTechnologyCode:
           type: "string"
           description: |-
