@@ -497,6 +497,10 @@ components:
           description: "The location of the event."
           allOf:
           - $ref: "#/components/schemas/Location"
+        reason:
+          maxLength: 250
+          type: "string"
+          description: "Free text information explaining why this event was sent"
         eventClassification:
           description: "Type, subtype and classifier of an event"
           allOf:
@@ -588,9 +592,10 @@ components:
           type: "string"
           description: |-
             Code used to denote the type of a transport event
-            - `ARRI` - Arrived
-            - `DEPA` - Departed
-          example: "ARRI"
+            - `APPROACHING` - Close to arriving at a certain location
+            - `ARRIVED` - Arrived at a certain location
+            - `DEPARTED` - Departed from a certain location
+          example: "ARRIVED"
         equipmentEventTypeCode:
           type: "string"
           description: |-
@@ -760,7 +765,6 @@ components:
             - `DOOR_OPENED` - Door opened
             - `GEOFENCE_ENTRY` - Geofenced area entry
             - `GEOFENCE_EXIT` - Geofenced area exit
-            - `LOCATION_REACHED` - Meaningful location reached
             - `MOTION_START` - Motion start
             - `MOTION_STOP` - Motion stop
           example: "DRO"
@@ -790,7 +794,7 @@ components:
         deviceModel:
           maxLength: 100
           type: "string"
-          description: "Model name of the IoT device"
+          description: "Model of the IoT device"
       description: "IoT-specific details"
     Location:
       type: "object"
@@ -996,6 +1000,18 @@ components:
           description: "Non-temperature measured parameters"
           allOf:
           - $ref: "#/components/schemas/ReeferParameters"
+        unitManufacturer:
+          maxLength: 100
+          type: "string"
+          description: "Manufacturer name of the reefer unit"
+        unitModel:
+          maxLength: 100
+          type: "string"
+          description: "Model of the reefer unit"
+        controllerModel:
+          maxLength: 100
+          type: "string"
+          description: "Model of the reefer controller"
       description: "Reefer-specific details"
     ReeferParameters:
       type: "object"
@@ -1164,9 +1180,6 @@ components:
             - `PTP` - Prohibited transshipment port
             - `RTP` - Requested transshipment port
           example: "PRE"
-        reason:
-          type: "string"
-          description: "The reason this event was sent"
         priceCalculationDate:
           type: "string"
           description: |
@@ -1331,13 +1344,6 @@ components:
               Code identifying the reason for a delay,
               [as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
             example: "STR"
-        changeRemark:
-          maxLength: 250
-          type: "string"
-          description: |
-            Free text information provided by the vessel operator regarding the reasons for the change in schedule
-            and/or plans to mitigate schedule slippage.
-          example: "Bad weather"
         transportCall:
           description: "Transport call information"
           allOf:

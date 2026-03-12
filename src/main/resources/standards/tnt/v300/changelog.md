@@ -16,6 +16,12 @@ Added IoT pairing / unpairing events and IoT equipment technology type. (SD-2784
 
 Added IoT device brand, model, power status. (SD-2882)
 
+Added transport event type for "approaching" a certain location. (SD-2852)
+
+Promoted the free-text `reason` (why the event was sent) from `ShipmentDetails` up into the `Event` itself, and removed the `changeRemark` from `TransportDetails` as it became redundant with the `reason`.
+
+Added as reefer details the unit manufacturer and model and the controller model. (SD-2870)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

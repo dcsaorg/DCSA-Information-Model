@@ -112,9 +112,10 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 - `UPDT` - Update In Progress
 - `UPRE` - Update Received
 - `VOID` - Voided",
-"Event / eventClassification / transportEventTypeCode",transportEventTypeCode,string,,,,ARRI,"Code used to denote the type of a transport event
-- `ARRI` - Arrived
-- `DEPA` - Departed",
+"Event / eventClassification / transportEventTypeCode",transportEventTypeCode,string,,,,ARRIVED,"Code used to denote the type of a transport event
+- `APPROACHING` - Close to arriving at a certain location
+- `ARRIVED` - Arrived at a certain location
+- `DEPARTED` - Departed from a certain location",
 "Event / eventDateTime",eventDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the real-world event has occurred or will occur.",
 "Event / eventID",eventID,string,,maxLength=500,,"event-HHL71800000-APZU4812090-IoT-DRO-2025-01-23T01:23:45Z","ID of the event, unique among all the events published by a T&T Event Producer.
 
@@ -215,7 +216,7 @@ or any other code as defined in the
 or a subsequent revision.",
 "Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
 "Event / iotDetails",iotDetails,IotDetails,,,,,"IoT-specific details",
-"Event / iotDetails / deviceModel",deviceModel,string,,maxLength=100,,,"Model name of the IoT device",
+"Event / iotDetails / deviceModel",deviceModel,string,,maxLength=100,,,"Model of the IoT device",
 "Event / iotDetails / deviceVendor",deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
 "Event / iotDetails / iotEquipmentTechnologyCode","iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
 - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
@@ -229,7 +230,6 @@ or a subsequent revision.",
 - `DOOR_OPENED` - Door opened
 - `GEOFENCE_ENTRY` - Geofenced area entry
 - `GEOFENCE_EXIT` - Geofenced area exit
-- `LOCATION_REACHED` - Meaningful location reached
 - `MOTION_START` - Motion start
 - `MOTION_STOP` - Motion stop",
 "Event / iotDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
@@ -242,8 +242,10 @@ or a subsequent revision.",
 The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
 
 If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
+"Event / reason",reason,string,,maxLength=250,,,"Free text information explaining why this event was sent",
 "Event / reeferDetails",reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
 "Event / reeferDetails / ambientMeasuredTemperature","ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
+"Event / reeferDetails / controllerModel",controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 "Event / reeferDetails / internalSetpointTemperature","internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 "Event / reeferDetails / measuredParameters",measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 "Event / reeferDetails / measuredParameters / airExchangeUnit",airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
@@ -300,6 +302,8 @@ or during transit but prior arrival at POD.",
 "Event / reeferDetails / temperatureUnit",temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
+"Event / reeferDetails / unitManufacturer",unitManufacturer,string,,maxLength=100,,,"Manufacturer name of the reefer unit",
+"Event / reeferDetails / unitModel",unitModel,string,,maxLength=100,,,"Model of the reefer unit",
 "Event / shipmentDetails",shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
 "Event / shipmentDetails / additionalDocumentReferences","additionalDocumentReferences","DocumentReference list",,,,,"List of additional document references related to this event",
 "Event / shipmentDetails / additionalDocumentReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
@@ -416,7 +420,6 @@ or during transit but prior arrival at POD.",
 - `VGM` - Verified Gross Mass",
 "Event / shipmentDetails / priceCalculationDate",priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
 It can vary per carrier.",
-"Event / shipmentDetails / reason",reason,string,,,,,"The reason this event was sent",
 "Event / shipmentDetails / shipmentLocationType",shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
 - `FCD` - Full container drop-off location
 - `IEL` - Container intermediate export stop-off location
@@ -482,8 +485,6 @@ It can vary per carrier.",
 - `RUC` - Registro Único del Contribuyente
 - `SI` - Shipper’s Reference",
 "Event / transportDetails",transportDetails,TransportDetails,,,,,"Transport-specific details",
-"Event / transportDetails / changeRemark",changeRemark,string,,maxLength=250,,"Bad weather","Free text information provided by the vessel operator regarding the reasons for the change in schedule
-and/or plans to mitigate schedule slippage.",
 "Event / transportDetails / delayReasonCodes",delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
 Item description:
 Code identifying the reason for a delay,

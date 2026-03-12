@@ -9,12 +9,13 @@ import lombok.Getter;
 @Getter
 @Schema(
     type = "string",
-    example = "ARRI",
+    example = "ARRIVED",
     description = "Code used to denote the type of a transport event")
 @AllArgsConstructor
 public enum TransportEventTypeCode implements EnumBase {
-  ARRI("Arrived"),
-  DEPA("Departed");
+  APPROACHING("Close to arriving at a certain location"),
+  ARRIVED("Arrived at a certain location"),
+  DEPARTED("Departed from a certain location");
 
   private final String valueDescription;
 }

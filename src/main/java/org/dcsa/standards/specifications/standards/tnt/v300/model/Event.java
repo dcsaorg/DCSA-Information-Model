@@ -49,6 +49,9 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
   @Schema(description = "The location of the event.")
   private Location eventLocation;
 
+  @Schema(description = "Free text information explaining why this event was sent", maxLength = 250)
+  private String reason;
+
   @Schema() private EventClassification eventClassification;
 
   @Schema() private ShipmentDetails shipmentDetails;

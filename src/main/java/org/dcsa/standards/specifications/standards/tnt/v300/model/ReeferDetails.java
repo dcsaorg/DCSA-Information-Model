@@ -47,4 +47,13 @@ Unit in which all temperature values are expressed:
 
   @Schema(description = "Non-temperature measured parameters")
   private ReeferParameters measuredParameters;
+
+  @Schema(maxLength = 100, description = "Manufacturer name of the reefer unit")
+  private String unitManufacturer;
+
+  @Schema(maxLength = 100, description = "Model of the reefer unit")
+  private String unitModel;
+
+  @Schema(maxLength = 100, description = "Model of the reefer controller")
+  private String controllerModel;
 }

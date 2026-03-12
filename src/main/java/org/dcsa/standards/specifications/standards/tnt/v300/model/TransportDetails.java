@@ -13,15 +13,5 @@ public class TransportDetails {
   @Schema(description = "Codes identifying the reasons for a delay")
   private List<DelayReasonCode> delayReasonCodes;
 
-  @Schema(
-      example = "Bad weather",
-      description =
-"""
-Free text information provided by the vessel operator regarding the reasons for the change in schedule
-and/or plans to mitigate schedule slippage.
-""",
-      maxLength = 250)
-  private String changeRemark;
-
   @Schema() private TransportCall transportCall;
 }

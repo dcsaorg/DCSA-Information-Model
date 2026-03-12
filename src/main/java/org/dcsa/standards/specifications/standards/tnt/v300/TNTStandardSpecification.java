@@ -89,7 +89,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20260213-alpha", "TNT", "3.0.0-20260116-alpha", 4);
+        "Track and Trace", "3.0.0-20260313-alpha", "TNT", "3.0.0-20260213-alpha", 4);
   }
 
   @Override
@@ -155,7 +155,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "965a937a6df4807ca594834db502a99b9084b3b2"
+                                    + "54d897dbc442c2d11e994d6cafd0e0d375b5d8a0"
                                     + "/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }

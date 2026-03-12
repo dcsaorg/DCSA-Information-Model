@@ -31,9 +31,6 @@ public class ShipmentDetails {
 
   @Schema() private ShipmentLocationTypeCode shipmentLocationType;
 
-  @Schema(description = "The reason this event was sent")
-  private String reason;
-
   @Schema(
       description =
 """

@@ -19,7 +19,6 @@ public enum IotEventCode implements EnumBase {
   DOOR_OPENED("Door opened"),
   GEOFENCE_ENTRY("Geofenced area entry"),
   GEOFENCE_EXIT("Geofenced area exit"),
-  LOCATION_REACHED("Meaningful location reached"),
   MOTION_START("Motion start"),
   MOTION_STOP("Motion stop");
 

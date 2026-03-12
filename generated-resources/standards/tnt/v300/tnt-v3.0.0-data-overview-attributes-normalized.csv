@@ -90,6 +90,7 @@ Event,isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
 The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
 
 If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
+Event,reason,string,,maxLength=250,,,"Free text information explaining why this event was sent",
 Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
 Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
 Event,transportDetails,TransportDetails,,,,,"Transport-specific details",
@@ -164,9 +165,10 @@ EventClassification,shipmentEventTypeCode,string,,,,APPR,"Code used to denote th
 - `UPDT` - Update In Progress
 - `UPRE` - Update Received
 - `VOID` - Voided",
-EventClassification,transportEventTypeCode,string,,,,ARRI,"Code used to denote the type of a transport event
-- `ARRI` - Arrived
-- `DEPA` - Departed",
+EventClassification,transportEventTypeCode,string,,,,ARRIVED,"Code used to denote the type of a transport event
+- `APPROACHING` - Close to arriving at a certain location
+- `ARRIVED` - Arrived at a certain location
+- `DEPARTED` - Departed from a certain location",
 EventRouting,destinationParty,Party,,,,,"The final party intended as destination of the event.",
 EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party.",
 EventRouting,originatingParty,Party,,,,,"The initial party with which the event originated.",
@@ -191,7 +193,7 @@ At least one feedback element of severity `ERROR` is expected.
 Lower severity feedback elements may also be included.",
 GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
 GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
-IotDetails,deviceModel,string,,maxLength=100,,,"Model name of the IoT device",
+IotDetails,deviceModel,string,,maxLength=100,,,"Model of the IoT device",
 IotDetails,deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
 IotDetails,"iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
 - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
@@ -205,7 +207,6 @@ IotDetails,iotEventCode,string,,,,DRO,"Code used to denote the specific IoT even
 - `DOOR_OPENED` - Door opened
 - `GEOFENCE_ENTRY` - Geofenced area entry
 - `GEOFENCE_EXIT` - Geofenced area exit
-- `LOCATION_REACHED` - Meaningful location reached
 - `MOTION_START` - Motion start
 - `MOTION_STOP` - Motion stop",
 IotDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
@@ -267,6 +268,7 @@ RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or 
 RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",
 RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported.",
 ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
+ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
@@ -281,6 +283,8 @@ ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",
 ReeferDetails,temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
+ReeferDetails,unitManufacturer,string,,maxLength=100,,,"Manufacturer name of the reefer unit",
+ReeferDetails,unitModel,string,,maxLength=100,,,"Model of the reefer unit",
 ReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
@@ -332,7 +336,6 @@ ShipmentDetails,documentReference,DocumentReference,,,,,"Primary document refere
 ShipmentDetails,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
 ShipmentDetails,priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
 It can vary per carrier.",
-ShipmentDetails,reason,string,,,,,"The reason this event was sent",
 ShipmentDetails,shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
 - `FCD` - Full container drop-off location
 - `IEL` - Container intermediate export stop-off location
@@ -394,8 +397,6 @@ This key is essential to distinguish between two separate calls at the same loca
 TransportCall,"transportCallSequenceNumberMax",integer,,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
 TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information",
 TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information",
-TransportDetails,changeRemark,string,,maxLength=250,,"Bad weather","Free text information provided by the vessel operator regarding the reasons for the change in schedule
-and/or plans to mitigate schedule slippage.",
 TransportDetails,delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
 Item description:
 Code identifying the reason for a delay,

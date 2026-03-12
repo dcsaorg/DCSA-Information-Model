@@ -19,6 +19,6 @@ public class IotDetails {
   @Schema(maxLength = 100, description = "Brand name of the IoT device")
   private String deviceVendor;
 
-  @Schema(maxLength = 100, description = "Model name of the IoT device")
+  @Schema(maxLength = 100, description = "Model of the IoT device")
   private String deviceModel;
 }
