@@ -97,7 +97,7 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0gnlh3n" messageRef="Message_3d0fekq" />
     </bpmn:intermediateCatchEvent>
     <bpmn:sequenceFlow id="Flow_1fd2i08" sourceRef="Event_1jbkp6i" targetRef="Activity_0b13p9d" />
-    <bpmn:task id="Activity_0b13p9d" name="Submit coastal schedule proposal">
+    <bpmn:task id="Activity_0b13p9d" name="Share coastal schedule proposal">
       <bpmn:incoming>Flow_1fd2i08</bpmn:incoming>
       <bpmn:incoming>Flow_09qmgdv</bpmn:incoming>
     </bpmn:task>
