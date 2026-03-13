@@ -22,6 +22,8 @@ Promoted the free-text `reason` (why the event was sent) from `ShipmentDetails` 
 
 Added as reefer details the unit manufacturer and model and the controller model. (SD-2870)
 
+Added support in object `EventRouting` for multiple `originatingParties` and `destinationParties`. (SD-2921)
+
 
 ## Snapshot v3.0.0-20260213-alpha
 

@@ -168,23 +168,23 @@ One line of an unstructured `Address`.",
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-"Event / eventRouting",eventRouting,EventRouting,,,,,"Routing of an event from the originating party, via forwarding parties, to the destination party.",
-"Event / eventRouting / destinationParty",destinationParty,Party,,,,,"The final party intended as destination of the event.",
-"Event / eventRouting / destinationParty / codeListName",codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+"Event / eventRouting",eventRouting,EventRouting,,,,,"Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).",
+"Event / eventRouting / destinationParties",destinationParties,"Party list",,,,,"The party (or parties) intended as final recipients of the event.",
+"Event / eventRouting / destinationParties / codeListName",codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
 - `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
-"Event / eventRouting / destinationParty / codeListProvider",codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
+"Event / eventRouting / destinationParties / codeListProvider",codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
 - `SMDG` (Ship Message Design Group)
 - `ZZZ` (Mutually defined)
 
 or any other code as defined in the
 [DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).",
-"Event / eventRouting / destinationParty / partyCode",partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
-"Event / eventRouting / destinationParty / partyFunction",partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
+"Event / eventRouting / destinationParties / partyCode",partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
+"Event / eventRouting / destinationParties / partyFunction",partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
 or a subsequent revision.",
-"Event / eventRouting / forwardingParties",forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party.",
+"Event / eventRouting / forwardingParties",forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party or parties.",
 "Event / eventRouting / forwardingParties / codeListName",codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
@@ -199,19 +199,19 @@ or any other code as defined in the
 "Event / eventRouting / forwardingParties / partyFunction",partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
 or a subsequent revision.",
-"Event / eventRouting / originatingParty",originatingParty,Party,,,,,"The initial party with which the event originated.",
-"Event / eventRouting / originatingParty / codeListName",codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
+"Event / eventRouting / originatingParties",originatingParties,"Party list",,,,,"The party (or parties) with which the event (data) originated.",
+"Event / eventRouting / originatingParties / codeListName",codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
 - `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
-"Event / eventRouting / originatingParty / codeListProvider",codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
+"Event / eventRouting / originatingParties / codeListProvider",codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
 - `SMDG` (Ship Message Design Group)
 - `ZZZ` (Mutually defined)
 
 or any other code as defined in the
 [DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).",
-"Event / eventRouting / originatingParty / partyCode",partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
-"Event / eventRouting / originatingParty / partyFunction",partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
+"Event / eventRouting / originatingParties / partyCode",partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
+"Event / eventRouting / originatingParties / partyFunction",partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
 or a subsequent revision.",
 "Event / eventUpdatedDateTime",eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",

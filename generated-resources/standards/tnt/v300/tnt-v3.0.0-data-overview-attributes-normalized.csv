@@ -82,7 +82,7 @@ by a composite key including:
 - `eventRouting.originatingParty.codeListName`
 - `eventID`",
 Event,eventLocation,Location,,,,,"The location of the event.",
-Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party, via forwarding parties, to the destination party.",
+Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).",
 Event,eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
 Event,iotDetails,IotDetails,,,,,"IoT-specific details",
 Event,isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
@@ -169,9 +169,9 @@ EventClassification,transportEventTypeCode,string,,,,ARRIVED,"Code used to denot
 - `APPROACHING` - Close to arriving at a certain location
 - `ARRIVED` - Arrived at a certain location
 - `DEPARTED` - Departed from a certain location",
-EventRouting,destinationParty,Party,,,,,"The final party intended as destination of the event.",
-EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party.",
-EventRouting,originatingParty,Party,,,,,"The initial party with which the event originated.",
+EventRouting,destinationParties,"Party list",,,,,"The party (or parties) intended as final recipients of the event.",
+EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party or parties.",
+EventRouting,originatingParties,"Party list",,,,,"The party (or parties) with which the event (data) originated.",
 Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
 Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))

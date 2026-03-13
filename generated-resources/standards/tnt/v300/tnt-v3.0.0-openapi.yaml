@@ -455,7 +455,7 @@ components:
       properties:
         eventRouting:
           description: |
-            Routing of an event from the originating party, via forwarding parties, to the destination party.
+            Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).
           allOf:
           - $ref: "#/components/schemas/EventRouting"
         eventID:
@@ -637,24 +637,23 @@ components:
     EventRouting:
       type: "object"
       properties:
-        originatingParty:
-          description: |
-            The initial party with which the event originated.
-          allOf:
-          - $ref: "#/components/schemas/Party"
-        forwardingParties:
+        originatingParties:
           type: "array"
-          description: |
-            Ordered list of parties forwarding the event between the originating and destination party.
+          description: "The party (or parties) with which the event (data) originated."
           items:
             $ref: "#/components/schemas/Party"
-        destinationParty:
-          description: |
-            The final party intended as destination of the event.
-          allOf:
-          - $ref: "#/components/schemas/Party"
+        forwardingParties:
+          type: "array"
+          description: "Ordered list of parties forwarding the event between the originating and destination party or parties."
+          items:
+            $ref: "#/components/schemas/Party"
+        destinationParties:
+          type: "array"
+          description: "The party (or parties) intended as final recipients of the event."
+          items:
+            $ref: "#/components/schemas/Party"
       description: |
-        Routing of an event from the originating party, via forwarding parties, to the destination party.
+        Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).
     Facility:
       type: "object"
       properties:
