@@ -164,8 +164,26 @@ public class TNTStandardSpecification extends StandardSpecification {
   protected Map<Class<? extends DataOverviewSheet>, Map<String, String>>
       getChangedPrimaryKeyByOldPrimaryKeyBySheetClass() {
     return Map.ofEntries(
-        Map.entry(AttributesHierarchicalSheet.class, Map.ofEntries()),
-        Map.entry(AttributesNormalizedSheet.class, Map.ofEntries()),
+        Map.entry(
+            AttributesHierarchicalSheet.class,
+            Map.ofEntries(
+                Map.entry(
+                    "Event / equipmentDetails / movementType",
+                    "Event / equipmentDetails / transportPhase"),
+                Map.entry(
+                    "Event / eventRouting / destinationParty",
+                    "Event / eventRouting / destinationParties"),
+                Map.entry(
+                    "Event / eventRouting / originatingParty",
+                    "Event / eventRouting / originatingParties"),
+                Map.entry("Event / shipmentDetails / reason", "Event / reason"))),
+        Map.entry(
+            AttributesNormalizedSheet.class,
+            Map.ofEntries(
+                Map.entry("EquipmentDetails,movementType", "EquipmentDetails,transportPhase"),
+                Map.entry("EventRouting,destinationParty", "EventRouting,destinationParties"),
+                Map.entry("EventRouting,originatingParty", "EventRouting,originatingParties"),
+                Map.entry("ShipmentDetails,reason", "Event,reason"))),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }
