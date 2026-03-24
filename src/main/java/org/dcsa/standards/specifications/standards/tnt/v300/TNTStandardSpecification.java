@@ -25,19 +25,19 @@ import org.dcsa.standards.specifications.dataoverview.QueryParametersSheet;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v104.model.Address;
-import org.dcsa.standards.specifications.standards.core.v104.model.ClassifiedDateTime;
-import org.dcsa.standards.specifications.standards.core.v104.model.DocumentReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.DocumentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v104.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v104.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v104.model.Location;
-import org.dcsa.standards.specifications.standards.core.v104.model.Party;
-import org.dcsa.standards.specifications.standards.core.v104.model.Seal;
-import org.dcsa.standards.specifications.standards.core.v104.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.ShipmentReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.ShipmentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v104.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.Address;
+import org.dcsa.standards.specifications.standards.core.v200.model.ClassifiedDateTime;
+import org.dcsa.standards.specifications.standards.core.v200.model.DocumentReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.DocumentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v200.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v200.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v200.model.Location;
+import org.dcsa.standards.specifications.standards.core.v200.model.Party;
+import org.dcsa.standards.specifications.standards.core.v200.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v200.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.ShipmentReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.ShipmentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v200.model.VoyageNumberOrReference;
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.FeedbackElement;
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsError;
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.GetEventsResponse;
@@ -170,6 +170,33 @@ public class TNTStandardSpecification extends StandardSpecification {
             AttributesHierarchicalSheet.class,
             Map.ofEntries(
                 Map.entry(
+                    "Event / eventClassification / equipmentEventTypeCode",
+                    "Event / eventClassification / equipmentEventType"),
+                Map.entry(
+                    "Event / eventClassification / eventClassifierCode",
+                    "Event / eventClassification / eventClassifier"),
+                Map.entry(
+                    "Event / eventClassification / eventTypeCode",
+                    "Event / eventClassification / eventType"),
+                Map.entry(
+                    "Event / eventClassification / iotEventTypeCode",
+                    "Event / eventClassification / iotEventType"),
+                Map.entry(
+                    "Event / eventClassification / reeferEventTypeCode",
+                    "Event / eventClassification / reeferEventType"),
+                Map.entry(
+                    "Event / eventClassification / shipmentEventTypeCode",
+                    "Event / eventClassification / shipmentEventType"),
+                Map.entry(
+                    "Event / eventClassification / transportEventTypeCode",
+                    "Event / eventClassification / transportEventType"),
+                Map.entry(
+                    "Event / eventLocation / facilityTypeCode",
+                    "Event / eventLocation / facilityType"),
+                Map.entry(
+                    "Event / iotDetails / iotEquipmentTechnologyCode",
+                    "Event / iotDetails / iotEquipmentTechnology"),
+                Map.entry(
                     "Event / reeferDetails / measuredParameters / isColdTreatmentRequired",
                     "Event / reeferDetails / measuredParameters / isColdTreatment"),
                 Map.entry(
@@ -180,15 +207,59 @@ public class TNTStandardSpecification extends StandardSpecification {
                     "Event / reeferDetails / setpointParameters / isColdTreatment"),
                 Map.entry(
                     "Event / reeferDetails / setpointParameters / isControlledAtmosphereRequired",
-                    "Event / reeferDetails / setpointParameters / isControlledAtmosphere"))),
+                    "Event / reeferDetails / setpointParameters / isControlledAtmosphere"),
+                Map.entry(
+                    "Event / shipmentDetails / additionalDocumentReferences / typeCode",
+                    "Event / shipmentDetails / additionalDocumentReferences / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / documentReference / typeCode",
+                    "Event / shipmentDetails / documentReference / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / typeCode",
+                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / typeCode",
+                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / shipmentReferences / typeCode",
+                    "Event / shipmentDetails / shipmentReferences / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / typeCode",
+                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / referenceType"),
+                Map.entry(
+                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / typeCode",
+                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / referenceType"))),
         Map.entry(
             AttributesNormalizedSheet.class,
             Map.ofEntries(
+                Map.entry("DocumentReference,typeCode", "DocumentReference,referenceType"),
+                Map.entry(
+                    "EventClassification,equipmentEventTypeCode",
+                    "EventClassification,equipmentEventType"),
+                Map.entry(
+                    "EventClassification,eventClassifierCode",
+                    "EventClassification,eventClassifier"),
+                Map.entry("EventClassification,eventTypeCode", "EventClassification,eventType"),
+                Map.entry(
+                    "EventClassification,iotEventTypeCode", "EventClassification,iotEventType"),
+                Map.entry(
+                    "EventClassification,reeferEventTypeCode",
+                    "EventClassification,reeferEventType"),
+                Map.entry(
+                    "EventClassification,shipmentEventTypeCode",
+                    "EventClassification,shipmentEventType"),
+                Map.entry(
+                    "EventClassification,transportEventTypeCode",
+                    "EventClassification,transportEventType"),
+                Map.entry(
+                    "IotDetails,iotEquipmentTechnologyCode", "IotDetails,iotEquipmentTechnology"),
+                Map.entry("Location,facilityTypeCode", "Location,facilityType"),
                 Map.entry(
                     "ReeferParameters,isColdTreatmentRequired", "ReeferParameters,isColdTreatment"),
                 Map.entry(
                     "ReeferParameters,isControlledAtmosphereRequired",
-                    "ReeferParameters,isControlledAtmosphere"))),
+                    "ReeferParameters,isControlledAtmosphere"),
+                Map.entry("ShipmentReference,typeCode", "ShipmentReference,referenceType"))),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }

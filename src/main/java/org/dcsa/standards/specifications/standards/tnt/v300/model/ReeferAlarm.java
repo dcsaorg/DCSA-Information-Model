@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.core.v200.types.FormattedDateTime;
 
 @Schema(description = "Reefer container alarm")
 @Data

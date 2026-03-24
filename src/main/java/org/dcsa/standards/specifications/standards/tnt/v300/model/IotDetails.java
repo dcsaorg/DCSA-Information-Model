@@ -2,19 +2,16 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEquipmentTechnologyCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEventCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.PowerStatusCode;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEquipmentTechnology;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.PowerStatus;
 
 @Schema(description = "IoT-specific details")
 @Data
 public class IotDetails {
 
-  @Schema() private IotEventCode iotEventCode;
+  @Schema() private IotEquipmentTechnology iotEquipmentTechnology;
 
-  @Schema() private IotEquipmentTechnologyCode iotEquipmentTechnologyCode;
-
-  @Schema protected PowerStatusCode powerStatus;
+  @Schema protected PowerStatus powerStatus;
 
   @Schema(maxLength = 100, description = "Brand name of the IoT device")
   private String deviceVendor;

@@ -15,41 +15,41 @@ Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
 "AirTemperatureMeasurement",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
 "AirTemperatureSensorReading",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
-ClassifiedDateTime,classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
-- `PLN` - Planned
-- `EST` - Estimated
-- `ACT` - Actual",
+ClassifiedDateTime,classifier,string,,maxLength=10,,ESTIMATED,"Classifier denoting whether a timestamp or event is planned, estimated or actual
+- `ACTUAL` - Actual
+- `ESTIMATED` - Estimated
+- `PLANNED` - Planned",
 ClassifiedDateTime,value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
 DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-DocumentReference,typeCode,string,,,,BKG,"Code used to denote the type of a document reference
-- `AMF` - Advance Manifest Filing (of any subtype)
-- `ARN` - Arrival Notice
-- `BKG` - Booking
-- `CAS` - Cargo Survey
-- `CBR` - Carrier Booking Request
-- `CEA` - Certificate of Analysis
-- `CEO` - Certificate of Origin
-- `CQU` - Contract Quotation
-- `CRO` - Container Release Order
-- `CUC` - Customs Clearance
-- `DEI` - Delivery Instructions
-- `DEO` - Delivery Order
-- `DGD` - Dangerous Goods Declaration
-- `FCE` - Fumigation Certificate
-- `HCE` - Health Certificate
-- `ICE` - Inspection Certificate
-- `INV` - Invoice
-- `OOG` - Out of Gauge
-- `PCE` - Phytosanitary Certificate
-- `PFD` - Proof of Delivery
-- `SHI` - Shipping Instruction
-- `TRD` - Transport Document
-- `TRO` - Transport Order
-- `VCE` - Veterinary Certificate
-- `VGM` - Verified Gross Mass",
+DocumentReference,referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+- `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
+- `ARRIVAL_NOTICE` - Arrival Notice
+- `BOOKING` - Booking
+- `CARGO_SURVEY` - Cargo Survey
+- `CARRIER_BOOKING_REQUEST` - Carrier Booking Request
+- `CERTIFICATE_OF_ANALYSIS` - Certificate of Analysis
+- `CERTIFICATE_OF_ORIGIN` - Certificate of Origin
+- `CONTAINER_RELEASE_ORDER` - Container Release Order
+- `CONTRACT_QUOTATION` - Contract Quotation
+- `CUSTOMS_CLEARANCE` - Customs Clearance
+- `DANGEROUS_GOODS_DECLARATION` - Dangerous Goods Declaration
+- `DELIVERY_INSTRUCTIONS` - Delivery Instructions
+- `DELIVERY_ORDER` - Delivery Order
+- `FUMIGATION_CERTIFICATE` - Fumigation Certificate
+- `HEALTH_CERTIFICATE` - Health Certificate
+- `INSPECTION_CERTIFICATE` - Inspection Certificate
+- `INVOICE` - Invoice
+- `OUT_OF_GAUGE_DECLARATION` - Out of Gauge Declaration
+- `PHYTOSANITARY_CERTIFICATE` - Phytosanitary Certificate
+- `PROOF_OF_DELIVERY` - Proof of Delivery
+- `SHIPPING_INSTRUCTIONS` - Shipping Instruction
+- `TRANSPORT_DOCUMENT` - Transport Document
+- `TRANSPORT_ORDER` - Transport Order
+- `VERIFIED_GROSS_MASS` - Verified Gross Mass
+- `VETERINARY_CERTIFICATE` - Veterinary Certificate",
 "DocumentReferenceReplacement",newReferences,"DocumentReference list",,,,,"References of the documents replacing those with the `oldReferences`.",
 "DocumentReferenceReplacement",oldReferences,"DocumentReference list",,,,,"References of the documents replaced by those with the `newReferences`.",
-EquipmentDetails,emptyIndicatorCode,string,,,,LADEN,"Code to denote whether the equipment is empty or laden.
+EquipmentDetails,emptyIndicator,string,,,,LADEN,"Indicator of whether the equipment is empty or laden.
 - `EMPTY` - Empty
 - `LADEN` - Laden",
 EquipmentDetails,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
@@ -94,78 +94,85 @@ Event,reason,string,,maxLength=250,,,"Free text information explaining why this 
 Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
 Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
 Event,transportDetails,TransportDetails,,,,,"Transport-specific details",
-EventClassification,equipmentEventTypeCode,string,,,,LOAD,"Code used to denote the type of an equipment event
-- `AVDO` - Available for Drop-off
-- `AVPU` - Available for Pick-up
-- `CROS` - Crossed
-- `CUSI` - Customs Selected for Inspection
-- `CUSR` - Customs Released
-- `CUSS` - Customs Selected for Scan
-- `DISC` - Discharged
-- `DROP` - Drop-off
-- `GTIN` - Gated in
-- `GTOT` - Gated out
-- `INSP` - Inspected
-- `LOAD` - Loaded
-- `PICK` - Pick-up
-- `RMVD` - Removed
-- `RSEA` - Resealed
-- `STRP` - Stripped
-- `STUF` - Stuffed",
-EventClassification,eventClassifierCode,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
-- `PLN` - Planned
-- `EST` - Estimated
-- `ACT` - Actual",
-EventClassification,eventTypeCode,string,,,,EQUIPMENT,"Code used to denote the type of an event
+EventClassification,equipmentEventType,string,,,,LOADED,"The type of an equipment event
+- `AVAILABLE_FOR_DROP_OFF` - Available for drop-off
+- `AVAILABLE_FOR_PICKUP` - Available for pickup
+- `CROSSED` - Crossed
+- `CUSTOMS_RELEASED` - Released by customs
+- `CUSTOMS_SELECTED_FOR_INSPECTION` - Selected for customs inspection
+- `CUSTOMS_SELECTED_FOR_SCAN` - Selected for customs scan
+- `DISCHARGED` - Discharged
+- `DROPPED_OFF` - Dropped off
+- `GATED_IN` - Gated in
+- `GATED_OUT` - Gated out
+- `INSPECTED` - Inspected
+- `LOADED` - Loaded
+- `PICKED_UP` - Picked up
+- `REMOVED` - Removed
+- `RESEALED` - Resealed
+- `STRIPPED` - Stripped
+- `STUFFED` - Stuffed",
+EventClassification,eventClassifier,string,,maxLength=10,,ESTIMATED,"Classifier denoting whether a timestamp or event is planned, estimated or actual
+- `ACTUAL` - Actual
+- `ESTIMATED` - Estimated
+- `PLANNED` - Planned",
+EventClassification,eventType,string,,,,EQUIPMENT,"The type of a Track and Trace event
 - `SHIPMENT` - Shipment event
 - `TRANSPORT` - Transport event
 - `EQUIPMENT` - Equipment event
 - `IOT` - IoT event
 - `REEFER` - Reefer event",
-EventClassification,iotEventTypeCode,string,,,,TELEMETRY,"Code used to denote the type of an IoT event
+EventClassification,iotEventType,string,,,,DOOR_OPENED,"The type of an IoT event
+- `BREADCRUMB` - Periodic geolocation update
+- `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
+- `DOOR_CLOSED` - Door closed
+- `DOOR_OPENED` - Door opened
+- `GEOFENCE_ENTRY` - Geofenced area entry
+- `GEOFENCE_EXIT` - Geofenced area exit
+- `MOTION_START` - Motion start
+- `MOTION_STOP` - Motion stop
 - `PAIRING` - The IoT device is being paired with the equipment
-- `TELEMETRY` - The IoT device is emitting telemetry data
 - `UNPAIRING` - The IoT device is being unpaired from the equipment",
-EventClassification,reeferEventTypeCode,string,,,,MEAS,"Code used to denote the type of a reefer event
-- `MEAS` - Measured
-- `ADJU` - Adjusted",
-EventClassification,shipmentEventTypeCode,string,,,,APPR,"Code used to denote the type of a shipment event
-- `AMCF` - Amendment Confirmed
-- `AMCN` - Amendment Cancelled
-- `AMDC` - Amendment Declined
-- `AMPR` - Amendment In Progress
-- `AMRE` - Amendment Received
-- `APPR` - Approved
-- `CACF` - Cancellation Confirmed
-- `CADC` - Cancellation Declined
-- `CANC` - Cancelled
-- `CARE` - Cancellation Received
-- `CMPL` - Completed
-- `CONF` - Confirmed
-- `DECL` - Declined
-- `DRFT` - Drafted
-- `HOLD` - On Hold
-- `ISSU` - Issued
-- `PENA` - Pending Approval
-- `PENM` - Pending Amendment
-- `PENU` - Pending Update
-- `PSAM` - Pending Surrender for Amendment
-- `PSDL` - Pending Surrender for Delivery
-- `RECE` - Received
-- `REJE` - Rejected
-- `RELS` - Released
-- `REQS` - Requested
-- `SUAM` - Surrendered for Amendment
-- `SUBM` - Submitted
-- `SUDL` - Surrendered for Delivery
-- `SURR` - Surrendered
-- `UPCF` - Update Confirmed
-- `UPCN` - Update Cancelled
-- `UPDC` - Update Declined
-- `UPDT` - Update In Progress
-- `UPRE` - Update Received
-- `VOID` - Voided",
-EventClassification,transportEventTypeCode,string,,,,ARRIVED,"Code used to denote the type of a transport event
+EventClassification,reeferEventType,string,,,,MEASURED,"The type of a reefer event
+- `ADJUSTED` - Adjusted
+- `MEASURED` - Measured",
+EventClassification,shipmentEventType,string,,,,APPROVED,"The type of a shipment event
+- `AMENDMENT_CANCELLED` - Amendment Cancelled
+- `AMENDMENT_CONFIRMED` - Amendment Confirmed
+- `AMENDMENT_DECLINED` - Amendment Declined
+- `AMENDMENT_IN_PROGRESS` - Amendment In Progress
+- `AMENDMENT_RECEIVED` - Amendment Received
+- `APPROVED` - Approved
+- `CANCELLATION_CONFIRMED` - Cancellation Confirmed
+- `CANCELLATION_DECLINED` - Cancellation Declined
+- `CANCELLATION_RECEIVED` - Cancellation Received
+- `CANCELLED` - Cancelled
+- `COMPLETED` - Completed
+- `CONFIRMED` - Confirmed
+- `DECLINED` - Declined
+- `DRAFTED` - Drafted
+- `ISSUED` - Issued
+- `ON_HOLD` - On Hold
+- `PENDING_AMENDMENT` - Pending Amendment
+- `PENDING_APPROVAL` - Pending Approval
+- `PENDING_SURRENDER_FOR_AMENDMENT` - Pending Surrender for Amendment
+- `PENDING_SURRENDER_FOR_DELIVERY` - Pending Surrender for Delivery
+- `PENDING_UPDATE` - Pending Update
+- `RECEIVED` - Received
+- `REJECTED` - Rejected
+- `RELEASED` - Released
+- `REQUESTED` - Requested
+- `SUBMITTED` - Submitted
+- `SURRENDERED` - Surrendered
+- `SURRENDERED_FOR_AMENDMENT` - Surrendered for Amendment
+- `SURRENDERED_FOR_DELIVERY` - Surrendered for Delivery
+- `UPDATE_CANCELLED` - Update Cancelled
+- `UPDATE_CONFIRMED` - Update Confirmed
+- `UPDATE_DECLINED` - Update Declined
+- `UPDATE_IN_PROGRESS` - Update In Progress
+- `UPDATE_RECEIVED` - Update Received
+- `VOIDED` - Voided",
+EventClassification,transportEventType,string,,,,ARRIVED,"The type of a transport event
 - `APPROACHING` - Close to arriving at a certain location
 - `ARRIVED` - Arrived at a certain location
 - `DEPARTED` - Departed from a certain location",
@@ -195,38 +202,28 @@ GetEventsResponse,events,"Event list",,,,,"The list of events matching the filte
 GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 IotDetails,deviceModel,string,,maxLength=100,,,"Model of the IoT device",
 IotDetails,deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
-IotDetails,"iotEquipmentTechnologyCode",string,,,,SMART_CONTAINER,"Code used to indicate the type of IoT technology used by a piece of equipment
+IotDetails,iotEquipmentTechnology,string,,,,SMART_CONTAINER,"The type of IoT technology used by a piece of equipment
 - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
 - `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
 - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
 - `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
-IotDetails,iotEventCode,string,,,,DOOR_OPENED,"Code used to denote the specific IoT event that has occurred
-- `BREADCRUMB` - Periodic geolocation update
-- `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
-- `DOOR_CLOSED` - Door closed
-- `DOOR_OPENED` - Door opened
-- `GEOFENCE_ENTRY` - Geofenced area entry
-- `GEOFENCE_EXIT` - Geofenced area exit
-- `MOTION_START` - Motion start
-- `MOTION_STOP` - Motion stop",
-IotDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
+IotDetails,powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
 - `POWER_ON` - The device is connected to a power source and powered on.
 - `UNKNOWN` - The power status of the device could not be determined.",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
-Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
-
-- `BORD` - Border
-- `CLOC` - Customer location
-- `COFS` - Container freight station
-- `OFFD` - Off-dock storage
-- `DEPO` - Depot
-- `INTE` - Inland terminal
-- `POTE` - Port terminal
+Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
+- `BORDER` - Border
+- `CUSTOMER_LOCATION` - Customer location
+- `DEPOT` - Depot
+- `FREIGHT_STATION` - Container freight station
+- `INLAND_TERMINAL` - Inland terminal
+- `OFF_DOCK_STORAGE` - Off-dock storage
+- `PORT_TERMINAL` - Port terminal
 - `RAMP` - Ramp
-- `WAYP` - Waypoint",
+- `WAYPOINT` - Waypoint",
 Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
 Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
 Location,UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
@@ -278,7 +275,7 @@ ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint tem
 ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 ReeferDetails,numberOfActiveAlarms,integer,,,,,"The number of alarms that are currently active",
-ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
+ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
 - `POWER_ON` - The device is connected to a power source and powered on.
@@ -342,36 +339,36 @@ ShipmentDetails,documentReference,DocumentReference,,,,,"Primary document refere
 ShipmentDetails,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
 ShipmentDetails,priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
 It can vary per carrier.",
-ShipmentDetails,shipmentLocationType,string,,,,PRE,"Code used to denote the type of a shipment location
-- `FCD` - Full container drop-off location
-- `IEL` - Container intermediate export stop-off location
-- `OIR` - Onward Inland Routing
-- `ORI` - Origin of goods
-- `PCF` - Pre-carriage From
-- `PDE` - Place of Delivery
-- `POD` - Port of Discharge
-- `POL` - Port of Loading
-- `PRE` - Place of Receipt
-- `PTP` - Prohibited transshipment port
-- `RTP` - Requested transshipment port",
+ShipmentDetails,shipmentLocationType,string,,,,PLACE_OF_DELIVERY,"The type of a shipment location
+- `FULL_CONTAINER_DROP_OFF` - Full container drop-off location
+- `INTERMEDIATE_EXPORT_STOP_OFF` - Container intermediate export stop-off location
+- `ONWARD_INLAND_ROUTING` - Onward Inland Routing
+- `ORIGIN_OF_GOODS` - Origin of goods
+- `PLACE_OF_DELIVERY` - Place of Delivery
+- `PLACE_OF_RECEIPT` - Place of Receipt
+- `PORT_OF_DISCHARGE` - Port of Discharge
+- `PORT_OF_LOADING` - Port of Loading
+- `PRE_CARRIAGE_FORM` - Pre-carriage From
+- `PROHIBITED_TRANSSHIPMENT_PORT` - Prohibited transshipment port
+- `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port",
 ShipmentDetails,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
 ShipmentDetails,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
 ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
-ShipmentReference,typeCode,string,,,,FF,"Code used to denote the type of a shipment reference
-- `AAO` - Consignee’s Reference
-- `AES` - Automated Export System
-- `BID` - Booking Request ID
-- `BPR` - Booking party reference number
-- `CER` - Canadian Export Reporting System
-- `CR` - Customer’s Reference
-- `CSI` - Customer shipment ID
-- `DUE` - Declaração Única de Exportação
-- `ECR` - Empty container release reference
-- `EQ` - Equipment Reference
-- `FF` - Freight Forwarder’s Reference
-- `PO` - Purchase Order Reference
-- `RUC` - Registro Único del Contribuyente
-- `SI` - Shipper’s Reference",
+ShipmentReference,referenceType,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
+- `CONSIGNEES_REFERENCE` - Consignee’s Reference
+- `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
+- `BOOKING_REQUEST_ID` - Booking Request ID
+- `BOOKING_PARTY_REFERENCE_NUMBER` - Booking party reference number
+- `CANADIAN_EXPORT_REPORTING_NUMBER` - Canadian Export Reporting System
+- `CUSTOMERS_REFERENCE` - Customer’s Reference
+- `CUSTOMER_SHIPMENT_ID` - Customer shipment ID
+- `DECLARACAO_UNICA_DE_EXPORTACAO` - Declaração Única de Exportação
+- `EMPTY_CONTAINER_RELEASE_REFERENCE` - Empty container release reference
+- `EQUIPMENT_REFERENCE` - Equipment Reference
+- `FREIGHT_FORWARDERS_REFERENCE` - Freight Forwarder’s Reference
+- `PURCHASE_ORDER_REFERENCE` - Purchase Order Reference
+- `REGISTRO_UNICO_DEL_CONTRIBUYENTE` - Registro Único del Contribuyente
+- `SHIPPERS_REFERENCE` - Shipper’s Reference",
 "ShipmentReferenceReplacement",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`.",
 "ShipmentReferenceReplacement",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`.",
 "TemperatureProbeMeasurement",COAProbeUDMKey,string,,,,P20,"COA UDM reefer probe key:

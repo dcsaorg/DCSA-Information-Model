@@ -9,9 +9,9 @@ import org.dcsa.standards.specifications.generator.EnumBase;
 @Schema(
     type = "string",
     example = "SMART_CONTAINER",
-    description = "Code used to indicate the type of IoT technology used by a piece of equipment")
+    description = "The type of IoT technology used by a piece of equipment")
 @AllArgsConstructor
-public enum IotEquipmentTechnologyCode implements EnumBase {
+public enum IotEquipmentTechnology implements EnumBase {
   SMART_CONTAINER(
       "The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)"),
   PASSIVE_TAG(

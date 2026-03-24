@@ -9,12 +9,15 @@ import lombok.Getter;
 @Getter
 @Schema(
     type = "string",
-    example = "LADEN",
-    description = "Code to denote whether the equipment is empty or laden.")
+    example = "EQUIPMENT",
+    description = "The type of a Track and Trace event")
 @AllArgsConstructor
-public enum EmptyIndicatorCode implements EnumBase {
-  EMPTY("Empty"),
-  LADEN("Laden");
+public enum EventType implements EnumBase {
+  SHIPMENT("Shipment event"),
+  TRANSPORT("Transport event"),
+  EQUIPMENT("Equipment event"),
+  IOT("IoT event"),
+  REEFER("Reefer event");
 
   private final String valueDescription;
 }

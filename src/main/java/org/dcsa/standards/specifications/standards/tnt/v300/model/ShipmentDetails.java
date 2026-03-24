@@ -3,12 +3,12 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.model.DocumentReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.DocumentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v104.model.ShipmentReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.ShipmentReferenceReplacement;
-import org.dcsa.standards.specifications.standards.core.v104.types.FormattedDate;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentLocationTypeCode;
+import org.dcsa.standards.specifications.standards.core.v200.model.DocumentReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.DocumentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v200.model.ShipmentReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.ShipmentReferenceReplacement;
+import org.dcsa.standards.specifications.standards.core.v200.types.FormattedDate;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentLocationType;
 
 @Schema(description = "Shipment-specific details")
 @Data
@@ -29,7 +29,7 @@ public class ShipmentDetails {
   @Schema(description = "List of shipment reference replacements related to this event")
   private List<ShipmentReferenceReplacement> shipmentReferenceReplacements;
 
-  @Schema() private ShipmentLocationTypeCode shipmentLocationType;
+  @Schema() private ShipmentLocationType shipmentLocationType;
 
   @Schema(
       description =

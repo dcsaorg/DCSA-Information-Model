@@ -3,10 +3,10 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.model.Seal;
-import org.dcsa.standards.specifications.standards.core.v104.types.EquipmentReference;
-import org.dcsa.standards.specifications.standards.core.v104.types.IsoEquipmentCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.EmptyIndicatorCode;
+import org.dcsa.standards.specifications.standards.core.v200.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v200.types.EquipmentReference;
+import org.dcsa.standards.specifications.standards.core.v200.types.IsoEquipmentCode;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.EmptyIndicator;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.TransportPhase;
 
 @Schema(description = "Equipment-specific details")
@@ -18,7 +18,7 @@ public class EquipmentDetails {
   @Schema(name = "ISOEquipmentCode")
   private IsoEquipmentCode isoEquipmentCode;
 
-  @Schema() private EmptyIndicatorCode emptyIndicatorCode;
+  @Schema() private EmptyIndicator emptyIndicator;
 
   @Schema() private TransportPhase transportPhase;
 

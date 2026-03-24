@@ -10,9 +10,9 @@ import org.dcsa.standards.specifications.generator.EnumBase;
     type = "string",
     maxLength = 20,
     example = "POWER_ON",
-    description = "Code indicating the power status of an IoT device or reefer container")
+    description = "The power status of an IoT device or reefer container")
 @AllArgsConstructor
-public enum PowerStatusCode implements EnumBase {
+public enum PowerStatus implements EnumBase {
   INACTIVE("The device is inactive (not operational / not commissioned)."),
   POWER_OFF("The device is connected to a power source but switched off."),
   POWER_ON("The device is connected to a power source and powered on."),

@@ -3,14 +3,14 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.types.FormattedDateTime;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.PowerStatusCode;
+import org.dcsa.standards.specifications.standards.core.v200.types.FormattedDateTime;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.PowerStatus;
 
 @Schema(description = "Reefer-specific details")
 @Data
 public class ReeferDetails {
 
-  @Schema protected PowerStatusCode powerStatus;
+  @Schema protected PowerStatus powerStatus;
 
   @Schema(
       description =

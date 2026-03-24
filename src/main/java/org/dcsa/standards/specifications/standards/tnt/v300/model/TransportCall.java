@@ -2,9 +2,9 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.model.ServiceCodeOrReference;
-import org.dcsa.standards.specifications.standards.core.v104.model.VoyageNumberOrReference;
-import org.dcsa.standards.specifications.standards.core.v104.types.ModeOfTransportCode;
+import org.dcsa.standards.specifications.standards.core.v200.model.ServiceCodeOrReference;
+import org.dcsa.standards.specifications.standards.core.v200.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.core.v200.types.ModeOfTransport;
 
 @Data
 @Schema(description = "Transport call information")
@@ -35,7 +35,7 @@ The maximum `transportCallSequenceNumber` value to be expected within the set of
 """)
   private Integer transportCallSequenceNumberMax;
 
-  @Schema() private ModeOfTransportCode modeOfTransport;
+  @Schema() private ModeOfTransport modeOfTransport;
 
   @Schema(
       description =

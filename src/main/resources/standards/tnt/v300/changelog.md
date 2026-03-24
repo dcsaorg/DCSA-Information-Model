@@ -8,6 +8,8 @@ Added in object `ReeferDetails` attribute `lastDefrostDateTime`. (SD-2880)
 
 Added in object `ReeferDetails` attributes `alarms` and `numberOfActiveAlarms`. (SD-2881)
 
+Replaced all 3- and 4-letter pseudo-enum codes with full-word descriptions. (SD-2920)
+
 
 ## Snapshot v3.0.0-20260313-alpha
 

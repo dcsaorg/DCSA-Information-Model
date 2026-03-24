@@ -4,7 +4,7 @@ import io.swagger.v3.oas.models.parameters.Parameter;
 import java.util.List;
 import java.util.Map;
 
-import org.dcsa.standards.specifications.standards.tnt.v300.types.EventTypeCode;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.EventType;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 
 public class GetEventsEndpoint extends QueryParametersFilterEndpoint {
@@ -31,9 +31,9 @@ public class GetEventsEndpoint extends QueryParametersFilterEndpoint {
       createStringListQueryParameter(
           "eventTypes",
           List.of(
-              EventTypeCode.EQUIPMENT.name(),
-              EventTypeCode.IOT.name(),
-              EventTypeCode.REEFER.name()),
+              EventType.EQUIPMENT.name(),
+              EventType.IOT.name(),
+              EventType.REEFER.name()),
           "Retrieve only events whose `eventType` is in this list");
 
   private final Parameter eventUpdatedDateTimeMin =

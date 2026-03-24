@@ -2,29 +2,29 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.core.v104.types.EventClassifierCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.EquipmentEventTypeCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.EventTypeCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEventTypeCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.ReeferEventTypeCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentEventTypeCode;
-import org.dcsa.standards.specifications.standards.tnt.v300.types.TransportEventTypeCode;
+import org.dcsa.standards.specifications.standards.core.v200.types.EventClassifier;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.EquipmentEventType;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.EventType;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.IotEventType;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.ReeferEventType;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.ShipmentEventType;
+import org.dcsa.standards.specifications.standards.tnt.v300.types.TransportEventType;
 
 @Schema(description = "Type, subtype and classifier of an event")
 @Data
 public class EventClassification {
 
-  @Schema() private EventTypeCode eventTypeCode;
+  @Schema() private EventType eventType;
 
-  @Schema() private EventClassifierCode eventClassifierCode;
+  @Schema() private EventClassifier eventClassifier;
 
-  @Schema() private ShipmentEventTypeCode shipmentEventTypeCode;
+  @Schema() private ShipmentEventType shipmentEventType;
 
-  @Schema() private TransportEventTypeCode transportEventTypeCode;
+  @Schema() private TransportEventType transportEventType;
 
-  @Schema() private EquipmentEventTypeCode equipmentEventTypeCode;
+  @Schema() private EquipmentEventType equipmentEventType;
 
-  @Schema() private IotEventTypeCode iotEventTypeCode;
+  @Schema() private IotEventType iotEventType;
 
-  @Schema() private ReeferEventTypeCode reeferEventTypeCode;
+  @Schema() private ReeferEventType reeferEventType;
 }
