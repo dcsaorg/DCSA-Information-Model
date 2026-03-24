@@ -170,6 +170,9 @@ public class TNTStandardSpecification extends StandardSpecification {
             AttributesHierarchicalSheet.class,
             Map.ofEntries(
                 Map.entry(
+                    "Event / equipmentDetails / emptyIndicatorCode",
+                    "Event / equipmentDetails / emptyIndicator"),
+                Map.entry(
                     "Event / eventClassification / equipmentEventTypeCode",
                     "Event / eventClassification / equipmentEventType"),
                 Map.entry(
@@ -233,6 +236,7 @@ public class TNTStandardSpecification extends StandardSpecification {
             AttributesNormalizedSheet.class,
             Map.ofEntries(
                 Map.entry("DocumentReference,typeCode", "DocumentReference,referenceType"),
+                Map.entry("EquipmentDetails,emptyIndicatorCode", "EquipmentDetails,emptyIndicator"),
                 Map.entry(
                     "EventClassification,equipmentEventTypeCode",
                     "EventClassification,equipmentEventType"),
