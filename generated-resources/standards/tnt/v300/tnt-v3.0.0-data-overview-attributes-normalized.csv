@@ -267,11 +267,17 @@ RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or 
 (Also known as a departure reference number.)",
 RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",
 RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported.",
+ReeferAlarm,code,string,,maxLength=50,,,"Code of the alarm, as defined typically by the device manufacturer",
+ReeferAlarm,description,string,,maxLength=500,,,"Free-text description of the alarm",
+ReeferAlarm,endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive",
+ReeferAlarm,startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active",
+ReeferDetails,alarms,"ReeferAlarm list",,,,,"The list of alarms that are active, or that were active within a relevant time frame",
 ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
+ReeferDetails,numberOfActiveAlarms,integer,,,,,"The number of alarms that are currently active",
 ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.

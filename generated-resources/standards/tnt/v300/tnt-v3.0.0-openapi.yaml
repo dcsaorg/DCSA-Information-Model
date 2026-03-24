@@ -948,6 +948,30 @@ components:
             Unique identifying number or code that is assigned to a specific departure of a rail.
             (Also known as a departure reference number.)
       description: "Rail transport information"
+    ReeferAlarm:
+      type: "object"
+      properties:
+        code:
+          maxLength: 50
+          type: "string"
+          description: "Code of the alarm, as defined typically by the device manufacturer"
+        description:
+          maxLength: 500
+          type: "string"
+          description: "Free-text description of the alarm"
+        startDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the alarm became active"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        endDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the alarm became inactive"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+      description: "Reefer container alarm"
     ReeferDetails:
       type: "object"
       properties:
@@ -1005,6 +1029,15 @@ components:
           description: "The date and time when the last defrost was completed"
           format: "date-time"
           example: "2025-01-23T01:23:45Z"
+        alarms:
+          type: "array"
+          description: "The list of alarms that are active, or that were active within a relevant time frame"
+          items:
+            $ref: "#/components/schemas/ReeferAlarm"
+        numberOfActiveAlarms:
+          type: "integer"
+          description: "The number of alarms that are currently active"
+          format: "int32"
         unitManufacturer:
           maxLength: 100
           type: "string"

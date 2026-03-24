@@ -244,6 +244,11 @@ The data in this and all previously transmitted events with the same `eventID` m
 If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
 "Event / reason",reason,string,,maxLength=250,,,"Free text information explaining why this event was sent",
 "Event / reeferDetails",reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
+"Event / reeferDetails / alarms",alarms,"ReeferAlarm list",,,,,"The list of alarms that are active, or that were active within a relevant time frame",
+"Event / reeferDetails / alarms / code",code,string,,maxLength=50,,,"Code of the alarm, as defined typically by the device manufacturer",
+"Event / reeferDetails / alarms / description",description,string,,maxLength=500,,,"Free-text description of the alarm",
+"Event / reeferDetails / alarms / endDateTime",endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive",
+"Event / reeferDetails / alarms / startDateTime",startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active",
 "Event / reeferDetails / ambientMeasuredTemperature","ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 "Event / reeferDetails / controllerModel",controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 "Event / reeferDetails / internalSetpointTemperature","internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
@@ -261,6 +266,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / reeferDetails / measuredParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / measuredParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 "Event / reeferDetails / measuredParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
+"Event / reeferDetails / numberOfActiveAlarms",numberOfActiveAlarms,integer,,,,,"The number of alarms that are currently active",
 "Event / reeferDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.

@@ -6,6 +6,8 @@ Renamed in object `ReeferParameters` attributes `isColdTreatment` and `isControl
 
 Added in object `ReeferDetails` attribute `lastDefrostDateTime`. (SD-2880)
 
+Added in object `ReeferDetails` attributes `alarms` and `numberOfActiveAlarms`. (SD-2881)
+
 
 ## Snapshot v3.0.0-20260313-alpha
 

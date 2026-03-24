@@ -46,6 +46,7 @@ import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsR
 import org.dcsa.standards.specifications.standards.tnt.v300.messages.PostEventsResponse;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.AirTemperatureMeasurement;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.AirTemperatureSensorReading;
+import org.dcsa.standards.specifications.standards.tnt.v300.model.ReeferAlarm;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.EquipmentDetails;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.Event;
 import org.dcsa.standards.specifications.standards.tnt.v300.model.EventClassification;
@@ -117,6 +118,7 @@ public class TNTStandardSpecification extends StandardSpecification {
         PostEventsRequest.class,
         PostEventsResponse.class,
         RailTransport.class,
+        ReeferAlarm.class,
         ReeferDetails.class,
         ReeferParameters.class,
         Seal.class,

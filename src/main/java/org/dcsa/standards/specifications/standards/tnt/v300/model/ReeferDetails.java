@@ -52,6 +52,12 @@ Unit in which all temperature values are expressed:
   @Schema(description = "The date and time when the last defrost was completed")
   private FormattedDateTime lastDefrostDateTime;
 
+  @Schema(description = "The list of alarms that are active, or that were active within a relevant time frame")
+  private List<ReeferAlarm> alarms;
+
+  @Schema(description = "The number of alarms that are currently active")
+  private Integer numberOfActiveAlarms;
+
   @Schema(maxLength = 100, description = "Manufacturer name of the reefer unit")
   private String unitManufacturer;
 
