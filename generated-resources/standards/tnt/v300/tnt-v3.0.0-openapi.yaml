@@ -999,6 +999,12 @@ components:
           description: "Non-temperature measured parameters"
           allOf:
           - $ref: "#/components/schemas/ReeferParameters"
+        lastDefrostDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the last defrost was completed"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
         unitManufacturer:
           maxLength: 100
           type: "string"

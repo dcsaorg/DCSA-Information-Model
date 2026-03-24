@@ -3,6 +3,7 @@ package org.dcsa.standards.specifications.standards.tnt.v300.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
+import org.dcsa.standards.specifications.standards.core.v104.types.FormattedDateTime;
 import org.dcsa.standards.specifications.standards.tnt.v300.types.PowerStatusCode;
 
 @Schema(description = "Reefer-specific details")
@@ -47,6 +48,9 @@ Unit in which all temperature values are expressed:
 
   @Schema(description = "Non-temperature measured parameters")
   private ReeferParameters measuredParameters;
+
+  @Schema(description = "The date and time when the last defrost was completed")
+  private FormattedDateTime lastDefrostDateTime;
 
   @Schema(maxLength = 100, description = "Manufacturer name of the reefer unit")
   private String unitManufacturer;

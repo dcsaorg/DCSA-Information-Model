@@ -247,6 +247,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / reeferDetails / ambientMeasuredTemperature","ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 "Event / reeferDetails / controllerModel",controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 "Event / reeferDetails / internalSetpointTemperature","internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
+"Event / reeferDetails / lastDefrostDateTime",lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 "Event / reeferDetails / measuredParameters",measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 "Event / reeferDetails / measuredParameters / airExchangeUnit",airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)

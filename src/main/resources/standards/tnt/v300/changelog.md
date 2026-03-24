@@ -4,6 +4,8 @@
 
 Renamed in object `ReeferParameters` attributes `isColdTreatment` and `isControlledAtmosphere`. (SD-2946)
 
+Added in object `ReeferDetails` attribute `lastDefrostDateTime`. (SD-2880)
+
 
 ## Snapshot v3.0.0-20260313-alpha
 

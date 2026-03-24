@@ -270,6 +270,7 @@ RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail
 ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
 ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
+ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"Code indicating the power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
