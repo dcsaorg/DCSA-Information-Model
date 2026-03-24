@@ -89,7 +89,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20260313-alpha", "TNT", "3.0.0-20260213-alpha", 4);
+        "Track and Trace", "3.0.0-20260327-alpha", "TNT", "3.0.0-20260313-alpha", 4);
   }
 
   @Override
@@ -155,7 +155,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "54d897dbc442c2d11e994d6cafd0e0d375b5d8a0"
+                                    + "42dfc698bc6c3e7b6ceed59f5cec41004cb7a52f"
                                     + "/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
@@ -168,22 +168,25 @@ public class TNTStandardSpecification extends StandardSpecification {
             AttributesHierarchicalSheet.class,
             Map.ofEntries(
                 Map.entry(
-                    "Event / equipmentDetails / movementType",
-                    "Event / equipmentDetails / transportPhase"),
+                    "Event / reeferDetails / measuredParameters / isColdTreatmentRequired",
+                    "Event / reeferDetails / measuredParameters / isColdTreatment"),
                 Map.entry(
-                    "Event / eventRouting / destinationParty",
-                    "Event / eventRouting / destinationParties"),
+                    "Event / reeferDetails / measuredParameters / isControlledAtmosphereRequired",
+                    "Event / reeferDetails / measuredParameters / isControlledAtmosphere"),
                 Map.entry(
-                    "Event / eventRouting / originatingParty",
-                    "Event / eventRouting / originatingParties"),
-                Map.entry("Event / shipmentDetails / reason", "Event / reason"))),
+                    "Event / reeferDetails / setpointParameters / isColdTreatmentRequired",
+                    "Event / reeferDetails / setpointParameters / isColdTreatment"),
+                Map.entry(
+                    "Event / reeferDetails / setpointParameters / isControlledAtmosphereRequired",
+                    "Event / reeferDetails / setpointParameters / isControlledAtmosphere"))),
         Map.entry(
             AttributesNormalizedSheet.class,
             Map.ofEntries(
-                Map.entry("EquipmentDetails,movementType", "EquipmentDetails,transportPhase"),
-                Map.entry("EventRouting,destinationParty", "EventRouting,destinationParties"),
-                Map.entry("EventRouting,originatingParty", "EventRouting,originatingParties"),
-                Map.entry("ShipmentDetails,reason", "Event,reason"))),
+                Map.entry(
+                    "ReeferParameters,isColdTreatmentRequired", "ReeferParameters,isColdTreatment"),
+                Map.entry(
+                    "ReeferParameters,isControlledAtmosphereRequired",
+                    "ReeferParameters,isControlledAtmosphere"))),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }

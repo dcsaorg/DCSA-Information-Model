@@ -1,5 +1,10 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260327-alpha
+
+Renamed in object `ReeferParameters` attributes `isColdTreatment` and `isControlledAtmosphere`. (SD-2946)
+
+
 ## Snapshot v3.0.0-20260313-alpha
 
 Added IoT event subtypes for geofence entry and exit. (SD-2744)

@@ -48,14 +48,13 @@ Unit in which the `airExchangeValue` is expressed:
   @Schema(
       description =
 """
-Flag indicating whether cargo cold treatment is required prior to loading at origin,
-or during transit but prior arrival at POD.
+Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.
 """,
       example = "true")
-  protected Boolean isColdTreatmentRequired;
+  protected Boolean isColdTreatment;
 
   @Schema(
-      description = "Flag indicating whether controlled atmosphere is required",
+      description = "Flag indicating whether controlled atmosphere is active.",
       example = "true")
-  protected Boolean isControlledAtmosphereRequired;
+  protected Boolean isControlledAtmosphere;
 }

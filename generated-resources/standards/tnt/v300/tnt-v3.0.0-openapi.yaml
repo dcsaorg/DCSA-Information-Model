@@ -1054,15 +1054,14 @@ components:
           type: "boolean"
           description: "Flag indicating whether bulb mode is active"
           example: true
-        isColdTreatmentRequired:
+        isColdTreatment:
           type: "boolean"
           description: |
-            Flag indicating whether cargo cold treatment is required prior to loading at origin,
-            or during transit but prior arrival at POD.
+            Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.
           example: true
-        isControlledAtmosphereRequired:
+        isControlledAtmosphere:
           type: "boolean"
-          description: "Flag indicating whether controlled atmosphere is required"
+          description: "Flag indicating whether controlled atmosphere is active."
           example: true
       description: |
         Non-temperature parameters of a reefer that can be used both as setpoint and as measured values.
