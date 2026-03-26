@@ -17,7 +17,7 @@ the carrier can provide an extra type called `EQ` which is a reference to an Equ
 """)
 public class ShipmentReference {
 
-  @Schema() private ShipmentReferenceType referenceType;
+  @Schema() private ShipmentReferenceType type;
 
   @Schema(description = "The actual reference value", example = "123e4567e89b", maxLength = 100)
   private String reference;

@@ -17,25 +17,26 @@ The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group
 following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
 "Event / equipmentDetails / seals",seals,"Seal list",,,,,,
 "Event / equipmentDetails / seals / number",number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
-"Event / equipmentDetails / seals / placement",placement,string,,maxLength=10,,DOOR,"Placement of the seal.
-- `DOOR` (Door)
-- `VENT` (Vent)",
-"Event / equipmentDetails / seals / source",source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
-- `CAR` (Carrier)
-- `CNS` (Consolidator)
-- `CST` (Customer)
-- `CUS` (Customs)
-- `PHY` (Phytosanitary)
-- `SHI` (Shipper)
-- `TER` (Terminal)
-- `VET` (Veterinary)
+"Event / equipmentDetails / seals / placement",placement,string,,maxLength=100,,DOOR,"The placement of a seal.
+- `DOOR` - Door
+- `VENT` - Vent",
+"Event / equipmentDetails / seals / source",source,string,,maxLength=100,,CUSTOMER,"The source of a seal, indicating who has affixed the seal.
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
-both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
-"Event / equipmentDetails / seals / type",type,string,,maxLength=10,,WIR,"The type of seal.
-- `KLP` (Keyless padlock)
-- `BLT` (Bolt)
-- `WIR` (Wire)",
+both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
+
+- `CARRIER` - Carrier
+- `CONSOLIDATOR` - Consolidator
+- `CUSTOMER` - Customer
+- `CUSTOMS` - Customs
+- `PHYTOSANITARY` - Phytosanitary
+- `SHIPPER` - Shipper
+- `TERMINAL` - Terminal
+- `VETERINARY` - Veterinary",
+"Event / equipmentDetails / seals / type",type,string,,maxLength=100,,BOLT,"The type of a seal.
+- `KEYLESS_PADLOCK` - Keyless padlock
+- `BOLT` - Bolt
+- `WIRE` - Wire",
 "Event / equipmentDetails / transportPhase",transportPhase,string,,,,EXPORT,"The phase of the transport lifecycle in which the event occurs
 - `EXPORT` - Considered active until the vessel departs the Port of Loading
 - `IMPORT` - Considered to start when the vessel arrives at the Port of Discharge; may remain active until the empty container is returned after stripping
@@ -71,7 +72,7 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 - `REEFER` - Reefer event",
 "Event / eventClassification / iotEventType",iotEventType,string,,,,DOOR_OPENED,"The type of an IoT event
 - `BREADCRUMB` - Periodic geolocation update
-- `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
+- `DEVICE_STATUS` - IoT device status update
 - `DOOR_CLOSED` - Door closed
 - `DOOR_OPENED` - Door opened
 - `GEOFENCE_ENTRY` - Geofenced area entry
@@ -158,7 +159,7 @@ One line of an unstructured `Address`.",
 - `BORDER` - Border
 - `CUSTOMER_LOCATION` - Customer location
 - `DEPOT` - Depot
-- `FREIGHT_STATION` - Container freight station
+- `CONTAINER_FREIGHT_STATION` - Container freight station
 - `INLAND_TERMINAL` - Inland terminal
 - `OFF_DOCK_STORAGE` - Off-dock storage
 - `PORT_TERMINAL` - Port terminal
@@ -309,7 +310,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / shipmentDetails",shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
 "Event / shipmentDetails / additionalDocumentReferences","additionalDocumentReferences","DocumentReference list",,,,,"List of additional document references related to this event",
 "Event / shipmentDetails / additionalDocumentReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-"Event / shipmentDetails / additionalDocumentReferences / referenceType",referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+"Event / shipmentDetails / additionalDocumentReferences / type",type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
 - `BOOKING` - Booking
@@ -337,7 +338,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 - `VETERINARY_CERTIFICATE` - Veterinary Certificate",
 "Event / shipmentDetails / documentReference",documentReference,DocumentReference,,,,,"Primary document reference associated with this event",
 "Event / shipmentDetails / documentReference / reference",reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-"Event / shipmentDetails / documentReference / referenceType",referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+"Event / shipmentDetails / documentReference / type",type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
 - `BOOKING` - Booking
@@ -366,7 +367,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / shipmentDetails / documentReferenceReplacements","documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
 "Event / shipmentDetails / documentReferenceReplacements / newReferences",newReferences,"DocumentReference list",,,,,"References of the documents replacing those with the `oldReferences`.",
 "Event / shipmentDetails / documentReferenceReplacements / newReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-"Event / shipmentDetails / documentReferenceReplacements / newReferences / referenceType",referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+"Event / shipmentDetails / documentReferenceReplacements / newReferences / type",type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
 - `BOOKING` - Booking
@@ -394,7 +395,7 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 - `VETERINARY_CERTIFICATE` - Veterinary Certificate",
 "Event / shipmentDetails / documentReferenceReplacements / oldReferences",oldReferences,"DocumentReference list",,,,,"References of the documents replaced by those with the `newReferences`.",
 "Event / shipmentDetails / documentReferenceReplacements / oldReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-"Event / shipmentDetails / documentReferenceReplacements / oldReferences / referenceType",referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+"Event / shipmentDetails / documentReferenceReplacements / oldReferences / type",type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
 - `BOOKING` - Booking
@@ -431,13 +432,13 @@ It can vary per carrier.",
 - `PLACE_OF_RECEIPT` - Place of Receipt
 - `PORT_OF_DISCHARGE` - Port of Discharge
 - `PORT_OF_LOADING` - Port of Loading
-- `PRE_CARRIAGE_FORM` - Pre-carriage From
+- `PRE_CARRIAGE_FROM` - Pre-carriage From
 - `PROHIBITED_TRANSSHIPMENT_PORT` - Prohibited transshipment port
 - `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port",
 "Event / shipmentDetails / shipmentReferenceReplacements","shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
 "Event / shipmentDetails / shipmentReferenceReplacements / newReferences",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`.",
 "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
-"Event / shipmentDetails / shipmentReferenceReplacements / newReferences / referenceType",referenceType,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
+"Event / shipmentDetails / shipmentReferenceReplacements / newReferences / type",type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
 - `CONSIGNEES_REFERENCE` - Consignee’s Reference
 - `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
 - `BOOKING_REQUEST_ID` - Booking Request ID
@@ -454,7 +455,7 @@ It can vary per carrier.",
 - `SHIPPERS_REFERENCE` - Shipper’s Reference",
 "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`.",
 "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
-"Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / referenceType",referenceType,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
+"Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / type",type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
 - `CONSIGNEES_REFERENCE` - Consignee’s Reference
 - `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
 - `BOOKING_REQUEST_ID` - Booking Request ID
@@ -471,7 +472,7 @@ It can vary per carrier.",
 - `SHIPPERS_REFERENCE` - Shipper’s Reference",
 "Event / shipmentDetails / shipmentReferences",shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
 "Event / shipmentDetails / shipmentReferences / reference",reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
-"Event / shipmentDetails / shipmentReferences / referenceType",referenceType,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
+"Event / shipmentDetails / shipmentReferences / type",type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
 - `CONSIGNEES_REFERENCE` - Consignee’s Reference
 - `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
 - `BOOKING_REQUEST_ID` - Booking Request ID

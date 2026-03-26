@@ -8,7 +8,7 @@ import org.dcsa.standards.specifications.standards.core.v200.types.DocumentRefer
 @Schema(description = "Referenced document")
 public class DocumentReference {
 
-  @Schema() private DocumentReferenceType referenceType;
+  @Schema() private DocumentReferenceType type;
 
   @Schema(
       description = "Reference identifying the document",

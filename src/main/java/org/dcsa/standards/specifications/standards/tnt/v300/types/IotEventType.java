@@ -10,7 +10,7 @@ import org.dcsa.standards.specifications.generator.EnumBase;
 @AllArgsConstructor
 public enum IotEventType implements EnumBase {
   BREADCRUMB("Periodic geolocation update"),
-  DEVICE_STATUS("IoT device status update (pairing/unpairing, power status)"),
+  DEVICE_STATUS("IoT device status update"),
   DOOR_CLOSED("Door closed"),
   DOOR_OPENED("Door opened"),
   GEOFENCE_ENTRY("Geofenced area entry"),

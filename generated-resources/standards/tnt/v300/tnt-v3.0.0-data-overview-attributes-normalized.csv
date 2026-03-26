@@ -21,7 +21,7 @@ ClassifiedDateTime,classifier,string,,maxLength=10,,ESTIMATED,"Classifier denoti
 - `PLANNED` - Planned",
 ClassifiedDateTime,value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
 DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
-DocumentReference,referenceType,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
+DocumentReference,type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
 - `BOOKING` - Booking
@@ -124,7 +124,7 @@ EventClassification,eventType,string,,,,EQUIPMENT,"The type of a Track and Trace
 - `REEFER` - Reefer event",
 EventClassification,iotEventType,string,,,,DOOR_OPENED,"The type of an IoT event
 - `BREADCRUMB` - Periodic geolocation update
-- `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
+- `DEVICE_STATUS` - IoT device status update
 - `DOOR_CLOSED` - Door closed
 - `DOOR_OPENED` - Door opened
 - `GEOFENCE_ENTRY` - Geofenced area entry
@@ -218,7 +218,7 @@ Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
 - `BORDER` - Border
 - `CUSTOMER_LOCATION` - Customer location
 - `DEPOT` - Depot
-- `FREIGHT_STATION` - Container freight station
+- `CONTAINER_FREIGHT_STATION` - Container freight station
 - `INLAND_TERMINAL` - Inland terminal
 - `OFF_DOCK_STORAGE` - Off-dock storage
 - `PORT_TERMINAL` - Port terminal
@@ -302,25 +302,26 @@ ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drain
 ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
 ReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
-Seal,placement,string,,maxLength=10,,DOOR,"Placement of the seal.
-- `DOOR` (Door)
-- `VENT` (Vent)",
-Seal,source,string,,maxLength=10,,CUS,"The source of the seal, namely who has affixed the seal.
-- `CAR` (Carrier)
-- `CNS` (Consolidator)
-- `CST` (Customer)
-- `CUS` (Customs)
-- `PHY` (Phytosanitary)
-- `SHI` (Shipper)
-- `TER` (Terminal)
-- `VET` (Veterinary)
+Seal,placement,string,,maxLength=100,,DOOR,"The placement of a seal.
+- `DOOR` - Door
+- `VENT` - Vent",
+Seal,source,string,,maxLength=100,,CUSTOMER,"The source of a seal, indicating who has affixed the seal.
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
-both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
-Seal,type,string,,maxLength=10,,WIR,"The type of seal.
-- `KLP` (Keyless padlock)
-- `BLT` (Bolt)
-- `WIR` (Wire)",
+both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
+
+- `CARRIER` - Carrier
+- `CONSOLIDATOR` - Consolidator
+- `CUSTOMER` - Customer
+- `CUSTOMS` - Customs
+- `PHYTOSANITARY` - Phytosanitary
+- `SHIPPER` - Shipper
+- `TERMINAL` - Terminal
+- `VETERINARY` - Veterinary",
+Seal,type,string,,maxLength=100,,BOLT,"The type of a seal.
+- `KEYLESS_PADLOCK` - Keyless padlock
+- `BOLT` - Bolt
+- `WIRE` - Wire",
 ServiceCodeOrReference,carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service.",
 ServiceCodeOrReference,"universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
 
@@ -348,13 +349,13 @@ ShipmentDetails,shipmentLocationType,string,,,,PLACE_OF_DELIVERY,"The type of a 
 - `PLACE_OF_RECEIPT` - Place of Receipt
 - `PORT_OF_DISCHARGE` - Port of Discharge
 - `PORT_OF_LOADING` - Port of Loading
-- `PRE_CARRIAGE_FORM` - Pre-carriage From
+- `PRE_CARRIAGE_FROM` - Pre-carriage From
 - `PROHIBITED_TRANSSHIPMENT_PORT` - Prohibited transshipment port
 - `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port",
 ShipmentDetails,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
 ShipmentDetails,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
 ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
-ShipmentReference,referenceType,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
+ShipmentReference,type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
 - `CONSIGNEES_REFERENCE` - Consignee’s Reference
 - `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
 - `BOOKING_REQUEST_ID` - Booking Request ID

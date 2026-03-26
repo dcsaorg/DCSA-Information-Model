@@ -20,7 +20,7 @@ public enum ShipmentLocationType implements EnumBase {
   PLACE_OF_RECEIPT("Place of Receipt"),
   PORT_OF_DISCHARGE("Port of Discharge"),
   PORT_OF_LOADING("Port of Loading"),
-  PRE_CARRIAGE_FORM("Pre-carriage From"),
+  PRE_CARRIAGE_FROM("Pre-carriage From"),
   PROHIBITED_TRANSSHIPMENT_PORT("Prohibited transshipment port"),
   REQUESTED_TRANSSHIPMENT_PORT("Requested transshipment port");
 

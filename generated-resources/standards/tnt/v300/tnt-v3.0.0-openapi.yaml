@@ -351,7 +351,7 @@ components:
     DocumentReference:
       type: "object"
       properties:
-        referenceType:
+        type:
           maxLength: 100
           type: "string"
           description: |-
@@ -624,7 +624,7 @@ components:
           description: |-
             The type of an IoT event
             - `BREADCRUMB` - Periodic geolocation update
-            - `DEVICE_STATUS` - IoT device status update (pairing/unpairing, power status)
+            - `DEVICE_STATUS` - IoT device status update
             - `DOOR_CLOSED` - Door closed
             - `DOOR_OPENED` - Door opened
             - `GEOFENCE_ENTRY` - Geofenced area entry
@@ -806,7 +806,7 @@ components:
             - `BORDER` - Border
             - `CUSTOMER_LOCATION` - Customer location
             - `DEPOT` - Depot
-            - `FREIGHT_STATION` - Container freight station
+            - `CONTAINER_FREIGHT_STATION` - Container freight station
             - `INLAND_TERMINAL` - Inland terminal
             - `OFF_DOCK_STORAGE` - Off-dock storage
             - `PORT_TERMINAL` - Port terminal
@@ -1107,42 +1107,41 @@ components:
           description: "Identifies a seal affixed to the container."
           example: "VET123"
         source:
-          maxLength: 10
+          maxLength: 100
           type: "string"
-          description: |
-            The source of the seal, namely who has affixed the seal.
-            - `CAR` (Carrier)
-            - `CNS` (Consolidator)
-            - `CST` (Customer)
-            - `CUS` (Customs)
-            - `PHY` (Phytosanitary)
-            - `SHI` (Shipper)
-            - `TER` (Terminal)
-            - `VET` (Veterinary)
+          description: |-
+            The source of a seal, indicating who has affixed the seal.
 
             In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
             both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
-          example: "CUS"
+
+            - `CARRIER` - Carrier
+            - `CONSOLIDATOR` - Consolidator
+            - `CUSTOMER` - Customer
+            - `CUSTOMS` - Customs
+            - `PHYTOSANITARY` - Phytosanitary
+            - `SHIPPER` - Shipper
+            - `TERMINAL` - Terminal
+            - `VETERINARY` - Veterinary
+          example: "CUSTOMER"
         type:
-          maxLength: 10
+          maxLength: 100
           type: "string"
-          description: |
-            The type of seal.
-            - `KLP` (Keyless padlock)
-            - `BLT` (Bolt)
-            - `WIR` (Wire)
-          example: "WIR"
+          description: |-
+            The type of a seal.
+            - `KEYLESS_PADLOCK` - Keyless padlock
+            - `BOLT` - Bolt
+            - `WIRE` - Wire
+          example: "BOLT"
         placement:
-          maxLength: 10
+          maxLength: 100
           type: "string"
-          description: |
-            Placement of the seal.
-            - `DOOR` (Door)
-            - `VENT` (Vent)
+          description: |-
+            The placement of a seal.
+            - `DOOR` - Door
+            - `VENT` - Vent
           example: "DOOR"
-          default: "DOOR"
-      description: |
-        Seal-related information associated with the equipment.
+      description: "Seal-related information associated with the equipment."
     ServiceCodeOrReference:
       type: "object"
       properties:
@@ -1207,7 +1206,7 @@ components:
             - `PLACE_OF_RECEIPT` - Place of Receipt
             - `PORT_OF_DISCHARGE` - Port of Discharge
             - `PORT_OF_LOADING` - Port of Loading
-            - `PRE_CARRIAGE_FORM` - Pre-carriage From
+            - `PRE_CARRIAGE_FROM` - Pre-carriage From
             - `PROHIBITED_TRANSSHIPMENT_PORT` - Prohibited transshipment port
             - `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port
           example: "PLACE_OF_DELIVERY"
@@ -1222,7 +1221,7 @@ components:
     ShipmentReference:
       type: "object"
       properties:
-        referenceType:
+        type:
           maxLength: 100
           type: "string"
           description: |-

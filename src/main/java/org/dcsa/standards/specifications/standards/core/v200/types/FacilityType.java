@@ -16,7 +16,7 @@ public enum FacilityType implements EnumBase {
   BORDER("Border"),
   CUSTOMER_LOCATION("Customer location"),
   DEPOT("Depot"),
-  FREIGHT_STATION("Container freight station"),
+  CONTAINER_FREIGHT_STATION("Container freight station"),
   INLAND_TERMINAL("Inland terminal"),
   OFF_DOCK_STORAGE("Off-dock storage"),
   PORT_TERMINAL("Port terminal"),

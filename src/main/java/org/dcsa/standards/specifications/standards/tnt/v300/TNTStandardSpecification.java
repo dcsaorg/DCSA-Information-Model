@@ -213,29 +213,29 @@ public class TNTStandardSpecification extends StandardSpecification {
                     "Event / reeferDetails / setpointParameters / isControlledAtmosphere"),
                 Map.entry(
                     "Event / shipmentDetails / additionalDocumentReferences / typeCode",
-                    "Event / shipmentDetails / additionalDocumentReferences / referenceType"),
+                    "Event / shipmentDetails / additionalDocumentReferences / type"),
                 Map.entry(
                     "Event / shipmentDetails / documentReference / typeCode",
-                    "Event / shipmentDetails / documentReference / referenceType"),
+                    "Event / shipmentDetails / documentReference / type"),
                 Map.entry(
                     "Event / shipmentDetails / documentReferenceReplacements / newReferences / typeCode",
-                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / referenceType"),
+                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / type"),
                 Map.entry(
                     "Event / shipmentDetails / documentReferenceReplacements / oldReferences / typeCode",
-                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / referenceType"),
+                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / type"),
                 Map.entry(
                     "Event / shipmentDetails / shipmentReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferences / referenceType"),
+                    "Event / shipmentDetails / shipmentReferences / type"),
                 Map.entry(
                     "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / referenceType"),
+                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / type"),
                 Map.entry(
                     "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / referenceType"))),
+                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / type"))),
         Map.entry(
             AttributesNormalizedSheet.class,
             Map.ofEntries(
-                Map.entry("DocumentReference,typeCode", "DocumentReference,referenceType"),
+                Map.entry("DocumentReference,typeCode", "DocumentReference,type"),
                 Map.entry("EquipmentDetails,emptyIndicatorCode", "EquipmentDetails,emptyIndicator"),
                 Map.entry(
                     "EventClassification,equipmentEventTypeCode",
@@ -263,7 +263,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                 Map.entry(
                     "ReeferParameters,isControlledAtmosphereRequired",
                     "ReeferParameters,isControlledAtmosphere"),
-                Map.entry("ShipmentReference,typeCode", "ShipmentReference,referenceType"))),
+                Map.entry("ShipmentReference,typeCode", "ShipmentReference,type"))),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }
