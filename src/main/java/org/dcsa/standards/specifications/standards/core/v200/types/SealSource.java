@@ -15,7 +15,7 @@ import org.dcsa.standards.specifications.generator.EnumBase;
 The source of a seal, indicating who has affixed the seal.
 
 In [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm),
-both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).
+both VETERINARY (Veterinary) and PHYTOSANITARY (Phytosanitary) map to AC (Quarantine agency).
 """)
 @AllArgsConstructor
 public enum SealSource implements EnumBase {
