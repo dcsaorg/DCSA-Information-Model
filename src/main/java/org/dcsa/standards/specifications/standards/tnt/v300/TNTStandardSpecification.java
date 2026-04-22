@@ -90,7 +90,7 @@ public class TNTStandardSpecification extends StandardSpecification {
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(
-        "Track and Trace", "3.0.0-20260327-alpha", "TNT", "3.0.0-20260313-alpha", 4);
+        "Track and Trace", "3.0.0-20260424-beta", "TNT", "3.0.0-20260327-alpha", 4);
   }
 
   @Override
@@ -157,7 +157,7 @@ public class TNTStandardSpecification extends StandardSpecification {
                     DataOverviewSheet.importFromString(
                         SpecificationToolkit.readRemoteFile(
                             ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "42dfc698bc6c3e7b6ceed59f5cec41004cb7a52f"
+                                    + "5e6310ec7925d1f3ff4a97c29d4510d490a7590b"
                                     + "/generated-resources/standards/tnt/v300/tnt-v3.0.0-data-overview-%s.csv")
                                 .formatted(entry.getValue())))));
   }
@@ -166,104 +166,8 @@ public class TNTStandardSpecification extends StandardSpecification {
   protected Map<Class<? extends DataOverviewSheet>, Map<String, String>>
       getChangedPrimaryKeyByOldPrimaryKeyBySheetClass() {
     return Map.ofEntries(
-        Map.entry(
-            AttributesHierarchicalSheet.class,
-            Map.ofEntries(
-                Map.entry(
-                    "Event / equipmentDetails / emptyIndicatorCode",
-                    "Event / equipmentDetails / emptyIndicator"),
-                Map.entry(
-                    "Event / eventClassification / equipmentEventTypeCode",
-                    "Event / eventClassification / equipmentEventType"),
-                Map.entry(
-                    "Event / eventClassification / eventClassifierCode",
-                    "Event / eventClassification / eventClassifier"),
-                Map.entry(
-                    "Event / eventClassification / eventTypeCode",
-                    "Event / eventClassification / eventType"),
-                Map.entry(
-                    "Event / eventClassification / iotEventTypeCode",
-                    "Event / eventClassification / iotEventType"),
-                Map.entry(
-                    "Event / eventClassification / reeferEventTypeCode",
-                    "Event / eventClassification / reeferEventType"),
-                Map.entry(
-                    "Event / eventClassification / shipmentEventTypeCode",
-                    "Event / eventClassification / shipmentEventType"),
-                Map.entry(
-                    "Event / eventClassification / transportEventTypeCode",
-                    "Event / eventClassification / transportEventType"),
-                Map.entry(
-                    "Event / eventLocation / facilityTypeCode",
-                    "Event / eventLocation / facilityType"),
-                Map.entry(
-                    "Event / iotDetails / iotEquipmentTechnologyCode",
-                    "Event / iotDetails / iotEquipmentTechnology"),
-                Map.entry(
-                    "Event / reeferDetails / measuredParameters / isColdTreatmentRequired",
-                    "Event / reeferDetails / measuredParameters / isColdTreatment"),
-                Map.entry(
-                    "Event / reeferDetails / measuredParameters / isControlledAtmosphereRequired",
-                    "Event / reeferDetails / measuredParameters / isControlledAtmosphere"),
-                Map.entry(
-                    "Event / reeferDetails / setpointParameters / isColdTreatmentRequired",
-                    "Event / reeferDetails / setpointParameters / isColdTreatment"),
-                Map.entry(
-                    "Event / reeferDetails / setpointParameters / isControlledAtmosphereRequired",
-                    "Event / reeferDetails / setpointParameters / isControlledAtmosphere"),
-                Map.entry(
-                    "Event / shipmentDetails / additionalDocumentReferences / typeCode",
-                    "Event / shipmentDetails / additionalDocumentReferences / type"),
-                Map.entry(
-                    "Event / shipmentDetails / documentReference / typeCode",
-                    "Event / shipmentDetails / documentReference / type"),
-                Map.entry(
-                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / typeCode",
-                    "Event / shipmentDetails / documentReferenceReplacements / newReferences / type"),
-                Map.entry(
-                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / typeCode",
-                    "Event / shipmentDetails / documentReferenceReplacements / oldReferences / type"),
-                Map.entry(
-                    "Event / shipmentDetails / shipmentReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferences / type"),
-                Map.entry(
-                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferenceReplacements / newReferences / type"),
-                Map.entry(
-                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / typeCode",
-                    "Event / shipmentDetails / shipmentReferenceReplacements / oldReferences / type"))),
-        Map.entry(
-            AttributesNormalizedSheet.class,
-            Map.ofEntries(
-                Map.entry("DocumentReference,typeCode", "DocumentReference,type"),
-                Map.entry("EquipmentDetails,emptyIndicatorCode", "EquipmentDetails,emptyIndicator"),
-                Map.entry(
-                    "EventClassification,equipmentEventTypeCode",
-                    "EventClassification,equipmentEventType"),
-                Map.entry(
-                    "EventClassification,eventClassifierCode",
-                    "EventClassification,eventClassifier"),
-                Map.entry("EventClassification,eventTypeCode", "EventClassification,eventType"),
-                Map.entry(
-                    "EventClassification,iotEventTypeCode", "EventClassification,iotEventType"),
-                Map.entry(
-                    "EventClassification,reeferEventTypeCode",
-                    "EventClassification,reeferEventType"),
-                Map.entry(
-                    "EventClassification,shipmentEventTypeCode",
-                    "EventClassification,shipmentEventType"),
-                Map.entry(
-                    "EventClassification,transportEventTypeCode",
-                    "EventClassification,transportEventType"),
-                Map.entry(
-                    "IotDetails,iotEquipmentTechnologyCode", "IotDetails,iotEquipmentTechnology"),
-                Map.entry("Location,facilityTypeCode", "Location,facilityType"),
-                Map.entry(
-                    "ReeferParameters,isColdTreatmentRequired", "ReeferParameters,isColdTreatment"),
-                Map.entry(
-                    "ReeferParameters,isControlledAtmosphereRequired",
-                    "ReeferParameters,isControlledAtmosphere"),
-                Map.entry("ShipmentReference,typeCode", "ShipmentReference,type"))),
+        Map.entry(AttributesHierarchicalSheet.class, Map.ofEntries()),
+        Map.entry(AttributesNormalizedSheet.class, Map.ofEntries()),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }

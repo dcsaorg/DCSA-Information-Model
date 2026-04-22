@@ -1,5 +1,10 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260424-beta
+
+No changes.
+
+
 ## Snapshot v3.0.0-20260327-alpha
 
 Renamed in object `ReeferParameters` attributes `isColdTreatment` and `isControlledAtmosphere`. (SD-2946)
