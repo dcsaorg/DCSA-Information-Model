@@ -7,6 +7,7 @@ import org.dcsa.standards.specifications.standards.booking.v200.Booking200Standa
 import org.dcsa.standards.specifications.standards.booking.v201.Booking201StandardSpecification;
 import org.dcsa.standards.specifications.standards.booking.v202.Booking202StandardSpecification;
 import org.dcsa.standards.specifications.standards.booking.v203.Booking203StandardSpecification;
+import org.dcsa.standards.specifications.standards.booking.v204.Booking204StandardSpecification;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -19,6 +20,7 @@ class Booking2StandardSpecificationsTest {
     buildAndCheckV201();
     buildAndCheckV202();
     buildAndCheckV203();
+    buildAndCheckV204();
   }
 
   private static void buildAndCheckV200() {
@@ -59,5 +61,15 @@ class Booking2StandardSpecificationsTest {
         "./src/main/resources/standards/booking/v203/booking_v2.0.3.yaml",
         booking203StandardSpecification);
     booking203StandardSpecification.generateArtifacts();
+  }
+
+  private static void buildAndCheckV204() {
+    Booking204StandardSpecification booking204StandardSpecification =
+        new Booking204StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        Booking.class.getSimpleName(),
+        "./src/main/resources/standards/booking/v204/booking_v2.0.4.yaml",
+        booking204StandardSpecification);
+    booking204StandardSpecification.generateArtifacts();
   }
 }

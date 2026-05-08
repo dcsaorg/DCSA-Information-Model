@@ -9,9 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -47,14 +49,18 @@ public enum StandardSpecificationTestToolkit {
     Map<String, Schema<?>> generatedSchemas =
         SpecificationToolkit.parameterizeStringRawSchemaMap(
             standardSpecification.getOpenAPI().getComponents().getSchemas());
-    compareType("", originalSchemas, generatedSchemas, typeName);
+    compareType("", originalSchemas, generatedSchemas, typeName, new HashSet<>());
   }
 
   private static void compareType(
       String indentation,
       Map<String, Schema<?>> originalSchemasByType,
       Map<String, Schema<?>> generatedSchemasByType,
-      String typeName) {
+      String typeName,
+      Set<String> visitedTypes) {
+    if (!visitedTypes.add(typeName)) {
+      return;
+    }
     log.info("{}Comparing object: {}", indentation, typeName);
 
     Schema<?> originalTypeSchema = originalSchemasByType.get(typeName);
@@ -80,7 +86,8 @@ public enum StandardSpecificationTestToolkit {
                   typeName,
                   attributeName,
                   originalAttributeSchema,
-                  generatedAttributeSchema);
+                  generatedAttributeSchema,
+                  visitedTypes);
             });
 
     originalProperties.keySet().stream()
@@ -94,7 +101,8 @@ public enum StandardSpecificationTestToolkit {
                     "    " + indentation,
                     originalSchemasByType,
                     generatedSchemasByType,
-                    attributeTypeName);
+                    attributeTypeName,
+                    visitedTypes);
               }
             });
   }
@@ -104,7 +112,8 @@ public enum StandardSpecificationTestToolkit {
       String typeName,
       String attributeName,
       Schema<?> originalAttributeSchema,
-      Schema<?> generatedAttributeSchema) {
+      Schema<?> generatedAttributeSchema,
+      Set<String> visitedTypes) {
     log.info("{}Comparing {} {}", indentation, typeName, attributeName);
     if (generatedAttributeSchema instanceof ComposedSchema) {
       if (!(originalAttributeSchema instanceof ComposedSchema)) {
@@ -113,17 +122,19 @@ public enum StandardSpecificationTestToolkit {
             typeName,
             attributeName,
             originalAttributeSchema,
-            generatedAttributeSchema.getAllOf().getFirst());
+            generatedAttributeSchema.getAllOf().getFirst(),
+            visitedTypes);
         return;
       }
     }
-    softAssertEquals(indentation, originalAttributeSchema, generatedAttributeSchema);
+    softAssertEquals(indentation, originalAttributeSchema, generatedAttributeSchema, visitedTypes);
   }
 
   private static void softAssertEquals(
-      String indentation, Schema<?> originalAttributeSchema, Schema<?> generatedAttributeSchema) {
+      String indentation, Schema<?> originalAttributeSchema, Schema<?> generatedAttributeSchema,
+      Set<String> visitedTypes) {
     softAssertEquals(
-        "name",
+        "description",
         comparableDescription(originalAttributeSchema.getDescription()),
         comparableDescription(generatedAttributeSchema.getDescription()));
 
@@ -131,6 +142,10 @@ public enum StandardSpecificationTestToolkit {
         "type",
         getAttributeTypeName(originalAttributeSchema),
         getAttributeTypeName(generatedAttributeSchema));
+    softAssertEquals(
+        "schema type",
+        originalAttributeSchema.getType(),
+        generatedAttributeSchema.getType());
     softAssertEquals(
         "format", originalAttributeSchema.getFormat(), generatedAttributeSchema.getFormat());
     softAssertEquals(
@@ -170,8 +185,12 @@ public enum StandardSpecificationTestToolkit {
     if (originalAttributeSchema instanceof ArraySchema) {
       log.info("{}  Comparing array item schema", indentation);
       Assertions.assertInstanceOf(ArraySchema.class, generatedAttributeSchema);
-      softAssertEquals(
-          indentation, originalAttributeSchema.getItems(), generatedAttributeSchema.getItems());
+      String itemTypeName = getAttributeTypeName(originalAttributeSchema.getItems());
+      if (itemTypeName == null || !visitedTypes.contains(itemTypeName)) {
+        softAssertEquals(
+            indentation, originalAttributeSchema.getItems(), generatedAttributeSchema.getItems(),
+            visitedTypes);
+      }
     }
   }
 

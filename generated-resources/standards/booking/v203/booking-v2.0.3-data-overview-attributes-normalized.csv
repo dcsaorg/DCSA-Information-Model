@@ -1,0 +1,842 @@
+Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+ActiveReeferSettings,airExchangeSetpoint,number,,minimum=0,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+ActiveReeferSettings,airExchangeUnit,string,,,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
+- `MQH` (Cubic metre per hour)
+- `FQH` (Cubic foot per hour)
+
+**Condition:** Mandatory if `airExchange` is provided. If `airExchange` is not provided, this field must be empty.",
+ActiveReeferSettings,co2Setpoint,number,,"minimum=0
+maximum=100",,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
+ActiveReeferSettings,humiditySetpoint,number,,"minimum=0
+maximum=100",,95.6,"The percentage of the controlled atmosphere humidity target value",
+ActiveReeferSettings,isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
+ActiveReeferSettings,isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
+ActiveReeferSettings,"isControlledAtmosphereRequired",boolean,,,,true,"Indicator of whether cargo requires Controlled Atmosphere.",
+ActiveReeferSettings,isDrainholesOpen,boolean,,,,true,"Is drain holes open on the container",
+ActiveReeferSettings,isGeneratorSetRequired,boolean,,,,true,"Indicator whether reefer container should have a generator set attached at time of release from depot",
+ActiveReeferSettings,isPreCoolingRequired,boolean,,,,true,"Indicator whether reefer container should be pre-cooled to the temperature setting required at time of release from depot",
+ActiveReeferSettings,isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
+ActiveReeferSettings,o2Setpoint,number,,"minimum=0
+maximum=100",,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
+ActiveReeferSettings,temperatureSetpoint,number,yes,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+ActiveReeferSettings,temperatureUnit,string,yes,,,CEL,"The unit for temperature in Celsius or Fahrenheit
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)
+
+**Condition:** Mandatory if `temperatureSetpoint` is provided. If `temperatureSetpoint` is not provided, this field must be empty.",
+Address,city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+Address,countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+Address,floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code.",
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+Address,street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
+AdvanceManifestFiling,countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",US,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+AdvanceManifestFiling,manifestTypeCode,string,yes,maxLength=50,"^\S(?:.*\S)?$",ACE,"The Manifest type code as defined by the provider.",
+Booking,advanceManifestFilings,"AdvanceManifestFiling list",,,,,"A list of `Advance Manifest Filings` provided by the carrier",
+Booking,amendedBookingStatus,string,,maxLength=50,,AMENDMENT_RECEIVED,"The status of latest amendment added to the `Booking`. If no amendment has been requested - then this field is empty. Possible values are:
+- `AMENDMENT_RECEIVED` (An amendment has been received and is awaiting to be processed)
+- `AMENDMENT_CONFIRMED` (Amendment is confirmed)
+- `AMENDMENT_DECLINED` (Amendment discontinued by provider)
+- `AMENDMENT_CANCELLED` (Amendment discontinued by consumer)",
+Booking,"bookingCancellationStatus",string,,maxLength=50,,CANCELLATION_RECEIVED,"The status of the latest booking cancellation. If no cancellation has been requested - then this property is empty. Possible values are:
+- `CANCELLATION_RECEIVED` (A request to cancel a Confirmed Booking has been received and is awaiting to be processed)
+- `CANCELLATION_DECLINED` (Cancellation of the Confirmed Booking has been declined by provider)
+- `CANCELLATION_CONFIRMED` (Cancellation of the Confirmed Booking has been confirmed by provider)",
+Booking,bookingChannelReference,string,,maxLength=20,"^\S(?:.*\S)?$","Inttra reference","Identification number provided by the platform/channel used for booking request/confirmation, ex: Inttra booking reference, or GTNexus, other.
+
+**Condition:** a booking channel is being used",
+Booking,bookingStatus,string,yes,maxLength=50,,RECEIVED,"The status of the `Booking`. Possible values are:
+- `RECEIVED` (Booking request has been received)
+- `PENDING_UPDATE` (An update is required to the Booking)
+- `UPDATE_RECEIVED` (An update has been received and is awaiting to be processed)
+- `CONFIRMED` (Booking has been Confirmed)
+- `PENDING_AMENDMENT` (An amendment is required to the Booking)
+- `REJECTED` (Booking discontinued by carrier before it has been Confirmed)
+- `DECLINED` (Booking discontinued by carrier after it has been Confirmed)
+- `CANCELLED` (Booking discontinued by consumer)
+- `COMPLETED` (The Transport Document this Booking is connected to has been Surrendered for Delivery)",
+Booking,"cargoMovementTypeAtDestination",string,yes,maxLength=3,,FCL,"Refers to the shipment term at the **unloading** of the cargo out of the container. Possible values are:
+- `FCL` (Full Container Load)
+- `LCL` (Less than Container Load)",
+Booking,"cargoMovementTypeAtOrigin",string,yes,maxLength=3,,FCL,"Refers to the shipment term at the **loading** of the cargo into the container. Possible values are:
+- `FCL` (Full Container Load)
+- `LCL` (Less than Container Load)",
+Booking,carrierBookingReference,string,,maxLength=35,"^\S(?:.*\S)?$",ABC709951,"The `carrierBookingReference` if know. Often this will not be known until the booking has been confirmed. Is available during a booking amendment.
+
+**Condition:** `carrierBookingRequestReference` and/or `carrierBookingReference` must be provided",
+Booking,"carrierBookingRequestReference",string,,maxLength=100,"^\S(?:.*\S)?$","24595eb0-5cfc-4381-9c3a-cedc1975e9aa","A reference to the booking during the booking request phase.
+
+**Condition:** `carrierBookingRequestReference` and/or `carrierBookingReference` must be provided",
+Booking,carrierClauses,"string list",,maxLength=20000,"^\S(?:.*\S)?$",,"Additional clauses for a specific shipment added by the carrier to the Bill of Lading, subject to local rules / guidelines or certain mandatory information required to be shared with the customer.
+Item description:
+The content of the clause.",
+Booking,carrierCode,string,,maxLength=4,"^\S+$",MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier the booking request is intended for. `carrierCodeListProvider` defines which list the `carrierCode` is based upon.",
+Booking,carrierCodeListProvider,string,,,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+Booking,"carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The carrier specific identifier of the export Voyage.
+
+**Condition:** Mandatory if `expectedDepartureDate` or `expectedArrivalAtPlaceOfDeliveryStartDate` and `expectedArrivalAtPlaceOfDeliveryEndDate` is not provided. If `routingReference` is provided - this property MUST not be provided.",
+Booking,carrierServiceCode,string,,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier specific code of the service for which the schedule details are published.
+
+**Condition:** Mandatory if `carrierExportVoyageNumber` is provided and Vessel details or `carrierServiceName` are blank. If `routingReference` is provided - this property MUST not be provided.",
+Booking,carrierServiceName,string,,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of a service as specified by the carrier.
+
+**Condition:** Mandatory if `carrierExportVoyageNumber` is provided and Vessel details or `carrierServiceCode` are blank. If `routingReference` is provided - this property MUST not be provided.",
+Booking,charges,"Charge list",,,,,"A list of `Charges`",
+Booking,confirmedEquipments,"ConfirmedEquipment list",,,,,"A list of `Confirmed Equipments`
+
+**Condition:** Mandatory and non-empty for a `CONFIRMED` Booking",
+Booking,"contractQuotationReference",string,,maxLength=35,"^\S(?:.*\S)?$",HHL1401,"Information provided by the shipper to identify whether pricing for the shipment has been agreed via a contract or a quotation reference.
+
+**Condition:** One of `contractQuotationReference` or `serviceContractReference` must be provided, but not both.",
+Booking,customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+Booking,declaredValue,number,,minimum=0,,1231.1,"The value of the cargo that the shipper declares in order to avoid the carrier's limitation of liability and ""Ad Valorem"" freight, i.e., freight which is calculated based on the value of the goods declared by the shipper.",
+Booking,declaredValueCurrency,string,,"minLength=3
+maxLength=3","^[A-Z]{3}$",DKK,"The currency used for the declared value, using the 3-character code defined by [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).
+
+**Condition:** Mandatory if `declaredValue` is provided. If `declaredValue` is not provided, this field must be empty.",
+Booking,"deliveryTypeAtDestination",string,yes,maxLength=3,,CY,"Indicates the type of service offered at `Destination`. The options are:
+- `CY` (Container yard (incl. rail ramp))
+- `SD` (Store Door)
+- `CFS` (Container Freight Station)",
+Booking,"destinationChargesPaymentTerm","DestinationChargesPaymentTerm",,,,,"An indicator of whether destination charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
+Booking,documentParties,DocumentParties,yes,,,,"All `Parties` with associated roles.",
+Booking,"expectedArrivalAtPlaceOfDeliveryEndDate","string(date)",,,,2021-05-19,"The end date (provided as a range together with `expectedArrivalAtPlaceOfDeliveryStartDate`) for when the shipment is expected to arrive at `Place Of Delivery`.
+
+**Condition:** Mandatory if vessel/voyage/service details or `expectedDepartureDate` is not provided. If `routingReference` is provided - this property MUST not be provided.",
+Booking,"expectedArrivalAtPlaceOfDeliveryStartDate","string(date)",,,,2021-05-17,"The start date (provided as a range together with `expectedArrivalAtPlaceOfDeliveryEndDate`) for when the shipment is expected to arrive at `Place Of Delivery`.
+
+**Condition:** Mandatory if vessel/voyage/service details or `expectedDepartureDate` is not provided. If `routingReference` is provided - this property MUST not be provided.",
+Booking,expectedDepartureDate,"string(date)",,,,2021-05-17,"The date when the shipment is expected to be loaded on board a vessel at `Port of Loading` as provided by the shipper or its agent.
+
+**Condition:** Mandatory if vessel/voyage/service details or `expectedArrivalAtPlaceOfDeliveryDate` or `expectedDepartureFromPlaceOfReceiptDate` (at PRE) is not provided. If `routingReference` is provided - this property MUST not be provided.",
+Booking,"expectedDepartureFromPlaceOfReceiptDate","string(date)",,,,2021-05-17,"The date when the shipment is expected to be handed over to the carrier at `Place of Receipt` as provided by the shipper or its agent.
+
+**Condition:** Mandatory if vessel/voyage/service details or `expectedArrivalAtPlaceOfDeliveryDate` or `expectedDepartureDate` (at POL) is not provided.",
+Booking,"exportDeclarationReference",string,,maxLength=35,"^\S(?:.*\S)?$",ABC123123,"Reference number assigned to an Export declaration typically submitted by the exporter (or the freight forwarder on behalf of the exporter) that provides detailed information about the goods being exported. It serves as a record for the exporting country's government and is used for statistical, regulatory, and compliance purposes. The export declaration must typically be submitted to the relevant customs authorities before the goods leave the exporting country.",
+Booking,feedbacks,"Feedback list",,,,,"Feedback that can be provided includes, but is not limited to:
+- unsupported properties
+- changed values
+- removed properties
+- general information",
+Booking,freightPaymentTermCode,string,,,,PRE,"An indicator of whether freight and ancillary fees for the main transport are prepaid (`PRE`) or collect (`COL`). When prepaid the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+Booking,incoTerms,string,,maxLength=3,,FCA,"Transport obligations, costs and risks as agreed between buyer and seller as defined by [Incoterms Rules](https://iccwbo.org/business-solutions/incoterms-rules/).",
+Booking,invoicePayableAt,InvoicePayableAt,,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer.
+
+The location must be provided as a `UN Location Code`",
+Booking,"isEquipmentSubstitutionAllowed",boolean,yes,,,true,"Indicates if an alternate equipment type can be provided by the carrier.",
+Booking,"isExportDeclarationRequired",boolean,,,,true,"Information provided by the shipper whether an export declaration is required for this particular shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+Booking,isPartialLoadAllowed,boolean,,,,true,"Indicates whether the shipper agrees to load part of the shipment in case not all of the cargo is delivered within cut-off.
+
+**Note:** The carrier is not liable in case unable to follow the customer's instructions due to operational constraints. If this value is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+Booking,originChargesPaymentTerm,OriginChargesPaymentTerm,,,,,"An indicator of whether origin charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
+Booking,partyContactDetails,"PartyContactDetail list",,,,,"The contact details of the Booking requestor(s) to contact in relation to the **Booking** (changes, notifications etc.)",
+Booking,placeOfBLIssue,PlaceOfBLIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
+
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+Booking,receiptTypeAtOrigin,string,yes,maxLength=3,,CY,"Indicates the type of service offered at `Origin`. The options are:
+- `CY` (Container yard (incl. rail ramp))
+- `SD` (Store Door)
+- `CFS` (Container Freight Station)",
+Booking,references,"Reference list",,,,,"A list of `References`",
+Booking,requestedEquipments,"RequestedEquipment list",yes,minItems=1,,,"List of `Requested Equipments`. Multiple containers can be requested within the same booking. For each Requested Equipment object with 2 or more units, it is a condition that the commodity (or list of commodities) defined within the same Requested Equipment object is the same for each requested unit.
+
+**Example:** 2 x 20' containing 50% shoes and 50% t-shirts can be requested within the same Requested Equipment object only if each 20' will contain 50% shoes and 50% t-shirts. If 1 x 20' will contain 100% shoes and the other 20' will be 100% t-shirts, 2 separate Requested Equipment objects must be defined.",
+Booking,"requestedNumberOfTransportDocuments",integer,,minimum=1,,3,"The number of `Transport Documents` requested to be linked to this Booking by the Shipper.",
+Booking,"requestedOnCarriageModeOfTransport",string,,maxLength=50,,VESSEL,"The `Mode of Transport` requested ​by the shipper for the **on carriage**. The supported values include:
+- `VESSEL` (Vessel)
+- `RAIL` (Rail)
+- `TRUCK` (Truck)
+- `BARGE` (Barge)
+- `RAIL_TRUCK`(Rail and truck)
+- `BARGE_TRUCK`(Barge and truck)
+- `BARGE_RAIL`(Barge and rail)
+- `MULTIMODAL` (if multiple modes are used)",
+Booking,"requestedPreCarriageModeOfTransport",string,,maxLength=50,,,"The `Mode of Transport` requested ​by the shipper for the **pre carriage**. The supported values include:
+- `VESSEL` (Vessel)
+- `RAIL` (Rail)
+- `TRUCK` (Truck)
+- `BARGE` (Barge)
+- `RAIL_TRUCK`(Rail and truck)
+- `BARGE_TRUCK`(Barge and truck)
+- `BARGE_RAIL`(Barge and rail)
+- `MULTIMODAL` (if multiple modes are used)",
+Booking,routingReference,string,,maxLength=5000,"^\S(?:.*\S)?$",Route123,"A reference to a predefined `route` specified in **Commercial Schedules - Point to Point**. When specifying this property - it is not needed to specify the following properties:
+  - `vessel` which includes:
+    - `vesselName`
+    - `vesselIMONumber`
+  - `carrierServiceName`
+  - `carrierServiceCode`
+  - `universalServiceReference`
+  - `carrierExportVoyageNumber`
+  - `universalExportVoyageReference`
+  - `expectedDepartureDate`
+  - `expectedArrivalAtPlaceOfDeliveryStartDate` or `expectedArrivalAtPlaceOfDeliveryEndDate`
+  - the following `locationTypeCode` in `shipmentLocations`:
+    - `PRE` (Place of Receipt)
+    - `POL` (Port of Loading)
+    - `POD` (Port of Discharge)
+    - `PDE` (Place of Delivery)",
+Booking,serviceContractReference,string,,maxLength=30,,HHL51800000,"Reference number for agreement between shipper and carrier, which optionally includes a certain minimum quantity commitment (usually referred as “MQC”) of cargo that the shipper commits to over a fixed period, and the carrier commits to a certain rate or rate schedule.
+
+**Condition:** One of `serviceContractReference` or `contractQuotationReference` must be provided, but not both.",
+Booking,shipmentCutOffTimes,"ShipmentCutOffTime list",,,,,"A list of cut-off times provided by the carrier in the booking confirmation. A cut-off time indicates the latest deadline within which a task must be completed. The confirmed schedule cannot be guaranteed if a cut-off time is missed. Customs brokers may set additional cut-off times to receive the export customs documentation, which is not included in the shipment cut-off times of a carrier booking.
+
+**Condition:** Mandatory and non-empty for a `CONFIRMED` Booking",
+Booking,shipmentLocations,"ShipmentLocation list",yes,minItems=1,,,"A list of `Shipment Locations`",
+Booking,termsAndConditions,string,,maxLength=50000,,"Any reference in...","Carrier terms and conditions of transport.",
+Booking,"transportDocumentReference",string,,maxLength=20,"^\S(?:.*\S)?$",reserved-HHL123,"A unique reference allocated by the shipping line to the `Transport Document` that the booking concerns.
+
+**Deprecated:** In case both provider and consumer are on API v2.0.2 (or later), please use `transportDocumentReferences` property instead",
+Booking,"transportDocumentReferences","string list",,maxLength=20,"^\S(?:.*\S)?$",,"An array of `transportDocumentReference` to be associated to this Booking.
+Item description:
+The `transportDocumentReference` to be associated to this Booking.",
+Booking,"transportDocumentTypeCode",string,,,,SWB,"Specifies the type of the `Transport Document`. Possible values are:
+- `BOL` (Bill of Lading)
+- `SWB` (Sea Waybill)",
+Booking,transportPlan,"Transport list",,,,,"A list of `Transport` objects (legs) describing the entire transport plan including transshipments.
+
+**Condition:** Mandatory and non-empty for a `CONFIRMED` Booking",
+Booking,"universalExportVoyageReference",string,,"minLength=5
+maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).
+
+**Condition:** If `routingReference` is provided - this property MUST not be provided.",
+Booking,"universalServiceReference",string,,"minLength=8
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5 digits`, followed by a checksum-character as a capital letter from `A to Z`.
+
+**Condition:** If `routingReference` is provided - this property MUST not be provided.",
+Booking,vessel,Vessel,,,,,"Vessels related to this booking request.
+
+**Condition:** Mandatory if `carrierExportVoyageNumber` is provided and Vessel details or `carrierServiceCode` are blank",
+BookingAgent,address,PartyAddress,,,,,"Party address.",
+BookingAgent,identifyingCodes,"IdentifyingCode list",,,,,,
+BookingAgent,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+BookingAgent,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+BookingAgent,reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Booking Agent`.",
+BookingAgent,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+CargoGrossVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)",
+CargoGrossVolume,value,number,yes,minimum=0,,2.4,"The estimated grand total volume of the cargo.",
+CargoGrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+CargoGrossWeight,value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CargoGrossWeightReq,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+CargoGrossWeightReq,value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CargoNetVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)",
+CargoNetVolume,value,number,yes,minimum=0,,2.4,"The estimated net total volume of the cargo.",
+CargoNetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+CargoNetWeight,value,number,yes,minimum=0,,2400,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CarrierBookingOffice,address,Address,,,,,"Address of the carrier booking office.",
+CarrierBookingOffice,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+CarrierBookingOffice,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+CarrierBookingOffice,UNLocationCode,string,yes,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+Charge,calculationBasis,string,yes,maxLength=50,"^\S(?:.*\S)?$","Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
+Charge,chargeName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Documentation fee - Destination","Free text field describing the charge to apply",
+Charge,currencyAmount,number,yes,minimum=0,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+Charge,currencyCode,string,yes,"minLength=3
+maxLength=3","^[A-Z]{3}$",DKK,"The currency for the charge, using a 3-character code according to [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).",
+Charge,paymentTermCode,string,yes,,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+Charge,quantity,number,yes,minimum=0,,34.4,"The amount of unit for this charge item.",
+Charge,unitPrice,number,yes,minimum=0,,3456.6,"The unit price of this charge item in the currency of the charge.",
+Commodity,cargoGrossVolume,CargoGrossVolume,,,,,"The estimated grand total volume of the cargo.",
+Commodity,cargoGrossWeight,CargoGrossWeight,,,,,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.
+
+**Condition:** Mandatory if not provided on `Requested Equipment` level.",
+Commodity,cargoNetVolume,CargoNetVolume,,,,,"The estimated net total volume of the cargo.",
+Commodity,cargoNetWeight,CargoNetWeight,,,,,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+Commodity,commoditySubReference,string,,maxLength=100,"^\S(?:.*\S)?$",,"A unique reference for this commodity object assigned by the carrier in the booking confirmation. The reference must be provided by the shipper as part of the `Shipping Instructions` for the carrier to link the consignment item to this commodity. A commodity reference is only unique in the context of a booking.
+
+**Condition:** Mandatory to provide for `CONFIRMED` bookings",
+Commodity,commodityType,string,yes,maxLength=550,"^\S(?:.*\S)?$","Mobile phones","High-level description of goods to be shipped which allow the carrier to confirm acceptance and commercial terms. To be replaced by ""description of goods"" upon submission of `Shipping Instructions`",
+Commodity,customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+Commodity,exportLicense,ExportLicense,,,,,"Export license information.",
+Commodity,HSCodes,"string list",,"minLength=6
+maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `commodity`
+Item description:
+Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
+
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
+",
+Commodity,importLicense,ImportLicense,,,,,"Import license information.",
+Commodity,nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `commodity`",
+Commodity,outerPackaging,OuterPackaging,,,,,"Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+
+**Condition:** Mandatory for DG (Dangerous Goods) cargo.",
+Commodity,references,"Reference list",,,,,"A list of `References`",
+ConfirmedEquipment,containerPositionings,"ContainerPositioningEstimated list",,,,,"A list of date and time and locations of the customer facility where the container(s) will be loaded. If multiple Container positioning locations (`CPO`) are provided (multi-stop), the first location is where the empty container will be stuffed first. The order in which the `CPO` locations should be visited is implicitly defined by the shipper based on the date and time provided per location (all times are estimated).
+
+**Condition:** Only applicable to carrier haulage service at origin (`Receipt type at origin = 'SD'`).",
+ConfirmedEquipment,emptyContainerPickup,EmptyContainerPickup,,,,,"The date and time and location for the empty container pick-up.
+
+**Condition:** Only applicable to merchant haulage service at origin (`Receipt type at origin = 'CY'`).",
+ConfirmedEquipment,ISOEquipmentCode,string,yes,maxLength=4,"^\S(?:.*\S)?$",22G1,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
+ConfirmedEquipment,"originEmptyContainerPickup","OriginEmptyContainerPickup",,,,,"The date, time and location of the depot from which the empty container(s) will be released from.
+
+**Note:** Applicable to **all** `Receipt type at origin`.",
+ConfirmedEquipment,units,integer,yes,minimum=1,,3,"Number of confirmed equipment units",
+Consignee,address,PartyAddress,,,,,"Party address.",
+Consignee,identifyingCodes,"IdentifyingCode list",,,,,,
+Consignee,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+Consignee,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+Consignee,purchaseOrderReferences,"string list",,maxLength=35,"^\S(?:.*\S)?$",,"A list of `Purchase Order Reference`s linked to the `Consignee`.
+Item description:
+A purchase order reference linked to the `Consignee`.",
+Consignee,reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Consignee`.",
+Consignee,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+ContainerPositioning,dateTime,"string(date-time)",,,,2024-09-04T09:41Z,"The date and time requested by the shipper for the positioning of the container(s) at the Container positioning location (`CPO`), if provided, or the Place of Receipt (`PRE`) if `CPO` location is not provided.",
+ContainerPositioning,location,"ContainerPositioningLocation",yes,,,,"The container positioning location.",
+"ContainerPositioningEstimated",estimatedDateTime,"string(date-time)",,,,2024-09-04T09:41Z,"The estimated date and time for the positioning of the container(s) at the `Container Positioning Location` (CPO), if provided, or the `Place of Receipt` (PRE) if CPO location is not provided.
+
+**Condition:** Only applicable to carrier haulage service at origin (`Receipt type at origin = 'SD'`).",
+"ContainerPositioningEstimated",location,"ContainerPositioningLocation",yes,,,,"The container positioning location.",
+"ContainerPositioningLocation",address,Address,,,,,"Address of the location.",
+"ContainerPositioningLocation",facility,Facility,,,,,"Facility information for the location.",
+"ContainerPositioningLocation",geoCoordinate,GeoCoordinate,,,,,"Geographic coordinate (latitude/longitude) of the location.",
+"ContainerPositioningLocation",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Shanghai Shengdong International Container Terminal","The name of the location.",
+"ContainerPositioningLocation",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+CustomsReference,countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+CustomsReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+CustomsReference,values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+DangerousGoods,"additionalContainerCargoHandling",string,,maxLength=255,,"To be handled with extreme care","Text field to provide cargo handling information already known at the booking stage.",
+DangerousGoods,codedVariantList,string,,"minLength=4
+maxLength=4","^[0-3][0-9A-Z]{3}$",2200,"Four-character code supplied by Exis Technologies that assists to remove ambiguities when identifying a variant within a single `UN number` or `NA number` that may occur when two companies exchange DG information.
+
+Character | Valid Characters | Description
+:--------:|------------------|------------
+1| 0, 1, 2, 3|The packing group. Code 0 indicates there is no packing group
+2|0 to 9 and A to Z|A sequence letter for the PSN, or 0 if there were no alternative PSNs
+3 and 4|0 to 9 and A to Z|Two sequence letters for other information, for the cases where the variant is required because of different in subrisks, packing instruction etc.",
+DangerousGoods,"competentAuthorityApproval",string,,maxLength=70,"^\S(?:.*\S)?$","{Name and reference...}","Name and reference number of the competent authority providing the approval.",
+DangerousGoods,emergencyContactDetails,EmergencyContactDetails,yes,,,,"24 hr emergency contact details",
+DangerousGoods,EMSNumber,string,,maxLength=7,,"F-A S-Q","The emergency schedule identified in the IMO EmS Guide - Emergency Response Procedures for Ships Carrying Dangerous Goods. Comprises 2 values; 1 for spillage and 1 for fire. Possible values spillage: S-A to S-Z. Possible values fire: F-A to F-Z.",
+DangerousGoods,endOfHoldingTime,"string(date)",,,,2021-09-03,"Date by when the refrigerated liquid needs to be delivered.",
+DangerousGoods,fumigationDateTime,"string(date-time)",,,,2024-09-04T09:41Z,"Date & time when the container was fumigated",
+DangerousGoods,grossWeight,GrossWeight,yes,,,,"Total weight of the goods carried, including packaging.",
+DangerousGoods,imoClass,string,yes,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
+- `1.1A` (Substances and articles which have a mass explosion hazard)
+- `1.6N` (Extremely insensitive articles which do not have a mass explosion hazard)
+- `2.1` (Flammable gases)
+- `8` (Corrosive substances)",
+DangerousGoods,inhalationZone,string,,"minLength=1
+maxLength=1",,A,"The zone classification of the toxicity of the inhalant. Possible values are:
+- `A` (Hazard Zone A) can be assigned to specific gases and liquids
+- `B` (Hazard Zone B) can be assigned to specific gases and liquids
+- `C` (Hazard Zone C) can **only** be assigned to specific gases
+- `D` (Hazard Zone D) can **only** be assigned to specific gases",
+DangerousGoods,innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
+DangerousGoods,"isCompetentAuthorityApprovalRequired",boolean,yes,,,false,"Indicates if the cargo require approval from authorities",
+DangerousGoods,isEmptyUncleanedResidue,boolean,yes,,,false,"Indicates if the cargo is residue.",
+DangerousGoods,isExceptedQuantity,boolean,yes,,,false,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
+DangerousGoods,isHot,boolean,yes,,,false,"Indicates if high temperature cargo is shipped.",
+DangerousGoods,isLimitedQuantity,boolean,yes,,,false,"Indicates if the dangerous goods can be transported as limited quantity in accordance with Chapter 3.4 of the IMO IMDG Code.",
+DangerousGoods,isMarinePollutant,boolean,yes,,,false,"Indicates if the goods belong to the classification of Marine Pollutant.",
+DangerousGoods,isReportableQuantity,boolean,yes,,,false,"Indicates if a container of hazardous material is at the reportable quantity level. If `TRUE`, a report to the relevant authority must be made in case of spill.",
+DangerousGoods,isSalvagePackings,boolean,yes,,,false,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked.",
+DangerousGoods,isWaste,boolean,yes,,,false,"Indicates if waste is being shipped",
+DangerousGoods,limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
+DangerousGoods,NANumber,string,,"minLength=4
+maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
+DangerousGoods,netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging's, casings, etc.",
+DangerousGoods,netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods.
+
+**Condition:** only applicable to liquids and gas.",
+DangerousGoods,netWeight,NetWeight,,,,,"Total weight of the goods carried, excluding packaging.",
+DangerousGoods,packingGroup,integer,,"minimum=1
+maximum=3",,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+DangerousGoods,properShippingName,string,yes,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
+DangerousGoods,segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
+
+**Condition:** only applicable to specific hazardous goods.
+Item description:
+Grouping of Dangerous Goods having certain similar chemical properties. Possible values are:
+- `1` (Acids)
+- `2` (Ammonium Compounds)
+- `3` (Bromates)
+- `4` (Chlorates)
+- `5` (Chlorites)
+- `6` (Cyanides)
+- `7` (Heavy metals and their salts)
+- `8` (Hypochlorites)
+- `9` (Lead and its compounds)
+- `10` (Liquid halogenated hydrocarbons)
+- `11` (Mercury and mercury compounds)
+- `12` (Nitrites and their mixtures)
+- `13` (Perchlorates)
+- `14` (Permanganates)
+- `15` (Powdered metals)
+- `16` (Peroxides),
+- `17` (Azides)
+- `18` (Alkalis)
+",
+DangerousGoods,specialCertificateNumber,string,,maxLength=255,,22663:3,"Text field to indicate certificate number & segment for specific stowage requirements overruling IMDG code",
+DangerousGoods,subsidiaryRisk1,string,,"minLength=1
+maxLength=3","^[0-9](\.[0-9])?$",1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
+DangerousGoods,subsidiaryRisk2,string,,"minLength=1
+maxLength=3","^[0-9](\.[0-9])?$",1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
+DangerousGoods,technicalName,string,,maxLength=250,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code.",
+DangerousGoods,UNNumber,string,,"minLength=4
+maxLength=4","^\d{4}$",1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
+"DestinationChargesPaymentTerm","haulageChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the costs for inland transportation to the port, when applicable, are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"DestinationChargesPaymentTerm","otherChargesPaymentTermCode",string,,,,PRE,"An indicator of whether destination charges (excluding port and haulage) are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"DestinationChargesPaymentTerm","portChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the destination port charges are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+DischargeLocation,address,Address,,,,,"Address of the location.",
+DischargeLocation,facility,Facility,,,,,"Facility information for the location.",
+DischargeLocation,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
+DischargeLocation,UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+DocumentParties,bookingAgent,BookingAgent,,,,,"The Booking Agent party.",
+DocumentParties,carrierBookingOffice,CarrierBookingOffice,,,,,"The Carrier Booking Office.",
+DocumentParties,consignee,Consignee,,,,,"The Consignee party.",
+DocumentParties,issueTo,IssueToParty,,,,,"The party that receives **possession** of the original Bill of Lading upon issuance.",
+DocumentParties,other,"OtherDocumentParty list",,,,,"A list of document parties that can be optionally provided at booking stage.",
+DocumentParties,serviceContractOwner,ServiceContractOwner,,,,,"The Service Contract Owner party.",
+DocumentParties,shipper,Shipper,,,,,"The Shipper party.",
+EmergencyContactDetails,contact,string,yes,maxLength=255,,"Henrik Larsen","Name of the Contact person during an emergency.",
+EmergencyContactDetails,phone,string,yes,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+EmergencyContactDetails,provider,string,,maxLength=255,,GlobeTeam,"Name of the third party vendor providing emergency support",
+EmergencyContactDetails,referenceNumber,string,,maxLength=255,,12234,"Contract reference for the emergency support provided by an external third party vendor.",
+"EmptyContainerDepotReleaseLocation",address,Address,,,,,"Address of the location.",
+"EmptyContainerDepotReleaseLocation",facility,Facility,,,,,"Facility information for the location.",
+"EmptyContainerDepotReleaseLocation",geoCoordinate,GeoCoordinate,,,,,"Geographic coordinate (latitude/longitude) of the location.",
+"EmptyContainerDepotReleaseLocation",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Shanghai Shengdong International Container Terminal","The name of the location.",
+"EmptyContainerDepotReleaseLocation",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+EmptyContainerPickup,dateTime,"string(date-time)",,,,2024-09-04T09:41Z,"The date and time for the pick-up of the empty container(s) at the Empty container depot release location, if provided.",
+EmptyContainerPickup,depotReleaseLocation,"EmptyContainerDepotReleaseLocation",,,,,"The location of the depot from which the empty container(s) will be released from",
+ExportLicense,expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License` applicable to the booking.",
+ExportLicense,isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+ExportLicense,issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License` applicable to the booking.",
+ExportLicense,reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+Facility,facilityCode,string,yes,maxLength=6,"^\S(?:.*\S)?$",ADT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
+
+The definition of the code depends on the `facilityCodeListProvider`. As code list providers maintain multiple codeLists the following codeList is used:
+
+- `SMDG` (the codeList used is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/))
+- `BIC` (the codeList used is the [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
+Facility,facilityCodeListProvider,string,yes,,,SMDG,"The provider used for identifying the facility Code. Some facility codes are only defined in combination with an `UN Location Code`
+- `BIC` (Requires a UN Location Code)
+- `SMDG` (Requires a UN Location Code)",
+Feedback,code,string,yes,maxLength=50,,PROPERTY_WILL_BE_IGNORED,"A code used to describe the feedback. Possible values are:
+- `INFORMATIONAL_MESSAGE` (INFO - to be used when providing extra information)
+- `PROPERTY_WILL_BE_IGNORED` (WARN - to be used for unsupported properties/values)
+- `PROPERTY_VALUE_MUST_CHANGE` (ERROR - to be used when a wrong property/value is provided)
+- `PROPERTY_VALUE_HAS_BEEN_CHANGED` (WARN - when something has been auto-updated without consumer intervention)
+- `PROPERTY_VALUE_MAY_CHANGE` (WARN - when something is likely to change in the future)
+- `PROPERTY_HAS_BEEN_DELETED` (WARN - when something has been auto-deleted without consumer intervention)",
+Feedback,jsonPath,string,,maxLength=500,,"$.location.facilityCode","A path to the property, formatted according to [JSONpath](https://github.com/json-path/JsonPath).",
+Feedback,message,string,yes,maxLength=5000,,"Spaces not allowed in facility code","A description with additional information.",
+Feedback,property,string,,maxLength=100,,facilityCode,"The name of the property causing the error/warning.",
+Feedback,severity,string,yes,maxLength=50,,WARN,"The severity of the feedback. Possible values are:
+- `INFO` (Information - ""Your reefer container will use renewable energy"", ""This earlier / premium service is available"")
+- `WARN` (Warning - ""I'm going to replace"" / ""Ignore this value"" / ""Use another value instead"")
+- `ERROR` (Error - ""This must be changed!"")",
+GeoCoordinate,latitude,string,yes,maxLength=10,,48.85855,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+GeoCoordinate,longitude,string,yes,maxLength=11,,2.294492036,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
+GrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+GrossWeight,value,number,yes,minimum=0,,12000.3,"The grand total weight of the DG cargo and weight per `UNNumber`/`NANumber` including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+IdentifyingCode,codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+IdentifyingCode,partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+ImportLicense,expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License` applicable to the booking.",
+ImportLicense,isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+ImportLicense,issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License` applicable to the booking.",
+ImportLicense,reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+InnerPackaging,description,string,yes,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
+InnerPackaging,material,string,yes,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
+InnerPackaging,quantity,integer,yes,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+InvoicePayableAt,UNLocationCode,string,yes,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+IssueToParty,identifyingCodes,"IdentifyingCode list",,,,,,
+IssueToParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
+IssueToParty,sendToPlatform,string,,maxLength=4,"^\S+$",BOLE,"The eBL platform of the transaction party.
+The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+
+**Condition:** Only applicable when `isElectronic=true` and `transportDocumentTypeCode=BOL`. The property **MUST** be absent for paper B/Ls (`isElectronic=false`)",
+IssueToParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+Limits,flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.
+
+**Condition:** only applicable to specific hazardous goods according to the IMO IMDG Code.",
+Limits,SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+Limits,SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+Limits,temperatureUnit,string,yes,,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
+- `CEL` (Celsius)
+- `FAH` (Fahrenheit)",
+Limits,"transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+Limits,"transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+LoadLocation,address,Address,,,,,"Address of the location.",
+LoadLocation,facility,Facility,,,,,"Facility information for the location.",
+LoadLocation,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
+LoadLocation,UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+Location,address,Address,,,,,"Address of the location.",
+Location,facility,Facility,,,,,"Facility information for the location.",
+Location,geoCoordinate,GeoCoordinate,,,,,"Geographic coordinate (latitude/longitude) of the location.",
+Location,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
+Location,UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+NationalCommodityCode,countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+NationalCommodityCode,type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` ( Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+NationalCommodityCode,values,"string list",yes,"minItems=1
+maxLength=10","^\S(?:.*\S)?$",,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+NetExplosiveContent,unit,string,yes,,,KGM,"Unit of measure used to describe the `netExplosiveWeight`. Possible values are:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)
+- `GRM` (Grams)
+- `ONZ` (Ounce)",
+NetExplosiveContent,value,number,yes,minimum=0,,2400,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
+NetVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)
+- `LTR` (Litre)",
+NetVolume,value,number,yes,minimum=0,,2.4,"The volume of the referenced dangerous goods.",
+NetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+NetWeight,value,number,yes,minimum=0,,2400,"Total weight of the goods carried, excluding packaging.",
+OriginChargesPaymentTerm,"haulageChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the costs for inland transportation to the port, when applicable, are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+OriginChargesPaymentTerm,"otherChargesPaymentTermCode",string,,,,PRE,"An indicator of whether origin charges (excluding port and haulage) are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+OriginChargesPaymentTerm,"portChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the origin port charges are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"OriginEmptyContainerPickup",dateTime,"string(date-time)",,,,2024-09-04T09:41Z,"The date and time for the pick-up of the empty container(s) at the Empty container depot release location, if provided.",
+"OriginEmptyContainerPickup",depotReleaseLocation,"EmptyContainerDepotReleaseLocation",,,,,"The location of the depot from which the empty container(s) will be released from",
+OtherDocumentParty,party,Party,yes,,,,"The party information.",
+OtherDocumentParty,partyFunction,string,yes,maxLength=3,,DDS,"Specifies the role of the party in a given context. Possible values are:
+
+- `DDR` (Consignor's freight forwarder)
+- `DDS` (Consignee's freight forwarder)
+- `COW` (Invoice payer on behalf of the consignor (shipper))
+- `COX` (Invoice payer on behalf of the consignee)
+- `N1` (First Notify Party)
+- `N2` (Second Notify Party)
+- `NI` (Other Notify Party)
+- `NAC` (Named Account Customer)",
+OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods` related to the `Commodity`",
+OuterPackaging,description,string,,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
+OuterPackaging,imoPackagingCode,string,,"minLength=1
+maxLength=5","^[A-Z0-9]{1,5}$",1A2,"The code of the packaging as per IMO.
+
+**Condition:** only applicable to dangerous goods if specified in the [IMO IMDG code](https://www.imo.org/en/publications/Pages/IMDG%20Code.aspx). If not available, the `packageCode` as per UN recommendation 21 should be used.",
+OuterPackaging,numberOfPackages,integer,,"minimum=1
+maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Commodity`.
+
+**Condition:** In case this `OuterPackaging` includes `Dangerous Goods` the `numberOfPackages` is mandatory to provide",
+OuterPackaging,packageCode,string,,"minLength=2
+maxLength=2","^[A-Z0-9]{2}$",5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)
+
+**Condition:** only applicable to dangerous goods if the `IMO packaging code` is not available.",
+Party,address,PartyAddress,,,,,"Party address.",
+Party,identifyingCodes,"IdentifyingCode list",,,,,,
+Party,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+Party,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+Party,reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Party`.",
+Party,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+PartyAddress,city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+PartyAddress,countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+PartyAddress,floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+PartyAddress,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+PartyAddress,postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+PartyAddress,stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+PartyAddress,street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+PartyAddress,streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+PartyAddress,UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+PartyContactDetail,email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+PartyContactDetail,name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+PartyContactDetail,phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+PlaceOfBLIssue,countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+PlaceOfBLIssue,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
+PlaceOfBLIssue,UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+Reference,type,string,yes,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CR` (Customer's Reference)
+- `ECR` (Empty container release reference)
+- `AKG` (Vehicle Identification Number)
+- `AEF` (Customer Load Reference)",
+Reference,value,string,yes,maxLength=35,"^\S(?:.*\S)?$",HHL00103004,"The value of the reference.",
+RequestedEquipment,activeReeferSettings,ActiveReeferSettings,,,,,"Active reefer settings for temperature-controlled containers.",
+RequestedEquipment,cargoGrossWeight,CargoGrossWeightReq,,,,,"The gross weight of the cargo and any packaging.",
+RequestedEquipment,commodities,"Commodity list",,,,,"A list of `Commodities`",
+RequestedEquipment,containerPositionings,"ContainerPositioning list",,,,,"A list of date and time and locations of the customer facility where the container(s) will be loaded. If multiple Container positioning locations (`CPO`) are provided (multi-stop), the first location is where the empty container will be stuffed first. The order in which the `CPO` locations should be visited is implicitly defined by the shipper based on the date and time provided per location.
+
+**Condition:** Only applicable to carrier haulage service at origin (`Receipt type at origin = 'SD'`).",
+RequestedEquipment,customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+RequestedEquipment,emptyContainerPickup,EmptyContainerPickup,,,,,"The date and time and location for the empty container pick-up.
+
+**Condition:** Only applicable to merchant haulage service at origin (`Receipt type at origin = 'CY'`).",
+RequestedEquipment,equipmentReferences,"string list",,maxLength=11,"^\S(?:.*\S)?$",,"A list of equipments to be used by the shipper if known at the time of booking
+Item description:
+The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.
+",
+RequestedEquipment,"fullContainerPickupDateTime","string(date-time)",,,,2025-05-16T09:14Z,"The date and time when the loaded container(s) need to be picked up from the `Place of Receipt`, if provided.",
+RequestedEquipment,isNonOperatingReefer,boolean,,,,false,"If the equipment is a Reefer Container then setting this attribute will indicate that the container should be treated as a `DRY` container.
+
+**Condition:** Only applicable if `ISOEquipmentCode` shows a Reefer type.",
+RequestedEquipment,ISOEquipmentCode,string,yes,maxLength=4,"^\S(?:.*\S)?$",22RT,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
+RequestedEquipment,isShipperOwned,boolean,yes,,,true,"Indicates whether the container is shipper owned (`SOC`).",
+RequestedEquipment,"originEmptyContainerPickup","OriginEmptyContainerPickup",,,,,"The date, time and location of the depot from which the empty container(s) will be released from.
+
+**Note:** Applicable to **all** `Receipt type at origin`.",
+RequestedEquipment,references,"Reference list",,,,,"A list of `References`",
+RequestedEquipment,tareWeight,TareWeight,,,,,"The weight of an empty container (gross container weight).
+
+**Condition:** In case of Shipper Owned Containers (`SOC`) this is a required property",
+RequestedEquipment,units,integer,yes,minimum=1,,3,"Number of requested equipment units.",
+ServiceContractOwner,address,PartyAddress,,,,,"Party address.",
+ServiceContractOwner,identifyingCodes,"IdentifyingCode list",,,,,,
+ServiceContractOwner,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+ServiceContractOwner,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+ServiceContractOwner,reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Service Contract Owner`.",
+ServiceContractOwner,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+ShipmentCutOffTime,cutOffDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Actual cut-off time",
+ShipmentCutOffTime,cutOffDateTimeCode,string,yes,maxLength=3,,DCO,"Code for the cut-off time. Possible values are:
+- `DCO` (Documentation cut-off)
+- `VCO` (VGM cut-off)
+- `FCO` (FCL delivery cut-off)
+- `LCO` (LCL delivery cut-off) **Condition:** only when the `Receipt Type at Origin` is `CFS`
+- `EFC` (Earliest full-container delivery date)",
+ShipmentLocation,location,Location,yes,,,,"The location information.",
+ShipmentLocation,locationTypeCode,string,yes,maxLength=3,,PRE,"Links to the Location Type Code defined by DCSA. Possible values are:
+- `PRE` (Place of Receipt)
+- `POL` (Port of Loading)
+- `POD` (Port of Discharge)
+- `PDE` (Place of Delivery)
+- `PCF` (Pre-carriage From)
+- `OIR` (Onward In-land Routing)
+- `ORI` (Origin of goods)
+- `IEL` (Container intermediate export stop off location)
+- `PTP` (Prohibited transshipment port)
+- `RTP` (Requested transshipment port)
+- `FCD` (Full container drop-off location)
+- `ROU` (Routing Reference)
+
+**Note:** Use `ROU` when `routingReference` is used in order to comply with the need to add at least 1 `shipmentLocation` to a Booking request.",
+Shipper,address,PartyAddress,,,,,"Party address.",
+Shipper,identifyingCodes,"IdentifyingCode list",,,,,,
+Shipper,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
+Shipper,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+Shipper,purchaseOrderReferences,"string list",,maxLength=35,"^\S(?:.*\S)?$",,"A list of `Purchase Order Reference`s linked to the `Shipper`.
+Item description:
+A purchase order reference linked to the `Shipper`.",
+Shipper,reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Shipper`.",
+Shipper,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+TareWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+TareWeight,value,number,yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
+TaxLegalReference,countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+TaxLegalReference,value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+Transport,"carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",
+Transport,"carrierImportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",
+Transport,carrierServiceCode,string,,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published.",
+Transport,dischargeLocation,DischargeLocation,yes,,,,"The discharge location for this transport leg.",
+Transport,loadLocation,LoadLocation,yes,,,,"The load location for this transport leg.",
+Transport,modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA. The currently supported values include:
+- `VESSEL` (Vessel)
+- `RAIL` (Rail)
+- `TRUCK` (Truck)
+- `BARGE` (Barge)
+- `RAIL_TRUCK`(Rail and truck)
+- `BARGE_TRUCK`(Barge and truck)
+- `BARGE_RAIL`(Barge and rail)
+- `MULTIMODAL` (if multiple modes are used)",
+Transport,plannedArrivalDate,"string(date)",yes,,,2021-05-19,"The planned date of arrival.
+
+**Note:** In case no date is available, the date `1970-01-01` should be used.",
+Transport,plannedDepartureDate,"string(date)",yes,,,2021-05-17,"The planned date of departure.
+
+**Note:** In case no date is available, the date `1970-01-01` should be used.",
+Transport,transportPlanStage,string,yes,,,PRC,"Code qualifying a specific stage of transport e.g. pre-carriage, main carriage transport or on-carriage transport
+- `PRC` (Pre-Carriage)
+- `MNC` (Main Carriage Transport)
+- `ONC` (On-Carriage Transport)",
+Transport,"transportPlanStageSequenceNumber",integer,yes,,,5,"Sequence number of the transport plan stage",
+Transport,"universalExportVoyageReference",string,,"minLength=5
+maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+Transport,"universalImportVoyageReference",string,,"minLength=5
+maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+Transport,"universalServiceReference",string,,"minLength=8
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5 digits`, followed by a checksum-character as a capital letter from `A to Z`.",
+Transport,vesselIMONumber,string,,"minLength=7
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel",
+Transport,vesselName,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
+Vessel,name,string,yes,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
+Vessel,vesselIMONumber,string,,"minLength=7
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel",

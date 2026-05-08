@@ -224,14 +224,18 @@ public class AttributesData {
                 .getOrDefault(lastObjectType, List.of())
                 .forEach(
                     attributeInfo -> {
+                      String baseType = attributeInfo.getAttributeBaseType();
                       String newPath =
                           "%s / %s:%s"
                               .formatted(
                                   existingPath,
                                   attributeInfo.getAttributeName(),
-                                  attributeInfo.getAttributeBaseType());
+                                  baseType);
                       attributesByPath.put(newPath, attributeInfo);
-                      newPaths.add(newPath);
+                      // Only expand further if this type is not already in the path (prevent circular references)
+                      if (baseType == null || !existingPath.contains(":" + baseType)) {
+                        newPaths.add(newPath);
+                      }
                     });
           });
     }

@@ -16,6 +16,10 @@ public class Booking203StandardSpecification extends Booking2StandardSpecificati
     super("2.0.3", "2.0.2");
   }
 
+  protected Booking203StandardSpecification(String versionNumber, String baselineVersion) {
+    super(versionNumber, baselineVersion);
+  }
+
   @Override
   protected Stream<Class<?>> modelClassesStream() {
     Stream<Class<?>> v202ModelClassesStream =

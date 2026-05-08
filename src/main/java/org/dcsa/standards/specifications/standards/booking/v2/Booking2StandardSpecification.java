@@ -45,19 +45,12 @@ import org.dcsa.standards.specifications.standards.booking.v2.model.OuterPackagi
 import org.dcsa.standards.specifications.standards.booking.v2.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.booking.v2.model.Reference;
 import org.dcsa.standards.specifications.standards.booking.v2.model.TareWeight;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CargoItem;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.EmergencyContactDetails;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Equipment;
 import org.dcsa.standards.specifications.standards.dt.v100.model.GeoCoordinate;
 import org.dcsa.standards.specifications.standards.dt.v100.model.InnerPackaging;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ReferenceConsignmentItem;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Seal;
 import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.UtilizedTransportEquipment;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 import org.dcsa.standards.specifications.standards.booking.v2.model.AdvanceManifestFiling;
 import org.dcsa.standards.specifications.standards.booking.v2.model.Booking;
 import org.dcsa.standards.specifications.standards.booking.v2.model.BookingAgent;
@@ -118,19 +111,12 @@ public class Booking2StandardSpecification extends StandardSpecification {
   protected Stream<Class<?>> modelClassesStream() {
     return Stream.of(
         // dt.v100.model
-        CargoItem.class,
-        ConsignmentItem.class,
         CustomsReference.class,
         EmergencyContactDetails.class,
-        Equipment.class,
         GeoCoordinate.class,
         InnerPackaging.class,
         PartyContactDetail.class,
-        ReferenceConsignmentItem.class,
-        Seal.class,
         TaxLegalReference.class,
-        UtilizedTransportEquipment.class,
-        Volume.class,
         // booking.v2.model
         ActiveReeferSettings.class,
         Address.class,

@@ -1,0 +1,60 @@
+package org.dcsa.standards.specifications.standards.booking.v204.model;
+
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
+
+@Schema(
+    description =
+        org.dcsa.standards.specifications.standards.booking.v2.model.Consignee
+            .CLASS_SCHEMA_DESCRIPTION)
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode(callSuper = true)
+public class Consignee
+    extends org.dcsa.standards.specifications.standards.booking.v2.model.Consignee {
+
+  @Schema(
+      description =
+          "Unstructured address lines, used as a fallback when structured address fields are unavailable.")
+  @ArraySchema(maxItems = 5)
+  protected List<AddressLine> addressLines;
+
+  @Schema(
+      description =
+"""
+The eBL platform of the party. The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+""",
+      example = "BOLE",
+      pattern = "^\\S+$",
+      maxLength = 4)
+  private String eblPlatform;
+}
