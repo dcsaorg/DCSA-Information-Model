@@ -5,11 +5,18 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Facility;
 
-@Schema(description = "End location of inland movement after delivery to port of discharge/place of delivery for merchant haulage. May be specified via UN Location Code, Facility, or Address.")
+@Schema(description = OnwardInlandRouting.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class OnwardInlandRouting {
 
-  @Schema(description = "The name of the location.", example = "Port of Amsterdam", maxLength = 100, pattern = "^\\S(?:.*\\S)?$")
+  public static final String CLASS_SCHEMA_DESCRIPTION =
+      "End location of inland movement after delivery to port of discharge/place of delivery for merchant haulage. May be specified via UN Location Code, Facility, or Address.";
+
+  @Schema(
+      description = "The name of the location.",
+      example = "Port of Amsterdam",
+      maxLength = 100,
+      pattern = "^\\S(?:.*\\S)?$")
   private String locationName;
 
   @Schema(

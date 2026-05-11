@@ -8,18 +8,27 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReferen
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress;
 
-@Schema(description = "The company or a legal entity issuing the `Transport Document`.")
+@Schema(description = IssuingParty.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class IssuingParty {
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Name of the party.", example = "Asseco Denmark", maxLength = 70, pattern = "^\\S(?:.*\\S)?$")
+  public static final String CLASS_SCHEMA_DESCRIPTION =
+      "The company or a legal entity issuing the `Transport Document`.";
+
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "Name of the party.",
+      example = "Asseco Denmark",
+      maxLength = 70,
+      pattern = "^\\S(?:.*\\S)?$")
   private String partyName;
 
-  @Schema(requiredMode = Schema.RequiredMode.REQUIRED, description = "Physical address of the issuing party.")
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "Physical address of the issuing party.")
   private PartyAddress address;
 
-  @Schema()
-  private List<IdentifyingCode> identifyingCodes;
+  @Schema() private List<IdentifyingCode> identifyingCodes;
 
   @Schema(description = "A list of `Tax References` for a `Party`")
   private List<TaxLegalReference> taxLegalReferences;

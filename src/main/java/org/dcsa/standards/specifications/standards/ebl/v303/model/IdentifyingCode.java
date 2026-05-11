@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.ebl.v303.model_si;
+package org.dcsa.standards.specifications.standards.ebl.v303.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;

@@ -18,9 +18,9 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Consignment
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.DocumentPartiesHouseBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.DocumentPartiesShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.EndorseeShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_si.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.IssueToParty;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_si.NationalCommodityCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.NotifyPartyHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.NotifyPartyShipper;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OnBehalfOfConsigneeShipper;
@@ -28,10 +28,10 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OnBehalfOfS
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OtherDocumentPartyShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OuterPackagingHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OuterPackagingShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_si.PartyAddress;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.PartyShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Reference;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Seller;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.SellerHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ShipperShipper;

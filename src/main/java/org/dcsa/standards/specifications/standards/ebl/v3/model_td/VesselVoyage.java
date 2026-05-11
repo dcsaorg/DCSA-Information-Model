@@ -3,9 +3,11 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_td;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Vessel and export voyage details.")
+@Schema(description = VesselVoyage.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class VesselVoyage {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Vessel and export voyage details.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

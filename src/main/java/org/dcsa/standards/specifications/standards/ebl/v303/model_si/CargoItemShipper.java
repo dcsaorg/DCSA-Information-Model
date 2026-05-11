@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.standards.booking.v204.model.ExtendedNationalCommodityCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
 
 @Schema(
     description =

@@ -6,9 +6,11 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Facility;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.GeoCoordinate;
 
-@Schema(description = "Location where the cargo is handed over to the carrier. May be specified via UN Location Code, Facility, Address, or Geo Coordinate.")
+@Schema(description = PlaceOfReceipt.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class PlaceOfReceipt {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Location where the cargo is handed over to the carrier. May be specified via UN Location Code, Facility, Address, or Geo Coordinate.";
 
   @Schema(description = "The name of the location.", example = "Port of Amsterdam", maxLength = 100, pattern = "^\\S(?:.*\\S)?$")
   private String locationName;
