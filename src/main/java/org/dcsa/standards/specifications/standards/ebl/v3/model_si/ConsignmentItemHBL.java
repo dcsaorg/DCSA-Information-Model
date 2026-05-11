@@ -8,11 +8,12 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReferenc
 import org.dcsa.standards.specifications.standards.ebl.v3.model.NationalCommodityCode;
 
 @Schema(
-    description =
-        "Defines a list of `CargoItems` belonging together in the same consignment. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`",
+    description = ConsignmentItemHBL.CLASS_SCHEMA_DESCRIPTION,
     title = "Consignment Item (House B/L)")
 @Data
 public class ConsignmentItemHBL {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Defines a list of `CargoItems` belonging together in the same consignment. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

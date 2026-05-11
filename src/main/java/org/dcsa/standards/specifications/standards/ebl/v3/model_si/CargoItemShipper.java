@@ -5,12 +5,11 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.*;
 
-@Schema(
-    description =
-        "A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.",
-    title = "Cargo Item (Shipper)")
+@Schema(description = CargoItemShipper.CLASS_SCHEMA_DESCRIPTION, title = "Cargo Item (Shipper)")
 @Data
 public class CargoItemShipper {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

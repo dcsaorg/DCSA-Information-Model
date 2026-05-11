@@ -4,15 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 
-@Schema(
-    description =
+@Schema(description = OnBehalfOfShipper.CLASS_SCHEMA_DESCRIPTION)
+@Data
+public class OnBehalfOfShipper {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION =
 """
 The party allowed to act on behalf of the shipper for documentation purposes.
 
 **Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.
-""")
-@Data
-public class OnBehalfOfShipper {
+""";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

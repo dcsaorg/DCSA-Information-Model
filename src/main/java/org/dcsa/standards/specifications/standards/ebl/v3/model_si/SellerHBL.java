@@ -8,9 +8,11 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReferen
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyContactDetailHBL;
 
-@Schema(description = "The seller for a `House Bill of Lading`.", title = "Seller (House B/L)")
+@Schema(description = SellerHBL.CLASS_SCHEMA_DESCRIPTION, title = "Seller (House B/L)")
 @Data
 public class SellerHBL {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "The seller for a `House Bill of Lading`.";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

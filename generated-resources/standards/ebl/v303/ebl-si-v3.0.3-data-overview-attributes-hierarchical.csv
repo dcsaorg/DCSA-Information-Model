@@ -1,0 +1,1968 @@
+Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+ShippingInstructions,,,,,,,,
+"ShippingInstructions / advanceManifestFilings",advanceManifestFilings,"AdvanceManifestFiling list",,,,,"A list of `Advance Manifest Filings` specified by the Shipper to indicate whom is to do the Filing",
+"ShippingInstructions / advanceManifestFilings / advanceManifestFilingsHouseBLPerformedBy","advanceManifestFilingsHouseBLPerformedBy",string,yes,,,SELF,"Indicates whether the shipper (`SELF`) will perform the advance manifest filing(s) for the House BL directly or if the carrier (`CARRIER`) should file them on their behalf. Allowed values are:
+
+- `SELF` (filing done by the House filer)
+- `CARRIER` (the carrier does the filing)
+
+In case of self-filing (`SELF`), the shipper can provide their `selfFilerCode` for each manifest.
+
+**Condition:** The `selfFilerCode` must be provided when `manifestTypeCode` is one of `ACE` (US) or `ACI` (CA) and the `advanceManifestFilingsHouseBLPerformedBy` is set to `SELF`.",
+"ShippingInstructions / advanceManifestFilings / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / advanceManifestFilings / identificationNumber",identificationNumber,string,,maxLength=17,"^\S(?:.*\S)?$",FLXP-123321,"An identification number of the house filer responsible for submitting the `Advance Manifest Filing`.
+
+**Condition:** Mandatory if `manifestTypeCode` is `ENS` and `advanceManifestFilingsHouseBLPerformedBy` is `SELF`.",
+"ShippingInstructions / advanceManifestFilings / manifestTypeCode",manifestTypeCode,string,yes,maxLength=50,"^\S(?:.*\S)?$",ENS,"The Manifest type code as defined by the provider.",
+"ShippingInstructions / advanceManifestFilings / selfFilerCode",selfFilerCode,string,,maxLength=100,"^\S(?:.*\S)?$",FLXP,"Code identifying the party who will submit the advance manifest filing(s) for the House BL.
+
+**Mandatory** if `manifestTypeCode` is one of `ACE` (US) or `ACI` (CA) and `advanceManifestFilingsHouseBLPerformedBy` is set to `SELF`.",
+"ShippingInstructions / carrierCode",carrierCode,string,,maxLength=4,"^\S+$",MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier the `Shipping Instructions` is intended for. `carrierCodeListProvider` defines which list the `carrierCode` is based upon.",
+"ShippingInstructions / carrierCodeListProvider",carrierCodeListProvider,string,,,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+"ShippingInstructions / consignmentItems",consignmentItems,"ConsignmentItemShipper list",yes,minItems=1,,,"A list of `ConsignmentItems`",
+"ShippingInstructions / consignmentItems / cargoItems",cargoItems,"CargoItemShipper list",yes,minItems=1,,,"A list of all `cargoItems`",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume",cargoGrossVolume,CargoGrossVolume,,,,,"Calculated by multiplying the width, height, and length of the packed cargo.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,CargoNetVolume,,,,,"Volume of the cargo excluding packaging. Calculated by multiplying width, height, and length.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
+- `FTQ` (Cubic foot)
+- `MTQ` (Cubic meter)",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging and container tare weight.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ShippingInstructions / consignmentItems / cargoItems / customsReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / cargoItems / customsReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ShippingInstructions / consignmentItems / cargoItems / customsReferences / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+"ShippingInstructions / consignmentItems / cargoItems / equipmentReference",equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
+"ShippingInstructions / consignmentItems / cargoItems / exportLicense",exportLicense,ExportLicenseShipper,,,,,"`Export License` requirements
+
+**Condition:** Subject to local customs requirements and commodity.",
+"ShippingInstructions / consignmentItems / cargoItems / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
+"ShippingInstructions / consignmentItems / cargoItems / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / consignmentItems / cargoItems / exportLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License`.",
+"ShippingInstructions / consignmentItems / cargoItems / exportLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+"ShippingInstructions / consignmentItems / cargoItems / extendedNationalCommodityCodes","extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `cargoItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
+
+**Note:** If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored.",
+"ShippingInstructions / consignmentItems / cargoItems / extendedNationalCommodityCodes / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / cargoItems / extendedNationalCommodityCodes / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / consignmentItems / cargoItems / extendedNationalCommodityCodes / values",values,"string list",yes,"minItems=1
+maxLength=16","^\S(?:.*\S)?$",,"A list of `national commodity codes` values supporting up to 16 characters.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / consignmentItems / cargoItems / houseBillOfLadingReference","houseBillOfLadingReference",string,,maxLength=20,"^\S(?:.*\S)?$",ABC123,"Link to the **House Bill of Lading** this `cargoItem` is connected to.",
+"ShippingInstructions / consignmentItems / cargoItems / importLicense",importLicense,ImportLicenseShipper,,,,,"`Import License` requirements
+
+**Condition:** Subject to local customs requirements and commodity.",
+"ShippingInstructions / consignmentItems / cargoItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
+"ShippingInstructions / consignmentItems / cargoItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / consignmentItems / cargoItems / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
+"ShippingInstructions / consignmentItems / cargoItems / importLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+"ShippingInstructions / consignmentItems / cargoItems / nationalCommodityCodes",nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `cargoItem`
+
+**DEPRECATED:** This property is not to be used any more, please use `extendedNationalCommodityCodes` instead. If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored.",
+"ShippingInstructions / consignmentItems / cargoItems / nationalCommodityCodes / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / cargoItems / nationalCommodityCodes / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / consignmentItems / cargoItems / nationalCommodityCodes / values",values,"string list",yes,"minItems=1
+maxLength=10","^\S(?:.*\S)?$",,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging",outerPackaging,OuterPackagingShipper,,,,,"Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+
+**Condition:** Mandatory for non-dangerous goods cargo.",
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / description",description,string,yes,maxLength=100,,"Drum, steel","Description of the `Outer Packaging/Overpack`.",
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,yes,"minimum=1
+maximum=99999999",,18,"Specifies the number of `Outer Packagings/Overpacks` associated with this `Cargo Item`.",
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,,"minLength=2
+maxLength=2","^[A-Z0-9]{2}$",5H,"A code identifying the `Outer Packaging/Overpack`. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)
+
+**Condition:** only applicable to dangerous goods if the `IMO packaging code` is not available.",
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / woodDeclaration",woodDeclaration,string,,maxLength=30,,TREATED_AND_CERTIFIED,"Property to clearly indicate if the products, packaging and any other items are made of wood. Possible values include:
+- `NOT_APPLICABLE` (if no wood or any other wood product such as packaging and supports are being shipped)
+- `NOT_TREATED_AND_NOT_CERTIFIED` (if the wood or wooden materials have not been treated nor fumigated and do not include a certificate)
+- `PROCESSED` (if the wood or wooden materials are entirely made of processed wood, such as plywood, particle board, sliver plates of wood and wood laminate sheets produced using glue, heat, pressure or a combination of these)
+- `TREATED_AND_CERTIFIED` (if the wood or wooden materials have been treated and/or fumigated and include a certificate)",
+"ShippingInstructions / consignmentItems / carrierBookingReference",carrierBookingReference,string,yes,maxLength=35,"^\S(?:.*\S)?$",ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
+"ShippingInstructions / consignmentItems / commoditySubReference",commoditySubReference,string,,maxLength=100,"^\S(?:.*\S)?$",COM-001,"A unique reference to the commodity object assigned by the carrier in the booking confirmation. The reference must be provided by the shipper as part of the `Shipping Instructions` for the carrier to link this consignment item to the commodity. A commodity reference is only unique in the context of a booking.",
+"ShippingInstructions / consignmentItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ShippingInstructions / consignmentItems / customsReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / customsReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ShippingInstructions / consignmentItems / customsReferences / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+"ShippingInstructions / consignmentItems / descriptionOfGoods",descriptionOfGoods,"string list",yes,"maxItems=150
+maxLength=35","^\S(?:.*\S)?$",,"A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line describing the cargo",
+"ShippingInstructions / consignmentItems / descriptionOfGoodsForCustoms","descriptionOfGoodsForCustoms","string list",,"maxItems=150
+maxLength=35",,,"A detailed plain-language description of the goods provided specifically for customs filing purposes. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line describing the cargo for filing purposes",
+"ShippingInstructions / consignmentItems / exportLicense",exportLicense,ExportLicenseShipper,,,,,,
+"ShippingInstructions / consignmentItems / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
+"ShippingInstructions / consignmentItems / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / consignmentItems / exportLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License`.",
+"ShippingInstructions / consignmentItems / exportLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+"ShippingInstructions / consignmentItems / extendedHSCodes",extendedHSCodes,"string list",,"minLength=6
+maxLength=12","^\d{6,12}$",,"A list of `HS Codes` that apply to this `consignmentItem`. The `extendedHSCodes` support up to 12 character codes.
+
+**Note:** If `extendedHSCodes` is provided - it always takes precedence over `HSCodes` (which is a required property but must be ignored).
+Item description:
+Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 12 digits.
+
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
+",
+"ShippingInstructions / consignmentItems / extendedNationalCommodityCodes","extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
+
+**Note:** If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored.",
+"ShippingInstructions / consignmentItems / extendedNationalCommodityCodes / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / extendedNationalCommodityCodes / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / consignmentItems / extendedNationalCommodityCodes / values",values,"string list",yes,"minItems=1
+maxLength=16","^\S(?:.*\S)?$",,"A list of `national commodity codes` values supporting up to 16 characters.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / consignmentItems / HSCodes",HSCodes,"string list",yes,"minItems=1
+minLength=6
+maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `consignmentItem`.
+
+**DEPRECATED:** Because of backward compatibility it is required to provide a value in this property even though a value is provided in the `extendedHSCodes` property. In case both properties are provided (`extendedHSCodes` and `HSCodes`) - `HSCodes` must be ignored.
+Item description:
+Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
+
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
+",
+"ShippingInstructions / consignmentItems / importLicense",importLicense,ImportLicenseShipper,,,,,,
+"ShippingInstructions / consignmentItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
+"ShippingInstructions / consignmentItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / consignmentItems / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
+"ShippingInstructions / consignmentItems / importLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+"ShippingInstructions / consignmentItems / nationalCommodityCodes",nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`
+
+**DEPRECATED:** This property is not to be used any more, please use `extendedNationalCommodityCodes` instead. If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored.",
+"ShippingInstructions / consignmentItems / nationalCommodityCodes / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / consignmentItems / nationalCommodityCodes / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / consignmentItems / nationalCommodityCodes / values",values,"string list",yes,"minItems=1
+maxLength=10","^\S(?:.*\S)?$",,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / consignmentItems / references",references,"ReferenceConsignmentItem list",,,,,"A list of `References`",
+"ShippingInstructions / consignmentItems / references / type",type,string,yes,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CR` (Customer's Reference)
+- `AKG` (Vehicle Identification Number)
+- `SPO` (Shipper's Purchase Order)
+- `CPO` (Consignee's Purchase Order)",
+"ShippingInstructions / consignmentItems / references / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"List of `referenceValues` for a given `referenceType`.
+Item description:
+The value of the reference.",
+"ShippingInstructions / consignmentItems / shippingMarks",shippingMarks,"string list",,"maxItems=50
+maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentItem`
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
+",
+"ShippingInstructions / consignmentItems / shippingMarksForCustoms",shippingMarksForCustoms,"string list",,"maxItems=50
+maxLength=35",,,"A list of the `ShippingMarks` provided specifically for customs filing purposes.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+The identifying details of a package or the actual markings that appear on the package(s) for customs filing purposes.
+",
+"ShippingInstructions / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ShippingInstructions / customsReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / customsReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ShippingInstructions / customsReferences / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+"ShippingInstructions / destinationChargesPaymentTerm","destinationChargesPaymentTerm","DestinationChargesPaymentTerm",,,,,"An indicator of whether destination charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
+"ShippingInstructions / destinationChargesPaymentTerm / haulageChargesPaymentTermCode","haulageChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the costs for inland transportation to the port, when applicable, are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / destinationChargesPaymentTerm / otherChargesPaymentTermCode","otherChargesPaymentTermCode",string,,,,PRE,"An indicator of whether destination charges (excluding port and haulage) are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / destinationChargesPaymentTerm / portChargesPaymentTermCode","portChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the destination port charges are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / displayedNameForPlaceOfDelivery","displayedNameForPlaceOfDelivery","string list",,"maxItems=5
+maxLength=35",,,"The name to be used in order to specify how the `Place of Delivery` should be displayed on the `Transport Document` to match the name and/or address provided on the `Letter of Credit`.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line of the address to be displayed on the transport document.",
+"ShippingInstructions / displayedNameForPlaceOfReceipt","displayedNameForPlaceOfReceipt","string list",,"maxItems=5
+maxLength=35",,,"The name to be used in order to specify how the `Place of Receipt` should be displayed on the `Transport Document` to match the name and/or address provided on the `Letter of Credit`.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line of the address to be displayed on the transport document.",
+"ShippingInstructions / displayedNameForPortOfDischarge","displayedNameForPortOfDischarge","string list",,"maxItems=5
+maxLength=35",,,"The name to be used in order to specify how the `Port of Discharge` should be displayed on the `Transport Document` to match the name and/or address provided on the `Letter of Credit`.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line of the address to be displayed on the transport document.",
+"ShippingInstructions / displayedNameForPortOfLoad","displayedNameForPortOfLoad","string list",,"maxItems=5
+maxLength=35",,,"The name to be used in order to specify how the `Port of Load` should be displayed on the `Transport Document` to match the name and/or address provided on the `Letter of Credit`.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A line of the address to be displayed on the transport document.",
+"ShippingInstructions / documentParties",documentParties,"DocumentPartiesShippingInstructions",yes,,,,"All `Parties` with associated roles.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` **and** `advancedManifestFilingPerformedBy=CARRIER` and `isHouseBillOfLadingsIssued=false`",
+"ShippingInstructions / documentParties / buyer",buyer,Buyer,,,,,"The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
+"ShippingInstructions / documentParties / buyer / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / documentParties / buyer / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / documentParties / buyer / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / buyer / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / documentParties / buyer / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / buyer / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / documentParties / buyer / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / documentParties / buyer / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / documentParties / buyer / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / documentParties / buyer / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / buyer / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / documentParties / buyer / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / buyer / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / buyer / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / buyer / partyContactDetails",partyContactDetails,"PartyContactDetailWithPattern list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / buyer / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / buyer / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / buyer / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / buyer / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / buyer / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / buyer / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / buyer / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / buyer / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / buyer / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / documentParties / consignee",consignee,ConsigneeShipper,,,,,"The party to which goods are consigned in the `Master Bill of Lading`.
+
+**Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
+"ShippingInstructions / documentParties / consignee / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / consignee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / consignee / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / consignee / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / consignee / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / consignee / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / consignee / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / consignee / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / consignee / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / consignee / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / consignee / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / consignee / displayedAddress",displayedAddress,"string list",,"maxItems=6
+maxLength=35",,,"The address of the party to be displayed on the `Transport Document`. The displayed address may be used to match the address provided in the `Letter of Credit`.
+
+**Conditions:** If provided:
+  - the displayed address must be included in the `Transport Document`.
+  - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+  - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
+  - the order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A single address line",
+"ShippingInstructions / documentParties / consignee / eblPlatform",eblPlatform,string,,maxLength=4,"^\S+$",BOLE,"The eBL platform of the party. The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)",
+"ShippingInstructions / documentParties / consignee / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / consignee / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / consignee / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / consignee / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / consignee / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / consignee / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / consignee / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / consignee / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / consignee / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / consignee / purchaseOrderReferences",purchaseOrderReferences,"string list",,maxLength=35,"^\S(?:.*\S)?$",,"A list of `Purchase Order Reference`s linked to the `Consignee`.
+Item description:
+A purchase order reference linked to the `Consignee`.",
+"ShippingInstructions / documentParties / consignee / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Consignee`.",
+"ShippingInstructions / documentParties / consignee / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / consignee / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / consignee / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / consignee / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / consignee / typeOfPerson",typeOfPerson,string,,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / documentParties / endorsee",endorsee,EndorseeShipper,,,,,"The party to whom the title to the goods is transferred by means of endorsement.
+
+**Condition:** Can only be provided for negotiable BLs (`isToOrder=true`). If a negotiable BL does not have an `Endorsee`, the BL is said to be ""blank endorsed"". Note `Consignee` and `Endorsee` are mutually exclusive.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
+"ShippingInstructions / documentParties / endorsee / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / endorsee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / endorsee / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / endorsee / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / endorsee / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / endorsee / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / endorsee / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / endorsee / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / endorsee / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / endorsee / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / endorsee / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / endorsee / displayedAddress",displayedAddress,"string list",,"maxItems=6
+maxLength=35",,,"The address of the party to be displayed on the `Transport Document`. The displayed address may be used to match the address provided in the `Letter of Credit`.
+
+**Conditions:** If provided:
+  - the displayed address must be included in the `Transport Document`.
+  - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+  - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
+  - the order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A single address line",
+"ShippingInstructions / documentParties / endorsee / eblPlatform",eblPlatform,string,,maxLength=4,"^\S+$",BOLE,"The eBL platform of the party. The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)",
+"ShippingInstructions / documentParties / endorsee / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / endorsee / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / endorsee / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / endorsee / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / endorsee / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / endorsee / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / endorsee / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / endorsee / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / endorsee / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / endorsee / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / endorsee / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / endorsee / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / endorsee / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / issueTo",issueTo,IssueToParty,,,,,"The party that receives **possession** of the original Bill of Lading upon issuance.",
+"ShippingInstructions / documentParties / issueTo / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
+"ShippingInstructions / documentParties / issueTo / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / issueTo / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / issueTo / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / issueTo / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
+"ShippingInstructions / documentParties / issueTo / sendToPlatform",sendToPlatform,string,,maxLength=4,"^\S+$",BOLE,"The eBL platform of the transaction party.
+The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+
+**Condition:** Only applicable when `isElectronic=true` and `transportDocumentTypeCode=BOL`. The property **MUST** be absent for paper B/Ls (`isElectronic=false`)",
+"ShippingInstructions / documentParties / issueTo / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / issueTo / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / issueTo / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / issueTo / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / notifyParties",notifyParties,"NotifyPartyShipper list",,maxItems=3,,,"List of up to 3 `Notify Parties`. The first item in the list is the **First Notify Party** (`N1`), the second item is the **Second Notify Party** (`N2`) and the last item is the **Other Notify Party** (`NI`).
+
+**Condition:** If provided:
+  - Mandatory for To Order BLs, `isToOrder=true`
+  - The order of the items in this array **MUST** be preserved as by the provider of the API.",
+"ShippingInstructions / documentParties / notifyParties / address",address,PartyAddress,,,,,"Physical address of the party.",
+"ShippingInstructions / documentParties / notifyParties / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / notifyParties / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / notifyParties / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / notifyParties / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / notifyParties / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / notifyParties / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / notifyParties / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / notifyParties / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / notifyParties / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / notifyParties / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / notifyParties / displayedAddress",displayedAddress,"string list",,"maxItems=6
+maxLength=35",,,"The address of the party to be displayed on the `Transport Document`. The displayed address may be used to match the address provided in the `Letter of Credit`.
+
+**Conditions:** If provided:
+  - the displayed address must be included in the `Transport Document`.
+  - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+  - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
+  - the order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A single address line",
+"ShippingInstructions / documentParties / notifyParties / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / notifyParties / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / notifyParties / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / notifyParties / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / notifyParties / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / notifyParties / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / notifyParties / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / notifyParties / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / notifyParties / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / notifyParties / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `NotifyParty`.",
+"ShippingInstructions / documentParties / notifyParties / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / notifyParties / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / notifyParties / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / notifyParties / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / notifyParties / typeOfPerson",typeOfPerson,string,,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / documentParties / onBehalfOfConsignee",onBehalfOfConsignee,"OnBehalfOfConsigneeShipper",,,,,"The party allowed to act on behalf of the consignee for documentation purposes.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address",address,PartyAddress,,,,,"Party address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / identifyingCodes",identifyingCodes,"IdentifyingCode list",,minItems=1,,,,
+"ShippingInstructions / documentParties / onBehalfOfConsignee / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / onBehalfOfConsignee / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / onBehalfOfShipper",onBehalfOfShipper,OnBehalfOfShipperShipper,,,,,"The party allowed to act on behalf of the shipper for documentation purposes.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address",address,PartyAddress,,,,,"Party address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / onBehalfOfShipper / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / onBehalfOfShipper / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / onBehalfOfShipper / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / onBehalfOfShipper / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / onBehalfOfShipper / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / other",other,"OtherDocumentPartyShippingInstructions list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.",
+"ShippingInstructions / documentParties / other / party",party,PartyShipper,yes,,,,"Refers to a company or a legal entity. Either `address` or an `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / other / party / address",address,PartyAddress,,,,,"Address of the party.",
+"ShippingInstructions / documentParties / other / party / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / other / party / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / other / party / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / other / party / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / other / party / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / other / party / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / other / party / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / other / party / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / other / party / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / other / party / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / other / party / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / other / party / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / other / party / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / other / party / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / other / party / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / other / party / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / other / party / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / other / party / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / other / party / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","Asseco Denmark","Name of the party.",
+"ShippingInstructions / documentParties / other / party / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Party`.",
+"ShippingInstructions / documentParties / other / party / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / other / party / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / other / party / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / other / party / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / other / partyFunction",partyFunction,string,yes,maxLength=3,,DDS,"Specifies the role of the party in a given context. Possible values are:
+
+- `SCO` (Service Contract Owner)
+- `DDR` (Consignor's freight forwarder)
+- `DDS` (Consignee's freight forwarder)
+- `COW` (Invoice payer on behalf of the consignor (shipper))
+- `COX` (Invoice payer on behalf of the consignee)
+- `CS` (Consolidator)
+- `MF` (Manufacturer)
+- `WH` (Warehouse Keeper)",
+"ShippingInstructions / documentParties / seller",seller,Seller,,,,,"The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
+"ShippingInstructions / documentParties / seller / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / documentParties / seller / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / documentParties / seller / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / seller / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / documentParties / seller / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / seller / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / documentParties / seller / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / documentParties / seller / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / documentParties / seller / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / documentParties / seller / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / seller / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / documentParties / seller / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / seller / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / seller / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / seller / partyContactDetails",partyContactDetails,"PartyContactDetailWithPattern list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / seller / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / seller / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / seller / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / seller / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / seller / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / seller / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / seller / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / seller / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / seller / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / documentParties / shipper",shipper,ShipperShipper,yes,,,,"Party by whom or in whose name a contract of carriage by sea has been concluded. May also be the party who delivers the goods to the carrier.",
+"ShippingInstructions / documentParties / shipper / address",address,PartyAddress,,,,,"Party address.",
+"ShippingInstructions / documentParties / shipper / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / shipper / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / shipper / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / shipper / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / shipper / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / shipper / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / shipper / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / shipper / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / shipper / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / shipper / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / shipper / displayedAddress",displayedAddress,"string list",,"maxItems=6
+maxLength=35",,,"The address of the party to be displayed on the `Transport Document`. The displayed address may be used to match the address provided in the `Letter of Credit`.
+
+**Conditions:** If provided:
+  - the displayed address must be included in the `Transport Document`.
+  - for physical BL (`isElectronic=false`), it is only allowed to provide max 2 lines of 35 characters. **Note:** Some carriers may choose to allow more lines, please consult the carrier's API documentation to check if this is the case.
+  - for electronic BL (`isElectronic=true`), the limit is 6 lines of 35 characters
+  - the order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+A single address line",
+"ShippingInstructions / documentParties / shipper / eblPlatform",eblPlatform,string,,maxLength=4,"^\S+$",BOLE,"The eBL platform of the party. The value **MUST** be one of:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)",
+"ShippingInstructions / documentParties / shipper / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,"**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / shipper / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / shipper / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / shipper / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / shipper / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / shipper / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / shipper / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / shipper / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / shipper / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / documentParties / shipper / purchaseOrderReferences",purchaseOrderReferences,"string list",,maxLength=35,"^\S(?:.*\S)?$",,"A list of `Purchase Order Reference`s linked to the `Shipper`.
+Item description:
+A purchase order reference linked to the `Shipper`.",
+"ShippingInstructions / documentParties / shipper / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Shipper`.",
+"ShippingInstructions / documentParties / shipper / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / documentParties / shipper / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / shipper / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / documentParties / shipper / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / documentParties / shipper / typeOfPerson",typeOfPerson,string,,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor","shippingInstructionsRequestor","ShippingInstructionsRequestor",,,,,"The requestor of whoever submits the `Shipping Instructions`.
+**Condition:** Either the `address` or a party `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party's address.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",2nd,"The floor of the party's street number.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the party's address.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street of the party's address.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the carrier booking office is located. The pattern used must be
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / addressLines",addressLines,"string list",,"maxItems=5
+maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `addressLines` as the only property to identify the party. Recipients implementing earlier versions **MAY ignore** this property.
+Item description:
+One line of an unstructured `Address`.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / partyContactDetails",partyContactDetails,"PartyContactDetail list",,,,,"A list of contact details",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","Asseco Denmark","Name of the party.",
+"ShippingInstructions / exportLicense",exportLicense,ExportLicenseShipper,,,,,,
+"ShippingInstructions / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
+"ShippingInstructions / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / exportLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Export License`.",
+"ShippingInstructions / exportLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Export License` or permit, which authorizes a business or individual to export specific goods to specific countries under defined conditions. It is a permit that is required when shipping certain restricted or controlled goods, such as military equipment, high-tech items, chemicals, or items subject to international regulations. The `Export License` must be valid at time of departure.",
+"ShippingInstructions / feedbacks",feedbacks,"Feedback list",,,,,"Feedback that can be provided includes, but is not limited to:
+- unsupported properties
+- changed values
+- removed properties
+- general information",
+"ShippingInstructions / feedbacks / code",code,string,yes,maxLength=50,,PROPERTY_WILL_BE_IGNORED,"A code used to describe the feedback. Possible values are:
+- `INFORMATIONAL_MESSAGE` (INFO - to be used when providing extra information)
+- `PROPERTY_WILL_BE_IGNORED` (WARN - to be used for unsupported properties/values)
+- `PROPERTY_VALUE_MUST_CHANGE` (ERROR - to be used when a wrong property/value is provided)
+- `PROPERTY_VALUE_HAS_BEEN_CHANGED` (WARN - when something has been auto-updated without consumer intervention)
+- `PROPERTY_VALUE_MAY_CHANGE` (WARN - when something is likely to change in the future)
+- `PROPERTY_HAS_BEEN_DELETED` (WARN - when something has been auto-deleted without consumer intervention)",
+"ShippingInstructions / feedbacks / jsonPath",jsonPath,string,,maxLength=500,,"$.location.facilityCode","A path to the property, formatted according to [JSONpath](https://github.com/json-path/JsonPath).",
+"ShippingInstructions / feedbacks / message",message,string,yes,maxLength=5000,,"Spaces not allowed in facility code","A description with additional information.",
+"ShippingInstructions / feedbacks / property",property,string,,maxLength=100,,facilityCode,"The name of the property causing the error/warning.",
+"ShippingInstructions / feedbacks / severity",severity,string,yes,maxLength=50,,WARN,"The severity of the feedback. Possible values are:
+- `INFO` (Information - ""Your reefer container will use renewable energy"", ""This earlier / premium service is available"")
+- `WARN` (Warning - ""I'm going to replace"" / ""Ignore this value"" / ""Use another value instead"")
+- `ERROR` (Error - ""This must be changed!"")",
+"ShippingInstructions / freightPaymentTermCode",freightPaymentTermCode,string,yes,,,PRE,"An indicator of whether freight and ancillary fees for the main transport are prepaid (`PRE`) or collect (`COL`). When prepaid the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / houseBillOfLadings",houseBillOfLadings,"HouseBillOfLading list",,,,,"A list of `House Bill of Ladings` specified by the Shipper.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems",consignmentItems,"ConsignmentItemHBL list",yes,minItems=1,,,"A list of `ConsignmentItems` for this `House Bill of Lading`",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems",cargoItems,"CargoItemHBL list",yes,minItems=1,,,"A list of all `cargoItems`",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
+- `KGM` (Kilograms)
+- `LBR` (Pounds)",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / equipmentReference",equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging",outerPackaging,OuterPackagingHBL,yes,,,,"Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,,"minimum=1
+maximum=99999999",,18,"Specifies the number of `Outer Packagings/Overpacks` associated with this `Cargo Item`.
+
+**Condition:** Mandatory if `packageCode` is **NOT** one of the following values:
+
+- `VY` (Bulk, solid, fine particles (""powders""))
+- `VS` (Bulk, scrap metal)
+- `VR` (Bulk, solid, granular particles (""grains""))
+- `VQ` (Bulk, liquefied gas (at abnormal temperature/pressure))
+- `VO` (Bulk, solid, large particles (""nodules""))
+- `VL` (Bulk, liquid)
+- `NG` (Unpacked or unpackaged, multiple units)
+- `NF` (Unpacked or unpackaged, single unit)
+- `NE` (Unpacked or unpackaged)
+- `VG` (Bulk, gas (at 1031 mbar and 15°C))",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,yes,"minLength=2
+maxLength=2","^[A-Z0-9]{2}$",5H,"A code identifying the `Outer Packaging/Overpack`. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / shippingMarks",shippingMarks,string,,maxLength=512,,"Made in China","The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / UNNumber",UNNumber,string,,"minLength=4
+maxLength=4","^\d{4}$",1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / customsReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / customsReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / customsReferences / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / descriptionOfGoods",descriptionOfGoods,string,yes,maxLength=512,"^\S(?:.*\S)?$","blue shoes size 47","A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted. Where the declarant provides the CUS code for chemical substances and preparations, Member States may waive the requirement of providing a precise description of the goods.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / extendedNationalCommodityCodes","extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
+
+**Note:** If both `nationalCommodityCode` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCode` must be ignored.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / extendedNationalCommodityCodes / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / extendedNationalCommodityCodes / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / extendedNationalCommodityCodes / values",values,"string list",yes,"minItems=1
+maxLength=16","^\S(?:.*\S)?$",,"A list of `national commodity codes` values supporting up to 16 characters.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode",nationalCommodityCode,NationalCommodityCode,yes,,,,"The national commodity classification code linked to a country with a value. Examples: NCM (Brazil), HTS (US), TARIC (EU).",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
+- `NCM` (Nomenclatura Comum do Mercosul)
+- `HTS` (Harmonized Tariff Schedule)
+- `SCHEDULE_B` (Schedule B)
+- `TARIC` (Integrated Tariff of the European Communities)
+- `CN` (Combined Nomenclature)
+- `CUS` (Customs Union and Statistics)",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode / values",values,"string list",yes,"minItems=1
+maxLength=10","^\S(?:.*\S)?$",,"A list of `national commodity codes` values.
+Item description:
+The value of the `National Commodity Code`",
+"ShippingInstructions / houseBillOfLadings / documentParties",documentParties,DocumentPartiesHouseBL,yes,,,,"All `Parties` with associated roles for this `House Bill of Lading`.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) **and** `advancedManifestFilingPerformedBy=CARRIER`",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer",buyer,BuyerHBL,,,,,"The buyer for a `House Bill of Lading`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address",address,AddressHBL,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee",consignee,ConsigneeHBL,,,,,"The ultimate recipient of the cargo. It must be different from the freight forwarder, (de)consolidator, postal operator, or customs agent.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty",notifyParty,NotifyPartyHBL,,,,,"The person to be notified when a shipment arrives at its destination.
+
+**Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address",address,AddressHBL,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",yes,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / houseBillOfLadings / documentParties / other",other,"OtherDocumentPartyHBL list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` as part of the House B/L.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party",party,PartyHBL,yes,,,,"Refers to a company or a legal entity.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","Asseco Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",HHL007,"A reference linked to the `Party`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / partyFunction",partyFunction,string,yes,maxLength=3,,DDS,"Specifies the role of the party in a given context. Possible values are:
+
+- `DDR` (Consignor's freight forwarder)
+- `DDS` (Consignee's freight forwarder)
+- `CS` (Consolidator)
+- `MF` (Manufacturer)
+- `WH` (Warehouse Keeper)",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller",seller,SellerHBL,,,,,"The seller for a `House Bill of Lading`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address",address,AddressHBL,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper",shipper,ShipperHBL,yes,,,,"The `Shipper` on the `House Bill of Lading`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / POBox",POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+- `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+- `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
+- `WAVE` (Wave)
+- `CARX` (CargoX)
+- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
+- `IDT` (ICE Digital Trade)
+- `BOLE` (Bolero)
+- `EDOX` (EdoxOnline)
+- `IQAX` (IQAX)
+- `SECR` (Secro)
+- `TRGO` (TradeGO)
+- `ETEU` (eTEU)
+- `TRAC` (Enigio trace:original)
+- `BRIT` (BRITC eBL)
+- `COVA` (Covantis)
+- `ETIT` (e-title)
+- `KTNE` (KTNET)
+- `CRED` (Credore)
+- `BLOC` (BlockPeer Technologies)
+- `DOCU` (DocuTrade)
+- `AEOT` (AEOTrade)
+- `SGTD` (SGTraDex)
+- `GSBN` (Global Shipping Business Network)
+- `WISE` (WiseTech)
+- `GLEIF` (Global Legal Entity Identifier Foundation)
+- `W3C` (World Wide Web Consortium)
+- `DNB` (Dun and Bradstreet)
+- `FMC` (Federal Maritime Commission)
+- `DCSA` (Digital Container Shipping Association)
+- `ZZZ` (Mutually defined)",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / partyContactDetails",partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / partyContactDetails / phone",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / typeOfPerson",typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can be one of the following values as per the Union Customs Code art. 5(4):
+- `NATURAL_PERSON` (A person that is an individual living human being)
+- `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
+- `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
+"ShippingInstructions / houseBillOfLadings / houseBillOfLadingReference","houseBillOfLadingReference",string,yes,maxLength=20,"^\S(?:.*\S)?$",HBOL001,"A unique number allocated by the Ocean Transport Intermediary (OTI) to the `House Bill of Lading`.",
+"ShippingInstructions / houseBillOfLadings / isCargoDeliveredInICS2Zone","isCargoDeliveredInICS2Zone",boolean,yes,,,true,"Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
+"ShippingInstructions / houseBillOfLadings / isToOrder",isToOrder,boolean,yes,,,false,"Indicates whether the `House Bill of Lading` (HBL) is issued `to order` or not. If `true`, `Notify party` at `HBL` level is mandatory",
+"ShippingInstructions / houseBillOfLadings / methodOfPayment",methodOfPayment,string,yes,maxLength=1,,A,"Method used for the payment of freight charges. It can be one of the following values:
+- `A` (Payment in cash)
+- `B` (Payment by credit card)
+- `C` (Payment by cheque)
+- `D` (Other (e.g. direct debit to cash account))
+- `H` (Electronic funds transfer)
+- `Y` (Account holder with carrier)
+- `Z` (Not pre-paid)",
+"ShippingInstructions / houseBillOfLadings / placeOfAcceptance",placeOfAcceptance,PlaceOfAcceptance,,,,,"An object to capture `Place of Acceptance` location specified as: identification of the seaport, freight terminal or other place at which the goods are taken over from the shipper by the Ocean Transport Intermediary (OTI) issuing the `House Bill of Lading`.
+
+**Condition:** Mandatory if different from `Place of Receipt` or `Port of Loading` at the `Master Transport Document` level.
+
+**Condition:** The location can be specified either using `UN Location Code` and/or (`Location Name` together with `Country Code`), all three properties can be specified.",
+"ShippingInstructions / houseBillOfLadings / placeOfAcceptance / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Condition:** Mandatory to provide in case `UN Location Code` is not provided
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / placeOfAcceptance / locationName",locationName,string,,maxLength=35,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.
+
+**Condition:** Mandatory to provide in case `UN Location Code` is not provided",
+"ShippingInstructions / houseBillOfLadings / placeOfAcceptance / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / houseBillOfLadings / placeOfFinalDelivery",placeOfFinalDelivery,PlaceOfFinalDelivery,,,,,"An object to capture `Place of Final Delivery` location specified as: Identification of the seaport, freight terminal or other place at which the goods are handed over from the `Ocean Transport Intermediary` (OTI) issuing the `House Bill of Lading` to the `Consignee`.
+
+**Condition:** Mandatory if different from `Place of Delivery` at the `Master Transport Document` level.
+
+**Condition:** The location can be specified either using `UN Location Code` and/or (`Location Name` together with `Country Code`), all three properties can be specified.",
+"ShippingInstructions / houseBillOfLadings / placeOfFinalDelivery / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Condition:** Mandatory to provide in case `UN Location Code` is not provided
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / houseBillOfLadings / placeOfFinalDelivery / locationName",locationName,string,,maxLength=35,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.
+
+**Condition:** Mandatory to provide in case `UN Location Code` is not provided",
+"ShippingInstructions / houseBillOfLadings / placeOfFinalDelivery / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / houseBillOfLadings / routingOfConsignmentCountries","routingOfConsignmentCountries","string list",yes,"minItems=1
+minLength=2
+maxLength=2","^[A-Z]{2}$",,"Identification in a chronological order of the countries through which the goods are routed between the country of original departure and final destination as stipulated in the lowest House Bill of Lading.
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+
+**Condition:** If provided - the first country in the list must be the country of `Place of Acceptance`; the last country in the list must be the country of `Place of Final Delivery`.
+Item description:
+The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments","utilizedTransportEquipments","UtilizedTransportEquipmentHBL list",yes,minItems=1,,,"A list of `Utilized Transport Equipment` for this `House Bill of Lading`",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / emptyIndicatorCode",emptyIndicatorCode,string,yes,,,LADEN,"Indication if the container is `EMPTY` or `LADEN`.
+
+- `EMPTY` (Empty)
+- `LADEN` (Laden)",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / equipmentReference",equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / ISOEquipmentCode",ISOEquipmentCode,string,yes,maxLength=4,"^\S(?:.*\S)?$",22G1,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / isShipperOwned",isShipperOwned,boolean,yes,,,false,"Indicates whether the container is shipper owned (SOC).",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / seals",seals,"Seal list",,minItems=1,,,"A list of `Seals`",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / seals / number",number,string,yes,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+"ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / seals / source",source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+- `CAR` (Carrier)
+- `SHI` (Shipper)
+- `VET` (Veterinary)
+- `CUS` (Customs)
+
+**Condition:** Seal source may be required depending on the type of commodity being shipped.",
+"ShippingInstructions / importLicense",importLicense,ImportLicenseShipper,,,,,,
+"ShippingInstructions / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
+"ShippingInstructions / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
+
+**Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
+"ShippingInstructions / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
+"ShippingInstructions / importLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
+"ShippingInstructions / invoicePayableAt",invoicePayableAt,"InvoicePayableAtShippingInstructions",,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer.
+
+The location must be provided as a `UN Location Code`",
+"ShippingInstructions / invoicePayableAt / UNLocationCode",UNLocationCode,string,yes,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / isCargoDeliveredInICS2Zone","isCargoDeliveredInICS2Zone",boolean,yes,,,true,"Indicates whether cargo is delivered to EU, Norway, Switzerland or Northern Ireland.",
+"ShippingInstructions / isCarriersAgentAtDestinationRequired","isCarriersAgentAtDestinationRequired",boolean,,,,false,"Indicates whether the **Carrier's agent at destination** name, address and contact details should be included in the `Transport Document`.",
+"ShippingInstructions / isElectronic",isElectronic,boolean,yes,,,true,"An indicator whether the transport document is electronically transferred.",
+"ShippingInstructions / isHouseBillOfLadingsIssued","isHouseBillOfLadingsIssued",boolean,,,,,"Indicates whether one or more `House Bill of Lading(s)` have been issued.
+
+**Condition:** Mandatory if `manifestTypeCode` is `ENS`",
+"ShippingInstructions / isShippedOnBoardType",isShippedOnBoardType,boolean,yes,,,true,"Specifies whether the Transport Document is a received for shipment, or shipped on board.",
+"ShippingInstructions / isToOrder",isToOrder,boolean,yes,,,false,"Indicates whether the B/L is issued `to order` or not. If `true`, the B/L is considered negotiable and an Endorsee party can be defined in the Document parties. If no Endorsee is defined, the B/L is blank endorsed. If `false`, the B/L is considered non-negotiable (also referred to as `straight`).
+
+`isToOrder` must be `false` if `transportDocumentTypeCode='SWB'` (Sea Waybill).",
+"ShippingInstructions / numberOfCopiesWithCharges","numberOfCopiesWithCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier including charges.
+
+**Conditions:** The following table defines the conditions for the `numberOfCopiesWithCharges` property:
+| Transport Document Type Code | Is Electronic | Meaning |
+|-------|:-------:|-------|
+|`BOL`|`false`|How many paper copies of the Original BL to be issued by the carrier with charges|
+|`BOL`|`true`|Not applicable, there are no copies|
+|`SWB`|`false`|Indicates that charges should be included in the `SWB` (pdf or other formats)|
+|`SWB`|`true`|Indicates that charges should be included in the electronic `SWB`|",
+"ShippingInstructions / numberOfCopiesWithoutCharges","numberOfCopiesWithoutCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier **NOT** including charges.
+
+**Conditions:** The following table defines the conditions for the `numberOfCopiesWithoutCharges` property:
+| Transport Document Type Code | Is Electronic | Meaning |
+|-------|:-------:|-------|
+|`BOL`|`false`|How many paper copies of the Original BL to be issued by the carrier without charges|
+|`BOL`|`true`|Not applicable, there are no copies|
+|`SWB`|`false`|Indicates that charges should NOT be included in the `SWB` (pdf or other formats)|
+|`SWB`|`true`|Indicates that charges NOT should be included in the electronic `SWB`|",
+"ShippingInstructions / numberOfOriginalsWithCharges","numberOfOriginalsWithCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that have been requested by the customer with charges.
+
+**Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero). `numberOfOriginalsWithoutCharges` + `numberOfOriginalsWithCharges` must be ≤ 1.",
+"ShippingInstructions / numberOfOriginalsWithoutCharges","numberOfOriginalsWithoutCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that have been requested by the customer without charges.
+
+**Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero). `numberOfOriginalsWithoutCharges` + `numberOfOriginalsWithCharges` must be ≤ 1.",
+"ShippingInstructions / originChargesPaymentTerm",originChargesPaymentTerm,OriginChargesPaymentTerm,,,,,"An indicator of whether origin charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
+"ShippingInstructions / originChargesPaymentTerm / haulageChargesPaymentTermCode","haulageChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the costs for inland transportation to the port, when applicable, are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / originChargesPaymentTerm / otherChargesPaymentTermCode","otherChargesPaymentTermCode",string,,,,PRE,"An indicator of whether origin charges (excluding port and haulage) are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / originChargesPaymentTerm / portChargesPaymentTermCode","portChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the origin port charges are prepaid (`PRE`) or collect (`COL`).
+
+- `PRE` (Prepaid)
+- `COL` (Collect)",
+"ShippingInstructions / partyContactDetails",partyContactDetails,"PartyContactDetail list",yes,minItems=1,,,"The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)",
+"ShippingInstructions / partyContactDetails / email",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
+"ShippingInstructions / partyContactDetails / name",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
+"ShippingInstructions / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
+"ShippingInstructions / placeOfIssue",placeOfIssue,PlaceOfIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
+
+Condition: The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+"ShippingInstructions / placeOfIssue / countryCode",countryCode,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / placeOfIssue / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
+"ShippingInstructions / placeOfIssue / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+- 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+- 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ShippingInstructions / references",references,"Reference list",,,,,"A list of `References`",
+"ShippingInstructions / references / type",type,string,yes,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CR` (Customer's Reference)
+- `AKG` (Vehicle Identification Number)",
+"ShippingInstructions / references / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",HHL00103004,"The value of the reference.",
+"ShippingInstructions / requestedCarrierCertificates","requestedCarrierCertificates","string list",,maxLength=100,,,"Certificate(s) requested by the Shipper for the Carrier to include as part of the shipment documentation pack
+Item description:
+Name of the certificate. Detailed information about carrier certificates can be found [here](https://dcsa.org/wp-content/uploads/2023/12/28-12-2023_Carrier-Certificates-shipment-voyage-particulars-and-vessel-particulars.pdf). Possible values are:
+- `SHIPMENT_VOYAGE_PARTICULARS_1` (Shipment-Voyage Particulars 1)
+- `SHIPMENT_VOYAGE_PARTICULARS_2` (Shipment-Voyage Particulars 2)
+- `SHIPMENT_VOYAGE_PARTICULARS_3` (Shipment-Voyage Particulars 3)
+- `SHIPMENT_VOYAGE_PARTICULARS_4` (Shipment-Voyage Particulars 4)
+- `SHIPMENT_VOYAGE_PARTICULARS_5` (Shipment-Voyage Particulars 5)
+- `SHIPMENT_VOYAGE_PARTICULARS_6` (Shipment-Voyage Particulars 6)
+- `SHIPMENT_VOYAGE_PARTICULARS_7` (Shipment-Voyage Particulars 7)
+- `VESSEL_PARTICULARS_1` (Vessel Particulars 1)
+- `VESSEL_PARTICULARS_2` (Vessel Particulars 2)
+- `VESSEL_PARTICULARS_3` (Vessel Particulars 3)
+- `VESSEL_PARTICULARS_4` (Vessel Particulars 4)
+- `VESSEL_PARTICULARS_5` (Vessel Particulars 5)
+- `VESSEL_PARTICULARS_6` (Vessel Particulars 6)
+- `VESSEL_PARTICULARS_7` (Vessel Particulars 7)
+- `VESSEL_PARTICULARS_8` (Vessel Particulars 8)
+- `VESSEL_PARTICULARS_9` (Vessel Particulars 9)
+- `VESSEL_PARTICULARS_10` (Vessel Particulars 10)
+- `VESSEL_PARTICULARS_11` (Vessel Particulars 11)
+- `VESSEL_PARTICULARS_12` (Vessel Particulars 12)
+- `VESSEL_PARTICULARS_13` (Vessel Particulars 13)
+- `VESSEL_PARTICULARS_14` (Vessel Particulars 14)
+- `VESSEL_PARTICULARS_15` (Vessel Particulars 15)
+- `VESSEL_PARTICULARS_16` (Vessel Particulars 16)
+- `VESSEL_PARTICULARS_17` (Vessel Particulars 17)
+- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)
+",
+"ShippingInstructions / requestedCarrierClauses",requestedCarrierClauses,"string list",,maxLength=100,,,"Clauses requested by the Shipper for the Carrier to include in the `Transport Document` `Carrier clauses`
+Item description:
+A clause to request from the carrier. Detailed information about the carrier clauses can be found [here](https://dcsa-website.cdn.prismic.io/dcsa-website/ZvaCMbVsGrYSwERk_202409StandardisedClausesBL-Final.pdf). Possible values are:
+- `CARGO_CARGOSPECIFICS` (Cargo/Cargo specifics)
+- `VESSELCONVEYANCE_COUNTRYSPECIFIC` (Vessel conveyance/Country Specific)
+- `CARGO_RETURNOFEMPTYCONTAINER` (Cargo/Return of Empty Container)
+- `CARGO_CARGOVALUE` (Cargo/Cargo value)
+- `CARGO_REEFERTEMPERATURE` (Cargo/Reefer temperature)
+- `CARGO_CONFLICTINGTEMPERATURES_MIXEDLOADS` (Cargo/Conflicting temperatures/Mixed loads)
+- `SHIPPERSLOADSTOWWEIGHTANDCOUNT` (Shipper's Load, Stow, Weight and Count)
+- `INTRANSITCLAUSE` (In transit clause)
+",
+"ShippingInstructions / shippingInstructionsReference","shippingInstructionsReference",string,,maxLength=100,"^\S(?:.*\S)?$","e0559d83-00e2-438e-afd9-fdd610c1a008","The identifier for a `Shipping Instructions` provided by the carrier for system purposes.",
+"ShippingInstructions / shippingInstructionsRevisionNumber","shippingInstructionsRevisionNumber",integer,,,,1,"The version number of the **Shipping Instructions** provided by the customer to ensure the carrier uses the most recent update when creating the **Transport Document**. This value is expected to increment by one with each **Shipping Instructions** update, with higher values representing newer versions.",
+"ShippingInstructions / shippingInstructionsStatus","shippingInstructionsStatus",string,yes,maxLength=50,,RECEIVED,"The status of the `Shipping Instructions`. Possible values are:
+- `RECEIVED` (Shipping Instructions have been received)
+- `PENDING_UPDATE` (An update is required to the Shipping Instructions)
+- `COMPLETED` (The Shipping Instructions can no longer be modified - the related Transport Document has been surrendered for delivery)
+- `CANCELLED` (The Shipping Instructions have been cancelled by Shipper)
+- `DECLINED` (The Shipping Instructions have been declined by Carrier)
+
+**Condition:** When communicating with providers **or** consumers implementing API **v3.0.2 or earlier**, a sender implementing API **v3.0.3 or later MUST NOT** use `CANCELLED` or `DECLINED` values. Recipients implementing earlier versions **MAY ignore these values or treat the request as invalid**.",
+"ShippingInstructions / transportDocumentReference","transportDocumentReference",string,,maxLength=20,"^\S(?:.*\S)?$",HHL71800000,"A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.",
+"ShippingInstructions / transportDocumentTypeCode","transportDocumentTypeCode",string,yes,,,SWB,"Specifies the type of the transport document
+- `BOL` (Bill of Lading)
+- `SWB` (Sea Waybill)",
+"ShippingInstructions / updatedShippingInstructionsStatus","updatedShippingInstructionsStatus",string,,maxLength=50,,UPDATE_RECEIVED,"The status of the latest update to the `Shipping Instructions`. If no update has been requested - then this property is empty. Possible values are:
+- `UPDATE_RECEIVED` (An update to a Shipping Instructions has been received and is awaiting to be processed)
+- `UPDATE_CONFIRMED` (An update to a Shipping Instructions has been confirmed)
+- `UPDATE_CANCELLED` (An update to a Shipping Instructions is discontinued by consumer)
+- `UPDATE_DECLINED` (An update to a Shipping Instructions is discontinued by provider)",
+"ShippingInstructions / utilizedTransportEquipments","utilizedTransportEquipments","UtilizedTransportEquipmentShipper list",yes,minItems=1,,,"A list of `Utilized Transport Equipments` describing the equipment being used.",
+"ShippingInstructions / utilizedTransportEquipments / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
+"ShippingInstructions / utilizedTransportEquipments / customsReferences / countryCode",countryCode,string,yes,"minLength=2
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
+"ShippingInstructions / utilizedTransportEquipments / customsReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",CUS,"The reference type code as defined in the relevant customs jurisdiction.",
+"ShippingInstructions / utilizedTransportEquipments / customsReferences / values",values,"string list",yes,"minItems=1
+maxLength=35","^\S(?:.*\S)?$",,"
+Item description:
+The value of the `customsReference`",
+"ShippingInstructions / utilizedTransportEquipments / emptyIndicatorCode",emptyIndicatorCode,string,,,,LADEN,"Indication if the container is `EMPTY` or `LADEN`.
+
+- `EMPTY` (Empty)
+- `LADEN` (Laden)",
+"ShippingInstructions / utilizedTransportEquipments / references",references,"Reference list",,,,,"A list of `References`",
+"ShippingInstructions / utilizedTransportEquipments / references / type",type,string,yes,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
+- `CR` (Customer's Reference)
+- `AKG` (Vehicle Identification Number)",
+"ShippingInstructions / utilizedTransportEquipments / references / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",HHL00103004,"The value of the reference.",
+"ShippingInstructions / utilizedTransportEquipments / seals",seals,"Seal list",yes,minItems=1,,,"A list of `Seals`",
+"ShippingInstructions / utilizedTransportEquipments / seals / number",number,string,yes,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+"ShippingInstructions / utilizedTransportEquipments / seals / source",source,string,,,,CUS,"The source of the seal, namely who has affixed the seal.
+- `CAR` (Carrier)
+- `SHI` (Shipper)
+- `VET` (Veterinary)
+- `CUS` (Customs)
+
+**Condition:** Seal source may be required depending on the type of commodity being shipped.",
+"ShippingInstructions / utilizedTransportEquipments / shippingMarks",shippingMarks,"string list",,"maxItems=50
+maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
+
+**Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
+Item description:
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
+",

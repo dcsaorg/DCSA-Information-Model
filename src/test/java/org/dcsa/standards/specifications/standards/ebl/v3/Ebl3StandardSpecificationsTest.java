@@ -20,6 +20,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.EblIss302StandardSpe
 import org.dcsa.standards.specifications.standards.ebl.v302.EblSi302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblSur302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblTd302StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v303.EblSi303StandardSpecification;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -31,6 +32,7 @@ class Ebl3StandardSpecificationsTest {
     buildAndCheckV300();
     buildAndCheckV301();
     buildAndCheckV302();
+    buildAndCheckV303();
   }
 
   private static void buildAndCheckV300() {
@@ -141,5 +143,47 @@ class Ebl3StandardSpecificationsTest {
         "./src/main/resources/standards/ebl/v302/EBL_SUR_v3.0.2.yaml",
         eblSur302StandardSpecification);
     eblSur302StandardSpecification.generateArtifacts();
+  }
+
+  private static void buildAndCheckV303() {
+    EblSi303StandardSpecification eblSi303StandardSpecification =
+        new EblSi303StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        ShippingInstructions.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v303/EBL_v3.0.3.yaml",
+        eblSi303StandardSpecification);
+    eblSi303StandardSpecification.generateArtifacts();
+
+    //    EblTd303StandardSpecification eblTd303StandardSpecification =
+    //        new EblTd303StandardSpecification();
+    //    StandardSpecificationTestToolkit.verifyTypeExport(
+    //        TransportDocument.class.getSimpleName(),
+    //        "./src/main/resources/standards/ebl/v303/EBL_v3.0.3.yaml",
+    //        eblTd303StandardSpecification);
+    //    eblTd303StandardSpecification.generateArtifacts();
+    //
+    //    EblIss303StandardSpecification eblIss303StandardSpecification =
+    //        new EblIss303StandardSpecification();
+    //    StandardSpecificationTestToolkit.verifyTypeExport(
+    //        IssuanceRequest.class.getSimpleName(),
+    //        "./src/main/resources/standards/ebl/v303/EBL_ISS_v3.0.3.yaml",
+    //        eblIss303StandardSpecification);
+    //    eblIss303StandardSpecification.generateArtifacts();
+    //
+    //    EblEnd303StandardSpecification eblEnd303StandardSpecification =
+    //        new EblEnd303StandardSpecification();
+    //    StandardSpecificationTestToolkit.verifyTypeExport(
+    //        EndorsementChain.class.getSimpleName(),
+    //        "./src/main/resources/standards/ebl/v303/EBL_END_v3.0.3.yaml",
+    //        eblEnd303StandardSpecification);
+    //    eblEnd303StandardSpecification.generateArtifacts();
+    //
+    //    EblSur303StandardSpecification eblSur303StandardSpecification =
+    //        new EblSur303StandardSpecification();
+    //    StandardSpecificationTestToolkit.verifyTypeExport(
+    //        SurrenderRequestDetails.class.getSimpleName(),
+    //        "./src/main/resources/standards/ebl/v303/EBL_SUR_v3.0.3.yaml",
+    //        eblSur303StandardSpecification);
+    //    eblSur303StandardSpecification.generateArtifacts();
   }
 }

@@ -22,6 +22,11 @@ public class Ebl302StandardSpecification extends Ebl301StandardSpecification {
     super(moduleName, modulePrefix, "3.0.2");
   }
 
+  protected Ebl302StandardSpecification(
+      String moduleName, String modulePrefix, String versionNumber) {
+    super(moduleName, modulePrefix, versionNumber);
+  }
+
   @Override
   protected LegendMetadata getLegendMetadata() {
     return new LegendMetadata(standardName, standardVersion, "eBL", "3.0.1", 2);

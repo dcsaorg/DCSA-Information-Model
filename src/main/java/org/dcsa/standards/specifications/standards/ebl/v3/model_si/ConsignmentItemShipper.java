@@ -12,11 +12,12 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model.NationalCommodit
 import org.dcsa.standards.specifications.standards.ebl.v3.types.HSCode;
 
 @Schema(
-    description =
-        "Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`",
+    description = ConsignmentItemShipper.CLASS_SCHEMA_DESCRIPTION,
     title = "Consignment Item (Shipper)")
 @Data
 public class ConsignmentItemShipper {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = "Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`";
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

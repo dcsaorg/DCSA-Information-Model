@@ -5,15 +5,16 @@ import java.util.List;
 import lombok.Data;
 
 @Schema(
-    description =
-"""
-All `Parties` with associated roles for this `House Bill of Lading`.
-
-**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) **and** `advancedManifestFilingPerformedBy=CARRIER`
-""",
+    description = DocumentPartiesHouseBL.CLASS_SCHEMA_DESCRIPTION,
     title = "Document Parties (House B/L)")
 @Data
 public class DocumentPartiesHouseBL {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = """
+All `Parties` with associated roles for this `House Bill of Lading`.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) **and** `advancedManifestFilingPerformedBy=CARRIER`
+""";
 
   @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
   private ShipperHBL shipper;

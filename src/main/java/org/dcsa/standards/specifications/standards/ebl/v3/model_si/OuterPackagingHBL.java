@@ -4,16 +4,17 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Schema(
-    description =
-"""
-Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
-""",
-    title = "Outer Packaging (House B/L)",
-    requiredProperties = {"packageCode"})
+    description = OuterPackagingHBL.CLASS_SCHEMA_DESCRIPTION,
+    title = "Outer Packaging (House B/L)")
 @Data
 public class OuterPackagingHBL {
 
+  public static final String CLASS_SCHEMA_DESCRIPTION = """
+Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+""";
+
   @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
       description =
 """
 A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)

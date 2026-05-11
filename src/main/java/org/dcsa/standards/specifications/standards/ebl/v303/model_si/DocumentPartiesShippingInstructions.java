@@ -1,0 +1,44 @@
+package org.dcsa.standards.specifications.standards.ebl.v303.model_si;
+
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Schema(
+    description =
+        org.dcsa.standards.specifications.standards.ebl.v302.model_si
+            .DocumentPartiesShippingInstructions.CLASS_SCHEMA_DESCRIPTION)
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode(callSuper = true)
+public class DocumentPartiesShippingInstructions
+    extends org.dcsa.standards.specifications.standards.ebl.v302.model_si
+        .DocumentPartiesShippingInstructions {
+
+  @Schema(
+      name = "notifyParties",
+      description =
+"""
+List of up to 3 `Notify Parties`. The first item in the list is the **First Notify Party** (`N1`), the second item is the **Second Notify Party** (`N2`) and the last item is the **Other Notify Party** (`NI`).
+
+**Condition:** If provided:
+  - Mandatory for To Order BLs, `isToOrder=true`
+  - The order of the items in this array **MUST** be preserved as by the provider of the API.
+""")
+  @ArraySchema(maxItems = 3)
+  private List<NotifyPartyShipper> renamed_notifyParties;
+
+  @Schema private OnBehalfOfConsigneeShipper onBehalfOfConsignee;
+
+  @Schema private OnBehalfOfShipperShipper onBehalfOfShipper;
+
+  @Schema(requiredMode = Schema.RequiredMode.REQUIRED)
+  private ShipperShipper shipper;
+}

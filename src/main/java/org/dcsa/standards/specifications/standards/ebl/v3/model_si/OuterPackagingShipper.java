@@ -4,15 +4,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Schema(
-    description =
-"""
-Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
-
-**Condition:** Mandatory for non-dangerous goods cargo.
-""",
+    description = OuterPackagingShipper.CLASS_SCHEMA_DESCRIPTION,
     title = "Outer Packaging (Shipper)")
 @Data
 public class OuterPackagingShipper {
+
+  public static final String CLASS_SCHEMA_DESCRIPTION = """
+Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+
+**Condition:** Mandatory for non-dangerous goods cargo.
+""";
 
   @Schema(
       description =

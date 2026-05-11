@@ -8,19 +8,21 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReferen
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyContactDetailHBL;
 
-@Schema(
-    description = """
-The person to be notified when a shipment arrives at its destination.
-
-**Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)
-""",
-    title = "Notify Party (House B/L)",
-    requiredProperties = {"partyName", "partyContactDetails", "typeOfPerson"})
+@Schema(description = NotifyPartyHBL.CLASS_SCHEMA_DESCRIPTION, title = "Notify Party (House B/L)")
 @Data
 public class NotifyPartyHBL {
 
+  public static final String CLASS_SCHEMA_DESCRIPTION =
+"""
+The person to be notified when a shipment arrives at its destination.
+
+**Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)
+""";
+
   @Schema(
-      description = """
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+"""
 Name of the party.
 """,
       example = "IKEA Denmark",
@@ -29,7 +31,9 @@ Name of the party.
   private String partyName;
 
   @Schema(
-      description = """
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+"""
 Can be one of the following values as per the Union Customs Code art. 5(4):
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
@@ -40,18 +44,21 @@ Can be one of the following values as per the Union Customs Code art. 5(4):
       maxLength = 50)
   private String typeOfPerson;
 
-  @Schema
-  private Address address;
+  @Schema private Address address;
 
-  @Schema
-  private List<IdentifyingCode> identifyingCodes;
+  @Schema private List<IdentifyingCode> identifyingCodes;
 
-  @Schema(description = """
+  @Schema(
+      description =
+"""
 A list of `Tax References` for a `Party`
 """)
   private List<TaxLegalReference> taxLegalReferences;
 
-  @Schema(description = """
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+"""
 A list of contact details
 """)
   private List<PartyContactDetailHBL> partyContactDetails;
