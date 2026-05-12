@@ -20,6 +20,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.EblIss302StandardSpe
 import org.dcsa.standards.specifications.standards.ebl.v302.EblSi302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblSur302StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v302.EblTd302StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v303.EblIss303StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v303.EblSi303StandardSpecification;
 import org.dcsa.standards.specifications.standards.ebl.v303.EblTd303StandardSpecification;
 import org.junit.jupiter.api.Test;
@@ -163,14 +164,14 @@ class Ebl3StandardSpecificationsTest {
         eblTd303StandardSpecification);
     eblTd303StandardSpecification.generateArtifacts();
 
-    //    EblIss303StandardSpecification eblIss303StandardSpecification =
-    //        new EblIss303StandardSpecification();
-    //    StandardSpecificationTestToolkit.verifyTypeExport(
-    //        IssuanceRequest.class.getSimpleName(),
-    //        "./src/main/resources/standards/ebl/v303/EBL_ISS_v3.0.3.yaml",
-    //        eblIss303StandardSpecification);
-    //    eblIss303StandardSpecification.generateArtifacts();
-    //
+    EblIss303StandardSpecification eblIss303StandardSpecification =
+        new EblIss303StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        IssuanceRequest.class.getSimpleName(),
+        "./src/main/resources/standards/ebl/v303/EBL_ISS_v3.0.3.yaml",
+        eblIss303StandardSpecification);
+    eblIss303StandardSpecification.generateArtifacts();
+
     //    EblEnd303StandardSpecification eblEnd303StandardSpecification =
     //        new EblEnd303StandardSpecification();
     //    StandardSpecificationTestToolkit.verifyTypeExport(
