@@ -182,7 +182,9 @@ public class AttributesData {
   }
 
   public List<List<String>> getNormalizedRows() {
+    Set<String> reachableTypes = getReachableTypes();
     return attributeInfoList.stream()
+        .filter(attributeInfo -> reachableTypes.contains(attributeInfo.getObjectType()))
         .map(
             attributeInfo ->
                 List.of(
@@ -196,6 +198,35 @@ public class AttributesData {
                     Objects.requireNonNullElse(attributeInfo.getDescription(), ""),
                     Objects.requireNonNullElse(attributeInfo.getConstraints(), "")))
         .toList();
+  }
+
+  private Set<String> getReachableTypes() {
+    Map<String, List<AttributeInfo>> attributeInfoByObjectType = new TreeMap<>();
+    attributeInfoList.forEach(
+        attributeInfo ->
+            attributeInfoByObjectType
+                .computeIfAbsent(attributeInfo.getObjectType(), _ -> new ArrayList<>())
+                .add(attributeInfo));
+
+    Set<String> reachableTypes = new HashSet<>();
+    List<String> pending = new ArrayList<>(rootTypeNames);
+    while (!pending.isEmpty()) {
+      List<String> next = new ArrayList<>();
+      for (String typeName : pending) {
+        if (reachableTypes.add(typeName)) {
+          attributeInfoByObjectType
+              .getOrDefault(typeName, List.of())
+              .forEach(attr -> {
+                String baseType = attr.getAttributeBaseType();
+                if (baseType != null && !reachableTypes.contains(baseType)) {
+                  next.add(baseType);
+                }
+              });
+        }
+      }
+      pending = next;
+    }
+    return reachableTypes;
   }
 
   public List<List<String>> getHierarchicalRows() {

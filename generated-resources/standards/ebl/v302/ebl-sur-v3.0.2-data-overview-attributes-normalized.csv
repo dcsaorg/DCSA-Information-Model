@@ -132,19 +132,3 @@ maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3
 **Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
 TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
 TaxLegalReference,value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
-TransactionParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the transaction party. The value **MUST** be one of:
-- `WAVE` (Wave)
-- `CARX` (CargoX)
-- `ESSD` (EssDOCS)
-- `IDT` (ICE Digital Trade)
-- `BOLE` (Bolero)
-- `EDOX` (EdoxOnline)
-- `IQAX` (IQAX)
-- `SECR` (Secro)
-- `TRGO` (TradeGO)
-- `ETEU` (eTEU)
-- `TRAC` (Enigio trace:original)
-- `BRIT` (BRITC eBL)",
-TransactionParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
-TransactionParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-TransactionParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",

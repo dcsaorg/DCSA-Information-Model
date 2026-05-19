@@ -39,33 +39,6 @@ IdentifyingCode,codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes 
 - `DCSA` (Digital Container Shipping Association)
 - `ZZZ` (Mutually defined)",
 IdentifyingCode,partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the `codeListProvider`",
-RecipientParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Recipient Party`. The value **MUST** be one of:
-- `WAVE` (Wave)
-- `CARX` (CargoX)
-- `ESSD` (EssDOCS - This value has been **deprecated**. Please use `IDT`)
-- `IDT` (ICE Digital Trade)
-- `BOLE` (Bolero)
-- `EDOX` (EdoxOnline)
-- `IQAX` (IQAX)
-- `SECR` (Secro)
-- `TRGO` (TradeGO)
-- `ETEU` (eTEU)
-- `TRAC` (Enigio trace:original)
-- `BRIT` (BRITC eBL)
-- `COVA` (Covantis)
-- `ETIT` (e-title)
-- `KTNE` (KTNET)
-- `CRED` (Credore)
-- `BLOC` (BlockPeer Technologies)
-- `NONE` (To be used as part of the '**No Party**' object when `actionCode` is `SIGN`, `BLANK ENDORSE` or `SURRENDERED`)",
-RecipientParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
-RecipientParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-RecipientParty,representedParty,"RepresentedRecipientParty",,,,,"The party on whose behalf the action was directed.",
-RecipientParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
-RepresentedActorParty,identifyingCodes,"IdentifyingCode list",,,,,,
-RepresentedActorParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"RepresentedRecipientParty",identifyingCodes,"IdentifyingCode list",,,,,,
-"RepresentedRecipientParty",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
 SurrenderRequestDetails,comments,string,,maxLength=255,"^\S(?:.*\S)?$","As requested...","Optional free text comment associated with the surrender request transaction.",
 SurrenderRequestDetails,endorsementChain,"EndorsementChainLink list",,,,,"A list of one or more endorsement related actions that were performed on or after the issuance of the eBL. It is equivalent to the ""back side"" of the physical bill of lading. The type of actions recorded in the endorsement chain as defined by the DCSA standard are listed below:
 
