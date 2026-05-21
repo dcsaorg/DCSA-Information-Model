@@ -15,11 +15,6 @@ Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
 "AirTemperatureMeasurement",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
 "AirTemperatureSensorReading",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
-ClassifiedDateTime,classifier,string,,maxLength=10,,ESTIMATED,"Classifier denoting whether a timestamp or event is planned, estimated or actual
-- `ACTUAL` - Actual
-- `ESTIMATED` - Estimated
-- `PLANNED` - Planned",
-ClassifiedDateTime,value,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Timestamp representation [in RFC 3339 format](https://swagger.io/docs/specification/v3_0/data-models/data-types/#strings)",
 DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
 DocumentReference,type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
@@ -77,10 +72,8 @@ An event overrides any other event that has the same `eventID` and an earlier `e
 
 Each event is uniquely identified within each T&T 3.x standard ecosystem of connected implementers
 by a composite key including:
-- `eventRouting.originatingParty.partyCode`
-- `eventRouting.originatingParty.codeListProvider`
-- `eventRouting.originatingParty.codeListName`
-- `eventID`",
+- the `partyCode`, `codeListProvider` and `codeListName` of all `eventRouting.originatingParties` (if present)
+- the `eventID`",
 Event,eventLocation,Location,,,,,"The location of the event.",
 Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).",
 Event,eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
@@ -184,22 +177,8 @@ Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
 Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
-FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed to a user of the event publishing organization",
-FeedbackElement,propertyPath,string,,maxLength=1000,,"$.events[2].location","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
-about which the feedback is provided (if applicable)",
-FeedbackElement,severity,string,,maxLength=50,,ERROR,"Code denoting the severity of a `FeedbackElement`
-
-- `ERROR` - Error that fully or partially prevents the correct processing of the request
-- `WARN` - Warning about the request being processed in a potentially unexpected way
-- `INFO` - Informational message about how the request is processed",
 GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-GetEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why the request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.",
-GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
-GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 IotDetails,deviceModel,string,,maxLength=100,,,"Model of the IoT device",
 IotDetails,deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
 IotDetails,iotEquipmentTechnology,string,,,,SMART_CONTAINER,"The type of IoT technology used by a piece of equipment
@@ -246,20 +225,6 @@ Party,partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per th
 Party,partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
 or a subsequent revision.",
-PostEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.
-
-When sent in response to a request that contains an array of events,
-the order of the `feedbackElements` is not related to the list of request events.
-Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
-PostEventsRequest,events,"Event list",,,,,"List of events.",
-PostEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed.
-
-There can be zero, one or more feedback elements per event in the request.
-The order of `feedbackElements` is not related to the order of events in the request.
-Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
 RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or code that is assigned to a specific departure of a rail.
 (Also known as a departure reference number.)",
 RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",

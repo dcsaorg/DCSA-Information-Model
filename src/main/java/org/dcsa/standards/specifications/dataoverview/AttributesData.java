@@ -264,7 +264,7 @@ public class AttributesData {
                                   baseType);
                       attributesByPath.put(newPath, attributeInfo);
                       // Only expand further if this type is not already in the path (prevent circular references)
-                      if (baseType == null || !existingPath.contains(":" + baseType)) {
+                      if (baseType == null || !hasTypeInPath(existingPath, baseType)) {
                         newPaths.add(newPath);
                       }
                     });
@@ -290,6 +290,25 @@ public class AttributesData {
                   Objects.requireNonNullElse(attributeInfo.getConstraints(), ""));
             })
         .toList();
+  }
+
+  private static boolean hasTypeInPath(String path, String type) {
+    // Check for exact type match in path segments (format is "name:Type / name:Type / ...")
+    // We need word-boundary matching to avoid "DocumentReference" matching "DocumentReferenceReplacement"
+    int searchFrom = 0;
+    String needle = ":" + type;
+    while (true) {
+      int idx = path.indexOf(needle, searchFrom);
+      if (idx < 0) return false;
+      int end = idx + needle.length();
+      // Check that the match is followed by end-of-string, " / ", or " list"
+      if (end == path.length()
+          || path.startsWith(" / ", end)
+          || path.startsWith(" list", end)) {
+        return true;
+      }
+      searchFrom = end;
+    }
   }
 
   private static String getAttributeSizeInfo(Schema<?> attributeSchema) {

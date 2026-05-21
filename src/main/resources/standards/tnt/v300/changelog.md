@@ -1,5 +1,12 @@
 # Track and Trace v3.0.0 Changelog
 
+## Snapshot v3.0.0-20260525-beta
+
+Updated in type `Event` the description of attribute `eventID` to account for multiple `originatingParties` in the `eventRouting`. (SD-3053)
+
+Removed irrelevant types from the normalized attributes in the data overview. (SD-2994)
+
+
 ## Snapshot v3.0.0-20260424-beta
 
 No changes.

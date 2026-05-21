@@ -22,10 +22,8 @@ An event overrides any other event that has the same `eventID` and an earlier `e
 
 Each event is uniquely identified within each T&T 3.x standard ecosystem of connected implementers
 by a composite key including:
-- `eventRouting.originatingParty.partyCode`
-- `eventRouting.originatingParty.codeListProvider`
-- `eventRouting.originatingParty.codeListName`
-- `eventID`
+- the `partyCode`, `codeListProvider` and `codeListName` of all `eventRouting.originatingParties` (if present)
+- the `eventID`
 """)
   private String eventID;
 
