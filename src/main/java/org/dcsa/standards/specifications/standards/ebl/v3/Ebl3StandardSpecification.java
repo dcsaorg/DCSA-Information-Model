@@ -67,6 +67,7 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model.TareWeight;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.UtilizedTransportEquipmentHBL;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssuanceRequest;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.SupportingDocument;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_si.RequiredEquipment;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_td.TransportDocument;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_si.AdvanceManifestFiling;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_si.Buyer;
@@ -221,6 +222,7 @@ public class Ebl3StandardSpecification extends StandardSpecification {
         PortOfLoading.class,
         Reference.class,
         ReferenceConsignmentItem.class,
+        RequiredEquipment.class,
         Seal.class,
         Seller.class,
         SellerHBL.class,

@@ -66,8 +66,8 @@ public enum StandardSpecificationTestToolkit {
     Schema<?> originalTypeSchema = originalSchemasByType.get(typeName);
     Schema<?> generatedTypeSchema = generatedSchemasByType.get(typeName);
 
-    Map<String, Schema<?>> originalProperties = getSchemaProperties(originalTypeSchema);
-    Map<String, Schema<?>> generatedProperties = getSchemaProperties(generatedTypeSchema);
+    Map<String, Schema<?>> originalProperties = getSchemaProperties(originalTypeSchema, originalSchemasByType);
+    Map<String, Schema<?>> generatedProperties = getSchemaProperties(generatedTypeSchema, generatedSchemasByType);
     softAssertEquals(
         "property list",
         new TreeSet<>(originalProperties.keySet()),
@@ -230,7 +230,8 @@ WRONG VALUE:
     return null;
   }
 
-  private static Map<String, Schema<?>> getSchemaProperties(Schema<?> schema) {
+  private static Map<String, Schema<?>> getSchemaProperties(
+      Schema<?> schema, Map<String, Schema<?>> allSchemas) {
     Map<String, Schema<?>> allProperties =
         SpecificationToolkit.parameterizeStringRawSchemaMap(schema.getProperties());
     Stream.of(schema.getAllOf(), schema.getAnyOf(), schema.getOneOf())
@@ -239,8 +240,24 @@ WRONG VALUE:
             schemaList ->
                 allProperties.putAll(
                     schemaList.stream()
-                        .flatMap(subSchema -> getSchemaProperties(subSchema).entrySet().stream())
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))));
+                        .map(subSchema -> resolveSchema(subSchema, allSchemas))
+                        .flatMap(
+                            subSchema ->
+                                getSchemaProperties(subSchema, allSchemas).entrySet().stream())
+                        .collect(
+                            Collectors.toMap(
+                                Map.Entry::getKey, Map.Entry::getValue, (a, _) -> a))));
     return allProperties;
+  }
+
+  private static Schema<?> resolveSchema(Schema<?> schema, Map<String, Schema<?>> allSchemas) {
+    if (schema.get$ref() != null) {
+      String refName = schema.get$ref().substring(schema.get$ref().lastIndexOf('/') + 1);
+      Schema<?> resolved = allSchemas.get(refName);
+      if (resolved != null) {
+        return resolved;
+      }
+    }
+    return schema;
   }
 }

@@ -8,6 +8,11 @@ import org.dcsa.standards.specifications.standards.booking.v204.types.ExtendedHS
 import org.dcsa.standards.specifications.standards.ebl.v302.model_si.AdvanceManifestFiling;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_si.PlaceOfAcceptance;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_si.PlaceOfFinalDelivery;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.AddressHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Buyer;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.BuyerHBL;
@@ -18,9 +23,7 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Consignment
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.DocumentPartiesHouseBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.DocumentPartiesShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.EndorseeShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.IssueToParty;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.NotifyPartyHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.NotifyPartyShipper;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OnBehalfOfConsigneeShipper;
@@ -28,10 +31,7 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OnBehalfOfS
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OtherDocumentPartyShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OuterPackagingHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.OuterPackagingShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.PartyShipper;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Seller;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.SellerHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ShipperShipper;
