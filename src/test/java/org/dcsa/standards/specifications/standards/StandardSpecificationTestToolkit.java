@@ -206,18 +206,37 @@ WRONG VALUE:
 >>>>>>>>  actual  >>>>>>>>
 {}
 ================
+(escaped view)
+expected: {}
+actual:   {}
 """,
           property,
           expected,
-          actual);
+          actual,
+          escapeNonPrintable(expected),
+          escapeNonPrintable(actual));
     }
     if (FAIL_ON_FIRST_WRONG_VALUE) {
       Assertions.assertEquals(expected, actual, "Wrong value for: " + property);
     }
   }
 
+  private static String escapeNonPrintable(Object value) {
+    if (value == null) return "null";
+    String str = value.toString();
+    StringBuilder sb = new StringBuilder();
+    for (char c : str.toCharArray()) {
+      if (c < 32 || c == 127) {
+        sb.append(String.format("\\x%02X", (int) c));
+      } else {
+        sb.append(c);
+      }
+    }
+    return sb.toString();
+  }
+
   private static String comparableDescription(String description) {
-    return description == null ? "" : description.trim();
+    return description == null ? "" : description.replace("\r\n", "\n").replace("\r", "\n").trim();
   }
 
   private static String getAttributeTypeName(Schema<?> attributeSchema) {

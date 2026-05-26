@@ -12,5 +12,6 @@ target/
 
 ### Temporary DCSA generated resources ###
 /generated-resources/standards/**/*.xlsx
-/generated-resources/standards/ebl/v30*/*.yaml
 /generated-resources/standards/booking/v20*/*.yaml
+/generated-resources/standards/ebl/v30*/*.yaml
+/generated-resources/standards/ovs/v30*/*.yaml
