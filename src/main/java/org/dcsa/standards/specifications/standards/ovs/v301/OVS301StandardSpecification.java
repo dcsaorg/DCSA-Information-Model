@@ -14,7 +14,11 @@ public class OVS301StandardSpecification extends OVS3StandardSpecification {
   private final GetServiceSchedulesV301Endpoint getServiceSchedulesV301Endpoint;
 
   public OVS301StandardSpecification() {
-    super("3.0.1", "3.0.0");
+    this("3.0.1", "3.0.0");
+  }
+
+  protected OVS301StandardSpecification(String versionNumber, String baselineVersion) {
+    super(versionNumber, baselineVersion);
     getServiceSchedulesV301Endpoint = new GetServiceSchedulesV301Endpoint();
   }
 
