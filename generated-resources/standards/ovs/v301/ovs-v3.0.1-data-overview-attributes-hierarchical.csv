@@ -1,0 +1,130 @@
+Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+ServiceSchedule,,,,,,,,
+"ServiceSchedule / carrierServiceCode",carrierServiceCode,string,yes,maxLength=11,,FE1,"The carrier-specific code of the service for which the schedule details are published.",
+"ServiceSchedule / carrierServiceName",carrierServiceName,string,yes,maxLength=50,,"Great Lion Service","The name of the service.",
+"ServiceSchedule / universalServiceReference","universalServiceReference",string,,maxLength=8,"^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5 digits`, followed by a checksum-character as a capital letter from `A to Z`.",
+"ServiceSchedule / vesselSchedules",vesselSchedules,"VesselSchedule list",,,,,,
+"ServiceSchedule / vesselSchedules / isDummyVessel",isDummyVessel,boolean,yes,,,,"Is this a dummy vessel? In case no vessel has been assigned yet - this property can be set to `true` indicating that the `vesselIMONumber`/`MMSINumber` does not exist.
+
+When `true`, the `vesselName` must be used as a unique identifier for the dummy vessel. See the `vesselName` field description for the recommended naming convention.",
+"ServiceSchedule / vesselSchedules / MMSINumber",MMSINumber,string,,"minLength=9
+maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.
+
+**Condition:** If `isDummyVessel` is `false` - at least one of `vesselIMONumber` or `MMSINumber` **MUST** be specified in order to identify the `Vessel`. It is also acceptable to provide both properties.  If `isDummyVessel` is `true` it is optional to provide this property.
+
+**Condition:** It is only possible to use this property in case the requester is on version `3.0.1` or later or `vesselIMONumber` is also provided. In case the requester is on version `3.0.0` (indicated by the `APIVersion` header being blank or containing the value `3`) - this property cannot be used unless `vesselIMONumber` is also present.",
+"ServiceSchedule / vesselSchedules / transportCalls",transportCalls,"TransportCall list",,,,,,
+"ServiceSchedule / vesselSchedules / transportCalls / carrierExportVoyageNumber","carrierExportVoyageNumber",string,,maxLength=50,,2103S,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",
+"ServiceSchedule / vesselSchedules / transportCalls / carrierImportVoyageNumber","carrierImportVoyageNumber",string,yes,maxLength=50,,2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.
+
+**Note:** In case the `carrierImportVoyageNumber` is not known, `9999R` should be interpreted as ""no voyage number"". The value `9999R` is reserved as a placeholder and **MUST NOT** be used for real voyage numbers.",
+"ServiceSchedule / vesselSchedules / transportCalls / location",location,Location,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address",address,Address,,,,,"An object for storing address related information.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / city",city,string,,maxLength=65,,Amsterdam,"The city name of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / country",country,string,,maxLength=75,,"The Netherlands","The country of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the party's street number.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / name",name,string,yes,maxLength=100,,John,"Name of the address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / postCode",postCode,string,,maxLength=50,,"1047 HM","The post code of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / street",street,string,,maxLength=100,,Ruijggoordweg,"The name of the street of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / facilitySMDGCode",facilitySMDGCode,string,,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
+
+The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/wp-content/uploads/Codelists/Terminals/SMDG-Terminal-Code-List-v20210401.xlsx)",
+"ServiceSchedule / vesselSchedules / transportCalls / location / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / locationType",locationType,string,,maxLength=4,,UNLO,"Discriminator used to identify the location type interface.",
+"ServiceSchedule / vesselSchedules / transportCalls / location / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+ - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+ - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"ServiceSchedule / vesselSchedules / transportCalls / portVisitReference",portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call",
+"ServiceSchedule / vesselSchedules / transportCalls / statusCode",statusCode,string,,,,OMIT,"The set of codes in `Status Code` are ONLY meant to communicate any change / exception to the published schedule. This is not required in case of normal schedule. Possible values are:
+
+- `OMIT` (Omit)
+- `BLNK` (Blank)
+- `ADHO` (Ad Hoc)
+- `PHOT` (Phase Out)
+- `PHIN` (Phase In)
+- `SLID` (Sliding)
+- `ROTC` (Rotation Change)
+- `CUTR` (Cut and Run)
+
+**Deprecated:** Use `statusCodes` instead. If `statusCodes` is used - then values in this property are ignored.",
+"ServiceSchedule / vesselSchedules / transportCalls / statusCodes",statusCodes,"string list",,,,,"Possibility to add multiple status codes to a `TransportCall`.
+
+**Note:** This property takes precedence over `statusCode` (if both are present - only the ones provided in this property are used).
+Item description:
+The set of codes are ONLY meant to communicate any change / exception to the published schedule. This is not required in case of normal schedule. Possible values are:
+
+- `OMIT` (Omit)
+- `BLNK` (Blank)
+- `ADHO` (Ad Hoc)
+- `PHOT` (Phase Out)
+- `PHIN` (Phase In)
+- `SLID` (Sliding)
+- `ROTC` (Rotation Change)
+- `CUTR` (Cut and Run)
+- `DRYD` (Dry Dock)
+- `BUNK` (Bunkering)
+- `OOSV` (Out of service)
+",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps",timestamps,"Timestamp list",,,,,,
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / changeRemark",changeRemark,string,,maxLength=250,,"Bad weather","Free text field to provide information as to why the `TransportEvent` was sent.",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / delayReasonCode",delayReasonCode,string,,maxLength=3,,WEA,"Reason code for the delay. See SMDG [Code list DELAY](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/) for a list of valid codes to be used for this attribute.
+
+**Deprecated:** Use `delayReasonCodes` instead. If `delayReasonCodes` is used - then values in this property are ignored.",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / delayReasonCodes",delayReasonCodes,"string list",,maxLength=3,,,"Possibility to add multiple delay reason codes to a `Timestamp`.
+
+**Note:** This property takes precedence over `delayReasonCode` (if both are present - only the ones provided in this property are used).
+Item description:
+Reason code for the delay. See SMDG [Code list DELAY](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/) for a list of valid codes to be used for this attribute.
+",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventClassifierCode",eventClassifierCode,string,yes,,,EST,"Code for the event classifier. Values can vary depending on eventType.
+
+- **Actual:** The **recorded time** when the event has actually occurred.
+- **Estimated:** The updated schedule time based on the **latest regional or coastal schedule (RS/CS)**. It reflects the most up-to-date estimated time as the voyage progresses and can be updated (weekly or daily) several times after the voyage start.
+- **Planned:** The scheduled time based on the **long-term service plan** (LTS), published well in advance (typically 12-14 weeks) before the voyage begins, and showing when an event *is planned* to occur.
+
+More information can be found in the OVS Definitions document. Possible value codes:
+- `ACT` (Actual)
+- `EST` (Estimated)
+- `PLN` (Planned)",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventDateTime",eventDateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","Time in the timestamp.",
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventTypeCode",eventTypeCode,string,yes,,,ARRI,"Identifier for type of `transportEvent`
+- `ARRI` (Arrived)
+- `DEPA` (Departed)",
+"ServiceSchedule / vesselSchedules / transportCalls / transportCallReference",transportCallReference,string,yes,maxLength=100,,"SR11111X-9321483-2107W-NLAMS-ACT-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.",
+"ServiceSchedule / vesselSchedules / transportCalls / universalExportVoyageReference","universalExportVoyageReference",string,,,"^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"ServiceSchedule / vesselSchedules / transportCalls / universalImportVoyageReference","universalImportVoyageReference",string,,,"^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"ServiceSchedule / vesselSchedules / vesselCallSign",vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a threeletter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
+"ServiceSchedule / vesselSchedules / vesselIMONumber",vesselIMONumber,string,,maxLength=7,"^\d{7}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code, which does not change during the lifetime of the vessel
+
+**Condition:** If `isDummyVessel` is `false` - at least one of `vesselIMONumber` or `MMSINumber` **MUST** be specified in order to identify the `Vessel`. It is also acceptable to provide both properties. If `isDummyVessel` is `true` it is optional to provide this property.
+
+**Condition:** Please note that if the requester is on a version `3.0.0` (indicated by the `APIVersion` being blank or containing the value `3`) and it is not a dummy vessel (`isDummyVessel: false`) then this property **MUST** be present.",
+"ServiceSchedule / vesselSchedules / vesselName",vesselName,string,,maxLength=35,,"King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.
+
+**Note:** In case the vessel is a ""dummy vessel"" (`isDummyVessel='true'`) then the following recommendations should be followed:
+
+Dummy vessel names should begin with the **SMDG Operating Carrier Code** to ensure uniqueness across carriers.
+The suffix can be **alphanumeric** and up to **10 characters long**, allowing each carrier to use internal naming conventions (e.g., `MSKTBN1`, `CMATEMP01`, `MSCX01A`).
+
+This approach:
+- Ensures consistency and uniqueness across carriers
+- Allows flexibility in local implementations
+- Avoids the need to assign dummy IMO numbers
+- Maintains the role of the dummy vessel name as a **stable and persistent identifier** throughout the planning process",
+"ServiceSchedule / vesselSchedules / vesselOperatorSMDGLinerCode","vesselOperatorSMDGLinerCode",string,yes,maxLength=10,,HLC,"The carrier who is in charge of the vessel operation based on the SMDG code.
+
+If not available at the moment of sharing the schedule, use `TBD` (To be defined).
+
+In the case an operator is still using a code not from SMDG, use the available code.",

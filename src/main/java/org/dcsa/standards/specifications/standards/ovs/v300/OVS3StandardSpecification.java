@@ -10,10 +10,13 @@ import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
 import io.swagger.v3.oas.models.tags.Tag;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.dcsa.standards.specifications.dataoverview.AttributesHierarchicalSheet;
 import org.dcsa.standards.specifications.dataoverview.AttributesNormalizedSheet;
@@ -36,10 +39,17 @@ public class OVS3StandardSpecification extends StandardSpecification {
 
   public static final String TAG_OVS = "Operational Vessel Schedules";
 
+  protected final String baselineVersion;
+
   private final GetServiceSchedulesEndpoint getServiceSchedulesEndpoint;
 
   public OVS3StandardSpecification() {
-    super("OVS", "3.0.0", "ovs", "ovs");
+    this("3.0.0", "");
+  }
+
+  protected OVS3StandardSpecification(String versionNumber, String baselineVersion) {
+    super("OVS", versionNumber, "ovs", "ovs");
+    this.baselineVersion = baselineVersion;
 
     getServiceSchedulesEndpoint = new GetServiceSchedulesEndpoint();
 
@@ -50,7 +60,8 @@ public class OVS3StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("OVS", "3.0.0", "", "", 2);
+    return new LegendMetadata(
+        "OVS", standardVersion, baselineVersion.isEmpty() ? "" : "OVS", baselineVersion, 2);
   }
 
   @Override
@@ -75,8 +86,30 @@ public class OVS3StandardSpecification extends StandardSpecification {
   protected Map<Class<? extends DataOverviewSheet>, List<List<String>>>
       getOldDataValuesBySheetClass() {
     return Map.ofEntries(
-        Map.entry(AttributesHierarchicalSheet.class, List.of()),
-        Map.entry(AttributesNormalizedSheet.class, List.of()));
+            Map.entry(AttributesHierarchicalSheet.class, "attributes-hierarchical"),
+            Map.entry(AttributesNormalizedSheet.class, "attributes-normalized"))
+        .entrySet()
+        .stream()
+        .filter(
+            entry ->
+                baselineVersion.isEmpty()
+                    || Files.isRegularFile(Path.of(getBaselineCsvFilePath(entry.getValue()))))
+        .collect(
+            Collectors.toMap(
+                Map.Entry::getKey,
+                entry ->
+                    baselineVersion.isEmpty()
+                        ? List.of()
+                        : DataOverviewSheet.importFromString(
+                                SpecificationToolkit.readLocalFile(
+                                    getBaselineCsvFilePath(entry.getValue())))
+                            .stream()
+                            .toList()));
+  }
+
+  protected String getBaselineCsvFilePath(String sheetName) {
+    return "./generated-resources/standards/ovs/v%s/ovs-v%s-data-overview-%s.csv"
+        .formatted(baselineVersion.replaceAll("\\.", ""), baselineVersion, sheetName);
   }
 
   @Override
