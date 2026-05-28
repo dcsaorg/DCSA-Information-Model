@@ -26,8 +26,8 @@ import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.Address;
-import org.dcsa.standards.specifications.standards.ovs.v300.model.DetailedError;
-import org.dcsa.standards.specifications.standards.ovs.v300.model.ErrorResponse;
+import org.dcsa.standards.specifications.standards.ovs.v300.messages.DetailedError;
+import org.dcsa.standards.specifications.standards.ovs.v300.messages.ErrorResponse;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.Location;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.ServiceSchedule;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.Timestamp;
@@ -69,7 +69,6 @@ public class OVS3StandardSpecification extends StandardSpecification {
     return Stream.of(
         Address.class,
         DetailedError.class,
-        ErrorResponse.class,
         Location.class,
         ServiceSchedule.class,
         Timestamp.class,

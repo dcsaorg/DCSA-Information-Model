@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.ovs.v300.model;
+package org.dcsa.standards.specifications.standards.ovs.v300.messages;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
