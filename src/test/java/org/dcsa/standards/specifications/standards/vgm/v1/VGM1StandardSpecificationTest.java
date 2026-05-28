@@ -1,8 +1,9 @@
 package org.dcsa.standards.specifications.standards.vgm.v1;
 
 import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
-import org.dcsa.standards.specifications.standards.vgm.v100.VGMStandardSpecification;
+import org.dcsa.standards.specifications.standards.vgm.v100.VGM100StandardSpecification;
 import org.dcsa.standards.specifications.standards.vgm.v100.model.VGMDeclaration;
+import org.dcsa.standards.specifications.standards.vgm.v101.VGM101StandardSpecification;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ class VGM1StandardSpecificationTest {
   }
 
   void buildAndCheckV100() {
-    VGMStandardSpecification vgmStandardSpecification = new VGMStandardSpecification();
+    VGM100StandardSpecification vgmStandardSpecification = new VGM100StandardSpecification();
     vgmStandardSpecification.generateArtifacts();
 
     String yamlFilePath = "./generated-resources/standards/vgm/v100/vgm-v1.0.0-openapi.yaml";
@@ -27,9 +28,9 @@ class VGM1StandardSpecificationTest {
   }
 
   void buildAndCheckV101() {
-    org.dcsa.standards.specifications.standards.vgm.v101.VGMStandardSpecification
+    VGM101StandardSpecification
         vgmStandardSpecification =
-            new org.dcsa.standards.specifications.standards.vgm.v101.VGMStandardSpecification();
+            new VGM101StandardSpecification();
     vgmStandardSpecification.generateArtifacts();
 
     String yamlFilePath = "./generated-resources/standards/vgm/v101/vgm-v1.0.1-openapi.yaml";

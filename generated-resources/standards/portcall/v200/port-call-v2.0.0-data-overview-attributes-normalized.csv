@@ -40,22 +40,8 @@ Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
 Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
-FeedbackElement,message,string,,maxLength=5000,,"The facility SMDG code does not match the location UN/LOCODE","Human readable feedback message that can be programmatically relayed to a user of the event publishing organization",
-FeedbackElement,propertyPath,string,,maxLength=1000,,"$.events[2].location","[JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property
-about which the feedback is provided (if applicable)",
-FeedbackElement,severity,string,,maxLength=50,,ERROR,"Code denoting the severity of a `FeedbackElement`
-
-- `ERROR` - Error that fully or partially prevents the correct processing of the request
-- `WARN` - Warning about the request being processed in a potentially unexpected way
-- `INFO` - Informational message about how the request is processed",
 GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-GetEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why the request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.",
-GetEventsResponse,events,"Event list",,,,,"The list of events matching the filter specified by the request query parameters",
-GetEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
 Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
@@ -238,20 +224,6 @@ These port call services only an ""A"" timestamp without an ""ERP"" pattern:
 This port call service has neither an ""A"" timestamp nor an ""ERP"" pattern:
 - `MOVES` (Moves)",
 PortCallService,serviceLocation,Location,,,,,"The location at which the port call service is provided",
-PostEventsError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.
-
-When sent in response to a request that contains an array of events,
-the order of the `feedbackElements` is not related to the list of request events.
-Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
-PostEventsRequest,events,"Event list",,,,,"List of events.",
-PostEventsResponse,feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed.
-
-There can be zero, one or more feedback elements per event in the request.
-The order of `feedbackElements` is not related to the order of events in the request.
-Instead, the relevant request event is indicated by the `propertyPath` of each `FeedbackElement`.",
 ServiceCodeOrReference,carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service.",
 ServiceCodeOrReference,"universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
 

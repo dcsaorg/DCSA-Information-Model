@@ -399,12 +399,6 @@ Code used to denote the type of free time.
 - `STO` - Storage",
 GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
 GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-GetArrivalNoticesError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why the request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.",
-"GetArrivalNoticesResponse",arrivalNotices,"ArrivalNotice list",,,,,"The list of arrival notices matching the filter specified by the request query parameters",
-"GetArrivalNoticesResponse",feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed",
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
@@ -533,21 +527,6 @@ PickupInformation,pickupLocation,Location,,,,,"The equipment handling facility w
 PickupInformation,pickupNumber,string,,maxLength=50,,780379,"A pickup number is a generated number assigned to each import container individually.
 A trucker picking up a container must present the correct pickup number.
 If the pickup number is incorrect, the trucker will have his pickup request denied.",
-"PostArrivalNoticeNotificationsRequest","arrivalNoticeNotifications","ArrivalNoticeNotification list",,,,,"List of Arrival Notice lightweight notifications.",
-PostArrivalNoticesError,feedbackElements,"FeedbackElement list",,,,,"Feedback elements indicating why request could not be processed.
-
-At least one feedback element of severity `ERROR` is expected.
-Lower severity feedback elements may also be included.
-
-When sent in response to a request that contains an array of arrival notice (notification) objects,
-the order of the `feedbackElements` is not related to the list of request objects.
-Instead, the relevant request object is indicated by the `propertyPath` of each `FeedbackElement`.",
-"PostArrivalNoticesRequest",arrivalNotices,"ArrivalNotice list",,,,,"List of arrival notices.",
-"PostArrivalNoticesResponse",feedbackElements,"FeedbackElement list",,,,,"Optional list of feedback elements indicating how the request was processed.
-
-There can be zero, one or more feedback elements per arrival notice (notification) in the request.
-The order of `feedbackElements` is not related to the order of arrival notice (notification) objects in the request.
-Instead, the relevant request object is indicated by the `propertyPath` of each `FeedbackElement`.",
 Reference,type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
 - `CA` (Carrier’s Reference)
 - `CR` (Customer’s Reference)

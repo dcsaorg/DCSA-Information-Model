@@ -124,7 +124,7 @@ public class PortCallStandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("Port Call", "2.0.0", "PC", "2.0.0-20251121-beta", 3);
+    return new LegendMetadata("Port Call", "2.0.0", "", "", 3);
   }
 
   @Override
@@ -168,32 +168,15 @@ public class PortCallStandardSpecification extends StandardSpecification {
             Map.entry(QueryFiltersSheet.class, "query-filters"))
         .entrySet()
         .stream()
-        .collect(
-            Collectors.toMap(
-                Map.Entry::getKey,
-                entry ->
-                    DataOverviewSheet.importFromString(
-                        SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "4baa6c0596095dbef96aaf1c7c07c58eff6320b9"
-                                    + "/generated-resources/standards/portcall/v200/port-call-v2.0.0-data-overview-%s.csv")
-                                .formatted(entry.getValue())))));
+        .collect(Collectors.toMap(Map.Entry::getKey, _ -> List.of()));
   }
 
   @Override
   protected Map<Class<? extends DataOverviewSheet>, Map<String, String>>
       getChangedPrimaryKeyByOldPrimaryKeyBySheetClass() {
     return Map.ofEntries(
-        Map.entry(
-            AttributesHierarchicalSheet.class,
-            Map.ofEntries(
-                Map.entry(
-                    "Event / portCallService / portCallID",
-                    "Event / portCallService / portCallServiceID"))),
-        Map.entry(
-            AttributesNormalizedSheet.class,
-            Map.ofEntries(
-                Map.entry("PortCallService,portCallID", "PortCallService,portCallServiceID"))),
+        Map.entry(AttributesHierarchicalSheet.class, Map.ofEntries()),
+        Map.entry(AttributesNormalizedSheet.class, Map.ofEntries()),
         Map.entry(QueryFiltersSheet.class, Map.ofEntries()),
         Map.entry(QueryParametersSheet.class, Map.ofEntries()));
   }

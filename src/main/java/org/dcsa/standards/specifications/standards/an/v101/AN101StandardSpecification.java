@@ -10,6 +10,8 @@ import io.swagger.v3.oas.models.parameters.RequestBody;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
 import io.swagger.v3.oas.models.tags.Tag;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -115,8 +117,7 @@ public class AN101StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(
-        "Arrival Notice", "1.0.1", "AN", "1.0.0", 4);
+    return new LegendMetadata("Arrival Notice", "1.0.1", "AN", "1.0.0", 4);
   }
 
   @Override
@@ -190,6 +191,11 @@ public class AN101StandardSpecification extends StandardSpecification {
         FeedbackElement.class.getSimpleName());
   }
 
+  protected String getBaselineCsvFilePath(String sheetName) {
+    return "./generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv"
+        .formatted(sheetName);
+  }
+
   @Override
   protected Map<Class<? extends DataOverviewSheet>, List<List<String>>>
       getOldDataValuesBySheetClass() {
@@ -200,16 +206,16 @@ public class AN101StandardSpecification extends StandardSpecification {
             Map.entry(QueryFiltersSheet.class, "query-filters"))
         .entrySet()
         .stream()
+        .filter(entry -> Files.isRegularFile(Path.of(getBaselineCsvFilePath(entry.getValue()))))
         .collect(
             Collectors.toMap(
                 Map.Entry::getKey,
                 entry ->
                     DataOverviewSheet.importFromString(
-                        SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/" +
-                              "c1fd6e8fc737796301d6c77369e96109a3a60973" +
-                              "/generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv")
-                                .formatted(entry.getValue())))));
+                            SpecificationToolkit.readLocalFile(
+                                getBaselineCsvFilePath(entry.getValue())))
+                        .stream()
+                        .toList()));
   }
 
   @Override

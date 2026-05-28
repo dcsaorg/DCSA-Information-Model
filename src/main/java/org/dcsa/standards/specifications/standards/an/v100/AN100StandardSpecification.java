@@ -115,8 +115,7 @@ public class AN100StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(
-        "Arrival Notice", "1.0.0-20251121-beta", "AN", "1.0.0-20251107-beta", 4);
+    return new LegendMetadata("Arrival Notice", "1.0.0", "", "", 4);
   }
 
   @Override
@@ -200,16 +199,7 @@ public class AN100StandardSpecification extends StandardSpecification {
             Map.entry(QueryFiltersSheet.class, "query-filters"))
         .entrySet()
         .stream()
-        .collect(
-            Collectors.toMap(
-                Map.Entry::getKey,
-                entry ->
-                    DataOverviewSheet.importFromString(
-                        SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/" +
-                              "db86454af300a5df090f37a057eb64d5d2633a7f" +
-                              "/generated-resources/standards/an/v100/an-v1.0.0-data-overview-%s.csv")
-                                .formatted(entry.getValue())))));
+        .collect(Collectors.toMap(Map.Entry::getKey, _ -> List.of()));
   }
 
   @Override

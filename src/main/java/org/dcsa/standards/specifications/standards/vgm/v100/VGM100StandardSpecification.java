@@ -1,4 +1,4 @@
-package org.dcsa.standards.specifications.standards.vgm.v101;
+package org.dcsa.standards.specifications.standards.vgm.v100;
 
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.PathItem;
@@ -16,6 +16,32 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.dcsa.standards.specifications.generator.SpecificationToolkit;
+import org.dcsa.standards.specifications.generator.StandardSpecification;
+import org.dcsa.standards.specifications.standards.core.v101.model.Address;
+import org.dcsa.standards.specifications.standards.core.v101.model.ContactDetails;
+import org.dcsa.standards.specifications.standards.core.v101.model.Facility;
+import org.dcsa.standards.specifications.standards.core.v101.model.GeoCoordinate;
+import org.dcsa.standards.specifications.standards.core.v101.model.Location;
+import org.dcsa.standards.specifications.standards.core.v101.model.Party;
+import org.dcsa.standards.specifications.standards.core.v101.model.PartyDetails;
+import org.dcsa.standards.specifications.standards.core.v101.model.Seal;
+import org.dcsa.standards.specifications.standards.core.v101.model.VoyageNumberOrReference;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.FeedbackElement;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.GetVGMDeclarationsError;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.GetVGMDeclarationsResponse;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.PostVGMDeclarationsError;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.PostVGMDeclarationsRequest;
+import org.dcsa.standards.specifications.standards.vgm.v100.messages.PostVGMDeclarationsResponse;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.EquipmentDetails;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.OtherReference;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.ShipmentDetails;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.VGM;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.VGMDeclaration;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.RoutingDetails;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.VesselVoyageDetails;
+import org.dcsa.standards.specifications.standards.vgm.v100.model.Weight;
 import org.dcsa.standards.specifications.dataoverview.AttributesHierarchicalSheet;
 import org.dcsa.standards.specifications.dataoverview.AttributesNormalizedSheet;
 import org.dcsa.standards.specifications.dataoverview.DataOverviewSheet;
@@ -23,41 +49,16 @@ import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
 import org.dcsa.standards.specifications.dataoverview.QueryFiltersSheet;
 import org.dcsa.standards.specifications.dataoverview.QueryParametersSheet;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
-import org.dcsa.standards.specifications.generator.SpecificationToolkit;
-import org.dcsa.standards.specifications.generator.StandardSpecification;
-import org.dcsa.standards.specifications.standards.core.v103.model.Address;
-import org.dcsa.standards.specifications.standards.core.v103.model.ContactDetails;
-import org.dcsa.standards.specifications.standards.core.v103.model.Facility;
-import org.dcsa.standards.specifications.standards.core.v103.model.GeoCoordinate;
-import org.dcsa.standards.specifications.standards.core.v103.model.Location;
-import org.dcsa.standards.specifications.standards.core.v103.model.Party;
-import org.dcsa.standards.specifications.standards.core.v103.model.PartyDetails;
-import org.dcsa.standards.specifications.standards.core.v103.model.Seal;
-import org.dcsa.standards.specifications.standards.core.v103.model.VoyageNumberOrReference;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.FeedbackElement;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.GetVGMDeclarationsError;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.GetVGMDeclarationsResponse;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.PostVGMDeclarationsError;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.PostVGMDeclarationsRequest;
-import org.dcsa.standards.specifications.standards.vgm.v101.messages.PostVGMDeclarationsResponse;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.EquipmentDetails;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.OtherReference;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.RoutingDetails;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.ShipmentDetails;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.VGM;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.VGMDeclaration;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.VesselVoyageDetails;
-import org.dcsa.standards.specifications.standards.vgm.v101.model.Weight;
 
-public class VGMStandardSpecification extends StandardSpecification {
+public class VGM100StandardSpecification extends StandardSpecification {
 
   public static final String TAG_VGM_PRODUCERS = "VGM Producer Endpoints";
   public static final String TAG_VGM_CONSUMERS = "VGM Consumer Endpoints";
 
   private final GetVGMDeclarationsEndpoint getVGMDeclarationsEndpoint;
 
-  public VGMStandardSpecification() {
-    super("Verified Gross Mass", "1.0.1", "vgm", "vgm");
+  public VGM100StandardSpecification() {
+    super("Verified Gross Mass", "1.0.0", "vgm", "vgm");
 
     openAPI.addTagsItem(
         new Tag()
@@ -77,8 +78,7 @@ public class VGMStandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(
-        "Verified Gross Mass", "1.0.1-20260116", "VGM", "1.0.0", 4);
+    return new LegendMetadata("Verified Gross Mass", "1.0.0", "", "", 4);
   }
 
   @Override
@@ -124,16 +124,7 @@ public class VGMStandardSpecification extends StandardSpecification {
             Map.entry(QueryFiltersSheet.class, "query-filters"))
         .entrySet()
         .stream()
-        .collect(
-            Collectors.toMap(
-                Map.Entry::getKey,
-                entry ->
-                    DataOverviewSheet.importFromString(
-                        SpecificationToolkit.readRemoteFile(
-                            ("https://raw.githubusercontent.com/dcsaorg/DCSA-Information-Model/"
-                                    + "11a5faddf572810f503621c59f98a8d3a00f0d3e"
-                                    + "/generated-resources/standards/vgm/v100/vgm-v1.0.0-data-overview-%s.csv")
-                                .formatted(entry.getValue())))));
+        .collect(Collectors.toMap(Map.Entry::getKey, _ -> List.of()));
   }
 
   @Override
@@ -184,7 +175,7 @@ public class VGMStandardSpecification extends StandardSpecification {
                                     Collectors.toMap(
                                         Map.Entry::getKey,
                                         Map.Entry::getValue,
-                                        (a, b) -> b,
+                                        (_, b) -> b,
                                         LinkedHashMap::new)))
                         .content(
                             new Content()
