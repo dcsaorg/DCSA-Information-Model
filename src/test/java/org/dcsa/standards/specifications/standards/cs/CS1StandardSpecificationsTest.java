@@ -14,6 +14,9 @@ import org.dcsa.standards.specifications.standards.cs.v101.CsVs101StandardSpecif
 import org.dcsa.standards.specifications.standards.cs.v102.CsP2p102StandardSpecification;
 import org.dcsa.standards.specifications.standards.cs.v102.CsPs102StandardSpecification;
 import org.dcsa.standards.specifications.standards.cs.v102.CsVs102StandardSpecification;
+import org.dcsa.standards.specifications.standards.cs.v103.CsP2p103StandardSpecification;
+import org.dcsa.standards.specifications.standards.cs.v103.CsPs103StandardSpecification;
+import org.dcsa.standards.specifications.standards.cs.v103.CsVs103StandardSpecification;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -24,6 +27,7 @@ class CS1StandardSpecificationsTest {
     buildAndCheckV100();
     buildAndCheckV101();
     buildAndCheckV102();
+    buildAndCheckV103();
   }
 
   private static void buildAndCheckV100() {
@@ -96,5 +100,29 @@ class CS1StandardSpecificationsTest {
         "./src/main/resources/standards/cs/v102/CS_v1.0.2.yaml",
         csVs102StandardSpecification);
     csVs102StandardSpecification.generateArtifacts();
+  }
+
+  private static void buildAndCheckV103() {
+    CsP2p103StandardSpecification csP2p103StandardSpecification =
+        new CsP2p103StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        PointToPoint.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v103/CS_v1.0.3.yaml",
+        csP2p103StandardSpecification);
+    csP2p103StandardSpecification.generateArtifacts();
+
+    CsPs103StandardSpecification csPs103StandardSpecification = new CsPs103StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        PortSchedule.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v103/CS_v1.0.3.yaml",
+        csPs103StandardSpecification);
+    csPs103StandardSpecification.generateArtifacts();
+
+    CsVs103StandardSpecification csVs103StandardSpecification = new CsVs103StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        ServiceSchedule.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v103/CS_v1.0.3.yaml",
+        csVs103StandardSpecification);
+    csVs103StandardSpecification.generateArtifacts();
   }
 }
