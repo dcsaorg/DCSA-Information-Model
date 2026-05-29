@@ -1,0 +1,86 @@
+Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+PortSchedule,,,,,,,,
+"PortSchedule / location",location,PortScheduleLocation,yes,,,,"General purpose object to capture location-related data, the location can be specified in **any** of the following ways:
+  - `UNLocationCode`
+  - `FacilitySMDGCode` (used to specify a location using a `facilitySMDGCode`)
+
+  It is expected that if a location is specified in multiple ways (both as a `UNLocationCode` and as a `facilitySMDGCode`) that both ways point to the same location.",
+"PortSchedule / location / facilityName",facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
+"PortSchedule / location / facilitySMDGCode",facilitySMDGCode,string,,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
+The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/)",
+"PortSchedule / location / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","An optional name for the location.",
+"PortSchedule / location / UNLocationCode",UNLocationCode,string,,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+  - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+  - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+  More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+"PortSchedule / vesselSchedules",vesselSchedules,"Schedule list",,,,,,
+"PortSchedule / vesselSchedules / cutOffTimes",cutOffTimes,"CutOffTime list",,,,,"A list of cut-offs times provided by the carrier when available. A cut-off time indicates the latest date and time by which a task must be completed. For example, the latest date and time by which a container must be delivered to a terminal to be loaded on a vessel, or where certain documentation must be provided by the Shipper.",
+"PortSchedule / vesselSchedules / cutOffTimes / cutOffDateTime",cutOffDateTime,"string(date-time)",yes,,,2019-11-12T07:41-08:30,"Estimated cut-off time expressed in local time with offset.",
+"PortSchedule / vesselSchedules / cutOffTimes / cutOffDateTimeCode",cutOffDateTimeCode,string,yes,maxLength=3,,DCO,"Code for the cut-off time. Possible values are:
+  - `DCO` (Documentation cut-off)
+  - `VCO` (VGM cut-off)
+  - `FCO` (FCL delivery cut-off)
+  - `LCO` (LCL delivery cut-off) **Condition:** only when the `Receipt Type at Origin` is `CFS`
+  - `PCO` (Port cut-off)
+  - `ECP` (Empty container pick-up date and time)
+  - `EFC` (Earliest full-container delivery date)
+  - `RCO` (Reefer cut-off)
+  - `DGC` (Dangerous Goods cut-off)
+  - `OBC` (OOG/BB cut-off)
+  - `TCO` (Transhipment cut-off)
+  - `STA` (Standard booking acceptance)
+  - `SPA` (Special booking acceptance)
+  - `CUA` (Customs Acceptance)
+  - `AFC` (Advanced filling cut-off)",
+"PortSchedule / vesselSchedules / isDummyVessel",isDummyVessel,boolean,yes,,,,"This property can be set to `true` when no vessel has been assigned, indicating that the `vesselIMONumber` does not exist.",
+"PortSchedule / vesselSchedules / servicePartners",servicePartners,"ServicePartnerSchedule list",yes,minItems=1,,,,
+"PortSchedule / vesselSchedules / servicePartners / carrierCode",carrierCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code based on either the SMDG or SCAC code lists.",
+"PortSchedule / vesselSchedules / servicePartners / carrierCodeListProvider",carrierCodeListProvider,string,,,,NMFTA,"Identifies the code list provider used for the `carrierCode`.
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+"PortSchedule / vesselSchedules / servicePartners / carrierExportVoyageNumber","carrierExportVoyageNumber",string,yes,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",
+"PortSchedule / vesselSchedules / servicePartners / carrierImportVoyageNumber","carrierImportVoyageNumber",string,yes,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",
+"PortSchedule / vesselSchedules / servicePartners / carrierServiceCode",carrierServiceCode,string,yes,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published.",
+"PortSchedule / vesselSchedules / servicePartners / carrierServiceName",carrierServiceName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of the service.",
+"PortSchedule / vesselSchedules / timestamps",timestamps,"Timestamp list",yes,minItems=1,,,,
+"PortSchedule / vesselSchedules / timestamps / eventClassifierCode",eventClassifierCode,string,yes,,,PLN,"Code for the event classifier. Values can vary depending on eventType.
+
+Possible values are:
+- `ACT` (Actual)
+- `EST` (Estimated)
+- `PLN` (Planned)",
+"PortSchedule / vesselSchedules / timestamps / eventDateTime",eventDateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event takes place.",
+"PortSchedule / vesselSchedules / timestamps / eventTypeCode",eventTypeCode,string,yes,,,ARRI,"Identifier for type of transportEvent.
+
+- `ARRI` (Arrived)
+- `DEPA` (Departed)",
+"PortSchedule / vesselSchedules / universalExportVoyageReference","universalExportVoyageReference",string,,"minLength=5
+maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"PortSchedule / vesselSchedules / universalImportVoyageReference","universalImportVoyageReference",string,,"minLength=5
+maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
+
+- `2 digits` for the year
+- `2 alphanumeric characters` for the sequence number of the voyage
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+"PortSchedule / vesselSchedules / universalServiceReference","universalServiceReference",string,,"minLength=8
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
+"PortSchedule / vesselSchedules / vessel",vessel,Vessel,,,,,"Vessel information.",
+"PortSchedule / vesselSchedules / vessel / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
+"PortSchedule / vesselSchedules / vessel / flag",flag,string,,"minLength=2
+maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code.",
+"PortSchedule / vesselSchedules / vessel / MMSINumber",MMSINumber,string,,"minLength=9
+maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
+"PortSchedule / vesselSchedules / vessel / name",name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
+"PortSchedule / vesselSchedules / vessel / operatorCarrierCode",operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists.",
+"PortSchedule / vesselSchedules / vessel / operatorCarrierCodeListProvider","operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes.
+- `SMDG` (Ship Message Design Group)
+- `NMFTA` (National Motor Freight Traffic Association)",
+"PortSchedule / vesselSchedules / vessel / vesselIMONumber",vesselIMONumber,string,,"minLength=7
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code, which does not change during the lifetime of the vessel.",
