@@ -1,0 +1,1459 @@
+---
+openapi: "3.0.3"
+info:
+  title: "DCSA Dangerous Good Declaration API"
+  description: |
+    # DCSA Dangerous Good Declaration (DGD) API
+
+    This is the OpenAPI specification of the **DCSA Dangerous Good Declaration (DGD)** standard.
+
+    This API allows the transfer of structured DG declarations from a DGD Producer to a DGD Consumer.
+
+    Each DGD Producer implements the `GET /dgds` endpoint, which can be called by the authorized DGD Consumers to retrieve relevant available DG declarations.
+
+    Each DGD Consumer implements the `POST /dgds` endpoint, which can be called by DGD Producers to send relevant DG declarations as they become available or are updated.
+
+    The registration of DGD Consumers with DGD Producers is out of scope.
+
+    The authentication and authorization in both directions between DGD Producers and DGD Consumers is out of scope.
+
+    ### Work in progress ⚠️
+
+    The DCSA Dangerous Goods Declaration (DGD) standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+  contact:
+    name: "Digital Container Shipping Association (DCSA)"
+    url: "https://dcsa.org"
+    email: "info@dcsa.org"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "1.0.0"
+tags:
+- name: "DGD Producer Endpoints"
+  description: "Endpoints implemented by the DGD Producers"
+- name: "DGD Consumer Endpoints"
+  description: "Endpoints implemented by the DGD Consumers"
+paths:
+  /dgds:
+    get:
+      tags:
+      - "DGD Producer Endpoints"
+      summary: "Retrieves a list of DG declarations"
+      description: |+
+        Retrieves the list of DG declarations matching the criteria provided as query parameters.
+
+        If no DG declarations match the criteria provided as query parameters, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of DG declarations in the response message is unspecified.
+
+        The DGD Producer is expected to additionally filter the DG declarations based on the authorization and registration profile of the authenticated DGD Consumer calling this endpoint. Authorization, registration and any such additional filtering are out of scope in this standard.
+
+        ## DGD filtering
+
+        The `declarationReference` query parameter is mandatory for all requests.
+
+        Every DGD Producer must support the following combinations of additional query parameter filters:
+        * `carrierBookingReference`
+        * `carrierBookingReference`, `equipmentReference`
+        * `transportDocumentReference`
+        * `transportDocumentReference`, `equipmentReference`
+        * `equipmentReference`
+
+        Every DGD Producer must support combining any of the query parameter filters above with all of these additional filters:
+        * `declarationDateTimeMin`
+        * `declarationDateTimeMax`
+        * `declarationDateTimeMin`, `declarationDateTimeMax`
+
+        ## Pagination
+
+        Response pagination uses a mechanism based on the `limit` and `cursor` query parameters and on the `Next-Page-Cursor` response header.
+
+      operationId: "get-dg-declarations"
+      parameters:
+      - name: "declarationReference"
+        in: "query"
+        description: "Reference of the DG declaration"
+        schema:
+          type: "string"
+        example: "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
+      - name: "carrierBookingReference"
+        in: "query"
+        description: "Reference of the booking for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "ABC709951"
+      - name: "transportDocumentReference"
+        in: "query"
+        description: "Reference of the transport document for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "HHL71800000"
+      - name: "equipmentReference"
+        in: "query"
+        description: "Reference of the equipment for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "APZU4812090"
+      - name: "declarationDateTimeMin"
+        in: "query"
+        description: "Retrieve DG declarations with a `declarationDateTime` at or after this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "declarationDateTimeMax"
+        in: "query"
+        description: "Retrieve DG declarations with a `declarationDateTime` at or before this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of DG declarations to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      responses:
+        "200":
+          description: "List of DG declarations matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDGDeclarationsResponse"
+    post:
+      tags:
+      - "DGD Consumer Endpoints"
+      summary: "Sends a list of DG declarations"
+      description: |+
+        Used by a DGD Producer to send DG declarations to a registered DGD Consumer.
+
+        The subscription mechanism and the management of DGD Consumer profiles, including any filtering or page limits similar with the GET endpoint, are out of scope in this standard.
+
+      operationId: "post-dg-declarations"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      requestBody:
+        description: "List of DG declarations"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostDGDeclarationsRequest"
+        required: true
+      responses:
+        "200":
+          description: "DG declarations response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDGDeclarationsResponse"
+components:
+  schemas:
+    Activity:
+      type: "object"
+      properties:
+        value:
+          type: "number"
+          description: "Activity value expressed in the measurement `unit`"
+          format: "float"
+          example: 2.5
+        unit:
+          maxLength: 10
+          type: "string"
+          description: |
+            Measurement unit in which the activity `value` is expressed:
+            - `kBq`
+            - `MBq`
+            - `GBq`
+            - `TBq`
+            - `PBq`
+            - `mBq`
+            - `µBq`
+          example: "TBq"
+      description: "Activity value and measurement unit"
+    Address:
+      type: "object"
+      properties:
+        street:
+          maxLength: 70
+          type: "string"
+          description: "The name of the street."
+          example: "Ruijggoordweg"
+        streetNumber:
+          maxLength: 50
+          type: "string"
+          description: "The number of the street."
+          example: "100"
+        floor:
+          maxLength: 50
+          type: "string"
+          description: "The floor of the street number."
+          example: "N/A"
+        postCode:
+          maxLength: 10
+          type: "string"
+          description: "The post code of the address."
+          example: "1047 HM"
+        POBox:
+          maxLength: 20
+          type: "string"
+          description: "A numbered box at a post office where a person or business can have mail or parcels delivered."
+          example: "123"
+        city:
+          maxLength: 35
+          type: "string"
+          description: "The name of the city."
+          example: "Amsterdam"
+        stateRegion:
+          maxLength: 65
+          type: "string"
+          description: "The name of the state/region."
+          example: "North Holland"
+        countryCode:
+          maxLength: 2
+          type: "string"
+          description: "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+          example: "NL"
+        addressLines:
+          maxItems: 5
+          type: "array"
+          description: "Unstructured address lines, used as a fallback when structured address fields are unavailable."
+          items:
+            maxLength: 250
+            type: "string"
+            description: "One line of an unstructured `Address`."
+            example: "123 Example Rd"
+      description: "An object for storing address-related information."
+    CargoItem:
+      type: "object"
+      properties:
+        cargoGrossVolume:
+          description: "Gross volume of the cargo item, calculated by multiplying the width, height, and length of the packaged cargo."
+          allOf:
+          - $ref: "#/components/schemas/Volume"
+        cargoGrossWeight:
+          description: |
+            Gross weight of the cargo item including packaging being carried in the container.
+            Excludes the tare weight of the container.
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        cargoNetVolume:
+          description: "Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging."
+          allOf:
+          - $ref: "#/components/schemas/Volume"
+        cargoNetWeight:
+          description: "Net weight of the cargo item, excluding packaging and excluding the tare weight of the container."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        equipmentReference:
+          maxLength: 11
+          type: "string"
+          description: |
+            The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
+            According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+            If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.
+          example: "APZU4812090"
+        outerPackaging:
+          description: "Packaging information for this cargo item."
+          allOf:
+          - $ref: "#/components/schemas/OuterPackaging"
+      description: "A cargo item within a consignment item."
+    ConsignmentItem:
+      type: "object"
+      properties:
+        cargoItems:
+          type: "array"
+          description: "A list of all `cargoItems`"
+          items:
+            $ref: "#/components/schemas/CargoItem"
+        carrierBookingReference:
+          maxLength: 35
+          type: "string"
+          description: "The associated booking number provided by the carrier for this `Consignment Item`."
+          example: "ABC709951"
+        descriptionOfGoods:
+          type: "array"
+          description: |
+            A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+          items:
+            type: "string"
+            description: |
+              A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+        references:
+          type: "array"
+          description: "A list of `References`"
+          items:
+            $ref: "#/components/schemas/ReferenceConsignmentItem"
+        shippingMarks:
+          type: "array"
+          description: |
+            A list of the `ShippingMarks` applicable to this `consignmentItem`
+          items:
+            type: "string"
+            description: |
+              A list of the `ShippingMarks` applicable to this `consignmentItem`
+      description: "A consignment item within a DG declaration."
+    ContainerPackingCertificate:
+      type: "object"
+      properties:
+        companyName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the company responsible for packing/loading the container or vehicle."
+          example: "ABC Warehouse"
+        declarantName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the person responsible for the packing/loading declaration."
+          example: "John Loader"
+        declarantStatus:
+          maxLength: 100
+          type: "string"
+          description: "Role/status of the person signing the container/vehicle packing certificate."
+          example: "Warehouse Supervisor"
+        declarationPlace:
+          description: "Place where the packing/loading declaration was made."
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        declarationDate:
+          type: "string"
+          description: "Date when the container/vehicle packing certificate was signed."
+          format: "date"
+          example: "2025-01-23"
+        signatory:
+          maxLength: 100
+          type: "string"
+          description: |
+            Upper case name of the person authorized to sign the certificate.
+
+            According to IMDG Code 5.4.2.3: "If the container/vehicle packing certificate is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign."
+          example: "JOHN LOADER"
+      description: |
+        "I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING
+    DGDeclaration:
+      type: "object"
+      properties:
+        declarationReference:
+          maxLength: 500
+          type: "string"
+          description: "Reference of the DG declaration"
+          example: "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
+        declarationDateTime:
+          maxLength: 30
+          type: "string"
+          description: "The date and time when the DG declaration was issued"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        typeLabel:
+          maxLength: 100
+          type: "string"
+          description: "Free-format identifier used to specify a certain type of DG Declaration, for example \"English\" or \"French\"."
+          example: "French"
+        utilizedTransportEquipments:
+          type: "array"
+          description: "The equipments being used."
+          items:
+            $ref: "#/components/schemas/UtilizedTransportEquipment"
+        shipmentDetails:
+          description: "DG declaration details specific to the shipment"
+          allOf:
+          - $ref: "#/components/schemas/ShipmentDetails"
+        vesselVoyageDetails:
+          description: "DG declaration details specific to the vessel voyage"
+          allOf:
+          - $ref: "#/components/schemas/VesselVoyageDetails"
+        consignmentItems:
+          type: "array"
+          description: "A list of `ConsignmentItems`"
+          items:
+            $ref: "#/components/schemas/ConsignmentItem"
+        documentParties:
+          type: "array"
+          description: |
+            Document parties.
+
+            Note that while parties can generally appear in any order, including `N1` (First Notify Party)
+            and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
+            as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.
+          items:
+            $ref: "#/components/schemas/DocumentParty"
+        containerPackingCertificate:
+          description: |
+            "I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING
+          allOf:
+          - $ref: "#/components/schemas/ContainerPackingCertificate"
+        shipperDeclaration:
+          description: |
+            "I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."
+          allOf:
+          - $ref: "#/components/schemas/ShipperDeclaration"
+        haulageAcceptance:
+          description: "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
+          allOf:
+          - $ref: "#/components/schemas/HaulageAcceptance"
+        receivingOrganisationReceipt:
+          description: |
+            "Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
+          allOf:
+          - $ref: "#/components/schemas/ReceivingOrganisationReceipt"
+      description: |
+        Dangerous Good Declaration for one or more pieces of equipment, including the actual dangerous goods details and the relevant associated details
+    DangerousGoods:
+      type: "object"
+      properties:
+        EMSNumber:
+          maxLength: 7
+          type: "string"
+          description: "The emergency schedule identified in the IMO EmS Guide — Emergency Response Procedures for Ships Carrying Dangerous Goods. Comprises 2 values; 1 for spillage and 1 for fire. Possible values spillage: S-A to S-Z. Possible values fire: F-A to F-Z."
+          example: "F-A S-Q"
+        IMOClass:
+          maxLength: 4
+          type: "string"
+          description: |
+            The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
+
+            - `1.1A` (Substances and articles which have a mass explosion hazard)
+            - `1.6N` (Extremely insensitive articles which do not have a mass explosion hazard)
+            - `2.1` (Flammable gases)
+            - `8` (Corrosive substances)
+          example: "1.4S"
+        NANumber:
+          maxLength: 4
+          type: "string"
+          description: "Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation."
+          example: "9037"
+        UNNumber:
+          maxLength: 4
+          type: "string"
+          description: "United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG."
+          example: "1463"
+        codedVariantList:
+          maxLength: 4
+          type: "string"
+          description: |
+            Four-character code supplied by Exis Technologies that assists to remove ambiguities when identifying a variant within a single UN number or NA number that may occur when two companies exchange DG information.
+
+            Character | Valid Characters | Description
+            :--------:|------------------|------------
+            1| 0, 1, 2, 3|The packing group. Code 0 indicates there is no packing group
+            2|0 to 9 and A to Z|A sequence letter for the PSN, or 0 if there were no alternative PSNs
+            3 and 4|0 to 9 and A to Z|Two sequence letters for other information, for the cases where the variant is required because of different in subrisks, packing instruction etc.
+          example: "2200"
+        competentAuthorityApproval:
+          maxLength: 500
+          type: "string"
+          description: "Name and reference number of the competent authority providing the approval."
+          example: "{Name and reference...}"
+        emergencyContactDetails:
+          description: "24 hr emergency contact details"
+          allOf:
+          - $ref: "#/components/schemas/EmergencyContactDetails"
+        endOfHoldingTime:
+          type: "string"
+          description: "Date by when the refrigerated liquid needs to be delivered."
+          format: "date"
+          example: "2025-01-23"
+        fumigationDateTime:
+          maxLength: 30
+          type: "string"
+          description: "Date & time when the container was fumigated"
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        grossWeight:
+          description: "Total weight of the goods carried, including packaging."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        inhalationZone:
+          maxLength: 1
+          type: "string"
+          description: |
+            The zone classification of the toxicity of the inhalant. Possible values are:
+
+            - `A` (Hazard Zone A) can be assigned to specific gases and liquids
+            - `B` (Hazard Zone B) can be assigned to specific gases and liquids
+            - `C` (Hazard Zone C) can **only** be assigned to specific gases
+            - `D` (Hazard Zone D) can **only** be assigned to specific gases
+          example: "A"
+        innerPackagings:
+          type: "array"
+          description: "A list of `Inner Packings` contained inside this `outer packaging/overpack`."
+          items:
+            $ref: "#/components/schemas/InnerPackaging"
+        isCompetentAuthorityApprovalRequired:
+          type: "boolean"
+          description: "Indicates if the cargo require approval from authorities"
+        isEmptyUncleanedResidue:
+          type: "boolean"
+          description: "Indicates if the cargo is residue."
+        isExceptedQuantity:
+          type: "boolean"
+          description: "Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code."
+        isHot:
+          type: "boolean"
+          description: "Indicates if high temperature cargo is shipped."
+        isLimitedQuantity:
+          type: "boolean"
+          description: "Indicates if the dangerous goods can be transported as limited quantity in accordance with Chapter 3.4 of the IMO IMDG Code."
+        isMarinePollutant:
+          type: "boolean"
+          description: "Indicates if the goods belong to the classification of Marine Pollutant."
+        isReportableQuantity:
+          type: "boolean"
+          description: "Indicates if a container of hazardous material is at the reportable quantity level. If `true`, a report to the relevant authority must be made in case of spill."
+        isSalvagePackings:
+          type: "boolean"
+          description: "Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked."
+        isWaste:
+          type: "boolean"
+          description: "Indicates if waste is being shipped"
+        limits:
+          description: "Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure."
+          allOf:
+          - $ref: "#/components/schemas/Limits"
+        netExplosiveContent:
+          description: "The total weight of the explosive substances, without the packaging, casings, etc."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        netVolume:
+          description: "The volume of the referenced dangerous goods. Only applicable to liquids and gas."
+          allOf:
+          - $ref: "#/components/schemas/Volume"
+        netWeight:
+          description: "Total weight of the goods carried, excluding packaging."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        packingGroup:
+          type: "integer"
+          description: "The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code."
+          format: "int32"
+          example: 3
+        properShippingName:
+          maxLength: 500
+          type: "string"
+          description: "The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention."
+          example: "Chromium Trioxide, anhydrous"
+        segregationGroups:
+          type: "array"
+          description: |
+            List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
+          items:
+            type: "string"
+            description: |
+              List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
+        subsidiaryRisk1:
+          maxLength: 4
+          type: "string"
+          description: "Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
+          example: "1.2"
+        subsidiaryRisk2:
+          maxLength: 4
+          type: "string"
+          description: "Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
+          example: "1.2"
+        technicalName:
+          maxLength: 200
+          type: "string"
+          description: "The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code."
+          example: "xylene and benzene"
+        specialCertificateNumber:
+          maxLength: 100
+          type: "string"
+          description: "Text field to indicate certificate number & segment for specific stowage requirements overruling IMDG code"
+          example: "22663:3"
+        additionalContainerCargoHandling:
+          maxLength: 500
+          type: "string"
+          description: "Text field to provide cargo handling information already known at the booking stage."
+          example: "To be handled with extreme care"
+        isMolten:
+          type: "boolean"
+          description: "Indicates that the dangerous goods are offered for transport in molten state. Required when applicable unless already included in the properShippingName."
+        lithiumBatteryTransportCondition:
+          maxLength: 3
+          type: "string"
+          description: |
+            Indicates the transport condition of lithium cells or batteries transported under Special Provision 376 or 377. Allowed values:
+            - `DAM` (Damaged or defective)
+            - `DIS` (For disposal)
+            - `REC` (For recycling)
+          example: "DAM"
+        isStabilizedSubstance:
+          type: "boolean"
+          description: "Indicates that the substance is stabilized for transport purposes. Required when applicable unless already included in the properShippingName."
+        isTemperatureControlled:
+          type: "boolean"
+          description: "Indicates that stabilization is achieved through temperature control during transport. Required when applicable unless already included in the properShippingName."
+        radioactiveMaterial:
+          description: "Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7."
+          allOf:
+          - $ref: "#/components/schemas/RadioactiveMaterial"
+        fireworkClassificationReferences:
+          type: "array"
+          description: |
+            Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
+
+            The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
+          items:
+            type: "string"
+            description: |
+              Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
+
+              The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
+        dateOfProduction:
+          type: "string"
+          description: "Production date of the material. Required for UN 1361."
+          format: "date"
+          example: "2025-01-23"
+        dateOfPackingIntoPackagings:
+          type: "string"
+          description: "Date on which the material was packed into the packaging. Required for UN 1361."
+          format: "date"
+          example: "2025-01-23"
+        materialTemperatureAtPacking:
+          type: "number"
+          description: "Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361."
+          format: "float"
+          example: 55
+        additionalRegulatoryStatements:
+          type: "array"
+          description: "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."
+          items:
+            type: "string"
+            description: "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."
+        mfagReference:
+          maxLength: 100
+          type: "string"
+          description: "Medical First Aid Guide reference applicable to the dangerous goods carried."
+          example: "MFAG Table 620"
+      description: "Dangerous goods information"
+    DocumentParty:
+      type: "object"
+      properties:
+        address:
+          description: "Party address"
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        identifyingCodes:
+          type: "array"
+          description: "List of codes identifying the party"
+          items:
+            $ref: "#/components/schemas/IdentifyingCode"
+        partyContactDetails:
+          type: "array"
+          description: "Party contact details"
+          items:
+            $ref: "#/components/schemas/PartyContactDetail"
+        partyFunction:
+          maxLength: 3
+          type: "string"
+          description: |
+            Specifies the role of the party in a given context. Possible values are:
+
+            - `OS` (Shipper)
+            - `CN` (Consignee)
+            - `END` (Endorsee)
+            - `RW` (Issuing Party)
+            - `CG` (Carrier's Agent at Destination)
+            - `N1` (First Notify Party)
+            - `N2` (Second Notify Party)
+            - `NI` (Other Notify Party)
+            - `SCO` (Service Contract Owner)
+            - `DDR` (Consignor's freight forwarder)
+            - `DDS` (Consignee's freight forwarder)
+            - `COW` (Invoice payer on behalf of the consignor (shipper))
+            - `COX` (Invoice payer on behalf of the consignee)
+            - `CS` (Consolidator)
+            - `MF` (Manufacturer)
+            - `WH` (Warehouse Keeper)
+          example: "N1"
+        partyName:
+          maxLength: 100
+          type: "string"
+          description: "Party name"
+          example: "Acme Inc."
+        reference:
+          maxLength: 100
+          type: "string"
+          description: "A reference linked to the document party."
+          example: "REF1234"
+        taxLegalReferences:
+          type: "array"
+          description: "List of tax or legal references relevant to the party"
+          items:
+            $ref: "#/components/schemas/TaxLegalReference"
+      description: "Document party information."
+    EmergencyContactDetails:
+      type: "object"
+      properties:
+        contact:
+          maxLength: 100
+          type: "string"
+          description: "Name of the contact person during an emergency."
+          example: "Jane Doe"
+        phone:
+          maxLength: 30
+          type: "string"
+          description: |
+            Phone number for the contact, including an international phone number format
+            as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+          example: "+14155552671"
+        provider:
+          maxLength: 100
+          type: "string"
+          description: "Name of the third party vendor providing emergency support"
+          example: "ACME Inc"
+        referenceNumber:
+          maxLength: 100
+          type: "string"
+          description: "Contract reference for the emergency support provided by an external third party vendor."
+          example: "12234"
+      description: "24 hr emergency contact details"
+    Equipment:
+      type: "object"
+      properties:
+        equipmentReference:
+          maxLength: 11
+          type: "string"
+          description: |
+            The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
+
+            If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2: Containers with non-ISO identification from SMDG.
+          example: "APZU4812090"
+        ISOEquipmentCode:
+          maxLength: 4
+          type: "string"
+          description: "Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the ISO 6346 standard."
+          example: "22GP"
+        tareWeight:
+          description: "The tare weight of the container"
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+      description: "Equipment used for transport"
+    Facility:
+      type: "object"
+      properties:
+        facilityName:
+          maxLength: 100
+          type: "string"
+          description: "The name of the facility."
+          example: "Building 123"
+        facilityCode:
+          maxLength: 6
+          type: "string"
+          description: |
+            Code identifying a specific facility, as defined by the `facilityCodeListProvider`.
+          example: "ADT"
+        facilityCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            Code list provider (each with its relevant code list) defining the `facilityCode`:
+            - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
+            - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))
+          example: "SMDG"
+      description: |
+        Facility identified by a code as defined by a code list provider.
+    FissileMaterial:
+      type: "object"
+      properties:
+        fissileMaterialMass:
+          description: "Mass in grams of fissile material contained in the consignment (or mass of each fissile nuclide for mixtures when appropriate)."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        fissileExceptionReference:
+          maxLength: 100
+          type: "string"
+          description: "Reference to applicable fissile exception paragraph, when shipped under IMDG 2.7.2.3.5.1 to 2.7.2.3.5.6."
+          example: "2.7.2.3.5.3"
+        totalFissileNuclideMass:
+          description: "Total mass of fissile nuclides when shipped under 2.7.2.3.5.3 to 2.7.2.3.5.5 fissile exceptions."
+          allOf:
+          - $ref: "#/components/schemas/Weight"
+        fissilePackageReference:
+          maxLength: 100
+          type: "string"
+          description: "Reference to applicable package paragraph for fissile material, when contained in a package for which one of 6.4.11.2 (a) to (c) or 6.4.11.3 is applied"
+          example: "6.4.11.2(a)"
+        criticalitySafetyIndex:
+          type: "number"
+          description: "Criticality Safety Index (CSI) applicable to fissile radioactive material."
+          format: "float"
+          example: 2.0
+      description: "Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions."
+    GeoCoordinate:
+      type: "object"
+      properties:
+        latitude:
+          maxLength: 20
+          type: "string"
+          description: "Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+          example: "33.629152"
+        longitude:
+          maxLength: 20
+          type: "string"
+          description: "Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+          example: "-118.587187"
+      description: "An object used to express a location using its geographic coordinates."
+    GetDGDeclarationsResponse:
+      type: "object"
+      properties:
+        DGDeclarations:
+          type: "array"
+          description: |
+            The list of DG declarations matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/DGDeclaration"
+      description: |
+        API response to a `GET DG declarations` request
+    HaulageAcceptance:
+      type: "object"
+      properties:
+        haulierName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the road transport company contracted to move the container/vehicle to or from the port/terminal."
+          example: "Fast Road Haulage BV"
+        vehicleRegistrationNumber:
+          maxLength: 20
+          type: "string"
+          description: "License plate of the truck or vehicle used for the road leg of transport."
+          example: "AB-123-CD"
+        haulierSignatory:
+          maxLength: 100
+          type: "string"
+          description: "Upper case name of the haulier's representative"
+          example: "PETER JANSEN"
+        haulierAcceptanceDate:
+          type: "string"
+          description: "Date when the hauliers acceptence was signed."
+          format: "date"
+          example: "2025-01-23"
+        driverSignatory:
+          maxLength: 100
+          type: "string"
+          description: "Upper case name of the driver operating the vehicle"
+          example: "BOB DRIVER"
+      description: "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
+    IdentifyingCode:
+      type: "object"
+      properties:
+        codeListName:
+          maxLength: 100
+          type: "string"
+          description: |
+            The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
+            - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
+            - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
+            - `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`
+          example: "DID"
+        codeListProvider:
+          maxLength: 5
+          type: "string"
+          description: |
+            A list of codes identifying a party. Possible values are:
+            - `WAVE` (Wave)
+            - `CARX` (CargoX)
+            - `IDT` (ICE Digital Trade)
+            - `BOLE` (Bolero)
+            - `IQAX` (IQAX)
+            - `SECR` (Secro)
+            - `TRGO` (TradeGO)
+            - `ETEU` (eTEU)
+            - `TRAC` (Enigio trace:original)
+            - `BRIT` (BRITC eBL)
+            - `COVA` (Covantis)
+            - `ETIT` (e-title)
+            - `KTNE` (KTNET)
+            - `CRED` (Credore)
+            - `BLOC` (BlockPeer Technologies)
+            - `GSBN` (Global Shipping Business Network)
+            - `WISE` (WiseTech)
+            - `GLEIF` (Global Legal Entity Identifier Foundation)
+            - `W3C` (World Wide Web Consortium)
+            - `DNB` (Dun and Bradstreet)
+            - `FMC` (Federal Maritime Commission)
+            - `DCSA` (Digital Container Shipping Association)
+            - `ZZZ` (Mutually defined)
+          example: "W3C"
+        partyCode:
+          maxLength: 100
+          type: "string"
+          description: "Code to identify the party as provided by the code list provider"
+          example: "MSK"
+      description: "Code identifying a party."
+    InnerPackaging:
+      type: "object"
+      properties:
+        description:
+          maxLength: 200
+          type: "string"
+          description: "Description of the packaging."
+          example: "Woven plastic water resistant Bag"
+        material:
+          maxLength: 100
+          type: "string"
+          description: "The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`."
+          example: "Plastic"
+        quantity:
+          type: "integer"
+          description: "Count of `Inner Packagings` of the referenced `Dangerous Goods`."
+          format: "int32"
+          example: 20
+      description: "Inner packaging contained inside an outer packaging/overpack."
+    Limits:
+      type: "object"
+      properties:
+        SADT:
+          type: "number"
+          description: "Lowest temperature in which self-accelerating decomposition may occur in a substance"
+          format: "float"
+          example: 54.1
+        SAPT:
+          type: "number"
+          description: "Lowest temperature in which self-accelerating polymerization may occur in a substance"
+          format: "float"
+          example: 70.0
+        flashPoint:
+          type: "number"
+          description: "Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air."
+          format: "float"
+          example: 42.0
+        temperatureUnit:
+          maxLength: 3
+          type: "string"
+          description: |
+            The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
+
+            - `CEL` (Celsius)
+            - `FAH` (Fahrenheit)
+          example: "CEL"
+        transportControlTemperature:
+          type: "number"
+          description: "Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period."
+          format: "float"
+          example: 24.1
+        transportEmergencyTemperature:
+          type: "number"
+          description: "Temperature at which emergency procedures shall be implemented"
+          format: "float"
+          example: 74.1
+      description: "Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure."
+    Location:
+      type: "object"
+      properties:
+        locationName:
+          maxLength: 100
+          type: "string"
+          description: "The name of the location."
+          example: "Port of Amsterdam"
+        facilityType:
+          maxLength: 100
+          type: "string"
+          description: |-
+            A specific type of facility
+            - `BORDER` - Border
+            - `CUSTOMER_LOCATION` - Customer location
+            - `DEPOT` - Depot
+            - `CONTAINER_FREIGHT_STATION` - Container freight station
+            - `INLAND_TERMINAL` - Inland terminal
+            - `OFF_DOCK_STORAGE` - Off-dock storage
+            - `PORT_TERMINAL` - Port terminal
+            - `RAMP` - Ramp
+            - `WAYPOINT` - Waypoint
+          example: "DEPOT"
+        address:
+          description: "Location address"
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        UNLocationCode:
+          maxLength: 5
+          type: "string"
+          description: |
+            The UN Location code specifying where the place is located. The pattern used must be
+
+            - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+            - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+            More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)
+          example: "NLAMS"
+        facility:
+          description: |
+            Facility identified by a code as defined by a code list provider.
+          allOf:
+          - $ref: "#/components/schemas/Facility"
+        geoCoordinate:
+          description: "An object used to express a location using its geographic coordinates."
+          allOf:
+          - $ref: "#/components/schemas/GeoCoordinate"
+      description: "Location information"
+    OuterPackaging:
+      type: "object"
+      properties:
+        IMOPackagingCode:
+          maxLength: 5
+          type: "string"
+          description: "The code of the packaging as per IMO."
+          example: "1A2"
+        dangerousGoods:
+          type: "array"
+          description: "A list of `Dangerous Goods`"
+          items:
+            $ref: "#/components/schemas/DangerousGoods"
+        description:
+          maxLength: 200
+          type: "string"
+          description: "Description of the outer packaging/overpack."
+          example: "Drum, steel"
+        numberOfPackages:
+          type: "integer"
+          description: "Specifies the number of outer packagings/overpacks associated with this `Cargo Item`."
+          format: "int32"
+          example: 18
+        packageCode:
+          maxLength: 5
+          type: "string"
+          description: "A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)"
+          example: "5H"
+      description: "Packaging information for a cargo item."
+    PartyContactDetail:
+      type: "object"
+      properties:
+        email:
+          maxLength: 100
+          type: "string"
+          description: "Contact email address"
+          example: "jane.doe@example.com"
+        name:
+          maxLength: 100
+          type: "string"
+          description: "Contact name"
+          example: "Jane Doe"
+        phone:
+          maxLength: 30
+          type: "string"
+          description: |
+            Contact phone number, including an international phone number format
+            as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+          example: "+14155552671"
+      description: "Party contact details"
+    PostDGDeclarationsRequest:
+      type: "object"
+      properties:
+        DGDeclarations:
+          type: "array"
+          description: "List of DG declarations."
+          items:
+            $ref: "#/components/schemas/DGDeclaration"
+      description: "API message containing a list of DG declarations."
+    PostDGDeclarationsResponse:
+      type: "object"
+      description: "API response to a `POST DG declarations` request"
+    RadioactiveMaterial:
+      type: "object"
+      properties:
+        radionuclideIdentification:
+          maxLength: 200
+          type: "string"
+          description: "Name of the radionuclide(s) contained in Class 7 radioactive material consignments. For mixtures, provide a general description or list the most restrictive nuclides."
+          example: "Cs-137"
+        physicalChemicalForm:
+          maxLength: 500
+          type: "string"
+          description: "Describes the physical and chemical form of the radioactive material, or a notation that the material is special form radioactive material or low dispersible radioactive material. A generic chemical description is acceptable for chemical form."
+          example: "Solid contaminated metal debris"
+        maximumActivityDuringTransport:
+          description: "Maximum activity of the radioactive contents during transport, expressed in becquerels with an SI prefix."
+          allOf:
+          - $ref: "#/components/schemas/Activity"
+        fissileMaterial:
+          description: "Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions."
+          allOf:
+          - $ref: "#/components/schemas/FissileMaterial"
+        isExclusiveUseShipment:
+          type: "boolean"
+          description: "Indicates that the radioactive material shipment must be shipped under exclusive use."
+        totalActivityA2Multiple:
+          type: "number"
+          description: "For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited."
+          format: "float"
+          example: 12.5
+        radioactivePackageCategory:
+          maxLength: 10
+          type: "string"
+          description: |
+            Radiation package category for Class 7 material. Allowed values:
+            - `I-WHITE`
+            - `II-YELLOW`
+            - `III-YELLOW`
+          example: "II-YELLOW"
+        transportIndex:
+          type: "number"
+          description: "Transport Index (TI) assigned to the radioactive package."
+          format: "float"
+          example: 1.8
+      description: "Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7."
+    ReceivingOrganisationReceipt:
+      type: "object"
+      properties:
+        receivedInGoodCondition:
+          type: "boolean"
+          description: "Indicates whether the packages, containers, or trailers were received in apparent good order and condition at the time of handover. A value of false implies that damages, discrepancies, or irregularities were observed and should be detailed in the remarks field."
+        receivingOrganisationName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the organisation receiving the cargo."
+          example: "ECT Delta Terminal B.V."
+        receiptDate:
+          type: "string"
+          description: "The date on which the receiving organisation physically accepted the consignment."
+          format: "date"
+          example: "2025-01-23"
+        remarks:
+          maxLength: 500
+          type: "string"
+          description: "Free-text field for the receiving organisation to record any observations at the time of receipt."
+          example: "No visible damage"
+      description: |
+        "Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
+    Reference:
+      type: "object"
+      properties:
+        type:
+          maxLength: 3
+          type: "string"
+          description: |
+            The reference type codes defined by DCSA. Possible values are:
+            - `CA` (Carrier's Reference)
+            - `CR` (Customer's Reference)
+            - `AKG` (Vehicle Identification Number)
+            - `CPR` (Canadian Pacific Railway System)
+            - `CNR` (Canadian National Railway Unit)
+            - `VBN` (V-Bond Number)
+          example: "CR"
+        value:
+          maxLength: 100
+          type: "string"
+          description: "The value of the reference."
+          example: "HHL00103004"
+      description: "Reference used by the customer or carrier to identify or track the shipment."
+    ReferenceConsignmentItem:
+      type: "object"
+      properties:
+        type:
+          maxLength: 3
+          type: "string"
+          description: |
+            The reference type codes defined by DCSA. Possible values are:
+            - `CR` (Customer's Reference)
+            - `AKG` (Vehicle Identification Number)
+            - `SPO` (Shipper's Purchase Order)
+            - `CPO` (Consignee's Purchase Order)
+          example: "CR"
+        values:
+          type: "array"
+          description: "List of `referenceValues` for a given `referenceType`."
+          items:
+            type: "string"
+            description: "List of `referenceValues` for a given `referenceType`."
+      description: "A reference linked to a consignment item."
+    Seal:
+      type: "object"
+      properties:
+        number:
+          maxLength: 15
+          type: "string"
+          description: "Identifies a seal affixed to the container."
+          example: "VET123"
+        source:
+          maxLength: 100
+          type: "string"
+          description: |-
+            The source of a seal, indicating who has affixed the seal.
+
+            Both `VETERINARY` and `PHYTOSANITARY` map to `AC` (Quarantine agency) in [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm).
+
+            - `CARRIER` - Carrier
+            - `CONSOLIDATOR` - Consolidator
+            - `CUSTOMER` - Customer
+            - `CUSTOMS` - Customs
+            - `PHYTOSANITARY` - Phytosanitary
+            - `SHIPPER` - Shipper
+            - `TERMINAL` - Terminal
+            - `VETERINARY` - Veterinary
+          example: "CUSTOMER"
+        type:
+          maxLength: 100
+          type: "string"
+          description: |-
+            The type of a seal.
+            - `KEYLESS_PADLOCK` - Keyless padlock
+            - `BOLT` - Bolt
+            - `WIRE` - Wire
+          example: "BOLT"
+        placement:
+          maxLength: 100
+          type: "string"
+          description: |-
+            The placement of a seal.
+            - `DOOR` - Door
+            - `VENT` - Vent
+          example: "DOOR"
+      description: "Seal-related information associated with the equipment."
+    ShipmentDetails:
+      type: "object"
+      properties:
+        carrierBookingReference:
+          maxLength: 35
+          type: "string"
+          description: "The reference of the booking for which this DG declaration was created"
+          example: "ABC709951"
+        transportDocumentReference:
+          maxLength: 20
+          type: "string"
+          description: "The reference of the transport document for which this DG declaration was created"
+          example: "HHL71800000"
+        shipperReference:
+          maxLength: 100
+          type: "string"
+          description: "The shipper's own internal reference number for cross-referencing with their systems."
+          example: "SHP-2026-NL-8821"
+        freightForwarderReference:
+          maxLength: 100
+          type: "string"
+          description: "The reference number assigned by the freight forwarder handling the shipment on behalf of the shipper."
+          example: "FF-20260401-003"
+      description: "DG declaration details specific to the shipment"
+    ShipperDeclaration:
+      type: "object"
+      properties:
+        companyName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the shipper/consignor company making the dangerous goods declaration."
+          example: "ABC Chemicals Ltd"
+        declarantName:
+          maxLength: 100
+          type: "string"
+          description: "Name of the person signing on behalf of the shipper."
+          example: "Jane Smith"
+        declarantStatus:
+          maxLength: 100
+          type: "string"
+          description: "Role/status of the shipper's authorized signatory."
+          example: "Dangerous Goods Manager"
+        declarationPlace:
+          description: "Place where the shipper declaration was made."
+          allOf:
+          - $ref: "#/components/schemas/Address"
+        declarationDate:
+          type: "string"
+          description: "Date when the shipper declaration was signed."
+          format: "date"
+          example: "2025-01-23"
+        signatory:
+          maxLength: 100
+          type: "string"
+          description: |
+            Upper case name of the person authorized to sign the declaration.
+
+            According to IMDG Code 5.4.1.6.2: "If the dangerous goods documentation is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign."
+          example: "JANE SMITH"
+      description: |
+        "I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."
+    TaxLegalReference:
+      type: "object"
+      properties:
+        countryCode:
+          maxLength: 2
+          type: "string"
+          description: "The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+          example: "IN"
+        type:
+          maxLength: 50
+          type: "string"
+          description: "The reference type code as defined by the relevant tax and/or legal authority."
+          example: "PAN"
+        value:
+          maxLength: 100
+          type: "string"
+          description: "The value of the `taxLegalReference`"
+          example: "AAAAA0000A"
+      description: "Tax or legal reference relevant to a party."
+    UtilizedTransportEquipment:
+      type: "object"
+      properties:
+        equipment:
+          description: "The container or transport equipment used."
+          allOf:
+          - $ref: "#/components/schemas/Equipment"
+        seals:
+          type: "array"
+          description: "Seal-related information associated with the equipment."
+          items:
+            $ref: "#/components/schemas/Seal"
+        shippingMarks:
+          type: "array"
+          description: |
+            A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
+          items:
+            type: "string"
+            description: |
+              A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
+        references:
+          type: "array"
+          description: "Reference used by the customer or carrier to identify or track the shipment."
+          items:
+            $ref: "#/components/schemas/Reference"
+      description: "Transport equipment being used."
+    VesselVoyageDetails:
+      type: "object"
+      properties:
+        carrierCode:
+          maxLength: 4
+          type: "string"
+          description: |
+            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
+            [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
+
+            The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.
+          example: "MMCU"
+        carrierCodeListProvider:
+          maxLength: 10
+          type: "string"
+          description: |
+            The code list provider for the `carrierCode`. Possible values are:
+            - `SMDG` (Ship Message Design Group)
+            - `NMFTA` (National Motor Freight Traffic Association)
+          example: "NMFTA"
+        exportVoyageNumberOrReference:
+          description: "Export voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        importVoyageNumberOrReference:
+          description: "Import voyage number or reference"
+          allOf:
+          - $ref: "#/components/schemas/VoyageNumberOrReference"
+        portOfLoading:
+          description: "The location where the cargo is loaded onto a first sea-going vessel for water transportation."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        portOfDischarge:
+          description: "The location where the cargo is discharged from the last sea-going vessel."
+          allOf:
+          - $ref: "#/components/schemas/Location"
+        vesselName:
+          maxLength: 50
+          type: "string"
+          description: "Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded."
+          example: "King of the Seas"
+        departureDate:
+          type: "string"
+          description: |
+            The date of departure from the location where the cargo is handed over by the shipper, or his agent,
+            to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.
+          format: "date"
+          example: "2025-01-23"
+        destination:
+          description: "The final delivery destination of the goods"
+          allOf:
+          - $ref: "#/components/schemas/Location"
+      description: "DG declaration details specific to the vessel voyage"
+    Volume:
+      type: "object"
+      properties:
+        value:
+          type: "number"
+          description: "Volume value expressed in the measurement `unit`"
+          format: "float"
+          example: 2.4
+        unit:
+          maxLength: 10
+          type: "string"
+          description: |
+            Measurement unit in which the volume `value` is expressed:
+            - `FTQ` (Cubic foot)
+            - `MTQ` (Cubic meter)
+            - `LTR` (Litre)
+          example: "MTQ"
+      description: "Volume value and measurement unit"
+    VoyageNumberOrReference:
+      type: "object"
+      properties:
+        carrierVoyageNumber:
+          type: "string"
+          description: "Carrier-specific identifier of the voyage"
+          example: "2103S"
+        universalVoyageReference:
+          maxLength: 5
+          type: "string"
+          description: |
+            Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
+
+            Carriers assign a Universal Voyage Reference (UVR) to a voyage,
+            either individually for non-VSA services or jointly for shared services under a VSA or Alliance.
+
+            Every Universal Voyage Reference is a 5-character string with the following format:
+             * the last 2 digits of the year
+             * 2 alphanumeric characters for the sequence number of the voyage
+             * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).
+          example: "2301W"
+      description: "Carrier voyage number and/or universal voyage reference"
+    Weight:
+      type: "object"
+      properties:
+        value:
+          type: "number"
+          description: "Weight value expressed in the measurement `unit`"
+          format: "float"
+          example: 2.4
+        unit:
+          maxLength: 10
+          type: "string"
+          description: |
+            Measurement unit in which the weight `value` is expressed:
+            - `KGM` (Kilograms)
+            - `LBR` (Pounds)
+            - `GRM` (Grams)
+            - `ONZ` (Ounce)
+          example: "KGM"
+      description: "Weight value and measurement unit"
+  headers:
+    API-Version:
+      description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+      schema:
+        type: "string"
+        example: "1.0.0"
+    Next-Page-Cursor:
+      description: "A cursor value pointing to the next page of results in a paginated GET response."
+      schema:
+        type: "string"
+        example: "ExampleNextPageCursor"

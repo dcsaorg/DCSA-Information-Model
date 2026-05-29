@@ -1,0 +1,25 @@
+FilterParameters,Required
+declarationReference,yes
+"declarationReference, carrierBookingReference",yes
+"declarationReference, carrierBookingReference, equipmentReference",yes
+"declarationReference, transportDocumentReference",yes
+"declarationReference, transportDocumentReference, equipmentReference",yes
+"declarationReference, equipmentReference",yes
+"declarationReference, declarationDateTimeMin",
+"declarationReference, carrierBookingReference, declarationDateTimeMin",
+"declarationReference, carrierBookingReference, equipmentReference, declarationDateTimeMin",
+"declarationReference, transportDocumentReference, declarationDateTimeMin",
+"declarationReference, transportDocumentReference, equipmentReference, declarationDateTimeMin",
+"declarationReference, equipmentReference, declarationDateTimeMin",
+"declarationReference, declarationDateTimeMax",
+"declarationReference, carrierBookingReference, declarationDateTimeMax",
+"declarationReference, carrierBookingReference, equipmentReference, declarationDateTimeMax",
+"declarationReference, transportDocumentReference, declarationDateTimeMax",
+"declarationReference, transportDocumentReference, equipmentReference, declarationDateTimeMax",
+"declarationReference, equipmentReference, declarationDateTimeMax",
+"declarationReference, declarationDateTimeMin, declarationDateTimeMax",
+"declarationReference, carrierBookingReference, declarationDateTimeMin, declarationDateTimeMax",
+"declarationReference, carrierBookingReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"declarationReference, transportDocumentReference, declarationDateTimeMin, declarationDateTimeMax",
+"declarationReference, transportDocumentReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",
+"declarationReference, equipmentReference, declarationDateTimeMin, declarationDateTimeMax",

@@ -16,3 +16,4 @@ target/
 /generated-resources/standards/cs/v10*/*.yaml
 /generated-resources/standards/ebl/v30*/*.yaml
 /generated-resources/standards/ovs/v30*/*.yaml
+/tmp/

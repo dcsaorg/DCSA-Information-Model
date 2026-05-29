@@ -276,7 +276,7 @@ This means the generated YAML changed. The new hash is in the `but was:` part â€
 - Run `mvn clean install` to regenerate specifications and run tests.
 - Ensure generated output in `generated-resources/` is kept in sync with model changes.
 - Follow existing package/version naming conventions when adding new standard versions.
-- When modifying new standards: update the SHA-256 hash in the test after verifying the change is correct.
+- When modifying new standards: update the SHA-256 hash in the test after verifying the change is correct. Note: SHA-256 hash assertions are only added to **released** standards to prevent accidental post-release changes. Standards still in development do **not** use hash assertions in their tests.
 - When modifying old standards: ensure the Java model still matches the source YAML in `src/main/resources/standards/`.
 - For patch versions of old standards: create a new model class extending the previous version's model, add only new fields, and create a specification class using `modelClassesStreamWithReplacementClasses()`.
 
