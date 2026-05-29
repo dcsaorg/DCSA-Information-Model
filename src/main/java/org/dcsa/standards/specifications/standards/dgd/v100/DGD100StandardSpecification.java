@@ -76,7 +76,7 @@ public class DGD100StandardSpecification extends StandardSpecification {
   private final GetDGDeclarationsEndpoint getDGDeclarationsEndpoint;
 
   public DGD100StandardSpecification() {
-    super("Dangerous Good Declaration", "1.0.0", "dgd", "dgd");
+    super("Dangerous Goods Declaration", "1.0.0", "dgd", "dgd");
 
     openAPI.addTagsItem(
         new Tag()
@@ -100,7 +100,7 @@ public class DGD100StandardSpecification extends StandardSpecification {
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata("Dangerous Good Declaration", "1.0.0", "", "", 4);
+    return new LegendMetadata("Dangerous Goods Declaration", "1.0.0", "", "", 4);
   }
 
   @Override

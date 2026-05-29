@@ -1,6 +1,6 @@
-# DCSA Dangerous Good Declaration (DGD) API
+# DCSA Dangerous Goods Declaration (DGD) API
 
-This is the OpenAPI specification of the **DCSA Dangerous Good Declaration (DGD)** standard.
+This is the OpenAPI specification of the **DCSA Dangerous Goods Declaration (DGD)** standard.
 
 This API allows the transfer of structured DG declarations and asynchronous feedback between a DGD Producer and a DGD Consumer.
 
