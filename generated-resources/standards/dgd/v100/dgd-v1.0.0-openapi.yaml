@@ -7,11 +7,7 @@ info:
 
     This is the OpenAPI specification of the **DCSA Dangerous Good Declaration (DGD)** standard.
 
-    This API allows the transfer of structured DG declarations from a DGD Producer to a DGD Consumer.
-
-    Each DGD Producer implements the `GET /dgds` endpoint, which can be called by the authorized DGD Consumers to retrieve relevant available DG declarations.
-
-    Each DGD Consumer implements the `POST /dgds` endpoint, which can be called by DGD Producers to send relevant DG declarations as they become available or are updated.
+    This API allows the transfer of structured DG declarations and asynchronous feedback between a DGD Producer and a DGD Consumer.
 
     The registration of DGD Consumers with DGD Producers is out of scope.
 
@@ -175,6 +171,152 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PostDGDeclarationsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDGDeclarationsError"
+  /dgd-feedbacks:
+    get:
+      tags:
+      - "DGD Consumer Endpoints"
+      summary: "Retrieves a list of DGD feedbacks"
+      description: |+
+        Retrieves the list of DGD feedback elements matching the criteria provided as query parameters.
+
+        If no feedback elements match the criteria, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of feedback elements in the response message is unspecified.
+
+        The `declarationReference` query parameter is mandatory for all requests.
+
+      operationId: "get-dgd-feedbacks"
+      parameters:
+      - name: "declarationReference"
+        in: "query"
+        description: "Reference of the DG declaration"
+        schema:
+          type: "string"
+        example: "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
+      - name: "carrierBookingReference"
+        in: "query"
+        description: "Reference of the booking for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "ABC709951"
+      - name: "transportDocumentReference"
+        in: "query"
+        description: "Reference of the transport document for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "HHL71800000"
+      - name: "equipmentReference"
+        in: "query"
+        description: "Reference of the equipment for which to return the associated DG declarations"
+        schema:
+          type: "string"
+        example: "APZU4812090"
+      - name: "declarationDateTimeMin"
+        in: "query"
+        description: "Retrieve DG declarations with a `declarationDateTime` at or after this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "declarationDateTimeMax"
+        in: "query"
+        description: "Retrieve DG declarations with a `declarationDateTime` at or before this timestamp"
+        schema:
+          type: "string"
+          format: "date-time"
+        example: "2025-01-23T01:23:45Z"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of DG declarations to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      responses:
+        "200":
+          description: "List of DGD feedback elements matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDGDFeedbacksResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDGDeclarationsError"
+    post:
+      tags:
+      - "DGD Producer Endpoints"
+      summary: "Sends a list of DGD feedbacks"
+      description: |+
+        Used to send asynchronous feedback on previously received DG declarations.
+
+      operationId: "post-dgd-feedbacks"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      requestBody:
+        description: "List of DGD feedback elements"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostDGDFeedbacksRequest"
+        required: true
+      responses:
+        "200":
+          description: "DGD feedbacks response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDGDFeedbacksResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDGDeclarationsError"
 components:
   schemas:
     Activity:
@@ -782,6 +924,33 @@ components:
           example: "SMDG"
       description: |
         Facility identified by a code as defined by a code list provider.
+    FeedbackElement:
+      type: "object"
+      properties:
+        severity:
+          maxLength: 50
+          type: "string"
+          description: |-
+            Code denoting the severity of a `FeedbackElement`
+
+            - `ERROR` - Error that fully or partially prevents the correct processing of the request
+            - `WARN` - Warning about the request being processed in a potentially unexpected way
+            - `INFO` - Informational message about how the request is processed
+          example: "ERROR"
+        message:
+          maxLength: 5000
+          type: "string"
+          description: |
+            Human readable feedback message that can be programmatically relayed to a user of the DGD publishing organization
+          example: "The facility SMDG code does not match the location UN/LOCODE"
+        propertyPath:
+          maxLength: 1000
+          type: "string"
+          description: |
+            [JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property about which the feedback is provided (if applicable)
+          example: "$.DGDeclarations[2].consignmentItems[0].cargoItems[0].outerPackaging.dangerousGoods[0].UNNumber"
+      description: |
+        An individual piece of feedback (potentially out of several) providing information on how an API request is processed
     FissileMaterial:
       type: "object"
       properties:
@@ -823,6 +992,31 @@ components:
           description: "Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
           example: "-118.587187"
       description: "An object used to express a location using its geographic coordinates."
+    GetDGDFeedbacksResponse:
+      type: "object"
+      properties:
+        DGDFeedbacks:
+          type: "array"
+          description: |
+            The list of DGD feedback elements matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `GET DGD feedbacks` request
+    GetDGDeclarationsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why the request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `GET DG declarations` request
     GetDGDeclarationsResponse:
       type: "object"
       properties:
@@ -1065,6 +1259,41 @@ components:
             as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
           example: "+14155552671"
       description: "Party contact details"
+    PostDGDFeedbacksRequest:
+      type: "object"
+      properties:
+        DGDFeedbacks:
+          type: "array"
+          description: "List of DGD feedback elements."
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: "API message containing a list of DGD feedback elements."
+    PostDGDFeedbacksResponse:
+      type: "object"
+      description: |
+        API response to a `POST DGD feedbacks` request
+    PostDGDeclarationsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+
+            When sent in response to a request that contains an array of DG declarations,
+            the order of the `feedbackElements` is not related to the list of request DG declarations.
+            Instead, the relevant request DG declaration is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `POST DG declarations` request.
+
+        If some of the DG declarations in the request were successfully processed,
+        a regular `PostDGDeclarationsResponse` is expected to be used instead,
+        with `feedbackElements` indicating which DG declarations were not processed and why.
     PostDGDeclarationsRequest:
       type: "object"
       properties:
@@ -1076,7 +1305,19 @@ components:
       description: "API message containing a list of DG declarations."
     PostDGDeclarationsResponse:
       type: "object"
-      description: "API response to a `POST DG declarations` request"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed.
+
+            There can be zero, one or more feedback elements per declaration in the request.
+            The order of `feedbackElements` is not related to the order of DG declarations in the request.
+            Instead, the relevant request DG declaration is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `POST DG declarations` request
     RadioactiveMaterial:
       type: "object"
       properties:

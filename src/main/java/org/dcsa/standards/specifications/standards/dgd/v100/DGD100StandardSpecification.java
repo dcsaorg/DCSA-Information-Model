@@ -33,9 +33,15 @@ import org.dcsa.standards.specifications.standards.core.v200.model.Seal;
 import org.dcsa.standards.specifications.standards.core.v200.model.Volume;
 import org.dcsa.standards.specifications.standards.core.v200.model.VoyageNumberOrReference;
 import org.dcsa.standards.specifications.standards.core.v200.model.Weight;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.FeedbackElement;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.GetDGDeclarationsError;
 import org.dcsa.standards.specifications.standards.dgd.v100.messages.GetDGDeclarationsResponse;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.GetDGDFeedbacksResponse;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.PostDGDeclarationsError;
 import org.dcsa.standards.specifications.standards.dgd.v100.messages.PostDGDeclarationsRequest;
 import org.dcsa.standards.specifications.standards.dgd.v100.messages.PostDGDeclarationsResponse;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.PostDGDFeedbacksRequest;
+import org.dcsa.standards.specifications.standards.dgd.v100.messages.PostDGDFeedbacksResponse;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.Activity;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.CargoItem;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.ConsignmentItem;
@@ -85,6 +91,10 @@ public class DGD100StandardSpecification extends StandardSpecification {
         "/dgds",
         new PathItem().get(operationDGDeclarationsGet()).post(operationDGDeclarationsPost()));
 
+    openAPI.path(
+        "/dgd-feedbacks",
+        new PathItem().get(operationDGDFeedbacksGet()).post(operationDGDFeedbacksPost()));
+
     getDGDeclarationsEndpoint = new GetDGDeclarationsEndpoint();
   }
 
@@ -107,9 +117,12 @@ public class DGD100StandardSpecification extends StandardSpecification {
         EmergencyContactDetails.class,
         Equipment.class,
         Facility.class,
+        FeedbackElement.class,
         FissileMaterial.class,
         GeoCoordinate.class,
+        GetDGDeclarationsError.class,
         GetDGDeclarationsResponse.class,
+        GetDGDFeedbacksResponse.class,
         HaulageAcceptance.class,
         IdentifyingCode.class,
         InnerPackaging.class,
@@ -117,8 +130,11 @@ public class DGD100StandardSpecification extends StandardSpecification {
         Location.class,
         OuterPackaging.class,
         PartyContactDetail.class,
+        PostDGDeclarationsError.class,
         PostDGDeclarationsRequest.class,
         PostDGDeclarationsResponse.class,
+        PostDGDFeedbacksRequest.class,
+        PostDGDFeedbacksResponse.class,
         RadioactiveMaterial.class,
         ReceivingOrganisationReceipt.class,
         Reference.class,
@@ -256,6 +272,116 @@ public class DGD100StandardSpecification extends StandardSpecification {
                                             new Schema<>()
                                                 .$ref(
                                                     SpecificationToolkit.getComponentSchema$ref(
-                                                        PostDGDeclarationsResponse.class)))))));
+                                                        PostDGDeclarationsResponse.class))))))
+                .addApiResponse("default", createErrorResponse(PostDGDeclarationsError.class)));
+  }
+
+  private Operation operationDGDFeedbacksGet() {
+    return new Operation()
+        .summary("Retrieves a list of DGD feedbacks")
+        .description(readResourceFile("openapi-get-dgd-feedbacks-description.md"))
+        .operationId("get-dgd-feedbacks")
+        .tags(Collections.singletonList(TAG_DGD_CONSUMERS))
+        .parameters(
+            Stream.concat(
+                    new GetDGDeclarationsEndpoint().getQueryParameters().stream(),
+                    Stream.of(getApiVersionHeaderParameter()))
+                .toList())
+        .responses(
+            new ApiResponses()
+                .addApiResponse(
+                    "200",
+                    new ApiResponse()
+                        .description("List of DGD feedback elements matching the query parameters")
+                        .headers(
+                            Stream.of(
+                                    Map.entry(
+                                        API_VERSION_HEADER,
+                                        new Header().$ref(API_VERSION_HEADER_REF)),
+                                    Map.entry(
+                                        NEXT_PAGE_CURSOR_HEADER,
+                                        new Header().$ref(NEXT_PAGE_CURSOR_HEADER_REF)))
+                                .collect(
+                                    Collectors.toMap(
+                                        Map.Entry::getKey,
+                                        Map.Entry::getValue,
+                                        (_, b) -> b,
+                                        LinkedHashMap::new)))
+                        .content(
+                            new Content()
+                                .addMediaType(
+                                    "application/json",
+                                    new MediaType()
+                                        .schema(
+                                            new Schema<>()
+                                                .$ref(
+                                                    SpecificationToolkit.getComponentSchema$ref(
+                                                        GetDGDFeedbacksResponse.class))))))
+                .addApiResponse("default", createErrorResponse(GetDGDeclarationsError.class)));
+  }
+
+  private Operation operationDGDFeedbacksPost() {
+    return new Operation()
+        .summary("Sends a list of DGD feedbacks")
+        .description(readResourceFile("openapi-post-dgd-feedbacks-description.md"))
+        .operationId("post-dgd-feedbacks")
+        .tags(Collections.singletonList(TAG_DGD_PRODUCERS))
+        .parameters(List.of(getApiVersionHeaderParameter()))
+        .requestBody(
+            new RequestBody()
+                .description("List of DGD feedback elements")
+                .required(true)
+                .content(
+                    new Content()
+                        .addMediaType(
+                            "application/json",
+                            new MediaType()
+                                .schema(
+                                    new Schema<>()
+                                        .$ref(
+                                            SpecificationToolkit.getComponentSchema$ref(
+                                                PostDGDFeedbacksRequest.class))))))
+        .responses(
+            new ApiResponses()
+                .addApiResponse(
+                    "200",
+                    new ApiResponse()
+                        .description("DGD feedbacks response")
+                        .headers(
+                            new LinkedHashMap<>(
+                                Map.ofEntries(
+                                    Map.entry(
+                                        API_VERSION_HEADER,
+                                        new Header().$ref(API_VERSION_HEADER_REF)))))
+                        .content(
+                            new Content()
+                                .addMediaType(
+                                    "application/json",
+                                    new MediaType()
+                                        .schema(
+                                            new Schema<>()
+                                                .$ref(
+                                                    SpecificationToolkit.getComponentSchema$ref(
+                                                        PostDGDFeedbacksResponse.class))))))
+                .addApiResponse("default", createErrorResponse(PostDGDeclarationsError.class)));
+  }
+
+  private ApiResponse createErrorResponse(Class<?> errorMessageClass) {
+    return new ApiResponse()
+        .description("Error response")
+        .headers(
+            new LinkedHashMap<>(
+                Map.ofEntries(
+                    Map.entry(API_VERSION_HEADER, new Header().$ref(API_VERSION_HEADER_REF)))))
+        .content(
+            new Content()
+                .addMediaType(
+                    "application/json",
+                    new MediaType()
+                        .schema(
+                            new Schema<>()
+                                .$ref(
+                                    SpecificationToolkit.getComponentSchema$ref(
+                                        errorMessageClass)))));
   }
 }
