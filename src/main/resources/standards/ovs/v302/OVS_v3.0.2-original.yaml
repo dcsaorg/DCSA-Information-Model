@@ -15,7 +15,7 @@ info:
     This API follows the guidelines defined in version 2.0 of the API Design & Implementation Principles which can be found on the [DCSA Developer Portal](https://developer.dcsa.org/api_design)
 
     ### Changelog and Contact Us
-    For a changelog please click [here](https://github.com/dcsaorg/DCSA-OpenAPI/tree/master/ovs/v3#v301). If you have any questions, feel free to [Contact Us](https://dcsa.org/get-involved/contact-us).
+    For a changelog please click [here](https://github.com/dcsaorg/DCSA-OpenAPI/tree/master/ovs/v3#v302). If you have any questions, feel free to [Contact Us](https://dcsa.org/get-involved/contact-us).
 
     API specification issued by [DCSA.org](https://dcsa.org/).
   contact:
@@ -25,7 +25,7 @@ info:
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 3.0.1
+  version: 3.0.2
 tags:
   - name: Operational Vessel Schedules
     description: ' '
@@ -43,9 +43,9 @@ paths:
         - A `Vessel` which can call multiple `Ports` (`TransportCalls`).
         - A `Port` (`TransportCall`) can contain one or more `TimeStamps`.
 
-        The number of service schedules in the list can be narrowed down by providing filter parameters. The resulting payload will always include **entire voyage(s) being matched**. This means that even though a filter only matches a single `Port` in a `Voyage` or a single `Timestamp` within a `Port` in a `Voyage` - **the entire Voyage matched** is returned. If the `carrierImportVoyageNumber` of the `Port` differs from the `carrierExportVoyageNumber` of the `Port` then the **entire Voyage** for both these Voyage numbers are included.
+        The number of service schedules in the list can be narrowed down by providing filter parameters. The resulting payload will always include **entire voyage(s) being matched**, unless otherwise specified (see `responseScope` query parameter). This means that even though a filter only matches a single `Port` in a `Voyage` or a single `Timestamp` within a `Port` in a `Voyage` - **the entire Voyage matched** is returned. If the `carrierImportVoyageNumber` of the `Port` differs from the `carrierExportVoyageNumber` of the `Port` then the **entire Voyage** for both these Voyage numbers are included. An example of this is when `&UNLocationCode=DEHAM` is used as a filter parameter. In this case **entire Voyages** would be listed where `DEHAM` is a `Port`.
 
-        An example of this is when `&UNLocationCode=DEHAM` is used as a filter parameter. In this case **entire Voyages** would be listed where `DEHAM` is a `Port`.
+        **Note as of v3.0.2:** If `responseScope` is used with the `MATCHED_CALLS` value then only **partial voyage(s) will potentially be returned**. This means that if a filter only matches a single `Port` (`UNLocationCode`) in a `Voyage` or a single `Timestamp` within a `Port` in a `Voyage` - **only matched transportCalls** are returned. If the `carrierImportVoyageNumber` of the `Port` differs from the `carrierExportVoyageNumber` of the `Port` then the **matched transportCalls** where either one (or both) match the filter are included. An example of this is when `&UNLocationCode=DEHAM` is used as a filter parameter. In this case **transportCalls matching `DEHAM`** would be included.
 
         Be aware that it is possible to specify filters that are mutially exclusive resulting in an empty response list. An example of this could be when both using `vesselIMONumber` and `vesselName` filters at the same time:
 
@@ -168,6 +168,20 @@ paths:
             type: string
             format: date
             example: '2020-04-10'
+        - name: responseScope
+          in: query
+          description: |
+            Indicates whether the `transportCalls` arrays in the returned service schedules represent full matched voyage(s) (the **default**) or only matched transport calls. Possible values are:
+
+              - `FULL_VOYAGE` (the response includes entire voyages - which is also the default)
+              - `MATCHED_CALLS` (the response only includes matched `transportCalls`)
+
+            If omitted, the default value is `FULL_VOYAGE`.
+          schema:
+            type: string
+            maxLength: 30
+            default: FULL_VOYAGE
+            example: MATCHED_CALLS
         - name: limit
           in: query
           description: |
@@ -203,11 +217,11 @@ paths:
                 maxLength: 1024
                 example: fE9mZnNldHw9MTAmbGltaXQ9MTA
               description: |
-                The Next-Page-Cursor header contains a cursor value that points to the next page of results in a paginated API response.
+                The `Next-Page-Cursor` header contains a cursor value that points to the next page of results in a paginated API response.
                 When an initial `GET` endpoint request includes the query parameter `limit=...` the API provider limits the number of items in the root array of the response to the specified limit. If the response would contain more items than the specified limit, the API provider includes only the first set of limit items and appends the following response header:
-                `Next-Page-Cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA`, a string that acts as a reference for the next page of results. The cursor value is used in subsequent requests to retrieve the next page by passing it as a query parameter: `?cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA`.
+                `Next-Page-Cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA`, a string that acts as a reference for the next page of results. The `Next-Page-Cursor` value is used in a subsequent request to retrieve the next page by passing it as a value in the `cursor`-query parameter: `cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA`.
 
-                To retrieve the next page, the API consumer sends a `GET` request to the endpoint URL with only `?cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA` as query parameter. The limit of items per page and any other query parameters may not be altered, therefore it may also not be specified when requesting subsequent pages. The API provider must ignore any query parameters passed along with a cursor, and should return a `400` error if any other query parameter is passed along with the `cursor`.
+                To retrieve the next page, the API consumer sends a `GET` request to the endpoint URL with only `cursor=fE9mZnNldHw9MTAmbGltaXQ9MTA` as query parameter. The limit of items per page and any other query parameters may not be altered, therefore it may also not be specified when requesting subsequent pages. The API provider must ignore any query parameters passed along with a cursor, and should return a `400` error if any other query parameter is passed along with the `cursor`.
           content:
             application/json:
               schema:
@@ -389,7 +403,7 @@ components:
           type: string
           maxLength: 100
           description: |
-            The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.
+            The unique reference for a transport call. It's the vessel operator's responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.
           example: SR11111X-9321483-2107W-NLAMS-ACT-1-1
         carrierImportVoyageNumber:
           type: string
@@ -580,56 +594,54 @@ components:
             Discriminator used to identify this as an `Address` location interface.
           example: ADDR
         address:
-          $ref: '#/components/schemas/Address'
+          type: object
+          description: An object for storing address related information.
+          properties:
+            name:
+              maxLength: 100
+              type: string
+              description: Name of the address.
+              example: John
+            street:
+              maxLength: 100
+              type: string
+              description: The name of the street of the party's address.
+              example: Ruijggoordweg
+            streetNumber:
+              maxLength: 50
+              type: string
+              description: The number of the street of the party's address.
+              example: '100'
+            floor:
+              maxLength: 50
+              type: string
+              description: The floor of the party's street number.
+              example: N/A
+            postCode:
+              maxLength: 50
+              type: string
+              description: The post code of the party's address.
+              example: 1047 HM
+            city:
+              maxLength: 65
+              type: string
+              description: The city name of the party's address.
+              example: Amsterdam
+            stateRegion:
+              maxLength: 65
+              type: string
+              description: The state/region of the party's address.
+              example: North Holland
+            country:
+              maxLength: 75
+              type: string
+              description: The country of the party's address.
+              example: The Netherlands
+          required:
+            - name
       required:
         - address
         - locationType
-    Address:
-      type: object
-      description: An object for storing address related information.
-      properties:
-        name:
-          maxLength: 100
-          type: string
-          description: Name of the address.
-          example: John
-        street:
-          maxLength: 100
-          type: string
-          description: The name of the street of the party’s address.
-          example: Ruijggoordweg
-        streetNumber:
-          maxLength: 50
-          type: string
-          description: The number of the street of the party’s address.
-          example: '100'
-        floor:
-          maxLength: 50
-          type: string
-          description: The floor of the party’s street number.
-          example: N/A
-        postCode:
-          maxLength: 50
-          type: string
-          description: The post code of the party’s address.
-          example: 1047 HM
-        city:
-          maxLength: 65
-          type: string
-          description: The city name of the party’s address.
-          example: Amsterdam
-        stateRegion:
-          maxLength: 65
-          type: string
-          description: The state/region of the party’s address.
-          example: North Holland
-        country:
-          maxLength: 75
-          type: string
-          description: The country of the party’s address.
-          example: The Netherlands
-      required:
-        - name
     Timestamp:
       type: object
       title: Timestamp
@@ -697,6 +709,17 @@ components:
           description: |
             Free text field to provide information as to why the `TransportEvent` was sent.
           example: Bad weather
+        facilityTypeCode:
+          type: string
+          maxLength: 4
+          default: BRTH
+          description: |
+            The code to identify the specific type of facility. The following values are supported:
+            - `PBPL` (Pilot Boarding Place)
+            - `BRTH` (Berth)
+
+            If no value is provided, `BRTH` is the default value.
+          example: BRTH
       required:
         - eventClassifierCode
         - eventDateTime
@@ -778,7 +801,10 @@ components:
           maximum: 9999
           minimum: 7000
           type: integer
-          description: "The detailed error code returned.\n\n  - `7000-7999` Technical error codes\n  - `8000-8999` Functional error codes\n  - `9000-9999` API provider-specific error codes            \n\n[Error codes as specified by DCSA](https://dcsa.atlassian.net/wiki/spaces/DTG/pages/197132308/Standard+Error+Codes).\n"
+          description: |
+            The detailed error code returned. The codes returned are maintained by the implementor of the API. For further explanation as to the meaning of an errorCode please consult the implementer.
+
+            **Note:** Previously it was the intention of DCSA to standardize this but it never gained traction.
           format: int32
           example: 7003
         property:

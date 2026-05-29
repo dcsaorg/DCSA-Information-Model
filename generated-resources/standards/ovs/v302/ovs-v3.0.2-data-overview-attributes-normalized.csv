@@ -7,19 +7,21 @@ Address,postCode,string,,maxLength=50,,"1047 HM","The post code of the party's a
 Address,stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
 Address,street,string,,maxLength=100,,Ruijggoordweg,"The name of the street of the party's address.",
 Address,streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
-Location,address,Address,,,,,"An object for storing address related information.",
-Location,facilitySMDGCode,string,,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
+AddressLocation,address,Address,yes,,,,"An object for storing address related information.",
+AddressLocation,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+AddressLocation,locationType,string,yes,maxLength=4,,ADDR,"Discriminator used to identify this as an `Address` location interface.",
+FacilitySMDGLocation,facilitySMDGCode,string,yes,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
 
 The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/wp-content/uploads/Codelists/Terminals/SMDG-Terminal-Code-List-v20210401.xlsx)",
-Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
-Location,locationType,string,,maxLength=4,,UNLO,"Discriminator used to identify the location type interface.",
-Location,UNLocationCode,string,,"minLength=5
+FacilitySMDGLocation,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+FacilitySMDGLocation,locationType,string,yes,maxLength=4,,FACS,"Discriminator used to identify this as a `Facility Location` interface only using `SMDG` code list.",
+FacilitySMDGLocation,UNLocationCode,string,yes,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
- - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+ - 2 characters for the country code using [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+More info can be found here: [UN/LOCODE](https://en.wikipedia.org/wiki/UN/LOCODE)",
 ServiceSchedule,carrierServiceCode,string,yes,maxLength=11,,FE1,"The carrier-specific code of the service for which the schedule details are published.",
 ServiceSchedule,carrierServiceName,string,yes,maxLength=50,,"Great Lion Service","The name of the service.",
 ServiceSchedule,"universalServiceReference",string,,maxLength=8,"^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5 digits`, followed by a checksum-character as a capital letter from `A to Z`.",
@@ -57,7 +59,9 @@ TransportCall,"carrierExportVoyageNumber",string,,maxLength=50,,2103S,"The ident
 TransportCall,"carrierImportVoyageNumber",string,yes,maxLength=50,,2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.
 
 **Note:** In case the `carrierImportVoyageNumber` is not known, `9999R` should be interpreted as ""no voyage number"". The value `9999R` is reserved as a placeholder and **MUST NOT** be used for real voyage numbers.",
-TransportCall,location,Location,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+TransportCall,"location as UNLocationLocation",UNLocationLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+TransportCall,"location as FacilitySMDGLocation",FacilitySMDGLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+TransportCall,"location as AddressLocation",AddressLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
 TransportCall,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call",
 TransportCall,statusCode,string,,,,OMIT,"The set of codes in `Status Code` are ONLY meant to communicate any change / exception to the published schedule. This is not required in case of normal schedule. Possible values are:
 
@@ -99,6 +103,15 @@ TransportCall,"universalImportVoyageReference",string,,,"^\d{2}[0-9A-Z]{2}[NEWSR
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
 - `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+UNLocationLocation,locationName,string,,maxLength=100,"^\S+(\s+\S+)*$","Port of Amsterdam","The name of the location.",
+UNLocationLocation,locationType,string,yes,maxLength=4,,UNLO,"Discriminator used to identify this as a `UNLocation` location interface.",
+UNLocationLocation,UNLocationCode,string,yes,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+ - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+ - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 VesselSchedule,isDummyVessel,boolean,yes,,,,"Is this a dummy vessel? In case no vessel has been assigned yet - this property can be set to `true` indicating that the `vesselIMONumber`/`MMSINumber` does not exist.
 
 When `true`, the `vesselName` must be used as a unique identifier for the dummy vessel. See the `vesselName` field description for the recommended naming convention.",

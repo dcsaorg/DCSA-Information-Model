@@ -2,6 +2,7 @@ package org.dcsa.standards.specifications.standards;
 
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.ComposedSchema;
+import io.swagger.v3.oas.models.media.Discriminator;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 
@@ -11,6 +12,7 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -66,6 +68,16 @@ public enum StandardSpecificationTestToolkit {
     Schema<?> originalTypeSchema = originalSchemasByType.get(typeName);
     Schema<?> generatedTypeSchema = generatedSchemasByType.get(typeName);
 
+    if (originalTypeSchema == null || generatedTypeSchema == null) {
+      if (originalTypeSchema == null && generatedTypeSchema == null) {
+        return;
+      }
+      log.warn("Schema '{}' exists in {} but not in {}",
+          typeName,
+          originalTypeSchema != null ? "original" : "generated",
+          originalTypeSchema != null ? "generated" : "original");
+      return;
+    }
     Map<String, Schema<?>> originalProperties = getSchemaProperties(originalTypeSchema, originalSchemasByType);
     Map<String, Schema<?>> generatedProperties = getSchemaProperties(generatedTypeSchema, generatedSchemasByType);
     softAssertEquals(
@@ -87,6 +99,8 @@ public enum StandardSpecificationTestToolkit {
                   attributeName,
                   originalAttributeSchema,
                   generatedAttributeSchema,
+                  originalSchemasByType,
+                  generatedSchemasByType,
                   visitedTypes);
             });
 
@@ -95,7 +109,11 @@ public enum StandardSpecificationTestToolkit {
         .forEach(
             attributeName -> {
               Schema<?> originalAttributeSchema = originalProperties.get(attributeName);
+              Schema<?> generatedAttributeSchema = generatedProperties.get(attributeName);
               String attributeTypeName = getAttributeTypeName(originalAttributeSchema);
+              if (attributeTypeName == null && generatedAttributeSchema != null) {
+                attributeTypeName = getAttributeTypeName(generatedAttributeSchema);
+              }
               if (attributeTypeName != null) {
                 compareType(
                     "    " + indentation,
@@ -113,19 +131,80 @@ public enum StandardSpecificationTestToolkit {
       String attributeName,
       Schema<?> originalAttributeSchema,
       Schema<?> generatedAttributeSchema,
+      Map<String, Schema<?>> originalSchemasByType,
+      Map<String, Schema<?>> generatedSchemasByType,
       Set<String> visitedTypes) {
     log.info("{}Comparing {} {}", indentation, typeName, attributeName);
-    if (generatedAttributeSchema instanceof ComposedSchema) {
-      if (!(originalAttributeSchema instanceof ComposedSchema)) {
-        compareAttribute(
-            indentation,
-            typeName,
-            attributeName,
-            originalAttributeSchema,
-            generatedAttributeSchema.getAllOf().getFirst(),
-            visitedTypes);
+    if (generatedAttributeSchema instanceof ComposedSchema && generatedAttributeSchema.getAllOf() != null) {
+      if (!(originalAttributeSchema instanceof ComposedSchema && originalAttributeSchema.getAllOf() != null)) {
+        // Generated is allOf-wrapped $ref with description; original is inline/direct
+        // Compare description from the wrapper only if original has one too
+        String originalDesc = comparableDescription(originalAttributeSchema.getDescription());
+        String generatedDesc = comparableDescription(generatedAttributeSchema.getDescription());
+        if (!originalDesc.isEmpty()) {
+          softAssertEquals("description", originalDesc, generatedDesc);
+        }
+        // Recurse into the referenced type, using the original inline schema as the type definition
+        // if it's not available in the original schemas map (parser may have inlined it)
+        String refTypeName = getAttributeTypeName(generatedAttributeSchema.getAllOf().getFirst());
+        if (refTypeName != null && !visitedTypes.contains(refTypeName)) {
+          Schema<?> originalTypeForRef = originalSchemasByType.get(refTypeName);
+          if (originalTypeForRef == null && originalAttributeSchema.getProperties() != null) {
+            // Parser inlined the $ref – compare directly using the inline schema as the type
+            visitedTypes.add(refTypeName);
+            Schema<?> generatedTypeForRef = generatedSchemasByType.get(refTypeName);
+            if (generatedTypeForRef != null) {
+              log.info("{}  Comparing inlined type: {}", indentation, refTypeName);
+              Map<String, Schema<?>> origProps = SpecificationToolkit.parameterizeStringRawSchemaMap(originalAttributeSchema.getProperties());
+              Map<String, Schema<?>> genProps = SpecificationToolkit.parameterizeStringRawSchemaMap(generatedTypeForRef.getProperties());
+              softAssertEquals("property list of " + refTypeName,
+                  new TreeSet<>(origProps.keySet()), new TreeSet<>(genProps.keySet()));
+              origProps.keySet().stream().sorted().forEach(propName -> {
+                Schema<?> origProp = origProps.get(propName);
+                Schema<?> genProp = genProps.get(propName);
+                if (genProp != null) {
+                  softAssertEquals(indentation, origProp, genProp, visitedTypes);
+                }
+              });
+            }
+          }
+        }
         return;
       }
+    }
+    // Handle oneOf comparison
+    if (originalAttributeSchema.getOneOf() != null && generatedAttributeSchema.getOneOf() != null) {
+      softAssertEquals(
+          "description",
+          comparableDescription(originalAttributeSchema.getDescription()),
+          comparableDescription(generatedAttributeSchema.getDescription()));
+      List<String> originalOneOfRefs = originalAttributeSchema.getOneOf().stream()
+          .map(s -> ((Schema<?>) s).get$ref())
+          .filter(Objects::nonNull)
+          .toList();
+      List<String> generatedOneOfRefs = generatedAttributeSchema.getOneOf().stream()
+          .map(s -> ((Schema<?>) s).get$ref())
+          .filter(Objects::nonNull)
+          .toList();
+      softAssertEquals("oneOf", originalOneOfRefs, generatedOneOfRefs);
+      // Compare discriminator
+      Discriminator originalDisc = originalAttributeSchema.getDiscriminator();
+      Discriminator generatedDisc = generatedAttributeSchema.getDiscriminator();
+      if (originalDisc != null || generatedDisc != null) {
+        softAssertEquals("discriminator.propertyName",
+            originalDisc != null ? originalDisc.getPropertyName() : null,
+            generatedDisc != null ? generatedDisc.getPropertyName() : null);
+        softAssertEquals("discriminator.mapping",
+            originalDisc != null ? originalDisc.getMapping() : null,
+            generatedDisc != null ? generatedDisc.getMapping() : null);
+      }
+      // Recurse into each oneOf type
+      for (String ref : originalOneOfRefs) {
+        String refTypeName = ref.substring(ref.lastIndexOf('/') + 1);
+        compareType("    " + indentation, originalSchemasByType, generatedSchemasByType,
+            refTypeName, visitedTypes);
+      }
+      return;
     }
     softAssertEquals(indentation, originalAttributeSchema, generatedAttributeSchema, visitedTypes);
   }
@@ -245,6 +324,9 @@ actual:   {}
     }
     if (attributeSchema.get$ref() != null) {
       return Arrays.stream(attributeSchema.get$ref().split("/")).toList().getLast();
+    }
+    if (attributeSchema.getAllOf() != null && !attributeSchema.getAllOf().isEmpty()) {
+      return getAttributeTypeName(attributeSchema.getAllOf().getFirst());
     }
     return null;
   }

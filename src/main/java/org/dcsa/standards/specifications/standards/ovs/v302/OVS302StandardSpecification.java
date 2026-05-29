@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint;
 import org.dcsa.standards.specifications.standards.ovs.v301.OVS301StandardSpecification;
+import org.dcsa.standards.specifications.standards.ovs.v302.model.Address;
 import org.dcsa.standards.specifications.standards.ovs.v302.model.Timestamp;
 import org.dcsa.standards.specifications.standards.ovs.v302.model.TransportCall;
 
@@ -20,7 +21,7 @@ public class OVS302StandardSpecification extends OVS301StandardSpecification {
   @Override
   protected Stream<Class<?>> modelClassesStream() {
     return modelClassesStreamWithReplacementClasses(
-        super.modelClassesStream(), Set.of(Timestamp.class, TransportCall.class));
+        super.modelClassesStream(), Set.of(Address.class, Timestamp.class, TransportCall.class));
   }
 
   @Override

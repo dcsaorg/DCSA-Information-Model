@@ -1,5 +1,6 @@
 package org.dcsa.standards.specifications.standards.ovs.v300.model;
 
+import io.swagger.v3.oas.annotations.media.DiscriminatorMapping;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
@@ -74,10 +75,15 @@ A global unique voyage reference for the export Voyage, as per DCSA standard, ag
 
   @Schema(
       description =
-"""
-General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.
-""")
-  private Location location;
+          "General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+      oneOf = {UNLocationLocation.class, FacilitySMDGLocation.class, AddressLocation.class},
+      discriminatorProperty = "locationType",
+      discriminatorMapping = {
+          @DiscriminatorMapping(value = "UNLO", schema = UNLocationLocation.class),
+          @DiscriminatorMapping(value = "FACS", schema = FacilitySMDGLocation.class),
+          @DiscriminatorMapping(value = "ADDR", schema = AddressLocation.class)
+      })
+  private Object location;
 
   @Schema(
       description =

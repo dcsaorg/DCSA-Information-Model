@@ -6,14 +6,17 @@ import io.swagger.v3.core.converter.AnnotatedType;
 import io.swagger.v3.core.converter.ModelConverter;
 import io.swagger.v3.core.converter.ModelConverterContext;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.DiscriminatorMapping;
 import io.swagger.v3.oas.models.media.ComposedSchema;
 import io.swagger.v3.oas.models.media.DateSchema;
+import io.swagger.v3.oas.models.media.Discriminator;
 import io.swagger.v3.oas.models.media.Schema;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -180,20 +183,52 @@ public class ModelValidatorConverter implements ModelConverter {
                     propertySchema.exclusiveMinimumValue(null);
                     propertySchema.exclusiveMaximumValue(null);
                   }
-                  if (propertySchema.get$ref() != null) {
+
+                  // Check if the field has a @Schema(oneOf=...) annotation
+                  Field field = getJavaFieldWithPropertyName(
+                      getAnnotatedTypeClass(annotatedType), propertyName);
+                  io.swagger.v3.oas.annotations.media.Schema fieldSchemaAnnotation =
+                      field != null
+                          ? field.getAnnotation(io.swagger.v3.oas.annotations.media.Schema.class)
+                          : null;
+                  if (fieldSchemaAnnotation != null && fieldSchemaAnnotation.oneOf().length > 0) {
+                    ComposedSchema composed = new ComposedSchema();
+                    composed.setDescription(fieldSchemaAnnotation.description());
+                    composed.setOneOf(
+                        Arrays.stream(fieldSchemaAnnotation.oneOf())
+                            .map(c -> new Schema<>().$ref(
+                                "#/components/schemas/" + c.getSimpleName()))
+                            .toList());
+                    Discriminator discriminator = new Discriminator()
+                        .propertyName(fieldSchemaAnnotation.discriminatorProperty());
+                    Map<String, String> mapping = new LinkedHashMap<>();
+                    for (DiscriminatorMapping dm : fieldSchemaAnnotation.discriminatorMapping()) {
+                      mapping.put(dm.value(), "#/components/schemas/" + dm.schema().getSimpleName());
+                    }
+                    discriminator.setMapping(mapping);
+                    composed.setDiscriminator(discriminator);
+                    schema.getProperties().put(propertyName, composed);
+                  } else if (propertySchema.get$ref() != null) {
                     Schema<?> originalPropertySchema =
                         originalSchemasByClassAndField
                             .getOrDefault(
                                 getAnnotatedTypeClass(annotatedType).getSimpleName(), Map.of())
                             .get(propertyName);
-                    if (originalPropertySchema != null) {
+                    String description = originalPropertySchema != null
+                        ? originalPropertySchema.getDescription() : null;
+                    if ((description == null || description.isEmpty())
+                        && fieldSchemaAnnotation != null
+                        && !fieldSchemaAnnotation.description().isEmpty()) {
+                      description = fieldSchemaAnnotation.description();
+                    }
+                    if (description != null && !description.isEmpty()) {
                       schema
                           .getProperties()
                           .put(
                               propertyName,
                               new ComposedSchema()
                                   .allOf(List.of(new Schema<>().$ref(propertySchema.get$ref())))
-                                  .description(originalPropertySchema.getDescription()));
+                                  .description(description));
                     }
                   } else if (propertySchema instanceof DateSchema) {
                     schema

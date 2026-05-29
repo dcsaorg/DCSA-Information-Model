@@ -41,7 +41,7 @@ class OVS3StandardSpecificationsTest {
     OVS302StandardSpecification ovs302StandardSpecification = new OVS302StandardSpecification();
     StandardSpecificationTestToolkit.verifyTypeExport(
         ServiceSchedule.class.getSimpleName(),
-        "./src/main/resources/standards/ovs/v302/OVS_v3.0.2.yaml",
+        "./src/main/resources/standards/ovs/v302/OVS_v3.0.2-original.yaml",
         ovs302StandardSpecification);
     ovs302StandardSpecification.generateArtifacts();
   }

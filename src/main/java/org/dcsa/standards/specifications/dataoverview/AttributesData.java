@@ -49,6 +49,33 @@ public class AttributesData {
 
                         Schema<?> attributeSchema = typeAttributeProperties.get(attributeName);
                         String attributeSchemaType = attributeSchema.getType();
+
+                        // Handle oneOf: expand into one attribute per variant
+                        if (attributeSchema.getOneOf() != null && !attributeSchema.getOneOf().isEmpty()) {
+                          List<Schema<?>> oneOfSchemas = SpecificationToolkit.parameterizeRawSchemaList(attributeSchema.getOneOf());
+                          for (Schema<?> oneOfSchema : oneOfSchemas) {
+                            String $ref = oneOfSchema.get$ref();
+                            if ($ref != null) {
+                              String variantType = $ref.substring("#/components/schemas/".length());
+                              AttributeInfo variantInfo = new AttributeInfo();
+                              variantInfo.setObjectType(typeName);
+                              variantInfo.setAttributeName("%s as %s".formatted(attributeName, variantType));
+                              variantInfo.setAttributeType(variantType);
+                              variantInfo.setAttributeBaseType(variantType);
+                              variantInfo.setRequired(requiredAttributes.contains(attributeName));
+                              variantInfo.setSize("");
+                              variantInfo.setPattern("");
+                              variantInfo.setExample("");
+                              variantInfo.setDescription(
+                                  Objects.requireNonNullElse(attributeSchema.getDescription(), "").trim());
+                              variantInfo.setConstraints("");
+                              attributeInfoList.add(variantInfo);
+                            }
+                          }
+                          requiredAttributes.remove(attributeName);
+                          return;
+                        }
+
                         attributeInfo.setAttributeType("UNKNOWN");
                         attributeInfo.setAttributeBaseType(attributeInfo.getAttributeType());
                         attributeInfo.setRequired(requiredAttributes.remove(attributeName));

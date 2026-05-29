@@ -18,22 +18,35 @@ maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are
 "ServiceSchedule / vesselSchedules / transportCalls / carrierImportVoyageNumber","carrierImportVoyageNumber",string,yes,maxLength=50,,2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.
 
 **Note:** In case the `carrierImportVoyageNumber` is not known, `9999R` should be interpreted as ""no voyage number"". The value `9999R` is reserved as a placeholder and **MUST NOT** be used for real voyage numbers.",
-"ServiceSchedule / vesselSchedules / transportCalls / location",location,Location,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address",address,Address,,,,,"An object for storing address related information.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / city",city,string,,maxLength=65,,Amsterdam,"The city name of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / country",country,string,,maxLength=75,,"The Netherlands","The country of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the party's street number.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / name",name,string,yes,maxLength=100,,John,"Name of the address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / postCode",postCode,string,,maxLength=50,,"1047 HM","The post code of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / street",street,string,,maxLength=100,,Ruijggoordweg,"The name of the street of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / facilitySMDGCode",facilitySMDGCode,string,,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation","location as AddressLocation",AddressLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address",address,Address,yes,,,,"An object for storing address related information.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / city",city,string,,maxLength=65,,Amsterdam,"The city name of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / country",country,string,,maxLength=75,,"The Netherlands","The country of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / floor",floor,string,,maxLength=50,,N/A,"The floor of the party's street number.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / name",name,string,yes,maxLength=100,,John,"Name of the address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / postCode",postCode,string,,maxLength=50,,"1047 HM","The post code of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The state/region of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / street",street,string,,maxLength=100,,Ruijggoordweg,"The name of the street of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street of the party's address.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as AddressLocation / locationType",locationType,string,yes,maxLength=4,,ADDR,"Discriminator used to identify this as an `Address` location interface.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as FacilitySMDGLocation","location as FacilitySMDGLocation",FacilitySMDGLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as FacilitySMDGLocation / facilitySMDGCode",facilitySMDGCode,string,yes,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
 
 The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/wp-content/uploads/Codelists/Terminals/SMDG-Terminal-Code-List-v20210401.xlsx)",
-"ServiceSchedule / vesselSchedules / transportCalls / location / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / locationType",locationType,string,,maxLength=4,,UNLO,"Discriminator used to identify the location type interface.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / UNLocationCode",UNLocationCode,string,,"minLength=5
+"ServiceSchedule / vesselSchedules / transportCalls / location as FacilitySMDGLocation / locationName",locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as FacilitySMDGLocation / locationType",locationType,string,yes,maxLength=4,,FACS,"Discriminator used to identify this as a `Facility Location` interface only using `SMDG` code list.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as FacilitySMDGLocation / UNLocationCode",UNLocationCode,string,yes,"minLength=5
+maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
+
+ - 2 characters for the country code using [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+ - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
+
+More info can be found here: [UN/LOCODE](https://en.wikipedia.org/wiki/UN/LOCODE)",
+"ServiceSchedule / vesselSchedules / transportCalls / location as UNLocationLocation","location as UNLocationLocation",UNLocationLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as UNLocationLocation / locationName",locationName,string,,maxLength=100,"^\S+(\s+\S+)*$","Port of Amsterdam","The name of the location.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as UNLocationLocation / locationType",locationType,string,yes,maxLength=4,,UNLO,"Discriminator used to identify this as a `UNLocation` location interface.",
+"ServiceSchedule / vesselSchedules / transportCalls / location as UNLocationLocation / UNLocationCode",UNLocationCode,string,yes,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
  - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)

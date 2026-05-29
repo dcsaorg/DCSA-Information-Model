@@ -594,54 +594,56 @@ components:
             Discriminator used to identify this as an `Address` location interface.
           example: ADDR
         address:
-          type: object
-          description: An object for storing address related information.
-          properties:
-            name:
-              maxLength: 100
-              type: string
-              description: Name of the address.
-              example: John
-            street:
-              maxLength: 100
-              type: string
-              description: The name of the street of the party's address.
-              example: Ruijggoordweg
-            streetNumber:
-              maxLength: 50
-              type: string
-              description: The number of the street of the party's address.
-              example: '100'
-            floor:
-              maxLength: 50
-              type: string
-              description: The floor of the party's street number.
-              example: N/A
-            postCode:
-              maxLength: 50
-              type: string
-              description: The post code of the party's address.
-              example: 1047 HM
-            city:
-              maxLength: 65
-              type: string
-              description: The city name of the party's address.
-              example: Amsterdam
-            stateRegion:
-              maxLength: 65
-              type: string
-              description: The state/region of the party's address.
-              example: North Holland
-            country:
-              maxLength: 75
-              type: string
-              description: The country of the party's address.
-              example: The Netherlands
-          required:
-            - name
+          $ref: '#/components/schemas/Address'
       required:
         - address
         - locationType
+    Address:
+      type: object
+      description: An object for storing address related information.
+      properties:
+        name:
+          maxLength: 100
+          type: string
+          description: Name of the address.
+          example: John
+        street:
+          maxLength: 100
+          type: string
+          description: The name of the street of the party's address.
+          example: Ruijggoordweg
+        streetNumber:
+          maxLength: 50
+          type: string
+          description: The number of the street of the party's address.
+          example: '100'
+        floor:
+          maxLength: 50
+          type: string
+          description: The floor of the party's street number.
+          example: N/A
+        postCode:
+          maxLength: 50
+          type: string
+          description: The post code of the party's address.
+          example: 1047 HM
+        city:
+          maxLength: 65
+          type: string
+          description: The city name of the party's address.
+          example: Amsterdam
+        stateRegion:
+          maxLength: 65
+          type: string
+          description: The state/region of the party's address.
+          example: North Holland
+        country:
+          maxLength: 75
+          type: string
+          description: The country of the party's address.
+          example: The Netherlands
+      required:
+        - name
     Timestamp:
       type: object
       title: Timestamp

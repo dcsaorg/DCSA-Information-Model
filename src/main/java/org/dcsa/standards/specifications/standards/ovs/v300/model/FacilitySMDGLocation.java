@@ -5,29 +5,35 @@ import lombok.Data;
 
 @Schema(
     description =
-        "General purpose object to capture location-related data, the location can be specified in **one** of the following ways: `UN Location Code`, a `Facility` or an `Address`.")
+        "An interface used to express a location using a `Facility` by the `SMDG` code list. The `facilitySMDGCode` does not contain the `UNLocationCode` - this should be provided in the `UnLocationCode` attribute.")
 @Data
-public class Location {
+public class FacilitySMDGLocation {
 
-  @Schema(description = "The name of the location.", maxLength = 100, example = "Port of Amsterdam")
+  @Schema(
+      description = "The name of the location.",
+      maxLength = 100,
+      example = "Port of Amsterdam")
   private String locationName;
 
   @Schema(
-      description = "Discriminator used to identify the location type interface.",
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+          "Discriminator used to identify this as a `Facility Location` interface only using `SMDG` code list.",
       maxLength = 4,
-      example = "UNLO")
+      example = "FACS")
   private String locationType;
 
   @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
       name = "UNLocationCode",
       description =
 """
 The UN Location code specifying where the place is located. The pattern used must be
 
- - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
+ - 2 characters for the country code using [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
  - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)
+More info can be found here: [UN/LOCODE](https://en.wikipedia.org/wiki/UN/LOCODE)
 """,
       pattern = "^[A-Z]{2}[A-Z2-9]{3}$",
       minLength = 5,
@@ -36,6 +42,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
   private String unLocationCode;
 
   @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
       description =
 """
 The code used for identifying the specific facility. This code does not include the UN Location Code.
@@ -45,7 +52,5 @@ The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/wp-c
       maxLength = 6,
       example = "ACT")
   private String facilitySMDGCode;
-
-  @Schema(description = "An object for storing address related information.")
-  private Address address;
 }
+

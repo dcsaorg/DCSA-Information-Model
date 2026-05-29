@@ -26,12 +26,14 @@ import org.dcsa.standards.specifications.generator.QueryParametersFilterEndpoint
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.Address;
+import org.dcsa.standards.specifications.standards.ovs.v300.model.AddressLocation;
 import org.dcsa.standards.specifications.standards.ovs.v300.messages.DetailedError;
 import org.dcsa.standards.specifications.standards.ovs.v300.messages.ErrorResponse;
-import org.dcsa.standards.specifications.standards.ovs.v300.model.Location;
+import org.dcsa.standards.specifications.standards.ovs.v300.model.FacilitySMDGLocation;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.ServiceSchedule;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.Timestamp;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.TransportCall;
+import org.dcsa.standards.specifications.standards.ovs.v300.model.UNLocationLocation;
 import org.dcsa.standards.specifications.standards.ovs.v300.model.VesselSchedule;
 
 /** OVS 3.0.0 standard specification created for maintaining and exporting a new-style IM and DO. */
@@ -68,11 +70,13 @@ public class OVS3StandardSpecification extends StandardSpecification {
   protected Stream<Class<?>> modelClassesStream() {
     return Stream.of(
         Address.class,
+        AddressLocation.class,
         DetailedError.class,
-        Location.class,
+        FacilitySMDGLocation.class,
         ServiceSchedule.class,
         Timestamp.class,
         TransportCall.class,
+        UNLocationLocation.class,
         VesselSchedule.class);
   }
 
