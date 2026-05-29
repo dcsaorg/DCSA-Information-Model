@@ -30,7 +30,11 @@ public class CsP2p100StandardSpecification extends Cs1StandardSpecification {
   private final GetPointToPointRoutesEndpoint getPointToPointRoutesEndpoint;
 
   public CsP2p100StandardSpecification() {
-    super("Point to Point", "p2p", "1.0.0");
+    this("1.0.0", "");
+  }
+
+  protected CsP2p100StandardSpecification(String versionNumber, String baselineVersion) {
+    super("Point to Point", "p2p", versionNumber, baselineVersion);
 
     getPointToPointRoutesEndpoint = new GetPointToPointRoutesEndpoint();
 

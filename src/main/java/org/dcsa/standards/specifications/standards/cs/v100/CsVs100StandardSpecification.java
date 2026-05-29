@@ -30,7 +30,11 @@ public class CsVs100StandardSpecification extends Cs1StandardSpecification {
   private final GetVesselSchedulesEndpoint getVesselSchedulesEndpoint;
 
   public CsVs100StandardSpecification() {
-    super("Vessel Schedule", "vs", "1.0.0");
+    this("1.0.0", "");
+  }
+
+  protected CsVs100StandardSpecification(String versionNumber, String baselineVersion) {
+    super("Vessel Schedule", "vs", versionNumber, baselineVersion);
 
     getVesselSchedulesEndpoint = new GetVesselSchedulesEndpoint();
 

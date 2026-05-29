@@ -8,6 +8,9 @@ import org.dcsa.standards.specifications.standards.cs.v100.CsVs100StandardSpecif
 import org.dcsa.standards.specifications.standards.cs.v100.model.PointToPoint;
 import org.dcsa.standards.specifications.standards.cs.v100.model.PortSchedule;
 import org.dcsa.standards.specifications.standards.cs.v100.model.ServiceSchedule;
+import org.dcsa.standards.specifications.standards.cs.v101.CsP2p101StandardSpecification;
+import org.dcsa.standards.specifications.standards.cs.v101.CsPs101StandardSpecification;
+import org.dcsa.standards.specifications.standards.cs.v101.CsVs101StandardSpecification;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
@@ -16,6 +19,7 @@ class CS1StandardSpecificationsTest {
   @Test
   void testCS1StandardSpecifications() {
     buildAndCheckV100();
+    buildAndCheckV101();
   }
 
   private static void buildAndCheckV100() {
@@ -40,5 +44,29 @@ class CS1StandardSpecificationsTest {
         "./src/main/resources/standards/cs/v100/CS_v1.0.0.yaml",
         csVs100StandardSpecification);
     csVs100StandardSpecification.generateArtifacts();
+  }
+
+  private static void buildAndCheckV101() {
+    CsP2p101StandardSpecification csP2p101StandardSpecification =
+        new CsP2p101StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        PointToPoint.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v101/CS_v1.0.1.yaml",
+        csP2p101StandardSpecification);
+    csP2p101StandardSpecification.generateArtifacts();
+
+    CsPs101StandardSpecification csPs101StandardSpecification = new CsPs101StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        PortSchedule.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v101/CS_v1.0.1.yaml",
+        csPs101StandardSpecification);
+    csPs101StandardSpecification.generateArtifacts();
+
+    CsVs101StandardSpecification csVs101StandardSpecification = new CsVs101StandardSpecification();
+    StandardSpecificationTestToolkit.verifyTypeExport(
+        ServiceSchedule.class.getSimpleName(),
+        "./src/main/resources/standards/cs/v101/CS_v1.0.1.yaml",
+        csVs101StandardSpecification);
+    csVs101StandardSpecification.generateArtifacts();
   }
 }

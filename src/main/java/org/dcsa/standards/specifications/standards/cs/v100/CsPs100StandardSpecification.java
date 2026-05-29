@@ -30,7 +30,11 @@ public class CsPs100StandardSpecification extends Cs1StandardSpecification {
   private final GetPortSchedulesEndpoint getPortSchedulesEndpoint;
 
   public CsPs100StandardSpecification() {
-    super("Port Schedule", "ps", "1.0.0");
+    this("1.0.0", "");
+  }
+
+  protected CsPs100StandardSpecification(String versionNumber, String baselineVersion) {
+    super("Port Schedule", "ps", versionNumber, baselineVersion);
 
     getPortSchedulesEndpoint = new GetPortSchedulesEndpoint();
 

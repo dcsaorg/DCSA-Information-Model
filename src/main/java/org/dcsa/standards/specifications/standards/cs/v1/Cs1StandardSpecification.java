@@ -1,5 +1,7 @@
 package org.dcsa.standards.specifications.standards.cs.v1;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,6 +10,7 @@ import org.dcsa.standards.specifications.dataoverview.AttributesHierarchicalShee
 import org.dcsa.standards.specifications.dataoverview.AttributesNormalizedSheet;
 import org.dcsa.standards.specifications.dataoverview.DataOverviewSheet;
 import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
+import org.dcsa.standards.specifications.generator.SpecificationToolkit;
 import org.dcsa.standards.specifications.generator.StandardSpecification;
 import org.dcsa.standards.specifications.standards.cs.v100.messages.DetailedError;
 import org.dcsa.standards.specifications.standards.cs.v100.messages.ErrorResponse;
@@ -20,15 +23,23 @@ import org.dcsa.standards.specifications.standards.cs.v100.model.*;
 public abstract class Cs1StandardSpecification extends StandardSpecification {
 
   protected final String modulePrefix;
+  protected final String baselineVersion;
 
-  public Cs1StandardSpecification(String moduleName, String modulePrefix, String versionNumber) {
+  protected Cs1StandardSpecification(
+      String moduleName, String modulePrefix, String versionNumber, String baselineVersion) {
     super("Commercial Schedules - " + moduleName, versionNumber, "cs", "cs-" + modulePrefix);
     this.modulePrefix = modulePrefix;
+    this.baselineVersion = baselineVersion;
   }
 
   @Override
   protected LegendMetadata getLegendMetadata() {
-    return new LegendMetadata(standardName, standardVersion, "", "", 2);
+    return new LegendMetadata(
+        standardName,
+        standardVersion,
+        baselineVersion.isEmpty() ? "" : standardName,
+        baselineVersion,
+        2);
   }
 
   @Override
@@ -71,7 +82,30 @@ public abstract class Cs1StandardSpecification extends StandardSpecification {
             Map.entry(AttributesNormalizedSheet.class, "attributes-normalized"))
         .entrySet()
         .stream()
-        .collect(Collectors.toMap(Map.Entry::getKey, _ -> List.of()));
+        .filter(
+            entry ->
+                baselineVersion.isEmpty()
+                    || Files.isRegularFile(Path.of(getBaselineCsvFilePath(entry.getValue()))))
+        .collect(
+            Collectors.toMap(
+                Map.Entry::getKey,
+                entry ->
+                    baselineVersion.isEmpty()
+                        ? List.of()
+                        : DataOverviewSheet.importFromString(
+                                SpecificationToolkit.readLocalFile(
+                                    getBaselineCsvFilePath(entry.getValue())))
+                            .stream()
+                            .toList()));
+  }
+
+  protected String getBaselineCsvFilePath(String sheetName) {
+    return "./generated-resources/standards/cs/v%s/cs-%s-v%s-data-overview-%s.csv"
+        .formatted(
+            baselineVersion.replaceAll("\\.", ""),
+            modulePrefix,
+            baselineVersion,
+            sheetName);
   }
 
   @Override
