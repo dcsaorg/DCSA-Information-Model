@@ -1,0 +1,4 @@
+Name,Type,Description,Example
+documentID,string,"Universally unique identifier of the document.","3910eb91-8791-4699-8029-8bba8cedb6f5"
+limit,integer,"Maximum number of documents to include in each page of the response.",10
+cursor,string,"Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page.",ExampleNextPageCursor

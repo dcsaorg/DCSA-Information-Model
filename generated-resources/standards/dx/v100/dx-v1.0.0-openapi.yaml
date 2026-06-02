@@ -1,0 +1,412 @@
+---
+openapi: "3.0.3"
+info:
+  title: "DCSA Document Exchange API"
+  description: |+
+    # DCSA Document Exchange (DX) API
+
+    This is the OpenAPI specification of the **DCSA Document Exchange (DX)** standard.
+
+    This API allows the transfer of structured documents and asynchronous feedback between a DX Producer and a DX Consumer.
+
+    The registration of DX Consumers with DX Producers is out of scope.
+
+    The authentication and authorization in both directions between DX Producers and DX Consumers is out of scope.
+
+    ### Work in progress ⚠️
+
+    The DCSA Document Exchange (DX) standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+
+  contact:
+    name: "Digital Container Shipping Association (DCSA)"
+    url: "https://dcsa.org"
+    email: "info@dcsa.org"
+  license:
+    name: "Apache 2.0"
+    url: "https://www.apache.org/licenses/LICENSE-2.0.html"
+  version: "1.0.0"
+tags:
+- name: "DX Producer Endpoints"
+  description: "Endpoints implemented by the DX Producers"
+- name: "DX Consumer Endpoints"
+  description: "Endpoints implemented by the DX Consumers"
+paths:
+  /documents:
+    get:
+      tags:
+      - "DX Producer Endpoints"
+      summary: "Retrieves a list of documents"
+      description: |+
+        Retrieves the list of documents matching the criteria provided as query parameters.
+
+        If no documents match the criteria provided as query parameters, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of documents in the response message is unspecified.
+
+        The DX Producer is expected to additionally filter the documents based on the authorization and registration profile of the authenticated DX Consumer calling this endpoint. Authorization, registration and any such additional filtering are out of scope in this standard.
+
+        ## Document filtering
+
+        The `documentID` query parameter is mandatory for all requests.
+
+        ## Pagination
+
+        Response pagination uses a mechanism based on the `limit` and `cursor` query parameters and on the `Next-Page-Cursor` response header.
+
+      operationId: "get-documents"
+      parameters:
+      - name: "documentID"
+        in: "query"
+        description: "Universally unique identifier of the document."
+        schema:
+          type: "string"
+        example: "3910eb91-8791-4699-8029-8bba8cedb6f5"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of documents to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      responses:
+        "200":
+          description: "List of documents matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocumentsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocumentsError"
+    post:
+      tags:
+      - "DX Consumer Endpoints"
+      summary: "Sends a list of documents"
+      description: |+
+        Used by a DX Producer to send documents to a registered DX Consumer.
+
+        The subscription mechanism and the management of DX Consumer profiles, including any filtering or page limits similar with the GET endpoint, are out of scope in this standard.
+
+      operationId: "post-documents"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      requestBody:
+        description: "List of documents"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostDocumentsRequest"
+        required: true
+      responses:
+        "200":
+          description: "Documents response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDocumentsResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDocumentsError"
+  /document-feedbacks:
+    get:
+      tags:
+      - "DX Consumer Endpoints"
+      summary: "Retrieves a list of document feedbacks"
+      description: |+
+        Retrieves the list of document feedback elements matching the criteria provided as query parameters.
+
+        If no feedback elements match the criteria, the response should not be an HTTP 404 error message, but a regular HTTP 200 response with an empty array in the message body.
+
+        The ordering of feedback elements in the response message is unspecified.
+
+        The `documentID` query parameter is mandatory for all requests.
+
+      operationId: "get-document-feedbacks"
+      parameters:
+      - name: "documentID"
+        in: "query"
+        description: "Universally unique identifier of the document."
+        schema:
+          type: "string"
+        example: "3910eb91-8791-4699-8029-8bba8cedb6f5"
+      - name: "limit"
+        in: "query"
+        description: "Maximum number of documents to include in each page of the response."
+        schema:
+          type: "integer"
+          format: "int32"
+        example: 10
+      - name: "cursor"
+        in: "query"
+        description: "Set to the value of the `Next-Page-Cursor` header of the previous response to retrieve the next page."
+        schema:
+          type: "string"
+        example: "ExampleNextPageCursor"
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      responses:
+        "200":
+          description: "List of document feedback elements matching the query parameters"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+            Next-Page-Cursor:
+              $ref: "#/components/headers/Next-Page-Cursor"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocumentFeedbacksResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetDocumentsError"
+    post:
+      tags:
+      - "DX Producer Endpoints"
+      summary: "Sends a list of document feedbacks"
+      description: |+
+        Used to send asynchronous feedback on previously received documents.
+
+      operationId: "post-document-feedbacks"
+      parameters:
+      - name: "API-Version"
+        in: "header"
+        description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+        required: false
+        schema:
+          type: "string"
+        example: "1.0.0"
+      requestBody:
+        description: "List of document feedback elements"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostDocumentFeedbacksRequest"
+        required: true
+      responses:
+        "200":
+          description: "Document feedbacks response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDocumentFeedbacksResponse"
+        default:
+          description: "Error response"
+          headers:
+            API-Version:
+              $ref: "#/components/headers/API-Version"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostDocumentsError"
+components:
+  schemas:
+    Document:
+      type: "object"
+      properties:
+        documentID:
+          type: "string"
+          description: "Universally unique identifier of the document."
+          format: "uuid"
+          example: "3910eb91-8791-4699-8029-8bba8cedb6f5"
+        name:
+          maxLength: 255
+          type: "string"
+          description: "Document name"
+          example: "20250123 AN XYZ01234.docx"
+        content:
+          type: "string"
+          description: "Base64 representation of the binary document content"
+          example: "RXhhbXBsZSBBTiBjb250ZW50"
+        contentType:
+          maxLength: 255
+          type: "string"
+          description: "Content type of document"
+          example: "application/msword"
+          default: "application/pdf"
+      description: "Name, Base64-encoded content and content type of an embedded document"
+    FeedbackElement:
+      type: "object"
+      properties:
+        severity:
+          maxLength: 50
+          type: "string"
+          description: |-
+            Code denoting the severity of a `FeedbackElement`
+
+            - `ERROR` - Error that fully or partially prevents the correct processing of the request
+            - `WARN` - Warning about the request being processed in a potentially unexpected way
+            - `INFO` - Informational message about how the request is processed
+          example: "ERROR"
+        message:
+          maxLength: 5000
+          type: "string"
+          description: |
+            Human readable feedback message that can be programmatically relayed to a user of the DX publishing organization
+          example: "The document content type does not match the document name extension"
+        propertyPath:
+          maxLength: 1000
+          type: "string"
+          description: |
+            [JSONPath](https://github.com/json-path/JsonPath) within the request message of the specific property about which the feedback is provided (if applicable)
+          example: "$.documents[2].contentType"
+      description: |
+        An individual piece of feedback (potentially out of several) providing information on how an API request is processed
+    GetDocumentFeedbacksResponse:
+      type: "object"
+      properties:
+        documentFeedbacks:
+          type: "array"
+          description: |
+            The list of document feedback elements matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `GET document feedbacks` request
+    GetDocumentsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why the request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `GET documents` request
+    GetDocumentsResponse:
+      type: "object"
+      properties:
+        documents:
+          type: "array"
+          description: |
+            The list of documents matching the filter specified by the request query parameters
+          items:
+            $ref: "#/components/schemas/Document"
+      description: |
+        API response to a `GET documents` request
+    PostDocumentFeedbacksRequest:
+      type: "object"
+      properties:
+        documentFeedbacks:
+          type: "array"
+          description: "List of document feedback elements."
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: "API message containing a list of document feedback elements."
+    PostDocumentFeedbacksResponse:
+      type: "object"
+      description: |
+        API response to a `POST document feedbacks` request
+    PostDocumentsError:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Feedback elements indicating why request could not be processed.
+
+            At least one feedback element of severity `ERROR` is expected.
+            Lower severity feedback elements may also be included.
+
+            When sent in response to a request that contains an array of documents,
+            the order of the `feedbackElements` is not related to the list of request documents.
+            Instead, the relevant request document is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        Error API response to a `POST documents` request.
+
+        If some of the documents in the request were successfully processed,
+        a regular `PostDocumentsResponse` is expected to be used instead,
+        with `feedbackElements` indicating which documents were not processed and why.
+    PostDocumentsRequest:
+      type: "object"
+      properties:
+        documents:
+          type: "array"
+          description: "List of documents."
+          items:
+            $ref: "#/components/schemas/Document"
+      description: "API message containing a list of documents."
+    PostDocumentsResponse:
+      type: "object"
+      properties:
+        feedbackElements:
+          type: "array"
+          description: |
+            Optional list of feedback elements indicating how the request was processed.
+
+            There can be zero, one or more feedback elements per document in the request.
+            The order of `feedbackElements` is not related to the order of documents in the request.
+            Instead, the relevant request document is indicated by the `propertyPath` of each `FeedbackElement`.
+          items:
+            $ref: "#/components/schemas/FeedbackElement"
+      description: |
+        API response to a `POST documents` request
+  headers:
+    API-Version:
+      description: "Every API request and response must contain the `API-Version` header, set to the full version of the implemented DCSA standard."
+      schema:
+        type: "string"
+        example: "1.0.0"
+    Next-Page-Cursor:
+      description: "A cursor value pointing to the next page of results in a paginated GET response."
+      schema:
+        type: "string"
+        example: "ExampleNextPageCursor"
