@@ -11,10 +11,10 @@ Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address."
 Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
 Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
 Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
-ContainerCountBySize,size20Units,integer,,,,123,"The number of 20-foot containers.",
-ContainerCountBySize,size40Units,integer,,,,123,"The number of 40-foot containers.",
-ContainerCountBySize,size45Units,integer,,,,123,"The number of 45-foot containers.",
-ContainerCountBySize,totalUnits,integer,,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
+ContainerCountBySize,size20Units,"integer(int32)",,,,123,"The number of 20-foot containers.",
+ContainerCountBySize,size40Units,"integer(int32)",,,,123,"The number of 40-foot containers.",
+ContainerCountBySize,size45Units,"integer(int32)",,,,123,"The number of 45-foot containers.",
+ContainerCountBySize,totalUnits,"integer(int32)",,,,123,"The total number of containers (relevant only if specific numbers for each container size are not provided).",
 "ContainerCountByTypeAndSize",emptyUnits,ContainerCountBySize,,,,,"The number of empty containers.",
 "ContainerCountByTypeAndSize",ladenUnits,ContainerCountBySize,,,,,"The number of laden containers.",
 "ContainerCountByTypeAndSize",outOfGaugeUnits,ContainerCountBySize,,,,,"The number of out-of-gauge containers.",
@@ -241,7 +241,7 @@ TerminalCall,carrierServiceName,string,,maxLength=50,,"Great Lion Service","The 
 TerminalCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
 TerminalCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
 TerminalCall,isOmitted,boolean,,,,false,"Flag indicating whether the terminal call is omitted by the carrier.",
-TerminalCall,sequenceNumber,integer,,,,2,"Sequential number assigned to each terminal call within a port call,
+TerminalCall,sequenceNumber,"integer(int32)",,,,2,"Sequential number assigned to each terminal call within a port call,
 indicating the order in which the terminal calls are scheduled to occur.
 This number helps differentiate multiple terminal visits in the same port call.",
 TerminalCall,serviceCodeOrReference,ServiceCodeOrReference,,,,,"Carrier service code and/or universal service reference",
@@ -279,10 +279,10 @@ Code identifying the reason for a delay,
 ",
 Timestamp,remark,string,,maxLength=500,,"Port closed due to strike","Free text used to provide any relevant additional information.",
 Timestamp,serviceDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the service was provided or is expected to be provided.",
-Vessel,aftDraft,number,,,,37,"The vertical distance between the waterline and the bottom of the hull (keel) at the stern (after part) of the vessel.
+Vessel,aftDraft,"number(float)",,,,37,"The vertical distance between the waterline and the bottom of the hull (keel) at the stern (after part) of the vessel.
 The depth to which the after part of the ship is immersed in water.",
-Vessel,airDraft,number,,,,55.0,"The vertical distance from the surface of the water to the highest point of mast or aerial.",
-Vessel,draft,number,,,,12.5,"The vertical distance between the waterline and the bottom of the hull (keel) of a ship.
+Vessel,airDraft,"number(float)",,,,55.0,"The vertical distance from the surface of the water to the highest point of mast or aerial.",
+Vessel,draft,"number(float)",,,,12.5,"The vertical distance between the waterline and the bottom of the hull (keel) of a ship.
 The depth to which a ship is immersed in water.",
 Vessel,draftUnit,string,,maxLength=3,,MTR,"The unit of measure in which the draft values are expressed:
 - `MTR` (Meter)
@@ -290,10 +290,10 @@ Vessel,draftUnit,string,,maxLength=3,,MTR,"The unit of measure in which the draf
 
 If values are specified in feet (`FOT`) then the decimal part means a fraction of a foot and **not** as a number of inches.
 E.g. 120.5 feet means 120 and a half foot (which would be 120'6"").",
-Vessel,forwardDraft,number,,,,35,"The vertical distance between the waterline and the bottom of the hull (keel) at the bow (forward part) of the vessel.
+Vessel,forwardDraft,"number(float)",,,,35,"The vertical distance between the waterline and the bottom of the hull (keel) at the bow (forward part) of the vessel.
 The depth to which the forward part of the ship is immersed in water.",
-Vessel,lengthOverall,number,,,,245.45,"The maximum length of the vessel's hull measured parallel to the waterline (""length overall"").",
-Vessel,milesToDestinationPort,number,,,,245.45,"Remaining distance reported by the vessel to the berth in the next destination port, expressed in nautical miles.",
+Vessel,lengthOverall,"number(float)",,,,245.45,"The maximum length of the vessel's hull measured parallel to the waterline (""length overall"").",
+Vessel,milesToDestinationPort,"number(double)",,,,245.45,"Remaining distance reported by the vessel to the berth in the next destination port, expressed in nautical miles.",
 Vessel,vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU).
 It consists of a three-letter alphanumeric prefix that indicates nationality, followed by one to four characters
 to identify the individual vessel.",
@@ -321,7 +321,7 @@ Vessel,vesselTypeCode,string,,maxLength=4,,CONT,"Categorization of ocean-going v
 - `LGTK` (Liquefied gas tanker)
 - `ASSI` (Assistance)
 - `PILO` (Pilot boat)",
-Vessel,width,number,,,,37.33,"Overall width of the ship measured at the widest point of the nominal waterline.",
+Vessel,width,"number(float)",,,,37.33,"Overall width of the ship measured at the widest point of the nominal waterline.",
 VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
 VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
 

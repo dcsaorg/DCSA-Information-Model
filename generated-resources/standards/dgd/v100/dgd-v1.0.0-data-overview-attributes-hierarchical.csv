@@ -7,7 +7,7 @@ DGDeclaration,,,,,,,,
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"DGDeclaration / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / cargoGrossVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
 Excludes the tare weight of the container.",
 "DGDeclaration / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
@@ -15,20 +15,20 @@ Excludes the tare weight of the container.",
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / cargoGrossWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,Volume,,,,,"Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 "DGDeclaration / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"DGDeclaration / consignmentItems / cargoItems / cargoNetVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / cargoNetVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,Weight,,,,,"Net weight of the cargo item, excluding packaging and excluding the tare weight of the container.",
 "DGDeclaration / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / cargoNetWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / cargoNetWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / equipmentReference",equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
@@ -72,7 +72,7 @@ The classification reference(s) shall consist of the competent authority's state
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / IMOClass",IMOClass,string,,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
 
 - `1.1A` (Substances and articles which have a mass explosion hazard)
@@ -88,7 +88,7 @@ The classification reference(s) shall consist of the competent authority's state
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings",innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / description",description,string,,maxLength=200,,"Woven plastic water resistant Bag","Description of the packaging.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / material",material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,integer,,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isCompetentAuthorityApprovalRequired","isCompetentAuthorityApprovalRequired",boolean,,,,,"Indicates if the cargo require approval from authorities",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isEmptyUncleanedResidue",isEmptyUncleanedResidue,boolean,,,,,"Indicates if the cargo is residue.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isExceptedQuantity",isExceptedQuantity,boolean,,,,,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
@@ -102,20 +102,20 @@ The classification reference(s) shall consist of the competent authority's state
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isTemperatureControlled",isTemperatureControlled,boolean,,,,,"Indicates that stabilization is achieved through temperature control during transport. Required when applicable unless already included in the properShippingName.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isWaste",isWaste,boolean,,,,,"Indicates if waste is being shipped",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits",limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SADT",SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SAPT",SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SADT",SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SAPT",SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / temperatureUnit",temperatureUnit,string,,maxLength=3,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / lithiumBatteryTransportCondition","lithiumBatteryTransportCondition",string,,maxLength=3,,DAM,"Indicates the transport condition of lithium cells or batteries transported under Special Provision 376 or 377. Allowed values:
 - `DAM` (Damaged or defective)
 - `DIS` (For disposal)
 - `REC` (For recycling)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / materialTemperatureAtPacking","materialTemperatureAtPacking",number,,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / materialTemperatureAtPacking","materialTemperatureAtPacking","number(float)",,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / mfagReference",mfagReference,string,,maxLength=100,,"MFAG Table 620","Medical First Aid Guide reference applicable to the dangerous goods carried.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / NANumber",NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
@@ -124,25 +124,25 @@ The classification reference(s) shall consist of the competent authority's state
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume",netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight",netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / packingGroup",packingGroup,integer,,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / packingGroup",packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / properShippingName",properShippingName,string,,maxLength=500,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial",radioactiveMaterial,RadioactiveMaterial,,,,,"Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial",fissileMaterial,FissileMaterial,,,,,"Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / criticalitySafetyIndex",criticalitySafetyIndex,number,,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / criticalitySafetyIndex",criticalitySafetyIndex,"number(float)",,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissileExceptionReference","fissileExceptionReference",string,,maxLength=100,,2.7.2.3.5.3,"Reference to applicable fissile exception paragraph, when shipped under IMDG 2.7.2.3.5.1 to 2.7.2.3.5.6.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissileMaterialMass",fissileMaterialMass,Weight,,,,,"Mass in grams of fissile material contained in the consignment (or mass of each fissile nuclide for mixtures when appropriate).",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissileMaterialMass / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
@@ -150,7 +150,7 @@ The classification reference(s) shall consist of the competent authority's state
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissileMaterialMass / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissileMaterialMass / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / fissilePackageReference",fissilePackageReference,string,,maxLength=100,,"6.4.11.2(a)","Reference to applicable package paragraph for fissile material, when contained in a package for which one of 6.4.11.2 (a) to (c) or 6.4.11.3 is applied",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / totalFissileNuclideMass",totalFissileNuclideMass,Weight,,,,,"Total mass of fissile nuclides when shipped under 2.7.2.3.5.3 to 2.7.2.3.5.5 fissile exceptions.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / totalFissileNuclideMass / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
@@ -158,7 +158,7 @@ The classification reference(s) shall consist of the competent authority's state
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / totalFissileNuclideMass / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / fissileMaterial / totalFissileNuclideMass / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / isExclusiveUseShipment",isExclusiveUseShipment,boolean,,,,,"Indicates that the radioactive material shipment must be shipped under exclusive use.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / maximumActivityDuringTransport","maximumActivityDuringTransport",Activity,,,,,"Maximum activity of the radioactive contents during transport, expressed in becquerels with an SI prefix.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / maximumActivityDuringTransport / unit",unit,string,,maxLength=10,,TBq,"Measurement unit in which the activity `value` is expressed:
@@ -169,15 +169,15 @@ The classification reference(s) shall consist of the competent authority's state
 - `PBq`
 - `mBq`
 - `µBq`",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / maximumActivityDuringTransport / value",value,number,,,,2.5,"Activity value expressed in the measurement `unit`",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / maximumActivityDuringTransport / value",value,"number(float)",,,,2.5,"Activity value expressed in the measurement `unit`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / physicalChemicalForm",physicalChemicalForm,string,,maxLength=500,,"Solid contaminated metal debris","Describes the physical and chemical form of the radioactive material, or a notation that the material is special form radioactive material or low dispersible radioactive material. A generic chemical description is acceptable for chemical form.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / radioactivePackageCategory","radioactivePackageCategory",string,,maxLength=10,,II-YELLOW,"Radiation package category for Class 7 material. Allowed values:
 - `I-WHITE`
 - `II-YELLOW`
 - `III-YELLOW`",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / radionuclideIdentification","radionuclideIdentification",string,,maxLength=200,,Cs-137,"Name of the radionuclide(s) contained in Class 7 radioactive material consignments. For mixtures, provide a general description or list the most restrictive nuclides.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / totalActivityA2Multiple",totalActivityA2Multiple,number,,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / transportIndex",transportIndex,number,,,,1.8,"Transport Index (TI) assigned to the radioactive package.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / totalActivityA2Multiple",totalActivityA2Multiple,"number(float)",,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / radioactiveMaterial / transportIndex",transportIndex,"number(float)",,,,1.8,"Transport Index (TI) assigned to the radioactive package.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / segregationGroups",segregationGroups,"string list",,,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
 Item description:
 List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
@@ -189,7 +189,7 @@ List of the segregation groups applicable to specific hazardous goods according 
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / dangerousGoods / UNNumber",UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / description",description,string,,maxLength=200,,"Drum, steel","Description of the outer packaging/overpack.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / IMOPackagingCode",IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
-"DGDeclaration / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
+"DGDeclaration / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 "DGDeclaration / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,,maxLength=5,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
 "DGDeclaration / consignmentItems / carrierBookingReference",carrierBookingReference,string,,maxLength=35,,ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
 "DGDeclaration / consignmentItems / descriptionOfGoods",descriptionOfGoods,"string list",,,,,"A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
@@ -359,7 +359,7 @@ If a container does not comply with ISO 6346, it is suggested to follow Recommen
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"DGDeclaration / utilizedTransportEquipments / equipment / tareWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"DGDeclaration / utilizedTransportEquipments / equipment / tareWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "DGDeclaration / utilizedTransportEquipments / references",references,"Reference list",,,,,"Reference used by the customer or carrier to identify or track the shipment.",
 "DGDeclaration / utilizedTransportEquipments / references / type",type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
 - `CA` (Carrier's Reference)

@@ -1,17 +1,17 @@
 Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-ActiveReeferSettings,airExchangeSetpoint,number,,,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+ActiveReeferSettings,airExchangeSetpoint,"number(float)",,,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
 ActiveReeferSettings,airExchangeUnit,string,,maxLength=10,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
-ActiveReeferSettings,co2Setpoint,number,,,,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
-ActiveReeferSettings,humiditySetpoint,number,,,,95.6,"The percentage of the controlled atmosphere humidity target value",
+ActiveReeferSettings,co2Setpoint,"number(float)",,,,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
+ActiveReeferSettings,humiditySetpoint,"number(float)",,,,95.6,"The percentage of the controlled atmosphere humidity target value",
 ActiveReeferSettings,isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
 ActiveReeferSettings,isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
 ActiveReeferSettings,"isControlledAtmosphereRequired",boolean,,,,true,"Indicator of whether cargo requires Controlled Atmosphere.",
 ActiveReeferSettings,isDrainholesOpen,boolean,,,,true,"Is drain holes open on the container",
 ActiveReeferSettings,isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
-ActiveReeferSettings,o2Setpoint,number,,,,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
-ActiveReeferSettings,temperatureSetpoint,number,,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+ActiveReeferSettings,o2Setpoint,"number(float)",,,,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
+ActiveReeferSettings,temperatureSetpoint,"number(float)",,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
 ActiveReeferSettings,temperatureUnit,string,,maxLength=10,,CEL,"The unit for temperature in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
@@ -167,7 +167,7 @@ CargoItem,exportLicense,ExportLicense,,,,,"Export license applicable to this car
 CargoItem,importLicense,ImportLicense,,,,,"Import license applicable to this cargo item.",
 CargoItem,nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `cargoItem`",
 CargoItem,outerPackaging,OuterPackaging,,,,,"Packaging information for this cargo item.",
-CargoItem,position,integer,,,,12,"The order in which the carrier submitted the pre-announcement to the customs authority (which may vary by country) is,
+CargoItem,position,"integer(int32)",,,,12,"The order in which the carrier submitted the pre-announcement to the customs authority (which may vary by country) is,
 in some cases, the same order the consignee must follow for the final customs release.",
 Charge,calculationBasis,string,,maxLength=50,,"Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
 Charge,carrierRateOfExchange,string,,maxLength=50,,"1.00 Euro = 1.17801 US Dollars","The quotation of the relative value of a currency unit against the unit of another currency
@@ -183,7 +183,7 @@ The publisher must clearly indicate in its API documentation whether the specifi
 to a vessel rate of exchange or a daily rate of exchange.",
 Charge,chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
 Charge,chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
-Charge,currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+Charge,currencyAmount,"number(float)",,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 Charge,currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 Charge,invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
 Charge,paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
@@ -192,8 +192,8 @@ Charge,paymentTermCode,string,,maxLength=10,,PRE,"An indicator of whether a char
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-Charge,quantity,number,,,,34.4,"The amount of unit for this charge item.",
-Charge,unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+Charge,quantity,"number(float)",,,,34.4,"The amount of unit for this charge item.",
+Charge,unitPrice,"number(float)",,,,3456.6,"The unit price of this charge item in the currency of the charge.",
 ClassifiedDate,classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
 - `PLN` - Planned
 - `EST` - Estimated
@@ -281,7 +281,7 @@ DangerousGoods,NANumber,string,,maxLength=4,,9037,"Four-digit number that is ass
 DangerousGoods,netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
 DangerousGoods,netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
 DangerousGoods,netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
-DangerousGoods,packingGroup,integer,,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+DangerousGoods,packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 DangerousGoods,properShippingName,string,,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 DangerousGoods,segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
 Item description:
@@ -373,7 +373,7 @@ FeedbackElement,severity,string,,maxLength=50,,ERROR,"Code denoting the severity
 - `INFO` - Informational message about how the request is processed",
 FreeTime,calculationBasis,string,,maxLength=1000,,"Calculated as...","Description of the conditions under which this free time item applies.
 It can include references to the carrier website or individual charges as per service contract/agreement.",
-FreeTime,duration,integer,,,,5,"The duration expressed in `timeUnit`s for which this free time item applies.",
+FreeTime,duration,"integer(int32)",,,,5,"The duration expressed in `timeUnit`s for which this free time item applies.",
 FreeTime,equipmentReferences,"string list",,maxLength=11,,,"References of the equipments for which this free time applies
 Item description:
 The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
@@ -452,7 +452,7 @@ ImportLicense,issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import 
 ImportLicense,reference,string,,maxLength=35,,EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
 InnerPackaging,description,string,,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
 InnerPackaging,material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-InnerPackaging,quantity,integer,,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+InnerPackaging,quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
 Leg,arrivalDate,ClassifiedDate,,,,,"The arrival date at the discharge location for this specific leg of the transport plan.",
 Leg,departureDate,ClassifiedDate,,,,,"The departure date from the load location for this specific leg of the transport plan.",
 Leg,dischargeLocation,Location,,,,,"The location where the cargo is discharged for this specific leg of the transport plan.",
@@ -467,17 +467,17 @@ Leg,transportPlanStage,string,,maxLength=10,,MNC,"A specific stage of transport
 - `PRC` - Pre-Carriage Transport
 - `MNC` - Main Carriage Transport
 - `ONC` - On-Carriage Transport",
-Leg,"transportPlanStageSequenceNumber",integer,,,,5,"Sequence number of the transport plan stage",
+Leg,"transportPlanStageSequenceNumber","integer(int32)",,,,5,"Sequence number of the transport plan stage",
 Leg,vesselVoyage,VesselVoyage,,,,,"Vessel and voyage details of a transport leg",
-Limits,flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
-Limits,SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-Limits,SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+Limits,flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
+Limits,SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+Limits,SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 Limits,temperatureUnit,string,,maxLength=10,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-Limits,"transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-Limits,"transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+Limits,"transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+Limits,"transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
 Location,facilityTypeCode,string,,maxLength=10,,RAMP,"Code identifying a specific type of facility
@@ -513,7 +513,7 @@ The value of the `National Commodity Code`",
 OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`",
 OuterPackaging,description,string,,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
 OuterPackaging,IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
-OuterPackaging,numberOfPackages,integer,,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
+OuterPackaging,numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 OuterPackaging,packageCode,string,,maxLength=2,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
 OuterPackaging,woodDeclaration,string,,maxLength=30,,TREATED_AND_CERTIFIED,"Property to clearly indicate if the products, packaging and any other items are made of wood. Possible values include:
 - `NOT_APPLICABLE` (if no wood or any other wood product such as packaging and supports are being shipped)
@@ -665,10 +665,10 @@ Volume,unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `val
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-Volume,value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+Volume,value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 Weight,unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-Weight,value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+Weight,value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",

@@ -368,14 +368,19 @@ public class AttributesData {
   }
 
   private static Schema<?> getAttributeStringSchema(Schema<?> attributeSchema) {
-    if ("string".equals(attributeSchema.getType())) {
+    if (hasTypeWithFormat(attributeSchema)) {
       return attributeSchema;
     }
     if (attributeSchema.getItems() != null) {
-      if ("string".equals(attributeSchema.getItems().getType())) {
+      if (hasTypeWithFormat(attributeSchema.getItems())) {
         return attributeSchema.getItems();
       }
     }
     return null;
+  }
+
+  private static boolean hasTypeWithFormat(Schema<?> schema) {
+    String type = schema.getType();
+    return "string".equals(type) || "number".equals(type) || "integer".equals(type);
   }
 }

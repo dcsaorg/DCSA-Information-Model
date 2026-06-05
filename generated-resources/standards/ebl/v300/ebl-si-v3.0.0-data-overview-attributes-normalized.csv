@@ -46,11 +46,11 @@ BuyerHBL,typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Ca
 CargoGrossVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-CargoGrossVolume,value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
+CargoGrossVolume,value,"number(float)",yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
 CargoGrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-CargoGrossWeight,value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+CargoGrossWeight,value,"number(float)",yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
 CargoItemHBL,cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
 CargoItemHBL,equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
@@ -80,11 +80,11 @@ CargoItemShipper,outerPackaging,OuterPackagingShipper,,,,,"Object for outer pack
 CargoNetVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-CargoNetVolume,value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
+CargoNetVolume,value,"number(float)",yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 CargoNetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-CargoNetWeight,value,number,yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+CargoNetWeight,value,"number(float)",yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
 ConsigneeHBL,address,Address,,,,,"An object for storing address related information",
 ConsigneeHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 ConsigneeHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
@@ -415,7 +415,7 @@ OtherDocumentPartyHBL,partyFunction,string,yes,maxLength=3,,DDS,"Specifies the r
 - `CS` (Consolidator)
 - `MF` (Manufacturer)
 - `WH` (Warehouse Keeper)",
-OuterPackagingHBL,numberOfPackages,integer,,"minimum=1
+OuterPackagingHBL,numberOfPackages,"integer(int32)",,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.
 
 **Condition:** Mandatory if `packageCode` is **NOT** one of the following values:
@@ -436,7 +436,7 @@ OuterPackagingHBL,shippingMarks,string,,maxLength=512,,"Made in China","The iden
 OuterPackagingHBL,UNNumber,string,,"minLength=4
 maxLength=4","^\d{4}$",1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
 OuterPackagingShipper,description,string,yes,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
-OuterPackagingShipper,numberOfPackages,integer,yes,"minimum=1
+OuterPackagingShipper,numberOfPackages,"integer(int32)",yes,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 OuterPackagingShipper,packageCode,string,,"minLength=2
 maxLength=2","^[A-Z0-9]{2}$",5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)
@@ -653,7 +653,7 @@ ShippingInstructions,isShippedOnBoardType,boolean,yes,,,true,"Specifies whether 
 ShippingInstructions,isToOrder,boolean,yes,,,false,"Indicates whether the B/L is issued `to order` or not. If `true`, the B/L is considered negotiable and an Endorsee party can be defined in the Document parties. If no Endorsee is defined, the B/L is blank endorsed. If `false`, the B/L is considered non-negotiable (also referred to as `straight`).
 
 `isToOrder` must be `false` if `transportDocumentTypeCode='SWB'` (Sea Waybill).",
-ShippingInstructions,"numberOfCopiesWithCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier including charges.
+ShippingInstructions,"numberOfCopiesWithCharges","integer(int32)",,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier including charges.
 
 **Conditions:** The following table defines the conditions for the `numberOfCopiesWithCharges` property:
 | Transport Document Type Code | Is Electronic | Meaning |
@@ -662,7 +662,7 @@ ShippingInstructions,"numberOfCopiesWithCharges",integer,,minimum=0,,2,"The requ
 |`BOL`|`true`|Not applicable, there are no copies|
 |`SWB`|`false`|Indicates that charges should be included in the `SWB` (pdf or other formats)|
 |`SWB`|`true`|Indicates that charges should be included in the electronic `SWB`|",
-ShippingInstructions,"numberOfCopiesWithoutCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier **NOT** including charges.
+ShippingInstructions,"numberOfCopiesWithoutCharges","integer(int32)",,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier **NOT** including charges.
 
 **Conditions:** The following table defines the conditions for the `numberOfCopiesWithoutCharges` property:
 | Transport Document Type Code | Is Electronic | Meaning |
@@ -671,10 +671,10 @@ ShippingInstructions,"numberOfCopiesWithoutCharges",integer,,minimum=0,,2,"The r
 |`BOL`|`true`|Not applicable, there are no copies|
 |`SWB`|`false`|Indicates that charges should NOT be included in the `SWB` (pdf or other formats)|
 |`SWB`|`true`|Indicates that charges NOT should be included in the electronic `SWB`|",
-ShippingInstructions,"numberOfOriginalsWithCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer with charges.
+ShippingInstructions,"numberOfOriginalsWithCharges","integer(int32)",,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer with charges.
 
 **Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero)",
-ShippingInstructions,"numberOfOriginalsWithoutCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer without charges.
+ShippingInstructions,"numberOfOriginalsWithoutCharges","integer(int32)",,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer without charges.
 
 **Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero)",
 ShippingInstructions,originChargesPaymentTerm,OriginChargesPaymentTerm,,,,,"An indicator of whether origin charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
@@ -742,7 +742,7 @@ ShippingInstructions,"utilizedTransportEquipments","UtilizedTransportEquipmentSh
 TareWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-TareWeight,value,number,yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
+TareWeight,value,"number(float)",yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
 TaxLegalReference,countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",

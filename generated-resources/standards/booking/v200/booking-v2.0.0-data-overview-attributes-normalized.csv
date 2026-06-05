@@ -1,13 +1,13 @@
 Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-ActiveReeferSettings,airExchangeSetpoint,number,,minimum=0,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+ActiveReeferSettings,airExchangeSetpoint,"number(float)",,minimum=0,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
 ActiveReeferSettings,airExchangeUnit,string,,,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)
 
 **Condition:** Mandatory if `airExchange` is provided. If `airExchange` is not provided, this field must be empty.",
-ActiveReeferSettings,co2Setpoint,number,,"minimum=0
+ActiveReeferSettings,co2Setpoint,"number(float)",,"minimum=0
 maximum=100",,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
-ActiveReeferSettings,humiditySetpoint,number,,"minimum=0
+ActiveReeferSettings,humiditySetpoint,"number(float)",,"minimum=0
 maximum=100",,95.6,"The percentage of the controlled atmosphere humidity target value",
 ActiveReeferSettings,isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
 ActiveReeferSettings,isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
@@ -16,9 +16,9 @@ ActiveReeferSettings,isDrainholesOpen,boolean,,,,true,"Is drain holes open on th
 ActiveReeferSettings,isGeneratorSetRequired,boolean,,,,true,"Indicator whether reefer container should have a generator set attached at time of release from depot",
 ActiveReeferSettings,isPreCoolingRequired,boolean,,,,true,"Indicator whether reefer container should be pre-cooled to the temperature setting required at time of release from depot",
 ActiveReeferSettings,isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
-ActiveReeferSettings,o2Setpoint,number,,"minimum=0
+ActiveReeferSettings,o2Setpoint,"number(float)",,"minimum=0
 maximum=100",,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
-ActiveReeferSettings,temperatureSetpoint,number,yes,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+ActiveReeferSettings,temperatureSetpoint,"number(float)",yes,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
 ActiveReeferSettings,temperatureUnit,string,yes,,,CEL,"The unit for temperature in Celsius or Fahrenheit
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)
@@ -95,7 +95,7 @@ Booking,"contractQuotationReference",string,,maxLength=35,"^\S(?:.*\S)?$",HHL140
 
 **Condition:** One of `contractQuotationReference` or `serviceContractReference` must be provided, but not both.",
 Booking,customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
-Booking,declaredValue,number,,minimum=0,,1231.1,"The value of the cargo that the shipper declares in order to avoid the carrier's limitation of liability and ""Ad Valorem"" freight, i.e., freight which is calculated based on the value of the goods declared by the shipper.",
+Booking,declaredValue,"number(float)",,minimum=0,,1231.1,"The value of the cargo that the shipper declares in order to avoid the carrier's limitation of liability and ""Ad Valorem"" freight, i.e., freight which is calculated based on the value of the goods declared by the shipper.",
 Booking,declaredValueCurrency,string,,"minLength=3
 maxLength=3","^[A-Z]{3}$",DKK,"The currency used for the declared value, using the 3-character code defined by [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).
 
@@ -182,23 +182,23 @@ BookingAgent,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax Ref
 CargoGrossVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-CargoGrossVolume,value,number,yes,minimum=0,,2.4,"The estimated grand total volume of the cargo.",
+CargoGrossVolume,value,"number(float)",yes,minimum=0,,2.4,"The estimated grand total volume of the cargo.",
 CargoGrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-CargoGrossWeight,value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CargoGrossWeight,value,"number(float)",yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 CargoGrossWeightReq,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-CargoGrossWeightReq,value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CargoGrossWeightReq,value,"number(float)",yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 CargoNetVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-CargoNetVolume,value,number,yes,minimum=0,,2.4,"The estimated net total volume of the cargo.",
+CargoNetVolume,value,"number(float)",yes,minimum=0,,2.4,"The estimated net total volume of the cargo.",
 CargoNetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-CargoNetWeight,value,number,yes,minimum=0,,2400,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+CargoNetWeight,value,"number(float)",yes,minimum=0,,2400,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 CarrierBookingOffice,address,Address,,,,,"Address of the carrier booking office.",
 CarrierBookingOffice,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
 CarrierBookingOffice,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -211,14 +211,14 @@ maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying wher
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 Charge,calculationBasis,string,yes,maxLength=50,"^\S(?:.*\S)?$","Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
 Charge,chargeName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Documentation fee - Destination","Free text field describing the charge to apply",
-Charge,currencyAmount,number,yes,minimum=0,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+Charge,currencyAmount,"number(float)",yes,minimum=0,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 Charge,currencyCode,string,yes,"minLength=3
 maxLength=3","^[A-Z]{3}$",DKK,"The currency for the charge, using a 3-character code according to [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).",
 Charge,paymentTermCode,string,yes,,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-Charge,quantity,number,yes,minimum=0,,34.4,"The amount of unit for this charge item.",
-Charge,unitPrice,number,yes,minimum=0,,3456.6,"The unit price of this charge item in the currency of the charge.",
+Charge,quantity,"number(float)",yes,minimum=0,,34.4,"The amount of unit for this charge item.",
+Charge,unitPrice,"number(float)",yes,minimum=0,,3456.6,"The unit price of this charge item in the currency of the charge.",
 Commodity,cargoGrossVolume,CargoGrossVolume,,,,,"The estimated grand total volume of the cargo.",
 Commodity,cargoGrossWeight,CargoGrossWeight,,,,,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.
 
@@ -251,7 +251,7 @@ ConfirmedEquipment,emptyContainerPickup,EmptyContainerPickup,,,,,"The date and t
 
 **Condition:** Only applicable to merchant haulage service at origin (`Receipt type at origin = 'CY'`).",
 ConfirmedEquipment,ISOEquipmentCode,string,yes,maxLength=4,"^\S(?:.*\S)?$",22G1,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the [ISO 6346](https://www.iso.org/standard/83558.html) standard.",
-ConfirmedEquipment,units,integer,yes,minimum=1,,3,"Number of confirmed equipment units",
+ConfirmedEquipment,units,"integer(int32)",yes,minimum=1,,3,"Number of confirmed equipment units",
 Consignee,address,PartyAddress,,,,,"Party address.",
 Consignee,identifyingCodes,"IdentifyingCode list",,,,,,
 Consignee,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
@@ -329,7 +329,7 @@ DangerousGoods,netVolume,NetVolume,,,,,"The volume of the referenced dangerous g
 
 **Condition:** only applicable to liquids and gas.",
 DangerousGoods,netWeight,NetWeight,,,,,"Total weight of the goods carried, excluding packaging.",
-DangerousGoods,packingGroup,integer,,"minimum=1
+DangerousGoods,packingGroup,"integer(int32)",,"minimum=1
 maximum=3",,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 DangerousGoods,properShippingName,string,yes,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 DangerousGoods,segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
@@ -443,7 +443,7 @@ GeoCoordinate,longitude,string,yes,maxLength=11,,2.294492036,"Geographic coordin
 GrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-GrossWeight,value,number,yes,minimum=0,,12000.3,"The grand total weight of the DG cargo and weight per `UNNumber`/`NANumber` including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+GrossWeight,value,"number(float)",yes,minimum=0,,12000.3,"The grand total weight of the DG cargo and weight per `UNNumber`/`NANumber` including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
@@ -478,7 +478,7 @@ ImportLicense,issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import 
 ImportLicense,reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
 InnerPackaging,description,string,yes,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
 InnerPackaging,material,string,yes,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-InnerPackaging,quantity,integer,yes,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+InnerPackaging,quantity,"integer(int32)",yes,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
 InvoicePayableAt,UNLocationCode,string,yes,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
@@ -486,16 +486,16 @@ maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying wher
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-Limits,flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.
+Limits,flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.
 
 **Condition:** only applicable to specific hazardous goods according to the IMO IMDG Code.",
-Limits,SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-Limits,SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+Limits,SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+Limits,SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 Limits,temperatureUnit,string,yes,,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-Limits,"transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-Limits,"transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+Limits,"transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+Limits,"transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 LoadLocation,address,Address,,,,,"Address of the location.",
 LoadLocation,facility,Facility,,,,,"Facility information for the location.",
 LoadLocation,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
@@ -535,16 +535,16 @@ NetExplosiveContent,unit,string,yes,,,KGM,"Unit of measure used to describe the 
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-NetExplosiveContent,value,number,yes,minimum=0,,2400,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
+NetExplosiveContent,value,"number(float)",yes,minimum=0,,2400,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
 NetVolume,unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-NetVolume,value,number,yes,minimum=0,,2.4,"The volume of the referenced dangerous goods.",
+NetVolume,value,"number(float)",yes,minimum=0,,2.4,"The volume of the referenced dangerous goods.",
 NetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-NetWeight,value,number,yes,minimum=0,,2400,"Total weight of the goods carried, excluding packaging.",
+NetWeight,value,"number(float)",yes,minimum=0,,2400,"Total weight of the goods carried, excluding packaging.",
 OriginChargesPaymentTerm,"haulageChargesPaymentTermCode",string,,,,PRE,"An indicator of whether the costs for inland transportation to the port, when applicable, are prepaid (`PRE`) or collect (`COL`).
 
 - `PRE` (Prepaid)
@@ -573,7 +573,7 @@ OuterPackaging,imoPackagingCode,string,,"minLength=1
 maxLength=5","^[A-Z0-9]{1,5}$",1A2,"The code of the packaging as per IMO.
 
 **Condition:** only applicable to dangerous goods if specified in the [IMO IMDG code](https://www.imo.org/en/publications/Pages/IMDG%20Code.aspx). If not available, the `packageCode` as per UN recommendation 21 should be used.",
-OuterPackaging,numberOfPackages,integer,,"minimum=1
+OuterPackaging,numberOfPackages,"integer(int32)",,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Commodity`.
 
 **Condition:** In case this `OuterPackaging` includes `Dangerous Goods` the `numberOfPackages` is mandatory to provide",
@@ -649,7 +649,7 @@ RequestedEquipment,references,"Reference list",,,,,"A list of `References`",
 RequestedEquipment,tareWeight,TareWeight,,,,,"The weight of an empty container (gross container weight).
 
 **Condition:** In case of Shipper Owned Containers (`SOC`) this is a required property",
-RequestedEquipment,units,integer,yes,minimum=1,,3,"Number of requested equipment units.",
+RequestedEquipment,units,"integer(int32)",yes,minimum=1,,3,"Number of requested equipment units.",
 ServiceContractOwner,address,PartyAddress,,,,,"Party address.",
 ServiceContractOwner,identifyingCodes,"IdentifyingCode list",,,,,,
 ServiceContractOwner,partyContactDetails,"PartyContactDetail list",,minItems=1,,,"A list of contact details",
@@ -688,7 +688,7 @@ Shipper,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax Referenc
 TareWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-TareWeight,value,number,yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
+TareWeight,value,"number(float)",yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
 TaxLegalReference,countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
@@ -710,7 +710,7 @@ Transport,transportPlanStage,string,yes,,,PRC,"Code qualifying a specific stage 
 - `PRC` (Pre-Carriage)
 - `MNC` (Main Carriage Transport)
 - `ONC` (On-Carriage Transport)",
-Transport,"transportPlanStageSequenceNumber",integer,yes,,,5,"Sequence number of the transport plan stage",
+Transport,"transportPlanStageSequenceNumber","integer(int32)",yes,,,5,"Sequence number of the transport plan stage",
 Transport,"universalExportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 - `2 digits` for the year

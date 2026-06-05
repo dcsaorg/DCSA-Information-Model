@@ -59,14 +59,14 @@ The content of the clause.",
 "Booking / charges",charges,"Charge list",,,,,"A list of `Charges`",
 "Booking / charges / calculationBasis",calculationBasis,string,yes,maxLength=50,"^\S(?:.*\S)?$","Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
 "Booking / charges / chargeName",chargeName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Documentation fee - Destination","Free text field describing the charge to apply",
-"Booking / charges / currencyAmount",currencyAmount,number,yes,minimum=0,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"Booking / charges / currencyAmount",currencyAmount,"number(float)",yes,minimum=0,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 "Booking / charges / currencyCode",currencyCode,string,yes,"minLength=3
 maxLength=3","^[A-Z]{3}$",DKK,"The currency for the charge, using a 3-character code according to [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).",
 "Booking / charges / paymentTermCode",paymentTermCode,string,yes,,,PRE,"An indicator of whether a charge is prepaid (PRE) or collect (COL). When prepaid, the charge is the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charge is the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-"Booking / charges / quantity",quantity,number,yes,minimum=0,,34.4,"The amount of unit for this charge item.",
-"Booking / charges / unitPrice",unitPrice,number,yes,minimum=0,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"Booking / charges / quantity",quantity,"number(float)",yes,minimum=0,,34.4,"The amount of unit for this charge item.",
+"Booking / charges / unitPrice",unitPrice,"number(float)",yes,minimum=0,,3456.6,"The unit price of this charge item in the currency of the charge.",
 "Booking / confirmedEquipments",confirmedEquipments,"ConfirmedEquipment list",,,,,"A list of `Confirmed Equipments`
 
 **Condition:** Mandatory and non-empty for a `CONFIRMED` Booking",
@@ -187,7 +187,7 @@ maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying wher
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-"Booking / confirmedEquipments / units",units,integer,yes,minimum=1,,3,"Number of confirmed equipment units",
+"Booking / confirmedEquipments / units",units,"integer(int32)",yes,minimum=1,,3,"Number of confirmed equipment units",
 "Booking / contractQuotationReference","contractQuotationReference",string,,maxLength=35,"^\S(?:.*\S)?$",HHL1401,"Information provided by the shipper to identify whether pricing for the shipment has been agreed via a contract or a quotation reference.
 
 **Condition:** One of `contractQuotationReference` or `serviceContractReference` must be provided, but not both.",
@@ -201,7 +201,7 @@ maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3
 maxLength=35","^\S(?:.*\S)?$",,"
 Item description:
 The value of the `customsReference`",
-"Booking / declaredValue",declaredValue,number,,minimum=0,,1231.1,"The value of the cargo that the shipper declares in order to avoid the carrier's limitation of liability and ""Ad Valorem"" freight, i.e., freight which is calculated based on the value of the goods declared by the shipper.",
+"Booking / declaredValue",declaredValue,"number(float)",,minimum=0,,1231.1,"The value of the cargo that the shipper declares in order to avoid the carrier's limitation of liability and ""Ad Valorem"" freight, i.e., freight which is calculated based on the value of the goods declared by the shipper.",
 "Booking / declaredValueCurrency",declaredValueCurrency,string,,"minLength=3
 maxLength=3","^[A-Z]{3}$",DKK,"The currency used for the declared value, using the 3-character code defined by [ISO 4217](https://www.iso.org/iso-4217-currency-codes.html).
 
@@ -686,15 +686,15 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 
 **Example:** 2 x 20' containing 50% shoes and 50% t-shirts can be requested within the same Requested Equipment object only if each 20' will contain 50% shoes and 50% t-shirts. If 1 x 20' will contain 100% shoes and the other 20' will be 100% t-shirts, 2 separate Requested Equipment objects must be defined.",
 "Booking / requestedEquipments / activeReeferSettings",activeReeferSettings,ActiveReeferSettings,,,,,"Active reefer settings for temperature-controlled containers.",
-"Booking / requestedEquipments / activeReeferSettings / airExchangeSetpoint",airExchangeSetpoint,number,,minimum=0,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+"Booking / requestedEquipments / activeReeferSettings / airExchangeSetpoint",airExchangeSetpoint,"number(float)",,minimum=0,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
 "Booking / requestedEquipments / activeReeferSettings / airExchangeUnit",airExchangeUnit,string,,,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)
 
 **Condition:** Mandatory if `airExchange` is provided. If `airExchange` is not provided, this field must be empty.",
-"Booking / requestedEquipments / activeReeferSettings / co2Setpoint",co2Setpoint,number,,"minimum=0
+"Booking / requestedEquipments / activeReeferSettings / co2Setpoint",co2Setpoint,"number(float)",,"minimum=0
 maximum=100",,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
-"Booking / requestedEquipments / activeReeferSettings / humiditySetpoint",humiditySetpoint,number,,"minimum=0
+"Booking / requestedEquipments / activeReeferSettings / humiditySetpoint",humiditySetpoint,"number(float)",,"minimum=0
 maximum=100",,95.6,"The percentage of the controlled atmosphere humidity target value",
 "Booking / requestedEquipments / activeReeferSettings / isBulbMode",isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
 "Booking / requestedEquipments / activeReeferSettings / isColdTreatmentRequired",isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
@@ -703,9 +703,9 @@ maximum=100",,95.6,"The percentage of the controlled atmosphere humidity target 
 "Booking / requestedEquipments / activeReeferSettings / isGeneratorSetRequired",isGeneratorSetRequired,boolean,,,,true,"Indicator whether reefer container should have a generator set attached at time of release from depot",
 "Booking / requestedEquipments / activeReeferSettings / isPreCoolingRequired",isPreCoolingRequired,boolean,,,,true,"Indicator whether reefer container should be pre-cooled to the temperature setting required at time of release from depot",
 "Booking / requestedEquipments / activeReeferSettings / isVentilationOpen",isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
-"Booking / requestedEquipments / activeReeferSettings / o2Setpoint",o2Setpoint,number,,"minimum=0
+"Booking / requestedEquipments / activeReeferSettings / o2Setpoint",o2Setpoint,"number(float)",,"minimum=0
 maximum=100",,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
-"Booking / requestedEquipments / activeReeferSettings / temperatureSetpoint",temperatureSetpoint,number,yes,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+"Booking / requestedEquipments / activeReeferSettings / temperatureSetpoint",temperatureSetpoint,"number(float)",yes,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
 "Booking / requestedEquipments / activeReeferSettings / temperatureUnit",temperatureUnit,string,yes,,,CEL,"The unit for temperature in Celsius or Fahrenheit
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)
@@ -715,30 +715,30 @@ maximum=100",,25,"The percentage of the controlled atmosphere O<sub>2</sub> targ
 "Booking / requestedEquipments / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / cargoGrossWeight / value",value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+"Booking / requestedEquipments / cargoGrossWeight / value",value,"number(float)",yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 "Booking / requestedEquipments / commodities",commodities,"Commodity list",,,,,"A list of `Commodities`",
 "Booking / requestedEquipments / commodities / cargoGrossVolume",cargoGrossVolume,CargoGrossVolume,,,,,"The estimated grand total volume of the cargo.",
 "Booking / requestedEquipments / commodities / cargoGrossVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-"Booking / requestedEquipments / commodities / cargoGrossVolume / value",value,number,yes,minimum=0,,2.4,"The estimated grand total volume of the cargo.",
+"Booking / requestedEquipments / commodities / cargoGrossVolume / value",value,"number(float)",yes,minimum=0,,2.4,"The estimated grand total volume of the cargo.",
 "Booking / requestedEquipments / commodities / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,,,,,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.
 
 **Condition:** Mandatory if not provided on `Requested Equipment` level.",
 "Booking / requestedEquipments / commodities / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / commodities / cargoGrossWeight / value",value,number,yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+"Booking / requestedEquipments / commodities / cargoGrossWeight / value",value,"number(float)",yes,minimum=0,,36000,"The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 "Booking / requestedEquipments / commodities / cargoNetVolume",cargoNetVolume,CargoNetVolume,,,,,"The estimated net total volume of the cargo.",
 "Booking / requestedEquipments / commodities / cargoNetVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-"Booking / requestedEquipments / commodities / cargoNetVolume / value",value,number,yes,minimum=0,,2.4,"The estimated net total volume of the cargo.",
+"Booking / requestedEquipments / commodities / cargoNetVolume / value",value,"number(float)",yes,minimum=0,,2.4,"The estimated net total volume of the cargo.",
 "Booking / requestedEquipments / commodities / cargoNetWeight",cargoNetWeight,CargoNetWeight,,,,,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 "Booking / requestedEquipments / commodities / cargoNetWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / commodities / cargoNetWeight / value",value,number,yes,minimum=0,,2400,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+"Booking / requestedEquipments / commodities / cargoNetWeight / value",value,"number(float)",yes,minimum=0,,2400,"The estimated grand total net weight of the cargo, excluding packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 "Booking / requestedEquipments / commodities / commoditySubReference",commoditySubReference,string,,maxLength=100,"^\S(?:.*\S)?$",,"A unique reference for this commodity object assigned by the carrier in the booking confirmation. The reference must be provided by the shipper as part of the `Shipping Instructions` for the carrier to link the consignment item to this commodity. A commodity reference is only unique in the context of a booking.
 
 **Condition:** Mandatory to provide for `CONFIRMED` bookings",
@@ -816,7 +816,7 @@ Character | Valid Characters | Description
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / grossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / grossWeight / value",value,number,yes,minimum=0,,12000.3,"The grand total weight of the DG cargo and weight per `UNNumber`/`NANumber` including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / grossWeight / value",value,"number(float)",yes,minimum=0,,12000.3,"The grand total weight of the DG cargo and weight per `UNNumber`/`NANumber` including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / imoClass",imoClass,string,yes,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
 - `1.1A` (Substances and articles which have a mass explosion hazard)
 - `1.6N` (Extremely insensitive articles which do not have a mass explosion hazard)
@@ -831,7 +831,7 @@ maxLength=1",,A,"The zone classification of the toxicity of the inhalant. Possib
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / innerPackagings",innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / innerPackagings / description",description,string,yes,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / innerPackagings / material",material,string,yes,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,integer,yes,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,"integer(int32)",yes,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / isCompetentAuthorityApprovalRequired","isCompetentAuthorityApprovalRequired",boolean,yes,,,false,"Indicates if the cargo require approval from authorities",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / isEmptyUncleanedResidue",isEmptyUncleanedResidue,boolean,yes,,,false,"Indicates if the cargo is residue.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / isExceptedQuantity",isExceptedQuantity,boolean,yes,,,false,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
@@ -842,16 +842,16 @@ maxLength=1",,A,"The zone classification of the toxicity of the inhalant. Possib
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / isSalvagePackings",isSalvagePackings,boolean,yes,,,false,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / isWaste",isWaste,boolean,yes,,,false,"Indicates if waste is being shipped",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits",limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.
 
 **Condition:** only applicable to specific hazardous goods according to the IMO IMDG Code.",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / SADT",SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / SAPT",SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / SADT",SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / SAPT",SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / temperatureUnit",temperatureUnit,string,yes,,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / NANumber",NANumber,string,,"minLength=4
 maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging's, casings, etc.",
@@ -860,7 +860,7 @@ maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, ha
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netExplosiveContent / value",value,number,yes,minimum=0,,2400,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netExplosiveContent / value",value,"number(float)",yes,minimum=0,,2400,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netVolume",netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods.
 
 **Condition:** only applicable to liquids and gas.",
@@ -868,13 +868,13 @@ maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, ha
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netVolume / value",value,number,yes,minimum=0,,2.4,"The volume of the referenced dangerous goods.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netVolume / value",value,"number(float)",yes,minimum=0,,2.4,"The volume of the referenced dangerous goods.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netWeight",netWeight,NetWeight,,,,,"Total weight of the goods carried, excluding packaging.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netWeight / value",value,number,yes,minimum=0,,2400,"Total weight of the goods carried, excluding packaging.",
-"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / packingGroup",packingGroup,integer,,"minimum=1
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / netWeight / value",value,"number(float)",yes,minimum=0,,2400,"Total weight of the goods carried, excluding packaging.",
+"Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / packingGroup",packingGroup,"integer(int32)",,"minimum=1
 maximum=3",,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / properShippingName",properShippingName,string,yes,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / segregationGroups",segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
@@ -914,7 +914,7 @@ maxLength=4","^\d{4}$",1463,"United Nations Dangerous Goods Identifier (UNDG) as
 maxLength=5","^[A-Z0-9]{1,5}$",1A2,"The code of the packaging as per IMO.
 
 **Condition:** only applicable to dangerous goods if specified in the [IMO IMDG code](https://www.imo.org/en/publications/Pages/IMDG%20Code.aspx). If not available, the `packageCode` as per UN recommendation 21 should be used.",
-"Booking / requestedEquipments / commodities / outerPackaging / numberOfPackages",numberOfPackages,integer,,"minimum=1
+"Booking / requestedEquipments / commodities / outerPackaging / numberOfPackages",numberOfPackages,"integer(int32)",,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Commodity`.
 
 **Condition:** In case this `OuterPackaging` includes `Dangerous Goods` the `numberOfPackages` is mandatory to provide",
@@ -1080,9 +1080,9 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "Booking / requestedEquipments / tareWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"Booking / requestedEquipments / tareWeight / value",value,number,yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
-"Booking / requestedEquipments / units",units,integer,yes,minimum=1,,3,"Number of requested equipment units.",
-"Booking / requestedNumberOfTransportDocuments","requestedNumberOfTransportDocuments",integer,,minimum=1,,3,"The number of `Transport Documents` requested to be linked to this Booking by the Shipper.",
+"Booking / requestedEquipments / tareWeight / value",value,"number(float)",yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
+"Booking / requestedEquipments / units",units,"integer(int32)",yes,minimum=1,,3,"Number of requested equipment units.",
+"Booking / requestedNumberOfTransportDocuments","requestedNumberOfTransportDocuments","integer(int32)",,minimum=1,,3,"The number of `Transport Documents` requested to be linked to this Booking by the Shipper.",
 "Booking / requestedOnCarriageModeOfTransport","requestedOnCarriageModeOfTransport",string,,maxLength=50,,VESSEL,"The `Mode of Transport` requested ​by the shipper for the **on carriage**. The supported values include:
 - `VESSEL` (Vessel)
 - `RAIL` (Rail)
@@ -1274,7 +1274,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `PRC` (Pre-Carriage)
 - `MNC` (Main Carriage Transport)
 - `ONC` (On-Carriage Transport)",
-"Booking / transportPlan / transportPlanStageSequenceNumber","transportPlanStageSequenceNumber",integer,yes,,,5,"Sequence number of the transport plan stage",
+"Booking / transportPlan / transportPlanStageSequenceNumber","transportPlanStageSequenceNumber","integer(int32)",yes,,,5,"Sequence number of the transport plan stage",
 "Booking / transportPlan / universalExportVoyageReference","universalExportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 - `2 digits` for the year

@@ -40,7 +40,7 @@ The publisher must clearly indicate in its API documentation whether the specifi
 to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
 "ArrivalNotice / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
-"ArrivalNotice / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / charges / currencyAmount",currencyAmount,"number(float)",,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 "ArrivalNotice / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
 "ArrivalNotice / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
@@ -89,8 +89,8 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-"ArrivalNotice / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
-"ArrivalNotice / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / charges / quantity",quantity,"number(float)",,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / charges / unitPrice",unitPrice,"number(float)",,,,3456.6,"The unit price of this charge item in the currency of the charge.",
 "ArrivalNotice / consignmentItems",consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`",
 "ArrivalNotice / consignmentItems / cargoItems",cargoItems,"CargoItem list",,,,,"A list of all `cargoItems`",
 "ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume",cargoGrossVolume,Volume,,,,,"Gross volume of the cargo item, calculated by multiplying the width, height, and length of the packaged cargo.",
@@ -98,7 +98,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
 Excludes the tare weight of the container.",
 "ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
@@ -106,20 +106,20 @@ Excludes the tare weight of the container.",
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoGrossWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,Volume,,,,,"Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 "ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,Weight,,,,,"Net weight of the cargo item, excluding packaging and excluding the tare weight of the container.",
 "ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / cargoNetWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / charges",charges,"Charge list",,,,,"A list of `Charges`",
 "ArrivalNotice / consignmentItems / cargoItems / charges / calculationBasis",calculationBasis,string,,maxLength=50,,"Per day","The code specifying the measure unit used for the corresponding unit price for this cost, such as per day, per ton, per square metre.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / carrierRateOfExchange",carrierRateOfExchange,string,,maxLength=50,,"1.00 Euro = 1.17801 US Dollars","The quotation of the relative value of a currency unit against the unit of another currency
@@ -135,7 +135,7 @@ The publisher must clearly indicate in its API documentation whether the specifi
 to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
 "ArrivalNotice / consignmentItems / cargoItems / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
-"ArrivalNotice / consignmentItems / cargoItems / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / currencyAmount",currencyAmount,"number(float)",,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 "ArrivalNotice / consignmentItems / cargoItems / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / consignmentItems / cargoItems / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
 "ArrivalNotice / consignmentItems / cargoItems / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
@@ -184,8 +184,8 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-"ArrivalNotice / consignmentItems / cargoItems / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
-"ArrivalNotice / consignmentItems / cargoItems / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / quantity",quantity,"number(float)",,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / consignmentItems / cargoItems / charges / unitPrice",unitPrice,"number(float)",,,,3456.6,"The unit price of this charge item in the currency of the charge.",
 "ArrivalNotice / consignmentItems / cargoItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
 "ArrivalNotice / consignmentItems / cargoItems / customsReferences / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / consignmentItems / cargoItems / customsReferences / type",type,string,,maxLength=50,,CUS,"The reference type code as defined in the relevant customs jurisdiction.",
@@ -247,7 +247,7 @@ as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.1
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / grossWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / IMOClass",IMOClass,string,,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
 
 - `1.1A` (Substances and articles which have a mass explosion hazard)
@@ -263,7 +263,7 @@ as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.1
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings",innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / description",description,string,,maxLength=100,,"Woven plastic water resistant Bag","Description of the packaging.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / material",material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,integer,,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / innerPackagings / quantity",quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isCompetentAuthorityApprovalRequired","isCompetentAuthorityApprovalRequired",boolean,,,,false,"Indicates if the cargo require approval from authorities",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isEmptyUncleanedResidue",isEmptyUncleanedResidue,boolean,,,,false,"Indicates if the cargo is residue.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isExceptedQuantity",isExceptedQuantity,boolean,,,,false,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
@@ -274,15 +274,15 @@ as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.1
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isSalvagePackings",isSalvagePackings,boolean,,,,false,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / isWaste",isWaste,boolean,,,,false,"Indicates if waste is being shipped",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits",limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SADT",SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SAPT",SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / flashPoint",flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SADT",SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / SAPT",SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / temperatureUnit",temperatureUnit,string,,maxLength=10,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportControlTemperature","transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / NANumber",NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
@@ -290,21 +290,21 @@ as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.1
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume",netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / unit",unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / value",value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / value",value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight",netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / packingGroup",packingGroup,integer,,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / packingGroup",packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / properShippingName",properShippingName,string,,maxLength=250,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / segregationGroups",segregationGroups,"string list",,maxLength=2,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
 Item description:
@@ -335,14 +335,14 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / UNNumber",UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / description",description,string,,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / IMOPackagingCode",IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
-"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
+"ArrivalNotice / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,,maxLength=2,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / woodDeclaration",woodDeclaration,string,,maxLength=30,,TREATED_AND_CERTIFIED,"Property to clearly indicate if the products, packaging and any other items are made of wood. Possible values include:
 - `NOT_APPLICABLE` (if no wood or any other wood product such as packaging and supports are being shipped)
 - `NOT_TREATED_AND_NOT_CERTIFIED` (if the wood or wooden materials have not been treated nor fumigated and do not include a certificate)
 - `PROCESSED` (if the wood or wooden materials are entirely made of processed wood, such as plywood, particle board, sliver plates of wood and wood laminate sheets produced using glue, heat, pressure or a combination of these)
 - `TREATED_AND_CERTIFIED` (if the wood or wooden materials have been treated and/or fumigated and include a certificate)",
-"ArrivalNotice / consignmentItems / cargoItems / position",position,integer,,,,12,"The order in which the carrier submitted the pre-announcement to the customs authority (which may vary by country) is,
+"ArrivalNotice / consignmentItems / cargoItems / position",position,"integer(int32)",,,,12,"The order in which the carrier submitted the pre-announcement to the customs authority (which may vary by country) is,
 in some cases, the same order the consignee must follow for the final customs release.",
 "ArrivalNotice / consignmentItems / carrierBookingReference",carrierBookingReference,string,,maxLength=35,,ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
 "ArrivalNotice / consignmentItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
@@ -549,7 +549,7 @@ Purchase order reference",
 "ArrivalNotice / freeTimes",freeTimes,"FreeTime list",,,,,"List of free time conditions applicable to this shipment at destination",
 "ArrivalNotice / freeTimes / calculationBasis",calculationBasis,string,,maxLength=1000,,"Calculated as...","Description of the conditions under which this free time item applies.
 It can include references to the carrier website or individual charges as per service contract/agreement.",
-"ArrivalNotice / freeTimes / duration",duration,integer,,,,5,"The duration expressed in `timeUnit`s for which this free time item applies.",
+"ArrivalNotice / freeTimes / duration",duration,"integer(int32)",,,,5,"The duration expressed in `timeUnit`s for which this free time item applies.",
 "ArrivalNotice / freeTimes / equipmentReferences",equipmentReferences,"string list",,maxLength=11,,,"References of the equipments for which this free time applies
 Item description:
 The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
@@ -932,7 +932,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 - `PRC` - Pre-Carriage Transport
 - `MNC` - Main Carriage Transport
 - `ONC` - On-Carriage Transport",
-"ArrivalNotice / transport / legs / transportPlanStageSequenceNumber","transportPlanStageSequenceNumber",integer,,,,5,"Sequence number of the transport plan stage",
+"ArrivalNotice / transport / legs / transportPlanStageSequenceNumber","transportPlanStageSequenceNumber","integer(int32)",,,,5,"Sequence number of the transport plan stage",
 "ArrivalNotice / transport / legs / vesselVoyage",vesselVoyage,VesselVoyage,,,,,"Vessel and voyage details of a transport leg",
 "ArrivalNotice / transport / legs / vesselVoyage / callReferenceNumber",callReferenceNumber,string,,maxLength=100,,NLRTM25002178,"A registration number assigned by customs to the vessel before its arrival at Port of Discharge.
 It can be used for customs clearance purposes in specific countries (e.g. NL, UK).",
@@ -1199,19 +1199,19 @@ regardless of the `versionLabel` (which is a high-level label with business sema
 and may or may not change between timestamped versions).",
 "ArrivalNotice / utilizedTransportEquipments","utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used.",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings",activeReeferSettings,ActiveReeferSettings,,,,,"Active reefer settings applied to this equipment.",
-"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / airExchangeSetpoint",airExchangeSetpoint,number,,,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / airExchangeSetpoint",airExchangeSetpoint,"number(float)",,,,15.4,"Target value for the air exchange rate which is the rate at which outdoor air replaces indoor air within a Reefer container",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / airExchangeUnit",airExchangeUnit,string,,maxLength=10,,MQH,"The unit for `airExchange` in metrics- or imperial- units per hour
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
-"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / co2Setpoint",co2Setpoint,number,,,,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
-"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / humiditySetpoint",humiditySetpoint,number,,,,95.6,"The percentage of the controlled atmosphere humidity target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / co2Setpoint",co2Setpoint,"number(float)",,,,25,"The percentage of the controlled atmosphere CO<sub>2</sub> target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / humiditySetpoint",humiditySetpoint,"number(float)",,,,95.6,"The percentage of the controlled atmosphere humidity target value",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isBulbMode",isBulbMode,boolean,,,,true,"Is special container setting for handling flower bulbs active",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isColdTreatmentRequired",isColdTreatmentRequired,boolean,,,,true,"Indicator whether cargo requires cold treatment prior to loading at origin or during transit, but prior arrival at POD",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isControlledAtmosphereRequired","isControlledAtmosphereRequired",boolean,,,,true,"Indicator of whether cargo requires Controlled Atmosphere.",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Is drain holes open on the container",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / isVentilationOpen",isVentilationOpen,boolean,,,,true,"If `true` the ventilation orifice is `Open` - if `false` the ventilation orifice is `closed`",
-"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / o2Setpoint",o2Setpoint,number,,,,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
-"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / temperatureSetpoint",temperatureSetpoint,number,,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / o2Setpoint",o2Setpoint,"number(float)",,,,25,"The percentage of the controlled atmosphere O<sub>2</sub> target value",
+"ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / temperatureSetpoint",temperatureSetpoint,"number(float)",,,,-15,"Target value of the temperature for the Reefer based on the cargo requirement.",
 "ArrivalNotice / utilizedTransportEquipments / activeReeferSettings / temperatureUnit",temperatureUnit,string,,maxLength=10,,CEL,"The unit for temperature in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
@@ -1231,7 +1231,7 @@ The publisher must clearly indicate in its API documentation whether the specifi
 to a vessel rate of exchange or a daily rate of exchange.",
 "ArrivalNotice / utilizedTransportEquipments / charges / chargeCode",chargeCode,string,,maxLength=50,,FRT00,"Code associated with the charge",
 "ArrivalNotice / utilizedTransportEquipments / charges / chargeName",chargeName,string,,maxLength=50,,"Documentation fee - Destination","Free text field describing the charge to apply",
-"ArrivalNotice / utilizedTransportEquipments / charges / currencyAmount",currencyAmount,number,,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
+"ArrivalNotice / utilizedTransportEquipments / charges / currencyAmount",currencyAmount,"number(float)",,,,1012.12,"The monetary value of all freight and other service charges for a transport document, with a maximum of 2-digit decimals.",
 "ArrivalNotice / utilizedTransportEquipments / charges / currencyCode",currencyCode,string,,maxLength=3,,DKK,"The currency for the charge, using a 3-character code ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
 "ArrivalNotice / utilizedTransportEquipments / charges / invoicePayerCode",invoicePayerCode,string,,maxLength=50,,2066095,"Code used to identify the party responsible for the payment",
 "ArrivalNotice / utilizedTransportEquipments / charges / paymentCurrency",paymentCurrency,string,,maxLength=3,,EUR,"Currency code as defined by ([ISO 4217](https://www.iso.org/iso-4217-currency-codes.html)).",
@@ -1280,8 +1280,8 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-"ArrivalNotice / utilizedTransportEquipments / charges / quantity",quantity,number,,,,34.4,"The amount of unit for this charge item.",
-"ArrivalNotice / utilizedTransportEquipments / charges / unitPrice",unitPrice,number,,,,3456.6,"The unit price of this charge item in the currency of the charge.",
+"ArrivalNotice / utilizedTransportEquipments / charges / quantity",quantity,"number(float)",,,,34.4,"The amount of unit for this charge item.",
+"ArrivalNotice / utilizedTransportEquipments / charges / unitPrice",unitPrice,"number(float)",,,,3456.6,"The unit price of this charge item in the currency of the charge.",
 "ArrivalNotice / utilizedTransportEquipments / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
 "ArrivalNotice / utilizedTransportEquipments / customsReferences / countryCode",countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ArrivalNotice / utilizedTransportEquipments / customsReferences / type",type,string,,maxLength=50,,CUS,"The reference type code as defined in the relevant customs jurisdiction.",
@@ -1300,7 +1300,7 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-"ArrivalNotice / utilizedTransportEquipments / equipment / tareWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"ArrivalNotice / utilizedTransportEquipments / equipment / tareWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "ArrivalNotice / utilizedTransportEquipments / isNonOperatingReefer",isNonOperatingReefer,boolean,,,,false,"If the equipment is a Reefer Container then setting this attribute will indicate that the container should be treated as a `DRY` container.",
 "ArrivalNotice / utilizedTransportEquipments / isShipperOwned",isShipperOwned,boolean,,,,true,"Indicates whether the container is shipper owned (SOC).",
 "ArrivalNotice / utilizedTransportEquipments / pickupInformation",pickupInformation,PickupInformation,,,,,"Consolidates the information required to pick up the container.",

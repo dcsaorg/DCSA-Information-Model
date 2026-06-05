@@ -28,22 +28,22 @@ maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-"ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / value",value,"number(float)",yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / value",value,"number(float)",yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,CargoNetVolume,,,,,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
-"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / value",value,"number(float)",yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / value",value,"number(float)",yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
 "ShippingInstructions / consignmentItems / cargoItems / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
 "ShippingInstructions / consignmentItems / cargoItems / customsReferences / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -93,7 +93,7 @@ The value of the `National Commodity Code`",
 
 **Condition:** Mandatory for non-dangerous goods cargo.",
 "ShippingInstructions / consignmentItems / cargoItems / outerPackaging / description",description,string,yes,maxLength=100,,"Drum, steel","Description of the outer packaging/overpack.",
-"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,yes,"minimum=1
+"ShippingInstructions / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,"integer(int32)",yes,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 "ShippingInstructions / consignmentItems / cargoItems / outerPackaging / packageCode",packageCode,string,,"minLength=2
 maxLength=2","^[A-Z0-9]{2}$",5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)
@@ -859,13 +859,13 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / value",value,"number(float)",yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / equipmentReference",equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
 If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging",outerPackaging,OuterPackagingHBL,yes,,,,"Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.",
-"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,integer,,"minimum=1
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / outerPackaging / numberOfPackages",numberOfPackages,"integer(int32)",,"minimum=1
 maximum=99999999",,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.
 
 **Condition:** Mandatory if `packageCode` is **NOT** one of the following values:
@@ -1370,7 +1370,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ShippingInstructions / isToOrder",isToOrder,boolean,yes,,,false,"Indicates whether the B/L is issued `to order` or not. If `true`, the B/L is considered negotiable and an Endorsee party can be defined in the Document parties. If no Endorsee is defined, the B/L is blank endorsed. If `false`, the B/L is considered non-negotiable (also referred to as `straight`).
 
 `isToOrder` must be `false` if `transportDocumentTypeCode='SWB'` (Sea Waybill).",
-"ShippingInstructions / numberOfCopiesWithCharges","numberOfCopiesWithCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier including charges.
+"ShippingInstructions / numberOfCopiesWithCharges","numberOfCopiesWithCharges","integer(int32)",,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier including charges.
 
 **Conditions:** The following table defines the conditions for the `numberOfCopiesWithCharges` property:
 | Transport Document Type Code | Is Electronic | Meaning |
@@ -1379,7 +1379,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 |`BOL`|`true`|Not applicable, there are no copies|
 |`SWB`|`false`|Indicates that charges should be included in the `SWB` (pdf or other formats)|
 |`SWB`|`true`|Indicates that charges should be included in the electronic `SWB`|",
-"ShippingInstructions / numberOfCopiesWithoutCharges","numberOfCopiesWithoutCharges",integer,,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier **NOT** including charges.
+"ShippingInstructions / numberOfCopiesWithoutCharges","numberOfCopiesWithoutCharges","integer(int32)",,minimum=0,,2,"The requested number of copies of the `Transport Document` to be issued by the carrier **NOT** including charges.
 
 **Conditions:** The following table defines the conditions for the `numberOfCopiesWithoutCharges` property:
 | Transport Document Type Code | Is Electronic | Meaning |
@@ -1388,10 +1388,10 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 |`BOL`|`true`|Not applicable, there are no copies|
 |`SWB`|`false`|Indicates that charges should NOT be included in the `SWB` (pdf or other formats)|
 |`SWB`|`true`|Indicates that charges NOT should be included in the electronic `SWB`|",
-"ShippingInstructions / numberOfOriginalsWithCharges","numberOfOriginalsWithCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer with charges.
+"ShippingInstructions / numberOfOriginalsWithCharges","numberOfOriginalsWithCharges","integer(int32)",,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer with charges.
 
 **Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero)",
-"ShippingInstructions / numberOfOriginalsWithoutCharges","numberOfOriginalsWithoutCharges",integer,,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer without charges.
+"ShippingInstructions / numberOfOriginalsWithoutCharges","numberOfOriginalsWithoutCharges","integer(int32)",,minimum=0,,1,"Number of originals of the Bill of Lading that has been requested by the customer without charges.
 
 **Condition:** Only applicable if `transportDocumentType` = `BOL` (Bill of Lading). If `isElectronic = 'True'`, accepted value is `1` (one) or `0` (zero)",
 "ShippingInstructions / originChargesPaymentTerm",originChargesPaymentTerm,OriginChargesPaymentTerm,,,,,"An indicator of whether origin charges are prepaid (`PRE`) or collect (`COL`). When prepaid, the charges are the responsibility of the shipper or the Invoice payer on behalf of the shipper (if provided). When collect, the charges are the responsibility of the consignee or the Invoice payer on behalf of the consignee (if provided).",
@@ -1507,7 +1507,7 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
 "ShippingInstructions / utilizedTransportEquipments / equipment / tareWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"ShippingInstructions / utilizedTransportEquipments / equipment / tareWeight / value",value,number,yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
+"ShippingInstructions / utilizedTransportEquipments / equipment / tareWeight / value",value,"number(float)",yes,minimum=0,,4800,"The weight of an empty container (gross container weight).",
 "ShippingInstructions / utilizedTransportEquipments / equipmentReference",equipmentReference,string,,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 

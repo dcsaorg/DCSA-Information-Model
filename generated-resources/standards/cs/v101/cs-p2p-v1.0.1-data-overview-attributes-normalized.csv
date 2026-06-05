@@ -63,7 +63,7 @@ Facility,facilityCodeListProvider,string,yes,,,SMDG,"The provider used for ident
 - `SMDG` (Requires a UN Location Code)",
 Leg,arrival,PlaceOfArrival,yes,,,,"The Location specifying where the place of arrival is located.",
 Leg,departure,PlaceOfDeparture,yes,,,,"The Location specifying where the place of departure is located.",
-Leg,sequenceNumber,integer,,,,1,"Sequence number of the leg.",
+Leg,sequenceNumber,"integer(int32)",,,,1,"Sequence number of the leg.",
 Leg,"transport as VesselTransport",VesselTransport,,,,,"The mode of transport as defined by DCSA.",
 Leg,"transport as BargeTransport",BargeTransport,,,,,"The mode of transport as defined by DCSA.",
 Leg,"transport as OtherTransport",OtherTransport,,,,,"The mode of transport as defined by DCSA.",
@@ -173,8 +173,8 @@ PointToPoint,receiptTypeAtOrigin,string,,maxLength=3,,CY,"Indicates the type of 
 - `SD` (Store Door)
 - `CFS` (Container Freight Station)",
 PointToPoint,routingReference,string,,maxLength=5000,"^\S(?:.*\S)?$",Route123,"A reference to be used when creating a **Booking** in the **Booking API**.",
-PointToPoint,solutionNumber,integer,,minimum=1,,1,"Solution number, starting with 1. Used to group and identify similar or same routings in the response as per the carrier commercial definitions.",
-PointToPoint,transitTime,integer,,,,10,"The estimated total time in days that it takes a shipment to move from place of receipt to place of delivery. Transit time includes stop-over time during transhipments and waiting time at connection points, if applicable, thus can vary between the same locations.",
+PointToPoint,solutionNumber,"integer(int32)",,minimum=1,,1,"Solution number, starting with 1. Used to group and identify similar or same routings in the response as per the carrier commercial definitions.",
+PointToPoint,transitTime,"integer(int32)",,,,10,"The estimated total time in days that it takes a shipment to move from place of receipt to place of delivery. Transit time includes stop-over time during transhipments and waiting time at connection points, if applicable, thus can vary between the same locations.",
 ServicePartner,carrierCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code based on either the SMDG or SCAC code lists.",
 ServicePartner,carrierCodeListProvider,string,,,,NMFTA,"Identifies the code list provider used for the `carrierCode`.
 - `SMDG` (Ship Message Design Group)

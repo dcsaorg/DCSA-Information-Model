@@ -12,9 +12,9 @@ Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state
 Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
 Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
 "AirTemperatureMeasurement",sensorReadings,"AirTemperatureSensorReading list",,,,,,
-"AirTemperatureMeasurement",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
+"AirTemperatureMeasurement",temperatureValue,"number(float)",,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
-"AirTemperatureSensorReading",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
+"AirTemperatureSensorReading",temperatureValue,"number(float)",,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
 DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
 DocumentReference,type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
@@ -234,12 +234,12 @@ ReeferAlarm,description,string,,maxLength=500,,,"Free-text description of the al
 ReeferAlarm,endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive",
 ReeferAlarm,startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active",
 ReeferDetails,alarms,"ReeferAlarm list",,,,,"The list of alarms that are active, or that were active within a relevant time frame",
-ReeferDetails,"ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
+ReeferDetails,"ambientMeasuredTemperature","number(float)",,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
-ReeferDetails,"internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
+ReeferDetails,"internalSetpointTemperature","number(float)",,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
-ReeferDetails,numberOfActiveAlarms,integer,,,,,"The number of alarms that are currently active",
+ReeferDetails,numberOfActiveAlarms,"integer(int32)",,,,,"The number of alarms that are currently active",
 ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
@@ -257,15 +257,15 @@ ReeferDetails,unitModel,string,,maxLength=100,,,"Model of the reefer unit",
 ReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
-ReeferParameters,airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
-ReeferParameters,co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
-ReeferParameters,humidityPercentage,number,,,,50,"Humidity percentage",
+ReeferParameters,airExchangeValue,"number(float)",,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
+ReeferParameters,co2Percentage,"number(float)",,,,25,"CO<sub>2</sub> percentage",
+ReeferParameters,humidityPercentage,"number(float)",,,,50,"Humidity percentage",
 ReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
 ReeferParameters,isColdTreatment,boolean,,,,true,"Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.",
 ReeferParameters,isControlledAtmosphere,boolean,,,,true,"Flag indicating whether controlled atmosphere is active.",
 ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
-ReeferParameters,o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
+ReeferParameters,o2Percentage,"number(float)",,,,25,"O<sub>2</sub> percentage",
 Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
 Seal,placement,string,,maxLength=100,,DOOR,"The placement of a seal.
 - `DOOR` - Door
@@ -341,9 +341,9 @@ ShipmentReference,type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Ty
 - `P20` (USDA probe 2)
 - `P21` (USDA probe 3)
 - `P22` (Cargo probe)",
-"TemperatureProbeMeasurement",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
+"TemperatureProbeMeasurement",measuredTemperatureValue,"number(float)",,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
 "TemperatureProbeMeasurement",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
-"TemperatureProbeMeasurement",USDAProbeNumber,integer,,,,2,"USDA reefer probe number (1-3)",
+"TemperatureProbeMeasurement",USDAProbeNumber,"integer(int32)",,,,2,"USDA reefer probe number (1-3)",
 TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
 TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
 TransportCall,modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA
@@ -360,9 +360,9 @@ TransportCall,transportCallReference,string,,,,,"Carrier-defined reference of a 
 
 If the mode of transport is Vessel and the facility is a Port or Terminal,
 this reference should be considered a terminal call reference.",
-TransportCall,"transportCallSequenceNumber",integer,,,,,"Transport operator's key that uniquely identifies each individual transport call.
+TransportCall,"transportCallSequenceNumber","integer(int32)",,,,,"Transport operator's key that uniquely identifies each individual transport call.
 This key is essential to distinguish between two separate calls at the same location within one voyage.",
-TransportCall,"transportCallSequenceNumberMax",integer,,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
+TransportCall,"transportCallSequenceNumberMax","integer(int32)",,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
 TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information",
 TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information",
 TransportDetails,delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay

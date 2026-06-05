@@ -244,24 +244,24 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / reeferDetails / alarms / description",description,string,,maxLength=500,,,"Free-text description of the alarm",
 "Event / reeferDetails / alarms / endDateTime",endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive",
 "Event / reeferDetails / alarms / startDateTime",startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active",
-"Event / reeferDetails / ambientMeasuredTemperature","ambientMeasuredTemperature",number,,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
+"Event / reeferDetails / ambientMeasuredTemperature","ambientMeasuredTemperature","number(float)",,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
 "Event / reeferDetails / controllerModel",controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
-"Event / reeferDetails / internalSetpointTemperature","internalSetpointTemperature",number,,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
+"Event / reeferDetails / internalSetpointTemperature","internalSetpointTemperature","number(float)",,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
 "Event / reeferDetails / lastDefrostDateTime",lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
 "Event / reeferDetails / measuredParameters",measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
 "Event / reeferDetails / measuredParameters / airExchangeUnit",airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
-"Event / reeferDetails / measuredParameters / airExchangeValue",airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
-"Event / reeferDetails / measuredParameters / co2Percentage",co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
-"Event / reeferDetails / measuredParameters / humidityPercentage",humidityPercentage,number,,,,50,"Humidity percentage",
+"Event / reeferDetails / measuredParameters / airExchangeValue",airExchangeValue,"number(float)",,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
+"Event / reeferDetails / measuredParameters / co2Percentage",co2Percentage,"number(float)",,,,25,"CO<sub>2</sub> percentage",
+"Event / reeferDetails / measuredParameters / humidityPercentage",humidityPercentage,"number(float)",,,,50,"Humidity percentage",
 "Event / reeferDetails / measuredParameters / isBulbMode",isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
 "Event / reeferDetails / measuredParameters / isColdTreatment",isColdTreatment,boolean,,,,true,"Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.",
 "Event / reeferDetails / measuredParameters / isControlledAtmosphere",isControlledAtmosphere,boolean,,,,true,"Flag indicating whether controlled atmosphere is active.",
 "Event / reeferDetails / measuredParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / measuredParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
-"Event / reeferDetails / measuredParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
-"Event / reeferDetails / numberOfActiveAlarms",numberOfActiveAlarms,integer,,,,,"The number of alarms that are currently active",
+"Event / reeferDetails / measuredParameters / o2Percentage",o2Percentage,"number(float)",,,,25,"O<sub>2</sub> percentage",
+"Event / reeferDetails / numberOfActiveAlarms",numberOfActiveAlarms,"integer(int32)",,,,,"The number of alarms that are currently active",
 "Event / reeferDetails / powerStatus",powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
@@ -270,35 +270,35 @@ If this flag is set, any event data other than the `eventID` is irrelevant (if p
 "Event / reeferDetails / returnAirTemperatureMeasurement","returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements",
 "Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings",sensorReadings,"AirTemperatureSensorReading list",,,,,,
 "Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / sensorLabel",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
-"Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
-"Event / reeferDetails / returnAirTemperatureMeasurement / temperatureValue",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / returnAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,"number(float)",,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / returnAirTemperatureMeasurement / temperatureValue",temperatureValue,"number(float)",,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "Event / reeferDetails / setpointParameters",setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
 "Event / reeferDetails / setpointParameters / airExchangeUnit",airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
 - `FQH` (Cubic foot per hour)",
-"Event / reeferDetails / setpointParameters / airExchangeValue",airExchangeValue,number,,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
-"Event / reeferDetails / setpointParameters / co2Percentage",co2Percentage,number,,,,25,"CO<sub>2</sub> percentage",
-"Event / reeferDetails / setpointParameters / humidityPercentage",humidityPercentage,number,,,,50,"Humidity percentage",
+"Event / reeferDetails / setpointParameters / airExchangeValue",airExchangeValue,"number(float)",,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
+"Event / reeferDetails / setpointParameters / co2Percentage",co2Percentage,"number(float)",,,,25,"CO<sub>2</sub> percentage",
+"Event / reeferDetails / setpointParameters / humidityPercentage",humidityPercentage,"number(float)",,,,50,"Humidity percentage",
 "Event / reeferDetails / setpointParameters / isBulbMode",isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
 "Event / reeferDetails / setpointParameters / isColdTreatment",isColdTreatment,boolean,,,,true,"Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.",
 "Event / reeferDetails / setpointParameters / isControlledAtmosphere",isControlledAtmosphere,boolean,,,,true,"Flag indicating whether controlled atmosphere is active.",
 "Event / reeferDetails / setpointParameters / isDrainholesOpen",isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
 "Event / reeferDetails / setpointParameters / isVentilationOpen",isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
-"Event / reeferDetails / setpointParameters / o2Percentage",o2Percentage,number,,,,25,"O<sub>2</sub> percentage",
+"Event / reeferDetails / setpointParameters / o2Percentage",o2Percentage,"number(float)",,,,25,"O<sub>2</sub> percentage",
 "Event / reeferDetails / supplyAirTemperatureMeasurement","supplyAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Supply air temperature measurement",
 "Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings",sensorReadings,"AirTemperatureSensorReading list",,,,,,
 "Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings / sensorLabel",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
-"Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,number,,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
-"Event / reeferDetails / supplyAirTemperatureMeasurement / temperatureValue",temperatureValue,number,,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / supplyAirTemperatureMeasurement / sensorReadings / temperatureValue",temperatureValue,"number(float)",,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
+"Event / reeferDetails / supplyAirTemperatureMeasurement / temperatureValue",temperatureValue,"number(float)",,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
 "Event / reeferDetails / temperatureProbeMeasurements","temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
 "Event / reeferDetails / temperatureProbeMeasurements / COAProbeUDMKey",COAProbeUDMKey,string,,,,P20,"COA UDM reefer probe key:
 - `P19` (USDA probe 1)
 - `P20` (USDA probe 2)
 - `P21` (USDA probe 3)
 - `P22` (Cargo probe)",
-"Event / reeferDetails / temperatureProbeMeasurements / measuredTemperatureValue",measuredTemperatureValue,number,,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
+"Event / reeferDetails / temperatureProbeMeasurements / measuredTemperatureValue",measuredTemperatureValue,"number(float)",,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
 "Event / reeferDetails / temperatureProbeMeasurements / probeLabel",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
-"Event / reeferDetails / temperatureProbeMeasurements / USDAProbeNumber",USDAProbeNumber,integer,,,,2,"USDA reefer probe number (1-3)",
+"Event / reeferDetails / temperatureProbeMeasurements / USDAProbeNumber",USDAProbeNumber,"integer(int32)",,,,2,"USDA reefer probe number (1-3)",
 "Event / reeferDetails / temperatureUnit",temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
@@ -544,9 +544,9 @@ Every Universal Service Reference is an 8-character string with the following fo
 
 If the mode of transport is Vessel and the facility is a Port or Terminal,
 this reference should be considered a terminal call reference.",
-"Event / transportDetails / transportCall / transportCallSequenceNumber","transportCallSequenceNumber",integer,,,,,"Transport operator's key that uniquely identifies each individual transport call.
+"Event / transportDetails / transportCall / transportCallSequenceNumber","transportCallSequenceNumber","integer(int32)",,,,,"Transport operator's key that uniquely identifies each individual transport call.
 This key is essential to distinguish between two separate calls at the same location within one voyage.",
-"Event / transportDetails / transportCall / transportCallSequenceNumberMax","transportCallSequenceNumberMax",integer,,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
+"Event / transportDetails / transportCall / transportCallSequenceNumberMax","transportCallSequenceNumberMax","integer(int32)",,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
 "Event / transportDetails / transportCall / truckTransport",truckTransport,TruckTransport,,,,,"Truck transport information",
 "Event / transportDetails / transportCall / truckTransport / tractorDetails",tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment.",
 "Event / transportDetails / transportCall / truckTransport / tractorDetails / licensePlate",licensePlate,string,,maxLength=15,,,"A license plate is a tag that is attached to a vehicle and displays a unique number or code assigned to the vehicle.

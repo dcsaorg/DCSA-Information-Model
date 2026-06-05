@@ -172,4 +172,4 @@ Every Universal Voyage Reference is a 5-character string with the following form
 Weight,unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-Weight,value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+Weight,value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",

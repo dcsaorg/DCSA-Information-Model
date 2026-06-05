@@ -49,7 +49,7 @@ Excludes the tare weight of the container.",
 "VGMDeclaration / equipmentDetails / cargoGrossWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"VGMDeclaration / equipmentDetails / cargoGrossWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"VGMDeclaration / equipmentDetails / cargoGrossWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "VGMDeclaration / equipmentDetails / equipmentReference",equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 
 According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
@@ -87,7 +87,7 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency).",
 "VGMDeclaration / equipmentDetails / tareWeight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"VGMDeclaration / equipmentDetails / tareWeight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"VGMDeclaration / equipmentDetails / tareWeight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "VGMDeclaration / holdingParty",holdingParty,PartyDetails,,,,,"Information reference agency holding the VGM declaration.",
 "VGMDeclaration / holdingParty / address",address,Address,,,,,"An object for storing address-related information.",
 "VGMDeclaration / holdingParty / address / addressLines",addressLines,"string list",,"maxItems=5
@@ -460,7 +460,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "VGMDeclaration / VGM / weight / unit",unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
-"VGMDeclaration / VGM / weight / value",value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+"VGMDeclaration / VGM / weight / value",value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
 "VGMDeclaration / weighingParty",weighingParty,PartyDetails,,,,,"Legally accepted party designated to perform the weighing.",
 "VGMDeclaration / weighingParty / address",address,Address,,,,,"An object for storing address-related information.",
 "VGMDeclaration / weighingParty / address / addressLines",addressLines,"string list",,"maxItems=5

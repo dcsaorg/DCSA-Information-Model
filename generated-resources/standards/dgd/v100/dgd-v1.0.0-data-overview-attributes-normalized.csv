@@ -7,7 +7,7 @@ Activity,unit,string,,maxLength=10,,TBq,"Measurement unit in which the activity 
 - `PBq`
 - `mBq`
 - `µBq`",
-Activity,value,number,,,,2.5,"Activity value expressed in the measurement `unit`",
+Activity,value,"number(float)",,,,2.5,"Activity value expressed in the measurement `unit`",
 Address,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 Item description:
@@ -106,13 +106,13 @@ DangerousGoods,"lithiumBatteryTransportCondition",string,,maxLength=3,,DAM,"Indi
 - `DAM` (Damaged or defective)
 - `DIS` (For disposal)
 - `REC` (For recycling)",
-DangerousGoods,"materialTemperatureAtPacking",number,,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361.",
+DangerousGoods,"materialTemperatureAtPacking","number(float)",,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361.",
 DangerousGoods,mfagReference,string,,maxLength=100,,"MFAG Table 620","Medical First Aid Guide reference applicable to the dangerous goods carried.",
 DangerousGoods,NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
 DangerousGoods,netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
 DangerousGoods,netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
 DangerousGoods,netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
-DangerousGoods,packingGroup,integer,,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
+DangerousGoods,packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
 DangerousGoods,properShippingName,string,,maxLength=500,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
 DangerousGoods,radioactiveMaterial,RadioactiveMaterial,,,,,"Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7.",
 DangerousGoods,segregationGroups,"string list",,,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
@@ -179,7 +179,7 @@ Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
 - `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
 Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
-FissileMaterial,criticalitySafetyIndex,number,,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material.",
+FissileMaterial,criticalitySafetyIndex,"number(float)",,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material.",
 FissileMaterial,"fissileExceptionReference",string,,maxLength=100,,2.7.2.3.5.3,"Reference to applicable fissile exception paragraph, when shipped under IMDG 2.7.2.3.5.1 to 2.7.2.3.5.6.",
 FissileMaterial,fissileMaterialMass,Weight,,,,,"Mass in grams of fissile material contained in the consignment (or mass of each fissile nuclide for mixtures when appropriate).",
 FissileMaterial,fissilePackageReference,string,,maxLength=100,,"6.4.11.2(a)","Reference to applicable package paragraph for fissile material, when contained in a package for which one of 6.4.11.2 (a) to (c) or 6.4.11.3 is applied",
@@ -222,16 +222,16 @@ IdentifyingCode,codeListProvider,string,,maxLength=5,,W3C,"A list of codes ident
 IdentifyingCode,partyCode,string,,maxLength=100,,MSK,"Code to identify the party as provided by the code list provider",
 InnerPackaging,description,string,,maxLength=200,,"Woven plastic water resistant Bag","Description of the packaging.",
 InnerPackaging,material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-InnerPackaging,quantity,integer,,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
-Limits,flashPoint,number,,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
-Limits,SADT,number,,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-Limits,SAPT,number,,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+InnerPackaging,quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
+Limits,flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
+Limits,SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
+Limits,SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
 Limits,temperatureUnit,string,,maxLength=3,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
 - `FAH` (Fahrenheit)",
-Limits,"transportControlTemperature",number,,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-Limits,"transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
+Limits,"transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
+Limits,"transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
 Location,address,Address,,,,,"Location address",
 Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
 Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
@@ -255,7 +255,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`",
 OuterPackaging,description,string,,maxLength=200,,"Drum, steel","Description of the outer packaging/overpack.",
 OuterPackaging,IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
-OuterPackaging,numberOfPackages,integer,,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
+OuterPackaging,numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
 OuterPackaging,packageCode,string,,maxLength=5,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
 PartyContactDetail,email,string,,maxLength=100,,jane.doe@example.com,"Contact email address",
 PartyContactDetail,name,string,,maxLength=100,,"Jane Doe","Contact name",
@@ -270,8 +270,8 @@ RadioactiveMaterial,"radioactivePackageCategory",string,,maxLength=10,,II-YELLOW
 - `II-YELLOW`
 - `III-YELLOW`",
 RadioactiveMaterial,"radionuclideIdentification",string,,maxLength=200,,Cs-137,"Name of the radionuclide(s) contained in Class 7 radioactive material consignments. For mixtures, provide a general description or list the most restrictive nuclides.",
-RadioactiveMaterial,totalActivityA2Multiple,number,,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited.",
-RadioactiveMaterial,transportIndex,number,,,,1.8,"Transport Index (TI) assigned to the radioactive package.",
+RadioactiveMaterial,totalActivityA2Multiple,"number(float)",,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited.",
+RadioactiveMaterial,transportIndex,"number(float)",,,,1.8,"Transport Index (TI) assigned to the radioactive package.",
 "ReceivingOrganisationReceipt",receiptDate,"string(date)",,,,2025-01-23,"The date on which the receiving organisation physically accepted the consignment.",
 "ReceivingOrganisationReceipt",receivedInGoodCondition,boolean,,,,,"Indicates whether the packages, containers, or trailers were received in apparent good order and condition at the time of handover. A value of false implies that damages, discrepancies, or irregularities were observed and should be detailed in the remarks field.",
 "ReceivingOrganisationReceipt","receivingOrganisationName",string,,maxLength=100,,"ECT Delta Terminal B.V.","Name of the organisation receiving the cargo.",
@@ -353,7 +353,7 @@ Volume,unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `val
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
 - `LTR` (Litre)",
-Volume,value,number,,,,2.4,"Volume value expressed in the measurement `unit`",
+Volume,value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
 VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
 VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
 
@@ -369,4 +369,4 @@ Weight,unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `val
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
-Weight,value,number,,,,2.4,"Weight value expressed in the measurement `unit`",
+Weight,value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
