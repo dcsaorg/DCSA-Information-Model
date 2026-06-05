@@ -4,18 +4,16 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Seal;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Reference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Seal;
 import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
 
 @Schema(
     description =
 """
 Specifies the container (`Equipment`), `Seals` and `References`
-""",
-    title = "Utilized Transport Equipment (Shipper)",
-    requiredProperties = {"seals"})
+""")
 @Data
 public class UtilizedTransportEquipmentShipper {
 
@@ -33,7 +31,8 @@ A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
       description =
 """
 A list of `Seals`
-""")
+""",
+      requiredMode = Schema.RequiredMode.REQUIRED)
   @ArraySchema(minItems = 1)
   private List<Seal> seals;
 

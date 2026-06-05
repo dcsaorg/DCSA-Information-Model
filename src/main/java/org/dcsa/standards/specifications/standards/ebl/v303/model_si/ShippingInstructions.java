@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model_si.ShippingInstructions
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The `Shipping Instructions` as provided by the Shipper.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

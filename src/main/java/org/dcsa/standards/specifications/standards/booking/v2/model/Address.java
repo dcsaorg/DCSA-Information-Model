@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.Address.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object for storing address related information
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -21,7 +21,15 @@ public class EblIss300StandardSpecification extends Ebl300StandardSpecification 
             .filter(
                 modelClass ->
                     !modelClass.equals(
-                            org.dcsa.standards.specifications.standards.dt.v100.model.Address.class)
+                            org.dcsa.standards.specifications.standards.ebl.v3.model.Address.class)
+                        && !modelClass.equals(
+                            org.dcsa.standards.specifications.standards.ebl.v3.model.Facility.class)
+                        && !modelClass.equals(
+                            org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress
+                                .class)
+                        && !modelClass.equals(
+                            org.dcsa.standards.specifications.standards.ebl.v3.model_td.IssuingParty
+                                .class)
                         && !modelClass.equals(DangerousGoods.class)
                         && !modelClass.equals(DocumentParties.class)
                         && !modelClass.equals(IdentifyingCode.class)
@@ -34,11 +42,14 @@ public class EblIss300StandardSpecification extends Ebl300StandardSpecification 
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Address.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.DangerousGoods.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.DocumentParties.class,
+            org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Facility.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IdentifyingCode.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssueToParty.class,
+            org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssuingParty.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.NotifyParty.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.OtherDocumentParty.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Party.class,
+            org.dcsa.standards.specifications.standards.ebl.v3.model_iss.PartyAddress.class,
             org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Shipper.class));
   }
 

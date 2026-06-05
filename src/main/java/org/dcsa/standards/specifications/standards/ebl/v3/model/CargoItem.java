@@ -10,8 +10,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.CargoItem
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

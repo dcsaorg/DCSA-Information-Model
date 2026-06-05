@@ -5,17 +5,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Charge;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ExportLicense;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ImportLicense;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.ExportLicense;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.ImportLicense;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.UtilizedTransportEquipment;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Reference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.UtilizedTransportEquipment;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PlaceOfIssue;
 import org.dcsa.standards.specifications.standards.ebl.v3.types.CarrierClause;
 import org.dcsa.standards.specifications.standards.ebl.v3.types.DisplayedName;
 
-@Schema(description = TransportDocument.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The document that governs the terms of carriage between shipper and carrier for maritime transportation. Two distinct types of transport documents exist:
+- Bill of Lading
+- Sea Waybill.
+""")
 @Data
 public class TransportDocument {
 

@@ -30,7 +30,10 @@ import org.junit.jupiter.api.Assertions;
 public enum StandardSpecificationTestToolkit {
   ; // no instances
 
-  public static final boolean FAIL_ON_FIRST_WRONG_VALUE = System.currentTimeMillis() > 0;
+  public static final boolean FAIL_ON_FIRST_WRONG_VALUE = System.currentTimeMillis() < 0;
+
+  private static final java.util.concurrent.atomic.AtomicInteger WRONG_VALUE_COUNT =
+      new java.util.concurrent.atomic.AtomicInteger();
 
   @SneakyThrows
   public static String getFileHash(String filePath) {
@@ -52,6 +55,12 @@ public enum StandardSpecificationTestToolkit {
         SpecificationToolkit.parameterizeStringRawSchemaMap(
             standardSpecification.getOpenAPI().getComponents().getSchemas());
     compareType("", originalSchemas, generatedSchemas, typeName, new HashSet<>());
+    int wrongValues = WRONG_VALUE_COUNT.getAndSet(0);
+    if (wrongValues > 0) {
+      Assertions.fail(
+          "Found " + wrongValues + " wrong value(s) while comparing type '" + typeName
+              + "' against '" + yamlFilePath + "' (see WRONG VALUE log warnings above)");
+    }
   }
 
   private static void compareType(
@@ -86,6 +95,10 @@ public enum StandardSpecificationTestToolkit {
         new TreeSet<>(generatedProperties.keySet()));
     softAssertEquals(
         "required properties", originalTypeSchema.getRequired(), generatedTypeSchema.getRequired());
+    softAssertEquals(
+        "type description (" + typeName + ")",
+        comparableDescription(originalTypeSchema.getDescription()),
+        comparableDescription(generatedTypeSchema.getDescription()));
 
     originalProperties.keySet().stream()
         .sorted()
@@ -135,6 +148,15 @@ public enum StandardSpecificationTestToolkit {
       Map<String, Schema<?>> generatedSchemasByType,
       Set<String> visitedTypes) {
     log.info("{}Comparing {} {}", indentation, typeName, attributeName);
+    if (originalAttributeSchema == null || generatedAttributeSchema == null) {
+      log.warn(
+          "Missing attribute schema for {}.{} (original={}, generated={})",
+          typeName,
+          attributeName,
+          originalAttributeSchema != null,
+          generatedAttributeSchema != null);
+      return;
+    }
     if (generatedAttributeSchema instanceof ComposedSchema && generatedAttributeSchema.getAllOf() != null) {
       if (!(originalAttributeSchema instanceof ComposedSchema && originalAttributeSchema.getAllOf() != null)) {
         // Generated is allOf-wrapped $ref with description; original is inline/direct
@@ -275,6 +297,7 @@ public enum StandardSpecificationTestToolkit {
 
   private static void softAssertEquals(String property, Object expected, Object actual) {
     if (!Objects.equals(expected, actual)) {
+      WRONG_VALUE_COUNT.incrementAndGet();
       log.warn(
 """
 WRONG VALUE:

@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_end.RecipientParty
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Refers to a company or a legal entity.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

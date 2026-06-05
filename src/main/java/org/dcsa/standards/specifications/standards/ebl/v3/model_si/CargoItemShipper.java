@@ -5,7 +5,11 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.*;
 
-@Schema(description = CargoItemShipper.CLASS_SCHEMA_DESCRIPTION, title = "Cargo Item (Shipper)")
+@Schema(
+    description =
+"""
+A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.
+""")
 @Data
 public class CargoItemShipper {
 
@@ -57,5 +61,5 @@ If a container does not comply with [ISO 6346](https://www.iso.org/standard/8355
   private String houseBillOfLadingReference;
 
   @Schema(description = "A list of `Customs references`")
-  private List<org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference> customsReferences;
+  private List<org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference> customsReferences;
 }

@@ -10,17 +10,19 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model_iss.Address;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_iss.IssuanceRequest;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_iss.SupportingDocument;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.City;
-import org.dcsa.standards.specifications.standards.ebl.v302.model_td.OtherDocumentParty;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Facility;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.OtherDocumentParty;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
-import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.DangerousGoods;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.DocumentParties;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.IdentifyingCode;
+import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.IssuingParty;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.IssueToParty;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.NotifyParty;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.Party;
+import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.Shipper;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_iss.TransportDocument;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.CargoItem;
@@ -30,7 +32,6 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_td.Consignee;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.Endorsee;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.InnerPackaging;
-import org.dcsa.standards.specifications.standards.ebl.v303.model_td.IssuingParty;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.NetExplosiveContent;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.OnBehalfOfConsignee;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.OnBehalfOfShipper;
@@ -66,6 +67,7 @@ public class EblIss303StandardSpecification extends Ebl303StandardSpecification 
             Endorsee.class,
             ExtendedHSCode.class,
             ExtendedNationalCommodityCode.class,
+            Facility.class,
             InnerPackaging.class,
             IssuingParty.class,
             NationalCommodityCode.class,

@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model_iss.IssueToParty.CLASS_SCHEMA_DESCRIPTION)
+"""
+The party that receives **possession** of the eBL upon issuance.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -7,12 +7,15 @@ import org.dcsa.standards.specifications.standards.booking.v204.model.ExtendedNa
 import org.dcsa.standards.specifications.standards.booking.v204.types.ExtendedHSCode;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.City;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.OtherDocumentParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_td.Transports;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.TransportDocument;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.UtilizedTransportEquipment;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.UtilizedTransportEquipmentHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.CargoItem;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.CarriersAgentAtDestination;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_td.Charge;
@@ -79,6 +82,9 @@ public class EblTd303StandardSpecification extends Ebl303StandardSpecification {
             Reference.class,
             ReferenceConsignmentItem.class,
             Shipper.class,
+            Transports.class,
+            UtilizedTransportEquipment.class,
+            UtilizedTransportEquipmentHBL.class,
             VesselVoyage.class));
   }
 

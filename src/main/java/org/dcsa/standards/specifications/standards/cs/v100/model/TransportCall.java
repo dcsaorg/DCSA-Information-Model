@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 
-@Schema(description = "A transport call in the schedule.")
 @Data
 public class TransportCall {
 

@@ -12,7 +12,11 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.Buyer.CLASS_SCHEMA_DESCRIPTION)
+"""
+The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

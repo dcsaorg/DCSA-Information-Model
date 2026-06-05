@@ -3,12 +3,18 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_si;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyContactDetailHBL;
 
-@Schema(description = NotifyPartyHBL.CLASS_SCHEMA_DESCRIPTION, title = "Notify Party (House B/L)")
+@Schema(
+    description =
+"""
+The person to be notified when a shipment arrives at its destination.
+
+**Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)
+""")
 @Data
 public class NotifyPartyHBL {
 

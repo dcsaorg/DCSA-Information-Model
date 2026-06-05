@@ -4,6 +4,9 @@ import java.util.Set;
 import java.util.stream.Stream;
 import org.dcsa.standards.specifications.dataoverview.LegendMetadata;
 import org.dcsa.standards.specifications.standards.ebl.v302.Ebl302StandardSpecification;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_td.Transports;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.UtilizedTransportEquipment;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.UtilizedTransportEquipmentHBL;
 
 public class Ebl303StandardSpecification extends Ebl302StandardSpecification {
 
@@ -23,6 +26,13 @@ public class Ebl303StandardSpecification extends Ebl302StandardSpecification {
 
   @Override
   protected Stream<Class<?>> modelClassesStream() {
-    return modelClassesStreamWithReplacementClasses(super.modelClassesStream(), Set.of());
+    return modelClassesStreamWithReplacementClasses(
+        super.modelClassesStream(),
+        Set.of(
+            // 3.0.2 carry-overs whose class-level descriptions changed in v3 YAML
+            Transports.class,
+            // 3.0.3 patches that should be picked up by all v303 doc specs
+            UtilizedTransportEquipment.class,
+            UtilizedTransportEquipmentHBL.class));
   }
 }

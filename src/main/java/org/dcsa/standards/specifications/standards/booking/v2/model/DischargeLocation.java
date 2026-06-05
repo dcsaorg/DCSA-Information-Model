@@ -5,7 +5,15 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Facility;
 
-@Schema(description = DischargeLocation.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+An object to capture the `Discharge Location`.
+
+The location can be specified in **any** of the following ways: `UN Location Code`, `Facility` or an `Address`.
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `Address` and as a `Facility`) that both ways point to the same location.
+""")
 @Data
 public class DischargeLocation {
 

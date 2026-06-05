@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si
-            .OtherDocumentPartyShippingInstructions.CLASS_SCHEMA_DESCRIPTION)
+"""
+A list of document parties that can be optionally provided in the `Shipping Instructions`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

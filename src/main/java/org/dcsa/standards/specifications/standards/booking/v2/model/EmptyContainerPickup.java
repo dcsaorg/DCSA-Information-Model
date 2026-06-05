@@ -3,7 +3,13 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = EmptyContainerPickup.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The date and time and location for the empty container pick-up.
+
+**Condition:** Only applicable to merchant haulage service at origin (`Receipt type at origin = 'CY'`).
+""")
 @Data
 public class EmptyContainerPickup {
 

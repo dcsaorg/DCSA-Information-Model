@@ -20,7 +20,7 @@ public class CsPs103StandardSpecification extends CsPs102StandardSpecification {
   @Override
   protected Stream<Class<?>> modelClassesStream() {
     return modelClassesStreamWithReplacementClasses(
-        super.modelClassesStream(), Set.of(Timestamp.class));
+        super.modelClassesStream(), Set.of(Timestamp.class, TransportCall.class));
   }
 
   @Override

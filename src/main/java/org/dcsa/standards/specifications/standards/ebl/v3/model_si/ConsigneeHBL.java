@@ -3,17 +3,16 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_si;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyContactDetailHBL;
 
 @Schema(
-    description = """
+    description =
+"""
 The ultimate recipient of the cargo. It must be different from the freight forwarder, (de)consolidator, postal operator, or customs agent.
-""",
-    title = "Consignee (House B/L)",
-    requiredProperties = {"partyName", "typeOfPerson"})
+""")
 @Data
 public class ConsigneeHBL {
 
@@ -23,7 +22,8 @@ Name of the party.
 """,
       example = "IKEA Denmark",
       pattern = "^\\S(?:.*\\S)?$",
-      maxLength = 70)
+      maxLength = 70,
+      requiredMode = Schema.RequiredMode.REQUIRED)
   private String partyName;
 
   @Schema(
@@ -35,7 +35,8 @@ Can be one of the following values as per the Union Customs Code art. 5(4):
 """,
       example = "NATURAL_PERSON",
       pattern = "^\\S(?:.*\\S)?$",
-      maxLength = 50)
+      maxLength = 50,
+      requiredMode = Schema.RequiredMode.REQUIRED)
   private String typeOfPerson;
 
   @Schema

@@ -9,8 +9,11 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.ActiveReeferSettings
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The specifications for a Reefer equipment.
+
+**Condition:** Only applicable when `isNonOperatingReefer` is set to `false`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

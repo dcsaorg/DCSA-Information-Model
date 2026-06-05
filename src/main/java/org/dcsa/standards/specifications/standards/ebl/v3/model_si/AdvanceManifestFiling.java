@@ -5,8 +5,18 @@ import lombok.Data;
 
 @Schema(
     description =
-      AdvanceManifestFiling.CLASS_SCHEMA_DESCRIPTION,
-    title = "Advance Manifest Filing")
+"""
+An Advance Manifest Filing defined by a Manifest type code in combination with a country code.
+
+A small list of **potential** examples:
+
+| manifestTypeCode | countryCode | Description |
+|-----------------------|:-------------:|-------------|
+|ACI|EG|Advance Cargo Information in Egypt|
+|ACE|US|Automated Commercial Environment in the United States|
+|AFR|JP|Cargo Summary Notification (CSN)|
+|ENS|NL|Entry Summary Declaration|
+""")
 @Data
 public class AdvanceManifestFiling {
 

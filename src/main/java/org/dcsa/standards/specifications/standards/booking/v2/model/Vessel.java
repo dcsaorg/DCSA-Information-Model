@@ -3,7 +3,13 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = Vessel.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+Vessels related to this booking request.
+
+**Condition:** Mandatory if `carrierExportVoyageNumber` is provided and `carrierServiceCode` or `carrierServiceName` are blank.
+""")
 @Data
 public class Vessel {
 

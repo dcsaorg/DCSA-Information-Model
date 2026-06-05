@@ -5,6 +5,8 @@ import java.util.stream.Stream;
 import org.dcsa.standards.specifications.standards.booking.v2.Booking2StandardSpecification;
 import org.dcsa.standards.specifications.standards.booking.v201.model.Booking;
 import org.dcsa.standards.specifications.standards.booking.v201.model.OtherDocumentParty;
+import org.dcsa.standards.specifications.standards.booking.v201.model.ShipmentLocation;
+import org.dcsa.standards.specifications.standards.booking.v201.model.Vessel;
 
 public class Booking201StandardSpecification extends Booking2StandardSpecification {
 
@@ -15,6 +17,7 @@ public class Booking201StandardSpecification extends Booking2StandardSpecificati
   @Override
   protected Stream<Class<?>> modelClassesStream() {
     return modelClassesStreamWithReplacementClasses(
-        super.modelClassesStream(), Set.of(Booking.class, OtherDocumentParty.class));
+        super.modelClassesStream(),
+        Set.of(Booking.class, OtherDocumentParty.class, ShipmentLocation.class, Vessel.class));
   }
 }

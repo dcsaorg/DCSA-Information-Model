@@ -6,7 +6,6 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
 
 @Schema(description = ServiceContractOwner.CLASS_SCHEMA_DESCRIPTION)
 @Data

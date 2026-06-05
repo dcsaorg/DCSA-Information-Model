@@ -11,8 +11,11 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_td.TransportDocu
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssuanceRequest
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Details of the eBL that the carrier requests to have issued.
+
+The `eBLVisualisationByCarrier` is an optional document, where the carrier can provide its own visualization of the eBL for the end user.  The carrier is the sole responsible party for ensuring there are no discrepancies between the eBL (the `document` attribute) and the provided visualization (the `eBLVisualisationByCarrier` attribute).
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

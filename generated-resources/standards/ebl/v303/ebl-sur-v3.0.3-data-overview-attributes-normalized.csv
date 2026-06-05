@@ -39,7 +39,21 @@ Not all actions are applicable to all surrender requests. The combination and or
 EndorsementChainLink,actionDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Date time when the action occurred.",
 EndorsementChainLink,actor,ActorParty,yes,,,,"Refers to a company or a legal entity.",
 EndorsementChainLink,auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider.",
-EndorsementChainLink,recipient,RecipientParty,yes,,,,"Refers to a company or a legal entity.",
+EndorsementChainLink,recipient,RecipientParty,yes,,,,"Refers to a company or a legal entity.
+
+**Note:** It is possible to use a '**No Party**' placeholder when the `actionCode` is one of the following values: `SIGN`, `BLANK ENDORSE` or `SURRENDERED` (as none of these `actionCodes` require a `recipient`). A '**No Party**' object MUST be populated with the following values:
+```
+  {
+    'eblPlatform': 'NONE',
+    'partyName': 'NONE',
+    'identifyingCodes': [
+      {
+        'codeListProvider': 'NONE',
+        'partyCode': 'NONE',
+      }
+    ]
+  }
+```",
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`

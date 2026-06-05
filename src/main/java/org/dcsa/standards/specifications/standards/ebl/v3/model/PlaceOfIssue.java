@@ -3,7 +3,13 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = PlaceOfIssue.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
+
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.
+""")
 @Data
 public class PlaceOfIssue {
 

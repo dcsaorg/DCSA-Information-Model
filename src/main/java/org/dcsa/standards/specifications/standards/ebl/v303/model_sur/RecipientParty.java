@@ -9,8 +9,23 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v303.model_end.RecipientParty
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Refers to a company or a legal entity.
+
+**Note:** It is possible to use a '**No Party**' placeholder when the `actionCode` is one of the following values: `SIGN`, `BLANK ENDORSE` or `SURRENDERED` (as none of these `actionCodes` require a `recipient`). A '**No Party**' object MUST be populated with the following values:
+```
+  {
+    'eblPlatform': 'NONE',
+    'partyName': 'NONE',
+    'identifyingCodes': [
+      {
+        'codeListProvider': 'NONE',
+        'partyCode': 'NONE',
+      }
+    ]
+  }
+```
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

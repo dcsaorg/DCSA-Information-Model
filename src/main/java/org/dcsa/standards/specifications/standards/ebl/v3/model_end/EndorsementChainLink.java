@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_end;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = EndorsementChainLink.CLASS_SCHEMA_DESCRIPTION, title = "Endorsement Chain Link")
+@Schema(
+    description =
+"""
+Entry in the endorsement chain.
+""")
 @Data
 public class EndorsementChainLink {
 

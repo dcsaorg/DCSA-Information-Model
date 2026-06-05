@@ -12,8 +12,15 @@ import org.dcsa.standards.specifications.standards.booking.v204.types.ExtendedNa
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v202.model.NationalCommodityCode
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Extended version of the national commodity classification code linked to a country with a value supporting up to 16 characters.
+
+An example could look like this:
+
+| Type  | Country | Value |
+|-------|:-------:|-------------|
+|NCM|BR|['1515', '2106', '2507', '2512']|
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

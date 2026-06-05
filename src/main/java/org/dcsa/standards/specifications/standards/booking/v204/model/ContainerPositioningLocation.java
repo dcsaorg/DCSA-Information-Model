@@ -12,8 +12,19 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v2.model.ContainerPositioningLocation
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+An object to capture the `Container Positioning Location`.
+
+The location of the customer facility where the container(s) will be loaded.
+
+**Condition:** Only applicable to carrier haulage service at origin (`Receipt type at origin = 'SD'`).
+
+The location can be specified in **any** of the following ways: `Address` (structured address), `AddressLines` (unstructured address), `Facility`, `UN Location Code` or a `GeoCoordinate`.
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `Address` and as a `Facility`) that both ways point to the same location.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v2.0.3 or earlier**, a sender implementing API **v2.0.4 or later MUST NOT** use `addressLines` as the only property to identify the location. Recipients implementing earlier versions **MAY ignore** this property.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

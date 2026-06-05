@@ -156,14 +156,16 @@ maxLength=1",,A,"The zone classification of the toxicity of the inhalant. Possib
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / limits / transportEmergencyTemperature","transportEmergencyTemperature",number,,,,74.1,"Temperature at which emergency procedures shall be implemented",
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / NANumber",NANumber,string,,"minLength=4
 maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
-"IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
+"IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent",netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
 - `ONZ` (Ounce)",
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netExplosiveContent / value",value,number,yes,minimum=0,,2.4,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
-"IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume",netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
+"IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume",netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods.
+
+**Condition:** only applicable to liquids and gas.",
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / netVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
@@ -760,9 +762,9 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-"IssuanceRequest / document / exportLicense",exportLicense,ExportLicense,,,,,"`Export License` requirements.
+"IssuanceRequest / document / exportLicense",exportLicense,ExportLicense,,,,,"`Export License` requirements
 
-Condition: Included if the property is provided in the `Shipping Instructions.`",
+**Condition:** Included if the property is provided in the `Shipping Instructions.`",
 "IssuanceRequest / document / exportLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Export License`.",
 "IssuanceRequest / document / exportLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Export License` or permit is required for this shipment/commodity/destination.
 
@@ -773,16 +775,18 @@ Condition: Included if the property is provided in the `Shipping Instructions.`"
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-"IssuanceRequest / document / importLicense",importLicense,ImportLicense,,,,,"`Import License` requirements.
+"IssuanceRequest / document / importLicense",importLicense,ImportLicense,,,,,"`Import License` requirements
 
-Condition: Included if the property is provided in the `Shipping Instructions.`",
+**Condition:** Included if the property is provided in the `Shipping Instructions.`",
 "IssuanceRequest / document / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`.",
 "IssuanceRequest / document / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
 
 **Note:** If this property is omitted, it may be interpreted differently by different API providers and by the same API provider in different contexts.",
 "IssuanceRequest / document / importLicense / issueDate",issueDate,"string(date)",,,,2024-09-14,"Issue date of the `Import License`.",
 "IssuanceRequest / document / importLicense / reference",reference,string,,maxLength=35,"^\S(?:.*\S)?$",EMC007123,"Reference number assigned to an `Import License` or permit, issued by countries exercising import controls that authorizes the importation of the articles stated in the license. The `Import License` must be valid at time of arrival.",
-"IssuanceRequest / document / invoicePayableAt",invoicePayableAt,InvoicePayableAt,yes,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer. Can be a UN Location Code or free-text name.",
+"IssuanceRequest / document / invoicePayableAt",invoicePayableAt,InvoicePayableAt,yes,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer.
+
+The location can be provided as a `UN Location Code` or as a fallback - a `freeText` field",
 "IssuanceRequest / document / invoicePayableAt / freeText",freeText,string,,maxLength=35,,"DCSA Headquarters","The name of the location where payment will be rendered by the customer.",
 "IssuanceRequest / document / invoicePayableAt / UNLocationCode",UNLocationCode,string,,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
@@ -830,7 +834,7 @@ Can be omitted on draft transport documents, but must be provided when the docum
 "IssuanceRequest / document / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
 "IssuanceRequest / document / placeOfIssue",placeOfIssue,PlaceOfIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
 
-Condition: The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
 "IssuanceRequest / document / placeOfIssue / countryCode",countryCode,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "IssuanceRequest / document / placeOfIssue / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",
@@ -877,7 +881,7 @@ Exactly one of `shippedOnBoard` and `receiveForShipmentDate` must be provided on
 "IssuanceRequest / document / transportDocumentTypeCode","transportDocumentTypeCode",string,yes,,,SWB,"Specifies the type of the transport document
 - `BOL` (Bill of Lading)
 - `SWB` (Sea Waybill)",
-"IssuanceRequest / document / transports",transports,Transports,yes,,,,"Transport information for the shipment including ports, places, and planned dates.",
+"IssuanceRequest / document / transports",transports,Transports,yes,,,,,
 "IssuanceRequest / document / transports / onCarriageBy",onCarriageBy,string,,maxLength=50,,TRUCK,"Mode of transportation for on-carriage when transport from the port of discharge is organized by the carrier. If this attributes is populated, then a Place of Delivery must also be defined. The currently supported values include:
 - `VESSEL` (Vessel)
 - `RAIL` (Rail)
@@ -1085,7 +1089,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTrans
 Item description:
 The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
 ",
-"IssuanceRequest / eBLVisualisationByCarrier","eBLVisualisationByCarrier",SupportingDocument,,,,,"A binary document representing the visualisation of the eBL.",
+"IssuanceRequest / eBLVisualisationByCarrier","eBLVisualisationByCarrier",SupportingDocument,,,,,,
 "IssuanceRequest / eBLVisualisationByCarrier / content",content,"string(byte)",yes,,,"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAGaSURBVDhPnZO/S0JRFMe/zygxwgqcfZtz0N7SFNgPaKlJpTFLCqwotV9qRYN/gIOL1FK22NISWUNT0BTUkNLgIL2iHxYRnc697/kKzdA+cOD8uOec77uXB/oHngMPnd2eSb/pAf5DP2EWhGlQ8ChIikiiQa7vruFacwHdHHwC9nY7mhqgRBTdsbDdA/nVvHQbYnxvHHhnp4XtFZjon4DapTam4Lx4jt7NXlO6WEsreltDA5RFlt4qHDaWXlgrwNnplDX5CcWnIo5vjmWimsGdQV7HjjjJ0gMDAbNZopU1wgwfmQSlL9JCkEkunyMEuLbMFgZZ161G5RsFES5WNrC8lC8Fb49XDlcWWLNVOHqttFGCo90haxUsyeEk8GhEfEm+lA/ZqyyGdof0ocJegMhIpKZZIC8xfhLH0v6SfstCzRubeK42tg9Od3RDm9c4qMV8hWguinAmDHTJvC5bVB6A8nYZtlabTFcjX0EQ6gshNhqTDSbPQGIsUbdZIhT8ZOt0izDFu+dAakI1svX59W/MXGbIveM2or8g+gL+Fn3DwcYf+gAAAABJRU5ErkJggg==","The actual contents of the visual rendering.",
 "IssuanceRequest / eBLVisualisationByCarrier / contentType",contentType,string,,maxLength=100,,application/msword,"The `Media Type` of the content being transmitted as defined by [Iana](https://www.iana.org/assignments/media-types/media-types.xhtml). Can be left out if the content is `application/pdf` (PDF).
 
@@ -1095,7 +1099,7 @@ The identifying details of a package or the actual markings that appear on the p
 This attribute is used to provide integrity of various parts of the payload that enable parties to
 validate whether a payload matches what the carrier issued originally. Accordingly, the payload is
 signed by the carrier.",
-"IssuanceRequest / issueTo",issueTo,IssueToParty,yes,,,,"The party that receives **possession** of the original Bill of Lading upon issuance.",
+"IssuanceRequest / issueTo",issueTo,IssueToParty,yes,,,,"The party to whom the `Bill of Lading` must be issued.",
 "IssuanceRequest / issueTo / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
 "IssuanceRequest / issueTo / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 

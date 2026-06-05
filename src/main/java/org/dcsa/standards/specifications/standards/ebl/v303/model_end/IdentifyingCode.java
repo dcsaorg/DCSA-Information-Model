@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_end.IdentifyingCode
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+A code and value that uniquely identifies a party.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

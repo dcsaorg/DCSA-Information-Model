@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v101.model.Charge.CLASS_SCHEMA_DESCRIPTION)
+"""
+Addresses the monetary value of freight and other service charges for a `Booking`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

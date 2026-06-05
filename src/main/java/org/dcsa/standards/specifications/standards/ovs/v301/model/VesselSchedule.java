@@ -6,7 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Schema(description = "Vessel schedule information including transport calls.")
+@Schema(
+    description =
+"""
+The timetable of departure and arrival times for each port call on the rotation of the vessel in question.
+""")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

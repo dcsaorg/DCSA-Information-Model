@@ -9,7 +9,10 @@ import lombok.ToString;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 
 @Schema(
-    description = "Calculated by multiplying the width, height, and length of the packed cargo.")
+    description =
+"""
+The estimated grand total volume of the cargo.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

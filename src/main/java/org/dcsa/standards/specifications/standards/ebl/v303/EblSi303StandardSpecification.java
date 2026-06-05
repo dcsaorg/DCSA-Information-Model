@@ -13,6 +13,7 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model.NationalCommod
 import org.dcsa.standards.specifications.standards.ebl.v303.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.Reference;
 import org.dcsa.standards.specifications.standards.ebl.v303.model.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.ebl.v303.model.UtilizedTransportEquipment;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.AddressHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.Buyer;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.BuyerHBL;
@@ -37,6 +38,7 @@ import org.dcsa.standards.specifications.standards.ebl.v303.model_si.SellerHBL;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ShipperShipper;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ShippingInstructions;
 import org.dcsa.standards.specifications.standards.ebl.v303.model_si.ShippingInstructionsRequestor;
+import org.dcsa.standards.specifications.standards.ebl.v303.model_si.UtilizedTransportEquipmentShipper;
 
 public class EblSi303StandardSpecification extends Ebl303StandardSpecification {
 
@@ -84,7 +86,9 @@ public class EblSi303StandardSpecification extends Ebl303StandardSpecification {
             SellerHBL.class,
             ShipperShipper.class,
             ShippingInstructions.class,
-            ShippingInstructionsRequestor.class));
+            ShippingInstructionsRequestor.class,
+            UtilizedTransportEquipment.class,
+            UtilizedTransportEquipmentShipper.class));
   }
 
   @Override

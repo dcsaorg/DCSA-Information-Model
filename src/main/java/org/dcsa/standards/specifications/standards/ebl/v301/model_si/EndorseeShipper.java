@@ -12,8 +12,13 @@ import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddres
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.EndorseeShipper
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The party to whom the title to the goods is transferred by means of endorsement.
+
+**Condition:** Can only be provided for negotiable BLs (`isToOrder=true`). If a negotiable BL does not have an `Endorsee`, the BL is said to be "blank endorsed". Note `Consignee` and `Endorsee` are mutually exclusive.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

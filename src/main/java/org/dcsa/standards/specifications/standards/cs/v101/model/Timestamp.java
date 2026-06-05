@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Schema(description = "Timestamp information for transport events.")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

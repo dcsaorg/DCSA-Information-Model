@@ -3,7 +3,7 @@ package org.dcsa.standards.specifications.standards.ebl.v300;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_end.ActorParty;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_end.RepresentedActorParty;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_end.RepresentedRecipientParty;

@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.IssueToParty
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The party that receives **possession** of the original Bill of Lading upon issuance.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

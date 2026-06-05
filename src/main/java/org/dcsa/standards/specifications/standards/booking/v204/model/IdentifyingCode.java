@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v203.model.IdentifyingCode
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+A code and value that uniquely identifies a party.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

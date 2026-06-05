@@ -6,7 +6,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model.Party;
 
 @Schema(
     description =
-      OtherDocumentParty.CLASS_SCHEMA_DESCRIPTION)
+"""
+A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.
+""")
 @Data
 public class OtherDocumentParty {
 

@@ -4,9 +4,13 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 
-@Schema(description = ActorParty.CLASS_SCHEMA_DESCRIPTION, title = "Actor Party")
+@Schema(
+    description =
+"""
+Refers to a company or a legal entity.
+""")
 @Data
 public class ActorParty {
 

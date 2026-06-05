@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.GeoCoordinate
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+An object used to express a location using `latitude` and `longitude`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

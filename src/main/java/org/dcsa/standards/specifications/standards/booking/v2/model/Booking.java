@@ -6,11 +6,9 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.booking.v2.types.CarrierClause;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Charge;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
 
-@Schema(description = Booking.CLASS_SCHEMA_DESCRIPTION)
 @Data
 public class Booking {
 

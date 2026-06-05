@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_iss.SupportingDocument
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+A binary document representing the visualisation of the eBL.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

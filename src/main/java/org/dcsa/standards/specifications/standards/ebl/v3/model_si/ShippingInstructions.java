@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Reference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.Feedback;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PlaceOfIssue;
 import org.dcsa.standards.specifications.standards.ebl.v3.types.DisplayedName;
@@ -14,8 +14,10 @@ import org.dcsa.standards.specifications.standards.ebl.v3.types.RequestedCarrier
 import org.dcsa.standards.specifications.standards.ebl.v3.types.RequestedCarrierClause;
 
 @Schema(
-    description = ShippingInstructions.CLASS_SCHEMA_DESCRIPTION,
-    title = "Shipping Instructions")
+    description =
+"""
+The `Shipping Instructions` as provided by the Shipper.
+""")
 @Data
 public class ShippingInstructions {
 

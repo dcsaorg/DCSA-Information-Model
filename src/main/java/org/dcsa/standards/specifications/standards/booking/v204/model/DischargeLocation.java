@@ -12,8 +12,15 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v2.model.DischargeLocation
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+An object to capture the `Discharge Location`.
+
+The location can be specified in **any** of the following ways: `UN Location Code`, `Facility`, `Address` (structured address) or `AddressLines` (unstructured address).
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `Address` and as a `Facility`) that both ways point to the same location.
+
+**Condition:** When communicating with providers **or** consumers implementing API **v2.0.3 or earlier**, a sender implementing API **v2.0.4 or later MUST NOT** use `addressLines` as the only property to identify the location. Recipients implementing earlier versions **MAY ignore** this property.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

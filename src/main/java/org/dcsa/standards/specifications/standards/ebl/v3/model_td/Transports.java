@@ -5,9 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 
-@Schema(
-    description =
-        "Transport information for the shipment including ports, places, and planned dates.")
 @Data
 public class Transports {
 

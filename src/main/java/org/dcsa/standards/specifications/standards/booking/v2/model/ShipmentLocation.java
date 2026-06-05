@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = ShipmentLocation.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+Maps the relationship between `Shipment` and `Location`, e.g., the `Place of Receipt` and the `Place of Delivery` for a specific shipment. This is a reusable object between `Booking` and `Transport Document`
+""")
 @Data
 public class ShipmentLocation {
 

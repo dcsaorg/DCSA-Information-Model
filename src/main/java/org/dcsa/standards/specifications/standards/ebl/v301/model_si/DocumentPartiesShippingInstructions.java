@@ -12,8 +12,11 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_si.ShippingInstr
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si
-            .DocumentPartiesShippingInstructions.CLASS_SCHEMA_DESCRIPTION)
+"""
+All `Parties` with associated roles.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` **and** `advancedManifestFilingPerformedBy=CARRIER` and `isHouseBillOfLadingsIssued=false`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

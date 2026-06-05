@@ -10,13 +10,15 @@ import lombok.ToString;
 @Schema(
     description =
 """
-The national commodity classification code, which can be one of the following values defined by DCSA:
-- `NCM` (Nomenclatura Comum do Mercosul)
-- `HTS` (Harmonized Tariff Schedule)
-- `SCHEDULE_B` (Schedule B)
-- `TARIC` (Integrated Tariff of the European Communities)
-- `CN` (Combined Nomenclature)
-- `CUS` (Customs Union and Statistics)
+The national commodity classification code linked to a country with a value.
+
+An example could look like this:
+
+| Type  | Country | Value |
+|-------|:-------:|-------------|
+|NCM|BR|['1515', '2106', '2507', '2512']|
+
+**DEPRECATED:** This object is not to be used any more, please use `ExtendedNationalCommodityCode` instead.
 """)
 @Getter
 @Setter

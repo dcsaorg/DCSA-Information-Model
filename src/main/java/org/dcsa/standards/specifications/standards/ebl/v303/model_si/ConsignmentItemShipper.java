@@ -17,8 +17,9 @@ import org.dcsa.standards.specifications.standards.ebl.v303.types.ShippingMark;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.ConsignmentItemShipper
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

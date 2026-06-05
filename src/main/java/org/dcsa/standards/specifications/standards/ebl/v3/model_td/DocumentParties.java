@@ -7,7 +7,11 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.NotifyParty;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.Shipper;
 
-@Schema(description = DocumentParties.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+All `Parties` with associated roles.
+""")
 @Data
 public class DocumentParties {
 

@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model.Address.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object for storing address related information. Either **Street number** or **PO Box** should be provided to meet **ICS2** filing requirements.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

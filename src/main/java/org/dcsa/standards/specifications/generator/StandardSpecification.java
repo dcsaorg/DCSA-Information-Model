@@ -141,6 +141,29 @@ public abstract class StandardSpecification {
                 ModelConverters.getInstance()
                     .read(modelClass)
                     .forEach(openAPI.getComponents()::addSchemas));
+
+    // Post-processing: ensure each model class's own @Schema(description=...) is honored on the
+    // generated schema. Swagger's default resolver may skip a subclass that adds no new fields
+    // (treating it as identical to its parent), which causes class-level description overrides
+    // on patch classes to be lost. We re-apply them here based on the most-derived class.
+    modelClassesStream()
+        .forEach(
+            modelClass -> {
+              io.swagger.v3.oas.annotations.media.Schema classSchemaAnnotation =
+                  modelClass.getDeclaredAnnotation(
+                      io.swagger.v3.oas.annotations.media.Schema.class);
+              if (classSchemaAnnotation != null
+                  && classSchemaAnnotation.description() != null
+                  && !classSchemaAnnotation.description().isEmpty()) {
+                Schema<?> typeSchema =
+                    openAPI.getComponents().getSchemas() == null
+                        ? null
+                        : openAPI.getComponents().getSchemas().get(modelClass.getSimpleName());
+                if (typeSchema != null) {
+                  typeSchema.setDescription(classSchemaAnnotation.description());
+                }
+              }
+            });
   }
 
   protected abstract LegendMetadata getLegendMetadata();

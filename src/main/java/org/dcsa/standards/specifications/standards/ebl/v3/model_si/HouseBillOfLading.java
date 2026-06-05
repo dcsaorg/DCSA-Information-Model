@@ -9,8 +9,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.types.RoutingOfConsign
 
 @Schema(
     description =
-        "A legal contract between the Ocean Transport Intermediary (OTI), such as a Non-Vessel Operating Common Carrier (NVOCC) or a freight forwarder, and the shipper that acknowledges the receipt of goods and outlines the terms of shipment.",
-    title = "House Bill of Lading")
+"""
+A legal contract between the Ocean Transport Intermediary (OTI), such as a Non-Vessel Operating Common Carrier (NVOCC) or a freight forwarder, and the shipper that acknowledges the receipt of goods and outlines the terms of shipment.
+""")
 @Data
 public class HouseBillOfLading {
 

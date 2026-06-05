@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = Limits.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+Limits for the `Dangerous Goods`. The same `Temperature Unit` needs to apply to all attributes in this structure.
+""")
 @Data
 public class Limits {
 

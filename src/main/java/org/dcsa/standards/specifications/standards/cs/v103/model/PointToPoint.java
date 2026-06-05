@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "Point to Point routing information.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

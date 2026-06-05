@@ -13,8 +13,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.types.HSCode;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.ConsignmentItem
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

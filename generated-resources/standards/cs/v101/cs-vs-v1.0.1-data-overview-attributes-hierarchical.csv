@@ -77,7 +77,7 @@ maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
 - `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
-"ServiceSchedule / vesselSchedules / vessel",vessel,Vessel,,,,,"Vessel information.",
+"ServiceSchedule / vesselSchedules / vessel",vessel,Vessel,,,,,,
 "ServiceSchedule / vesselSchedules / vessel / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
 "ServiceSchedule / vesselSchedules / vessel / flag",flag,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code.",

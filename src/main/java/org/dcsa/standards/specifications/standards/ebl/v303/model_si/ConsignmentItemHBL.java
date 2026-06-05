@@ -12,8 +12,9 @@ import org.dcsa.standards.specifications.standards.booking.v204.model.ExtendedNa
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.ConsignmentItemHBL
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Defines a list of `CargoItems` belonging together in the same consignment. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

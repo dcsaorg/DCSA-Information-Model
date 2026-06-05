@@ -5,14 +5,13 @@ import lombok.Data;
 
 @Schema(
     description =
-        """
+"""
 Feedback that can be provided includes, but is not limited to:
 - unsupported properties
 - changed values
 - removed properties
 - general information
-""",
-    title = "Feedback")
+""")
 @Data
 public class Feedback {
 

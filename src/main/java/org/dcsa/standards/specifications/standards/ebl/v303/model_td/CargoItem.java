@@ -13,7 +13,9 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.NationalCommod
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.CargoItem.CLASS_SCHEMA_DESCRIPTION)
+"""
+A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

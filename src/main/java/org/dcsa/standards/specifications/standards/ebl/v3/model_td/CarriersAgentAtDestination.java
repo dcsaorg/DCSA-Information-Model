@@ -3,10 +3,14 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_td;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 
-@Schema(description = CarriersAgentAtDestination.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The party on the import side assigned by the carrier to whom the customer need to reach out to for cargo release.
+""")
 @Data
 public class CarriersAgentAtDestination {
 

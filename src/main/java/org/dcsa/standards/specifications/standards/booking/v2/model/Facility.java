@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.Facility.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object used to express a location using a `Facility`. The facility can be expressed using one of `BIC` code or `SMDG` code. The `facilityCode` does not contain the `UNLocationCode` - this should be provided in the `UnLocationCode` attribute.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

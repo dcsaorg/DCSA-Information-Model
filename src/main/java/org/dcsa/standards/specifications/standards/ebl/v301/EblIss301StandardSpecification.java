@@ -4,8 +4,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.DangerousGoods;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Facility;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssuanceRequest;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.IssuingParty;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.OtherDocumentParty;
 import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.Party;
+import org.dcsa.standards.specifications.standards.ebl.v3.model_iss.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_iss.Address;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_iss.DocumentParties;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_iss.IdentifyingCode;
@@ -15,7 +19,6 @@ import org.dcsa.standards.specifications.standards.ebl.v301.model_iss.Shipper;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_iss.TransportDocument;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_td.Consignee;
 import org.dcsa.standards.specifications.standards.ebl.v301.model_td.Endorsee;
-import org.dcsa.standards.specifications.standards.ebl.v301.model_td.OtherDocumentParty;
 
 public class EblIss301StandardSpecification extends Ebl301StandardSpecification {
 
@@ -33,11 +36,14 @@ public class EblIss301StandardSpecification extends Ebl301StandardSpecification 
             DangerousGoods.class,
             DocumentParties.class,
             Endorsee.class,
+            Facility.class,
             IdentifyingCode.class,
             IssueToParty.class,
+            IssuingParty.class,
             NotifyParty.class,
             OtherDocumentParty.class,
             Party.class,
+            PartyAddress.class,
             Shipper.class,
             TransportDocument.class));
   }

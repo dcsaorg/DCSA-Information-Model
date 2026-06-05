@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.VesselVoyage
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Vessel and export voyage. The vessel can be nominated a `role` as either: first sea-going vessel or a mother vessel.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

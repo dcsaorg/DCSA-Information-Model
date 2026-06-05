@@ -4,7 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import java.util.List;
 
-@Schema(description = EndorsementChain.CLASS_SCHEMA_DESCRIPTION, title = "Endorsement Chain")
+@Schema(
+    description =
+"""
+An endorsement Chain linked to a particular `transportDocumentReference` and potentially a `transportDocumentSubReference`.
+""")
 @Data
 public class EndorsementChain {
 

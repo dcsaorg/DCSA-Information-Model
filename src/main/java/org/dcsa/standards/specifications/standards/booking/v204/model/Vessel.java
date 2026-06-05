@@ -9,8 +9,11 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v2.model.Vessel
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Vessels related to this booking request.
+
+**Condition:** Mandatory if `carrierExportVoyageNumber` is provided and `carrierServiceCode` or `carrierServiceName` are blank. If `routingReference` is provided - this object MUST not be provided.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

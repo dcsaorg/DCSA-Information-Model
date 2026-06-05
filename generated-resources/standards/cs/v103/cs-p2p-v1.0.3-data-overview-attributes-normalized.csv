@@ -19,7 +19,7 @@ Barge,"operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code lis
 - `NMFTA` (National Motor Freight Traffic Association)",
 Barge,vesselIMONumber,string,,"minLength=7
 maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code, which does not change during the lifetime of the vessel.",
-BargeTransport,barge,Barge,,,,,"Barge information.",
+BargeTransport,barge,Barge,,,,,,
 BargeTransport,modeOfTransport,string,yes,,,BARGE,"The mode of transport as defined by DCSA. For the Barge Transport mode this needs to be `BARGE`.",
 BargeTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call.",
 BargeTransport,servicePartners,"ServicePartner list",,,,,,

@@ -5,7 +5,13 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.DangerousGoods;
 
-@Schema(description = OuterPackaging.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+
+**Condition:** Mandatory for DG (Dangerous Goods) cargo.
+""")
 @Data
 public class OuterPackaging {
 

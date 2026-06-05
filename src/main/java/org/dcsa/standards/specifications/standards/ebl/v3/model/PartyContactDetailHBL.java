@@ -4,11 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Schema(
-    description = """
+    description =
+"""
 The contact details of the person to contact. It is mandatory to provide either `phone` and/or `email` along with the `name`, both can be provided.
-""",
-    title = "Party Contact Detail (House B/L)",
-    requiredProperties = {"name"})
+""")
 @Data
 public class PartyContactDetailHBL {
 
@@ -18,7 +17,8 @@ Name of the contact
 """,
       example = "Henrik",
       pattern = "^\\S(?:.*\\S)?$",
-      maxLength = 35)
+      maxLength = 35,
+      requiredMode = Schema.RequiredMode.REQUIRED)
   private String name;
 
   @Schema(

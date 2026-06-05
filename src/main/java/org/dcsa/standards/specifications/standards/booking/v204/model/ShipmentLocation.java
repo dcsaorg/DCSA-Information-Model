@@ -9,8 +9,11 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v203.model.ShipmentLocation
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Maps the relationship between `Shipment` and `Location`, e.g., the `Place of Receipt` and the `Place of Delivery` for a specific shipment.
+
+**Condition:** In case `routingReference` is provided - then `PRE` (Place of Receipt), `POL` (Port of Loading), `POD` (Port of Discharge) and `PDE` (Place of Delivery) MUST not be provided.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

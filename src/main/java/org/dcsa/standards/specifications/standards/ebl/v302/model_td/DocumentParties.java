@@ -11,8 +11,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_td.OnBehalfOfCon
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.DocumentParties
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+All `Parties` with associated roles.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

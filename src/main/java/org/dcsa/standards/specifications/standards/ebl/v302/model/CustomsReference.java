@@ -9,15 +9,28 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Reference associated with customs and/or excise purposes required by the relevant authorities for the import, export, or transit of the goods.
+
+A small list of **potential** examples:
+
+| Type  | Country | Description |
+|-------|:-------:|-------------|
+|UCR|NL|Unique Consignment Reference|
+|CUS|NL|Customs Union and Statistics|
+|ACID|EG|Advance Cargo Information Declaration in Egypt|
+|CERS|CA|Canadian Export Reporting System|
+|ITN|US|Internal Transaction Number in US|
+|PEB|ID|PEB reference number|
+|CSN|IN|Cargo Summary Notification (CSN)|
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class CustomsReference
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference {
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

@@ -10,10 +10,6 @@ import lombok.ToString;
 import org.dcsa.standards.specifications.standards.booking.v202.types.TransportDocumentReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
 
-@Schema(
-    description =
-        org.dcsa.standards.specifications.standards.booking.v201.model.Booking
-            .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
 @RequiredArgsConstructor

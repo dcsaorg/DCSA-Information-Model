@@ -2,11 +2,21 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_td;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Facility;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Facility;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.GeoCoordinate;
 
-@Schema(description = PlaceOfDelivery.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+An object to capture `Place of Delivery` location specified as: the location where the cargo is handed over to the consignee, or his agent, by the shipping line and where responsibility of the shipping line ceases.
+
+**Condition:** Only when onward transport is done by the carrier
+
+The location can be specified in **any** of the following ways: `UN Location Code`, `Facility`, `Address` or a `Geo Coordinate`.
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `Address` and as a `Facility`) that both ways point to the same location.
+""")
 @Data
 public class PlaceOfDelivery {
 

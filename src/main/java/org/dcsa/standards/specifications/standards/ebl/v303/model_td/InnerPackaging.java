@@ -10,15 +10,16 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.InnerPackaging
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Object for `Inner Packaging` specification
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
 public class InnerPackaging
-    extends org.dcsa.standards.specifications.standards.dt.v100.model.InnerPackaging {
+    extends org.dcsa.standards.specifications.standards.ebl.v3.model.InnerPackaging {
 
   @Schema(description = "A list of `Inner Packagings` contained inside this `Inner Packaging`.")
   private List<InnerPackaging> innerPackagings;

@@ -3,12 +3,16 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_si;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.Address;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyContactDetailHBL;
 
-@Schema(description = "The `Shipper` on the `House Bill of Lading`.", title = "Shipper (House B/L)")
+@Schema(
+    description =
+"""
+The `Shipper` on the `House Bill of Lading`.
+""")
 @Data
 public class ShipperHBL {
 

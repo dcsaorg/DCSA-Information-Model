@@ -50,7 +50,7 @@ maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference
 - `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
 Schedule,"universalServiceReference",string,,"minLength=8
 maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
-Schedule,vessel,Vessel,,,,,"Vessel information.",
+Schedule,vessel,Vessel,,,,,,
 ServicePartnerSchedule,carrierCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code based on either the SMDG or SCAC code lists.",
 ServicePartnerSchedule,carrierCodeListProvider,string,,,,NMFTA,"Identifies the code list provider used for the `carrierCode`.
 - `SMDG` (Ship Message Design Group)

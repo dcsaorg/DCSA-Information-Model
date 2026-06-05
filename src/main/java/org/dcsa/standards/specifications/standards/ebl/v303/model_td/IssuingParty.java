@@ -12,8 +12,9 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.IssuingParty
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The company or a legal entity issuing the `Transport Document`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -8,7 +8,13 @@ import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 
-@Schema(description = "Volume of the cargo excluding packaging. Calculated by multiplying width, height, and length.")
+@Schema(
+    description =
+"""
+The volume of the referenced dangerous goods.
+
+**Condition:** only applicable to liquids and gas.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

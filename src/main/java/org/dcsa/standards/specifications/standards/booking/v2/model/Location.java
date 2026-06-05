@@ -6,7 +6,17 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Facility;
 import org.dcsa.standards.specifications.standards.dt.v100.model.GeoCoordinate;
 
-@Schema(description = Location.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The location can be specified using **any** of the nested structures:
+- `address` (used to specify the location via an Address)
+- `UNLocationCode`
+- `facility` (used to specify a location using a `facilityCode` and a `facilityCodeListProvider`)
+- `geoCoordinate` (used to specify a location using `latitude` and `longitude`)
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `Address` and as a `Facility`) that both ways point to the same location.
+""")
 @Data
 public class Location {
 

@@ -11,8 +11,11 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_td.OtherDocument
 
 @Schema(
     description =
-      DocumentPartiesShippingInstructions.CLASS_SCHEMA_DESCRIPTION,
-    title = "Document Parties (Shipping Instructions)")
+"""
+All `Parties` with associated roles.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` **and** `advancedManifestFilingPerformedBy=CARRIER` and `isHouseBillOfLadingsIssued=false`
+""")
 @Data
 public class DocumentPartiesShippingInstructions {
 

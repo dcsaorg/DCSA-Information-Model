@@ -4,16 +4,18 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
-import org.dcsa.standards.specifications.standards.dt.v100.model.ReferenceConsignmentItem;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.ReferenceConsignmentItem;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DescriptionOfGoodsLine;
 import org.dcsa.standards.specifications.standards.dt.v100.types.ShippingMark;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.NationalCommodityCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.types.HSCode;
 
 @Schema(
-    description = ConsignmentItemShipper.CLASS_SCHEMA_DESCRIPTION,
-    title = "Consignment Item (Shipper)")
+    description =
+"""
+Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Data
 public class ConsignmentItemShipper {
 

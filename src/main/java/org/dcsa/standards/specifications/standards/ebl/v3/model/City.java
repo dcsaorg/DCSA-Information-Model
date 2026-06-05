@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = City.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+An object for storing city, state/region and country related information
+""")
 @Data
 public class City {
 

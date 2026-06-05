@@ -4,8 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Schema(
-    description = OuterPackagingHBL.CLASS_SCHEMA_DESCRIPTION,
-    title = "Outer Packaging (House B/L)")
+    description =
+"""
+Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+""")
 @Data
 public class OuterPackagingHBL {
 

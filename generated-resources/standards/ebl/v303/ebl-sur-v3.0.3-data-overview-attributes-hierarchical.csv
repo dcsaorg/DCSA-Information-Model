@@ -130,7 +130,21 @@ maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3
 "SurrenderRequestDetails / endorsementChain / actor / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
 "SurrenderRequestDetails / endorsementChain / actor / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
 "SurrenderRequestDetails / endorsementChain / auditReference",auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider.",
-"SurrenderRequestDetails / endorsementChain / recipient",recipient,RecipientParty,yes,,,,"Refers to a company or a legal entity.",
+"SurrenderRequestDetails / endorsementChain / recipient",recipient,RecipientParty,yes,,,,"Refers to a company or a legal entity.
+
+**Note:** It is possible to use a '**No Party**' placeholder when the `actionCode` is one of the following values: `SIGN`, `BLANK ENDORSE` or `SURRENDERED` (as none of these `actionCodes` require a `recipient`). A '**No Party**' object MUST be populated with the following values:
+```
+  {
+    'eblPlatform': 'NONE',
+    'partyName': 'NONE',
+    'identifyingCodes': [
+      {
+        'codeListProvider': 'NONE',
+        'partyCode': 'NONE',
+      }
+    ]
+  }
+```",
 "SurrenderRequestDetails / endorsementChain / recipient / eblPlatform",eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Recipient Party`. The value **MUST** be one of:
 - `WAVE` (Wave)
 - `CARX` (CargoX)

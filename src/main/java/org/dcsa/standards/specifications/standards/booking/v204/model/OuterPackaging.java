@@ -9,8 +9,11 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.booking.v2.model.OuterPackaging
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Object for `Outer Packaging/Overpack` specification. Examples of `Overpacks` are a number of packages stacked on to a pallet and secured by strapping or placed in a protective `Outer Packaging` such as a box or crate to form one unit for the convenience of handling and stowage during transport.
+
+**Condition:** Mandatory for DG (Dangerous Goods) cargo.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -17,7 +17,7 @@ Barge,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in char
 Barge,"operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes.",
 Barge,vesselIMONumber,string,,"minLength=7
 maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel.",
-BargeTransport,barge,Barge,,,,,"Barge information.",
+BargeTransport,barge,Barge,,,,,,
 BargeTransport,modeOfTransport,string,yes,,,BARGE,"The mode of transport as defined by DCSA. For the Barge Transport mode this needs to be `BARGE`.",
 BargeTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call.",
 BargeTransport,servicePartners,"ServicePartner list",,,,,,
@@ -208,4 +208,4 @@ maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference
 - `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
 VesselTransport,"universalServiceReference",string,,"minLength=8
 maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
-VesselTransport,vessel,Vessel,,,,,"Vessel information.",
+VesselTransport,vessel,Vessel,,,,,,

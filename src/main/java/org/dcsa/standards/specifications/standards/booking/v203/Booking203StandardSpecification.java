@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 import org.dcsa.standards.specifications.standards.booking.v2.Booking2StandardSpecification;
 import org.dcsa.standards.specifications.standards.booking.v202.Booking202StandardSpecification;
+import org.dcsa.standards.specifications.standards.booking.v203.model.Booking;
 import org.dcsa.standards.specifications.standards.booking.v203.model.DocumentParties;
 import org.dcsa.standards.specifications.standards.booking.v203.model.GeoCoordinate;
 import org.dcsa.standards.specifications.standards.booking.v203.model.IdentifyingCode;
@@ -28,6 +29,7 @@ public class Booking203StandardSpecification extends Booking2StandardSpecificati
     return modelClassesStreamWithReplacementClasses(
         v202ModelClassesStream,
         Set.of(
+            Booking.class,
             DocumentParties.class,
             GeoCoordinate.class,
             IdentifyingCode.class,

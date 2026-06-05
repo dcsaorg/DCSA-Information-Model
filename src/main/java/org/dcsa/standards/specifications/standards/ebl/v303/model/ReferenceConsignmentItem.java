@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v101.model.ReferenceConsignmentItem
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+References provided by the shipper or freight forwarder at the time of `Booking` or at the time of providing `Shipping Instructions`. Carriers share it back when providing `Track & Trace` event updates, some are also printed on the B/L. Customers can use these references to track shipments in their internal systems.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

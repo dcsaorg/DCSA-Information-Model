@@ -3,7 +3,6 @@ package org.dcsa.standards.specifications.standards.cs.v100.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Timestamp information for transport events.")
 @Data
 public class Timestamp {
 

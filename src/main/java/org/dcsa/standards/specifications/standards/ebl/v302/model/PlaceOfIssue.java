@@ -9,7 +9,11 @@ import lombok.ToString;
 
 @Schema(
     description =
-      org.dcsa.standards.specifications.standards.ebl.v3.model.PlaceOfIssue.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
+
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

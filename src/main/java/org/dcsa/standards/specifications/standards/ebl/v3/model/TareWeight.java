@@ -8,7 +8,11 @@ import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
 
-@Schema(description = "The weight of an empty container (gross container weight).")
+@Schema(
+    description =
+"""
+The weight of an empty container (gross container weight).
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

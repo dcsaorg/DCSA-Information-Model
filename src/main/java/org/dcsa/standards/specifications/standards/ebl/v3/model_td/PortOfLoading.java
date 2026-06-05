@@ -4,7 +4,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.City;
 
-@Schema(description = "The port where the cargo is loaded onto a sea-going vessel. Can be specified using UN Location Code or City and Country.")
+@Schema(
+    description =
+"""
+An object to capture `Port of Loading` location specified as: the location where the cargo is loaded onto a first sea-going vessel for water transportation.
+
+The location can be specified in **any** of the following ways: `UN Location Code` or `City and Country`.
+
+**Condition:** It is expected that if a location is specified in multiple ways (e.g. both as an `UN Location Code` and as a `City and Country`) that both ways point to the same location.
+""")
 @Data
 public class PortOfLoading {
 

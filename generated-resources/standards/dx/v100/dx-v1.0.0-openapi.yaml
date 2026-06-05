@@ -5,7 +5,7 @@ info:
   description: |+
     # DCSA Document Exchange (DX) API
 
-    This is the OpenAPI specification of the **DCSA Document Exchange (DX)** standard.
+    This is the OpenAPI specification of the **DCSA Document Exchange (DX)** cross-standard module.
 
     This API allows the transfer of structured documents and asynchronous feedback between a DX Producer and a DX Consumer.
 
@@ -15,7 +15,7 @@ info:
 
     ### Work in progress ⚠️
 
-    The DCSA Document Exchange (DX) standard, including this API, is currently being designed and is **not** ready for general adoption yet.
+    The DCSA Document Exchange (DX) cross-standard module, including this API, is currently being designed and is **not** ready for general adoption yet.
 
   contact:
     name: "Digital Container Shipping Association (DCSA)"

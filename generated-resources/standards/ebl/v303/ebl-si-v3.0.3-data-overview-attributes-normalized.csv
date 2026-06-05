@@ -40,7 +40,7 @@ AdvanceManifestFiling,manifestTypeCode,string,yes,maxLength=50,"^\S(?:.*\S)?$",E
 AdvanceManifestFiling,selfFilerCode,string,,maxLength=100,"^\S(?:.*\S)?$",FLXP,"Code identifying the party who will submit the advance manifest filing(s) for the House BL.
 
 **Mandatory** if `manifestTypeCode` is one of `ACE` (US) or `ACI` (CA) and `advanceManifestFilingsHouseBLPerformedBy` is set to `SELF`.",
-Buyer,address,Address,,,,,"An object for storing address-related information.",
+Buyer,address,Address,,,,,"An object for storing address related information",
 Buyer,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 Item description:
@@ -53,7 +53,7 @@ Buyer,typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can b
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-BuyerHBL,address,AddressHBL,,,,,"An object for storing address-related information.",
+BuyerHBL,address,AddressHBL,,,,,"An object for storing address related information. Either **Street number** or **PO Box** should be provided to meet **ICS2** filing requirements.",
 BuyerHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 BuyerHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
 BuyerHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -70,16 +70,16 @@ CargoGrossWeight,unit,string,yes,,,KGM,"The unit of measure which can be express
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
 CargoGrossWeight,value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
-CargoItemHBL,cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
+CargoItemHBL,cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
 CargoItemHBL,equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
 If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
 CargoItemHBL,outerPackaging,OuterPackagingHBL,yes,,,,"Object for outer packaging/overpack specification. Examples of overpacks are a number of packages stacked on to a pallet and secured by strapping or placed in a protective outer packaging such as a box or crate to form one unit for the convenience of handling and stowage during transport.",
 CargoItemShipper,cargoGrossVolume,CargoGrossVolume,,,,,"Calculated by multiplying the width, height, and length of the packed cargo.",
-CargoItemShipper,cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
-CargoItemShipper,cargoNetVolume,CargoNetVolume,,,,,"Volume of the cargo excluding packaging. Calculated by multiplying width, height, and length.",
-CargoItemShipper,cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging and container tare weight.",
+CargoItemShipper,cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
+CargoItemShipper,cargoNetVolume,CargoNetVolume,,,,,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
+CargoItemShipper,cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container.",
 CargoItemShipper,customsReferences,"CustomsReference list",,,,,"A list of `Customs references`",
 CargoItemShipper,equipmentReference,string,yes,maxLength=11,"^\S(?:.*\S)?$",APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
@@ -109,7 +109,7 @@ CargoNetWeight,unit,string,yes,,,KGM,"The unit of measure which can be expressed
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
 CargoNetWeight,value,number,yes,minimum=0,,2400,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
-ConsigneeHBL,address,Address,,,,,"An object for storing address-related information.",
+ConsigneeHBL,address,Address,,,,,"An object for storing address related information",
 ConsigneeHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 ConsigneeHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
 ConsigneeHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -118,7 +118,7 @@ ConsigneeHBL,typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-ConsigneeShipper,address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+ConsigneeShipper,address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 ConsigneeShipper,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 
@@ -174,7 +174,13 @@ ConsignmentItemHBL,descriptionOfGoods,string,yes,maxLength=512,"^\S(?:.*\S)?$","
 ConsignmentItemHBL,"extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
 
 **Note:** If both `nationalCommodityCode` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCode` must be ignored.",
-ConsignmentItemHBL,nationalCommodityCode,NationalCommodityCode,yes,,,,"The national commodity classification code linked to a country with a value. Examples: NCM (Brazil), HTS (US), TARIC (EU).",
+ConsignmentItemHBL,nationalCommodityCode,NationalCommodityCode,yes,,,,"The national commodity classification code linked to a country with a value.
+
+An example could look like this:
+
+| Type  | Country | Value |
+|-------|:-------:|-------------|
+|NCM|BR|['1515', '2106', '2507', '2512']|",
 ConsignmentItemShipper,cargoItems,"CargoItemShipper list",yes,minItems=1,,,"A list of all `cargoItems`",
 ConsignmentItemShipper,carrierBookingReference,string,yes,maxLength=35,"^\S(?:.*\S)?$",ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
 ConsignmentItemShipper,commoditySubReference,string,,maxLength=100,"^\S(?:.*\S)?$",COM-001,"A unique reference to the commodity object assigned by the carrier in the booking confirmation. The reference must be provided by the shipper as part of the `Shipping Instructions` for the carrier to link this consignment item to the commodity. A commodity reference is only unique in the context of a booking.",
@@ -254,17 +260,21 @@ The value of the `customsReference`",
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-DocumentPartiesHouseBL,buyer,BuyerHBL,,,,,"The buyer for a `House Bill of Lading`.",
+DocumentPartiesHouseBL,buyer,BuyerHBL,,,,,"The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.",
 DocumentPartiesHouseBL,consignee,ConsigneeHBL,,,,,"The ultimate recipient of the cargo. It must be different from the freight forwarder, (de)consolidator, postal operator, or customs agent.",
 DocumentPartiesHouseBL,notifyParty,NotifyPartyHBL,,,,,"The person to be notified when a shipment arrives at its destination.
 
 **Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)",
 DocumentPartiesHouseBL,other,"OtherDocumentPartyHBL list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` as part of the House B/L.",
-DocumentPartiesHouseBL,seller,SellerHBL,,,,,"The seller for a `House Bill of Lading`.",
+DocumentPartiesHouseBL,seller,SellerHBL,,,,,"The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.",
 DocumentPartiesHouseBL,shipper,ShipperHBL,yes,,,,"The `Shipper` on the `House Bill of Lading`.",
 "DocumentPartiesShippingInstructions",buyer,Buyer,,,,,"The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.",
 "DocumentPartiesShippingInstructions",consignee,ConsigneeShipper,,,,,"The party to which goods are consigned in the `Master Bill of Lading`.
 
 **Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
@@ -275,7 +285,7 @@ DocumentPartiesHouseBL,shipper,ShipperHBL,yes,,,,"The `Shipper` on the `House Bi
 **Condition:** Can only be provided for negotiable BLs (`isToOrder=true`). If a negotiable BL does not have an `Endorsee`, the BL is said to be ""blank endorsed"". Note `Consignee` and `Endorsee` are mutually exclusive.
 
 **Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
-"DocumentPartiesShippingInstructions",issueTo,IssueToParty,,,,,"The party that receives **possession** of the original Bill of Lading upon issuance.",
+"DocumentPartiesShippingInstructions",issueTo,IssueToParty,,,,,"The party to whom the `Bill of Lading` must be issued.",
 "DocumentPartiesShippingInstructions",notifyParties,"NotifyPartyShipper list",,maxItems=3,,,"List of up to 3 `Notify Parties`. The first item in the list is the **First Notify Party** (`N1`), the second item is the **Second Notify Party** (`N2`) and the last item is the **Other Notify Party** (`NI`).
 
 **Condition:** If provided:
@@ -283,18 +293,26 @@ DocumentPartiesHouseBL,shipper,ShipperHBL,yes,,,,"The `Shipper` on the `House Bi
   - The order of the items in this array **MUST** be preserved as by the provider of the API.",
 "DocumentPartiesShippingInstructions",onBehalfOfConsignee,"OnBehalfOfConsigneeShipper",,,,,"The party allowed to act on behalf of the consignee for documentation purposes.
 
-**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
+**Condition:** Providers **or** consumers on API v3.0.2 (or earlier): Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.
+
+**Condition:** Providers **and** consumers on API v3.0.3 (or later): Either the `address`, `addressLines` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
 "DocumentPartiesShippingInstructions",onBehalfOfShipper,OnBehalfOfShipperShipper,,,,,"The party allowed to act on behalf of the shipper for documentation purposes.
 
-**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
+**Condition:** Providers **or** consumers on API v3.0.2 (or earlier): Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.
+
+**Condition:** Providers **and** consumers on API v3.0.3 (or later): Either the `address`, `addressLines` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
 "DocumentPartiesShippingInstructions",other,"OtherDocumentPartyShippingInstructions list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.",
 "DocumentPartiesShippingInstructions",seller,Seller,,,,,"The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
-"DocumentPartiesShippingInstructions",shipper,ShipperShipper,yes,,,,"Party by whom or in whose name a contract of carriage by sea has been concluded. May also be the party who delivers the goods to the carrier.",
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.",
+"DocumentPartiesShippingInstructions",shipper,ShipperShipper,yes,,,,"The party by whom or in whose name or on whose behalf a contract of carriage of goods by sea has been concluded with a carrier, or the party by whom or in whose name, or on whose behalf, the goods are actually delivered to the carrier in relation to the contract of carriage by sea.
+
+**Condition:** Providers **or** consumers on API v3.0.2 (or earlier): Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+
+**Condition:** Providers **and** consumers on API v3.0.3 (or later): Either the `address`, `addressLines` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address` or `addressLines`.",
 "DocumentPartiesShippingInstructions","shippingInstructionsRequestor","ShippingInstructionsRequestor",,,,,"The requestor of whoever submits the `Shipping Instructions`.
 **Condition:** Either the `address` or a party `identifyingCode` must be provided.",
-EndorseeShipper,address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+EndorseeShipper,address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 EndorseeShipper,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 
@@ -496,7 +514,7 @@ NationalCommodityCode,values,"string list",yes,"minItems=1
 maxLength=10","^\S(?:.*\S)?$",,"A list of `national commodity codes` values.
 Item description:
 The value of the `National Commodity Code`",
-NotifyPartyHBL,address,AddressHBL,,,,,"An object for storing address-related information.",
+NotifyPartyHBL,address,AddressHBL,,,,,"An object for storing address related information. Either **Street number** or **PO Box** should be provided to meet **ICS2** filing requirements.",
 NotifyPartyHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 NotifyPartyHBL,partyContactDetails,"PartyContactDetailHBL list",yes,,,,"A list of contact details",
 NotifyPartyHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -569,7 +587,11 @@ OtherDocumentPartyHBL,partyFunction,string,yes,maxLength=3,,DDS,"Specifies the r
 - `CS` (Consolidator)
 - `MF` (Manufacturer)
 - `WH` (Warehouse Keeper)",
-"OtherDocumentPartyShippingInstructions",party,PartyShipper,yes,,,,"Refers to a company or a legal entity. Either `address` or an `identifyingCode` must be provided.",
+"OtherDocumentPartyShippingInstructions",party,PartyShipper,yes,,,,"Refers to a company or a legal entity.
+
+**Condition:** Providers **or** consumers on API v3.0.2 (or earlier): Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.
+
+**Condition:** Providers **and** consumers on API v3.0.3 (or later): Either the `address`, `addressLines` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
 "OtherDocumentPartyShippingInstructions",partyFunction,string,yes,maxLength=3,,DDS,"Specifies the role of the party in a given context. Possible values are:
 
 - `SCO` (Service Contract Owner)
@@ -637,7 +659,7 @@ PartyContactDetailHBL,phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+
 "PartyContactDetailWithPattern",email,string,,maxLength=100,"^.+@\S+$",info@dcsa.org,"`E-mail` address to be used",
 "PartyContactDetailWithPattern",name,string,yes,maxLength=35,"^\S(?:.*\S)?$",Henrik,"Name of the contact",
 "PartyContactDetailWithPattern",phone,string,,maxLength=30,"^\+(?:[0-9] ?){6,14}[0-9]$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
-PartyHBL,address,Address,,,,,"An object for storing address-related information.",
+PartyHBL,address,Address,,,,,"An object for storing address related information",
 PartyHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 PartyHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
 PartyHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","Asseco Denmark","Name of the party.",
@@ -726,7 +748,7 @@ Seal,source,string,,,,CUS,"The source of the seal, namely who has affixed the se
 - `CUS` (Customs)
 
 **Condition:** Seal source may be required depending on the type of commodity being shipped.",
-Seller,address,Address,,,,,"An object for storing address-related information.",
+Seller,address,Address,,,,,"An object for storing address related information",
 Seller,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 Item description:
@@ -739,7 +761,7 @@ Seller,typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"Can 
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-SellerHBL,address,AddressHBL,,,,,"An object for storing address-related information.",
+SellerHBL,address,AddressHBL,,,,,"An object for storing address related information. Either **Street number** or **PO Box** should be provided to meet **ICS2** filing requirements.",
 SellerHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 SellerHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
 SellerHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -748,7 +770,7 @@ SellerHBL,typeOfPerson,string,yes,maxLength=50,"^\S(?:.*\S)?$",NATURAL_PERSON,"C
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-ShipperHBL,address,Address,,,,,"An object for storing address-related information.",
+ShipperHBL,address,Address,,,,,"An object for storing address related information",
 ShipperHBL,identifyingCodes,"IdentifyingCode list",,,,,,
 ShipperHBL,partyContactDetails,"PartyContactDetailHBL list",,,,,"A list of contact details",
 ShipperHBL,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$","IKEA Denmark","Name of the party.",
@@ -895,7 +917,7 @@ ShippingInstructions,originChargesPaymentTerm,OriginChargesPaymentTerm,,,,,"An i
 ShippingInstructions,partyContactDetails,"PartyContactDetail list",yes,minItems=1,,,"The contact details of the Shipping Instructions requestor(s) to contact in relation to the **Transport Document** (changes, notifications etc.)",
 ShippingInstructions,placeOfIssue,PlaceOfIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
 
-Condition: The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
 ShippingInstructions,references,"Reference list",,,,,"A list of `References`",
 ShippingInstructions,"requestedCarrierCertificates","string list",,maxLength=100,,,"Certificate(s) requested by the Shipper for the Carrier to include as part of the shipment documentation pack
 Item description:
@@ -958,7 +980,7 @@ ShippingInstructions,"updatedShippingInstructionsStatus",string,,maxLength=50,,U
 - `UPDATE_CANCELLED` (An update to a Shipping Instructions is discontinued by consumer)
 - `UPDATE_DECLINED` (An update to a Shipping Instructions is discontinued by provider)",
 ShippingInstructions,"utilizedTransportEquipments","UtilizedTransportEquipmentShipper list",yes,minItems=1,,,"A list of `Utilized Transport Equipments` describing the equipment being used.",
-"ShippingInstructionsRequestor",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructionsRequestor",address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 "ShippingInstructionsRequestor",addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 

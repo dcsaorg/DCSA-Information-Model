@@ -12,8 +12,9 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.CarriersAgentAtDestination
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The party on the import side assigned by the carrier to whom the customer need to reach out to for cargo release.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

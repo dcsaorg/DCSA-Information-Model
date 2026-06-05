@@ -88,4 +88,4 @@ Vessel,vesselIMONumber,string,,"minLength=7
 maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel.",
 VesselSchedule,isDummyVessel,boolean,yes,,,,"This property can be set to `true` when no vessel has been assigned, indicating that the `vesselIMONumber` does not exist.",
 VesselSchedule,transportCalls,"TransportCall list",,,,,,
-VesselSchedule,vessel,Vessel,,,,,"Vessel information.",
+VesselSchedule,vessel,Vessel,,,,,,

@@ -11,8 +11,18 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model_sur.Endorsemen
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model_sur.SurrenderRequestDetails
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+A concrete surrender request related to a transport document.
+
+The platform guarantees *all* of the following:
+
+  1) The surrender request was submitted by the sole possessor of the eBL.
+  2) Depending on the eBL type:
+   * For non-negotiable ("straight") eBLs, the surrender request was submitted by either the original shipper OR the consignee.
+   * For negotiable eBLs with a named titleholder, the surrender request was submitted by the named titleholder.
+   * For negotiable eBLs without a named titleholder / blank eBLs, possession is sufficient for the entity surrendering the eBL.
+  3) The carrier holds possession of the eBL with this surrender request  until it responds to this surrender request.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

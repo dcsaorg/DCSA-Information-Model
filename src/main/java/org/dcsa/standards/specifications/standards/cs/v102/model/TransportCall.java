@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Schema(description = "A transport call in the schedule.")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)

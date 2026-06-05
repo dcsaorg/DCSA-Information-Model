@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Schema(description = "Vessel information.")
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)

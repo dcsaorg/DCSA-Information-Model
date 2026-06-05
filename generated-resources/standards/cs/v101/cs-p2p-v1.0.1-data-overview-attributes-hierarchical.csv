@@ -113,7 +113,7 @@ maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying wher
 More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
 "PointToPoint / legs / sequenceNumber",sequenceNumber,integer,,,,1,"Sequence number of the leg.",
 "PointToPoint / legs / transport as BargeTransport","transport as BargeTransport",BargeTransport,,,,,"The mode of transport as defined by DCSA.",
-"PointToPoint / legs / transport as BargeTransport / barge",barge,Barge,,,,,"Barge information.",
+"PointToPoint / legs / transport as BargeTransport / barge",barge,Barge,,,,,,
 "PointToPoint / legs / transport as BargeTransport / barge / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
 "PointToPoint / legs / transport as BargeTransport / barge / flag",flag,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the ISO 3166 two-letter country code.",
@@ -187,7 +187,7 @@ maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference
 - `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
 "PointToPoint / legs / transport as VesselTransport / universalServiceReference","universalServiceReference",string,,"minLength=8
 maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
-"PointToPoint / legs / transport as VesselTransport / vessel",vessel,Vessel,,,,,"Vessel information.",
+"PointToPoint / legs / transport as VesselTransport / vessel",vessel,Vessel,,,,,,
 "PointToPoint / legs / transport as VesselTransport / vessel / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
 "PointToPoint / legs / transport as VesselTransport / vessel / flag",flag,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code.",

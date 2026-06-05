@@ -238,8 +238,10 @@ DangerousGoods,isWaste,boolean,,,,false,"Indicates if waste is being shipped",
 DangerousGoods,limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
 DangerousGoods,NANumber,string,,"minLength=4
 maxLength=4","^\d{4}$",9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
-DangerousGoods,netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
-DangerousGoods,netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
+DangerousGoods,netExplosiveContent,NetExplosiveContent,,,,,"The total weight of the explosive substances, without the packaging’s, casings, etc.",
+DangerousGoods,netVolume,NetVolume,,,,,"The volume of the referenced dangerous goods.
+
+**Condition:** only applicable to liquids and gas.",
 DangerousGoods,netWeight,NetWeight,,,,,"Total weight of the goods carried, excluding packaging.",
 DangerousGoods,packingGroup,integer,,"minimum=1
 maximum=3",,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
@@ -804,9 +806,9 @@ Item description:
 A line of the address to be displayed on the transport document.",
 TransportDocument,"displayedShippedOnBoardReceivedForShipment",string,,maxLength=250,"^\S(?:.*\S)?$","Received for Shipment CMA CGM CONCORDE 28-Jul-2022...","The text to be displayed on the `Transport Document` as evidence that the goods have been received for shipment or shipped on board.",
 TransportDocument,documentParties,DocumentParties,yes,,,,"All `Parties` with associated roles.",
-TransportDocument,exportLicense,ExportLicense,,,,,"`Export License` requirements.
+TransportDocument,exportLicense,ExportLicense,,,,,"`Export License` requirements
 
-Condition: Included if the property is provided in the `Shipping Instructions.`",
+**Condition:** Included if the property is provided in the `Shipping Instructions.`",
 TransportDocument,feedbacks,"Feedback list",,,,,"Feedback that can be provided includes, but is not limited to:
 - unsupported properties
 - changed values
@@ -816,10 +818,12 @@ TransportDocument,freightPaymentTermCode,string,,,,PRE,"An indicator of whether 
 
 - `PRE` (Prepaid)
 - `COL` (Collect)",
-TransportDocument,importLicense,ImportLicense,,,,,"`Import License` requirements.
+TransportDocument,importLicense,ImportLicense,,,,,"`Import License` requirements
 
-Condition: Included if the property is provided in the `Shipping Instructions.`",
-TransportDocument,invoicePayableAt,InvoicePayableAt,yes,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer. Can be a UN Location Code or free-text name.",
+**Condition:** Included if the property is provided in the `Shipping Instructions.`",
+TransportDocument,invoicePayableAt,InvoicePayableAt,yes,,,,"Location where payment of ocean freight and charges for the main transport will take place by the customer.
+
+The location can be provided as a `UN Location Code` or as a fallback - a `freeText` field",
 TransportDocument,isElectronic,boolean,yes,,,true,"An indicator whether the transport document is electronically transferred.",
 TransportDocument,isShippedOnBoardType,boolean,yes,,,true,"Specifies whether the Transport Document is a received for shipment, or shipped on board.",
 TransportDocument,issueDate,"string(date)",,,,2020-12-12,"Local date when the transport document has been issued.
@@ -856,7 +860,7 @@ TransportDocument,numberOfRiderPages,integer,,minimum=0,,2,"The number of additi
 TransportDocument,partyContactDetails,"PartyContactDetail list",yes,minItems=1,,,"The contact details of the person(s) to contact in relation to the **Transport Document** (changes, notifications etc.)",
 TransportDocument,placeOfIssue,PlaceOfIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
 
-Condition: The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
 TransportDocument,receiptTypeAtOrigin,string,yes,maxLength=3,,CY,"Indicates the type of service offered at `Origin`. The options are:
 - `CY` (Container yard (incl. rail ramp))
 - `SD` (Store Door)
@@ -889,7 +893,7 @@ TransportDocument,"transportDocumentSubReference",string,,maxLength=100,"^\S(?:.
 TransportDocument,"transportDocumentTypeCode",string,yes,,,SWB,"Specifies the type of the transport document
 - `BOL` (Bill of Lading)
 - `SWB` (Sea Waybill)",
-TransportDocument,transports,Transports,yes,,,,"Transport information for the shipment including ports, places, and planned dates.",
+TransportDocument,transports,Transports,yes,,,,,
 TransportDocument,"utilizedTransportEquipments","UtilizedTransportEquipment list",yes,minItems=1,,,"A list of `Utilized Transport Equipments` describing the equipment being used.",
 Transports,onCarriageBy,string,,maxLength=50,,TRUCK,"Mode of transportation for on-carriage when transport from the port of discharge is organized by the carrier. If this attributes is populated, then a Place of Delivery must also be defined. The currently supported values include:
 - `VESSEL` (Vessel)

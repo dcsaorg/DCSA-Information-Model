@@ -3,7 +3,13 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = CargoGrossWeightReq.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The estimated grand total gross weight of the cargo, including packaging items being carried, which can be expressed in imperial or metric terms, as provided by the shipper.
+
+**Condition:** Mandatory if not provided on `Commodity` level
+""")
 @Data
 public class CargoGrossWeightReq {
 

@@ -9,8 +9,7 @@ import lombok.Data;
 `Import License` requirements
 
 **Condition:** Subject to local customs requirements and commodity.
-""",
-    title = "Import License (Shipper)")
+""")
 @Data
 public class ImportLicenseShipper {
 

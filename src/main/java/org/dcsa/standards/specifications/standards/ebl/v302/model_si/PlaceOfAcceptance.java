@@ -9,7 +9,13 @@ import lombok.ToString;
 
 @Schema(
     description =
-      org.dcsa.standards.specifications.standards.ebl.v3.model_si.PlaceOfAcceptance.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object to capture `Place of Acceptance` location specified as: identification of the seaport, freight terminal or other place at which the goods are taken over from the shipper by the Ocean Transport Intermediary (OTI) issuing the `House Bill of Lading`.
+
+**Condition:** Mandatory if different from `Place of Receipt` or `Port of Loading` at the `Master Transport Document` level.
+
+**Condition:** The location can be specified either using `UN Location Code` and/or (`Location Name` together with `Country Code`), all three properties can be specified.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

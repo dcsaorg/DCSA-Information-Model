@@ -6,8 +6,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model.CargoGrossWeight
 
 @Schema(
     description =
-        "A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.",
-    title = "Cargo Item (House B/L)")
+"""
+A `cargoItem` is the smallest unit used by stuffing. A `cargoItem` cannot be split across containers.
+""")
 @Data
 public class CargoItemHBL {
 

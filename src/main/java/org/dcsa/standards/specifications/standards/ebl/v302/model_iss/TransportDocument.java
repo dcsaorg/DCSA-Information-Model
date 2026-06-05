@@ -12,8 +12,11 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDet
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.TransportDocument
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The document that governs the terms of carriage between shipper and carrier for maritime transportation. Two distinct types of transport documents exist:
+- Bill of Lading
+- Sea Waybill.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

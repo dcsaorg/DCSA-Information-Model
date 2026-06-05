@@ -15,8 +15,9 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.NationalCommod
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.ConsignmentItem
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Defines a list of `CargoItems` belonging together and the associated `Booking`. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

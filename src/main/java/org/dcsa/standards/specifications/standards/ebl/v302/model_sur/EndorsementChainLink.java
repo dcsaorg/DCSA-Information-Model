@@ -10,8 +10,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_sur.RecipientPar
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v302.model_end.EndorsementChainLink
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Entry in the endorsement chain.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

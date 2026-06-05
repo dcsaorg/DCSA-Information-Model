@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 
-@Schema(description = "Schedule information for a vessel at a port.")
 @Data
 public class Schedule {
 

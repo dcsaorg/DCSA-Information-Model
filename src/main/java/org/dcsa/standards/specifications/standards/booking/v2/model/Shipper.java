@@ -7,7 +7,6 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.booking.v2.types.PurchaseOrderReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
 
 @Schema(description = Shipper.CLASS_SCHEMA_DESCRIPTION)
 @Data

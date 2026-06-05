@@ -5,8 +5,10 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyHBL;
 
 @Schema(
-    description = "A list of document parties that can be optionally provided in the `House B/L`.",
-    title = "Other Document Party (House B/L)")
+    description =
+"""
+A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.
+""")
 @Data
 public class OtherDocumentPartyHBL {
 

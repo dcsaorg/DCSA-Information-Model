@@ -3,7 +3,13 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model_td;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = "Location where payment of ocean freight and charges for the main transport will take place by the customer. Can be a UN Location Code or free-text name.")
+@Schema(
+    description =
+"""
+Location where payment of ocean freight and charges for the main transport will take place by the customer.
+
+The location can be provided as a `UN Location Code` or as a fallback - a `freeText` field
+""")
 @Data
 public class InvoicePayableAt {
 

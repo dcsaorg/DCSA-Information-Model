@@ -5,13 +5,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v3.types.ConsigneePurchaseOrderReference;
 
-@Schema(description = Consignee.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The party to which goods are consigned in the `Master Bill of Lading`.
+
+**Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
+
+**Condition:** If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""")
 @Data
 public class Consignee {
 

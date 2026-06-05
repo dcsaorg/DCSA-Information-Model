@@ -6,8 +6,10 @@ import lombok.Data;
 import java.util.List;
 
 @Schema(
-    description = "The party on whose behalf the action was directed.",
-    title = "Represented Party")
+    description =
+"""
+The party on whose behalf the action was directed.
+""")
 @Data
 public class RepresentedRecipientParty {
 

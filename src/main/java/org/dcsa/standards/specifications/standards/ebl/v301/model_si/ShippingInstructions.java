@@ -12,8 +12,9 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDet
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.ShippingInstructions
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The `Shipping Instructions` as provided by the Shipper.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

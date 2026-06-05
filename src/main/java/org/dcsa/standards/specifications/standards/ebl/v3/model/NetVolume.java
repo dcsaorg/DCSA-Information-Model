@@ -11,7 +11,9 @@ import org.dcsa.standards.specifications.standards.dt.v100.model.Volume;
 @Schema(
     description =
 """
-The volume of the referenced dangerous goods. Only applicable to liquids and gas.
+The volume of the referenced dangerous goods.
+
+**Condition:** only applicable to liquids and gas.
 """)
 @Getter
 @Setter

@@ -5,8 +5,10 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.Party;
 
 @Schema(
-    description = OtherDocumentPartyShippingInstructions.CLASS_SCHEMA_DESCRIPTION,
-    title = "Other Document Party (Shipping Instructions)")
+    description =
+"""
+A list of document parties that can be optionally provided in the `Shipping Instructions`.
+""")
 @Data
 public class OtherDocumentPartyShippingInstructions {
 

@@ -3,15 +3,12 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Address;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
 
 @Schema(
-    description = """
+    description =
+"""
 Refers to a company or a legal entity.
-""",
-    title = "Party (House B/L)",
-    requiredProperties = {"partyName"})
+""")
 @Data
 public class PartyHBL {
 
@@ -21,7 +18,8 @@ Name of the party.
 """,
       example = "Asseco Denmark",
       pattern = "^\\S(?:.*\\S)?$",
-      maxLength = 70)
+      maxLength = 70,
+      requiredMode = Schema.RequiredMode.REQUIRED)
   private String partyName;
 
   @Schema

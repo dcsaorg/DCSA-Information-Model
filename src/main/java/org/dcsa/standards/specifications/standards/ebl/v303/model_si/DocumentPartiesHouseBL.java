@@ -11,8 +11,11 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_si.OtherDocument
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_si.DocumentPartiesHouseBL
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+All `Parties` with associated roles for this `House Bill of Lading`.
+
+**Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) **and** `advancedManifestFilingPerformedBy=CARRIER`
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

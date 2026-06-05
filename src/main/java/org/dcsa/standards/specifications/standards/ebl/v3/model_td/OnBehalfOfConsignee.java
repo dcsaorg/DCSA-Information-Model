@@ -7,7 +7,13 @@ import lombok.Data;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress;
 
-@Schema(description = OnBehalfOfConsignee.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The party allowed to act on behalf of the consignee for documentation purposes.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.
+""")
 @Data
 public class OnBehalfOfConsignee {
 

@@ -9,13 +9,15 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.Address.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object for storing address related information
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)
-public class Address extends org.dcsa.standards.specifications.standards.dt.v100.model.Address {
+public class Address extends org.dcsa.standards.specifications.standards.ebl.v3.model.Address {
 
   @Schema(
       requiredMode = Schema.RequiredMode.REQUIRED,

@@ -29,17 +29,17 @@ maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the packed cargo. A maximum of 4 decimals should be provided.",
-"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
 "ShippingInstructions / consignmentItems / cargoItems / cargoGrossWeight / value",value,number,yes,minimum=0,,2400,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container. A maximum of 3 decimals should be provided.",
-"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,CargoNetVolume,,,,,"Volume of the cargo excluding packaging. Calculated by multiplying width, height, and length.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume",cargoNetVolume,CargoNetVolume,,,,,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / unit",unit,string,yes,,,MTQ,"The unit of measure which can be expressed in imperial or metric terms:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetVolume / value",value,number,yes,minimum=0,,2.4,"Calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
-"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging and container tare weight.",
+"ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight",cargoNetWeight,CargoNetWeight,,,,,"The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container.",
 "ShippingInstructions / consignmentItems / cargoItems / cargoNetWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
@@ -223,8 +223,8 @@ A line of the address to be displayed on the transport document.",
 **Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` **and** `advancedManifestFilingPerformedBy=CARRIER` and `isHouseBillOfLadingsIssued=false`",
 "ShippingInstructions / documentParties / buyer",buyer,Buyer,,,,,"The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
-"ShippingInstructions / documentParties / buyer / address",address,Address,,,,,"An object for storing address-related information.",
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.",
+"ShippingInstructions / documentParties / buyer / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / documentParties / buyer / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / documentParties / buyer / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -284,7 +284,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 **Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
 
 **Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
-"ShippingInstructions / documentParties / consignee / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / consignee / address",address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 "ShippingInstructions / documentParties / consignee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party’s address.",
 "ShippingInstructions / documentParties / consignee / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -363,7 +363,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 **Condition:** Can only be provided for negotiable BLs (`isToOrder=true`). If a negotiable BL does not have an `Endorsee`, the BL is said to be ""blank endorsed"". Note `Consignee` and `Endorsee` are mutually exclusive.
 
 **Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
-"ShippingInstructions / documentParties / endorsee / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / endorsee / address",address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 "ShippingInstructions / documentParties / endorsee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party’s address.",
 "ShippingInstructions / documentParties / endorsee / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -429,7 +429,7 @@ A single address line",
 maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ShippingInstructions / documentParties / endorsee / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
 "ShippingInstructions / documentParties / endorsee / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
-"ShippingInstructions / documentParties / issueTo",issueTo,IssueToParty,,,,,"The party that receives **possession** of the original Bill of Lading upon issuance.",
+"ShippingInstructions / documentParties / issueTo",issueTo,IssueToParty,,,,,"The party to whom the `Bill of Lading` must be issued.",
 "ShippingInstructions / documentParties / issueTo / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
 "ShippingInstructions / documentParties / issueTo / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
@@ -564,7 +564,9 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
 "ShippingInstructions / documentParties / other",other,"OtherDocumentPartyShippingInstructions list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.",
-"ShippingInstructions / documentParties / other / party",party,Party,yes,,,,"Refers to a company or a legal entity. Either `address` or an `identifyingCode` must be provided.",
+"ShippingInstructions / documentParties / other / party",party,Party,yes,,,,"Refers to a company or a legal entity.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`.",
 "ShippingInstructions / documentParties / other / party / address",address,PartyAddress,,,,,"Address of the party.",
 "ShippingInstructions / documentParties / other / party / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party’s address.",
 "ShippingInstructions / documentParties / other / party / address / countryCode",countryCode,string,yes,"minLength=2
@@ -634,8 +636,8 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `WH` (Warehouse Keeper)",
 "ShippingInstructions / documentParties / seller",seller,Seller,,,,,"The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
 
-**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifestTypeCode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillOfLadingsIssued=false`.",
-"ShippingInstructions / documentParties / seller / address",address,Address,,,,,"An object for storing address-related information.",
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'` and `isHouseBillofLadingsIssued=false`.",
+"ShippingInstructions / documentParties / seller / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / documentParties / seller / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / documentParties / seller / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -690,7 +692,9 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `NATURAL_PERSON` (A person that is an individual living human being)
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
-"ShippingInstructions / documentParties / shipper",shipper,Shipper,yes,,,,"Party by whom or in whose name a contract of carriage by sea has been concluded. May also be the party who delivers the goods to the carrier.",
+"ShippingInstructions / documentParties / shipper",shipper,Shipper,yes,,,,"The party by whom or in whose name or on whose behalf a contract of carriage of goods by sea has been concluded with a carrier, or the party by whom or in whose name, or on whose behalf, the goods are actually delivered to the carrier in relation to the contract of carriage by sea.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.",
 "ShippingInstructions / documentParties / shipper / address",address,PartyAddress,,,,,"Party address.",
 "ShippingInstructions / documentParties / shipper / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party’s address.",
 "ShippingInstructions / documentParties / shipper / address / countryCode",countryCode,string,yes,"minLength=2
@@ -767,7 +771,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
 "ShippingInstructions / documentParties / shippingInstructionsRequestor","shippingInstructionsRequestor","ShippingInstructionsRequestor",,,,,"The requestor of whoever submits the `Shipping Instructions`.
 **Condition:** Either the `address` or a party `identifyingCode` must be provided.",
-"ShippingInstructions / documentParties / shippingInstructionsRequestor / address",address,PartyAddress,,,,,"Address where the party is located. Includes street details, postal info, and country/UN location codes.",
+"ShippingInstructions / documentParties / shippingInstructionsRequestor / address",address,PartyAddress,,,,,"Address where the party is located. It is an object of the attributes below.",
 "ShippingInstructions / documentParties / shippingInstructionsRequestor / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The city name of the party’s address.",
 "ShippingInstructions / documentParties / shippingInstructionsRequestor / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -851,7 +855,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ShippingInstructions / houseBillOfLadings",houseBillOfLadings,"HouseBillOfLading list",,,,,"A list of `House Bill of Ladings` specified by the Shipper.",
 "ShippingInstructions / houseBillOfLadings / consignmentItems",consignmentItems,"ConsignmentItemHBL list",yes,minItems=1,,,"A list of `ConsignmentItems` for this `House Bill of Lading`",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems",cargoItems,"CargoItemHBL list",yes,minItems=1,,,"A list of all `cargoItems`",
-"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging, excluding the tare weight of the container.",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight",cargoGrossWeight,CargoGrossWeight,yes,,,,"The weight of the cargo item including packaging being carried in the container. Excludes the tare weight of the container.",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / cargoItems / cargoGrossWeight / unit",unit,string,yes,,,KGM,"The unit of measure which can be expressed in imperial or metric terms:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)",
@@ -890,7 +894,13 @@ maxLength=35","^\S(?:.*\S)?$",,"
 Item description:
 The value of the `customsReference`",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / descriptionOfGoods",descriptionOfGoods,string,yes,maxLength=512,"^\S(?:.*\S)?$","blue shoes size 47","A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted. Where the declarant provides the CUS code for chemical substances and preparations, Member States may waive the requirement of providing a precise description of the goods.",
-"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode",nationalCommodityCode,NationalCommodityCode,yes,,,,"The national commodity classification code linked to a country with a value. Examples: NCM (Brazil), HTS (US), TARIC (EU).",
+"ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode",nationalCommodityCode,NationalCommodityCode,yes,,,,"The national commodity classification code linked to a country with a value.
+
+An example could look like this:
+
+| Type  | Country | Value |
+|-------|:-------:|-------------|
+|NCM|BR|['1515', '2106', '2507', '2512']|",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode / countryCode",countryCode,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",BR,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ShippingInstructions / houseBillOfLadings / consignmentItems / nationalCommodityCode / type",type,string,yes,maxLength=10,"^\S(?:.*\S)?$",NCM,"The national commodity classification code, which can be one of the following values defined by DCSA:
@@ -907,8 +917,10 @@ The value of the `National Commodity Code`",
 "ShippingInstructions / houseBillOfLadings / documentParties",documentParties,DocumentPartiesHouseBL,yes,,,,"All `Parties` with associated roles for this `House Bill of Lading`.
 
 **Condition:** `Buyer` and `Seller` are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) **and** `advancedManifestFilingPerformedBy=CARRIER`",
-"ShippingInstructions / houseBillOfLadings / documentParties / buyer",buyer,BuyerHBL,,,,,"The buyer for a `House Bill of Lading`.",
-"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer",buyer,BuyerHBL,,,,,"The buyer is the last known entity to whom the goods are sold or agreed to be sold. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / buyer / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / buyer / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -964,7 +976,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
 "ShippingInstructions / houseBillOfLadings / documentParties / consignee",consignee,ConsigneeHBL,,,,,"The ultimate recipient of the cargo. It must be different from the freight forwarder, (de)consolidator, postal operator, or customs agent.",
-"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / consignee / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / consignee / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -1022,7 +1034,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 "ShippingInstructions / houseBillOfLadings / documentParties / notifyParty",notifyParty,NotifyPartyHBL,,,,,"The person to be notified when a shipment arrives at its destination.
 
 **Condition:** Mandatory for To Order HBLs (HouseBL `isToOrder=true`)",
-"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / notifyParty / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -1079,7 +1091,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
 "ShippingInstructions / houseBillOfLadings / documentParties / other",other,"OtherDocumentPartyHBL list",,,,,"A list of document parties that can be optionally provided in the `Shipping Instructions` and `Transport Document`.",
 "ShippingInstructions / houseBillOfLadings / documentParties / other / party",party,PartyHBL,yes,,,,"Refers to a company or a legal entity.",
-"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / other / party / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / other / party / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -1138,8 +1150,10 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `CS` (Consolidator)
 - `MF` (Manufacturer)
 - `WH` (Warehouse Keeper)",
-"ShippingInstructions / houseBillOfLadings / documentParties / seller",seller,SellerHBL,,,,,"The seller for a `House Bill of Lading`.",
-"ShippingInstructions / houseBillOfLadings / documentParties / seller / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller",seller,SellerHBL,,,,,"The seller is the last known entity by whom the goods are sold or agreed to be sold to the buyer. If the goods are to be imported otherwise than in pursuance of a purchase, the details of the owner of the goods shall be provided.
+
+**Condition:** Buyer and Seller are mandatory if `isCargoDeliveredInICS2Zone=true` (on House B/L level) and `manifesttypecode='ENS'` and `advancedManifestFilingPerformedBy='CARRIER'`.",
+"ShippingInstructions / houseBillOfLadings / documentParties / seller / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / seller / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / seller / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -1195,7 +1209,7 @@ maxLength=2","^[A-Z]{2}$",IN,"The 2 characters for the country code using [ISO 3
 - `LEGAL_PERSON` (person (including a human being and public or private organizations) that can perform legal actions, such as own a property, sue and be sued)
 - `ASSOCIATION_OF_PERSONS` (Not a legal person, but recognised under Union or National law as having the capacity to perform legal acts)",
 "ShippingInstructions / houseBillOfLadings / documentParties / shipper",shipper,ShipperHBL,yes,,,,"The `Shipper` on the `House Bill of Lading`.",
-"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address",address,Address,,,,,"An object for storing address-related information.",
+"ShippingInstructions / houseBillOfLadings / documentParties / shipper / address",address,Address,,,,,"An object for storing address related information",
 "ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
 "ShippingInstructions / houseBillOfLadings / documentParties / shipper / address / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
@@ -1399,7 +1413,7 @@ More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE
 "ShippingInstructions / partyContactDetails / phone",phone,string,,maxLength=30,"^\S(?:.*\S)?$","+45 70262970","Phone number for the contact. Phone **MUST** include an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
 "ShippingInstructions / placeOfIssue",placeOfIssue,PlaceOfIssue,,,,,"An object to capture where the original Transport Document (`Bill of Lading`) will be issued.
 
-Condition: The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
+**Condition:** The location can be specified as one of `UN Location Code` or `CountryCode`, but not both.",
 "ShippingInstructions / placeOfIssue / countryCode",countryCode,string,,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
 "ShippingInstructions / placeOfIssue / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","The name of the location.",

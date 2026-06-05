@@ -5,7 +5,6 @@ import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.booking.v2.types.EquipmentReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.ActiveReeferSettings;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.dt.v100.model.Reference;
 
 @Schema(description = RequestedEquipment.CLASS_SCHEMA_DESCRIPTION)

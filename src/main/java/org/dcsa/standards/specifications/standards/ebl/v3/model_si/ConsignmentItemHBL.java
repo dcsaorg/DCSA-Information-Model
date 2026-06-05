@@ -4,12 +4,14 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.CustomsReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.CustomsReference;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.NationalCommodityCode;
 
 @Schema(
-    description = ConsignmentItemHBL.CLASS_SCHEMA_DESCRIPTION,
-    title = "Consignment Item (House B/L)")
+    description =
+"""
+Defines a list of `CargoItems` belonging together in the same consignment. A `ConsignmentItem` can be split across multiple containers (`UtilizedTransportEquipment`) by referencing multiple `CargoItems`
+""")
 @Data
 public class ConsignmentItemHBL {
 

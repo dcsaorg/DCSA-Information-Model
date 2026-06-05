@@ -17,6 +17,8 @@ import org.dcsa.standards.specifications.standards.ebl.v301.model.IdentifyingCod
 import org.dcsa.standards.specifications.standards.ebl.v301.model.IssueToParty;
 import org.dcsa.standards.specifications.standards.ebl.v301.model.NotifyParty;
 import org.dcsa.standards.specifications.standards.ebl.v301.model.Shipper;
+import org.dcsa.standards.specifications.standards.ebl.v301.model_si.OtherDocumentPartyHBL;
+import org.dcsa.standards.specifications.standards.ebl.v301.model_td.OtherDocumentParty;
 
 public class Ebl301StandardSpecification extends Ebl300StandardSpecification {
 
@@ -63,6 +65,6 @@ public class Ebl301StandardSpecification extends Ebl300StandardSpecification {
   protected Stream<Class<?>> modelClassesStream() {
     return modelClassesStreamWithReplacementClasses(
         super.modelClassesStream(),
-        Set.of(IdentifyingCode.class, IssueToParty.class, NotifyParty.class, Shipper.class));
+        Set.of(IdentifyingCode.class, IssueToParty.class, NotifyParty.class, OtherDocumentParty.class, OtherDocumentPartyHBL.class, Shipper.class));
   }
 }

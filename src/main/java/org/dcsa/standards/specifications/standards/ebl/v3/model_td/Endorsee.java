@@ -5,14 +5,20 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v3.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress;
 
 @Schema(
     description =
-      Endorsee.CLASS_SCHEMA_DESCRIPTION)
+"""
+The party to whom the title to the goods is transferred by means of endorsement.
+
+**Condition:** Can only be provided for negotiable BLs (`isToOrder=true`). If a negotiable BL does not have an `Endorsee`, the BL is said to be "blank endorsed". Note `Consignee` and `Endorsee` are mutually exclusive.
+
+**Condition:** If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""")
 @Data
 public class Endorsee {
 

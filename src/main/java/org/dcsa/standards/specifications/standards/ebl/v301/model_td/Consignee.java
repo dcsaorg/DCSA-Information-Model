@@ -12,8 +12,13 @@ import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddres
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.Consignee
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The party to which goods are consigned in the `Master Bill of Lading`.
+
+**Condition:** Mandatory for non-negotiable BL (`isToOrder=false`)
+
+**Condition:** If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

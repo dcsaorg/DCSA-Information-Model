@@ -11,8 +11,9 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model_end.EndorsementC
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_end.EndorsementChain
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+An endorsement Chain linked to a particular `transportDocumentReference` and potentially a `transportDocumentSubReference`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

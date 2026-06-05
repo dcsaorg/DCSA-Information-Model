@@ -7,10 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Schema(
-    description =
-        org.dcsa.standards.specifications.standards.booking.v2.model.Booking
-            .CLASS_SCHEMA_DESCRIPTION)
 @Getter
 @Setter
 @RequiredArgsConstructor

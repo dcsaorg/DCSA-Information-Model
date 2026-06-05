@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.booking.v2.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = PartyAddress.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+An object for storing address related information
+""")
 @Data
 public class PartyAddress {
 

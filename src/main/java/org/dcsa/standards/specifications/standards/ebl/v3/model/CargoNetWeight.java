@@ -8,7 +8,11 @@ import lombok.Setter;
 import lombok.ToString;
 import org.dcsa.standards.specifications.standards.core.v101.model.Weight;
 
-@Schema(description = "The weight of the cargo item excluding packaging and container tare weight.")
+@Schema(
+    description =
+"""
+The weight of the cargo item excluding packaging being carried in the container. Excludes the tare weight of the container.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

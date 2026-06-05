@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.ImportLicense
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+`Import License` required for this commodity
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

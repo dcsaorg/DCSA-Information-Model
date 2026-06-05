@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-      org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress.CLASS_SCHEMA_DESCRIPTION)
+"""
+Address where the party is located. It is an object of the attributes below.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

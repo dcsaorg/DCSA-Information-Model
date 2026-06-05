@@ -10,8 +10,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.dt.v100.model.InnerPackaging
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Object for `Inner Packaging` specification
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.NetExplosiveContent
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The total weight of the explosive substances, without the packaging's, casings, etc.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

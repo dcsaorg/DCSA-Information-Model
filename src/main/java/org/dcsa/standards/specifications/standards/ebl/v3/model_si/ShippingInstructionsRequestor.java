@@ -8,8 +8,11 @@ import org.dcsa.standards.specifications.standards.ebl.v3.model.IdentifyingCode;
 import org.dcsa.standards.specifications.standards.ebl.v3.model.PartyAddress;
 
 @Schema(
-    description = ShippingInstructionsRequestor.CLASS_SCHEMA_DESCRIPTION,
-    title = "Shipping Instructions Requestor")
+    description =
+"""
+The requestor of whoever submits the `Shipping Instructions`.
+**Condition:** Either the `address` or a party `identifyingCode` must be provided.
+""")
 @Data
 public class ShippingInstructionsRequestor {
 

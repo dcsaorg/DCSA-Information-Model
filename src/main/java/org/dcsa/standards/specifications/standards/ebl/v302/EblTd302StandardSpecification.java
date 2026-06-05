@@ -8,6 +8,7 @@ import org.dcsa.standards.specifications.standards.ebl.v301.model_td.Endorsee;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.City;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.DocumentParties;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.OtherDocumentParty;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_td.Transports;
 import org.dcsa.standards.specifications.standards.ebl.v302.model_td.TransportDocument;
 
 public class EblTd302StandardSpecification extends Ebl302StandardSpecification {
@@ -28,6 +29,7 @@ public class EblTd302StandardSpecification extends Ebl302StandardSpecification {
             City.class,
             DocumentParties.class,
             OtherDocumentParty.class,
+            Transports.class,
             TransportDocument.class));
   }
 

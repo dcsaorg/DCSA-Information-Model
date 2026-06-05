@@ -9,8 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.DangerousGoods
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+Specification for `Dangerous Goods`. It is mandatory to provide one of `UNNumber` or `NANumber`. Dangerous Goods is based on **IMDG Amendment Version 41-22**.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

@@ -9,8 +9,15 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.NationalCommodityCode
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The national commodity classification code linked to a country with a value.
+
+An example could look like this:
+
+| Type  | Country | Value |
+|-------|:-------:|-------------|
+|NCM|BR|['1515', '2106', '2507', '2512']|
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

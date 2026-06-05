@@ -9,7 +9,9 @@ import lombok.ToString;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.City.CLASS_SCHEMA_DESCRIPTION)
+"""
+An object for storing city, state/region and country related information
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

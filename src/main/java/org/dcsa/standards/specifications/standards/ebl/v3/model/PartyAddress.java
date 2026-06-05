@@ -3,7 +3,11 @@ package org.dcsa.standards.specifications.standards.ebl.v3.model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-@Schema(description = PartyAddress.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+Address where the party is located. It is an object of the attributes below.
+""")
 @Data
 public class PartyAddress {
 

@@ -12,8 +12,11 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v301.model.NotifyParty
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The person to be notified when a shipment arrives at its destination.
+
+**Condition:** If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address` or `addressLines`.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

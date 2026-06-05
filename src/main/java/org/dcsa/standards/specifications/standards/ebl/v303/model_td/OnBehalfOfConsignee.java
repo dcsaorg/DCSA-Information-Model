@@ -12,8 +12,9 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model_td.OnBehalfOfConsignee
-            .CLASS_SCHEMA_DESCRIPTION)
+"""
+The party allowed to act on behalf of the consignee for documentation purposes.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

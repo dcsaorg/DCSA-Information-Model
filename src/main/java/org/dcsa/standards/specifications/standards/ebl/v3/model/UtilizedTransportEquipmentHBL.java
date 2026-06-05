@@ -4,11 +4,12 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dt.v100.model.Seal;
 
 @Schema(
-    description = "Specifies the container (`Equipment`), `Seals` and `References`",
-    title = "Utilized Transport Equipment (House B/L)")
+    description =
+"""
+Specifies the container (`Equipment`), `Seals` and `References`
+""")
 @Data
 public class UtilizedTransportEquipmentHBL {
 

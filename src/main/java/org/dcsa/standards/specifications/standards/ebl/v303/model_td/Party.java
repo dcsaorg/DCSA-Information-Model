@@ -12,7 +12,9 @@ import org.dcsa.standards.specifications.standards.core.v104.types.AddressLine;
 
 @Schema(
     description =
-        org.dcsa.standards.specifications.standards.ebl.v3.model.Party.CLASS_SCHEMA_DESCRIPTION)
+"""
+Refers to a company or a legal entity.
+""")
 @Getter
 @Setter
 @RequiredArgsConstructor

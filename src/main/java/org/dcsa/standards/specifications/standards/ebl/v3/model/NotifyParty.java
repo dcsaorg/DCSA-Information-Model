@@ -5,10 +5,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.dt.v100.model.PartyContactDetail;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
 import org.dcsa.standards.specifications.standards.dt.v100.types.DisplayedAddressLine;
 
-@Schema(description = NotifyParty.CLASS_SCHEMA_DESCRIPTION)
+@Schema(
+    description =
+"""
+The person to be notified when a shipment arrives at its destination.
+
+**Condition:** Either the `address` or a party `identifyingCode` must be provided in the `Shipping Instructions`. If a `displayedAddress` is provided, it must be included in the `Transport Document` instead of the `address`.
+""")
 @Data
 public class NotifyParty {
 

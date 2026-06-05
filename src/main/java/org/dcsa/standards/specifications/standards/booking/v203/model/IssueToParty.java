@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
 import org.dcsa.standards.specifications.standards.booking.v202.model.IdentifyingCode;
-import org.dcsa.standards.specifications.standards.dt.v100.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.booking.v2.model.TaxLegalReference;
 
 @Schema(description = IssueToParty.CLASS_SCHEMA_DESCRIPTION, title = "Issue To Party")
 @Data

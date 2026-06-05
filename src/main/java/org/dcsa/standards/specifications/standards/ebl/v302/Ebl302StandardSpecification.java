@@ -15,6 +15,7 @@ import org.dcsa.standards.specifications.standards.ebl.v302.model.NationalCommod
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PartyAddress;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.PlaceOfIssue;
 import org.dcsa.standards.specifications.standards.ebl.v302.model.TaxLegalReference;
+import org.dcsa.standards.specifications.standards.ebl.v302.model_td.Transports;
 
 public class Ebl302StandardSpecification extends Ebl301StandardSpecification {
 
@@ -54,6 +55,7 @@ public class Ebl302StandardSpecification extends Ebl301StandardSpecification {
             NationalCommodityCode.class,
             PartyAddress.class,
             PlaceOfIssue.class,
-            TaxLegalReference.class));
+            TaxLegalReference.class,
+            Transports.class));
   }
 }

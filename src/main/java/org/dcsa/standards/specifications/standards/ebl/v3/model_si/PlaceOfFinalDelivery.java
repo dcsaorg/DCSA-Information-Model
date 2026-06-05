@@ -5,8 +5,13 @@ import lombok.Data;
 
 @Schema(
     description =
-      PlaceOfFinalDelivery.CLASS_SCHEMA_DESCRIPTION,
-    title = "Place of Final Delivery")
+"""
+An object to capture `Place of Final Delivery` location specified as: Identification of the seaport, freight terminal or other place at which the goods are handed over from the `Ocean Transport Intermediary` (OTI) issuing the `House Bill of Lading` to the `Consignee`.
+
+**Condition:** Mandatory if different from `Place of Delivery` at the `Master Transport Document` level.
+
+**Condition:** The location can be specified either using `UN Location Code` and/or (`Location Name` together with `Country Code`), all three properties can be specified.
+""")
 @Data
 public class PlaceOfFinalDelivery {
 

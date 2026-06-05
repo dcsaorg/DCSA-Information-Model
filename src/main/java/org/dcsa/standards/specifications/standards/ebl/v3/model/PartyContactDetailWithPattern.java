@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Schema(
     description =
-        "The contact details of the person to contact. It is mandatory to provide either `phone` and/or `email` along with the `name`, both can be provided.",
-    title = "Party Contact Detail (with phone pattern)")
+"""
+The contact details of the person to contact. It is mandatory to provide either `phone` and/or `email` along with the `name`, both can be provided.
+""")
 @Data
 public class PartyContactDetailWithPattern {
 

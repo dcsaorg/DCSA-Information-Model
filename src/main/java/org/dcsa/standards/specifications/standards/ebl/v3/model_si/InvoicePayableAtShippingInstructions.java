@@ -9,8 +9,7 @@ import lombok.Data;
 Location where payment of ocean freight and charges for the main transport will take place by the customer.
 
 The location must be provided as a `UN Location Code`
-""",
-    title = "Invoice Payable At (Shipping Instructions)")
+""")
 @Data
 public class InvoicePayableAtShippingInstructions {
 
