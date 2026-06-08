@@ -1,6 +1,6 @@
-Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-EndorsementChain,,,,,,,,
-"EndorsementChain / carrierSCACCode",carrierSCACCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code, based on SCAC code (provided by [NMFTA](https://nmfta.org/scac/)), that Issued the `transportDocumentReference`.",
+Path,Attribute,Type,Required,Size,Pattern,Example,Description
+EndorsementChain,,,,,,,
+"EndorsementChain / carrierSCACCode",carrierSCACCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code, based on SCAC code (provided by [NMFTA](https://nmfta.org/scac/)), that Issued the `transportDocumentReference`."
 "EndorsementChain / endorsementChain",endorsementChain,"EndorsementChainLink list",,,,,"A list of one or more actions that affect an eBL, starting from its issuance onward. It is equivalent to the ""back side"" of a physical Bill of Lading. The type of actions recorded in the endorsement chain as defined by the DCSA standard are listed below:
 
 - **Issue:** The act of issuing an eBL to the `Issue to` party, meaning the designated recipient of the action (typically the shipper or their on behalf of party).
@@ -13,7 +13,7 @@ EndorsementChain,,,,,,,,
 - **Transfer:** The act of transferring the possession of the eBL to the recipient.
 - **Surrendered:** The act of confirming that the eBL has been surrendered, meaning that its lifecycle is completed.
 
-**Note:** DCSA member carriers have agreed that the name `endorsementChain` is still the correct name for this list of actions.",
+**Note:** DCSA member carriers have agreed that the name `endorsementChain` is still the correct name for this list of actions."
 "EndorsementChain / endorsementChain / actionCode",actionCode,string,yes,maxLength=50,,ISSUE,"The action performed by the actor. This should be one of:
 - `ISSUE` (The actor issued the document to the recipient, who is the first possessor of the eBL, as designated by the `Issue to Party`)
 - `ENDORSE` (The actor endorsed the document to the recipient)
@@ -25,9 +25,9 @@ EndorsementChain,,,,,,,,
 - `TRANSFER` (The actor transferred the possession of the eBL to the recipient)
 - `SURRENDERED` (The actor acknowledged that the eBL has been accepted and the lifecycle of the eBL is accomplished)
 
-Not all actions are applicable to all surrender requests. The combination and order of endorsement chain entries may differ by eBL Solution Provider, based on their rulebook and/or bilateral agreements with carriers.",
-"EndorsementChain / endorsementChain / actionDateTime",actionDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Date time when the action occurred.",
-"EndorsementChain / endorsementChain / actor",actor,ActorParty,yes,,,,"Refers to a company or a legal entity.",
+Not all actions are applicable to all surrender requests. The combination and order of endorsement chain entries may differ by eBL Solution Provider, based on their rulebook and/or bilateral agreements with carriers."
+"EndorsementChain / endorsementChain / actionDateTime",actionDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Date time when the action occurred."
+"EndorsementChain / endorsementChain / actor",actor,ActorParty,yes,,,,"Refers to a company or a legal entity."
 "EndorsementChain / endorsementChain / actor / eblPlatform",eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Actor Party`.
 The value **MUST** be one of:
 - `WAVE` (Wave)
@@ -46,13 +46,13 @@ The value **MUST** be one of:
 - `ETIT` (e-title)
 - `KTNE` (KTNET)
 - `CRED` (Credore)
-- `BLOC` (BlockPeer Technologies)",
-"EndorsementChain / endorsementChain / actor / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
+- `BLOC` (BlockPeer Technologies)"
+"EndorsementChain / endorsementChain / actor / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,
 "EndorsementChain / endorsementChain / actor / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 "EndorsementChain / endorsementChain / actor / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
 
 - `WAVE` (Wave)
@@ -79,16 +79,16 @@ The value **MUST** be one of:
 - `DNB` (Dun and Bradstreet)
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
-- `ZZZ` (Mutually defined)",
-"EndorsementChain / endorsementChain / actor / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
-"EndorsementChain / endorsementChain / actor / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"EndorsementChain / endorsementChain / actor / representedParty",representedParty,RepresentedActorParty,,,,,"The party on whose behalf the action was performed.",
-"EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+- `ZZZ` (Mutually defined)"
+"EndorsementChain / endorsementChain / actor / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider"
+"EndorsementChain / endorsementChain / actor / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+"EndorsementChain / endorsementChain / actor / representedParty",representedParty,RepresentedActorParty,,,,,"The party on whose behalf the action was performed."
+"EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,
 "EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 "EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
 
 - `WAVE` (Wave)
@@ -115,18 +115,18 @@ The value **MUST** be one of:
 - `DNB` (Dun and Bradstreet)
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
-- `ZZZ` (Mutually defined)",
-"EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
-"EndorsementChain / endorsementChain / actor / representedParty / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"EndorsementChain / endorsementChain / actor / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+- `ZZZ` (Mutually defined)"
+"EndorsementChain / endorsementChain / actor / representedParty / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider"
+"EndorsementChain / endorsementChain / actor / representedParty / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+"EndorsementChain / endorsementChain / actor / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`"
 "EndorsementChain / endorsementChain / actor / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 
-**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
-"EndorsementChain / endorsementChain / actor / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
-"EndorsementChain / endorsementChain / actor / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
-"EndorsementChain / endorsementChain / auditReference",auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider.",
-"EndorsementChain / endorsementChain / recipient",recipient,RecipientParty,,,,,"Refers to a company or a legal entity.",
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`."
+"EndorsementChain / endorsementChain / actor / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority."
+"EndorsementChain / endorsementChain / actor / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`"
+"EndorsementChain / endorsementChain / auditReference",auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider."
+"EndorsementChain / endorsementChain / recipient",recipient,RecipientParty,,,,,"Refers to a company or a legal entity."
 "EndorsementChain / endorsementChain / recipient / eblPlatform",eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Recipient Party`.
 The value **MUST** be one of:
 - `WAVE` (Wave)
@@ -145,13 +145,13 @@ The value **MUST** be one of:
 - `ETIT` (e-title)
 - `KTNE` (KTNET)
 - `CRED` (Credore)
-- `BLOC` (BlockPeer Technologies)",
-"EndorsementChain / endorsementChain / recipient / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
+- `BLOC` (BlockPeer Technologies)"
+"EndorsementChain / endorsementChain / recipient / identifyingCodes",identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,
 "EndorsementChain / endorsementChain / recipient / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 "EndorsementChain / endorsementChain / recipient / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
 
 - `WAVE` (Wave)
@@ -178,16 +178,16 @@ The value **MUST** be one of:
 - `DNB` (Dun and Bradstreet)
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
-- `ZZZ` (Mutually defined)",
-"EndorsementChain / endorsementChain / recipient / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
-"EndorsementChain / endorsementChain / recipient / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"EndorsementChain / endorsementChain / recipient / representedParty",representedParty,"RepresentedRecipientParty",,,,,"The party on whose behalf the action was directed.",
-"EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,,
+- `ZZZ` (Mutually defined)"
+"EndorsementChain / endorsementChain / recipient / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider"
+"EndorsementChain / endorsementChain / recipient / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+"EndorsementChain / endorsementChain / recipient / representedParty",representedParty,"RepresentedRecipientParty",,,,,"The party on whose behalf the action was directed."
+"EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes",identifyingCodes,"IdentifyingCode list",,,,,
 "EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes / codeListName",codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 "EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes / codeListProvider",codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
 
 - `WAVE` (Wave)
@@ -214,15 +214,15 @@ The value **MUST** be one of:
 - `DNB` (Dun and Bradstreet)
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
-- `ZZZ` (Mutually defined)",
-"EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider",
-"EndorsementChain / endorsementChain / recipient / representedParty / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"EndorsementChain / endorsementChain / recipient / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+- `ZZZ` (Mutually defined)"
+"EndorsementChain / endorsementChain / recipient / representedParty / identifyingCodes / partyCode",partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the code list provider"
+"EndorsementChain / endorsementChain / recipient / representedParty / partyName",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+"EndorsementChain / endorsementChain / recipient / taxLegalReferences",taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`"
 "EndorsementChain / endorsementChain / recipient / taxLegalReferences / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 
-**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
-"EndorsementChain / endorsementChain / recipient / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
-"EndorsementChain / endorsementChain / recipient / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
-"EndorsementChain / transportDocumentReference","transportDocumentReference",string,yes,maxLength=20,"^\S(?:.*\S)?$",HHL71800000,"A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.",
-"EndorsementChain / transportDocumentSubReference","transportDocumentSubReference",string,,maxLength=100,"^\S(?:.*\S)?$",Version_1,"Additional reference that can be optionally used alongside the `transportDocumentReference` in order to distinguish between versions of the same `Transport Document`.",
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`."
+"EndorsementChain / endorsementChain / recipient / taxLegalReferences / type",type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority."
+"EndorsementChain / endorsementChain / recipient / taxLegalReferences / value",value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`"
+"EndorsementChain / transportDocumentReference","transportDocumentReference",string,yes,maxLength=20,"^\S(?:.*\S)?$",HHL71800000,"A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment."
+"EndorsementChain / transportDocumentSubReference","transportDocumentSubReference",string,,maxLength=100,"^\S(?:.*\S)?$",Version_1,"Additional reference that can be optionally used alongside the `transportDocumentReference` in order to distinguish between versions of the same `Transport Document`."
