@@ -12,7 +12,8 @@ public class QueryFiltersSheet extends DataOverviewSheet {
       Map<Class<? extends DataOverviewSheet>, List<List<String>>> oldDataValuesBySheetClass,
       Map<Class<? extends DataOverviewSheet>, Map<String, String>>
           changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-      boolean swapOldAndNew) {
+      boolean swapOldAndNew,
+      boolean hasBaseline) {
     super(
         "Query filters",
         "QueryFiltersTable",
@@ -34,6 +35,7 @@ public class QueryFiltersSheet extends DataOverviewSheet {
             .toList(),
         oldDataValuesBySheetClass,
         changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-        swapOldAndNew);
+        swapOldAndNew,
+        hasBaseline);
   }
 }

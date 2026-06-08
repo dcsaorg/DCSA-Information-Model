@@ -1,4 +1,4 @@
-Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Object,Attribute,Type,Required,Size,Pattern,Example,Description
 Activity,unit,string,,maxLength=10,,TBq,"Measurement unit in which the activity `value` is expressed:
 - `kBq`
 - `MBq`
@@ -6,66 +6,66 @@ Activity,unit,string,,maxLength=10,,TBq,"Measurement unit in which the activity 
 - `TBq`
 - `PBq`
 - `mBq`
-- `µBq`",
-Activity,value,"number(float)",,,,2.5,"Activity value expressed in the measurement `unit`",
+- `µBq`"
+Activity,value,"number(float)",,,,2.5,"Activity value expressed in the measurement `unit`"
 Address,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 Item description:
-One line of an unstructured `Address`.",
-Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
-Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
-Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
-Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
-Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
-Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
-Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
-CargoItem,cargoGrossVolume,Volume,,,,,"Gross volume of the cargo item, calculated by multiplying the width, height, and length of the packaged cargo.",
+One line of an unstructured `Address`."
+Address,city,string,,maxLength=35,,Amsterdam,"The name of the city."
+Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+Address,floor,string,,maxLength=50,,N/A,"The floor of the street number."
+Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered."
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address."
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region."
+Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street."
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street."
+CargoItem,cargoGrossVolume,Volume,,,,,"Gross volume of the cargo item, calculated by multiplying the width, height, and length of the packaged cargo."
 CargoItem,cargoGrossWeight,Weight,,,,,"Gross weight of the cargo item including packaging being carried in the container.
-Excludes the tare weight of the container.",
-CargoItem,cargoNetVolume,Volume,,,,,"Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging.",
-CargoItem,cargoNetWeight,Weight,,,,,"Net weight of the cargo item, excluding packaging and excluding the tare weight of the container.",
+Excludes the tare weight of the container."
+CargoItem,cargoNetVolume,Volume,,,,,"Net volume of the cargo item, calculated by multiplying the width, height, and length of the cargo, excluding packaging."
+CargoItem,cargoNetWeight,Weight,,,,,"Net weight of the cargo item, excluding packaging and excluding the tare weight of the container."
 CargoItem,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
-If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.",
-CargoItem,outerPackaging,OuterPackaging,,,,,"Packaging information for this cargo item.",
-ConsignmentItem,cargoItems,"CargoItem list",,,,,"A list of all `cargoItems`",
-ConsignmentItem,carrierBookingReference,string,,maxLength=35,,ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`.",
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG."
+CargoItem,outerPackaging,OuterPackaging,,,,,"Packaging information for this cargo item."
+ConsignmentItem,cargoItems,"CargoItem list",,,,,"A list of all `cargoItems`"
+ConsignmentItem,carrierBookingReference,string,,maxLength=35,,ABC709951,"The associated booking number provided by the carrier for this `Consignment Item`."
 ConsignmentItem,descriptionOfGoods,"string list",,,,,"A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
 Item description:
 A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
-",
-ConsignmentItem,references,"ReferenceConsignmentItem list",,,,,"A list of `References`",
+"
+ConsignmentItem,references,"ReferenceConsignmentItem list",,,,,"A list of `References`"
 ConsignmentItem,shippingMarks,"string list",,,,,"A list of the `ShippingMarks` applicable to this `consignmentItem`
 Item description:
 A list of the `ShippingMarks` applicable to this `consignmentItem`
-",
-"ContainerPackingCertificate",companyName,string,,maxLength=100,,"ABC Warehouse","Name of the company responsible for packing/loading the container or vehicle.",
-"ContainerPackingCertificate",declarantName,string,,maxLength=100,,"John Loader","Name of the person responsible for the packing/loading declaration.",
-"ContainerPackingCertificate",declarantStatus,string,,maxLength=100,,"Warehouse Supervisor","Role/status of the person signing the container/vehicle packing certificate.",
-"ContainerPackingCertificate",declarationDate,"string(date)",,,,2025-01-23,"Date when the container/vehicle packing certificate was signed.",
-"ContainerPackingCertificate",declarationPlace,Address,,,,,"Place where the packing/loading declaration was made.",
+"
+"ContainerPackingCertificate",companyName,string,,maxLength=100,,"ABC Warehouse","Name of the company responsible for packing/loading the container or vehicle."
+"ContainerPackingCertificate",declarantName,string,,maxLength=100,,"John Loader","Name of the person responsible for the packing/loading declaration."
+"ContainerPackingCertificate",declarantStatus,string,,maxLength=100,,"Warehouse Supervisor","Role/status of the person signing the container/vehicle packing certificate."
+"ContainerPackingCertificate",declarationDate,"string(date)",,,,2025-01-23,"Date when the container/vehicle packing certificate was signed."
+"ContainerPackingCertificate",declarationPlace,Address,,,,,"Place where the packing/loading declaration was made."
 "ContainerPackingCertificate",signatory,string,,maxLength=100,,"JOHN LOADER","Upper case name of the person authorized to sign the certificate.
 
-According to IMDG Code 5.4.2.3: ""If the container/vehicle packing certificate is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign.""",
-DangerousGoods,"additionalContainerCargoHandling",string,,maxLength=500,,"To be handled with extreme care","Text field to provide cargo handling information already known at the booking stage.",
+According to IMDG Code 5.4.2.3: ""If the container/vehicle packing certificate is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign."""
+DangerousGoods,"additionalContainerCargoHandling",string,,maxLength=500,,"To be handled with extreme care","Text field to provide cargo handling information already known at the booking stage."
 DangerousGoods,"additionalRegulatoryStatements","string list",,,,,"Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals.
 Item description:
-Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals.",
+Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."
 DangerousGoods,codedVariantList,string,,maxLength=4,,2200,"Four-character code supplied by Exis Technologies that assists to remove ambiguities when identifying a variant within a single UN number or NA number that may occur when two companies exchange DG information.
 
 Character | Valid Characters | Description
 :--------:|------------------|------------
 1| 0, 1, 2, 3|The packing group. Code 0 indicates there is no packing group
 2|0 to 9 and A to Z|A sequence letter for the PSN, or 0 if there were no alternative PSNs
-3 and 4|0 to 9 and A to Z|Two sequence letters for other information, for the cases where the variant is required because of different in subrisks, packing instruction etc.",
-DangerousGoods,"competentAuthorityApproval",string,,maxLength=500,,"{Name and reference...}","Name and reference number of the competent authority providing the approval.",
-DangerousGoods,"dateOfPackingIntoPackagings","string(date)",,,,2025-01-23,"Date on which the material was packed into the packaging. Required for UN 1361.",
-DangerousGoods,dateOfProduction,"string(date)",,,,2025-01-23,"Production date of the material. Required for UN 1361.",
-DangerousGoods,emergencyContactDetails,EmergencyContactDetails,,,,,"24 hr emergency contact details",
-DangerousGoods,EMSNumber,string,,maxLength=7,,"F-A S-Q","The emergency schedule identified in the IMO EmS Guide — Emergency Response Procedures for Ships Carrying Dangerous Goods. Comprises 2 values; 1 for spillage and 1 for fire. Possible values spillage: S-A to S-Z. Possible values fire: F-A to F-Z.",
-DangerousGoods,endOfHoldingTime,"string(date)",,,,2025-01-23,"Date by when the refrigerated liquid needs to be delivered.",
+3 and 4|0 to 9 and A to Z|Two sequence letters for other information, for the cases where the variant is required because of different in subrisks, packing instruction etc."
+DangerousGoods,"competentAuthorityApproval",string,,maxLength=500,,"{Name and reference...}","Name and reference number of the competent authority providing the approval."
+DangerousGoods,"dateOfPackingIntoPackagings","string(date)",,,,2025-01-23,"Date on which the material was packed into the packaging. Required for UN 1361."
+DangerousGoods,dateOfProduction,"string(date)",,,,2025-01-23,"Production date of the material. Required for UN 1361."
+DangerousGoods,emergencyContactDetails,EmergencyContactDetails,,,,,"24 hr emergency contact details"
+DangerousGoods,EMSNumber,string,,maxLength=7,,"F-A S-Q","The emergency schedule identified in the IMO EmS Guide — Emergency Response Procedures for Ships Carrying Dangerous Goods. Comprises 2 values; 1 for spillage and 1 for fire. Possible values spillage: S-A to S-Z. Possible values fire: F-A to F-Z."
+DangerousGoods,endOfHoldingTime,"string(date)",,,,2025-01-23,"Date by when the refrigerated liquid needs to be delivered."
 DangerousGoods,"fireworkClassificationReferences","string list",,,,,"Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
 
 The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
@@ -73,76 +73,76 @@ Item description:
 Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
 
 The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
-",
-DangerousGoods,fumigationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date & time when the container was fumigated",
-DangerousGoods,grossWeight,Weight,,,,,"Total weight of the goods carried, including packaging.",
+"
+DangerousGoods,fumigationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"Date & time when the container was fumigated"
+DangerousGoods,grossWeight,Weight,,,,,"Total weight of the goods carried, including packaging."
 DangerousGoods,IMOClass,string,,maxLength=4,,1.4S,"The hazard class code of the referenced dangerous goods according to the specified regulation. Examples of possible values are:
 
 - `1.1A` (Substances and articles which have a mass explosion hazard)
 - `1.6N` (Extremely insensitive articles which do not have a mass explosion hazard)
 - `2.1` (Flammable gases)
-- `8` (Corrosive substances)",
+- `8` (Corrosive substances)"
 DangerousGoods,inhalationZone,string,,maxLength=1,,A,"The zone classification of the toxicity of the inhalant. Possible values are:
 
 - `A` (Hazard Zone A) can be assigned to specific gases and liquids
 - `B` (Hazard Zone B) can be assigned to specific gases and liquids
 - `C` (Hazard Zone C) can **only** be assigned to specific gases
-- `D` (Hazard Zone D) can **only** be assigned to specific gases",
-DangerousGoods,innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`.",
-DangerousGoods,"isCompetentAuthorityApprovalRequired",boolean,,,,,"Indicates if the cargo require approval from authorities",
-DangerousGoods,isEmptyUncleanedResidue,boolean,,,,,"Indicates if the cargo is residue.",
-DangerousGoods,isExceptedQuantity,boolean,,,,,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code.",
-DangerousGoods,isHot,boolean,,,,,"Indicates if high temperature cargo is shipped.",
-DangerousGoods,isLimitedQuantity,boolean,,,,,"Indicates if the dangerous goods can be transported as limited quantity in accordance with Chapter 3.4 of the IMO IMDG Code.",
-DangerousGoods,isMarinePollutant,boolean,,,,,"Indicates if the goods belong to the classification of Marine Pollutant.",
-DangerousGoods,isMolten,boolean,,,,,"Indicates that the dangerous goods are offered for transport in molten state. Required when applicable unless already included in the properShippingName.",
-DangerousGoods,isReportableQuantity,boolean,,,,,"Indicates if a container of hazardous material is at the reportable quantity level. If `true`, a report to the relevant authority must be made in case of spill.",
-DangerousGoods,isSalvagePackings,boolean,,,,,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked.",
-DangerousGoods,isStabilizedSubstance,boolean,,,,,"Indicates that the substance is stabilized for transport purposes. Required when applicable unless already included in the properShippingName.",
-DangerousGoods,isTemperatureControlled,boolean,,,,,"Indicates that stabilization is achieved through temperature control during transport. Required when applicable unless already included in the properShippingName.",
-DangerousGoods,isWaste,boolean,,,,,"Indicates if waste is being shipped",
-DangerousGoods,limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure.",
+- `D` (Hazard Zone D) can **only** be assigned to specific gases"
+DangerousGoods,innerPackagings,"InnerPackaging list",,,,,"A list of `Inner Packings` contained inside this `outer packaging/overpack`."
+DangerousGoods,"isCompetentAuthorityApprovalRequired",boolean,,,,,"Indicates if the cargo require approval from authorities"
+DangerousGoods,isEmptyUncleanedResidue,boolean,,,,,"Indicates if the cargo is residue."
+DangerousGoods,isExceptedQuantity,boolean,,,,,"Indicates if the dangerous goods can be transported as excepted quantity in accordance with Chapter 3.5 of the IMO IMDG Code."
+DangerousGoods,isHot,boolean,,,,,"Indicates if high temperature cargo is shipped."
+DangerousGoods,isLimitedQuantity,boolean,,,,,"Indicates if the dangerous goods can be transported as limited quantity in accordance with Chapter 3.4 of the IMO IMDG Code."
+DangerousGoods,isMarinePollutant,boolean,,,,,"Indicates if the goods belong to the classification of Marine Pollutant."
+DangerousGoods,isMolten,boolean,,,,,"Indicates that the dangerous goods are offered for transport in molten state. Required when applicable unless already included in the properShippingName."
+DangerousGoods,isReportableQuantity,boolean,,,,,"Indicates if a container of hazardous material is at the reportable quantity level. If `true`, a report to the relevant authority must be made in case of spill."
+DangerousGoods,isSalvagePackings,boolean,,,,,"Indicates if the cargo has special packaging for the transport, recovery or disposal of damaged, defective, leaking or nonconforming hazardous materials packages, or hazardous materials that have spilled or leaked."
+DangerousGoods,isStabilizedSubstance,boolean,,,,,"Indicates that the substance is stabilized for transport purposes. Required when applicable unless already included in the properShippingName."
+DangerousGoods,isTemperatureControlled,boolean,,,,,"Indicates that stabilization is achieved through temperature control during transport. Required when applicable unless already included in the properShippingName."
+DangerousGoods,isWaste,boolean,,,,,"Indicates if waste is being shipped"
+DangerousGoods,limits,Limits,,,,,"Limits for the `Dangerous Goods`. The same `Temperature Unit` must apply to all attributes in this structure."
 DangerousGoods,"lithiumBatteryTransportCondition",string,,maxLength=3,,DAM,"Indicates the transport condition of lithium cells or batteries transported under Special Provision 376 or 377. Allowed values:
 - `DAM` (Damaged or defective)
 - `DIS` (For disposal)
-- `REC` (For recycling)",
-DangerousGoods,"materialTemperatureAtPacking","number(float)",,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361.",
-DangerousGoods,mfagReference,string,,maxLength=100,,"MFAG Table 620","Medical First Aid Guide reference applicable to the dangerous goods carried.",
-DangerousGoods,NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation.",
-DangerousGoods,netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc.",
-DangerousGoods,netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas.",
-DangerousGoods,netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging.",
-DangerousGoods,packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code.",
-DangerousGoods,properShippingName,string,,maxLength=500,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention.",
-DangerousGoods,radioactiveMaterial,RadioactiveMaterial,,,,,"Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7.",
+- `REC` (For recycling)"
+DangerousGoods,"materialTemperatureAtPacking","number(float)",,,,55,"Temperature of the material on the day of packing into the packaging, expressed in degrees Celsius (°C). Required for UN 1361."
+DangerousGoods,mfagReference,string,,maxLength=100,,"MFAG Table 620","Medical First Aid Guide reference applicable to the dangerous goods carried."
+DangerousGoods,NANumber,string,,maxLength=4,,9037,"Four-digit number that is assigned to dangerous, hazardous, and harmful substances by the United States Department of Transportation."
+DangerousGoods,netExplosiveContent,Weight,,,,,"The total weight of the explosive substances, without the packaging, casings, etc."
+DangerousGoods,netVolume,Volume,,,,,"The volume of the referenced dangerous goods. Only applicable to liquids and gas."
+DangerousGoods,netWeight,Weight,,,,,"Total weight of the goods carried, excluding packaging."
+DangerousGoods,packingGroup,"integer(int32)",,,,3,"The packing group according to the UN Recommendations on the Transport of Dangerous Goods and IMO IMDG Code."
+DangerousGoods,properShippingName,string,,maxLength=500,,"Chromium Trioxide, anhydrous","The proper shipping name for goods under IMDG Code, or the product name for goods under IBC Code and IGC Code, or the bulk cargo shipping name for goods under IMSBC Code, or the name of oil for goods under Annex I to the MARPOL Convention."
+DangerousGoods,radioactiveMaterial,RadioactiveMaterial,,,,,"Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7."
 DangerousGoods,segregationGroups,"string list",,,,,"List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
 Item description:
 List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
-",
-DangerousGoods,specialCertificateNumber,string,,maxLength=100,,22663:3,"Text field to indicate certificate number & segment for specific stowage requirements overruling IMDG code",
-DangerousGoods,subsidiaryRisk1,string,,maxLength=4,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
-DangerousGoods,subsidiaryRisk2,string,,maxLength=4,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code.",
-DangerousGoods,technicalName,string,,maxLength=200,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code.",
-DangerousGoods,UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG.",
-DGDeclaration,consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`",
-DGDeclaration,"containerPackingCertificate","ContainerPackingCertificate",,,,,"""I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions"". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING",
-DGDeclaration,declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the DG declaration was issued",
-DGDeclaration,declarationReference,string,,maxLength=500,,"DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the DG declaration",
+"
+DangerousGoods,specialCertificateNumber,string,,maxLength=100,,22663:3,"Text field to indicate certificate number & segment for specific stowage requirements overruling IMDG code"
+DangerousGoods,subsidiaryRisk1,string,,maxLength=4,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
+DangerousGoods,subsidiaryRisk2,string,,maxLength=4,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
+DangerousGoods,technicalName,string,,maxLength=200,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code."
+DangerousGoods,UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG."
+DGDeclaration,consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`"
+DGDeclaration,"containerPackingCertificate","ContainerPackingCertificate",,,,,"""I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions"". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING"
+DGDeclaration,declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the DG declaration was issued"
+DGDeclaration,declarationReference,string,,maxLength=500,,"DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the DG declaration"
 DGDeclaration,documentParties,"DocumentParty list",,,,,"Document parties.
 
 Note that while parties can generally appear in any order, including `N1` (First Notify Party)
 and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
-as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.",
-DGDeclaration,haulageAcceptance,HaulageAcceptance,,,,,"Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment",
-DGDeclaration,"receivingOrganisationReceipt","ReceivingOrganisationReceipt",,,,,"""Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks""",
-DGDeclaration,shipmentDetails,ShipmentDetails,,,,,"DG declaration details specific to the shipment",
-DGDeclaration,shipperDeclaration,ShipperDeclaration,,,,,"""I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations.""",
-DGDeclaration,typeLabel,string,,maxLength=100,,French,"Free-format identifier used to specify a certain type of DG Declaration, for example ""English"" or ""French"".",
-DGDeclaration,"utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used.",
-DGDeclaration,vesselVoyageDetails,VesselVoyageDetails,,,,,"DG declaration details specific to the vessel voyage",
-DocumentParty,address,Address,,,,,"Party address",
-DocumentParty,identifyingCodes,"IdentifyingCode list",,,,,"List of codes identifying the party",
-DocumentParty,partyContactDetails,"PartyContactDetail list",,,,,"Party contact details",
+as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party."
+DGDeclaration,haulageAcceptance,HaulageAcceptance,,,,,"Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
+DGDeclaration,"receivingOrganisationReceipt","ReceivingOrganisationReceipt",,,,,"""Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"""
+DGDeclaration,shipmentDetails,ShipmentDetails,,,,,"DG declaration details specific to the shipment"
+DGDeclaration,shipperDeclaration,ShipperDeclaration,,,,,"""I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."""
+DGDeclaration,typeLabel,string,,maxLength=100,,French,"Free-format identifier used to specify a certain type of DG Declaration, for example ""English"" or ""French""."
+DGDeclaration,"utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used."
+DGDeclaration,vesselVoyageDetails,VesselVoyageDetails,,,,,"DG declaration details specific to the vessel voyage"
+DocumentParty,address,Address,,,,,"Party address"
+DocumentParty,identifyingCodes,"IdentifyingCode list",,,,,"List of codes identifying the party"
+DocumentParty,partyContactDetails,"PartyContactDetail list",,,,,"Party contact details"
 DocumentParty,partyFunction,string,,maxLength=3,,N1,"Specifies the role of the party in a given context. Possible values are:
 
 - `OS` (Shipper)
@@ -160,41 +160,41 @@ DocumentParty,partyFunction,string,,maxLength=3,,N1,"Specifies the role of the p
 - `COX` (Invoice payer on behalf of the consignee)
 - `CS` (Consolidator)
 - `MF` (Manufacturer)
-- `WH` (Warehouse Keeper)",
-DocumentParty,partyName,string,,maxLength=100,,"Acme Inc.","Party name",
-DocumentParty,reference,string,,maxLength=100,,REF1234,"A reference linked to the document party.",
-DocumentParty,taxLegalReferences,"TaxLegalReference list",,,,,"List of tax or legal references relevant to the party",
-EmergencyContactDetails,contact,string,,maxLength=100,,"Jane Doe","Name of the contact person during an emergency.",
+- `WH` (Warehouse Keeper)"
+DocumentParty,partyName,string,,maxLength=100,,"Acme Inc.","Party name"
+DocumentParty,reference,string,,maxLength=100,,REF1234,"A reference linked to the document party."
+DocumentParty,taxLegalReferences,"TaxLegalReference list",,,,,"List of tax or legal references relevant to the party"
+EmergencyContactDetails,contact,string,,maxLength=100,,"Jane Doe","Name of the contact person during an emergency."
 EmergencyContactDetails,phone,string,,maxLength=30,,"+14155552671","Phone number for the contact, including an international phone number format
-as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
-EmergencyContactDetails,provider,string,,maxLength=100,,"ACME Inc","Name of the third party vendor providing emergency support",
-EmergencyContactDetails,referenceNumber,string,,maxLength=100,,12234,"Contract reference for the emergency support provided by an external third party vendor.",
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
+EmergencyContactDetails,provider,string,,maxLength=100,,"ACME Inc","Name of the third party vendor providing emergency support"
+EmergencyContactDetails,referenceNumber,string,,maxLength=100,,12234,"Contract reference for the emergency support provided by an external third party vendor."
 Equipment,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
-If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2: Containers with non-ISO identification from SMDG.",
-Equipment,ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the ISO 6346 standard.",
-Equipment,tareWeight,Weight,,,,,"The tare weight of the container",
-Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+If a container does not comply with ISO 6346, it is suggested to follow Recommendation #2: Containers with non-ISO identification from SMDG."
+Equipment,ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code for the different equipment size and type used to transport commodities. The code can refer to one of ISO size type (e.g. 22G1) or ISO type group (e.g. 22GP) following the ISO 6346 standard."
+Equipment,tareWeight,Weight,,,,,"The tare weight of the container"
+Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`."
 Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
-- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
-Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
-FissileMaterial,criticalitySafetyIndex,"number(float)",,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material.",
-FissileMaterial,"fissileExceptionReference",string,,maxLength=100,,2.7.2.3.5.3,"Reference to applicable fissile exception paragraph, when shipped under IMDG 2.7.2.3.5.1 to 2.7.2.3.5.6.",
-FissileMaterial,fissileMaterialMass,Weight,,,,,"Mass in grams of fissile material contained in the consignment (or mass of each fissile nuclide for mixtures when appropriate).",
-FissileMaterial,fissilePackageReference,string,,maxLength=100,,"6.4.11.2(a)","Reference to applicable package paragraph for fissile material, when contained in a package for which one of 6.4.11.2 (a) to (c) or 6.4.11.3 is applied",
-FissileMaterial,totalFissileNuclideMass,Weight,,,,,"Total mass of fissile nuclides when shipped under 2.7.2.3.5.3 to 2.7.2.3.5.5 fissile exceptions.",
-GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-HaulageAcceptance,driverSignatory,string,,maxLength=100,,"BOB DRIVER","Upper case name of the driver operating the vehicle",
-HaulageAcceptance,haulierAcceptanceDate,"string(date)",,,,2025-01-23,"Date when the hauliers acceptence was signed.",
-HaulageAcceptance,haulierName,string,,maxLength=100,,"Fast Road Haulage BV","Name of the road transport company contracted to move the container/vehicle to or from the port/terminal.",
-HaulageAcceptance,haulierSignatory,string,,maxLength=100,,"PETER JANSEN","Upper case name of the haulier's representative",
-HaulageAcceptance,"vehicleRegistrationNumber",string,,maxLength=20,,AB-123-CD,"License plate of the truck or vehicle used for the road leg of transport.",
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))"
+Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility."
+FissileMaterial,criticalitySafetyIndex,"number(float)",,,,2.0,"Criticality Safety Index (CSI) applicable to fissile radioactive material."
+FissileMaterial,"fissileExceptionReference",string,,maxLength=100,,2.7.2.3.5.3,"Reference to applicable fissile exception paragraph, when shipped under IMDG 2.7.2.3.5.1 to 2.7.2.3.5.6."
+FissileMaterial,fissileMaterialMass,Weight,,,,,"Mass in grams of fissile material contained in the consignment (or mass of each fissile nuclide for mixtures when appropriate)."
+FissileMaterial,fissilePackageReference,string,,maxLength=100,,"6.4.11.2(a)","Reference to applicable package paragraph for fissile material, when contained in a package for which one of 6.4.11.2 (a) to (c) or 6.4.11.3 is applied"
+FissileMaterial,totalFissileNuclideMass,Weight,,,,,"Total mass of fissile nuclides when shipped under 2.7.2.3.5.3 to 2.7.2.3.5.5 fissile exceptions."
+GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+HaulageAcceptance,driverSignatory,string,,maxLength=100,,"BOB DRIVER","Upper case name of the driver operating the vehicle"
+HaulageAcceptance,haulierAcceptanceDate,"string(date)",,,,2025-01-23,"Date when the hauliers acceptence was signed."
+HaulageAcceptance,haulierName,string,,maxLength=100,,"Fast Road Haulage BV","Name of the road transport company contracted to move the container/vehicle to or from the port/terminal."
+HaulageAcceptance,haulierSignatory,string,,maxLength=100,,"PETER JANSEN","Upper case name of the haulier's representative"
+HaulageAcceptance,"vehicleRegistrationNumber",string,,maxLength=20,,AB-123-CD,"License plate of the truck or vehicle used for the road leg of transport."
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 IdentifyingCode,codeListProvider,string,,maxLength=5,,W3C,"A list of codes identifying a party. Possible values are:
 - `WAVE` (Wave)
 - `CARX` (CargoX)
@@ -218,22 +218,22 @@ IdentifyingCode,codeListProvider,string,,maxLength=5,,W3C,"A list of codes ident
 - `DNB` (Dun and Bradstreet)
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
-- `ZZZ` (Mutually defined)",
-IdentifyingCode,partyCode,string,,maxLength=100,,MSK,"Code to identify the party as provided by the code list provider",
-InnerPackaging,description,string,,maxLength=200,,"Woven plastic water resistant Bag","Description of the packaging.",
-InnerPackaging,material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`.",
-InnerPackaging,quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`.",
-Limits,flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air.",
-Limits,SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance",
-Limits,SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance",
+- `ZZZ` (Mutually defined)"
+IdentifyingCode,partyCode,string,,maxLength=100,,MSK,"Code to identify the party as provided by the code list provider"
+InnerPackaging,description,string,,maxLength=200,,"Woven plastic water resistant Bag","Description of the packaging."
+InnerPackaging,material,string,,maxLength=100,,Plastic,"The `material` used for the `Inner Packaging` of the referenced `Dangerous Goods`."
+InnerPackaging,quantity,"integer(int32)",,,,20,"Count of `Inner Packagings` of the referenced `Dangerous Goods`."
+Limits,flashPoint,"number(float)",,,,42.0,"Lowest temperature at which a chemical can vaporize to form an ignitable mixture in air."
+Limits,SADT,"number(float)",,,,54.1,"Lowest temperature in which self-accelerating decomposition may occur in a substance"
+Limits,SAPT,"number(float)",,,,70.0,"Lowest temperature in which self-accelerating polymerization may occur in a substance"
 Limits,temperatureUnit,string,,maxLength=3,,CEL,"The unit for **all attributes in the limits structure** in Celsius or Fahrenheit
 
 - `CEL` (Celsius)
-- `FAH` (Fahrenheit)",
-Limits,"transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period.",
-Limits,"transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented",
-Location,address,Address,,,,,"Location address",
-Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+- `FAH` (Fahrenheit)"
+Limits,"transportControlTemperature","number(float)",,,,24.1,"Maximum temperature at which certain substance (such as organic peroxides and self-reactive and related substances) can be safely transported for a prolonged period."
+Limits,"transportEmergencyTemperature","number(float)",,,,74.1,"Temperature at which emergency procedures shall be implemented"
+Location,address,Address,,,,,"Location address"
+Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider."
 Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
 - `BORDER` - Border
 - `CUSTOMER_LOCATION` - Customer location
@@ -243,59 +243,59 @@ Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
 - `OFF_DOCK_STORAGE` - Off-dock storage
 - `PORT_TERMINAL` - Port terminal
 - `RAMP` - Ramp
-- `WAYPOINT` - Waypoint",
-Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
-Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+- `WAYPOINT` - Waypoint"
+Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates."
+Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location."
 Location,UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
 - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`",
-OuterPackaging,description,string,,maxLength=200,,"Drum, steel","Description of the outer packaging/overpack.",
-OuterPackaging,IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO.",
-OuterPackaging,numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`.",
-OuterPackaging,packageCode,string,,maxLength=5,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)",
-PartyContactDetail,email,string,,maxLength=100,,jane.doe@example.com,"Contact email address",
-PartyContactDetail,name,string,,maxLength=100,,"Jane Doe","Contact name",
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)"
+OuterPackaging,dangerousGoods,"DangerousGoods list",,,,,"A list of `Dangerous Goods`"
+OuterPackaging,description,string,,maxLength=200,,"Drum, steel","Description of the outer packaging/overpack."
+OuterPackaging,IMOPackagingCode,string,,maxLength=5,,1A2,"The code of the packaging as per IMO."
+OuterPackaging,numberOfPackages,"integer(int32)",,,,18,"Specifies the number of outer packagings/overpacks associated with this `Cargo Item`."
+OuterPackaging,packageCode,string,,maxLength=5,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)"
+PartyContactDetail,email,string,,maxLength=100,,jane.doe@example.com,"Contact email address"
+PartyContactDetail,name,string,,maxLength=100,,"Jane Doe","Contact name"
 PartyContactDetail,phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
-as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).",
-RadioactiveMaterial,fissileMaterial,FissileMaterial,,,,,"Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions.",
-RadioactiveMaterial,isExclusiveUseShipment,boolean,,,,,"Indicates that the radioactive material shipment must be shipped under exclusive use.",
-RadioactiveMaterial,"maximumActivityDuringTransport",Activity,,,,,"Maximum activity of the radioactive contents during transport, expressed in becquerels with an SI prefix.",
-RadioactiveMaterial,physicalChemicalForm,string,,maxLength=500,,"Solid contaminated metal debris","Describes the physical and chemical form of the radioactive material, or a notation that the material is special form radioactive material or low dispersible radioactive material. A generic chemical description is acceptable for chemical form.",
+as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
+RadioactiveMaterial,fissileMaterial,FissileMaterial,,,,,"Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions."
+RadioactiveMaterial,isExclusiveUseShipment,boolean,,,,,"Indicates that the radioactive material shipment must be shipped under exclusive use."
+RadioactiveMaterial,"maximumActivityDuringTransport",Activity,,,,,"Maximum activity of the radioactive contents during transport, expressed in becquerels with an SI prefix."
+RadioactiveMaterial,physicalChemicalForm,string,,maxLength=500,,"Solid contaminated metal debris","Describes the physical and chemical form of the radioactive material, or a notation that the material is special form radioactive material or low dispersible radioactive material. A generic chemical description is acceptable for chemical form."
 RadioactiveMaterial,"radioactivePackageCategory",string,,maxLength=10,,II-YELLOW,"Radiation package category for Class 7 material. Allowed values:
 - `I-WHITE`
 - `II-YELLOW`
-- `III-YELLOW`",
-RadioactiveMaterial,"radionuclideIdentification",string,,maxLength=200,,Cs-137,"Name of the radionuclide(s) contained in Class 7 radioactive material consignments. For mixtures, provide a general description or list the most restrictive nuclides.",
-RadioactiveMaterial,totalActivityA2Multiple,"number(float)",,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited.",
-RadioactiveMaterial,transportIndex,"number(float)",,,,1.8,"Transport Index (TI) assigned to the radioactive package.",
-"ReceivingOrganisationReceipt",receiptDate,"string(date)",,,,2025-01-23,"The date on which the receiving organisation physically accepted the consignment.",
-"ReceivingOrganisationReceipt",receivedInGoodCondition,boolean,,,,,"Indicates whether the packages, containers, or trailers were received in apparent good order and condition at the time of handover. A value of false implies that damages, discrepancies, or irregularities were observed and should be detailed in the remarks field.",
-"ReceivingOrganisationReceipt","receivingOrganisationName",string,,maxLength=100,,"ECT Delta Terminal B.V.","Name of the organisation receiving the cargo.",
-"ReceivingOrganisationReceipt",remarks,string,,maxLength=500,,"No visible damage","Free-text field for the receiving organisation to record any observations at the time of receipt.",
+- `III-YELLOW`"
+RadioactiveMaterial,"radionuclideIdentification",string,,maxLength=200,,Cs-137,"Name of the radionuclide(s) contained in Class 7 radioactive material consignments. For mixtures, provide a general description or list the most restrictive nuclides."
+RadioactiveMaterial,totalActivityA2Multiple,"number(float)",,,,12.5,"For LSA-II, LSA-III, SCO-I, SCO-II and SCO-III, total activity of the consignment as a multiple of A2. Use 0 when A2 is unlimited."
+RadioactiveMaterial,transportIndex,"number(float)",,,,1.8,"Transport Index (TI) assigned to the radioactive package."
+"ReceivingOrganisationReceipt",receiptDate,"string(date)",,,,2025-01-23,"The date on which the receiving organisation physically accepted the consignment."
+"ReceivingOrganisationReceipt",receivedInGoodCondition,boolean,,,,,"Indicates whether the packages, containers, or trailers were received in apparent good order and condition at the time of handover. A value of false implies that damages, discrepancies, or irregularities were observed and should be detailed in the remarks field."
+"ReceivingOrganisationReceipt","receivingOrganisationName",string,,maxLength=100,,"ECT Delta Terminal B.V.","Name of the organisation receiving the cargo."
+"ReceivingOrganisationReceipt",remarks,string,,maxLength=500,,"No visible damage","Free-text field for the receiving organisation to record any observations at the time of receipt."
 Reference,type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
 - `CA` (Carrier's Reference)
 - `CR` (Customer's Reference)
 - `AKG` (Vehicle Identification Number)
 - `CPR` (Canadian Pacific Railway System)
 - `CNR` (Canadian National Railway Unit)
-- `VBN` (V-Bond Number)",
-Reference,value,string,,maxLength=100,,HHL00103004,"The value of the reference.",
+- `VBN` (V-Bond Number)"
+Reference,value,string,,maxLength=100,,HHL00103004,"The value of the reference."
 ReferenceConsignmentItem,type,string,,maxLength=3,,CR,"The reference type codes defined by DCSA. Possible values are:
 - `CR` (Customer's Reference)
 - `AKG` (Vehicle Identification Number)
 - `SPO` (Shipper's Purchase Order)
-- `CPO` (Consignee's Purchase Order)",
+- `CPO` (Consignee's Purchase Order)"
 ReferenceConsignmentItem,values,"string list",,,,,"List of `referenceValues` for a given `referenceType`.
 Item description:
-List of `referenceValues` for a given `referenceType`.",
-Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+List of `referenceValues` for a given `referenceType`."
+Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container."
 Seal,placement,string,,maxLength=100,,DOOR,"The placement of a seal.
 - `DOOR` - Door
-- `VENT` - Vent",
+- `VENT` - Vent"
 Seal,source,string,,maxLength=100,,CUSTOMER,"The source of a seal, indicating who has affixed the seal.
 
 Both `VETERINARY` and `PHYTOSANITARY` map to `AC` (Quarantine agency) in [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm).
@@ -307,54 +307,54 @@ Both `VETERINARY` and `PHYTOSANITARY` map to `AC` (Quarantine agency) in [UN/EDI
 - `PHYTOSANITARY` - Phytosanitary
 - `SHIPPER` - Shipper
 - `TERMINAL` - Terminal
-- `VETERINARY` - Veterinary",
+- `VETERINARY` - Veterinary"
 Seal,type,string,,maxLength=100,,BOLT,"The type of a seal.
 - `KEYLESS_PADLOCK` - Keyless padlock
 - `BOLT` - Bolt
-- `WIRE` - Wire",
-ShipmentDetails,carrierBookingReference,string,,maxLength=35,,ABC709951,"The reference of the booking for which this DG declaration was created",
-ShipmentDetails,"freightForwarderReference",string,,maxLength=100,,FF-20260401-003,"The reference number assigned by the freight forwarder handling the shipment on behalf of the shipper.",
-ShipmentDetails,shipperReference,string,,maxLength=100,,SHP-2026-NL-8821,"The shipper's own internal reference number for cross-referencing with their systems.",
-ShipmentDetails,"transportDocumentReference",string,,maxLength=20,,HHL71800000,"The reference of the transport document for which this DG declaration was created",
-ShipperDeclaration,companyName,string,,maxLength=100,,"ABC Chemicals Ltd","Name of the shipper/consignor company making the dangerous goods declaration.",
-ShipperDeclaration,declarantName,string,,maxLength=100,,"Jane Smith","Name of the person signing on behalf of the shipper.",
-ShipperDeclaration,declarantStatus,string,,maxLength=100,,"Dangerous Goods Manager","Role/status of the shipper's authorized signatory.",
-ShipperDeclaration,declarationDate,"string(date)",,,,2025-01-23,"Date when the shipper declaration was signed.",
-ShipperDeclaration,declarationPlace,Address,,,,,"Place where the shipper declaration was made.",
+- `WIRE` - Wire"
+ShipmentDetails,carrierBookingReference,string,,maxLength=35,,ABC709951,"The reference of the booking for which this DG declaration was created"
+ShipmentDetails,"freightForwarderReference",string,,maxLength=100,,FF-20260401-003,"The reference number assigned by the freight forwarder handling the shipment on behalf of the shipper."
+ShipmentDetails,shipperReference,string,,maxLength=100,,SHP-2026-NL-8821,"The shipper's own internal reference number for cross-referencing with their systems."
+ShipmentDetails,"transportDocumentReference",string,,maxLength=20,,HHL71800000,"The reference of the transport document for which this DG declaration was created"
+ShipperDeclaration,companyName,string,,maxLength=100,,"ABC Chemicals Ltd","Name of the shipper/consignor company making the dangerous goods declaration."
+ShipperDeclaration,declarantName,string,,maxLength=100,,"Jane Smith","Name of the person signing on behalf of the shipper."
+ShipperDeclaration,declarantStatus,string,,maxLength=100,,"Dangerous Goods Manager","Role/status of the shipper's authorized signatory."
+ShipperDeclaration,declarationDate,"string(date)",,,,2025-01-23,"Date when the shipper declaration was signed."
+ShipperDeclaration,declarationPlace,Address,,,,,"Place where the shipper declaration was made."
 ShipperDeclaration,signatory,string,,maxLength=100,,"JANE SMITH","Upper case name of the person authorized to sign the declaration.
 
-According to IMDG Code 5.4.1.6.2: ""If the dangerous goods documentation is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign.""",
-TaxLegalReference,countryCode,string,,maxLength=2,,IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-TaxLegalReference,type,string,,maxLength=50,,PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
-TaxLegalReference,value,string,,maxLength=100,,AAAAA0000A,"The value of the `taxLegalReference`",
-"UtilizedTransportEquipment",equipment,Equipment,,,,,"The container or transport equipment used.",
-"UtilizedTransportEquipment",references,"Reference list",,,,,"Reference used by the customer or carrier to identify or track the shipment.",
-"UtilizedTransportEquipment",seals,"Seal list",,,,,"Seal-related information associated with the equipment.",
+According to IMDG Code 5.4.1.6.2: ""If the dangerous goods documentation is presented to the carrier by means of EDP or EDI transmission techniques, the signature(s) may be electronic signature(s) or may be replaced by the name(s) (in capitals) of the person authorized to sign."""
+TaxLegalReference,countryCode,string,,maxLength=2,,IN,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+TaxLegalReference,type,string,,maxLength=50,,PAN,"The reference type code as defined by the relevant tax and/or legal authority."
+TaxLegalReference,value,string,,maxLength=100,,AAAAA0000A,"The value of the `taxLegalReference`"
+"UtilizedTransportEquipment",equipment,Equipment,,,,,"The container or transport equipment used."
+"UtilizedTransportEquipment",references,"Reference list",,,,,"Reference used by the customer or carrier to identify or track the shipment."
+"UtilizedTransportEquipment",seals,"Seal list",,,,,"Seal-related information associated with the equipment."
 "UtilizedTransportEquipment",shippingMarks,"string list",,,,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
 Item description:
 A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
-",
+"
 VesselVoyageDetails,carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
 [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
-The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.",
+The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined."
 VesselVoyageDetails,carrierCodeListProvider,string,,maxLength=10,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
 - `SMDG` (Ship Message Design Group)
-- `NMFTA` (National Motor Freight Traffic Association)",
+- `NMFTA` (National Motor Freight Traffic Association)"
 VesselVoyageDetails,departureDate,"string(date)",,,,2025-01-23,"The date of departure from the location where the cargo is handed over by the shipper, or his agent,
-to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.",
-VesselVoyageDetails,destination,Location,,,,,"The final delivery destination of the goods",
-VesselVoyageDetails,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
-VesselVoyageDetails,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
-VesselVoyageDetails,portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel.",
-VesselVoyageDetails,portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation.",
-VesselVoyageDetails,vesselName,string,,maxLength=50,,"King of the Seas","Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded.",
+to the shipping line. This can refer either to the Place of Receipt or the Port of Loading."
+VesselVoyageDetails,destination,Location,,,,,"The final delivery destination of the goods"
+VesselVoyageDetails,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference"
+VesselVoyageDetails,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference"
+VesselVoyageDetails,portOfDischarge,Location,,,,,"The location where the cargo is discharged from the last sea-going vessel."
+VesselVoyageDetails,portOfLoading,Location,,,,,"The location where the cargo is loaded onto a first sea-going vessel for water transportation."
+VesselVoyageDetails,vesselName,string,,maxLength=50,,"King of the Seas","Name of the first sea-going vessel on which the cargo is loaded or intended to be loaded."
 Volume,unit,string,,maxLength=10,,MTQ,"Measurement unit in which the volume `value` is expressed:
 - `FTQ` (Cubic foot)
 - `MTQ` (Cubic meter)
-- `LTR` (Litre)",
-Volume,value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`",
-VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+- `LTR` (Litre)"
+Volume,value,"number(float)",,,,2.4,"Volume value expressed in the measurement `unit`"
+VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage"
 VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
 
 Carriers assign a Universal Voyage Reference (UVR) to a voyage,
@@ -363,10 +363,10 @@ either individually for non-VSA services or jointly for shared services under a 
 Every Universal Voyage Reference is a 5-character string with the following format:
  * the last 2 digits of the year
  * 2 alphanumeric characters for the sequence number of the voyage
- * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 Weight,unit,string,,maxLength=10,,KGM,"Measurement unit in which the weight `value` is expressed:
 - `KGM` (Kilograms)
 - `LBR` (Pounds)
 - `GRM` (Grams)
-- `ONZ` (Ounce)",
-Weight,value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`",
+- `ONZ` (Ounce)"
+Weight,value,"number(float)",,,,2.4,"Weight value expressed in the measurement `unit`"

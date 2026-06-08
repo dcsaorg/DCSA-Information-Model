@@ -10,7 +10,8 @@ public class QueryParametersSheet extends DataOverviewSheet {
       Map<Class<? extends DataOverviewSheet>, List<List<String>>> oldDataValuesBySheetClass,
       Map<Class<? extends DataOverviewSheet>, Map<String, String>>
           changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-      boolean swapOldAndNew) {
+      boolean swapOldAndNew,
+      boolean hasBaseline) {
     super(
         "Query parameters",
         "QueryParametersTable",
@@ -29,6 +30,7 @@ public class QueryParametersSheet extends DataOverviewSheet {
             .toList(),
         oldDataValuesBySheetClass,
         changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-        swapOldAndNew);
+        swapOldAndNew,
+        hasBaseline);
   }
 }

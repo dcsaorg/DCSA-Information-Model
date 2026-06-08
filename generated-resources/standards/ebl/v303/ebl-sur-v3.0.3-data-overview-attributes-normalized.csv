@@ -1,4 +1,4 @@
-Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Object,Attribute,Type,Required,Size,Pattern,Example,Description
 ActorParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Actor Party`. The value **MUST** be one of:
 - `WAVE` (Wave)
 - `CARX` (CargoX)
@@ -19,11 +19,11 @@ ActorParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of 
 - `BLOC` (BlockPeer Technologies)
 - `DOCU` (DocuTrade)
 - `AEOT` (AEOTrade)
-- `SGTD` (SGTraDex)",
-ActorParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
-ActorParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-ActorParty,representedParty,RepresentedActorParty,,,,,"The party on whose behalf the action was performed.",
-ActorParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
+- `SGTD` (SGTraDex)"
+ActorParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,
+ActorParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+ActorParty,representedParty,RepresentedActorParty,,,,,"The party on whose behalf the action was performed."
+ActorParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`"
 EndorsementChainLink,actionCode,string,yes,maxLength=50,,ISSUE,"The action performed by the actor. This should be one of:
 - `ISSUE` (The actor issued the document to the recipient, who is the first possessor of the eBL, as designated by the `Issue to Party`)
 - `ENDORSE` (The actor endorsed the document to the recipient)
@@ -35,10 +35,10 @@ EndorsementChainLink,actionCode,string,yes,maxLength=50,,ISSUE,"The action perfo
 - `TRANSFER` (The actor transferred the possession of the eBL to the recipient)
 - `SURRENDERED` (The actor acknowledged that the eBL has been accepted and the lifecycle of the eBL is accomplished)
 
-Not all actions are applicable to all surrender requests. The combination and order of endorsement chain entries may differ by eBL Solution Provider, based on their rulebook and/or bilateral agreements with carriers.",
-EndorsementChainLink,actionDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Date time when the action occurred.",
-EndorsementChainLink,actor,ActorParty,yes,,,,"Refers to a company or a legal entity.",
-EndorsementChainLink,auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider.",
+Not all actions are applicable to all surrender requests. The combination and order of endorsement chain entries may differ by eBL Solution Provider, based on their rulebook and/or bilateral agreements with carriers."
+EndorsementChainLink,actionDateTime,"string(date-time)",yes,,,2024-09-04T09:41Z,"Date time when the action occurred."
+EndorsementChainLink,actor,ActorParty,yes,,,,"Refers to a company or a legal entity."
+EndorsementChainLink,auditReference,string,,maxLength=100,,AUDIT0007,"An identifier issued by the eBL Solution Provider, used for auditing purposes to verify that the endorsement chain action has been securely recorded. The format of this identifier may vary depending on the technology employed by the eBL Solution Provider."
 EndorsementChainLink,recipient,RecipientParty,yes,,,,"Refers to a company or a legal entity.
 
 **Note:** It is possible to use a '**No Party**' placeholder when the `actionCode` is one of the following values: `SIGN`, `BLANK ENDORSE` or `SURRENDERED` (as none of these `actionCodes` require a `recipient`). A '**No Party**' object MUST be populated with the following values:
@@ -53,11 +53,11 @@ EndorsementChainLink,recipient,RecipientParty,yes,,,,"Refers to a company or a l
       }
     ]
   }
-```",
+```"
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 IdentifyingCode,codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes identifying a party. Possible values are:
 - `WAVE` (Wave)
 - `CARX` (CargoX)
@@ -87,8 +87,8 @@ IdentifyingCode,codeListProvider,string,yes,maxLength=100,,W3C,"A list of codes 
 - `FMC` (Federal Maritime Commission)
 - `DCSA` (Digital Container Shipping Association)
 - `ZZZ` (Mutually defined)
-- `NONE` (To be used as part of the '**No Party**' object when `actionCode` is `SIGN`, `BLANK ENDORSE` or `SURRENDERED`)",
-IdentifyingCode,partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the `codeListProvider`",
+- `NONE` (To be used as part of the '**No Party**' object when `actionCode` is `SIGN`, `BLANK ENDORSE` or `SURRENDERED`)"
+IdentifyingCode,partyCode,string,yes,maxLength=150,,MSK,"Code to identify the party as provided by the `codeListProvider`"
 RecipientParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform of the `Recipient Party`. The value **MUST** be one of:
 - `WAVE` (Wave)
 - `CARX` (CargoX)
@@ -110,16 +110,16 @@ RecipientParty,eblPlatform,string,yes,maxLength=4,"^\S+$",BOLE,"The eBL platform
 - `DOCU` (DocuTrade)
 - `AEOT` (AEOTrade)
 - `SGTD` (SGTraDex)
-- `NONE` (To be used as part of the '**No Party**' object when `actionCode` is `SIGN`, `BLANK ENDORSE` or `SURRENDERED`)",
-RecipientParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,,
-RecipientParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-RecipientParty,representedParty,"RepresentedRecipientParty",,,,,"The party on whose behalf the action was directed.",
-RecipientParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`",
-RepresentedActorParty,identifyingCodes,"IdentifyingCode list",,,,,,
-RepresentedActorParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-"RepresentedRecipientParty",identifyingCodes,"IdentifyingCode list",,,,,,
-"RepresentedRecipientParty",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party.",
-SurrenderRequestDetails,comments,string,,maxLength=255,"^\S(?:.*\S)?$","As requested...","Optional free text comment associated with the surrender request transaction. In case no valid `reasonCode` exists - this property can also be used to provide a reason.",
+- `NONE` (To be used as part of the '**No Party**' object when `actionCode` is `SIGN`, `BLANK ENDORSE` or `SURRENDERED`)"
+RecipientParty,identifyingCodes,"IdentifyingCode list",yes,minItems=1,,,
+RecipientParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+RecipientParty,representedParty,"RepresentedRecipientParty",,,,,"The party on whose behalf the action was directed."
+RecipientParty,taxLegalReferences,"TaxLegalReference list",,,,,"A list of `Tax References` for a `Party`"
+RepresentedActorParty,identifyingCodes,"IdentifyingCode list",,,,,
+RepresentedActorParty,partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+"RepresentedRecipientParty",identifyingCodes,"IdentifyingCode list",,,,,
+"RepresentedRecipientParty",partyName,string,yes,maxLength=70,"^\S(?:.*\S)?$",Globeteam,"Name of the party."
+SurrenderRequestDetails,comments,string,,maxLength=255,"^\S(?:.*\S)?$","As requested...","Optional free text comment associated with the surrender request transaction. In case no valid `reasonCode` exists - this property can also be used to provide a reason."
 SurrenderRequestDetails,endorsementChain,"EndorsementChainLink list",,,,,"A list of one or more actions that affect an eBL, starting from its issuance onward. It is equivalent to the ""back side"" of a physical Bill of Lading. The type of actions recorded in the endorsement chain as defined by the DCSA standard are listed below:
 
 - **Issue:** The act of issuing an eBL to the `Issue to` party, meaning the designated recipient of the action (typically the shipper or their on behalf of party).
@@ -130,26 +130,26 @@ SurrenderRequestDetails,endorsementChain,"EndorsementChainLink list",,,,,"A list
 - **Blank Endorse:** The act of transferring the rights and obligations associated with the eBL in blank, meaning that the endorsement does not specify a recipient. A party in possession of a blank endorsed eBL is allowed to claim or deal with the goods. Only applicable to negotiable eBL (`isToOrder=true`).
 - **Endorse to Order:** The act of transferring the rights and obligations associated with the eBL to a new endorsee, meaning the designated recipient of the action, allowing them to claim or deal with the goods. The newly appointed endorsee can further endorse the eBL to another party. Only applicable to negotiable eBL (`isToOrder=true`).
 - **Transfer:** The act of transferring the possession of the eBL to the recipient.
-- **Surrendered:** The act of confirming that the eBL has been surrendered, meaning that its lifecycle is completed.",
+- **Surrendered:** The act of confirming that the eBL has been surrendered, meaning that its lifecycle is completed."
 SurrenderRequestDetails,reasonCode,string,,maxLength=4,,SWTP,"A code defined by DCSA indicating the reason for requesting a Surrender for Amendment. Possible values are:
 - `SWTP` (Switch to paper)
 - `COD` (Change of destination)
 - `SWI` (Switch BL)
 
-In case no valid `reasonCode` exists for the `AREQ` (Requested to Surrender for Amendment) - it is possible to use the `comments` property below to add more information.",
+In case no valid `reasonCode` exists for the `AREQ` (Requested to Surrender for Amendment) - it is possible to use the `comments` property below to add more information."
 SurrenderRequestDetails,surrenderRequestCode,string,yes,,,SREQ,"Surrender Request codes:
 - `SREQ` (Requested to Surrender for Delivery)
 - `AREQ` (Requested to Surrender for Amendment)
 
 The surrender request code determines the type of surrender request. Any parallel negotiation between the consignee and the carrier related to any of these type surrender are handled outside this API. Examples could be the shipment release related to a Surrender for Delivery or the actual contents of the amendment in a surrender related to an amendment.
 
-Note that ""Switch to paper"" is considered an amendment in how it is modelled via the DCSA eBL data standard.",
-SurrenderRequestDetails,"surrenderRequestReference",string,yes,maxLength=100,"^\S(?:.*\S)?$",Z12345,"A server defined reference for a concrete surrender request. Surrender request references MUST NOT be reused.",
-SurrenderRequestDetails,"transportDocumentReference",string,yes,maxLength=20,"^\S(?:.*\S)?$",HHL71800000,"A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment.",
-SurrenderRequestDetails,"transportDocumentSubReference",string,,maxLength=100,"^\S(?:.*\S)?$",Version_1,"Additional reference that can be optionally used alongside the `transportDocumentReference` in order to distinguish between versions of the same `Transport Document`.",
+Note that ""Switch to paper"" is considered an amendment in how it is modelled via the DCSA eBL data standard."
+SurrenderRequestDetails,"surrenderRequestReference",string,yes,maxLength=100,"^\S(?:.*\S)?$",Z12345,"A server defined reference for a concrete surrender request. Surrender request references MUST NOT be reused."
+SurrenderRequestDetails,"transportDocumentReference",string,yes,maxLength=20,"^\S(?:.*\S)?$",HHL71800000,"A unique number allocated by the shipping line to the `Transport Document` and the main number used for the tracking of the status of the shipment."
+SurrenderRequestDetails,"transportDocumentSubReference",string,,maxLength=100,"^\S(?:.*\S)?$",Version_1,"Additional reference that can be optionally used alongside the `transportDocumentReference` in order to distinguish between versions of the same `Transport Document`."
 TaxLegalReference,countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 
-**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`.",
-TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority.",
-TaxLegalReference,value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`",
+**Note:** In case the `countryCode` is unknown it is possible to use the code `ZZ`."
+TaxLegalReference,type,string,yes,maxLength=50,"^\S(?:.*\S)?$",PAN,"The reference type code as defined by the relevant tax and/or legal authority."
+TaxLegalReference,value,string,yes,maxLength=35,"^\S(?:.*\S)?$",AAAAA0000A,"The value of the `taxLegalReference`"

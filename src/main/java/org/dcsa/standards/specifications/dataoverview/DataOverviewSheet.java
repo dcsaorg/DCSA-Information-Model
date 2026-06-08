@@ -53,6 +53,7 @@ public abstract class DataOverviewSheet {
   private final List<Boolean> excelWrapCellText;
   private final List<List<String>> csvDataValues;
   private final List<Map.Entry<DataOverviewDiffStatus, List<String>>> excelDataValues;
+  private final boolean hasBaseline;
 
   protected DataOverviewSheet(
       String sheetName,
@@ -65,34 +66,50 @@ public abstract class DataOverviewSheet {
       Map<Class<? extends DataOverviewSheet>, List<List<String>>> oldDataValuesBySheetClass,
       Map<Class<? extends DataOverviewSheet>, Map<String, String>>
           changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-      boolean swapOldAndNew) {
+      boolean swapOldAndNew,
+      boolean hasBaseline) {
     this.sheetName = sheetName;
     this.tableName = tableName;
+    this.hasBaseline = hasBaseline;
     this.csvHeaderTitles = headerTitles;
-    this.excelHeaderTitles = Stream.concat(Stream.of("Diff"), headerTitles.stream()).toList();
-    this.excelColumnWidths = Stream.concat(Stream.of(12), columnWidths.stream()).toList();
-    this.excelWrapCellText =
-        Stream.concat(Stream.of(Boolean.FALSE), wrapCellText.stream()).toList();
+    if (hasBaseline) {
+      this.excelHeaderTitles = Stream.concat(Stream.of("Diff"), headerTitles.stream()).toList();
+      this.excelColumnWidths = Stream.concat(Stream.of(12), columnWidths.stream()).toList();
+      this.excelWrapCellText =
+          Stream.concat(Stream.of(Boolean.FALSE), wrapCellText.stream()).toList();
+    } else {
+      this.excelHeaderTitles = headerTitles;
+      this.excelColumnWidths = columnWidths;
+      this.excelWrapCellText = wrapCellText;
+    }
     this.csvDataValues = dataValues;
 
-    Map<String, List<String>> oldRowValuesByPrimaryKey =
-        rowValuesByPrimaryKey(primaryKeyColumnCount, oldDataValuesBySheetClass.get(getClass()));
-    Map<String, List<String>> newRowValuesByPrimaryKey =
-        rowValuesByPrimaryKey(primaryKeyColumnCount, dataValues);
+    if (hasBaseline) {
+      int columnCount = headerTitles.size();
+      Map<String, List<String>> oldRowValuesByPrimaryKey =
+          rowValuesByPrimaryKey(primaryKeyColumnCount, truncateRows(oldDataValuesBySheetClass.get(getClass()), columnCount));
+      Map<String, List<String>> newRowValuesByPrimaryKey =
+          rowValuesByPrimaryKey(primaryKeyColumnCount, dataValues);
 
-    excelDataValues =
-        swapOldAndNew
-            ? diff(
-                primaryKeyColumnCount,
-                newRowValuesByPrimaryKey,
-                oldRowValuesByPrimaryKey,
-                changedPrimaryKeyByOldPrimaryKeyBySheetClass.get(getClass()).entrySet().stream()
-                    .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey)))
-            : diff(
-                primaryKeyColumnCount,
-                oldRowValuesByPrimaryKey,
-                newRowValuesByPrimaryKey,
-                changedPrimaryKeyByOldPrimaryKeyBySheetClass.get(getClass()));
+      excelDataValues =
+          swapOldAndNew
+              ? diff(
+                  primaryKeyColumnCount,
+                  newRowValuesByPrimaryKey,
+                  oldRowValuesByPrimaryKey,
+                  changedPrimaryKeyByOldPrimaryKeyBySheetClass.get(getClass()).entrySet().stream()
+                      .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey)))
+              : diff(
+                  primaryKeyColumnCount,
+                  oldRowValuesByPrimaryKey,
+                  newRowValuesByPrimaryKey,
+                  changedPrimaryKeyByOldPrimaryKeyBySheetClass.get(getClass()));
+    } else {
+      excelDataValues =
+          dataValues.stream()
+              .map(row -> Map.entry(DataOverviewDiffStatus.UNMODIFIED, row))
+              .toList();
+    }
   }
 
   @Getter
@@ -234,6 +251,12 @@ public abstract class DataOverviewSheet {
                 Function.identity()));
   }
 
+  private static List<List<String>> truncateRows(List<List<String>> rows, int columnCount) {
+    return rows.stream()
+        .map(row -> row.size() > columnCount ? row.subList(0, columnCount) : row)
+        .toList();
+  }
+
   public void addToExcelWorkbook(Workbook workbook, Supplier<Long> idSupplier) {
     Sheet sheet = workbook.createSheet(sheetName);
 
@@ -290,7 +313,9 @@ public abstract class DataOverviewSheet {
               row.setHeight((short) -1);
               AtomicInteger columnIndexReference = new AtomicInteger(0);
               Stream.concat(
-                      rowIndex == 0 ? Stream.of() : Stream.of(diffStatus.getDisplayName()),
+                      rowIndex == 0 || !hasBaseline
+                          ? Stream.of()
+                          : Stream.of(diffStatus.getDisplayName()),
                       rowValues.stream())
                   .forEach(
                       value -> {

@@ -20,14 +20,12 @@ import java.util.stream.Stream;
 import io.swagger.v3.oas.models.media.StringSchema;
 
 import org.dcsa.standards.specifications.generator.SpecificationToolkit;
-import org.dcsa.standards.specifications.constraints.SchemaConstraint;
 
 public class AttributesData {
   private final ArrayList<AttributeInfo> attributeInfoList = new ArrayList<>();
   private final List<String> rootTypeNames;
 
   public AttributesData(
-      Map<String, Map<String, List<SchemaConstraint>>> constraintsByClassAndField,
       Map<String, Schema<?>> schemas,
       List<String> rootTypeNames) {
     this.rootTypeNames = rootTypeNames;
@@ -68,7 +66,6 @@ public class AttributesData {
                               variantInfo.setExample("");
                               variantInfo.setDescription(
                                   Objects.requireNonNullElse(attributeSchema.getDescription(), "").trim());
-                              variantInfo.setConstraints("");
                               attributeInfoList.add(variantInfo);
                             }
                           }
@@ -149,26 +146,6 @@ public class AttributesData {
                         attributeInfo.setDescription(
                             Objects.requireNonNullElse(attributeSchema.getDescription(), "")
                                 .trim());
-                        attributeInfo.setConstraints(
-                            constraintsByClassAndField
-                                .getOrDefault(attributeInfo.getObjectType(), Map.of())
-                                .getOrDefault(attributeInfo.getAttributeName(), List.of())
-                                .stream()
-                                .map(SchemaConstraint::getDescription)
-                                .collect(Collectors.joining("\n\n")));
-                        if (!attributeInfo.getConstraints().isEmpty()
-                            && attributeInfo
-                                .getDescription()
-                                .endsWith(attributeInfo.getConstraints())) {
-                          attributeInfo.setDescription(
-                              attributeInfo
-                                  .getDescription()
-                                  .substring(
-                                      0,
-                                      attributeInfo.getDescription().length()
-                                          - attributeInfo.getConstraints().length())
-                                  .trim());
-                        }
                         Schema<?> itemSchema = attributeSchema.getItems();
                         if (itemSchema != null) {
                           if (itemSchema instanceof StringSchema) {
@@ -222,8 +199,7 @@ public class AttributesData {
                     Objects.requireNonNullElse(attributeInfo.getSize(), ""),
                     Objects.requireNonNullElse(attributeInfo.getPattern(), ""),
                     Objects.requireNonNullElse(attributeInfo.getExample(), ""),
-                    Objects.requireNonNullElse(attributeInfo.getDescription(), ""),
-                    Objects.requireNonNullElse(attributeInfo.getConstraints(), "")))
+                    Objects.requireNonNullElse(attributeInfo.getDescription(), "")))
         .toList();
   }
 
@@ -313,8 +289,7 @@ public class AttributesData {
                   Objects.requireNonNullElse(attributeInfo.getSize(), ""),
                   Objects.requireNonNullElse(attributeInfo.getPattern(), ""),
                   Objects.requireNonNullElse(attributeInfo.getExample(), ""),
-                  Objects.requireNonNullElse(attributeInfo.getDescription(), ""),
-                  Objects.requireNonNullElse(attributeInfo.getConstraints(), ""));
+                  Objects.requireNonNullElse(attributeInfo.getDescription(), ""));
             })
         .toList();
   }

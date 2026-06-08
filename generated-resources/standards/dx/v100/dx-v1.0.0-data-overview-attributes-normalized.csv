@@ -1,5 +1,5 @@
-Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-Document,content,string,,,,RXhhbXBsZSBBTiBjb250ZW50,"Base64 representation of the binary document content",
-Document,contentType,string,,maxLength=255,,application/msword,"Content type of document",
-Document,documentID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universally unique identifier of the document.",
-Document,name,string,,maxLength=255,,"20250123 AN XYZ01234.docx","Document name",
+Object,Attribute,Type,Required,Size,Pattern,Example,Description
+Document,content,string,,,,RXhhbXBsZSBBTiBjb250ZW50,"Base64 representation of the binary document content"
+Document,contentType,string,,maxLength=255,,application/msword,"Content type of document"
+Document,documentID,"string(uuid)",,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universally unique identifier of the document."
+Document,name,string,,maxLength=255,,"20250123 AN XYZ01234.docx","Document name"

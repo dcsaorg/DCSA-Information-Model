@@ -1,44 +1,44 @@
-Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-Address,city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+Object,Attribute,Type,Required,Size,Pattern,Example,Description
+Address,city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city."
 Address,countryCode,string,yes,"minLength=2
-maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-Address,floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
-Address,postCode,string,,maxLength=10,,"1047 HM","The post code.",
-Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
-Address,street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
-Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
-Barge,callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+Address,floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number."
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code."
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region."
+Address,street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street."
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street."
+Barge,callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag."
 Barge,flag,string,,"minLength=2
-maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the ISO 3166 two-letter country code.",
+maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the ISO 3166 two-letter country code."
 Barge,MMSINumber,string,,"minLength=9
-maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
-Barge,name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
-Barge,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists.",
+maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station."
+Barge,name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO."
+Barge,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists."
 Barge,"operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes.
 - `SMDG` (Ship Message Design Group)
-- `NMFTA` (National Motor Freight Traffic Association)",
+- `NMFTA` (National Motor Freight Traffic Association)"
 Barge,vesselIMONumber,string,,"minLength=7
-maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel.",
-BargeTransport,barge,Barge,,,,,,
-BargeTransport,modeOfTransport,string,yes,,,BARGE,"The mode of transport as defined by DCSA. For the Barge Transport mode this needs to be `BARGE`.",
-BargeTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call.",
-BargeTransport,servicePartners,"ServicePartner list",,,,,,
-BargeTransport,transportCallReference,string,,maxLength=100,,"SR11111X-9321483-2107W-NLAMS-ACT-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.",
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel."
+BargeTransport,barge,Barge,,,,,
+BargeTransport,modeOfTransport,string,yes,,,BARGE,"The mode of transport as defined by DCSA. For the Barge Transport mode this needs to be `BARGE`."
+BargeTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call."
+BargeTransport,servicePartners,"ServicePartner list",,,,,
+BargeTransport,transportCallReference,string,,maxLength=100,,"SR11111X-9321483-2107W-NLAMS-ACT-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator."
 BargeTransport,"universalExportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 BargeTransport,"universalImportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 BargeTransport,"universalServiceReference",string,,"minLength=8
-maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
-CutOffTime,cutOffDateTime,"string(date-time)",yes,,,2019-11-12T07:41-08:30,"Estimated cut-off time expressed in local time with offset.",
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`."
+CutOffTime,cutOffDateTime,"string(date-time)",yes,,,2019-11-12T07:41-08:30,"Estimated cut-off time expressed in local time with offset."
 CutOffTime,cutOffDateTimeCode,string,yes,maxLength=3,,DCO,"Code for the cut-off time. Possible values are:
   - `DCO` (Documentation cut-off)
   - `VCO` (VGM cut-off)
@@ -54,37 +54,37 @@ CutOffTime,cutOffDateTimeCode,string,yes,maxLength=3,,DCO,"Code for the cut-off 
   - `STA` (Standard booking acceptance)
   - `SPA` (Special booking acceptance)
   - `CUA` (Customs Acceptance)
-  - `AFC` (Advanced filling cut-off)",
+  - `AFC` (Advanced filling cut-off)"
 Facility,facilityCode,string,yes,maxLength=6,"^\S(?:.*\S)?$",ADT,"The code used for identifying the specific facility. This code does not include the UN Location Code.The definition of the code depends on the `facilityCodeListProvider`. As code list providers maintain multiple codeLists the following codeList is used:
   - for `SMDG` - the codeList used is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/)
-  - for `BIC`  - the codeList used is the [BIC Facility Codes](https://www.bic-code.org/facility-codes/)",
+  - for `BIC`  - the codeList used is the [BIC Facility Codes](https://www.bic-code.org/facility-codes/)"
 Facility,facilityCodeListProvider,string,yes,,,SMDG,"The provider used for identifying the facility Code. Some facility codes are only defined in combination with an `UN Location Code`.
 - `BIC` (Requires a UN Location Code)
-- `SMDG` (Requires a UN Location Code)",
-Leg,arrival,PlaceOfArrival,yes,,,,"The Location specifying where the place of arrival is located.",
-Leg,departure,PlaceOfDeparture,yes,,,,"The Location specifying where the place of departure is located.",
-Leg,sequenceNumber,"integer(int32)",,,,1,"Sequence number of the leg.",
-Leg,"transport as VesselTransport",VesselTransport,,,,,"The mode of transport as defined by DCSA.",
-Leg,"transport as BargeTransport",BargeTransport,,,,,"The mode of transport as defined by DCSA.",
-Leg,"transport as OtherTransport",OtherTransport,,,,,"The mode of transport as defined by DCSA.",
-Location,address,Address,,,,,"An object for storing address related information.",
-Location,facility,Facility,,,,,"A way to express a location using a `Facility`. The facility can either be expressed using a `BIC` code or a `SMDG` code. The `facilityCode` does not contain the `UNLocationCode` - this should be provided in the `UnLocationCode` attribute.",
-Location,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","An optional name for the location.",
+- `SMDG` (Requires a UN Location Code)"
+Leg,arrival,PlaceOfArrival,yes,,,,"The Location specifying where the place of arrival is located."
+Leg,departure,PlaceOfDeparture,yes,,,,"The Location specifying where the place of departure is located."
+Leg,sequenceNumber,"integer(int32)",,,,1,"Sequence number of the leg."
+Leg,"transport as VesselTransport",VesselTransport,,,,,"The mode of transport as defined by DCSA."
+Leg,"transport as BargeTransport",BargeTransport,,,,,"The mode of transport as defined by DCSA."
+Leg,"transport as OtherTransport",OtherTransport,,,,,"The mode of transport as defined by DCSA."
+Location,address,Address,,,,,"An object for storing address related information."
+Location,facility,Facility,,,,,"A way to express a location using a `Facility`. The facility can either be expressed using a `BIC` code or a `SMDG` code. The `facilityCode` does not contain the `UNLocationCode` - this should be provided in the `UnLocationCode` attribute."
+Location,locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","An optional name for the location."
 Location,UNLocationCode,string,,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
 - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)"
 OtherTransport,modeOfTransport,string,yes,,,RAIL,"The mode of transport as defined by DCSA. The allowed values for the Other Transport mode are:
 - `RAIL` (When the transport mode is Rail)
 - `TRUCK`(When the transport mode is Truck)
 - `RAIL_TRUCK`(When rail and truck are expected to be the mode of transport in a leg of a proposed routing)
 - `BARGE_TRUCK`(When barge and truck are expected to be the mode of transport in a leg of a proposed routing)
 - `BARGE_RAIL`(When barge and rail are expected to be the mode of transport in a leg of a proposed routing)
-- `MULTIMODAL`(When mode of transport is not really defined or unknown at this stage)",
-PlaceOfArrival,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place.",
+- `MULTIMODAL`(When mode of transport is not really defined or unknown at this stage)"
+PlaceOfArrival,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place."
 PlaceOfArrival,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identify the specific type of facility. The code indicates which role the facility plays during the transportCall.
 - `BORD` (Border)
 - `CLOC` (Customer Location)
@@ -96,14 +96,14 @@ PlaceOfArrival,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identi
 - `PBPL` (Pilot Boarding Place)
 - `BRTH` (Berth)
 - `RAMP` (Ramp)
-- `WAYP` (Waypoint)",
+- `WAYP` (Waypoint)"
 PlaceOfArrival,location,Location,yes,,,,"The location can be specified using **any** of the nested structures:
   - `Address` (used to specify the location via an Address)
   - `UNLocationCode`
   - `Facility` (used to specify a location using a `facilityCode` and a `facilityCodeListProvider`)
 
-  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location.",
-PlaceOfDelivery,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place.",
+  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location."
+PlaceOfDelivery,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place."
 PlaceOfDelivery,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identify the specific type of facility. The code indicates which role the facility plays during the transportCall.
 - `BORD` (Border)
 - `CLOC` (Customer Location)
@@ -115,14 +115,14 @@ PlaceOfDelivery,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to ident
 - `PBPL` (Pilot Boarding Place)
 - `BRTH` (Berth)
 - `RAMP` (Ramp)
-- `WAYP` (Waypoint)",
+- `WAYP` (Waypoint)"
 PlaceOfDelivery,location,Location,yes,,,,"The location can be specified using **any** of the nested structures:
   - `Address` (used to specify the location via an Address)
   - `UNLocationCode`
   - `Facility` (used to specify a location using a `facilityCode` and a `facilityCodeListProvider`)
 
-  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location.",
-PlaceOfDeparture,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place.",
+  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location."
+PlaceOfDeparture,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place."
 PlaceOfDeparture,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identify the specific type of facility. The code indicates which role the facility plays during the transportCall.
 - `BORD` (Border)
 - `CLOC` (Customer Location)
@@ -134,14 +134,14 @@ PlaceOfDeparture,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to iden
 - `PBPL` (Pilot Boarding Place)
 - `BRTH` (Berth)
 - `RAMP` (Ramp)
-- `WAYP` (Waypoint)",
+- `WAYP` (Waypoint)"
 PlaceOfDeparture,location,Location,yes,,,,"The location can be specified using **any** of the nested structures:
   - `Address` (used to specify the location via an Address)
   - `UNLocationCode`
   - `Facility` (used to specify a location using a `facilityCode` and a `facilityCodeListProvider`)
 
-  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location.",
-PlaceOfReceipt,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place.",
+  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location."
+PlaceOfReceipt,dateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event will take place."
 PlaceOfReceipt,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identify the specific type of facility. The code indicates which role the facility plays during the transportCall.
 - `BORD` (Border)
 - `CLOC` (Customer Location)
@@ -153,64 +153,64 @@ PlaceOfReceipt,facilityTypeCode,string,yes,maxLength=4,,POTE,"The code to identi
 - `PBPL` (Pilot Boarding Place)
 - `BRTH` (Berth)
 - `RAMP` (Ramp)
-- `WAYP` (Waypoint)",
+- `WAYP` (Waypoint)"
 PlaceOfReceipt,location,Location,yes,,,,"The location can be specified using **any** of the nested structures:
   - `Address` (used to specify the location via an Address)
   - `UNLocationCode`
   - `Facility` (used to specify a location using a `facilityCode` and a `facilityCodeListProvider`)
 
-  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location.",
-PointToPoint,cutOffTimes,"CutOffTime list",,,,,"A list of cut-offs times provided by the carrier when available. A cut-off time indicates the latest date and time by which a task must be completed. For example, the latest date and time by which a container must be delivered to a terminal to be loaded on a vessel, or where certain documentation must be provided by the Shipper.",
+  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location."
+PointToPoint,cutOffTimes,"CutOffTime list",,,,,"A list of cut-offs times provided by the carrier when available. A cut-off time indicates the latest date and time by which a task must be completed. For example, the latest date and time by which a container must be delivered to a terminal to be loaded on a vessel, or where certain documentation must be provided by the Shipper."
 PointToPoint,"deliveryTypeAtDestination",string,,maxLength=3,,CY,"Indicates the type of service offered at `Destination`. The options are:
 - `CY` (Container yard (incl. rail ramp))
 - `SD` (Store Door)
-- `CFS` (Container Freight Station)",
-PointToPoint,legs,"Leg list",yes,minItems=1,,,,
-PointToPoint,placeOfDelivery,PlaceOfDelivery,yes,,,,"The Location specifying where the place of delivery is located.",
-PointToPoint,placeOfReceipt,PlaceOfReceipt,yes,,,,"The Location specifying where the place of receipt is located.",
+- `CFS` (Container Freight Station)"
+PointToPoint,legs,"Leg list",yes,minItems=1,,,
+PointToPoint,placeOfDelivery,PlaceOfDelivery,yes,,,,"The Location specifying where the place of delivery is located."
+PointToPoint,placeOfReceipt,PlaceOfReceipt,yes,,,,"The Location specifying where the place of receipt is located."
 PointToPoint,receiptTypeAtOrigin,string,,maxLength=3,,CY,"Indicates the type of service offered at `Origin`. The options are:
 - `CY` (Container yard (incl. rail ramp))
 - `SD` (Store Door)
-- `CFS` (Container Freight Station)",
-PointToPoint,routingReference,string,,maxLength=5000,"^\S(?:.*\S)?$",Route123,"A reference to be used when creating a **Booking** in the **Booking API**.",
-PointToPoint,solutionNumber,"integer(int32)",,minimum=1,,1,"Solution number, starting with 1. Used to group and identify similar or same routings in the response as per the carrier commercial definitions.",
-PointToPoint,transitTime,"integer(int32)",,,,10,"The estimated total time in days that it takes a shipment to move from place of receipt to place of delivery. Transit time includes stop-over time during transhipments and waiting time at connection points, if applicable, thus can vary between the same locations.",
-ServicePartner,carrierCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code based on either the SMDG or SCAC code lists.",
+- `CFS` (Container Freight Station)"
+PointToPoint,routingReference,string,,maxLength=5000,"^\S(?:.*\S)?$",Route123,"A reference to be used when creating a **Booking** in the **Booking API**."
+PointToPoint,solutionNumber,"integer(int32)",,minimum=1,,1,"Solution number, starting with 1. Used to group and identify similar or same routings in the response as per the carrier commercial definitions."
+PointToPoint,transitTime,"integer(int32)",,,,10,"The estimated total time in days that it takes a shipment to move from place of receipt to place of delivery. Transit time includes stop-over time during transhipments and waiting time at connection points, if applicable, thus can vary between the same locations."
+ServicePartner,carrierCode,string,,maxLength=4,"^\S+$",MAEU,"The carrier code based on either the SMDG or SCAC code lists."
 ServicePartner,carrierCodeListProvider,string,,,,NMFTA,"Identifies the code list provider used for the `carrierCode`.
 - `SMDG` (Ship Message Design Group)
-- `NMFTA` (National Motor Freight Traffic Association)",
-ServicePartner,"carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",
-ServicePartner,"carrierImportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",
-ServicePartner,carrierServiceCode,string,,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published.",
-ServicePartner,carrierServiceName,string,,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of the service.",
-Vessel,callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
+- `NMFTA` (National Motor Freight Traffic Association)"
+ServicePartner,"carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage."
+ServicePartner,"carrierImportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage."
+ServicePartner,carrierServiceCode,string,,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published."
+ServicePartner,carrierServiceName,string,,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of the service."
+Vessel,callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag."
 Vessel,flag,string,,"minLength=2
-maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code.",
+maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code."
 Vessel,MMSINumber,string,,"minLength=9
-maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
-Vessel,name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
-Vessel,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists.",
+maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station."
+Vessel,name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO."
+Vessel,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists."
 Vessel,"operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes.
 - `SMDG` (Ship Message Design Group)
-- `NMFTA` (National Motor Freight Traffic Association)",
+- `NMFTA` (National Motor Freight Traffic Association)"
 Vessel,vesselIMONumber,string,,"minLength=7
-maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel.",
-VesselTransport,modeOfTransport,string,yes,,,VESSEL,"The mode of transport as defined by DCSA. For the Vessel Transport mode this needs to be `VESSEL`.",
-VesselTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call.",
-VesselTransport,servicePartners,"ServicePartner list",,,,,,
-VesselTransport,transportCallReference,string,,maxLength=100,,"SR11111X-9321483-2107W-NLAMS-ACT-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.",
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel."
+VesselTransport,modeOfTransport,string,yes,,,VESSEL,"The mode of transport as defined by DCSA. For the Vessel Transport mode this needs to be `VESSEL`."
+VesselTransport,portVisitReference,string,,maxLength=50,,NLAMS1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call."
+VesselTransport,servicePartners,"ServicePartner list",,,,,
+VesselTransport,transportCallReference,string,,maxLength=100,,"SR11111X-9321483-2107W-NLAMS-ACT-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator."
 VesselTransport,"universalExportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 VesselTransport,"universalImportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage. The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 VesselTransport,"universalServiceReference",string,,"minLength=8
-maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`.",
-VesselTransport,vessel,Vessel,,,,,,
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service. The service reference must match the regular expression pattern: `SR\d{5}[A-Z]`. The letters `SR` followed by `5` digits, followed by a checksum-character as a capital letter from `A to Z`."
+VesselTransport,vessel,Vessel,,,,,

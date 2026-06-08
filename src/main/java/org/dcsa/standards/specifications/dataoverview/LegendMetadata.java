@@ -5,4 +5,9 @@ public record LegendMetadata(
     String currentStandardVersion,
     String baselineStandardName,
     String baselineStandardVersion,
-    int sheetCount) {}
+    int sheetCount) {
+
+  public boolean hasBaseline() {
+    return !baselineStandardName.isEmpty() || !baselineStandardVersion.isEmpty();
+  }
+}

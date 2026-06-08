@@ -13,5 +13,4 @@ public class AttributeInfo {
   private String pattern;
   private String example;
   private String description;
-  private String constraints;
 }

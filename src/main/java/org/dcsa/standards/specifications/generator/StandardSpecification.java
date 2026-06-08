@@ -219,7 +219,6 @@ public abstract class StandardSpecification {
     DataOverview dataOverview =
         new DataOverview(
             getLegendMetadata(),
-            constraintsByClassAndField,
             SpecificationToolkit.parameterizeStringRawSchemaMap(
                 openAPI.getComponents().getSchemas()),
             getRootTypeNames(),

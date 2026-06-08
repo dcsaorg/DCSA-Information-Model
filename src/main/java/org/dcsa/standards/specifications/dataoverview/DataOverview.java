@@ -12,7 +12,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.dcsa.standards.specifications.constraints.SchemaConstraint;
 
 @Slf4j
 public class DataOverview {
@@ -24,7 +23,6 @@ public class DataOverview {
 
   public DataOverview(
       LegendMetadata legendMetadata,
-      Map<String, Map<String, List<SchemaConstraint>>> constraintsByClassAndField,
       Map<String, Schema<?>> schemas,
       List<String> rootTypeNames,
       List<Parameter> queryParameters,
@@ -34,15 +32,17 @@ public class DataOverview {
           changedPrimaryKeyByOldPrimaryKeyBySheetClass,
       boolean swapOldAndNew) {
     this.legendMetadata = legendMetadata;
+    boolean hasBaseline = legendMetadata.hasBaseline();
     AttributesData attributesData =
-        new AttributesData(constraintsByClassAndField, schemas, rootTypeNames);
+        new AttributesData(schemas, rootTypeNames);
     attributesHierarchicalSheet =
         oldDataValuesBySheetClass.containsKey(AttributesHierarchicalSheet.class)
             ? new AttributesHierarchicalSheet(
                 attributesData,
                 oldDataValuesBySheetClass,
                 changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-                swapOldAndNew)
+                swapOldAndNew,
+                hasBaseline)
             : null;
     attributesNormalizedSheet =
         oldDataValuesBySheetClass.containsKey(AttributesNormalizedSheet.class)
@@ -50,7 +50,8 @@ public class DataOverview {
                 attributesData,
                 oldDataValuesBySheetClass,
                 changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-                swapOldAndNew)
+                swapOldAndNew,
+                hasBaseline)
             : null;
     queryParametersSheet =
         oldDataValuesBySheetClass.containsKey(QueryParametersSheet.class)
@@ -58,7 +59,8 @@ public class DataOverview {
                 queryParameters,
                 oldDataValuesBySheetClass,
                 changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-                swapOldAndNew)
+                swapOldAndNew,
+                hasBaseline)
             : null;
     queryFiltersSheet =
         oldDataValuesBySheetClass.containsKey(QueryFiltersSheet.class)
@@ -66,7 +68,8 @@ public class DataOverview {
                 requiredAndOptionalFilters,
                 oldDataValuesBySheetClass,
                 changedPrimaryKeyByOldPrimaryKeyBySheetClass,
-                swapOldAndNew)
+                swapOldAndNew,
+                hasBaseline)
             : null;
   }
 

@@ -1,16 +1,16 @@
-Path,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
-ServiceSchedule,,,,,,,,
-"ServiceSchedule / carrierServiceCode",carrierServiceCode,string,yes,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published.",
-"ServiceSchedule / carrierServiceName",carrierServiceName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of the service.",
+Path,Attribute,Type,Required,Size,Pattern,Example,Description
+ServiceSchedule,,,,,,,
+"ServiceSchedule / carrierServiceCode",carrierServiceCode,string,yes,maxLength=11,"^\S(?:.*\S)?$",FE1,"The carrier-specific code of the service for which the schedule details are published."
+"ServiceSchedule / carrierServiceName",carrierServiceName,string,yes,maxLength=50,"^\S(?:.*\S)?$","Great Lion Service","The name of the service."
 "ServiceSchedule / universalServiceReference","universalServiceReference",string,,"minLength=8
-maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service.",
-"ServiceSchedule / vesselSchedules",vesselSchedules,"VesselSchedule list",yes,minItems=1,,,,
-"ServiceSchedule / vesselSchedules / isDummyVessel",isDummyVessel,boolean,yes,,,,"This property can be set to `true` when no vessel has been assigned, indicating that the `vesselIMONumber` does not exist.",
-"ServiceSchedule / vesselSchedules / transportCalls",transportCalls,"TransportCall list",,,,,,
-"ServiceSchedule / vesselSchedules / transportCalls / carrierExportVoyageNumber","carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage.",
-"ServiceSchedule / vesselSchedules / transportCalls / carrierImportVoyageNumber","carrierImportVoyageNumber",string,yes,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage.",
-"ServiceSchedule / vesselSchedules / transportCalls / cutOffTimes",cutOffTimes,"CutOffTime list",,,,,"A list of cut-offs times provided by the carrier when available. A cut-off time indicates the latest date and time by which a task must be completed. For example, the latest date and time by which a container must be delivered to a terminal to be loaded on a vessel, or where certain documentation must be provided by the Shipper.",
-"ServiceSchedule / vesselSchedules / transportCalls / cutOffTimes / cutOffDateTime",cutOffDateTime,"string(date-time)",yes,,,2019-11-12T07:41-08:30,"Estimated cut-off time expressed in local time with offset following [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format.",
+maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as per DCSA standard, agreed by VSA partners for the service."
+"ServiceSchedule / vesselSchedules",vesselSchedules,"VesselSchedule list",yes,minItems=1,,,
+"ServiceSchedule / vesselSchedules / isDummyVessel",isDummyVessel,boolean,yes,,,,"This property can be set to `true` when no vessel has been assigned, indicating that the `vesselIMONumber` does not exist."
+"ServiceSchedule / vesselSchedules / transportCalls",transportCalls,"TransportCall list",,,,,
+"ServiceSchedule / vesselSchedules / transportCalls / carrierExportVoyageNumber","carrierExportVoyageNumber",string,,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage."
+"ServiceSchedule / vesselSchedules / transportCalls / carrierImportVoyageNumber","carrierImportVoyageNumber",string,yes,maxLength=50,"^\S(?:.*\S)?$",2103N,"The identifier of an import voyage. The carrier-specific identifier of the import Voyage."
+"ServiceSchedule / vesselSchedules / transportCalls / cutOffTimes",cutOffTimes,"CutOffTime list",,,,,"A list of cut-offs times provided by the carrier when available. A cut-off time indicates the latest date and time by which a task must be completed. For example, the latest date and time by which a container must be delivered to a terminal to be loaded on a vessel, or where certain documentation must be provided by the Shipper."
+"ServiceSchedule / vesselSchedules / transportCalls / cutOffTimes / cutOffDateTime",cutOffDateTime,"string(date-time)",yes,,,2019-11-12T07:41-08:30,"Estimated cut-off time expressed in local time with offset following [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format."
 "ServiceSchedule / vesselSchedules / transportCalls / cutOffTimes / cutOffDateTimeCode",cutOffDateTimeCode,string,yes,maxLength=3,,DCO,"Code for the cut-off time. Possible values are:
   - `DCO` (Documentation cut-off)
   - `VCO` (VGM cut-off)
@@ -28,65 +28,65 @@ maxLength=8","^SR\d{5}[A-Z]$",SR12345A,"A global unique service reference, as pe
   - `CUA` (Customs Acceptance)
   - `AFC` (Advanced filling cut-off)
 
-More details can be found on [GitHub](https://github.com/dcsaorg/DCSA-OpenAPI/blob/master/reference-data/CutOffDateTimeCodeList-CS_v1.0.0.csv)",
+More details can be found on [GitHub](https://github.com/dcsaorg/DCSA-OpenAPI/blob/master/reference-data/CutOffDateTimeCodeList-CS_v1.0.0.csv)"
 "ServiceSchedule / vesselSchedules / transportCalls / location",location,TransportCallLocation,,,,,"General purpose object to capture location-related data, the location can be specified in **any** of the following ways:
   - `Address` (used to specify the location via an Address)
   - `UNLocationCode`
   - `FacilitySMDGCode` (used to specify a location using a `facilitySMDGCode`)
-  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address",address,Address,,,,,"An object for storing address related information.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city.",
+  It is expected that if a location is specified in multiple ways (both as an `Address` and as a `Facility`) that both ways point to the same location."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address",address,Address,,,,,"An object for storing address related information."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / city",city,string,yes,maxLength=35,"^\S(?:.*\S)?$",Amsterdam,"The name of the city."
 "ServiceSchedule / vesselSchedules / transportCalls / location / address / countryCode",countryCode,string,yes,"minLength=2
-maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street.",
-"ServiceSchedule / vesselSchedules / transportCalls / location / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street.",
+maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / floor",floor,string,,maxLength=50,"^\S(?:.*\S)?$",N/A,"The floor of the street number."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / postCode",postCode,string,,maxLength=10,,"1047 HM","The post code."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / stateRegion",stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / street",street,string,yes,maxLength=70,,Ruijggoordweg,"The name of the street."
+"ServiceSchedule / vesselSchedules / transportCalls / location / address / streetNumber",streetNumber,string,,maxLength=50,,100,"The number of the street."
 "ServiceSchedule / vesselSchedules / transportCalls / location / facilitySMDGCode",facilitySMDGCode,string,,maxLength=6,,ACT,"The code used for identifying the specific facility. This code does not include the UN Location Code.
-The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/)",
-"ServiceSchedule / vesselSchedules / transportCalls / location / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","An optional name for the location.",
+The codeList used by SMDG is the [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/)"
+"ServiceSchedule / vesselSchedules / transportCalls / location / locationName",locationName,string,,maxLength=100,"^\S(?:.*\S)?$","Port of Amsterdam","An optional name for the location."
 "ServiceSchedule / vesselSchedules / transportCalls / location / UNLocationCode",UNLocationCode,string,,"minLength=5
 maxLength=5","^[A-Z]{2}[A-Z2-9]{3}$",NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
   - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
   - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-  More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
-"ServiceSchedule / vesselSchedules / transportCalls / portVisitReference",portVisitReference,string,,maxLength=50,,NLRTM1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call.",
-"ServiceSchedule / vesselSchedules / transportCalls / timestamps",timestamps,"Timestamp list",yes,minItems=1,,,,
+  More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)"
+"ServiceSchedule / vesselSchedules / transportCalls / portVisitReference",portVisitReference,string,,maxLength=50,,NLRTM1234589,"The unique reference that can be used to link different `transportCallReferences` to the same port visit. The reference is provided by the port to uniquely identify a port call."
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps",timestamps,"Timestamp list",yes,minItems=1,,,
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventClassifierCode",eventClassifierCode,string,yes,,,PLN,"Code for the event classifier. Values can vary depending on eventType.
 
 Possible values are:
 - `ACT` (Actual)
 - `EST` (Estimated)
-- `PLN` (Planned)",
-"ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventDateTime",eventDateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event takes place, in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format specifying the offset.",
+- `PLN` (Planned)"
+"ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventDateTime",eventDateTime,"string(date-time)",yes,,,"2025-01-14T09:21+01:00","The local date and time, when the event takes place, in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format specifying the offset."
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventTypeCode",eventTypeCode,string,yes,,,ARRI,"Identifier for type of transportEvent.
 
 - `ARRI` (Arrived)
-- `DEPA` (Departed)",
-"ServiceSchedule / vesselSchedules / transportCalls / transportCallReference",transportCallReference,string,yes,maxLength=100,,"SR11111X-9321483-2107W-NLRTM-HPD2-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator.",
+- `DEPA` (Departed)"
+"ServiceSchedule / vesselSchedules / transportCalls / transportCallReference",transportCallReference,string,yes,maxLength=100,,"SR11111X-9321483-2107W-NLRTM-HPD2-1-1","The unique reference for a transport call. It’s the vessel operator’s responsibility to provide the Transport Call Reference, other parties are obliged to pick it up and use it. It can take the form of Port Call References as defined in OVS Definitions Document, or alternatively a reference as defined by the vessel operator."
 "ServiceSchedule / vesselSchedules / transportCalls / universalExportVoyageReference","universalExportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the export Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
 "ServiceSchedule / vesselSchedules / transportCalls / universalImportVoyageReference","universalImportVoyageReference",string,,"minLength=5
 maxLength=5","^\d{2}[0-9A-Z]{2}[NEWSR]$",2103N,"A global unique voyage reference for the import Voyage, as per DCSA standard, agreed by VSA partners for the voyage.The voyage reference must match the regular expression pattern: `\d{2}[0-9A-Z]{2}[NEWSR]`
 
 - `2 digits` for the year
 - `2 alphanumeric characters` for the sequence number of the voyage
-- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
-"ServiceSchedule / vesselSchedules / vessel",vessel,Vessel,,,,,,
-"ServiceSchedule / vesselSchedules / vessel / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag.",
+- `1 character` for the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."
+"ServiceSchedule / vesselSchedules / vessel",vessel,Vessel,,,,,
+"ServiceSchedule / vesselSchedules / vessel / callSign",callSign,string,,maxLength=10,"^\S(?:.*\S)?$",NCVV,"A unique alphanumeric identity that belongs to the vessel and is assigned by the International Telecommunication Union (ITU). It consists of a three letter alphanumeric prefix that indicates nationality, followed by one to four characters to identify the individual vessel. For instance, vessels registered under Denmark are assigned the prefix ranges 5PA-5QZ, OUAOZZ, and XPA-XPZ. The Call Sign changes whenever a vessel changes its flag."
 "ServiceSchedule / vesselSchedules / vessel / flag",flag,string,,"minLength=2
-maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code.",
+maxLength=2","^[A-Z]{2}$",DE,"The flag of the nation whose laws the vessel is registered under. This is the [ISO 3166](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en) two-letter country code."
 "ServiceSchedule / vesselSchedules / vessel / MMSINumber",MMSINumber,string,,"minLength=9
-maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
-"ServiceSchedule / vesselSchedules / vessel / name",name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO.",
-"ServiceSchedule / vesselSchedules / vessel / operatorCarrierCode",operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists.",
-"ServiceSchedule / vesselSchedules / vessel / operatorCarrierCodeListProvider","operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes.",
+maxLength=9","^\d{9}$",278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC), automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station."
+"ServiceSchedule / vesselSchedules / vessel / name",name,string,,maxLength=50,"^\S(?:.*\S)?$","King of the Seas","The name of the Vessel given by the Vessel Operator and registered with IMO."
+"ServiceSchedule / vesselSchedules / vessel / operatorCarrierCode",operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on either the SMDG or SCAC code lists."
+"ServiceSchedule / vesselSchedules / vessel / operatorCarrierCodeListProvider","operatorCarrierCodeListProvider",string,,,,NMFTA,"Identifies the code list provider used for the operator and partner carriercodes."
 "ServiceSchedule / vesselSchedules / vessel / vesselIMONumber",vesselIMONumber,string,,"minLength=7
-maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel.",
+maxLength=8","^\d{7,8}$",9321483,"The unique reference for a registered Vessel. The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd&apos;s register code, which does not change during the lifetime of the vessel."

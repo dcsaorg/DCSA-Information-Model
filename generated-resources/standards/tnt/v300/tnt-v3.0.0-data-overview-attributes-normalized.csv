@@ -1,21 +1,21 @@
-Object,Attribute,Type,Required,Size,Pattern,Example,Description,Constraints
+Object,Attribute,Type,Required,Size,Pattern,Example,Description
 Address,addressLines,"string list",,"maxItems=5
 maxLength=250",,,"Unstructured address lines, used as a fallback when structured address fields are unavailable.
 Item description:
-One line of an unstructured `Address`.",
-Address,city,string,,maxLength=35,,Amsterdam,"The name of the city.",
-Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)",
-Address,floor,string,,maxLength=50,,N/A,"The floor of the street number.",
-Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered.",
-Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address.",
-Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region.",
-Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street.",
-Address,streetNumber,string,,maxLength=50,,100,"The number of the street.",
-"AirTemperatureMeasurement",sensorReadings,"AirTemperatureSensorReading list",,,,,,
-"AirTemperatureMeasurement",temperatureValue,"number(float)",,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`.",
-"AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier).",
-"AirTemperatureSensorReading",temperatureValue,"number(float)",,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`.",
-DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document",
+One line of an unstructured `Address`."
+Address,city,string,,maxLength=35,,Amsterdam,"The name of the city."
+Address,countryCode,string,,maxLength=2,,NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
+Address,floor,string,,maxLength=50,,N/A,"The floor of the street number."
+Address,POBox,string,,maxLength=20,,123,"A numbered box at a post office where a person or business can have mail or parcels delivered."
+Address,postCode,string,,maxLength=10,,"1047 HM","The post code of the address."
+Address,stateRegion,string,,maxLength=65,,"North Holland","The name of the state/region."
+Address,street,string,,maxLength=70,,Ruijggoordweg,"The name of the street."
+Address,streetNumber,string,,maxLength=50,,100,"The number of the street."
+"AirTemperatureMeasurement",sensorReadings,"AirTemperatureSensorReading list",,,,,
+"AirTemperatureMeasurement",temperatureValue,"number(float)",,,,-12.3,"Logical / primary temperature (e.g., controller value) expressed in `ReeferDetails.temperatureUnit`."
+"AirTemperatureSensorReading",sensorLabel,string,,maxLength=100,,P16,"Label of the physical air temperature sensor (a COA property id, a vendor-specific id, or another identifier)."
+"AirTemperatureSensorReading",temperatureValue,"number(float)",,,,-12.3,"Sensor temperature expressed in `ReeferDetails.temperatureUnit`."
+DocumentReference,reference,string,,maxLength=100,,123e4567e89b,"Reference identifying the document"
 DocumentReference,type,string,,maxLength=100,,BOOKING,"Code used to denote the type of a document reference
 - `ADVANCE_MANIFEST_FILING` - Advance Manifest Filing (of any subtype)
 - `ARRIVAL_NOTICE` - Arrival Notice
@@ -41,12 +41,12 @@ DocumentReference,type,string,,maxLength=100,,BOOKING,"Code used to denote the t
 - `TRANSPORT_DOCUMENT` - Transport Document
 - `TRANSPORT_ORDER` - Transport Order
 - `VERIFIED_GROSS_MASS` - Verified Gross Mass
-- `VETERINARY_CERTIFICATE` - Veterinary Certificate",
-"DocumentReferenceReplacement",newReferences,"DocumentReference list",,,,,"References of the documents replacing those with the `oldReferences`.",
-"DocumentReferenceReplacement",oldReferences,"DocumentReference list",,,,,"References of the documents replaced by those with the `newReferences`.",
+- `VETERINARY_CERTIFICATE` - Veterinary Certificate"
+"DocumentReferenceReplacement",newReferences,"DocumentReference list",,,,,"References of the documents replacing those with the `oldReferences`."
+"DocumentReferenceReplacement",oldReferences,"DocumentReference list",,,,,"References of the documents replaced by those with the `newReferences`."
 EquipmentDetails,emptyIndicator,string,,,,LADEN,"Indicator of whether the equipment is empty or laden.
 - `EMPTY` - Empty
-- `LADEN` - Laden",
+- `LADEN` - Laden"
 EquipmentDetails,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible.
 
 According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number
@@ -54,18 +54,18 @@ According to ISO 6346, a container identification code consists of a 4-letter pr
 
 If a container does not comply with ISO 6346, it is suggested to follow
 [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
-from SMDG.",
+from SMDG."
 EquipmentDetails,ISOEquipmentCode,string,,maxLength=4,,22GP,"Unique code identifying the equipment size and type used to transport commodities.
 The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
-following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.",
-EquipmentDetails,seals,"Seal list",,,,,,
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard."
+EquipmentDetails,seals,"Seal list",,,,,
 EquipmentDetails,transportPhase,string,,,,EXPORT,"The phase of the transport lifecycle in which the event occurs
 - `EXPORT` - Considered active until the vessel departs the Port of Loading
 - `IMPORT` - Considered to start when the vessel arrives at the Port of Discharge; may remain active until the empty container is returned after stripping
-- `TRANSSHIPMENT` - Any intermediate arrival/departure or load/discharge that the carrier chooses to classify as such",
-Event,equipmentDetails,EquipmentDetails,,,,,"Equipment-specific details",
-Event,eventClassification,EventClassification,,,,,"Type, subtype and classifier of an event",
-Event,eventDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the real-world event has occurred or will occur.",
+- `TRANSSHIPMENT` - Any intermediate arrival/departure or load/discharge that the carrier chooses to classify as such"
+Event,equipmentDetails,EquipmentDetails,,,,,"Equipment-specific details"
+Event,eventClassification,EventClassification,,,,,"Type, subtype and classifier of an event"
+Event,eventDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the real-world event has occurred or will occur."
 Event,eventID,string,,maxLength=500,,"event-HHL71800000-APZU4812090-IoT-DRO-2025-01-23T01:23:45Z","ID of the event, unique among all the events published by a T&T Event Producer.
 
 An event overrides any other event that has the same `eventID` and an earlier `eventUpdatedDateTime`.
@@ -73,20 +73,20 @@ An event overrides any other event that has the same `eventID` and an earlier `e
 Each event is uniquely identified within each T&T 3.x standard ecosystem of connected implementers
 by a composite key including:
 - the `partyCode`, `codeListProvider` and `codeListName` of all `eventRouting.originatingParties` (if present)
-- the `eventID`",
-Event,eventLocation,Location,,,,,"The location of the event.",
-Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties).",
-Event,eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated.",
-Event,iotDetails,IotDetails,,,,,"IoT-specific details",
+- the `eventID`"
+Event,eventLocation,Location,,,,,"The location of the event."
+Event,eventRouting,EventRouting,,,,,"Routing of an event from the originating party (or parties), optionally via one or more forwarding parties, to the destination party (or parties)."
+Event,eventUpdatedDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the technical event was last updated."
+Event,iotDetails,IotDetails,,,,,"IoT-specific details"
 Event,isRetracted,boolean,,,,,"Flag indicating that the event is retracted.
 
 The data in this and all previously transmitted events with the same `eventID` must be discarded or ignored.
 
-If this flag is set, any event data other than the `eventID` is irrelevant (if present).",
-Event,reason,string,,maxLength=250,,,"Free text information explaining why this event was sent",
-Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details",
-Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details",
-Event,transportDetails,TransportDetails,,,,,"Transport-specific details",
+If this flag is set, any event data other than the `eventID` is irrelevant (if present)."
+Event,reason,string,,maxLength=250,,,"Free text information explaining why this event was sent"
+Event,reeferDetails,ReeferDetails,,,,,"Reefer-specific details"
+Event,shipmentDetails,ShipmentDetails,,,,,"Shipment-specific details"
+Event,transportDetails,TransportDetails,,,,,"Transport-specific details"
 EventClassification,equipmentEventType,string,,,,LOADED,"The type of an equipment event
 - `AVAILABLE_FOR_DROP_OFF` - Available for drop-off
 - `AVAILABLE_FOR_PICKUP` - Available for pickup
@@ -104,17 +104,17 @@ EventClassification,equipmentEventType,string,,,,LOADED,"The type of an equipmen
 - `REMOVED` - Removed
 - `RESEALED` - Resealed
 - `STRIPPED` - Stripped
-- `STUFFED` - Stuffed",
+- `STUFFED` - Stuffed"
 EventClassification,eventClassifier,string,,maxLength=10,,ESTIMATED,"Classifier denoting whether a timestamp or event is planned, estimated or actual
 - `ACTUAL` - Actual
 - `ESTIMATED` - Estimated
-- `PLANNED` - Planned",
+- `PLANNED` - Planned"
 EventClassification,eventType,string,,,,EQUIPMENT,"The type of a Track and Trace event
 - `SHIPMENT` - Shipment event
 - `TRANSPORT` - Transport event
 - `EQUIPMENT` - Equipment event
 - `IOT` - IoT event
-- `REEFER` - Reefer event",
+- `REEFER` - Reefer event"
 EventClassification,iotEventType,string,,,,DOOR_OPENED,"The type of an IoT event
 - `BREADCRUMB` - Periodic geolocation update
 - `DEVICE_STATUS` - IoT device status update
@@ -125,10 +125,10 @@ EventClassification,iotEventType,string,,,,DOOR_OPENED,"The type of an IoT event
 - `MOTION_START` - Motion start
 - `MOTION_STOP` - Motion stop
 - `PAIRING` - The IoT device is being paired with the equipment
-- `UNPAIRING` - The IoT device is being unpaired from the equipment",
+- `UNPAIRING` - The IoT device is being unpaired from the equipment"
 EventClassification,reeferEventType,string,,,,MEASURED,"The type of a reefer event
 - `ADJUSTED` - Adjusted
-- `MEASURED` - Measured",
+- `MEASURED` - Measured"
 EventClassification,shipmentEventType,string,,,,APPROVED,"The type of a shipment event
 - `AMENDMENT_CANCELLED` - Amendment Cancelled
 - `AMENDMENT_CONFIRMED` - Amendment Confirmed
@@ -164,35 +164,35 @@ EventClassification,shipmentEventType,string,,,,APPROVED,"The type of a shipment
 - `UPDATE_DECLINED` - Update Declined
 - `UPDATE_IN_PROGRESS` - Update In Progress
 - `UPDATE_RECEIVED` - Update Received
-- `VOIDED` - Voided",
+- `VOIDED` - Voided"
 EventClassification,transportEventType,string,,,,ARRIVED,"The type of a transport event
 - `APPROACHING` - Close to arriving at a certain location
 - `ARRIVED` - Arrived at a certain location
-- `DEPARTED` - Departed from a certain location",
-EventRouting,destinationParties,"Party list",,,,,"The party (or parties) intended as final recipients of the event.",
-EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party or parties.",
-EventRouting,originatingParties,"Party list",,,,,"The party (or parties) with which the event (data) originated.",
-Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`.",
+- `DEPARTED` - Departed from a certain location"
+EventRouting,destinationParties,"Party list",,,,,"The party (or parties) intended as final recipients of the event."
+EventRouting,forwardingParties,"Party list",,,,,"Ordered list of parties forwarding the event between the originating and destination party or parties."
+EventRouting,originatingParties,"Party list",,,,,"The party (or parties) with which the event (data) originated."
+Facility,facilityCode,string,,maxLength=6,,ADT,"Code identifying a specific facility, as defined by the `facilityCodeListProvider`."
 Facility,facilityCodeListProvider,string,,maxLength=10,,SMDG,"Code list provider (each with its relevant code list) defining the `facilityCode`:
 - `SMDG` (using [SMDG Terminal Code List](https://smdg.org/documents/smdg-code-lists/smdg-terminal-code-list/))
-- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))",
-Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility.",
-GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format.",
-IotDetails,deviceModel,string,,maxLength=100,,,"Model of the IoT device",
-IotDetails,deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device",
+- `BIC` (using [BIC Facility Codes](https://www.bic-code.org/facility-codes/))"
+Facility,facilityName,string,,maxLength=100,,"Building 123","The name of the facility."
+GeoCoordinate,latitude,string,,maxLength=20,,33.629152,"Latitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+GeoCoordinate,longitude,string,,maxLength=20,,-118.587187,"Longitude expressed as decimal degrees using the ISO 6709 data interchange numeric format."
+IotDetails,deviceModel,string,,maxLength=100,,,"Model of the IoT device"
+IotDetails,deviceVendor,string,,maxLength=100,,,"Brand name of the IoT device"
 IotDetails,iotEquipmentTechnology,string,,,,SMART_CONTAINER,"The type of IoT technology used by a piece of equipment
 - `SMART_CONTAINER` - The equipment is paired with an active IoT/telematics device. (SMDG code `SMC`)
 - `PASSIVE_TAG` - The equipment carries a passive identification tag (e.g. RFID/NFC). (SMDG code `SMP`)
 - `NONE` - The equipment is not paired with an active IoT device and carries no passive identification tag.
-- `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type.",
+- `UNKNOWN` - It is not known whether the equipment has IoT technology, or of what type."
 IotDetails,powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
 - `POWER_ON` - The device is connected to a power source and powered on.
-- `UNKNOWN` - The power status of the device could not be determined.",
-Location,address,Address,,,,,"Location address",
-Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider.",
+- `UNKNOWN` - The power status of the device could not be determined."
+Location,address,Address,,,,,"Location address"
+Location,facility,Facility,,,,,"Facility identified by a code as defined by a code list provider."
 Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
 - `BORDER` - Border
 - `CUSTOMER_LOCATION` - Customer location
@@ -202,74 +202,74 @@ Location,facilityType,string,,maxLength=100,,DEPOT,"A specific type of facility
 - `OFF_DOCK_STORAGE` - Off-dock storage
 - `PORT_TERMINAL` - Port terminal
 - `RAMP` - Ramp
-- `WAYPOINT` - Waypoint",
-Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates.",
-Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location.",
+- `WAYPOINT` - Waypoint"
+Location,geoCoordinate,GeoCoordinate,,,,,"An object used to express a location using its geographic coordinates."
+Location,locationName,string,,maxLength=100,,"Port of Amsterdam","The name of the location."
 Location,UNLocationCode,string,,maxLength=5,,NLAMS,"The UN Location code specifying where the place is located. The pattern used must be
 
 - 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 - 3 characters to code a location within that country. Letters A-Z and numbers from 2-9 can be used
 
-More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)",
+More info can be found here: [UN/LOCODE](https://unece.org/trade/cefact/UNLOCODE-Download)"
 Party,codeListName,string,,maxLength=100,,DID,"Name of the code list in which the `codeListProvider` defines the `partyCode`, including but not limited to:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
 - `LEI` (Legal Entity Identifier) for `codeListProvider` `GLEIF`
-- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`",
+- `DUNS` (Data Universal Numbering System) for `codeListProvider` `DNB`"
 Party,codeListProvider,string,,maxLength=100,,W3C,"Code of the provider of a list of codes identifying a party, including but not limited to:
 - `SMDG` (Ship Message Design Group)
 - `ZZZ` (Mutually defined)
 
 or any other code as defined in the
-[DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY).",
-Party,partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`.",
+[DCSA Code List Providers](https://dcsa.atlassian.net/wiki/external/ZjA4M2I3MjA4MDg1NDEwYzlkYTcxNDRhYWQwNzFiYzY)."
+Party,partyCode,string,,maxLength=150,,MSK,"Code identifying the party as per the `codeListProvider` and `codeListName`."
 Party,partyFunction,string,,maxLength=3,,CA,"Code identifying the function of the party, as defined in
 [UN/EDIFACT 16A 3035](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred3035.htm)
-or a subsequent revision.",
+or a subsequent revision."
 RailTransport,departureID,string,,maxLength=100,,,"Unique identifying number or code that is assigned to a specific departure of a rail.
-(Also known as a departure reference number.)",
-RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported.",
-RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported.",
-ReeferAlarm,code,string,,maxLength=50,,,"Code of the alarm, as defined typically by the device manufacturer",
-ReeferAlarm,description,string,,maxLength=500,,,"Free-text description of the alarm",
-ReeferAlarm,endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive",
-ReeferAlarm,startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active",
-ReeferDetails,alarms,"ReeferAlarm list",,,,,"The list of alarms that are active, or that were active within a relevant time frame",
-ReeferDetails,"ambientMeasuredTemperature","number(float)",,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`",
-ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller",
-ReeferDetails,"internalSetpointTemperature","number(float)",,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`",
-ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed",
-ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters",
-ReeferDetails,numberOfActiveAlarms,"integer(int32)",,,,,"The number of alarms that are currently active",
+(Also known as a departure reference number.)"
+RailTransport,railCarReference,string,,maxLength=50,,,"Reference of the rail car on which the equipment is transported."
+RailTransport,railServiceReference,string,,maxLength=50,,,"Reference of the rail service on which the equipment is transported."
+ReeferAlarm,code,string,,maxLength=50,,,"Code of the alarm, as defined typically by the device manufacturer"
+ReeferAlarm,description,string,,maxLength=500,,,"Free-text description of the alarm"
+ReeferAlarm,endDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became inactive"
+ReeferAlarm,startDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the alarm became active"
+ReeferDetails,alarms,"ReeferAlarm list",,,,,"The list of alarms that are active, or that were active within a relevant time frame"
+ReeferDetails,"ambientMeasuredTemperature","number(float)",,,,-15,"Ambient measured temperature value expressed in `temperatureUnit`"
+ReeferDetails,controllerModel,string,,maxLength=100,,,"Model of the reefer controller"
+ReeferDetails,"internalSetpointTemperature","number(float)",,,,-15,"Internal setpoint temperature value expressed in `temperatureUnit`"
+ReeferDetails,lastDefrostDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the last defrost was completed"
+ReeferDetails,measuredParameters,ReeferParameters,,,,,"Non-temperature measured parameters"
+ReeferDetails,numberOfActiveAlarms,"integer(int32)",,,,,"The number of alarms that are currently active"
 ReeferDetails,powerStatus,string,,maxLength=20,,POWER_ON,"The power status of an IoT device or reefer container
 - `INACTIVE` - The device is inactive (not operational / not commissioned).
 - `POWER_OFF` - The device is connected to a power source but switched off.
 - `POWER_ON` - The device is connected to a power source and powered on.
-- `UNKNOWN` - The power status of the device could not be determined.",
-ReeferDetails,"returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements",
-ReeferDetails,setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters",
-ReeferDetails,"supplyAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Supply air temperature measurement",
-ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe",
+- `UNKNOWN` - The power status of the device could not be determined."
+ReeferDetails,"returnAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Return air temperature measurements"
+ReeferDetails,setpointParameters,ReeferParameters,,,,,"Non-temperature setpoint parameters"
+ReeferDetails,"supplyAirTemperatureMeasurement","AirTemperatureMeasurement",,,,,"Supply air temperature measurement"
+ReeferDetails,"temperatureProbeMeasurements","TemperatureProbeMeasurement list",,,,,"Measurements collected from each temperature probe"
 ReeferDetails,temperatureUnit,string,,,,CEL,"Unit in which all temperature values are expressed:
 - `CEL` (Celsius)
-- `FAH` (Fahrenheit)",
-ReeferDetails,unitManufacturer,string,,maxLength=100,,,"Manufacturer name of the reefer unit",
-ReeferDetails,unitModel,string,,maxLength=100,,,"Model of the reefer unit",
+- `FAH` (Fahrenheit)"
+ReeferDetails,unitManufacturer,string,,maxLength=100,,,"Manufacturer name of the reefer unit"
+ReeferDetails,unitModel,string,,maxLength=100,,,"Model of the reefer unit"
 ReeferParameters,airExchangeUnit,string,,,,MQH,"Unit in which the `airExchangeValue` is expressed:
 - `MQH` (Cubic metre per hour)
-- `FQH` (Cubic foot per hour)",
-ReeferParameters,airExchangeValue,"number(float)",,,,15.4,"Air exchange rate expressed in `airExchangeUnit`",
-ReeferParameters,co2Percentage,"number(float)",,,,25,"CO<sub>2</sub> percentage",
-ReeferParameters,humidityPercentage,"number(float)",,,,50,"Humidity percentage",
-ReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active",
-ReeferParameters,isColdTreatment,boolean,,,,true,"Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD.",
-ReeferParameters,isControlledAtmosphere,boolean,,,,true,"Flag indicating whether controlled atmosphere is active.",
-ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open",
-ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open",
-ReeferParameters,o2Percentage,"number(float)",,,,25,"O<sub>2</sub> percentage",
-Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container.",
+- `FQH` (Cubic foot per hour)"
+ReeferParameters,airExchangeValue,"number(float)",,,,15.4,"Air exchange rate expressed in `airExchangeUnit`"
+ReeferParameters,co2Percentage,"number(float)",,,,25,"CO<sub>2</sub> percentage"
+ReeferParameters,humidityPercentage,"number(float)",,,,50,"Humidity percentage"
+ReeferParameters,isBulbMode,boolean,,,,true,"Flag indicating whether bulb mode is active"
+ReeferParameters,isColdTreatment,boolean,,,,true,"Flag indicating whether cargo cold treatment is active prior to loading at origin, or during transit but prior arrival at POD."
+ReeferParameters,isControlledAtmosphere,boolean,,,,true,"Flag indicating whether controlled atmosphere is active."
+ReeferParameters,isDrainholesOpen,boolean,,,,true,"Flag indicating whether drainholes are open"
+ReeferParameters,isVentilationOpen,boolean,,,,true,"Flag indicating whether the ventilation orifice is open"
+ReeferParameters,o2Percentage,"number(float)",,,,25,"O<sub>2</sub> percentage"
+Seal,number,string,,maxLength=15,,VET123,"Identifies a seal affixed to the container."
 Seal,placement,string,,maxLength=100,,DOOR,"The placement of a seal.
 - `DOOR` - Door
-- `VENT` - Vent",
+- `VENT` - Vent"
 Seal,source,string,,maxLength=100,,CUSTOMER,"The source of a seal, indicating who has affixed the seal.
 
 Both `VETERINARY` and `PHYTOSANITARY` map to `AC` (Quarantine agency) in [UN/EDIFACT 16A 9303](https://unece.org/fileadmin/DAM/trade/untdid/d16a/tred/tred9303.htm).
@@ -281,12 +281,12 @@ Both `VETERINARY` and `PHYTOSANITARY` map to `AC` (Quarantine agency) in [UN/EDI
 - `PHYTOSANITARY` - Phytosanitary
 - `SHIPPER` - Shipper
 - `TERMINAL` - Terminal
-- `VETERINARY` - Veterinary",
+- `VETERINARY` - Veterinary"
 Seal,type,string,,maxLength=100,,BOLT,"The type of a seal.
 - `KEYLESS_PADLOCK` - Keyless padlock
 - `BOLT` - Bolt
-- `WIRE` - Wire",
-ServiceCodeOrReference,carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service.",
+- `WIRE` - Wire"
+ServiceCodeOrReference,carrierServiceCode,string,,,,FE1,"Carrier-specific identifier of a service."
 ServiceCodeOrReference,"universalServiceReference",string,,maxLength=8,,SR12345A,"Globally unique identifier of a liner service, assigned by carriers as specified by DCSA.
 
 DCSA generates and distributes batches of Universal Service References (USRs)
@@ -298,12 +298,12 @@ or independently for one of its own non-VSA, non-Alliance services.
 Every Universal Service Reference is an 8-character string with the following format:
  * the prefix ""SR""
  * 5 digits
- * 1 uppercase English letter (A-Z).",
-ShipmentDetails,"additionalDocumentReferences","DocumentReference list",,,,,"List of additional document references related to this event",
-ShipmentDetails,documentReference,DocumentReference,,,,,"Primary document reference associated with this event",
-ShipmentDetails,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event",
+ * 1 uppercase English letter (A-Z)."
+ShipmentDetails,"additionalDocumentReferences","DocumentReference list",,,,,"List of additional document references related to this event"
+ShipmentDetails,documentReference,DocumentReference,,,,,"Primary document reference associated with this event"
+ShipmentDetails,"documentReferenceReplacements","DocumentReferenceReplacement list",,,,,"List of document replacements related to this event"
 ShipmentDetails,priceCalculationDate,"string(date)",,,,2025-01-23,"Date taken in consideration for the tariff applicability, that differs depending on the trade.
-It can vary per carrier.",
+It can vary per carrier."
 ShipmentDetails,shipmentLocationType,string,,,,PLACE_OF_DELIVERY,"The type of a shipment location
 - `FULL_CONTAINER_DROP_OFF` - Full container drop-off location
 - `INTERMEDIATE_EXPORT_STOP_OFF` - Container intermediate export stop-off location
@@ -315,10 +315,10 @@ ShipmentDetails,shipmentLocationType,string,,,,PLACE_OF_DELIVERY,"The type of a 
 - `PORT_OF_LOADING` - Port of Loading
 - `PRE_CARRIAGE_FROM` - Pre-carriage From
 - `PROHIBITED_TRANSSHIPMENT_PORT` - Prohibited transshipment port
-- `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port",
-ShipmentDetails,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event",
-ShipmentDetails,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event",
-ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value",
+- `REQUESTED_TRANSSHIPMENT_PORT` - Requested transshipment port"
+ShipmentDetails,"shipmentReferenceReplacements","ShipmentReferenceReplacement list",,,,,"List of shipment reference replacements related to this event"
+ShipmentDetails,shipmentReferences,"ShipmentReference list",,,,,"List of shipment references related to this event"
+ShipmentReference,reference,string,,maxLength=100,,123e4567e89b,"The actual reference value"
 ShipmentReference,type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Type of a shipment reference
 - `CONSIGNEES_REFERENCE` - Consignee’s Reference
 - `AUTOMATED_EXPORT_SYSTEM` - Automated Export System
@@ -333,66 +333,66 @@ ShipmentReference,type,string,,maxLength=100,,"FREIGHT_FORWARDERS_REFERENCE","Ty
 - `FREIGHT_FORWARDERS_REFERENCE` - Freight Forwarder’s Reference
 - `PURCHASE_ORDER_REFERENCE` - Purchase Order Reference
 - `REGISTRO_UNICO_DEL_CONTRIBUYENTE` - Registro Único del Contribuyente
-- `SHIPPERS_REFERENCE` - Shipper’s Reference",
-"ShipmentReferenceReplacement",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`.",
-"ShipmentReferenceReplacement",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`.",
+- `SHIPPERS_REFERENCE` - Shipper’s Reference"
+"ShipmentReferenceReplacement",newReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replacing those with the `oldReferences`."
+"ShipmentReferenceReplacement",oldReferences,"ShipmentReference list",,,,,"References of the shipment elements or equipments replaced by those with the `newReferences`."
 "TemperatureProbeMeasurement",COAProbeUDMKey,string,,,,P20,"COA UDM reefer probe key:
 - `P19` (USDA probe 1)
 - `P20` (USDA probe 2)
 - `P21` (USDA probe 3)
-- `P22` (Cargo probe)",
-"TemperatureProbeMeasurement",measuredTemperatureValue,"number(float)",,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`",
-"TemperatureProbeMeasurement",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key",
-"TemperatureProbeMeasurement",USDAProbeNumber,"integer(int32)",,,,2,"USDA reefer probe number (1-3)",
-TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference",
-TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference",
+- `P22` (Cargo probe)"
+"TemperatureProbeMeasurement",measuredTemperatureValue,"number(float)",,,,-12.3,"Temperature measured by the probe, expressed in `ReeferDetails.temperatureUnit`"
+"TemperatureProbeMeasurement",probeLabel,string,,maxLength=100,,"Pulp probe B","Label identifying the probe other than through a USDA number or COA UDM key"
+"TemperatureProbeMeasurement",USDAProbeNumber,"integer(int32)",,,,2,"USDA reefer probe number (1-3)"
+TransportCall,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference"
+TransportCall,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference"
 TransportCall,modeOfTransport,string,,maxLength=50,,VESSEL,"The mode of transport as defined by DCSA
 - `VESSEL` - Vessel
 - `RAIL` - Rail
 - `TRUCK` - Truck
 - `BARGE` - Barge
-- `MULTIMODAL` - Multimodal",
+- `MULTIMODAL` - Multimodal"
 TransportCall,portVisitReference,string,,,,,"The unique reference that can be used to link different `transportCallReferences` to the same port visit.
-The reference is provided by the port to uniquely identify a port call.",
-TransportCall,railTransport,RailTransport,,,,,"Rail transport information",
-TransportCall,serviceCodeOrReference,ServiceCodeOrReference,,,,,"Carrier service code and/or universal service reference",
+The reference is provided by the port to uniquely identify a port call."
+TransportCall,railTransport,RailTransport,,,,,"Rail transport information"
+TransportCall,serviceCodeOrReference,ServiceCodeOrReference,,,,,"Carrier service code and/or universal service reference"
 TransportCall,transportCallReference,string,,,,,"Carrier-defined reference of a `TransportCall`.
 
 If the mode of transport is Vessel and the facility is a Port or Terminal,
-this reference should be considered a terminal call reference.",
+this reference should be considered a terminal call reference."
 TransportCall,"transportCallSequenceNumber","integer(int32)",,,,,"Transport operator's key that uniquely identifies each individual transport call.
-This key is essential to distinguish between two separate calls at the same location within one voyage.",
-TransportCall,"transportCallSequenceNumberMax","integer(int32)",,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event.",
-TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information",
-TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information",
+This key is essential to distinguish between two separate calls at the same location within one voyage."
+TransportCall,"transportCallSequenceNumberMax","integer(int32)",,,,,"The maximum `transportCallSequenceNumber` value to be expected within the set of events emitted as a result of the transport plan change that has triggered this event."
+TransportCall,truckTransport,TruckTransport,,,,,"Truck transport information"
+TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport information"
 TransportDetails,delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
 Item description:
 Code identifying the reason for a delay,
 [as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
-",
-TransportDetails,transportCall,TransportCall,,,,,"Transport call information",
-TruckTransport,tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment.",
+"
+TransportDetails,transportCall,TransportCall,,,,,"Transport call information"
+TruckTransport,tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment."
 TruckTransport,trailerDetails,VehicleDetails,,,,,"The license plate and VIN of the trailer of the truck on which the equipment is transported,
-if the trailer is separate from the truck trailer and has its own details.",
+if the trailer is separate from the truck trailer and has its own details."
 VehicleDetails,licensePlate,string,,maxLength=15,,,"A license plate is a tag that is attached to a vehicle and displays a unique number or code assigned to the vehicle.
-The format, design, and issuing authority for license plates vary by country, state, and province.",
+The format, design, and issuing authority for license plates vary by country, state, and province."
 VehicleDetails,"vehicleIdentificationNumber",string,,maxLength=15,,,"A chassis number is a unique identifying number or code assigned to the chassis of a vehicle.
-It may also be referred to as a ""vehicle identification number"" (VIN), ""chassis number"" or ""frame number"".",
-VesselTransport,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on `operatorCarrierCodeListProvider`",
-VesselTransport,"operatorCarrierCodeListProvider",string,,maxLength=10,,SMDG,"The code list provider used for the `operatorCarrierCode` (SMDG or NMFTA)",
+It may also be referred to as a ""vehicle identification number"" (VIN), ""chassis number"" or ""frame number""."
+VesselTransport,operatorCarrierCode,string,,maxLength=10,,MAEU,"The carrier who is in charge of the vessel operation based on `operatorCarrierCodeListProvider`"
+VesselTransport,"operatorCarrierCodeListProvider",string,,maxLength=10,,SMDG,"The code list provider used for the `operatorCarrierCode` (SMDG or NMFTA)"
 VesselTransport,vesselCallSign,string,,maxLength=10,,NCVV,"A unique alphanumeric identity that belongs to the vessel
 and is assigned by the International Telecommunication Union (ITU).
 It consists of a three-letter alphanumeric prefix that indicates nationality,
-followed by one to four characters to identify the individual vessel.",
+followed by one to four characters to identify the individual vessel."
 VesselTransport,vesselFlag,string,,maxLength=2,,NL,"The national flag of the country under which a vessel is registered,
 indicated by the 2-character code defined in
-[ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en).",
+[ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)."
 VesselTransport,vesselIMONumber,string,,maxLength=8,,9321483,"The unique reference for a registered vessel, which remains unchanged throughout the entire lifetime of the vessel.
-The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code.",
+The reference is the International Maritime Organisation (IMO) number, also sometimes known as the Lloyd's register code."
 VesselTransport,vesselMMSINumber,string,,maxLength=9,,278111222,"Maritime Mobile Service Identities (MMSIs) are nine-digit numbers used by maritime digital selective calling (DSC),
-automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station.",
-VesselTransport,vesselName,string,,maxLength=50,,"King of the Seas","Vessel name",
-VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage",
+automatic identification systems (AIS) and certain other equipment to uniquely identify a ship or a coast radio station."
+VesselTransport,vesselName,string,,maxLength=50,,"King of the Seas","Vessel name"
+VoyageNumberOrReference,carrierVoyageNumber,string,,,,2103S,"Carrier-specific identifier of the voyage"
 VoyageNumberOrReference,universalVoyageReference,string,,maxLength=5,,2301W,"Unique identifier of the voyage within a service, assigned by carriers as specified by DCSA.
 
 Carriers assign a Universal Voyage Reference (UVR) to a voyage,
@@ -401,4 +401,4 @@ either individually for non-VSA services or jointly for shared services under a 
 Every Universal Voyage Reference is a 5-character string with the following format:
  * the last 2 digits of the year
  * 2 alphanumeric characters for the sequence number of the voyage
- * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip).",
+ * 1 character for the initial of the direction/haul (`N`orth, `E`ast, `W`est, `S`outh or `R`oundtrip)."

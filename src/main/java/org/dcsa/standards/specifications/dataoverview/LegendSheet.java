@@ -1,6 +1,7 @@
 package org.dcsa.standards.specifications.dataoverview;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -99,9 +100,9 @@ public class LegendSheet {
                     rowInfoStreamAttributesColumns(),
                     rowInfoStreamQueryParametersColumns(),
                     rowInfoStreamQueryFiltersColumns())
-                .limit(legendMetadata.sheetCount())
+                .limit(legendMetadata.sheetCount() - 1)
                 .flatMap(Function.identity()),
-            rowInfoStreamColorCodes())
+            legendMetadata.hasBaseline() ? rowInfoStreamColorCodes() : Stream.<RowInfo>of())
         .flatMap(Function.identity())
         .forEach(
             rowInfo -> {
@@ -122,28 +123,40 @@ public class LegendSheet {
 
   private Stream<RowInfo> rowInfoStreamHeader() {
     return Stream.of(
-        null,
-        new RowInfo(
-            cellStyleHeaderBold,
-            "Data Overview",
-            cellStyleHeaderWrapped,
-"""
-The Data Overview describes the objects and attributes of the standard and version below, \
-highlighting their differences with respect to the baseline standard and version below.
-"""),
-        new RowInfo(
-            cellStyleBold, "Standard", cellStyleBold, legendMetadata.currentStandardName()),
-        new RowInfo(
-            cellStyleBold, "Version", cellStyleBold, legendMetadata.currentStandardVersion()),
-        new RowInfo(
-            cellStyleBold,
-            "Baseline",
-            cellStyleBold,
-            "%s %s"
-                .formatted(
-                    legendMetadata.baselineStandardName(),
-                    legendMetadata.baselineStandardVersion())),
-        null);
+            Stream.of(
+                (RowInfo) null,
+                new RowInfo(
+                    cellStyleHeaderBold,
+                    "Data Overview",
+                    cellStyleHeaderWrapped,
+                    legendMetadata.hasBaseline()
+                        ? """
+                          The Data Overview describes the objects and attributes of the standard and version below, \
+                          highlighting their differences with respect to the baseline standard and version below.
+                          """
+                        : """
+                          The Data Overview describes the objects and attributes of the standard and version below.
+                          """),
+                new RowInfo(
+                    cellStyleBold, "Standard", cellStyleBold, legendMetadata.currentStandardName()),
+                new RowInfo(
+                    cellStyleBold,
+                    "Version",
+                    cellStyleBold,
+                    legendMetadata.currentStandardVersion())),
+            legendMetadata.hasBaseline()
+                ? Stream.of(
+                    new RowInfo(
+                        cellStyleBold,
+                        "Baseline",
+                        cellStyleBold,
+                        "%s %s"
+                            .formatted(
+                                legendMetadata.baselineStandardName(),
+                                legendMetadata.baselineStandardVersion())))
+                : Stream.<RowInfo>empty(),
+            Stream.of((RowInfo) null))
+        .flatMap(Function.identity());
   }
 
   private Stream<RowInfo> rowInfoStreamSheets() {
@@ -178,6 +191,7 @@ The following sheets are available in this Data Overview, each with the columns 
                         """
                         List of all query filters (combinations of query parameters) available in the GET endpoints
                         """))
+                .limit(legendMetadata.sheetCount())
                 .map(
                     entry ->
                         new RowInfo(
@@ -195,13 +209,15 @@ The following sheets are available in this Data Overview, each with the columns 
                     cellStyleHeaderWrapped,
                     "Columns of the hierarchical and normalized attributes sheets")),
             Stream.of(
-                    Map.entry(
-                        "Diff",
-                        """
-                        Indicates whether and how the object or attribute listed in this row compares in the current standard and version \
-                        to the corresponding object or attribute from the baseline standard and version, \
-                        using the coloring convention described the 'Color codes' section below.
-                        """),
+                    legendMetadata.hasBaseline()
+                        ? Map.entry(
+                            "Diff",
+                            """
+                            Indicates whether and how the object or attribute listed in this row compares in the current standard and version \
+                            to the corresponding object or attribute from the baseline standard and version, \
+                            using the coloring convention described the 'Color codes' section below.
+                            """)
+                        : null,
                     Map.entry(
                         "Path",
                         """
@@ -259,14 +275,8 @@ The following sheets are available in this Data Overview, each with the columns 
                         "Description",
                         """
                         Description of the object or attribute in this row.
-                        (Also includes a textual description of the constraints in standards released before Q2 2025.)
-                        """),
-                    Map.entry(
-                        "Constraints",
-                        """
-                        Constraints applicable to the attribute in this row.
-                        (Only applicable for constraints defined in the information model in standards released after Q2 2025.)
                         """))
+                .filter(Objects::nonNull)
                 .map(
                     entry ->
                         new RowInfo(
@@ -284,17 +294,20 @@ The following sheets are available in this Data Overview, each with the columns 
                     cellStyleHeaderWrapped,
                     "Columns of the 'Query parameters' sheet")),
             Stream.of(
-                    Map.entry(
-                        "Diff",
-                        """
-                        Indicates whether and how the query parameter in this row compares in the current standard and version \
-                        to the corresponding query parameter from the baseline standard and version, \
-                        using the coloring convention described the 'Color codes' section below.
-                        """),
+                    legendMetadata.hasBaseline()
+                        ? Map.entry(
+                            "Diff",
+                            """
+                            Indicates whether and how the query parameter in this row compares in the current standard and version \
+                            to the corresponding query parameter from the baseline standard and version, \
+                            using the coloring convention described the 'Color codes' section below.
+                            """)
+                        : null,
                     Map.entry("Name", "Name of the query parameter"),
                     Map.entry("Type", "Type of the query parameter"),
                     Map.entry("Description", "Description of the query parameter"),
                     Map.entry("Example", "Example of the query parameter"))
+                .filter(Objects::nonNull)
                 .map(
                     entry ->
                         new RowInfo(
@@ -312,13 +325,15 @@ The following sheets are available in this Data Overview, each with the columns 
                     cellStyleHeaderWrapped,
                     "Columns of the 'Query filters' sheet")),
             Stream.of(
-                    Map.entry(
-                        "Diff",
-                        """
-                        Indicates whether and how the query filter in this row compares in the current standard and version \
-                        to the corresponding query parameter from the baseline standard and version, \
-                        using the coloring convention described the 'Color codes' section below.
-                        """),
+                    legendMetadata.hasBaseline()
+                        ? Map.entry(
+                            "Diff",
+                            """
+                            Indicates whether and how the query filter in this row compares in the current standard and version \
+                            to the corresponding query parameter from the baseline standard and version, \
+                            using the coloring convention described the 'Color codes' section below.
+                            """)
+                        : null,
                     Map.entry(
                         "Name",
                         """
@@ -330,6 +345,7 @@ The following sheets are available in this Data Overview, each with the columns 
                         Set to "yes" if the adopter must implement support for this query filter; \
                         empty if the query filter is defined but not required.
                         """))
+                .filter(Objects::nonNull)
                 .map(
                     entry ->
                         new RowInfo(
