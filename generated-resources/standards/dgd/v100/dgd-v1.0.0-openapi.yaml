@@ -501,74 +501,6 @@ components:
           example: "JOHN LOADER"
       description: |
         "I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING
-    DGDeclaration:
-      type: "object"
-      properties:
-        declarationReference:
-          maxLength: 500
-          type: "string"
-          description: "Reference of the DG declaration"
-          example: "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
-        declarationDateTime:
-          maxLength: 30
-          type: "string"
-          description: "The date and time when the DG declaration was issued"
-          format: "date-time"
-          example: "2025-01-23T01:23:45Z"
-        typeLabel:
-          maxLength: 100
-          type: "string"
-          description: "Free-format identifier used to specify a certain type of DG Declaration, for example \"English\" or \"French\"."
-          example: "French"
-        utilizedTransportEquipments:
-          type: "array"
-          description: "The equipments being used."
-          items:
-            $ref: "#/components/schemas/UtilizedTransportEquipment"
-        shipmentDetails:
-          description: "DG declaration details specific to the shipment"
-          allOf:
-          - $ref: "#/components/schemas/ShipmentDetails"
-        vesselVoyageDetails:
-          description: "DG declaration details specific to the vessel voyage"
-          allOf:
-          - $ref: "#/components/schemas/VesselVoyageDetails"
-        consignmentItems:
-          type: "array"
-          description: "A list of `ConsignmentItems`"
-          items:
-            $ref: "#/components/schemas/ConsignmentItem"
-        documentParties:
-          type: "array"
-          description: |
-            Document parties.
-
-            Note that while parties can generally appear in any order, including `N1` (First Notify Party)
-            and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
-            as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.
-          items:
-            $ref: "#/components/schemas/DocumentParty"
-        containerPackingCertificate:
-          description: |
-            "I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING
-          allOf:
-          - $ref: "#/components/schemas/ContainerPackingCertificate"
-        shipperDeclaration:
-          description: |
-            "I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."
-          allOf:
-          - $ref: "#/components/schemas/ShipperDeclaration"
-        haulageAcceptance:
-          description: "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
-          allOf:
-          - $ref: "#/components/schemas/HaulageAcceptance"
-        receivingOrganisationReceipt:
-          description: |
-            "Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
-          allOf:
-          - $ref: "#/components/schemas/ReceivingOrganisationReceipt"
-      description: |
-        Dangerous Good Declaration for one or more pieces of equipment, including the actual dangerous goods details and the relevant associated details
     DangerousGoods:
       type: "object"
       properties:
@@ -812,6 +744,107 @@ components:
           description: "Medical First Aid Guide reference applicable to the dangerous goods carried."
           example: "MFAG Table 620"
       description: "Dangerous goods information"
+    DangerousGoodsDeclaration:
+      required:
+      - "declarationDateTime"
+      - "declarationReference"
+      type: "object"
+      properties:
+        declarationReference:
+          maxLength: 500
+          type: "string"
+          description: "Reference of the DG declaration"
+          example: "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z"
+        declarationDateTime:
+          maxLength: 30
+          type: "string"
+          description: |
+            The date and time when the DG declaration was issued.
+
+            A DG declaration with a newer `declarationDateTime` overwrites a declaration having:
+             - the same `declarationReference`
+             - an older `declarationDateTime`
+             - the same `typeLabel` (if present)
+          format: "date-time"
+          example: "2025-01-23T01:23:45Z"
+        typeLabel:
+          maxLength: 100
+          type: "string"
+          description: |
+            Free-format identifier used to specify a certain type of DG Declaration, for example "English" or "French".
+
+            A declaration with the same `declarationReference` and with a newer `declarationDateTime` only overwrite a declaration with the same `declarationReference` and an older `declarationDateTime` if the two declarations also have the same `typeLabel` (or if both have no `typeLabel`).
+          example: "French"
+        utilizedTransportEquipments:
+          type: "array"
+          description: "The equipments being used."
+          items:
+            $ref: "#/components/schemas/UtilizedTransportEquipment"
+        shipmentDetails:
+          description: "DG declaration details specific to the shipment"
+          allOf:
+          - $ref: "#/components/schemas/ShipmentDetails"
+        vesselVoyageDetails:
+          description: "DG declaration details specific to the vessel voyage"
+          allOf:
+          - $ref: "#/components/schemas/VesselVoyageDetails"
+        consignmentItems:
+          type: "array"
+          description: "A list of `ConsignmentItems`"
+          items:
+            $ref: "#/components/schemas/ConsignmentItem"
+        documentParties:
+          type: "array"
+          description: |
+            Document parties.
+
+            Note that while parties can generally appear in any order, including `N1` (First Notify Party) and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant, as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.
+          items:
+            $ref: "#/components/schemas/DocumentParty"
+        containerPackingCertificate:
+          description: |
+            "I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING
+          allOf:
+          - $ref: "#/components/schemas/ContainerPackingCertificate"
+        shipperDeclaration:
+          description: |
+            "I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."
+          allOf:
+          - $ref: "#/components/schemas/ShipperDeclaration"
+        haulageAcceptance:
+          description: "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
+          allOf:
+          - $ref: "#/components/schemas/HaulageAcceptance"
+        receivingOrganisationReceipt:
+          description: "Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
+          allOf:
+          - $ref: "#/components/schemas/ReceivingOrganisationReceipt"
+        documentExchangeReferences:
+          type: "array"
+          description: "References to documents exchanged through the DCSA Document Exchange (DX) API."
+          items:
+            $ref: "#/components/schemas/DocumentExchangeReference"
+      description: |
+        Dangerous Goods Declaration for one or more pieces of equipment, including the actual dangerous goods details and the relevant associated details
+    DocumentExchangeReference:
+      required:
+      - "documentID"
+      type: "object"
+      properties:
+        documentID:
+          type: "string"
+          description: "Universally unique identifier of the document exchanged through the Document Exchange (DX) API."
+          format: "uuid"
+          example: "3910eb91-8791-4699-8029-8bba8cedb6f5"
+        documentRole:
+          maxLength: 256
+          type: "string"
+          description: |
+            Role of the document within the context of a DG declaration:
+             - `ATTACHMENT` (Supporting document attached to the DG declaration)
+             - `VISUALIZATION` (Human-friendly visualization of the structured data of the DG declaration)
+          example: "VISUALIZATION"
+      description: "Reference to a document exchanged through the DCSA Document Exchange (DX) API."
     DocumentParty:
       type: "object"
       properties:
@@ -880,8 +913,7 @@ components:
           maxLength: 30
           type: "string"
           description: |
-            Phone number for the contact, including an international phone number format
-            as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+            Phone number for the contact, including an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
           example: "+14155552671"
         provider:
           maxLength: 100
@@ -1040,7 +1072,7 @@ components:
           description: |
             The list of DG declarations matching the filter specified by the request query parameters
           items:
-            $ref: "#/components/schemas/DGDeclaration"
+            $ref: "#/components/schemas/DangerousGoodsDeclaration"
       description: |
         API response to a `GET DG declarations` request
     HaulageAcceptance:
@@ -1270,8 +1302,7 @@ components:
           maxLength: 30
           type: "string"
           description: |
-            Contact phone number, including an international phone number format
-            as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+            Contact phone number, including an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
           example: "+14155552671"
       description: "Party contact details"
     PostDGDFeedbacksRequest:
@@ -1316,7 +1347,7 @@ components:
           type: "array"
           description: "List of DG declarations."
           items:
-            $ref: "#/components/schemas/DGDeclaration"
+            $ref: "#/components/schemas/DangerousGoodsDeclaration"
       description: "API message containing a list of DG declarations."
     PostDGDeclarationsResponse:
       type: "object"
@@ -1597,8 +1628,7 @@ components:
           maxLength: 4
           type: "string"
           description: |
-            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
-            [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
+            The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
             The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.
           example: "MMCU"
@@ -1634,8 +1664,7 @@ components:
         departureDate:
           type: "string"
           description: |
-            The date of departure from the location where the cargo is handed over by the shipper, or his agent,
-            to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.
+            The date of departure from the location where the cargo is handed over by the shipper, or his agent, to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.
           format: "date"
           example: "2025-01-23"
         destination:

@@ -135,22 +135,32 @@ DangerousGoods,subsidiaryRisk1,string,,maxLength=4,,1.2,"Any risk in addition to
 DangerousGoods,subsidiaryRisk2,string,,maxLength=4,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 DangerousGoods,technicalName,string,,maxLength=200,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code."
 DangerousGoods,UNNumber,string,,maxLength=4,,1463,"United Nations Dangerous Goods Identifier (UNDG) assigned by the UN Sub-Committee of Experts on the Transport of Dangerous Goods and shown in the IMO IMDG."
-DGDeclaration,consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`"
-DGDeclaration,"containerPackingCertificate","ContainerPackingCertificate",,,,,"""I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions"". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING"
-DGDeclaration,declarationDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the DG declaration was issued"
-DGDeclaration,declarationReference,string,,maxLength=500,,"DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the DG declaration"
-DGDeclaration,documentParties,"DocumentParty list",,,,,"Document parties.
+"DangerousGoodsDeclaration",consignmentItems,"ConsignmentItem list",,,,,"A list of `ConsignmentItems`"
+"DangerousGoodsDeclaration","containerPackingCertificate","ContainerPackingCertificate",,,,,"""I hereby declare that the goods described above have been packed/loaded into the container/vehicle identified above in accordance with the applicable provisions"". MUST BE COMPLETED AND SIGNED FOR ALL CONTAINER/VEHICLE LOADS BY PERSON RESPONSIBLE FOR PACKING/LOADING"
+"DangerousGoodsDeclaration",declarationDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the DG declaration was issued.
 
-Note that while parties can generally appear in any order, including `N1` (First Notify Party)
-and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
-as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party."
-DGDeclaration,haulageAcceptance,HaulageAcceptance,,,,,"Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
-DGDeclaration,"receivingOrganisationReceipt","ReceivingOrganisationReceipt",,,,,"""Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"""
-DGDeclaration,shipmentDetails,ShipmentDetails,,,,,"DG declaration details specific to the shipment"
-DGDeclaration,shipperDeclaration,ShipperDeclaration,,,,,"""I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."""
-DGDeclaration,typeLabel,string,,maxLength=100,,French,"Free-format identifier used to specify a certain type of DG Declaration, for example ""English"" or ""French""."
-DGDeclaration,"utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used."
-DGDeclaration,vesselVoyageDetails,VesselVoyageDetails,,,,,"DG declaration details specific to the vessel voyage"
+A DG declaration with a newer `declarationDateTime` overwrites a declaration having:
+ - the same `declarationReference`
+ - an older `declarationDateTime`
+ - the same `typeLabel` (if present)"
+"DangerousGoodsDeclaration",declarationReference,string,yes,maxLength=500,,"DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z","Reference of the DG declaration"
+"DangerousGoodsDeclaration","documentExchangeReferences","DocumentExchangeReference list",,,,,"References to documents exchanged through the DCSA Document Exchange (DX) API."
+"DangerousGoodsDeclaration",documentParties,"DocumentParty list",,,,,"Document parties.
+
+Note that while parties can generally appear in any order, including `N1` (First Notify Party) and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant, as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party."
+"DangerousGoodsDeclaration",haulageAcceptance,HaulageAcceptance,,,,,"Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment"
+"DangerousGoodsDeclaration","receivingOrganisationReceipt","ReceivingOrganisationReceipt",,,,,"Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
+"DangerousGoodsDeclaration",shipmentDetails,ShipmentDetails,,,,,"DG declaration details specific to the shipment"
+"DangerousGoodsDeclaration",shipperDeclaration,ShipperDeclaration,,,,,"""I hereby declare that the contents of this consignment are fully and accurately described below by the proper shipping name, and are classified, packaged, marked and labelled/placarded and are in all respects in proper condition for transport according to the applicable international and national governmental regulations."""
+"DangerousGoodsDeclaration",typeLabel,string,,maxLength=100,,French,"Free-format identifier used to specify a certain type of DG Declaration, for example ""English"" or ""French"".
+
+A declaration with the same `declarationReference` and with a newer `declarationDateTime` only overwrite a declaration with the same `declarationReference` and an older `declarationDateTime` if the two declarations also have the same `typeLabel` (or if both have no `typeLabel`)."
+"DangerousGoodsDeclaration","utilizedTransportEquipments","UtilizedTransportEquipment list",,,,,"The equipments being used."
+"DangerousGoodsDeclaration",vesselVoyageDetails,VesselVoyageDetails,,,,,"DG declaration details specific to the vessel voyage"
+"DocumentExchangeReference",documentID,"string(uuid)",yes,,,"3910eb91-8791-4699-8029-8bba8cedb6f5","Universally unique identifier of the document exchanged through the Document Exchange (DX) API."
+"DocumentExchangeReference",documentRole,string,,maxLength=256,,VISUALIZATION,"Role of the document within the context of a DG declaration:
+ - `ATTACHMENT` (Supporting document attached to the DG declaration)
+ - `VISUALIZATION` (Human-friendly visualization of the structured data of the DG declaration)"
 DocumentParty,address,Address,,,,,"Party address"
 DocumentParty,identifyingCodes,"IdentifyingCode list",,,,,"List of codes identifying the party"
 DocumentParty,partyContactDetails,"PartyContactDetail list",,,,,"Party contact details"
@@ -176,8 +186,7 @@ DocumentParty,partyName,string,,maxLength=100,,"Acme Inc.","Party name"
 DocumentParty,reference,string,,maxLength=100,,REF1234,"A reference linked to the document party."
 DocumentParty,taxLegalReferences,"TaxLegalReference list",,,,,"List of tax or legal references relevant to the party"
 EmergencyContactDetails,contact,string,,maxLength=100,,"Jane Doe","Name of the contact person during an emergency."
-EmergencyContactDetails,phone,string,,maxLength=30,,"+14155552671","Phone number for the contact, including an international phone number format
-as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
+EmergencyContactDetails,phone,string,,maxLength=30,,"+14155552671","Phone number for the contact, including an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
 EmergencyContactDetails,provider,string,,maxLength=100,,"ACME Inc","Name of the third party vendor providing emergency support"
 EmergencyContactDetails,referenceNumber,string,,maxLength=100,,12234,"Contract reference for the emergency support provided by an external third party vendor."
 Equipment,equipmentReference,string,,maxLength=11,,APZU4812090,"The unique identifier for the equipment, which should follow the BIC ISO Container Identification Number where possible. According to ISO 6346, a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
@@ -270,8 +279,7 @@ OuterPackaging,numberOfPackages,"integer(int32)",,,,18,"Specifies the number of 
 OuterPackaging,packageCode,string,,maxLength=5,,5H,"A code identifying the outer packaging/overpack. `PackageCode` must follow the codes specified in [Recommendation N°21](https://unece.org/trade/uncefact/cl-recommendations)"
 PartyContactDetail,email,string,,maxLength=100,,jane.doe@example.com,"Contact email address"
 PartyContactDetail,name,string,,maxLength=100,,"Jane Doe","Contact name"
-PartyContactDetail,phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format
-as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
+PartyContactDetail,phone,string,,maxLength=30,,"+14155552671","Contact phone number, including an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en)."
 RadioactiveMaterial,fissileMaterial,FissileMaterial,,,,,"Contains additional regulatory information applicable to fissile radioactive material transported under IMDG Code Class 7 provisions."
 RadioactiveMaterial,isExclusiveUseShipment,boolean,,,,,"Indicates that the radioactive material shipment must be shipped under exclusive use."
 RadioactiveMaterial,"maximumActivityDuringTransport",Activity,,,,,"Maximum activity of the radioactive contents during transport, expressed in becquerels with an SI prefix."
@@ -344,15 +352,13 @@ TaxLegalReference,value,string,,maxLength=100,,AAAAA0000A,"The value of the `tax
 "UtilizedTransportEquipment",shippingMarks,"string list",,,,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
 Item description:
 The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
-VesselVoyageDetails,carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
-[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
+VesselVoyageDetails,carrierCode,string,,maxLength=4,,MMCU,"The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
 The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined."
 VesselVoyageDetails,carrierCodeListProvider,string,,maxLength=10,,NMFTA,"The code list provider for the `carrierCode`. Possible values are:
 - `SMDG` (Ship Message Design Group)
 - `NMFTA` (National Motor Freight Traffic Association)"
-VesselVoyageDetails,departureDate,"string(date)",,,,2025-01-23,"The date of departure from the location where the cargo is handed over by the shipper, or his agent,
-to the shipping line. This can refer either to the Place of Receipt or the Port of Loading."
+VesselVoyageDetails,departureDate,"string(date)",,,,2025-01-23,"The date of departure from the location where the cargo is handed over by the shipper, or his agent, to the shipping line. This can refer either to the Place of Receipt or the Port of Loading."
 VesselVoyageDetails,destination,Location,,,,,"The final delivery destination of the goods"
 VesselVoyageDetails,"exportVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Export voyage number or reference"
 VesselVoyageDetails,"importVoyageNumberOrReference",VoyageNumberOrReference,,,,,"Import voyage number or reference"

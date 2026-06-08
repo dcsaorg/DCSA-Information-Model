@@ -13,8 +13,7 @@ public class VesselVoyageDetails {
   @Schema(
       description =
 """
-The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by
-[SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
+The `SCAC` code (provided by [NMFTA](https://nmfta.org/scac/)) or `SMDG` code (provided by [SMDG](https://smdg.org/documents/smdg-code-lists/smdg-liner-code-list/)) of the carrier.
 
 The `carrierCodeListProvider` specifies the provider of the list in which the `carrierCode` is defined.
 """,
@@ -58,8 +57,7 @@ The code list provider for the `carrierCode`. Possible values are:
   @Schema(
       description =
 """
-The date of departure from the location where the cargo is handed over by the shipper, or his agent,
-to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.
+The date of departure from the location where the cargo is handed over by the shipper, or his agent, to the shipping line. This can refer either to the Place of Receipt or the Port of Loading.
 """)
   private FormattedDate departureDate;
 

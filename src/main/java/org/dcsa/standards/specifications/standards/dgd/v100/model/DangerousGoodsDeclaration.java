@@ -9,21 +9,37 @@ import org.dcsa.standards.specifications.standards.core.v200.types.FormattedDate
 @Schema(
     description =
 """
-Dangerous Good Declaration for one or more pieces of equipment, including the actual dangerous goods details and the relevant associated details
+Dangerous Goods Declaration for one or more pieces of equipment, including the actual dangerous goods details and the relevant associated details
 """)
-public class DGDeclaration {
+public class DangerousGoodsDeclaration {
 
   @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
       maxLength = 500,
       example = "DGD-HHL71800000-APZU4812090-2025-01-23T01:23:45Z",
       description = "Reference of the DG declaration")
   private String declarationReference;
 
-  @Schema(description = "The date and time when the DG declaration was issued")
+  @Schema(
+      requiredMode = Schema.RequiredMode.REQUIRED,
+      description =
+"""
+The date and time when the DG declaration was issued.
+
+A DG declaration with a newer `declarationDateTime` overwrites a declaration having:
+ - the same `declarationReference`
+ - an older `declarationDateTime`
+ - the same `typeLabel` (if present)
+""")
   private FormattedDateTime declarationDateTime;
 
   @Schema(
-      description = "Free-format identifier used to specify a certain type of DG Declaration, for example \"English\" or \"French\".",
+      description =
+"""
+Free-format identifier used to specify a certain type of DG Declaration, for example "English" or "French".
+
+A declaration with the same `declarationReference` and with a newer `declarationDateTime` only overwrite a declaration with the same `declarationReference` and an older `declarationDateTime` if the two declarations also have the same `typeLabel` (or if both have no `typeLabel`).
+""",
       example = "French",
       maxLength = 100)
   private String typeLabel;
@@ -45,9 +61,7 @@ public class DGDeclaration {
 """
 Document parties.
 
-Note that while parties can generally appear in any order, including `N1` (First Notify Party)
-and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant,
-as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.
+Note that while parties can generally appear in any order, including `N1` (First Notify Party) and `N2` (Second Notify Party), the order of parties of type `NI` (Other Notify Party) is relevant, as it determines which of these parties is considered the third, fourth, fifth (and so on) notify party.
 """)
   private List<DocumentParty> documentParties;
 
@@ -65,13 +79,18 @@ as it determines which of these parties is considered the third, fourth, fifth (
 """)
   private ShipperDeclaration shipperDeclaration;
 
-  @Schema(description = "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment")
+  @Schema(
+      description =
+          "Identifies the road transport company and driver responsible for moving the container to or from the port, and records their acceptance of the dangerous goods consignment")
   private HaulageAcceptance haulageAcceptance;
 
   @Schema(
       description =
-"""
-"Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks"
-""")
+          "Received the above number of packages/containers/trailers in apparent good order and condition, unless stated on the remarks")
   private ReceivingOrganisationReceipt receivingOrganisationReceipt;
+
+  @Schema(
+      description =
+          "References to documents exchanged through the DCSA Document Exchange (DX) API.")
+  private List<DocumentExchangeReference> documentExchangeReferences;
 }

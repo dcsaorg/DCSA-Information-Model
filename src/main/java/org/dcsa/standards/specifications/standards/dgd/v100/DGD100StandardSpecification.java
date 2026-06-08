@@ -46,8 +46,9 @@ import org.dcsa.standards.specifications.standards.dgd.v100.model.Activity;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.CargoItem;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.ConsignmentItem;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.ContainerPackingCertificate;
-import org.dcsa.standards.specifications.standards.dgd.v100.model.DGDeclaration;
+import org.dcsa.standards.specifications.standards.dgd.v100.model.DangerousGoodsDeclaration;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.DangerousGoods;
+import org.dcsa.standards.specifications.standards.dgd.v100.model.DocumentExchangeReference;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.DocumentParty;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.EmergencyContactDetails;
 import org.dcsa.standards.specifications.standards.dgd.v100.model.Equipment;
@@ -112,7 +113,8 @@ public class DGD100StandardSpecification extends StandardSpecification {
         ConsignmentItem.class,
         ContainerPackingCertificate.class,
         DangerousGoods.class,
-        DGDeclaration.class,
+        DangerousGoodsDeclaration.class,
+        DocumentExchangeReference.class,
         DocumentParty.class,
         EmergencyContactDetails.class,
         Equipment.class,
@@ -152,7 +154,7 @@ public class DGD100StandardSpecification extends StandardSpecification {
 
   @Override
   protected List<String> getRootTypeNames() {
-    return List.of(DGDeclaration.class.getSimpleName());
+    return List.of(DangerousGoodsDeclaration.class.getSimpleName());
   }
 
   @Override

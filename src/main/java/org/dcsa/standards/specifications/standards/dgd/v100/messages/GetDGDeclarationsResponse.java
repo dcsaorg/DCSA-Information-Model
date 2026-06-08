@@ -3,7 +3,7 @@ package org.dcsa.standards.specifications.standards.dgd.v100.messages;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
-import org.dcsa.standards.specifications.standards.dgd.v100.model.DGDeclaration;
+import org.dcsa.standards.specifications.standards.dgd.v100.model.DangerousGoodsDeclaration;
 
 @Data
 @Schema(
@@ -19,5 +19,5 @@ public class GetDGDeclarationsResponse {
 """
 The list of DG declarations matching the filter specified by the request query parameters
 """)
-  private List<DGDeclaration> dgDeclarations;
+  private List<DangerousGoodsDeclaration> dangerousGoodsDeclarations;
 }

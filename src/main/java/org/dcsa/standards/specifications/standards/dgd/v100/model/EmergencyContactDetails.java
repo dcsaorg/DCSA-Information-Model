@@ -16,8 +16,7 @@ public class EmergencyContactDetails {
   @Schema(
       description =
 """
-Phone number for the contact, including an international phone number format
-as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
+Phone number for the contact, including an international phone number format as defined in the [ITU-T recommendation E.123](https://www.itu.int/rec/T-REC-E.123/en).
 """,
       example = "+14155552671",
       maxLength = 30)

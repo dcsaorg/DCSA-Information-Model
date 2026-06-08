@@ -2,7 +2,7 @@ package org.dcsa.standards.specifications.standards.dgd.v1;
 
 import org.dcsa.standards.specifications.standards.StandardSpecificationTestToolkit;
 import org.dcsa.standards.specifications.standards.dgd.v100.DGD100StandardSpecification;
-import org.dcsa.standards.specifications.standards.dgd.v100.model.DGDeclaration;
+import org.dcsa.standards.specifications.standards.dgd.v100.model.DangerousGoodsDeclaration;
 import org.junit.jupiter.api.Test;
 
 class DGD1StandardSpecificationTest {
@@ -17,6 +17,6 @@ class DGD1StandardSpecificationTest {
 
     String yamlFilePath = "./generated-resources/standards/dgd/v100/dgd-v1.0.0-openapi.yaml";
     StandardSpecificationTestToolkit.verifyTypeExport(
-        DGDeclaration.class.getSimpleName(), yamlFilePath, dgdStandardSpecification);
+        DangerousGoodsDeclaration.class.getSimpleName(), yamlFilePath, dgdStandardSpecification);
   }
 }
