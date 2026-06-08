@@ -133,8 +133,7 @@ maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 "ShippingInstructions / consignmentItems / importLicense",importLicense,ImportLicenseShipper,,,,,
 "ShippingInstructions / consignmentItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`."
 "ShippingInstructions / consignmentItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
@@ -171,8 +170,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentIt
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 "ShippingInstructions / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`"
 "ShippingInstructions / customsReferences / countryCode",countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
@@ -1321,8 +1319,7 @@ maxLength=2","^[A-Z]{2}$",,"Identification in a chronological order of the count
 
 **Condition:** If provided - the first country in the list must be the country of `Place of Acceptance`; the last country in the list must be the country of `Place of Final Delivery`.
 Item description:
-The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
-"
+The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
 "ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments","utilizedTransportEquipments","UtilizedTransportEquipmentHBL list",yes,minItems=1,,,"A list of `Utilized Transport Equipment` for this `House Bill of Lading`"
 "ShippingInstructions / houseBillOfLadings / utilizedTransportEquipments / emptyIndicatorCode",emptyIndicatorCode,string,yes,,,LADEN,"Indication if the container is `EMPTY` or `LADEN`.
 
@@ -1456,8 +1453,7 @@ Name of the certificate. Detailed information about carrier certificates can be 
 - `VESSEL_PARTICULARS_15` (Vessel Particulars 15)
 - `VESSEL_PARTICULARS_16` (Vessel Particulars 16)
 - `VESSEL_PARTICULARS_17` (Vessel Particulars 17)
-- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)
-"
+- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)"
 "ShippingInstructions / requestedCarrierClauses",requestedCarrierClauses,"string list",,maxLength=100,,,"Clauses requested by the Shipper for the Carrier to include in the `Transport Document` `Carrier clauses`
 Item description:
 A clause to request from the carrier. Detailed information about the carrier clauses can be found [here](https://dcsa-website.cdn.prismic.io/dcsa-website/ZvaCMbVsGrYSwERk_202409StandardisedClausesBL-Final.pdf). Possible values are:
@@ -1468,8 +1464,7 @@ A clause to request from the carrier. Detailed information about the carrier cla
 - `CARGO_REEFERTEMPERATURE` (Cargo/Reefer temperature)
 - `CARGO_CONFLICTINGTEMPERATURES_MIXEDLOADS` (Cargo/Conflicting temperatures/Mixed loads)
 - `SHIPPERSLOADSTOWWEIGHTANDCOUNT` (Shipper's Load, Stow, Weight and Count)
-- `INTRANSITCLAUSE` (In transit clause)
-"
+- `INTRANSITCLAUSE` (In transit clause)"
 "ShippingInstructions / shippingInstructionsReference","shippingInstructionsReference",string,,maxLength=100,"^\S(?:.*\S)?$","e0559d83-00e2-438e-afd9-fdd610c1a008","The identifier for a `Shipping Instructions` provided by the carrier for system purposes."
 "ShippingInstructions / shippingInstructionsStatus","shippingInstructionsStatus",string,yes,maxLength=50,,RECEIVED,"The status of the `Shipping Instructions`. Possible values are:
 - `RECEIVED` (Shipping Instructions has been received)
@@ -1532,5 +1527,4 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTrans
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."

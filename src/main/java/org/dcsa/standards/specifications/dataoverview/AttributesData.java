@@ -154,7 +154,7 @@ public class AttributesData {
                                   "%s\nItem description:\n%s"
                                       .formatted(
                                           attributeInfo.getDescription(),
-                                          itemSchema.getDescription()));
+                                          itemSchema.getDescription().trim()));
                             }
                           }
                         }

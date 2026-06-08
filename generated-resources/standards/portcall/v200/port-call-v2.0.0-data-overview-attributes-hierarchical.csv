@@ -340,8 +340,7 @@ Timestamps of type `EST`, `REQ` and `PLN` are relevant in port call services of 
 "Event / timestamp / delayReasonCodes",delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
 Item description:
 Code identifying the reason for a delay,
-[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
-"
+[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/)."
 "Event / timestamp / remark",remark,string,,maxLength=500,,"Port closed due to strike","Free text used to provide any relevant additional information."
 "Event / timestamp / serviceDateTime",serviceDateTime,"string(date-time)",,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the service was provided or is expected to be provided."
 "Event / vessel",vessel,Vessel,,,,,"Vessel information relevant for a port call service"

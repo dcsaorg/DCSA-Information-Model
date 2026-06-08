@@ -68,8 +68,7 @@ ArrivalNotice,freightPaymentStatus,string,,maxLength=50,,FULLY_PAID,"Payment sta
 - `OVERPAID` - Overpaid"
 ArrivalNotice,"houseBillOfLadingReferences","string list",,maxLength=20,,,"List of House Bill of Lading references
 Item description:
-Unique number allocated by the Ocean Transport Intermediary (OTI) to the House Bill of Lading.
-"
+Unique number allocated by the Ocean Transport Intermediary (OTI) to the House Bill of Lading."
 ArrivalNotice,isElectronic,boolean,,,,true,"An indicator whether the transport document is electronically transferred."
 ArrivalNotice,issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued."
 ArrivalNotice,paymentRemittance,PaymentRemittance,,,,,"Bank account information provided by the carrier for customers to make payments of the outstanding charges"
@@ -119,8 +118,7 @@ According to ISO 6346, a container identification code consists of a 4-letter pr
 
 If a container does not comply with ISO 6346, it is suggested to follow
 [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
-from SMDG.
-"
+from SMDG."
 "ArrivalNoticeNotification",issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued."
 "ArrivalNoticeNotification",placeOfDelivery,Location,,,,,"The location where the cargo is handed over by the shipping line to the consignee or its agent and where the
 responsibility of the shipping line ceases"
@@ -218,16 +216,14 @@ Item description:
 Used by customs to classify the product being shipped.
 The type of HS code depends on country and customs requirements.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 ConsignmentItem,importLicense,ImportLicense,,,,,"Import license for the consignment item."
 ConsignmentItem,nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `commodity`"
 ConsignmentItem,references,"ReferenceConsignmentItem list",,,,,"A list of `References`"
 ConsignmentItem,shippingMarks,"string list",,"maxItems=50
 maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentItem`
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 CustomsClearance,customsClearancePoint,Location,,,,,"The location where customs clearance occurs."
 CustomsClearance,"customsImportDeclarationProcedure",string,,maxLength=1000,,,"Instructions on the administrative processes for submitting import customs declarations to the local agency."
 CustomsClearance,"immediateTransportationEntry","ImmediateTransportationEntry",,,,,"An Immediate Transportation (IT) entry is a U.S. Customs and Border Protection (CBP) mechanism
@@ -304,8 +300,7 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 - `15` (Powdered metals)
 - `16` (Peroxides),
 - `17` (Azides)
-- `18` (Alkalis)
-"
+- `18` (Alkalis)"
 DangerousGoods,subsidiaryRisk1,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 DangerousGoods,subsidiaryRisk2,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 DangerousGoods,technicalName,string,,maxLength=250,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code."
@@ -383,14 +378,12 @@ According to ISO 6346, a container identification code consists of a 4-letter pr
 
 If a container does not comply with ISO 6346, it is suggested to follow
 [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
-from SMDG.
-"
+from SMDG."
 FreeTime,ISOEquipmentCodes,"string list",,maxLength=4,,,"Equipment type codes for which this free time applies
 Item description:
 Unique code identifying the equipment size and type used to transport commodities.
 The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
-following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.
-"
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard."
 FreeTime,lastFreeDate,ClassifiedDate,,,,,"The final date when the container(s) can be collected without incurring charges."
 FreeTime,lastFreeDateTime,ClassifiedDateTime,,,,,"The final date and time when the container(s) can be collected without incurring charges."
 FreeTime,timeUnit,string,,maxLength=3,,WD,"Code identifying the unit in which free time is expressed
@@ -614,8 +607,7 @@ For merchant haulage, this is when the last container is physically handed over 
 "UtilizedTransportEquipment",shippingMarks,"string list",,"maxItems=50
 maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 VesselVoyage,callReferenceNumber,string,,maxLength=100,,NLRTM25002178,"A registration number assigned by customs to the vessel before its arrival at Port of Discharge.
 It can be used for customs clearance purposes in specific countries (e.g. NL, UK)."
 VesselVoyage,"carrierExportVoyageNumber",string,,maxLength=50,,2208N,"Carrier-specific identifier of the export voyage"

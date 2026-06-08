@@ -1,5 +1,6 @@
 package org.dcsa.standards.specifications.standards.dgd.v100.model;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
@@ -168,11 +169,38 @@ The zone classification of the toxicity of the inhalant. Possible values are:
       maxLength = 500)
   private String properShippingName;
 
-  @Schema(
-      description =
+  @ArraySchema(
+      arraySchema =
+          @Schema(
+              description =
 """
 List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
-""")
+"""),
+      schema =
+          @Schema(
+              description =
+"""
+Grouping of Dangerous Goods having certain similar chemical properties. Possible values are:
+
+- `1` (Acids)
+- `2` (Ammonium Compounds)
+- `3` (Bromates)
+- `4` (Chlorates)
+- `5` (Chlorites)
+- `6` (Cyanides)
+- `7` (Heavy metals and their salts)
+- `8` (Hypochlorites)
+- `9` (Lead and its compounds)
+- `10` (Liquid halogenated hydrocarbons)
+- `11` (Mercury and mercury compounds)
+- `12` (Nitrites and their mixtures)
+- `13` (Perchlorates)
+- `14` (Permanganates)
+- `15` (Powdered metals)
+- `16` (Peroxides),
+- `17` (Azides)
+- `18` (Alkalis)
+"""))
   private List<String> segregationGroups;
 
   @Schema(
@@ -242,13 +270,19 @@ Indicates the transport condition of lithium cells or batteries transported unde
           "Contains regulatory information applicable to Class 7 radioactive material consignments in accordance with IMDG Code 5.4.1.5.7.")
   private RadioactiveMaterial radioactiveMaterial;
 
-  @Schema(
-      description =
+  @ArraySchema(
+      arraySchema =
+          @Schema(
+              description =
 """
 Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
-
+"""),
+      schema =
+          @Schema(
+              description =
+"""
 The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
-""")
+"""))
   private List<String> fireworkClassificationReferences;
 
   @Schema(description = "Production date of the material. Required for UN 1361.")
@@ -266,9 +300,14 @@ The classification reference(s) shall consist of the competent authority's state
       format = "float")
   private Double materialTemperatureAtPacking;
 
-  @Schema(
-      description =
-          "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals.")
+  @ArraySchema(
+      arraySchema =
+          @Schema(
+              description =
+                  "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."),
+      schema =
+          @Schema(
+              description = "The regulatory statement applicable to the dangerous goods cargo."))
   private List<String> additionalRegulatoryStatements;
 
   @Schema(

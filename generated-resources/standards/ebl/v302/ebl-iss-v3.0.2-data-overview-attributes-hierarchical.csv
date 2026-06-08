@@ -206,8 +206,7 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 - `15` (Powdered metals)
 - `16` (Peroxides),
 - `17` (Azides)
-- `18` (Alkalis)
-"
+- `18` (Alkalis)"
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk1",subsidiaryRisk1,string,,"minLength=1
 maxLength=3","^[0-9](\.[0-9])?$",1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 "IssuanceRequest / document / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk2",subsidiaryRisk2,string,,"minLength=1
@@ -261,8 +260,7 @@ maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 "IssuanceRequest / document / consignmentItems / importLicense",importLicense,ImportLicense,,,,,"Import license for the consignment item."
 "IssuanceRequest / document / consignmentItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`."
 "IssuanceRequest / document / consignmentItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
@@ -301,8 +299,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentIt
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 "IssuanceRequest / document / contractQuotationReference","contractQuotationReference",string,,maxLength=35,"^\S(?:.*\S)?$",HHL1401,"Information provided by the shipper to identify whether pricing for the shipment has been agreed via a contract or a quotation reference."
 "IssuanceRequest / document / customsReferences",customsReferences,"CustomsReference list",,,,,"A list of `Customs references`"
 "IssuanceRequest / document / customsReferences / countryCode",countryCode,string,yes,"minLength=2
@@ -1277,8 +1274,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTrans
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 "IssuanceRequest / eBLVisualisationByCarrier","eBLVisualisationByCarrier",SupportingDocument,,,,,
 "IssuanceRequest / eBLVisualisationByCarrier / content",content,"string(byte)",yes,,,"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAGaSURBVDhPnZO/S0JRFMe/zygxwgqcfZtz0N7SFNgPaKlJpTFLCqwotV9qRYN/gIOL1FK22NISWUNT0BTUkNLgIL2iHxYRnc697/kKzdA+cOD8uOec77uXB/oHngMPnd2eSb/pAf5DP2EWhGlQ8ChIikiiQa7vruFacwHdHHwC9nY7mhqgRBTdsbDdA/nVvHQbYnxvHHhnp4XtFZjon4DapTam4Lx4jt7NXlO6WEsreltDA5RFlt4qHDaWXlgrwNnplDX5CcWnIo5vjmWimsGdQV7HjjjJ0gMDAbNZopU1wgwfmQSlL9JCkEkunyMEuLbMFgZZ161G5RsFES5WNrC8lC8Fb49XDlcWWLNVOHqttFGCo90haxUsyeEk8GhEfEm+lA/ZqyyGdof0ocJegMhIpKZZIC8xfhLH0v6SfstCzRubeK42tg9Od3RDm9c4qMV8hWguinAmDHTJvC5bVB6A8nYZtlabTFcjX0EQ6gshNhqTDSbPQGIsUbdZIhT8ZOt0izDFu+dAakI1svX59W/MXGbIveM2or8g+gL+Fn3DwcYf+gAAAABJRU5ErkJggg==","The actual contents of the visual rendering."
 "IssuanceRequest / eBLVisualisationByCarrier / contentType",contentType,string,,maxLength=100,,application/msword,"The `Media Type` of the content being transmitted as defined by [Iana](https://www.iana.org/assignments/media-types/media-types.xhtml). Can be left out if the content is `application/pdf` (PDF).

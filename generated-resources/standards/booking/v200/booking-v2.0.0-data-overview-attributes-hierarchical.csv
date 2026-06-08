@@ -669,8 +669,7 @@ maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `commodity`
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 "Booking / requestedEquipments / commodities / importLicense",importLicense,ImportLicense,,,,,"Import license information."
 "Booking / requestedEquipments / commodities / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License` applicable to the booking."
 "Booking / requestedEquipments / commodities / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
@@ -801,8 +800,7 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 - `15` (Powdered metals)
 - `16` (Peroxides),
 - `17` (Azides)
-- `18` (Alkalis)
-"
+- `18` (Alkalis)"
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / specialCertificateNumber",specialCertificateNumber,string,,maxLength=255,,22663:3,"Text field to indicate certificate number & segment for specific stowage requirements overruling IMDG code"
 "Booking / requestedEquipments / commodities / outerPackaging / dangerousGoods / subsidiaryRisk1",subsidiaryRisk1,string,,"minLength=1
 maxLength=3","^[0-9](\.[0-9])?$",1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
@@ -917,8 +915,7 @@ The unique identifier for the equipment, which should follow the BIC ISO Contain
 
 According to [ISO 6346](https://www.iso.org/standard/83558.html), a container identification code consists of a 4-letter prefix and a 7-digit number (composed of a 3-letter owner code, a category identifier, a serial number, and a check-digit).
 
-If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG.
-"
+If a container does not comply with [ISO 6346](https://www.iso.org/standard/83558.html), it is suggested to follow [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations) from SMDG."
 "Booking / requestedEquipments / isNonOperatingReefer",isNonOperatingReefer,boolean,,,,false,"If the equipment is a Reefer Container then setting this attribute will indicate that the container should be treated as a `DRY` container.
 
 **Condition:** Only applicable if `ISOEquipmentCode` shows a Reefer type."

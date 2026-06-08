@@ -317,8 +317,7 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 - `15` (Powdered metals)
 - `16` (Peroxides),
 - `17` (Azides)
-- `18` (Alkalis)
-"
+- `18` (Alkalis)"
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk1",subsidiaryRisk1,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / subsidiaryRisk2",subsidiaryRisk2,string,,maxLength=3,,1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 "ArrivalNotice / consignmentItems / cargoItems / outerPackaging / dangerousGoods / technicalName",technicalName,string,,maxLength=250,,"xylene and benzene","The recognized chemical or biological name or other name currently used for the referenced dangerous goods as described in chapter 3.1.2.8 of the IMDG Code."
@@ -357,8 +356,7 @@ Item description:
 Used by customs to classify the product being shipped.
 The type of HS code depends on country and customs requirements.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 "ArrivalNotice / consignmentItems / importLicense",importLicense,ImportLicense,,,,,"Import license for the consignment item."
 "ArrivalNotice / consignmentItems / importLicense / expiryDate",expiryDate,"string(date)",,,,2024-09-21,"Expiry date of the `Import License`."
 "ArrivalNotice / consignmentItems / importLicense / isRequired",isRequired,boolean,,,,true,"Information provided by the shipper to indicate whether an `Import License` or permit is required for this shipment/commodity/destination.
@@ -390,8 +388,7 @@ The value of the reference."
 "ArrivalNotice / consignmentItems / shippingMarks",shippingMarks,"string list",,"maxItems=50
 maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentItem`
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 "ArrivalNotice / customsClearance",customsClearance,CustomsClearance,,,,,"Customs clearance information"
 "ArrivalNotice / customsClearance / customsClearancePoint",customsClearancePoint,Location,,,,,"The location where customs clearance occurs."
 "ArrivalNotice / customsClearance / customsClearancePoint / address",address,Address,,,,,"Location address"
@@ -540,14 +537,12 @@ According to ISO 6346, a container identification code consists of a 4-letter pr
 
 If a container does not comply with ISO 6346, it is suggested to follow
 [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
-from SMDG.
-"
+from SMDG."
 "ArrivalNotice / freeTimes / ISOEquipmentCodes",ISOEquipmentCodes,"string list",,maxLength=4,,,"Equipment type codes for which this free time applies
 Item description:
 Unique code identifying the equipment size and type used to transport commodities.
 The code can refer to either the ISO size type (e.g. 22G1) or the ISO type group (e.g. 22GP)
-following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard.
-"
+following the [ISO 6346](https://en.wikipedia.org/wiki/ISO_6346) standard."
 "ArrivalNotice / freeTimes / lastFreeDate",lastFreeDate,ClassifiedDate,,,,,"The final date when the container(s) can be collected without incurring charges."
 "ArrivalNotice / freeTimes / lastFreeDate / classifier",classifier,string,,maxLength=10,,EST,"Classifier denoting whether an event is planned, estimated or actual
 - `PLN` - Planned
@@ -579,8 +574,7 @@ Code used to denote the type of free time.
 - `OVERPAID` - Overpaid"
 "ArrivalNotice / houseBillOfLadingReferences","houseBillOfLadingReferences","string list",,maxLength=20,,,"List of House Bill of Lading references
 Item description:
-Unique number allocated by the Ocean Transport Intermediary (OTI) to the House Bill of Lading.
-"
+Unique number allocated by the Ocean Transport Intermediary (OTI) to the House Bill of Lading."
 "ArrivalNotice / isElectronic",isElectronic,boolean,,,,true,"An indicator whether the transport document is electronically transferred."
 "ArrivalNotice / issueDateTime",issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued."
 "ArrivalNotice / paymentRemittance",paymentRemittance,PaymentRemittance,,,,,"Bank account information provided by the carrier for customers to make payments of the outstanding charges"
@@ -1295,8 +1289,7 @@ both VET (Veterinary) and PHY (Phytosanitary) map to AC (Quarantine agency)."
 "ArrivalNotice / utilizedTransportEquipments / shippingMarks",shippingMarks,"string list",,"maxItems=50
 maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 "ArrivalNotice / versionLabel",versionLabel,string,,maxLength=1000,,Warning,"Free text used to indicate a certain version of an arrival notice of a certain type,
 for example ""Warning"", ""Updated"", ""Second"", ""Third"" etc.
 
@@ -1313,8 +1306,7 @@ According to ISO 6346, a container identification code consists of a 4-letter pr
 
 If a container does not comply with ISO 6346, it is suggested to follow
 [Recommendation #2: Containers with non-ISO identification](https://smdg.org/documents/smdg-recommendations)
-from SMDG.
-"
+from SMDG."
 "ArrivalNoticeNotification / issueDateTime",issueDateTime,"string(date-time)",yes,maxLength=30,,2025-01-23T01:23:45Z,"The date and time when the Arrival Notice was issued."
 "ArrivalNoticeNotification / placeOfDelivery",placeOfDelivery,Location,,,,,"The location where the cargo is handed over by the shipping line to the consignee or its agent and where the
 responsibility of the shipping line ceases"

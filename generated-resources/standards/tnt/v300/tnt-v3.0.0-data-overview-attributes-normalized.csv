@@ -368,8 +368,7 @@ TransportCall,vesselTransport,VesselTransport,,,,,"Vessel or barge transport inf
 TransportDetails,delayReasonCodes,"string list",,maxLength=3,,,"Codes identifying the reasons for a delay
 Item description:
 Code identifying the reason for a delay,
-[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/).
-"
+[as defined by SMDG](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/)."
 TransportDetails,transportCall,TransportCall,,,,,"Transport call information"
 TruckTransport,tractorDetails,VehicleDetails,,,,,"The license plate and VIN of the tractor of the truck used to transport the equipment."
 TruckTransport,trailerDetails,VehicleDetails,,,,,"The license plate and VIN of the trailer of the truck on which the equipment is transported,

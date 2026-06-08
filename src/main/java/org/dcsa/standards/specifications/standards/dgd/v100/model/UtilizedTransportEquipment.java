@@ -1,5 +1,6 @@
 package org.dcsa.standards.specifications.standards.dgd.v100.model;
 
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import lombok.Data;
@@ -15,11 +16,19 @@ public class UtilizedTransportEquipment {
   @Schema(description = "Seal-related information associated with the equipment.")
   private List<Seal> seals;
 
-  @Schema(
-      description =
+  @ArraySchema(
+      arraySchema =
+          @Schema(
+              description =
 """
 A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
-""")
+"""),
+      schema =
+          @Schema(
+              description =
+"""
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
+"""))
   private List<String> shippingMarks;
 
   @Schema(

@@ -162,8 +162,7 @@ maxLength=12","^\d{6,12}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 12 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 ConsignmentItem,"extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
 
 **Note:** If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored."
@@ -175,8 +174,7 @@ maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 ConsignmentItem,importLicense,ImportLicense,,,,,"Import license for the consignment item."
 ConsignmentItem,nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`
 
@@ -187,8 +185,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentIt
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 CustomsReference,countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 
@@ -269,8 +266,7 @@ Grouping of Dangerous Goods having certain similar chemical properties. Possible
 - `15` (Powdered metals)
 - `16` (Peroxides),
 - `17` (Azides)
-- `18` (Alkalis)
-"
+- `18` (Alkalis)"
 DangerousGoods,subsidiaryRisk1,string,,"minLength=1
 maxLength=3","^[0-9](\.[0-9])?$",1.2,"Any risk in addition to the class of the referenced dangerous goods according to the IMO IMDG Code."
 DangerousGoods,subsidiaryRisk2,string,,"minLength=1
@@ -948,8 +944,7 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTrans
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 VesselVoyage,"carrierExportVoyageNumber",string,yes,maxLength=50,"^\S(?:.*\S)?$",2103S,"The identifier of an export voyage. The carrier-specific identifier of the export Voyage."
 VesselVoyage,role,string,,maxLength=30,,MOTHER,"Identifies the role of the vessel voyage within the Transport Document. Possible values are:
 - `FIRST_SEA_GOING` (First sea-going vessel)

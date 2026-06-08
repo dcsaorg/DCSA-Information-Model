@@ -449,7 +449,7 @@ components:
           items:
             type: "string"
             description: |
-              A plain language description that is precise enough for Customs services to be able to identify the goods. General terms (i.e. 'consolidated', 'general cargo' 'parts' or 'freight of all kinds') or not sufficiently precise description cannot be accepted.
+              A line describing the cargo
         references:
           type: "array"
           description: "A list of `References`"
@@ -462,7 +462,7 @@ components:
           items:
             type: "string"
             description: |
-              A list of the `ShippingMarks` applicable to this `consignmentItem`
+              The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
       description: "A consignment item within a DG declaration."
     ContainerPackingCertificate:
       type: "object"
@@ -710,7 +710,26 @@ components:
           items:
             type: "string"
             description: |
-              List of the segregation groups applicable to specific hazardous goods according to the IMO IMDG Code.
+              Grouping of Dangerous Goods having certain similar chemical properties. Possible values are:
+
+              - `1` (Acids)
+              - `2` (Ammonium Compounds)
+              - `3` (Bromates)
+              - `4` (Chlorates)
+              - `5` (Chlorites)
+              - `6` (Cyanides)
+              - `7` (Heavy metals and their salts)
+              - `8` (Hypochlorites)
+              - `9` (Lead and its compounds)
+              - `10` (Liquid halogenated hydrocarbons)
+              - `11` (Mercury and mercury compounds)
+              - `12` (Nitrites and their mixtures)
+              - `13` (Perchlorates)
+              - `14` (Permanganates)
+              - `15` (Powdered metals)
+              - `16` (Peroxides),
+              - `17` (Azides)
+              - `18` (Alkalis)
         subsidiaryRisk1:
           maxLength: 4
           type: "string"
@@ -762,13 +781,9 @@ components:
           type: "array"
           description: |
             Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
-
-            The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
           items:
             type: "string"
             description: |
-              Classification reference(s) issued by the competent authority for fireworks transported under UN Nos. 0333, 0334, 0335, 0336, and 0337.
-
               The classification reference(s) shall consist of the competent authority's state, indicated by the distinguishing sign used on vehicles in international road traffic, the competent authority identification and a unique serial reference.
         dateOfProduction:
           type: "string"
@@ -790,7 +805,7 @@ components:
           description: "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."
           items:
             type: "string"
-            description: "Additional mandatory regulatory wording required by IMDG special provisions, class rules, or competent authority approvals."
+            description: "The regulatory statement applicable to the dangerous goods cargo."
         mfagReference:
           maxLength: 100
           type: "string"
@@ -1424,7 +1439,7 @@ components:
           description: "List of `referenceValues` for a given `referenceType`."
           items:
             type: "string"
-            description: "List of `referenceValues` for a given `referenceType`."
+            description: "The value of the reference."
       description: "A reference linked to a consignment item."
     Seal:
       type: "object"
@@ -1568,7 +1583,7 @@ components:
           items:
             type: "string"
             description: |
-              A list of the `ShippingMarks` applicable to this `UtilizedTransportEquipment`
+              The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
         references:
           type: "array"
           description: "Reference used by the customer or carrier to identify or track the shipment."

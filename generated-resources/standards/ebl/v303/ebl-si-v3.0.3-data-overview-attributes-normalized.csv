@@ -205,8 +205,7 @@ maxLength=12","^\d{6,12}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 12 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 ConsignmentItemShipper,"extendedNationalCommodityCodes","ExtendedNationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`. The `extendedNationalCommodityCodes` support up to 16 character codes.
 
 **Note:** If both `nationalCommodityCodes` and `extendedNationalCommodityCodes` are provided then `extendedNationalCommodityCodes` takes precedence and `nationalCommodityCodes` must be ignored."
@@ -218,8 +217,7 @@ maxLength=10","^\d{6,10}$",,"A list of `HS Codes` that apply to this `consignmen
 Item description:
 Used by customs to classify the product being shipped. The type of HS code depends on country and customs requirements. The code must be at least 6 and at most 10 digits.
 
-More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools).
-"
+More information can be found here: [HS Nomenclature](https://www.wcoomd.org/en/topics/nomenclature/instrument-and-tools)."
 ConsignmentItemShipper,importLicense,ImportLicenseShipper,,,,,
 ConsignmentItemShipper,nationalCommodityCodes,"NationalCommodityCode list",,,,,"A list of `National Commodity Codes` that apply to this `consignmentItem`
 
@@ -230,15 +228,13 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `consignmentIt
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."
 ConsignmentItemShipper,shippingMarksForCustoms,"string list",,"maxItems=50
 maxLength=35",,,"A list of the `ShippingMarks` provided specifically for customs filing purposes.
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s) for customs filing purposes.
-"
+The identifying details of a package or the actual markings that appear on the package(s) for customs filing purposes."
 CustomsReference,countryCode,string,yes,"minLength=2
 maxLength=2","^[A-Z]{2}$",NL,"The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
 
@@ -422,8 +418,7 @@ maxLength=2","^[A-Z]{2}$",,"Identification in a chronological order of the count
 
 **Condition:** If provided - the first country in the list must be the country of `Place of Acceptance`; the last country in the list must be the country of `Place of Final Delivery`.
 Item description:
-The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)
-"
+The 2 characters for the country code using [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#iso:pub:PUB500001:en)"
 HouseBillOfLading,"utilizedTransportEquipments","UtilizedTransportEquipmentHBL list",yes,minItems=1,,,"A list of `Utilized Transport Equipment` for this `House Bill of Lading`"
 IdentifyingCode,codeListName,string,,maxLength=100,,DID,"The name of the code list, code generation mechanism or code authority for the `partyCode`. Example values could be:
 - `DID` (Decentralized Identifier) for `codeListProvider` `W3C`
@@ -946,8 +941,7 @@ Name of the certificate. Detailed information about carrier certificates can be 
 - `VESSEL_PARTICULARS_15` (Vessel Particulars 15)
 - `VESSEL_PARTICULARS_16` (Vessel Particulars 16)
 - `VESSEL_PARTICULARS_17` (Vessel Particulars 17)
-- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)
-"
+- `VESSEL_PARTICULARS_18` (Vessel Particulars 18)"
 ShippingInstructions,requestedCarrierClauses,"string list",,maxLength=100,,,"Clauses requested by the Shipper for the Carrier to include in the `Transport Document` `Carrier clauses`
 Item description:
 A clause to request from the carrier. Detailed information about the carrier clauses can be found [here](https://dcsa-website.cdn.prismic.io/dcsa-website/ZvaCMbVsGrYSwERk_202409StandardisedClausesBL-Final.pdf). Possible values are:
@@ -958,8 +952,7 @@ A clause to request from the carrier. Detailed information about the carrier cla
 - `CARGO_REEFERTEMPERATURE` (Cargo/Reefer temperature)
 - `CARGO_CONFLICTINGTEMPERATURES_MIXEDLOADS` (Cargo/Conflicting temperatures/Mixed loads)
 - `SHIPPERSLOADSTOWWEIGHTANDCOUNT` (Shipper's Load, Stow, Weight and Count)
-- `INTRANSITCLAUSE` (In transit clause)
-"
+- `INTRANSITCLAUSE` (In transit clause)"
 ShippingInstructions,"shippingInstructionsReference",string,,maxLength=100,"^\S(?:.*\S)?$","e0559d83-00e2-438e-afd9-fdd610c1a008","The identifier for a `Shipping Instructions` provided by the carrier for system purposes."
 ShippingInstructions,"shippingInstructionsRevisionNumber","integer(int32)",,,,1,"The version number of the **Shipping Instructions** provided by the customer to ensure the carrier uses the most recent update when creating the **Transport Document**. This value is expected to increment by one with each **Shipping Instructions** update, with higher values representing newer versions."
 ShippingInstructions,"shippingInstructionsStatus",string,yes,maxLength=50,,RECEIVED,"The status of the `Shipping Instructions`. Possible values are:
@@ -1029,5 +1022,4 @@ maxLength=35",,,"A list of the `ShippingMarks` applicable to this `UtilizedTrans
 
 **Condition:** The order of the items in this array **MUST** be preserved as by the provider of the API.
 Item description:
-The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer.
-"
+The identifying details of a package or the actual markings that appear on the package(s). This information is provided by the customer."

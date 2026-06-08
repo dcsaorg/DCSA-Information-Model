@@ -82,8 +82,7 @@ The set of codes are ONLY meant to communicate any change / exception to the pub
 - `CUTR` (Cut and Run)
 - `DRYD` (Dry Dock)
 - `BUNK` (Bunkering)
-- `OOSV` (Out of service)
-"
+- `OOSV` (Out of service)"
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps",timestamps,"Timestamp list",,,,,
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps / changeRemark",changeRemark,string,,maxLength=250,,"Bad weather","Free text field to provide information as to why the `TransportEvent` was sent."
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps / delayReasonCode",delayReasonCode,string,,maxLength=3,,WEA,"Reason code for the delay. See SMDG [Code list DELAY](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/) for a list of valid codes to be used for this attribute.
@@ -93,8 +92,7 @@ The set of codes are ONLY meant to communicate any change / exception to the pub
 
 **Note:** This property takes precedence over `delayReasonCode` (if both are present - only the ones provided in this property are used).
 Item description:
-Reason code for the delay. See SMDG [Code list DELAY](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/) for a list of valid codes to be used for this attribute.
-"
+Reason code for the delay. See SMDG [Code list DELAY](https://smdg.org/documents/smdg-code-lists/delay-reason-and-port-call-activity/) for a list of valid codes to be used for this attribute."
 "ServiceSchedule / vesselSchedules / transportCalls / timestamps / eventClassifierCode",eventClassifierCode,string,yes,,,EST,"Code for the event classifier. Values can vary depending on eventType.
 
 - **Actual:** The **recorded time** when the event has actually occurred.
